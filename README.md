@@ -1,24 +1,14 @@
-.and(pagesData -> {
-          String whoseJobIsIt = getFirstValue(pagesData, WHOSE_JOB_IS_IT);
-          // For single applicants, WHOSE_JOB_IS_IT will be empty, so we treat empty as applicant's job
-          return whoseJobIsIt.isEmpty() 
-              || whoseJobIsIt.contains("applicant")
-              || (!spouseName.isEmpty() && whoseJobIsIt.contains(spouseName));
-        });
-
-
-
-         @Override
+ @Override
   public List<DocumentField> prepareDocumentFields(Application application, Document document,
       Recipient recipient) {
     List<DocumentField> fields = super.prepareDocumentFields(application, document, recipient);
     
-    // For single applicants, whoseJobIsItFormatted may not exist, so we need to populate it
-    // with the applicant's name
+    // For single applicants, whoseJobIsItFormatted may not exist because WHOSE_JOB_IS_IT is empty.
+    // We need to populate it with the applicant's name when it's missing.
     ScopedParams params = getParams(document, application);
     Subworkflow subworkflow = getGroup(application.getApplicationData(), params.group());
-    
-    if (subworkflow != null && !subworkflow.isEmpty()) {
+
+    f (subworkflow != null && !subworkflow.isEmpty()) {
       int index = 0;
       String applicantName = getFullName(application);
       
@@ -48,5 +38,4 @@
     }
     
     return fields;
-    
-    }
+  }
