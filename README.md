@@ -4,8 +4,7 @@
 <!-- This follows the same pattern as legalStuff page where accordions are rendered via promptMessageFragmentName -->
 <div th:fragment="penalty-warnings-legal-accordion" class="spacing-below-35">
   <div class="accordion legal-stuff-accordion" id="penalty-warnings-application-terms-accordion">
-    <button type="button" class="accordion__button" aria-expanded="true"
-            aria-controls="penalty-warnings-application-terms-content">
+    <button href="#" class="accordion__button" aria-expanded="true" aria-controls="penalty-warnings-application-terms-content">
       <span th:text="#{legal-stuff.application-terms}"></span>
     </button>
     <div id="penalty-warnings-application-terms-content"
@@ -29,43 +28,6 @@
       <div class="spacing-below-25">
         <h3 class="h4" th:text="#{legal-stuff.assignments}"></h3>
         <div th:text="#{legal-stuff.i-understand-that-when-I-get-MFIP}"></div>
-      </div>
-      <div class="spacing-below-25">
-        <h3 class="h4" th:text="#{legal-stuff.snap-penalty-warnings}"></h3>
-        <div th:text="#{legal-stuff.if-you-get-cash-or-SNAP-benefits}"></div>
-        <div>
-          <b th:text="|• #{legal-stuff.do-not-give-false-information}|"></b>
-          <span th:text="#{legal-stuff.or-hide-information-to-get-or-continue-to-get-benefits}"></span>
-        </div>
-        <div>
-          <b th:text="|• #{legal-stuff.do-not-trade-or-sell-snap-benefits}|"></b>
-          <span th:text="#{legal-stuff.or-electronic-benefit-transfer}"></span>
-        </div>
-        <div>
-          <b th:text="|• #{legal-stuff.do-not-use-cash-or-snap-benefits-to-buy-ineligible-items}|"></b>
-          <span th:text="#{legal-stuff.such-as-alcohol-and-tobacco}"></span>
-        </div>
-        <div>
-          <b th:text="|• #{legal-stuff.do-not-use-someone-elses-ebt-access-card}|"></b>
-          <span th:text="#{legal-stuff.to-get-cash-or-snap-benefits}"></span>
-        </div>
-        <div th:text="#{legal-stuff.the-state-may-bar-household-members-who-break}"></div>
-        <div>
-          <b th:text="#{legal-stuff.special-snap-penalty-warning}"></b>
-          <span th:text="#{legal-stuff.if-a-federal-state-or-local-court-finds}"></span>
-        </div>
-        <div>
-          <b th:text="|• #{legal-stuff.controlled-substances}|"></b>
-          <span th:text="#{legal-stuff.that-household-member-will-be-barred}"></span>
-        </div>
-        <div>
-          <b th:text="|• #{legal-stuff.firearms-ammunition-or-explosives}|"></b>
-          <span th:text="#{legal-stuff.that-household-member-will-be-barred-from-getting-snap}"></span>
-        </div>
-        <div>
-          <b th:text="|• #{legal-stuff.if-you-admit-committing-a-drug-felony-in-the-past-10-years}|"></b>
-          <span th:text="#{legal-stuff.the-agency-may-ask-you-to-take-random-drug-tests}"></span>
-        </div>
       </div>
       <div class="spacing-below-25">
         <h3 class="h4" th:text="#{legal-stuff.perjury-and-general-declarations}"></h3>
@@ -107,4 +69,3 @@
   </div>
 </div>
 </html>
-
