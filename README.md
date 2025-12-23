@@ -1,71 +1,72 @@
 <!DOCTYPE html>
 <html th:lang="${#locale.language}" xmlns:th="http://www.thymeleaf.org">
-<!-- Prompt fragment that renders ONLY the first accordion ("Application terms") for penaltyWarnings page -->
-<!-- This follows the same pattern as legalStuff page where accordions are rendered via promptMessageFragmentName -->
-<div th:fragment="penalty-warnings-legal-accordion" class="spacing-below-35">
-  <div class="accordion legal-stuff-accordion" id="penalty-warnings-application-terms-accordion">
-    <button href="#" class="accordion__button" aria-expanded="true" aria-controls="penalty-warnings-application-terms-content">
-      <span th:text="#{legal-stuff.application-terms}"></span>
-    </button>
-    <div id="penalty-warnings-application-terms-content"
-         class="accordion__content textarea-readonly legal-stuff-window spacing-below-35">
-      <h2 class="h3" th:text="#{legal-stuff.summary}"></h2>
-      <div th:text="|• #{legal-stuff.you-have-been-honest-on-this-application}|"></div>
-      <div th:text="|• #{legal-stuff.you-agree-to-the-benefit-rules}|"></div>
-      <div>
-        <p>
-          <span th:text="|• #{legal-stuff.you-can}|"></span>
-          <a th:text="#{legal-stuff.register-to-vote-online}"
-             href="https://sos.state.mn.us" target="_blank" rel="noopener noreferrer"></a>
-          <span th:text="#{legal-stuff.or-ask-your-county-worker}"></span>
+<!--
+  Display-only accordion section for the penaltyWarnings page.
+  Placed as the first input so it renders below the header and above the questions,
+  mimicking the accordion layout used on prepareToApply.
+-->
+<th:block th:fragment="penaltyWarningsAccordionDisplay (input, data)">
+  <div class="spacing-below-35">
+    <div class="accordion" id="penalty-warnings-accordion-1">
+      <button href="#" class="accordion__button" aria-expanded="true" aria-controls="pw-a1">
+        <span th:text="#{prepare-to-apply.we-will-ask-you-about}"></span>
+      </button>
+      <div class="accordion__content" id="pw-a1">
+        <ul class="list--bulleted">
+          <li th:text="#{prepare-to-apply.personal-information}"></li>
+          <li th:text="#{prepare-to-apply.people-who-live-with-you}"></li>
+          <li th:text="#{prepare-to-apply.income}"></li>
+          <li th:text="#{prepare-to-apply.expenses}"></li>
+          <li th:text="#{prepare-to-apply.assets}"></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="accordion">
+      <button href="#" class="accordion__button" aria-expanded="false" aria-controls="pw-a2">
+        <span th:text="#{prepare-to-apply.Submitting-an-incomplete-app-SNAP}"></span>
+      </button>
+      <div class="accordion__content" id="pw-a2">
+        <p class="text-25 spacing-below-15">
+          <span th:text="#{prepare-to-apply.If-you-are-applying-for-food-assistance}"></span>
+        </p>
+        <p class="text-25 spacing-below-15">
+          <span th:text="#{prepare-to-apply.by-choosing-to-submit-an-incomplete-application}"></span>
         </p>
       </div>
-      <h2 class="h3" th:text="#{legal-stuff.details}"></h2>
-      <div class="spacing-below-25">
-        <h3 class="h4" th:text="#{legal-stuff.employment-services-registration}"></h3>
-        <div th:text="#{legal-stuff.i-understand-that-signing-this-application-registers-me-for-employment-services}"></div>
+    </div>
+
+    <div class="accordion">
+      <button href="#" class="accordion__button" aria-expanded="false" aria-controls="pw-a3">
+        <span th:text="#{prepare-to-apply.adding-documents}"></span>
+      </button>
+      <div class="accordion__content" id="pw-a3">
+        <p class="text-25 spacing-below-15">
+          <span th:text="#{prepare-to-apply.at-the-end-of-this-application}"></span>
+        </p>
+        <p class="text-25 spacing-below-15">
+          <span th:text="#{prepare-to-apply.you-can-use-your-phone}"></span>
+        </p>
+        <p class="text-25 spacing-below-15">
+          <span th:text="#{prepare-to-apply.you-can-always-return-to-our-homepage}"></span>
+        </p>
       </div>
-      <div class="spacing-below-25">
-        <h3 class="h4" th:text="#{legal-stuff.assignments}"></h3>
-        <div th:text="#{legal-stuff.i-understand-that-when-I-get-MFIP}"></div>
-      </div>
-      <div class="spacing-below-25">
-        <h3 class="h4" th:text="#{legal-stuff.perjury-and-general-declarations}"></h3>
-      </div>
-      <div class="spacing-below-25">
-        <div>
-          <b th:text="#{legal-stuff.authorization-to-share-information-for-fraud-investigation-and-audits}"></b>
-          <span th:text="#{legal-stuff.i-agree-that-third-parties-may-share-information}"></span>
-        </div>
-        <div th:text="#{legal-stuff.this-may-include-but-is-not-limited-to}"></div>
-        <div th:text="|• #{legal-stuff.employers-and-schools}|"></div>
-        <div th:text="|• #{legal-stuff.landlords-and-utility-companies}|"></div>
-        <div th:text="|• #{legal-stuff.financial-and-insurance-agencies}|"></div>
-        <div th:text="|• #{legal-stuff.other-government-offices}|"></div>
-        <div th:text="#{legal-stuff.i-understand-this-consent-is-good-for-six-months-after-my-benefits-stop}"></div>
-        <h3 class="h4" th:text="#{legal-stuff.by-signing}"></h3>
-        <div th:text="|• #{legal-stuff.i-understand-cash-assistance-is-provided-to-help-eligible-families-meet-their-basic-needs}|"></div>
-        <div th:text="|• #{legal-stuff.i-understand-if-i-give-incorrect-information-or-misuse-an-electronic-benefit}|"></div>
-        <div th:text="|• #{legal-stuff.i-acknowledge-that-since-my-last-application-or-recertification}|"></div>
-        <div th:text="|• #{legal-stuff.i-acknowledge-that-i-have-read-and-understand-the-snaps-penalty-warning}|"></div>
-        <div>
-          <span th:text="|• #{legal-stuff.i-acknowledge-that-i-received-the-attached}|"></span>
-          <a th:text="#{legal-stuff.notices-of-privacy-practices}"
-             href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-3979-ENG" target="_blank" rel="noopener noreferrer"></a>
-          <span th:text="#{legal-stuff.and}"></span>
-          <a th:text="#{legal-stuff.crr}"
-             href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-4163-ENG" target="_blank" rel="noopener noreferrer"></a>
-        </div>
-        <div th:text="|• #{legal-stuff.i-agree-to-assign-my-child-support-as-stated-above}|"></div>
-        <div th:text="|• #{legal-stuff.i-agree-to-the-sharing-of-information-as-stated-on-the-fraud-release-information}|"></div>
-        <div th:text="|• #{legal-stuff.i-agree-to-the-sharing-of-information-as-stated-in-the-social-security-numbers-section}|"></div>
-        <div>
-          <span th:text="|• #{legal-stuff.i-agree-to-the-sharing-of-information-as-stated-in-the-social-security-numbers-section}|"></span>
-          <a th:text="#{legal-stuff.combined-application-form}"
-             href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-5223-ENG-pform" target="_blank" rel="noopener noreferrer"></a>
-        </div>
+    </div>
+
+    <div class="accordion spacing-below-35">
+      <button href="#" class="accordion__button" aria-expanded="false" aria-controls="pw-a4">
+        <span th:text="#{prepare-to-apply.after-you-submit}"></span>
+      </button>
+      <div class="accordion__content" id="pw-a4">
+        <p class="text-25 spacing-below-15">
+          <span th:text="#{prepare-to-apply.your-application-submission-date}"></span>
+        </p>
+        <p class="text-25 spacing-below-15">
+          <span th:text="#{prepare-to-apply.most-programs-on-this-application}"></span>
+        </p>
       </div>
     </div>
   </div>
-</div>
+</th:block>
 </html>
+
