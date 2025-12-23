@@ -1,5 +1,66 @@
-<th:block th:if="${page.hasPreFormContentFragment()}">
-          <div class="grid__item spacing-below-35">
-            <div th:replace="~{|fragments/${page.preFormContentFragment}| :: ${page.preFormContentFragment}}"></div>
-          </div>
-        </th:block>
+<!DOCTYPE html>
+<html th:lang="${#locale.language}" xmlns:th="http://www.thymeleaf.org">
+<!-- Accordion fragment for penaltyWarnings page, similar to prepareToApply style -->
+<div th:fragment="penaltyWarningsAccordions">
+  <div class="accordion" id="penalty-warnings-accordion-1">
+    <button href="#" class="accordion__button" aria-expanded="true" aria-controls="pw-a1">
+      <span th:text="#{prepare-to-apply.we-will-ask-you-about}"></span>
+    </button>
+    <div class="accordion__content" id="pw-a1">
+      <ul class="list--bulleted">
+        <li th:text="#{prepare-to-apply.personal-information}"></li>
+        <li th:text="#{prepare-to-apply.people-who-live-with-you}"></li>
+        <li th:text="#{prepare-to-apply.income}"></li>
+        <li th:text="#{prepare-to-apply.expenses}"></li>
+        <li th:text="#{prepare-to-apply.assets}"></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <button href="#" class="accordion__button" aria-expanded="false" aria-controls="pw-a2">
+      <span th:text="#{prepare-to-apply.Submitting-an-incomplete-app-SNAP}"></span>
+    </button>
+    <div class="accordion__content" id="pw-a2">
+      <p class="text-25 spacing-below-15">
+        <span th:text="#{prepare-to-apply.If-you-are-applying-for-food-assistance}"></span>
+      </p>
+      <p class="text-25 spacing-below-15">
+        <span th:text="#{prepare-to-apply.by-choosing-to-submit-an-incomplete-application}"></span>
+      </p>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <button href="#" class="accordion__button" aria-expanded="false" aria-controls="pw-a3">
+      <span th:text="#{prepare-to-apply.adding-documents}"></span>
+    </button>
+    <div class="accordion__content" id="pw-a3">
+      <p class="text-25 spacing-below-15">
+        <span th:text="#{prepare-to-apply.at-the-end-of-this-application}"></span>
+      </p>
+      <p class="text-25 spacing-below-15">
+        <span th:text="#{prepare-to-apply.you-can-use-your-phone}"></span>
+      </p>
+      <p class="text-25 spacing-below-15">
+        <span th:text="#{prepare-to-apply.you-can-always-return-to-our-homepage}"></span>
+      </p>
+    </div>
+  </div>
+
+  <div class="accordion spacing-below-35">
+    <button href="#" class="accordion__button" aria-expanded="false" aria-controls="pw-a4">
+      <span th:text="#{prepare-to-apply.after-you-submit}"></span>
+    </button>
+    <div class="accordion__content" id="pw-a4">
+      <p class="text-25 spacing-below-15">
+        <span th:text="#{prepare-to-apply.your-application-submission-date}"></span>
+      </p>
+      <p class="text-25 spacing-below-15">
+        <span th:text="#{prepare-to-apply.most-programs-on-this-application}"></span>
+      </p>
+    </div>
+  </div>
+</div>
+</html>
+
