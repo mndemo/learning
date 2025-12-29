@@ -1,66 +1,53 @@
-<!DOCTYPE html>
-<html th:lang="${#locale.language}" xmlns:th="http://www.thymeleaf.org">
-<!-- Accordion fragment for penaltyWarnings page, similar to prepareToApply style -->
-<div th:fragment="penaltyWarningsAccordions">
-  <div class="accordion" id="penalty-warnings-accordion-1">
-    <button href="#" class="accordion__button" aria-expanded="true" aria-controls="pw-a1">
-      <span th:text="#{prepare-to-apply.we-will-ask-you-about}"></span>
-    </button>
-    <div class="accordion__content" id="pw-a1">
-      <ul class="list--bulleted">
-        <li th:text="#{prepare-to-apply.personal-information}"></li>
-        <li th:text="#{prepare-to-apply.people-who-live-with-you}"></li>
-        <li th:text="#{prepare-to-apply.income}"></li>
-        <li th:text="#{prepare-to-apply.expenses}"></li>
-        <li th:text="#{prepare-to-apply.assets}"></li>
-      </ul>
-    </div>
-  </div>
+package org.codeforamerica.shiba.testutilities;
 
-  <div class="accordion">
-    <button href="#" class="accordion__button" aria-expanded="false" aria-controls="pw-a2">
-      <span th:text="#{prepare-to-apply.Submitting-an-incomplete-app-SNAP}"></span>
-    </button>
-    <div class="accordion__content" id="pw-a2">
-      <p class="text-25 spacing-below-15">
-        <span th:text="#{prepare-to-apply.If-you-are-applying-for-food-assistance}"></span>
-      </p>
-      <p class="text-25 spacing-below-15">
-        <span th:text="#{prepare-to-apply.by-choosing-to-submit-an-incomplete-application}"></span>
-      </p>
-    </div>
-  </div>
+import io.percy.selenium.Percy;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
-  <div class="accordion">
-    <button href="#" class="accordion__button" aria-expanded="false" aria-controls="pw-a3">
-      <span th:text="#{prepare-to-apply.adding-documents}"></span>
-    </button>
-    <div class="accordion__content" id="pw-a3">
-      <p class="text-25 spacing-below-15">
-        <span th:text="#{prepare-to-apply.at-the-end-of-this-application}"></span>
-      </p>
-      <p class="text-25 spacing-below-15">
-        <span th:text="#{prepare-to-apply.you-can-use-your-phone}"></span>
-      </p>
-      <p class="text-25 spacing-below-15">
-        <span th:text="#{prepare-to-apply.you-can-always-return-to-our-homepage}"></span>
-      </p>
-    </div>
-  </div>
+import java.util.Set;
 
-  <div class="accordion spacing-below-35">
-    <button href="#" class="accordion__button" aria-expanded="false" aria-controls="pw-a4">
-      <span th:text="#{prepare-to-apply.after-you-submit}"></span>
-    </button>
-    <div class="accordion__content" id="pw-a4">
-      <p class="text-25 spacing-below-15">
-        <span th:text="#{prepare-to-apply.your-application-submission-date}"></span>
-      </p>
-      <p class="text-25 spacing-below-15">
-        <span th:text="#{prepare-to-apply.most-programs-on-this-application}"></span>
-      </p>
-    </div>
-  </div>
-</div>
-</html>
+public class PercyTestPage extends Page {
 
+  protected final Percy percy;
+  
+  // Pages that should not be included in Percy visual snapshots
+  // These are intermediate/transitional pages that users quickly pass through
+  private static final Set<String> EXCLUDED_PAGES = Set.of(
+      "How to add documents",
+      "Upload documents"
+  );
+
+  public PercyTestPage(RemoteWebDriver driver) {
+    super(driver);
+    this.percy = new Percy(driver);
+  }
+
+  /**
+   * Takes a Percy snapshot of the current page, but only if the page is not in the exclusion list.
+   */
+  private void takeSnapshotIfNotExcluded() {
+    String currentPageTitle = driver.getTitle();
+    if (!EXCLUDED_PAGES.contains(currentPageTitle)) {
+      percy.snapshot(currentPageTitle);
+    }
+  }
+
+  public void clickLink(String linkText, String nextPage) {
+      takeSnapshotIfNotExcluded();
+      super.clickLink(linkText, nextPage);
+    }
+  
+  public void clickButton(String buttonText, String nextPage) {
+      takeSnapshotIfNotExcluded();
+      super.clickButton(buttonText, nextPage);
+    }
+  
+  public void clickButtonLink(String buttonLinkText, String nextPage) {
+      takeSnapshotIfNotExcluded();
+      super.clickButtonLink(buttonLinkText, nextPage);
+    }
+  
+  public void clickCustomButton(String buttonText, int retryCount, String nextPage) {
+      takeSnapshotIfNotExcluded();
+      super.clickCustomButton(buttonText, retryCount, nextPage);
+    }
+}
