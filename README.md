@@ -32,6 +32,13 @@ import org.springframework.stereotype.Component;
 public class PenaltyWarningsPreparer implements DocumentFieldPreparer {
 
   private static final String PAGE_NAME = "penaltyWarnings";
+  private static final List<String> QUESTIONS = List.of(
+      "disqualifiedPublicAssistance",
+      "fraudulentStatements",
+      "hidingFromLaw",
+      "drugFelony",
+      "violatingParole"
+  );
 
   @Override
   public List<DocumentField> prepareDocumentFields(Application application, Document document,
@@ -42,16 +49,16 @@ public class PenaltyWarningsPreparer implements DocumentFieldPreparer {
     }
 
     List<DocumentField> fields = new ArrayList<>();
-    int questionNumber = 1;
     
-    for (Map.Entry<String, InputData> entry : page.entrySet()) {
-      InputData input = entry.getValue();
-      if (input == null) {
-        continue;
-      }
+    for (int i = 0; i < QUESTIONS.size(); i++) {
+      String questionName = QUESTIONS.get(i);
+      int questionNumber = i + 1;
+      InputData input = page.get(questionName);
       
-      createFieldsIfAnsweredYes(application, input, entry.getKey(), questionNumber++)
-          .ifPresent(fields::addAll);
+      if (input != null) {
+        createFieldsIfAnsweredYes(application, input, questionName, questionNumber)
+            .ifPresent(fields::addAll);
+      }
     }
     return fields;
   }
