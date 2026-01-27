@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html th:lang="${#locale.language}" xmlns:th="http://www.thymeleaf.org">
 <th:block th:fragment="penaltyWarningHouseholdFollowup (input, data)" 
           th:with="formInputName=${T(org.codeforamerica.shiba.pages.PageUtils).getFormInputName(input.name)},
