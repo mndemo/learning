@@ -23,9 +23,8 @@
             <span th:text="|${fullName} #{general.you}|"></span>
           </label>
           
-          <!-- Other household member checkboxes -->
-          <th:block th:if="${hasHouseholdMembers}" 
-                    th:each="iteration, iterationStat: ${householdSubFlow}">
+          <!-- Other household member checkboxes - iterate directly like working examples -->
+          <th:block th:each="iteration, iterationStat: ${input.options.subworkflows.get('household')}">
             <label th:for="|${input.name}-householdMember${iterationStat.index}|"
               class="checkbox"
               th:with="fullName=${iteration.getPagesData().get('householdMemberInfo').get('firstName').value[0] + ' ' + iteration.getPagesData().get('householdMemberInfo').get('lastName').value[0]}">
