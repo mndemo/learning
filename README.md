@@ -12,9 +12,10 @@
         <p class="text--help" th:text="#{penalty-warning.select-all-that-apply}"></p>
         
         <!-- Applicant checkbox -->
-        <th:block th:if="${input.options != null and input.options.datasources != null and input.options.datasources.get('personalInfo') != null}">
+        <th:block th:if="${input.options != null and input.options.datasources != null}">
           <label th:for="${input.name + '-householdMember-me'}" class="checkbox"
-            th:with="fullName=${input.options.datasources.get('personalInfo').get('firstName').value[0] + ' ' + input.options.datasources.get('personalInfo').get('lastName').value[0]}">
+            th:with="personalInfo=${input.options.datasources.get('personalInfo')},
+                     fullName=${personalInfo != null ? (personalInfo.get('firstName').value[0] + ' ' + personalInfo.get('lastName').value[0]) : ''}">
             <input type="checkbox"
               th:id="${input.name + '-householdMember-me'}"
               th:value="${fullName} + ' applicant'"
@@ -23,8 +24,9 @@
             <span th:text="|${fullName} #{general.you}|"></span>
           </label>
           
-          <!-- Other household member checkboxes - iterate directly like working examples -->
-          <th:block th:each="iteration, iterationStat: ${input.options.subworkflows.get('household')}">
+          <!-- Other household member checkboxes -->
+          <th:block th:if="${input.options.subworkflows != null and input.options.subworkflows.get('household') != null}" 
+                    th:each="iteration, iterationStat: ${input.options.subworkflows.get('household')}">
             <label th:for="|${input.name}-householdMember${iterationStat.index}|"
               class="checkbox"
               th:with="fullName=${iteration.getPagesData().get('householdMemberInfo').get('firstName').value[0] + ' ' + iteration.getPagesData().get('householdMemberInfo').get('lastName').value[0]}">
