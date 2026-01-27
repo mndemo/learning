@@ -23,9 +23,9 @@
             <span th:text="|${fullName} #{general.you}|"></span>
           </label>
           
-          <!-- Other household member checkboxes (only if they exist) -->
+          <!-- Other household member checkboxes -->
           <th:block th:if="${hasHouseholdMembers}" 
-                    th:each="iteration, iterationStat: ${input.options.subworkflows.get('household')}">
+                    th:each="iteration, iterationStat: ${householdSubFlow}">
             <label th:for="|${input.name}-householdMember${iterationStat.index}|"
               class="checkbox"
               th:with="fullName=${iteration.getPagesData().get('householdMemberInfo').get('firstName').value[0] + ' ' + iteration.getPagesData().get('householdMemberInfo').get('lastName').value[0]}">
@@ -37,15 +37,6 @@
               <span th:text="${fullName}"></span>
             </label>
           </th:block>
-          
-          <!-- If no household members, include hidden checked checkbox for applicant -->
-          <th:block th:if="${not hasHouseholdMembers}">
-            <input type="checkbox"
-              th:name="${formInputName}"
-              th:value="${fullName} + ' applicant'"
-              checked
-              style="display:none;">
-          </th:block>
         </th:block>
       </fieldset>
     </div>
@@ -53,5 +44,39 @@
     <!-- Error message -->
     <div th:replace="~{fragments/inputErrorFragment :: validationError(${data}, ${input})}"></div>
   </div>
+  
+  <!-- If no household members, hide the follow-up container and include hidden checkbox for validation -->
+  <th:block th:if="${not hasHouseholdMembers and input.options != null and input.options.datasources != null and input.options.datasources.get('personalInfo') != null}"
+    th:with="fullName=${input.options.datasources.get('personalInfo').get('firstName').value[0] + ' ' + input.options.datasources.get('personalInfo').get('lastName').value[0]}">
+    <!-- Hidden checkbox for validation (only when "Yes" is selected) -->
+    <input type="checkbox"
+      th:name="${formInputName}"
+      th:value="${fullName} + ' applicant'"
+      checked
+      style="display:none;"
+      th:attr="data-auto-applicant='true'">
+    
+    <!-- Hide the follow-up container since there are no household members to select -->
+    <script th:inline="javascript">
+      (function() {
+        function onReady(fn) {
+          if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", fn);
+          } else {
+            fn();
+          }
+        }
+        
+        onReady(function() {
+          // Hide the follow-up container if it exists (no household members case)
+          const inputName = /*[[${input.name}]]*/ '';
+          const followUpContainer = document.querySelector('#' + inputName + '-follow-up');
+          if (followUpContainer) {
+            followUpContainer.style.display = 'none';
+          }
+        });
+      })();
+    </script>
+  </th:block>
 </th:block>
 </html>
