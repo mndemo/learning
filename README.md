@@ -11,33 +11,39 @@
         <legend class="form-question" th:text="#{penalty-warning.which-household-member-applies}"></legend>
         <p class="text--help" th:text="#{penalty-warning.select-all-that-apply}"></p>
         
+        <!-- Debug: Check if options exist -->
+        <div style="background: yellow; padding: 10px; margin: 10px 0;">
+          <strong>DEBUG:</strong><br>
+          input.options: <span th:text="${input.options != null ? 'EXISTS' : 'NULL'}"></span><br>
+          input.options.datasources: <span th:text="${input.options != null and input.options.datasources != null ? 'EXISTS' : 'NULL'}"></span><br>
+          personalInfo: <span th:text="${input.options != null and input.options.datasources != null and input.options.datasources.get('personalInfo') != null ? 'EXISTS' : 'NULL'}"></span>
+        </div>
+        
         <!-- Applicant checkbox -->
-        <th:block th:if="${input.options != null and input.options.datasources != null}">
-          <label th:for="${input.name + '-householdMember-me'}" class="checkbox"
-            th:with="personalInfo=${input.options.datasources.get('personalInfo')},
-                     fullName=${personalInfo != null ? (personalInfo.get('firstName').value[0] + ' ' + personalInfo.get('lastName').value[0]) : ''}">
+        <label th:for="${input.name + '-householdMember-me'}" class="checkbox"
+          th:with="personalInfo=${input.options != null and input.options.datasources != null ? input.options.datasources.get('personalInfo') : null},
+                   fullName=${personalInfo != null ? (personalInfo.get('firstName').value[0] + ' ' + personalInfo.get('lastName').value[0]) : 'No Name'}">
+          <input type="checkbox"
+            th:id="${input.name + '-householdMember-me'}"
+            th:value="${fullName} + ' applicant'"
+            th:name="${formInputName}"
+            th:checked="${inputData.value.contains(fullName + ' applicant')}">
+          <span th:text="|${fullName} #{general.you}|"></span>
+        </label>
+        
+        <!-- Other household member checkboxes -->
+        <th:block th:if="${input.options != null and input.options.subworkflows != null and input.options.subworkflows.get('household') != null}" 
+                  th:each="iteration, iterationStat: ${input.options.subworkflows.get('household')}">
+          <label th:for="|${input.name}-householdMember${iterationStat.index}|"
+            class="checkbox"
+            th:with="fullName=${iteration.getPagesData().get('householdMemberInfo').get('firstName').value[0] + ' ' + iteration.getPagesData().get('householdMemberInfo').get('lastName').value[0]}">
             <input type="checkbox"
-              th:id="${input.name + '-householdMember-me'}"
-              th:value="${fullName} + ' applicant'"
+              th:id="|${input.name}-householdMember${iterationStat.index}|"
+              th:value="${fullName} + ' ' + ${iteration.id}"
               th:name="${formInputName}"
-              th:checked="${inputData.value.contains(fullName + ' applicant')}">
-            <span th:text="|${fullName} #{general.you}|"></span>
+              th:checked="${inputData.value.contains(fullName + ' ' + iteration.id)}">
+            <span th:text="${fullName}"></span>
           </label>
-          
-          <!-- Other household member checkboxes -->
-          <th:block th:if="${input.options.subworkflows != null and input.options.subworkflows.get('household') != null}" 
-                    th:each="iteration, iterationStat: ${input.options.subworkflows.get('household')}">
-            <label th:for="|${input.name}-householdMember${iterationStat.index}|"
-              class="checkbox"
-              th:with="fullName=${iteration.getPagesData().get('householdMemberInfo').get('firstName').value[0] + ' ' + iteration.getPagesData().get('householdMemberInfo').get('lastName').value[0]}">
-              <input type="checkbox"
-                th:id="|${input.name}-householdMember${iterationStat.index}|"
-                th:value="${fullName} + ' ' + ${iteration.id}"
-                th:name="${formInputName}"
-                th:checked="${inputData.value.contains(fullName + ' ' + iteration.id)}">
-              <span th:text="${fullName}"></span>
-            </label>
-          </th:block>
         </th:block>
       </fieldset>
     </div>
