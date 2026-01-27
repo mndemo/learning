@@ -3,7 +3,7 @@
 <th:block th:fragment="penaltyWarningHouseholdFollowup (input, data)" 
           th:with="formInputName=${T(org.codeforamerica.shiba.pages.PageUtils).getFormInputName(input.name)},
                    inputData=${data.get(input.name)},
-                   householdSubFlow=${input.options != null and input.options.subworkflows != null ? input.options.subworkflows.get('household') : null},
+                   householdSubFlow=${input.options != null and input.options.subworkflows != null and input.options.subworkflows.get('household') != null ? input.options.subworkflows.get('household') : null},
                    hasHouseholdMembers=${householdSubFlow != null and not householdSubFlow.isEmpty()}">
   <div class="spacing-above-25 form-group" th:classappend="${!inputData.valid(data)} ? 'form-group--error' : ''">
     <div class="word-wrap-break-word">
