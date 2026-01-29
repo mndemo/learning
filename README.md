@@ -9,8 +9,11 @@
 				   householdSubFlow=${input.options != null and input.options.subworkflows != null ? input.options.subworkflows.get('household') : null},
 				   hasHouseholdMembers=${householdSubFlow != null and !householdSubFlow.isEmpty()}"> 		   
 	<div class="form-group" th:classappend="${hasError } ? 'form-group--error' : ''">
-		<!-- Question with Follow-up wrapper/Honeycrisp container that enables the show/hide behavior for follow-ups.-->
-		<div class="question-with-follow-up">
+		<!-- Question with Follow-up wrapper/Honeycrisp container that enables the show/hide behavior for follow-ups. When no household members, data attributes are used by script to add hidden "applicant" only when Yes is selected. -->
+		<div class="question-with-follow-up"
+			th:attr="data-no-household-members=${!hasHouseholdMembers ? 'true' : null},
+			         data-applicant-value=${(!hasHouseholdMembers && input.options.datasources != null) ? (input.options.datasources.get('personalInfo').get('firstName').value[0] + ' ' + input.options.datasources.get('personalInfo').get('lastName').value[0] + ' applicant') : null},
+			         data-input-name=${!hasHouseholdMembers ? formInputName : null}">
 			<!-- Main Yes/No Question -->
 			<div class="question-with-follow-up__question">
 				<fieldset>
@@ -42,11 +45,7 @@
 				</fieldset>
 			</div>
 			
-			<!-- When there are NO household members: always include a hidden "applicant" value so on submit we get [radioValue, "ApplicantName applicant"].
-			     If user selects Yes → ["true", "applicant"] and SELECT_AT_LEAST_ONE_IF_YES_SELECTED passes. If No → ["false", "applicant"] and validator passes (no "true"). -->
-			<th:block th:if="${!hasHouseholdMembers}" th:with="applicantFullName=${input.options.datasources.get('personalInfo').get('firstName').value[0] + ' ' + input.options.datasources.get('personalInfo').get('lastName').value[0]}">
-				<input type="hidden" th:name="${formInputName}" th:value="${applicantFullName + ' applicant'}">
-			</th:block>
+			<!-- When there are NO household members, a script (below) adds a hidden "applicant" input only when the user selects Yes, so NOT_BLANK still requires an answer and SELECT_AT_LEAST_ONE_IF_YES_SELECTED passes. -->
 
 			<!-- Follow-up: Household Member Checkboxes (ONLY shows if there are household members). Validation is server-side via SELECT_AT_LEAST_ONE_IF_YES_SELECTED. -->
 			<div class="question-with-follow-up__follow-up" 
@@ -92,7 +91,45 @@
 		<!-- Error message -->
 		<div th:replace="~{fragments/inputErrorFragment :: validationError(${data}, ${input})}"></div>
 	</div>
-	
+
+	<!-- When no household members: add hidden "applicant" only when Yes is selected so NOT_BLANK still enforces answering and SELECT_AT_LEAST_ONE_IF_YES_SELECTED passes. -->
+	<script th:if="${!hasHouseholdMembers}">
+		(function() {
+			function run() {
+				document.querySelectorAll('.question-with-follow-up[data-no-household-members="true"]').forEach(function(wrapper) {
+					var name = wrapper.getAttribute('data-input-name');
+					var applicantValue = wrapper.getAttribute('data-applicant-value');
+					if (!name || !applicantValue) return;
+					var radios = wrapper.querySelectorAll('input[type="radio"]');
+					var nameMatches = function(el) { return el.getAttribute('name') === name; };
+					var radioWithName = Array.prototype.find.call(radios, function(r) { return nameMatches(r); });
+					if (!radioWithName) return;
+					var checked = Array.prototype.find.call(radios, function(r) { return nameMatches(r) && r.checked; });
+					var isYes = checked && checked.value === 'true';
+					var hidden = wrapper.querySelector('input[type="hidden"][data-penalty-applicant]');
+					if (isYes) {
+						if (!hidden) {
+							var input = document.createElement('input');
+							input.type = 'hidden';
+							input.name = name;
+							input.value = applicantValue;
+							input.setAttribute('data-penalty-applicant', 'true');
+							wrapper.appendChild(input);
+						}
+					} else {
+						if (hidden) hidden.remove();
+					}
+				});
+			}
+			if (document.readyState === 'loading') {
+				document.addEventListener('DOMContentLoaded', run);
+			} else {
+				run();
+			}
+			document.addEventListener('change', function(e) {
+				if (e.target.type === 'radio' && e.target.form) run();
+			});
+		})();
+	</script>
  </th:block>
 </html>
-
