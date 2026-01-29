@@ -1,4 +1,4 @@
-- name: supplementalSecurityIncomeFrequency
+ - name: veteransBenefitsFrequency
         type: SELECT
         options:
           selectableOptions:
@@ -15,16 +15,16 @@
         condition:
           pageName: unearnedIncome
           input: unearnedIncome
-          value: SSI
-      - name: supplementalSecurityIncomeStartDate
+          value: VETERANS_BENEFITS
+      - name: veteransBenefitsStartDate
         type: DATE
         promptMessage:
           promptMessageKey: unearned-income-source.start-date
         condition:
           pageName: unearnedIncome
           input: unearnedIncome
-          value: SSI
-      - name: supplementalSecurityIncomeEndDate
+          value: VETERANS_BENEFITS
+      - name: veteransBenefitsEndDate
         type: DATE
         promptMessage:
           promptMessageKey: unearned-income-source.end-date
@@ -32,8 +32,8 @@
         condition:
           pageName: unearnedIncome
           input: unearnedIncome
-          value: SSI
-      - name: supplementalSecurityIncomeNoEndDate
+          value: VETERANS_BENEFITS
+      - name: veteransBenefitsNoEndDate
         type: CHECKBOX
         promptMessage:
           promptMessageKey: unearned-income-source.no-end-date
@@ -44,4 +44,4 @@
         condition:
           pageName: unearnedIncome
           input: unearnedIncome
-          value: SSI
+          value: VETERANS_BENEFITS
