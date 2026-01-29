@@ -1,4 +1,4 @@
- - name: socialSecurityFrequency
+- name: supplementalSecurityIncomeFrequency
         type: SELECT
         options:
           selectableOptions:
@@ -15,16 +15,16 @@
         condition:
           pageName: unearnedIncome
           input: unearnedIncome
-          value: SOCIAL_SECURITY
-      - name: socialSecurityStartDate
+          value: SSI
+      - name: supplementalSecurityIncomeStartDate
         type: DATE
         promptMessage:
           promptMessageKey: unearned-income-source.start-date
         condition:
           pageName: unearnedIncome
           input: unearnedIncome
-          value: SOCIAL_SECURITY
-      - name: socialSecurityEndDate
+          value: SSI
+      - name: supplementalSecurityIncomeEndDate
         type: DATE
         promptMessage:
           promptMessageKey: unearned-income-source.end-date
@@ -32,8 +32,8 @@
         condition:
           pageName: unearnedIncome
           input: unearnedIncome
-          value: SOCIAL_SECURITY
-      - name: socialSecurityNoEndDate
+          value: SSI
+      - name: supplementalSecurityIncomeNoEndDate
         type: CHECKBOX
         promptMessage:
           promptMessageKey: unearned-income-source.no-end-date
@@ -44,4 +44,4 @@
         condition:
           pageName: unearnedIncome
           input: unearnedIncome
-          value: SOCIAL_SECURITY
+          value: SSI
