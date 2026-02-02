@@ -56,8 +56,10 @@
       <span style="display:none" th:attr="data-end-date-form-name=${formInputName}"></span>
       <script>
         (function() {
-          var prev = document.currentScript && document.currentScript.previousElementSibling;
-          var endDateFormName = (prev && prev.getAttribute('data-end-date-form-name')) || '';
+          var scriptEl = document.currentScript;
+          var formGroup = scriptEl && scriptEl.closest && scriptEl.closest('.form-group');
+          var spanEl = formGroup && formGroup.querySelector('span[data-end-date-form-name]');
+          var endDateFormName = (spanEl && spanEl.getAttribute('data-end-date-form-name')) || '';
           if (!endDateFormName) return;
           var noEndDateCheckboxName = endDateFormName.replace('EndDate[]', 'NoEndDate[]');
           function syncEndDateDisabled(checkbox) {
