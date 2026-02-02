@@ -1,40 +1,90 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<!--
-  Fragment: noEndDateDisableScript(endDateFormName)
-  Single responsibility: wire one "No end date" checkbox to its end-date inputs (disable when checked).
-  Included by date-input fragment only when the DATE input is an end-date field (name ends with EndDate).
--->
-<th:block th:fragment="noEndDateDisableScript(endDateFormName)">
-  <script th:attr="data-end-date-form-name=${endDateFormName}">
-    (function() {
-      var scriptEl = document.currentScript;
-      var endDateFormName = scriptEl && scriptEl.getAttribute('data-end-date-form-name') || '';
-      var noEndDateCheckboxName = endDateFormName.replace('EndDate[]', 'NoEndDate[]');
-      function syncEndDateDisabled(checkbox) {
-        if (!checkbox || checkbox.getAttribute('name') !== noEndDateCheckboxName) return;
-        var form = checkbox.form;
-        if (!form) return;
-        var inputs = form.querySelectorAll('input[name="' + endDateFormName + '"]');
-        inputs.forEach(function(inp) { inp.disabled = checkbox.checked; });
-      }
-      function run() {
-        var form = document.getElementById('page-form');
-        if (!form) return;
-        var checkbox = form.querySelector('input[type="checkbox"][name="' + noEndDateCheckboxName + '"]');
-        if (checkbox) syncEndDateDisabled(checkbox);
-      }
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', run);
-      } else {
-        run();
-      }
-      document.addEventListener('change', function(e) {
-        if (e.target && e.target.type === 'checkbox' && e.target.getAttribute('name') === noEndDateCheckboxName) {
-          syncEndDateDisabled(e.target);
-        }
-      });
-    })();
-  </script>
-</th:block>
+<html th:lang="${#locale.language}" xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="date-input (input, data)"
+     class="form-group"
+     th:classappend="${!inputData.valid(data)} ? 'form-group--error' : ''"
+     th:with="inputData=${data.get(input.name)},
+              formInputName=${T(org.codeforamerica.shiba.pages.PageUtils).getFormInputName(input.name)},
+              hasError=${!data.isValid() && !inputData.valid(data)},
+              hasHelpMessage=${input.helpMessageKey != null},
+              needsAriaLabel=${input.needsAriaLabel()},
+              noEndDateChecked=${#strings.endsWith(input.name, 'EndDate') and data.get(#strings.substring(input.name, 0, #strings.length(input.name) - 8) + 'NoEndDate') != null and data.get(#strings.substring(input.name, 0, #strings.length(input.name) - 8) + 'NoEndDate').value.contains('true')}">
+	 <fieldset class="date-input">
+        <div th:replace="~{fragments/form-question-prompt :: formQuestionPrompt(${input})}"></div>
+        <p class="text--help">
+            <label th:for="${input.name}+'-month'"
+                   th:id="${input.name}+'-month-label'"
+                   th:text="#{general.month}"></label>
+            &nbsp;/&nbsp;
+            <label th:for="${input.name}+'-day'"
+                   th:id="${input.name}+'-day-label'"
+                   th:text="#{general.day}"></label>
+            &nbsp;/&nbsp;
+            <label th:for="${input.name}+'-year'"
+                   th:id="${input.name}+'-year-label'"
+                   th:text="#{general.year}"></label>
+        </p>
+        <input type="text" inputmode="numeric" maxlength="2" class="text-input form-width--2-character dob-input"
+               th:id="${input.name}+'-month'" th:name="${formInputName}"
+               th:value="${(!inputData.value.isEmpty() and #lists.size(inputData.value) > 0) ? inputData.value[0]: ''}"
+               th:placeholder="mm"
+               th:disabled="${noEndDateChecked}"
+               th:attr="aria-describedby=${hasHelpMessage ? input.name + '-help-message' : ''},
+                        aria-labelledby=${needsAriaLabel ? '' : input.name + '-label'},
+                        aria-invalid=${hasError}"/>
+        &nbsp;/&nbsp;
+        <input type="text" inputmode="numeric" maxlength="2" class="text-input form-width--2-character dob-input"
+               th:id="${input.name}+'-day'"
+               th:name="${formInputName}" th:value="${(!inputData.value.isEmpty() and #lists.size(inputData.value) > 1) ? inputData.value[1]: ''}"
+               th:placeholder="dd"
+               th:disabled="${noEndDateChecked}"
+               th:attr="aria-describedby=${hasHelpMessage ? input.name + '-help-message' : ''},
+                        aria-labelledby=${needsAriaLabel ? '' : input.name + '-label'},
+                        aria-invalid=${hasError}"/>
+        &nbsp;/&nbsp;
+        <input type="text" inputmode="numeric" maxlength="4" class="text-input form-width--4-character dob-input"
+               th:id="${input.name}+'-year'"
+               th:name="${formInputName}" th:value="${(!inputData.value.isEmpty() and #lists.size(inputData.value) > 2) ? inputData.value[2]: ''}"
+               th:placeholder="yyyy"
+               th:disabled="${noEndDateChecked}"
+               th:attr="aria-describedby=${hasHelpMessage ? input.name + '-help-message' : ''},
+                        aria-labelledby=${needsAriaLabel ? '' : input.name + '-label'},
+                        aria-invalid=${hasError}"/>
+    </fieldset>
+    <div th:replace="~{fragments/inputErrorFragment :: validationError(${data}, ${input})}"></div>
+    <th:block th:if="${#strings.endsWith(input.name, 'EndDate')}">
+      <span style="display:none" th:attr="data-end-date-form-name=${formInputName}"></span>
+      <script>
+        (function() {
+          var prev = document.currentScript && document.currentScript.previousElementSibling;
+          var endDateFormName = (prev && prev.getAttribute('data-end-date-form-name')) || '';
+          if (!endDateFormName) return;
+          var noEndDateCheckboxName = endDateFormName.replace('EndDate[]', 'NoEndDate[]');
+          function syncEndDateDisabled(checkbox) {
+            if (!checkbox || checkbox.getAttribute('name') !== noEndDateCheckboxName) return;
+            var form = checkbox.form;
+            if (!form) return;
+            var inputs = form.querySelectorAll('input[name="' + endDateFormName + '"]');
+            inputs.forEach(function(inp) { inp.disabled = checkbox.checked; });
+          }
+          function run() {
+            var form = document.getElementById('page-form');
+            if (!form) return;
+            var checkbox = form.querySelector('input[type="checkbox"][name="' + noEndDateCheckboxName + '"]');
+            if (checkbox) syncEndDateDisabled(checkbox);
+          }
+          if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', run);
+          } else {
+            run();
+          }
+          document.addEventListener('change', function(e) {
+            if (e.target && e.target.type === 'checkbox' && e.target.getAttribute('name') === noEndDateCheckboxName) {
+              syncEndDateDisabled(e.target);
+            }
+          });
+        })();
+      </script>
+    </th:block>
+</div>
 </html>
