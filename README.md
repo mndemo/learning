@@ -1,92 +1,9174 @@
-<!DOCTYPE html>
-<html th:lang="${#locale.language}" xmlns:th="http://www.thymeleaf.org">
-<div th:fragment="date-input (input, data)"
-     class="form-group"
-     th:classappend="${!inputData.valid(data)} ? 'form-group--error' : ''"
-     th:with="inputData=${data.get(input.name)},
-              formInputName=${T(org.codeforamerica.shiba.pages.PageUtils).getFormInputName(input.name)},
-              hasError=${!data.isValid() && !inputData.valid(data)},
-              hasHelpMessage=${input.helpMessageKey != null},
-              needsAriaLabel=${input.needsAriaLabel()},
-              noEndDateChecked=${#strings.endsWith(input.name, 'EndDate') and data.get(#strings.substring(input.name, 0, #strings.length(input.name) - 8) + 'NoEndDate') != null and data.get(#strings.substring(input.name, 0, #strings.length(input.name) - 8) + 'NoEndDate').value.contains('true')}">
-	 <fieldset class="date-input">
-        <div th:replace="~{fragments/form-question-prompt :: formQuestionPrompt(${input})}"></div>
-        <p class="text--help">
-            <label th:for="${input.name}+'-month'"
-                   th:id="${input.name}+'-month-label'"
-                   th:text="#{general.month}"></label>
-            &nbsp;/&nbsp;
-            <label th:for="${input.name}+'-day'"
-                   th:id="${input.name}+'-day-label'"
-                   th:text="#{general.day}"></label>
-            &nbsp;/&nbsp;
-            <label th:for="${input.name}+'-year'"
-                   th:id="${input.name}+'-year-label'"
-                   th:text="#{general.year}"></label>
-        </p>
-        <input type="text" inputmode="numeric" maxlength="2" class="text-input form-width--2-character dob-input"
-               th:id="${input.name}+'-month'" th:name="${formInputName}"
-               th:value="${(!inputData.value.isEmpty() and #lists.size(inputData.value) > 0) ? inputData.value[0]: ''}"
-               th:placeholder="mm"
-               th:disabled="${noEndDateChecked}"
-               th:attr="aria-describedby=${hasHelpMessage ? input.name + '-help-message' : ''},
-                        aria-labelledby=${needsAriaLabel ? '' : input.name + '-label'},
-                        aria-invalid=${hasError}"/>
-        &nbsp;/&nbsp;
-        <input type="text" inputmode="numeric" maxlength="2" class="text-input form-width--2-character dob-input"
-               th:id="${input.name}+'-day'"
-               th:name="${formInputName}" th:value="${(!inputData.value.isEmpty() and #lists.size(inputData.value) > 1) ? inputData.value[1]: ''}"
-               th:placeholder="dd"
-               th:disabled="${noEndDateChecked}"
-               th:attr="aria-describedby=${hasHelpMessage ? input.name + '-help-message' : ''},
-                        aria-labelledby=${needsAriaLabel ? '' : input.name + '-label'},
-                        aria-invalid=${hasError}"/>
-        &nbsp;/&nbsp;
-        <input type="text" inputmode="numeric" maxlength="4" class="text-input form-width--4-character dob-input"
-               th:id="${input.name}+'-year'"
-               th:name="${formInputName}" th:value="${(!inputData.value.isEmpty() and #lists.size(inputData.value) > 2) ? inputData.value[2]: ''}"
-               th:placeholder="yyyy"
-               th:disabled="${noEndDateChecked}"
-               th:attr="aria-describedby=${hasHelpMessage ? input.name + '-help-message' : ''},
-                        aria-labelledby=${needsAriaLabel ? '' : input.name + '-label'},
-                        aria-invalid=${hasError}"/>
-    </fieldset>
-    <div th:replace="~{fragments/inputErrorFragment :: validationError(${data}, ${input})}"></div>
-    <th:block th:if="${#strings.endsWith(input.name, 'EndDate')}">
-      <span style="display:none" th:attr="data-end-date-form-name=${formInputName}"></span>
-      <script>
-        (function() {
-          var scriptEl = document.currentScript;
-          var formGroup = scriptEl && scriptEl.closest && scriptEl.closest('.form-group');
-          var spanEl = formGroup && formGroup.querySelector('span[data-end-date-form-name]');
-          var endDateFormName = (spanEl && spanEl.getAttribute('data-end-date-form-name')) || '';
-          if (!endDateFormName) return;
-          var noEndDateCheckboxName = endDateFormName.replace('EndDate[]', 'NoEndDate[]');
-          function syncEndDateDisabled(checkbox) {
-            if (!checkbox || checkbox.getAttribute('name') !== noEndDateCheckboxName) return;
-            var form = checkbox.form;
-            if (!form) return;
-            var inputs = form.querySelectorAll('input[name="' + endDateFormName + '"]');
-            inputs.forEach(function(inp) { inp.disabled = checkbox.checked; });
-          }
-          function run() {
-            var form = document.getElementById('page-form');
-            if (!form) return;
-            var checkbox = form.querySelector('input[type="checkbox"][name="' + noEndDateCheckboxName + '"]');
-            if (checkbox) syncEndDateDisabled(checkbox);
-          }
-          if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', run);
-          } else {
-            run();
-          }
-          document.addEventListener('change', function(e) {
-            if (e.target && e.target.type === 'checkbox' && e.target.getAttribute('name') === noEndDateCheckboxName) {
-              syncEndDateDisabled(e.target);
-            }
-          });
-        })();
-      </script>
-    </th:block>
-</div>
-</html>
+# see @ApplicationConfiguration for how to maintain this file
+conditionDefinitions:
+  - &minimumFlow?
+    pageName: doYouNeedHelpImmediately
+    name: minimumFlow
+    input: needHelpImmediately
+    value: "false"
+  - &laterDocsFlow?
+    name: laterDocsFlow
+    pageName: matchInfo
+    input: lastName
+    matcher: NOT_EMPTY
+  - &expeditedFlow?
+    pageName: doYouNeedHelpImmediately
+    name: expeditedFlow
+    input: needHelpImmediately
+    value: "true"
+  - &onlyApplyingForOthers?
+    pageName: choosePrograms
+    name: onlyApplyingForOthers
+    input: programs
+    value: NONE
+  - &livesAlone?
+    pageName: addHouseholdMembers
+    name: livesAlone
+    input: addHouseholdMembers
+    value: "false"
+  - &isUrbanTribalNationMember?
+    pageName: selectTheTribe
+    name: isUrbanTribalNationMember
+    input: selectedTribe
+    matcher: IS_URBAN_TRIBAL_NATION_MEMBER
+  - &doesNotLiveAlone?
+    name: doesNotLiveAlone
+    logicalOperator: OR
+    conditions:
+      - *onlyApplyingForOthers?
+      - pageName: addHouseholdMembers
+        name: addHouseholdMembersTrue
+        input: addHouseholdMembers
+        value: "true"
+  - &isHomeless?
+    pageName: homeAddress
+    name: isHomeless
+    input: isHomeless
+    matcher: DOES_NOT_CONTAIN
+    value: "true"
+  - &continueWithoutSecondSignature?
+    pageName: secondSignatureLegalStuff
+    name: continueWithoutSecondSignature
+    input: secondSignatureOption
+    matcher: CONTAINS
+    value: CONTINUE_WITHOUT_SECOND_SIGNATURE
+  - &selectedCountyDoesNotMatchEnrichedCountyHome?
+    pageName: homeAddressValidation
+    name: selectedCountyDoesNotMatchEnrichedCountyHome
+    input: enrichedCountyDifferentFromSelected
+    matcher: CONTAINS
+    value: "false"
+  - &selectedCountyDoesNotMatchEnrichedCountyMailing?
+    pageName: mailingAddressValidation
+    name: selectedCountyDoesNotMatchEnrichedCountyMailing
+    input: enrichedCountyDifferentFromSelected
+    matcher: CONTAINS
+    value: "false"
+  - &isSomeonePregnant?
+    pageName: pregnant
+    name: isSomeonePregnant
+    input: isPregnant
+    matcher: CONTAINS
+    value: "true"
+  - &isApplicantsJob?
+    pageName: householdSelectionForIncome
+    name: isApplicantsJob
+    input: whoseJobIsIt
+    value: applicant
+    matcher: CONTAINS_SUBSTRING
+  - &selectedOtherUnearnedIncome?
+    pageName: otherUnearnedIncome
+    name: selectedOtherUnearnedIncome
+    input: otherUnearnedIncome
+    value: NO_OTHER_UNEARNED_INCOME_SELECTED
+    matcher: DOES_NOT_CONTAIN
+  - &selectedUnearnedIncome?
+    pageName: unearnedIncome
+    name: selectedUnearnedIncome
+    input: unearnedIncome
+    value: NO_UNEARNED_INCOME_SELECTED
+    matcher: DOES_NOT_CONTAIN
+  - &noUnearnedIncomeSelected?
+    pageName: unearnedIncome
+    name: noUnearnedIncomeSelected
+    input: unearnedIncome
+    value: NO_UNEARNED_INCOME_SELECTED
+  - &noOtherUnearnedIncomeSelected?
+    pageName: otherUnearnedIncome
+    name: noOtherUnearnedIncomeSelected
+    input: otherUnearnedIncome
+    value: NO_OTHER_UNEARNED_INCOME_SELECTED
+  - &doesNotHaveMortgage?
+    pageName: homeExpenses
+    name: doesNotHaveMortgage
+    input: homeExpenses
+    value: MORTGAGE
+    matcher: DOES_NOT_CONTAIN
+  - &doesNotHaveRent?
+    pageName: homeExpenses
+    name: doesNotHaveRent
+    input: homeExpenses
+    value: RENT
+    matcher: DOES_NOT_CONTAIN
+  - &doesNotHaveRoomAndBoard?
+    pageName: homeExpenses
+    name: doesNotHaveRoomAndBoard
+    input: homeExpenses
+    value: ROOM_AND_BOARD
+    matcher: DOES_NOT_CONTAIN
+  - &hasMortgage?
+    pageName: homeExpenses
+    name: hasMortgage
+    input: homeExpenses
+    value: MORTGAGE
+  - &hasRent?
+    pageName: homeExpenses
+    name: hasRent
+    input: homeExpenses
+    value: RENT
+  - &hasRoomAndBoard?
+    pageName: homeExpenses
+    name: hasRoomAndBoard
+    input: homeExpenses
+    value: ROOM_AND_BOARD
+  - &applicantChoseSNAP?
+    pageName: choosePrograms
+    name: applicantChoseSNAP
+    value: SNAP
+    input: programs
+  - &applicantChoseCASH?
+    pageName: choosePrograms
+    name: applicantChoseCASH
+    value: CASH
+    input: programs
+  - &applicantChoseGRH?
+    pageName: choosePrograms
+    name: applicantChoseGRH
+    value: GRH
+    input: programs
+  - &someoneChoseCASH?
+    name: someoneChoseCASH
+    logicalOperator: OR
+    conditions:
+      - pageName: choosePrograms
+        input: programs
+        value: CASH
+      - pageName: householdMemberInfo
+        input: programs
+        value: CASH
+  - &someoneChoseCCAP?
+    name: someoneChoseCCAP
+    logicalOperator: OR
+    conditions:
+      - pageName: choosePrograms
+        name: applicantChooseCCAP
+        input: programs
+        value: CCAP
+      - pageName: householdMemberInfo
+        input: programs
+        value: CCAP
+  - &applicantOnlyChoseCCAP?
+    pageName: choosePrograms
+    name: applicantOnlyChoseCCAP
+    value: CCAP
+    input: programs
+    matcher: CONTAINS_ONLY
+  - &householdOnlyChoseCCAP?
+    pageName: householdMemberInfo
+    name: householdOnlyChoseCCAP
+    input: programs
+    value: CCAP
+    matcher: CONTAINS_ONLY
+  - &applicantDidNotChooseProgram?
+    pageName: choosePrograms
+    name: applicantDidNotChooseProgram
+    input: programs
+    matcher: DOES_NOT_CONTAIN
+  - &applicantChoseAtLeastOneProgram?
+    pageName: choosePrograms
+    name: applicantChoseAtLeastOneProgram
+    value: NONE
+    input: programs
+    matcher: DOES_NOT_CONTAIN
+  - &applicantDidNotChooseCCAPOnly?
+    pageName: choosePrograms
+    name: applicantDidNotChooseCCAPOnly
+    value: CCAP
+    input: programs
+    matcher: DOES_NOT_EQUAL
+  - &applicantDidNotChooseCCAP?
+    name: applicantDidNotChooseCCAP
+    <<: *applicantDidNotChooseProgram?
+    value: CCAP
+  - &applicantDidNotChooseGRH?
+    name: applicantDidNotChooseGRH
+    <<: *applicantDidNotChooseProgram?
+    value: GRH
+  - &householdMemberDidNotChooseProgram?
+    pageName: householdMemberInfo
+    name: householdMemberDidNotChooseProgram
+    input: programs
+    matcher: DOES_NOT_CONTAIN
+  - &householdMemberChoseAtLeastOneProgram?
+    pageName: householdMemberInfo
+    name: householdMemberChoseAtLeastOneProgram
+    input: programs
+    matcher: CONTAINS_STRING_OTHER_THAN
+    value: NONE
+  - &householdMemberDidNotChooseCCAP?
+    name: householdMemberDidNotChooseCCAP
+    <<: *householdMemberDidNotChooseProgram?
+    value: CCAP
+  - &noOneChoseCCAP?
+    name: noOneChoseCCAP
+    logicalOperator: AND
+    conditions:
+      - *applicantDidNotChooseCCAP?
+      - logicalOperator: OR
+        conditions:
+          - *householdMemberDidNotChooseCCAP?
+          - *livesAlone?
+  - &noOneChoseSNAP?
+    name: noOneChoseSNAP
+    logicalOperator: AND
+    conditions:
+      - <<: *applicantDidNotChooseProgram?
+        value: SNAP
+      - logicalOperator: OR
+        conditions:
+          - <<: *householdMemberDidNotChooseProgram?
+            value: SNAP
+          - *livesAlone?
+  - &someoneChoseSNAP?
+    name: someoneChoseSnap
+    logicalOperator: OR
+    conditions:
+      - pageName: choosePrograms
+        name: applicantChooseSNAP
+        input: programs
+        matcher: CONTAINS
+        value: SNAP
+      - pageName: householdMemberInfo
+        name: hhMemberChooseSNAP
+        input: programs
+        matcher: CONTAINS
+        value: SNAP
+  - &someoneChoseEA?
+    name: someoneChoseEA
+    logicalOperator: OR
+    conditions:
+      - pageName: choosePrograms
+        name: applicantChooseEA
+        input: programs
+        matcher: CONTAINS
+        value: EA
+      - pageName: householdMemberInfo
+        name: hhMemberChooseEA
+        input: programs
+        matcher: CONTAINS
+        value: EA
+  - &someoneChoseCAFProgram?
+    name: someoneChoseCAFProgram
+    logicalOperator: OR
+    conditions:
+      - *someoneChoseSNAP?
+      - *someoneChoseEA?
+      - *someoneChoseCASH?
+      - *applicantChoseGRH?
+
+  - &noOneChoseCAF?
+    name: noOneChoseCAF
+    logicalOperator: AND
+    conditions:
+      # Applicant did not choose any CAF program (SNAP, EA, CASH, GRH)
+      - logicalOperator: AND
+        conditions:
+          - <<: *applicantDidNotChooseProgram?
+            value: SNAP
+          - <<: *applicantDidNotChooseProgram?
+            value: EA
+          - <<: *applicantDidNotChooseProgram?
+            value: CASH
+          - <<: *applicantDidNotChooseProgram?
+            value: GRH
+      # Either no household member chose them OR applicant lives alone
+      - logicalOperator: OR
+        conditions:
+          - logicalOperator: AND
+            conditions:
+              - <<: *householdMemberDidNotChooseProgram?
+                value: SNAP
+              - <<: *householdMemberDidNotChooseProgram?
+                value: EA
+              - <<: *householdMemberDidNotChooseProgram?
+                value: CASH
+              - <<: *householdMemberDidNotChooseProgram?
+                value: GRH
+          - *livesAlone?
+  - &noOneChoseCASH?
+    name: noOneChoseCASH
+    logicalOperator: AND
+    conditions:
+      - <<: *applicantDidNotChooseProgram?
+        value: CASH
+      - logicalOperator: OR
+        conditions:
+          - <<: *householdMemberDidNotChooseProgram?
+            value: CASH
+          - *livesAlone?
+  - &noOneChoseEA?
+    name: noOneChoseEA
+    logicalOperator: AND
+    conditions:
+      - <<: *applicantDidNotChooseProgram?
+        value: EA
+      - logicalOperator: OR
+        conditions:
+          - <<: *householdMemberDidNotChooseProgram?
+            value: EA
+          - *livesAlone?
+  - &noOneChoseGRH?
+    name: noOneChoseGRH
+    logicalOperator: AND
+    conditions:
+      - *applicantDidNotChooseGRH?
+      - logicalOperator: OR
+        conditions:
+          - <<: *householdMemberDidNotChooseProgram?
+            value: GRH
+          - *livesAlone?
+  - &livesAloneOrIsApplicantsJob?
+    name: livesAloneOrIsApplicantsJob
+    logicalOperator: OR
+    conditions:
+      - *isApplicantsJob?
+      - *livesAlone?
+  - &isNoSSN?
+    pageName: personalInfo
+    name: isNoSSN
+    input: ssn
+    matcher: NOT_EMPTY
+  - &applicantChoseCCAPProgram?
+    pageName: choosePrograms
+    name: applicantChoseCCAPProgram
+    value: CCAP
+    input: programs
+    matcher: CONTAINS
+  - &WENCountySelected?
+    name: WENCountySelected
+    logicalOperator: OR
+    conditions:
+      - pageName: identifyCounty
+        input: county
+        value: "Becker"
+      - pageName: identifyCounty
+        input: county
+        value: "Mahnomen"
+      - pageName: identifyCounty
+        input: county
+        value: "Clearwater"
+  - &doesNotHaveHealthcare?
+    name: doesNotHaveHealthcare
+    logicalOperator: OR
+    conditions:
+      - pageName: healthcareCoverage
+        input: healthcareCoverage
+        matcher: CONTAINS
+        value: NOT_SURE
+      - pageName: healthcareCoverage
+        input: healthcareCoverage
+        matcher: CONTAINS
+        value: NO
+      - pageName: healthcareCoverage
+        input: healthcareCoverage
+        matcher: NONE_SELECTED
+  - &householdMemberLessThanAge5?
+    pageName: householdMemberInfo
+    name: householdMemberLessThanAge5
+    input: dobAsDate
+    matcher: HH_MEMBER_AGE_LESS_THAN_5
+  - &householdMemberLessThanAge18?
+    pageName: householdMemberInfo
+    name: householdMemberLessThanAge18
+    input: dobAsDate
+    matcher: HH_MEMBER_AGE_LESS_THAN_18
+  - &isMilleLacsBandMemberInMilleLacsBandCounty?    
+    name: isMilleLacsBandMemberInMilleLacsBandCounty
+    logicalOperator: AND
+    conditions:
+      - pageName: selectTheTribe
+        name: selectedTribeMilleLacsBand
+        input: selectedTribe
+        value: Mille Lacs Band of Ojibwe
+      - pageName: identifyCounty
+        name: selectedCountyMilleLacsBandRuralCounty
+        input: county
+        matcher: IS_MILLE_LACS_RURAL_COUNTY
+  - &isTribalMemberLivingInUrbanTribalNationCounty?    
+    name: isTribalMemberLivingInUrbanTribalNationCounty
+    logicalOperator: AND
+    conditions:
+      - *isUrbanTribalNationMember?
+      - pageName: identifyCounty
+        name: isUrbanTribalNationCounty
+        input: county
+        matcher: IS_URBAN_TRIBAL_NATION_COUNTY
+  - &isTribalMemberNotLeechLakeLivingInBeltramiCounty?    
+    name: isTribalMemberNotLeechLakeLivingInBeltramiCounty
+    logicalOperator: AND
+    conditions:
+      - pageName: tribalNationMember
+        name: isTribalNationMemberTrue
+        input: isTribalNationMember
+        value: "true"
+      - pageName: selectTheTribe
+        name: notInLeechLakeTribe
+        input: selectedTribe
+        matcher: DOES_NOT_EQUAL        
+        value: "Leech Lake"
+      - pageName: identifyCounty
+        name: livesInBeltramiCounty
+        input: county
+        value: "Beltrami"
+  - &isTribalMemberNotWhiteEarthNationLivingInClearwaterCounty?    
+    name: isTribalMemberNotWhiteEarthNationLivingInClearwaterCounty
+    logicalOperator: AND
+    conditions:
+      - pageName: identifyCounty
+        name: livesInClearwaterCounty
+        input: county
+        value: "Clearwater"
+      - pageName: tribalNationMember
+        name: isTribalNationMemberTrue
+        input: isTribalNationMember
+        value: "true"
+      - pageName: selectTheTribe
+        name: notInLeechLakeTribe
+        input: selectedTribe
+        matcher: DOES_NOT_EQUAL        
+        value: "White Earth Nation"
+  - &isLivingInRedLakeNationAndBeltramiOrClearwaterCounty?    
+    name: isLivingOnRedLakeNationAndBeltramiOrClearwaterCounty
+    logicalOperator: AND
+    conditions:
+      - pageName: nationOfResidence
+        name: nationOfResidenceIsRedLakeNation
+        input: selectedNationOfResidence
+        value: "Red Lake Nation"
+      - logicalOperator: OR
+        name: livingInBeltramiOrClearwaterCounty
+        conditions:
+          - pageName: identifyCounty
+            input: county
+            value: "Beltrami"
+          - pageName: identifyCounty
+            input: county
+            value: "Clearwater"
+  - &isEligibleForTribalTANFonNationsBoundaryPage?
+    name: isEligibleForTribalTANFonNationsBoundaryPage
+    logicalOperator: AND
+    conditions:
+      - logicalOperator: OR
+        name: isPregnantOrHouseHoldMemberLessThan18
+        conditions:
+          - *isSomeonePregnant?
+          - *householdMemberLessThanAge18?
+      - logicalOperator: OR
+        name: threeOrConditionsInIsEligibleForTribalTANFonNationsBoundaryPage
+        conditions:
+          - *isMilleLacsBandMemberInMilleLacsBandCounty?
+          - *isTribalMemberLivingInUrbanTribalNationCounty?
+          - *isTribalMemberNotLeechLakeLivingInBeltramiCounty?
+  - &isEligibleForTribalTANFonNationOfResidencePage?
+    name: isEligibleForTribalTANFonNationOfResidencePage
+    logicalOperator: AND
+    conditions:
+      - logicalOperator: OR
+        name: someOneIsPregnantOrHHmemberLessThan18
+        conditions:
+          - *isSomeonePregnant?
+          - *householdMemberLessThanAge18?
+      - logicalOperator: OR
+        name: fourOrConditionsInIsEligibleForTribalTANFonNationOfResidencePage
+        conditions:
+          - *isMilleLacsBandMemberInMilleLacsBandCounty?
+          - *isTribalMemberLivingInUrbanTribalNationCounty?
+          - *isTribalMemberNotLeechLakeLivingInBeltramiCounty?
+          - *isLivingInRedLakeNationAndBeltramiOrClearwaterCounty?
+pageConfigurations:
+  - &landing
+    name: landing
+    pageTitle: landing.title
+    usingPageTemplateFragment: false
+  - &prepareToApply
+    name: prepareToApply
+    pageTitle: prepare-to-apply.title
+    headerKey: prepare-to-apply.how-this-works
+    contextFragment: prepareToApplyContextFragment
+    hasPrimaryButton: false
+  - &timeoutNotice
+    name: timeoutNotice
+    pageTitle: timeout-notice.title
+    headerKey: timeout-notice.header
+    contextFragment: timeoutNoticeContextFragment
+    hasPrimaryButton: false
+  - &readyToUploadDocuments
+    name: readyToUploadDocuments
+    pageTitle: ready-to-upload-documents.title
+    headerKey: ready-to-upload-documents.header
+    headerHelpMessageKey: ready-to-upload-documents.first-we'll-ask-you
+    contextFragment: readyToUploadContextFragment
+  - &languagePreferences
+    name: languagePreferences
+    pageTitle: language-preferences.title
+    headerKey: language-preferences.language-preferences
+    contextFragment: languagePreferencesContextFragment
+    inputs:
+      - name: writtenLanguage
+        type: SELECT
+        promptMessage:
+          promptMessageKey: language-preferences.what-language-do-you-prefer-to-read-or-write
+        helpMessageKey: language-preferences.the-county-will-do-their-best-to-provide-documents-in-your-preferred-language
+        options:
+          selectableOptions:
+            - value: ENGLISH
+              messageKey: language-preferences.english
+            - value: SPANISH
+              messageKey: language-preferences.spanish
+            - value: SOOMAALI
+              messageKey: language-preferences.soomaali
+            - value: VIETNAMESE
+              messageKey: language-preferences.vietnamese
+            - value: RUSSIAN
+              messageKey: language-preferences.russian
+            - value: HMOOB
+              messageKey: language-preferences.hmoob
+      - name: spokenLanguage
+        type: SELECT
+        promptMessage:
+          promptMessageKey: language-preferences.what-language-do-you-prefer-to-speak
+        helpMessageKey: language-preferences.the-county-will-do-their-best-to-connect-you-with-someone-who-speaks-your
+        options:
+          selectableOptions:
+            - value: ENGLISH
+              messageKey: language-preferences.english
+            - value: SPANISH
+              messageKey: language-preferences.spanish
+            - value: SOOMAALI
+              messageKey: language-preferences.soomaali
+            - value: VIETNAMESE
+              messageKey: language-preferences.vietnamese
+            - value: RUSSIAN
+              messageKey: language-preferences.russian
+            - value: HMOOB
+              messageKey: language-preferences.hmoob
+      - name: needInterpreter
+        type: RADIO
+        promptMessage:
+          promptMessageKey: language-preferences.do-you-need-an-interpreter
+        options:
+          selectableOptions:
+            - value: "true"
+              messageKey: general.inputs.yes
+            - value: "false"
+              messageKey: general.inputs.no
+  - &writtenLanguage
+    name: writtenLanguage
+    pageTitle: written-language.title
+    headerKey: language-preferences.language-preferences
+    contextFragment: languagePreferencesContextFragment
+    inputs:
+      - name: writtenLanguage
+        type: RADIO
+        helpMessageKey: language-preferences.the-county-will-do-their-best-to-provide-documents-in-your-preferred-language
+        validators:
+           - validation: SELECT_AT_LEAST_ONE
+             errorMessageKey: general.validation.make-sure-you-answer-this-question
+        options:
+           selectableOptions:
+              - value: ARABIC
+                messageKey: language-preferences.Arabic
+                lang: ar
+              - value: AMHARIC
+                messageKey: language-preferences.Amharic
+                lang: am
+              - value: ENGLISH
+                messageKey: language-preferences.English
+                lang: en
+              - value: SPANISH
+                messageKey: language-preferences.Spanish
+                lang: es
+              - value: HMONG
+                messageKey: language-preferences.hmoob
+                lang: hmn
+              - value: KAREN
+                messageKey: language-preferences.Karen
+                lang: ksw
+              - value: NEPALI
+                messageKey: language-preferences.Nepali
+                lang: ne
+              - value: OROMO
+                messageKey: language-preferences.Oromo
+                lang: om
+              - value: SOMALI
+                messageKey: language-preferences.soomaali
+                lang: so
+              - value: RUSSIAN
+                messageKey: language-preferences.russian
+                lang: ru
+              - value: UKRAINIAN
+                messageKey: language-preferences.Ukrainian
+                lang: uk
+              - value: VIETNAMESE
+                messageKey: language-preferences.vietnamese
+                lang: vi
+              - value: OTHER
+                messageKey: language-preferences.different-language
+        followUpValues:
+          - "OTHER"
+        followUps:
+          - name: otherWrittenLanguage
+            type: TEXT
+            maxlength: 50
+            promptMessage:
+              promptMessageKey: language-preferences.preferred.language
+        datasources:
+          - pageName: writtenLanguage				
+  - &spokenLanguage
+    name: spokenLanguage
+    pageTitle: spoken-language.title
+    headerKey: language-preferences.what-language-do-you-prefer-to-speak
+    contextFragment: languagePreferencesContextFragment
+    inputs:
+      - name: spokenSameAsWritten
+        type: CUSTOM
+        customInputFragment: languagePreferenceInputFragment
+        helpMessageKey: language-preferences.the-county-will-do-their-best-to-connect-you-with-someone-who-speaks-your
+        options:
+          selectableOptions:
+             - value: "true"
+               messageKey: same-language-preferences.to-read-or-write
+          datasources:
+             - pageName: writtenLanguage  
+      - name: spokenLanguage
+        type: RADIO
+        ariaDescribedbyInput: spokenSameAsWritten
+        validators:
+           - validation: SELECT_AT_LEAST_ONE
+             errorMessageKey: general.validation.make-sure-you-answer-this-question
+             condition:
+                input: spokenSameAsWritten
+                matcher: DOES_NOT_EQUAL
+                value: "true"
+        options:
+          selectableOptions:
+            - value: AMERICAN SIGN LANGUAGE
+              messageKey: language-preferences.American-sign-language
+              lang: ase
+            - value: ARABIC
+              messageKey: language-preferences.Arabic
+              lang: ar
+            - value: AMHARIC
+              messageKey: language-preferences.Amharic
+              lang: am				  
+            - value: ENGLISH
+              messageKey: language-preferences.English
+              lang: en
+            - value: SPANISH
+              messageKey: language-preferences.Spanish
+              lang: es
+            - value: HMONG
+              messageKey: language-preferences.hmoob
+              lang: hmn
+            - value: KAREN
+              messageKey: language-preferences.Karen
+              lang: ksw
+            - value: NEPALI
+              messageKey: language-preferences.Nepali
+              lang: ne
+            - value: OROMO
+              messageKey: language-preferences.Oromo
+              lang: om
+            - value: SOMALI
+              messageKey: language-preferences.soomaali
+              lang: so
+            - value: RUSSIAN
+              messageKey: language-preferences.russian
+              lang: ru
+            - value: UKRAINIAN
+              messageKey: language-preferences.Ukrainian
+              lang: uk
+            - value: VIETNAMESE
+              messageKey: language-preferences.vietnamese
+              lang: vi
+            - value: OTHER
+              messageKey: speak-language-preferences.different-language
+        followUpValues:
+          - "OTHER"
+        followUps:
+          - name: otherSpokenLanguage
+            type: TEXT
+            maxlength: 50
+            promptMessage:
+              promptMessageKey: language-preferences.preferred.language
+        datasources:
+          - pageName: writtenLanguage	
+      - name: needInterpreter
+        type: RADIO
+        promptMessage:
+           promptMessageKey: language-preferences.do-you-need-an-interpreter
+        options:
+           selectableOptions:
+              - value: "true"
+                messageKey: general.inputs.yes
+              - value: "false"
+                messageKey: general.inputs.no
+  - &choosePrograms
+    name: choosePrograms
+    pageTitle: choose-programs.title
+    headerKey: choose-programs.what-type-of-assistance-would-you-like-to-apply-for
+    headerHelpMessageKey: general.check-all-that-apply
+    contextFragment: chooseProgramsContextFragment
+    inputs:
+      - name: programs
+        type: CHECKBOX
+        validators:
+          - validation: SELECT_AT_LEAST_ONE
+            errorMessageKey: general.validation.make-sure-you-answer-this-question
+        options:
+          selectableOptions:
+            - value: SNAP
+              messageKey: choose-programs.food-snap
+              helpMessageKey: choose-programs.food-snap-help
+              helpIcon: icon-apple
+            - value: CASH
+              messageKey: choose-programs.cash-programs
+              helpMessageKey: choose-programs.cash-programs-help
+              helpIcon: icon-dollar-circle
+            - value: CCAP
+              messageKey: choose-programs.child-care-assistance
+              helpMessageKey: choose-programs.child-care-assistance-help
+              helpIcon: icon-child-care
+            - value: EA
+              messageKey: choose-programs.emergency-assistance
+              helpMessageKey: choose-programs.emergency-assistance-help
+              helpIcon: icon-home
+            - value: GRH
+              messageKey: choose-programs.housing-support-group-residential-housing
+              helpMessageKey: choose-programs.housing-grh-help
+              helpIcon: icon-apartment
+            - value: NONE
+              messageKey: choose-programs.none-of-the-above
+              helpIcon: icon-people
+              isNone: true
+          datasources:
+            - pageName: identifyCounty
+    alertBox:
+      type: CHOOSE_NONE_WARNING
+      message: choose-programs.you-will-be-asked
+  - &expeditedNotice
+    name: expeditedNotice
+    pageTitle: expedited-notice.title
+    headerKey: expedited-notice.we-will-check-to-see
+    contextFragment: expeditedNoticeContextFragment
+    hasPrimaryButton: false
+  - &basicCriteria
+    name: basicCriteria
+    pageTitle: basic-criteria.title
+    headerKey: basic-criteria.do-any-of-these-situations-apply
+    headerHelpMessageKey: basic-criteria.to-apply-for-healthcare-at-least-one-should-be-true
+    contextFragment: healthcareCoverageFragment
+    inputs:
+      - name: basicCriteria
+        type: CHECKBOX
+        validators:
+          - validation: SELECT_AT_LEAST_ONE
+            errorMessageKey: general.validation.make-sure-you-answer-this-question
+        options:
+          selectableOptions:
+            - value: SIXTY_FIVE_OR_OLDER
+              messageKey: basic-criteria.i-am-65-or-older
+            - value: BLIND
+              messageKey: basic-criteria.i-am-blind
+            - value: SSI_OR_RSDI
+              messageKey: basic-criteria.i-receive-ssi-or-rsdi
+            - value: HAVE_DISABILITY_SSA
+              messageKey: basic-criteria.i-have-a-disability-ssa
+            - value: HAVE_DISABILITY_SMRT
+              messageKey: basic-criteria.i-have-a-disability-smrt
+            - value: MEDICAL_ASSISTANCE
+              messageKey: basic-criteria.i-want-to-apply-for-medical-assistance
+            - value: HELP_WITH_MEDICARE
+              messageKey: basic-criteria.i-want-help-with-my-medicare-costs
+            - value: NONE
+              messageKey: general.inputs.none-of-the-above
+              isNone: true
+  - &addOtherPrograms
+    name: addOtherPrograms
+    pageTitle: add-other-programs.title
+    hasPrimaryButton: false
+  - &introBasicInfo
+    name: introBasicInfo
+    pageTitle: intro-basic-info.title
+    hasPrimaryButton: false
+  - &personalInfo
+    name: personalInfo
+    pageTitle: personal-info.title
+    headerKey: personal-info.tell-us-about-yourself
+    contextFragment: personContextFragment
+    inputs:
+      - name: firstName
+        type: TEXT
+        promptMessage:
+          promptMessageKey: personal-info.whats-your-first-name
+        helpMessageKey: personal-info.legally-as-it-appears-on-your-id
+        validators:
+          - validation: NOT_BLANK
+            errorMessageKey: general.validation.make-sure-to-provide-a-first-name
+      - name: middleName
+        type: TEXT
+        promptMessage:
+          promptMessageKey: personal-info.whats-your-middle-name
+        helpMessageKey: personal-info.legally-as-it-appears-on-your-id				
+      - name: lastName
+        type: TEXT
+        promptMessage:
+          promptMessageKey: personal-info.whats-your-last-name
+        helpMessageKey: personal-info.legally-as-it-appears-on-your-id
+        validators:
+          - validation: NOT_BLANK
+            errorMessageKey: general.validation.make-sure-to-provide-a-last-name
+      - name: otherName
+        type: TEXT
+        promptMessage:
+          promptMessageKey: personal-info.list-any-names-that-you-have-gone-by-in-the-past
+        helpMessageKey: personal-info.include-maiden-names-or-legal-changes
+      - name: dateOfBirth
+        type: DATE
+        validators:
+          - validation: DATE
+            errorMessageKey: general.validation.please-enter-your-birthday-in-this-format
+            condition:
+              input: dateOfBirth
+              matcher: NOT_EMPTY
+          - validation: DOB_VALID
+            condition:
+              input: dateOfBirth
+              matcher: NOT_EMPTY
+            errorMessageKey: general.validation.make-sure-to-provide-a-dob-between-1900-and-present
+        promptMessage:
+          promptMessageKey: personal-info.when-were-you-born
+      - name: ssn
+        type: SSN
+        validators:
+          - validation: SSN
+            errorMessageKey: general.validation.make-sure-your-SSN-has-9-digits
+            condition:
+              input: ssn
+              matcher: NOT_EMPTY
+        promptMessage:
+          promptMessageKey: personal-info.whats-your-social-security-number
+        helpMessageKey: personal-info.if-you-have-one-we-strongly-recommend-including-it-here
+      - name: maritalStatus
+        type: RADIO
+        promptMessage:
+          promptMessageKey: personal-info.whats-your-marital-status
+        options:
+          selectableOptions:
+            - value: NEVER_MARRIED
+              messageKey: general.never-married
+            - value: MARRIED_LIVING_WITH_SPOUSE
+              messageKey: general.married-living-with-spouse
+            - value: MARRIED_NOT_LIVING_WITH_SPOUSE
+              messageKey: general.married-not-living-with-spouse
+            - value: LEGALLY_SEPARATED
+              messageKey: general.legally-separated
+            - value: DIVORCED
+              messageKey: general.divorced
+            - value: WIDOWED
+              messageKey: general.widowed
+      - name: sex
+        type: RADIO
+        promptMessage:
+          promptMessageKey: personal-info.whats-your-sex
+        helpMessageKey: personal-info.legally-as-it-appears-on-your-id-we-regret-that-this-question-is-limited
+        options:
+          selectableOptions:
+            - value: FEMALE
+              messageKey: general.female
+            - value: MALE
+              messageKey: general.male
+            - value: RATHER_NOT_SAY
+              messageKey: general.rather-not-say
+      - name: livedInMnWholeLife
+        type: RADIO
+        promptMessage:
+          promptMessageKey: personal-info.have-you-lived-in-minnesota-your-whole-life
+        options:
+          selectableOptions:
+            - value: "false"
+              messageKey: general.inputs.no
+            - value: "true"
+              messageKey: general.inputs.yes
+        followUpValues:
+          - "true"
+        followUps:
+          - name: moveToMnDate
+            type: DATE
+            validators:
+              - validation: DATE
+                errorMessageKey: general.validation.please-enter-the-date-in-this-format
+                condition:
+                  input: moveToMnDate
+                  matcher: NOT_EMPTY
+            promptMessage:
+              promptMessageKey: personal-info.when-did-you-move-to-minnesota
+          - name: moveToMnPreviousCity
+            type: TEXT
+            promptMessage:
+              promptMessageKey: personal-info.what-state-did-you-move-from		  
+  - &penaltyWarnings
+    name: penaltyWarnings
+    pageTitle: penalty-warning.title
+    headerKey: penalty-warning-header-key
+    headerHelpMessageKey: penalty-warning-header-help-message-key
+    contextFragment: legalReview1ContextFragment
+    preFormContentFragment: penaltyWarningsAccordions
+    inputs:
+      - name: disqualifiedPublicAssistance
+        type: CUSTOM
+        customInputFragment: yesNoRadioWithHouseholdFollowup
+        validators:
+          - validation: NOT_BLANK
+            errorMessageKey: general.validation.make-sure-you-answer-this-question
+          - validation: SELECT_AT_LEAST_ONE_IF_YES_SELECTED
+            errorMessageKey: penalty-warning.validation.select-household-member
+            condition:
+              customCondition: HOUSEHOLD_HAS_MEMBERS
+        promptMessage:
+          promptMessageKey: penalty-warning.has-court-or-any-other
+        options:
+          datasources:
+            - pageName: personalInfo
+            - groupName: household
+              pageName: householdMemberInfo
+              optional: "true" 
+      - name: fraudulentStatements
+        type: CUSTOM
+        customInputFragment: yesNoRadioWithHouseholdFollowup
+        validators:
+          - validation: NOT_BLANK
+            errorMessageKey: general.validation.make-sure-you-answer-this-question
+          - validation: SELECT_AT_LEAST_ONE_IF_YES_SELECTED
+            errorMessageKey: penalty-warning.validation.select-household-member
+            condition:
+              customCondition: HOUSEHOLD_HAS_MEMBERS
+        promptMessage:
+          promptMessageKey: penalty-warning.has-anyone-in-the-household
+        options:
+          datasources:
+            - pageName: personalInfo
+            - groupName: household
+              pageName: householdMemberInfo
+              optional: "true"
+      - name: hidingFromLaw
+        type: CUSTOM
+        customInputFragment: yesNoRadioWithHouseholdFollowup
+        validators:
+          - validation: NOT_BLANK
+            errorMessageKey: general.validation.make-sure-you-answer-this-question
+          - validation: SELECT_AT_LEAST_ONE_IF_YES_SELECTED
+            errorMessageKey: penalty-warning.validation.select-household-member
+            condition:
+              customCondition: HOUSEHOLD_HAS_MEMBERS
+        promptMessage:
+          promptMessageKey: penalty-warning.is-anyone-in-your-household-hiding
+        options:
+          datasources:
+            - pageName: personalInfo
+            - groupName: household
+              pageName: householdMemberInfo
+              optional: "true"
+      - name: drugFelonyConviction
+        type: CUSTOM
+        customInputFragment: yesNoRadioWithHouseholdFollowup
+        validators:
+          - validation: NOT_BLANK
+            errorMessageKey: general.validation.make-sure-you-answer-this-question
+          - validation: SELECT_AT_LEAST_ONE_IF_YES_SELECTED
+            errorMessageKey: penalty-warning.validation.select-household-member
+            condition:
+              customCondition: HOUSEHOLD_HAS_MEMBERS
+        promptMessage:
+          promptMessageKey: penalty-warning.has-anyone-in-your-household-convicted
+        helpMessageKey: penalty-warning.has-anyone-in-your-household-convicted-if-yes
+        options:
+          datasources:
+            - pageName: personalInfo
+            - groupName: household
+              pageName: householdMemberInfo
+              optional: "true"
+      - name: violatingParole
+        type: CUSTOM
+        customInputFragment: yesNoRadioWithHouseholdFollowup
+        validators:
+          - validation: NOT_BLANK
+            errorMessageKey: general.validation.make-sure-you-answer-this-question
+          - validation: SELECT_AT_LEAST_ONE_IF_YES_SELECTED
+            errorMessageKey: penalty-warning.validation.select-household-member
+            condition:
+              customCondition: HOUSEHOLD_HAS_MEMBERS
+        promptMessage:
+          promptMessageKey: penalty-warning.is-anyone-in-your-household-violating
+        options:
+          datasources:
+            - pageName: personalInfo
+            - groupName: household
+              pageName: householdMemberInfo
+              optional: "true"
+  - &contactInfo
+    name: contactInfo
+    pageTitle: contact-info.title
+    headerKey: contact-info.how-can-we-stay-in-touch-with-you
+    contextFragment: contactInfoContextFragment
+    inputs:
+      - name: phoneNumber
+        type: PHONE
+        promptMessage:
+          promptMessageKey: contact-info.whats-your-phone-number
+        helpMessageKey: contact-info.phone-number-helper
+        validators:
+          - validation: PHONE_STARTS_WITH_ZERO
+            errorMessageKey: general.validation.area-codes-can-not-begin-with-0
+            condition:
+              input: phoneNumber
+              matcher: NOT_EMPTY
+          - validation: PHONE_STARTS_WITH_ONE
+            errorMessageKey: general.validation.area-codes-can-not-begin-with-1
+            condition:
+              input: phoneNumber
+              matcher: NOT_EMPTY
+          - validation: PHONE
+            errorMessageKey: general.validation.make-sure-to-enter-a-phone-number-with-10-digits
+            condition:
+              input: phoneNumber
+              matcher: NOT_EMPTY
+      - name: email
+        type: TEXT
+        promptMessage:
+          promptMessageKey: contact-info.whats-your-email-address
+        validators:
+          - validation: NOT_BLANK
+            errorMessageKey: general.validation.email
+            condition:
+              input: phoneOrEmail
+              value: EMAIL
+          - validation: EMAIL
+            errorMessageKey: general.validation.email
+            condition:
+              input: email
+              matcher: NOT_EMPTY
+          - validation: EMAIL_DOES_NOT_END_WITH_CON
+            errorMessageKey: general.validation.email-con-instead-of-com
+            condition:
+              input: email
+              matcher: NOT_EMPTY
+      - name: phoneOrEmail
+        type: CHECKBOX
+        promptMessage:
+          promptMessageKey: contact-info.how-can-we-send-you-updates-and-reminders-about-your-case-in-the-future
+        options:
+          selectableOptions:
+            - value: TEXT
+              messageKey: contact-info.text-me
+            - value: EMAIL
+              messageKey: contact-info.email-me
+    cardFooterTextKey: contact-info.the-department-of-human-services
+  - &noPhoneNumberConfirmation
+    name: noPhoneNumberConfirmation
+    headerKey: no-phone.are-you-sure
+    pageTitle: no-phone.title
+    contextFragment: contactInfoContextFragment
+    hasPrimaryButton: false
+  - &homeAddress
+    name: homeAddress
+    headerKey: home-address.where-are-you-currently-living
+    pageTitle: home-address.title
+    contextFragment: addressContextFragment
+    inputs:
+      - name: isHomeless
+        type: CUSTOM
+        customInputFragment: addressInputFragment
+        options:
+          selectableOptions:
+            - value: "true"
+              messageKey: home-address.i-dont-have-a-permanent-address
+        followUps:
+          - name: streetAddress
+            type: TEXT
+            promptMessage:
+              promptMessageKey: home-address.what-is-the-street-address
+            validators:
+              - validation: NOT_BLANK
+                errorMessageKey: general.validation.make-sure-you-answer-this-question
+                condition: *isHomeless?
+          - name: apartmentNumber
+            type: TEXT
+            promptMessage:
+              promptMessageKey: home-address.apartment-number
+          - name: city
+            type: TEXT
+            promptMessage:
+              promptMessageKey: home-address.what-is-the-city
+            validators:
+              - validation: NOT_BLANK
+                errorMessageKey: general.validation.make-sure-you-answer-this-question
+                condition: *isHomeless?
+          - name: state
+            type: TEXT
+            promptMessage:
+              promptMessageKey: home-address.what-is-the-state
+            helpMessageKey: home-address.what-is-the-state-helper
+            readOnly: false
+            defaultValue: MN
+            validators:
+              - validation: STATE
+                errorMessageKey: general.validation.make-sure-to-provide-a-valid-2-letter-state-code
+                condition:
+                  input: isHomeless
+                  matcher: DOES_NOT_CONTAIN
+                  value: "true"
+          - name: zipCode
+            type: TEXT
+            promptMessage:
+              promptMessageKey: home-address.what-is-the-zip-code
+            validators:
+              - validation: ZIPCODE
+                errorMessageKey: general.validation.make-sure-to-enter-a-zip-code-with-5-digits
+                condition: *isHomeless?
+  - &whereToSendMail
+    name: whereToSendMail
+    headerKey: where-to-send-mail.the-county-will-need-a-place-to-send-you-mail
+    headerHelpMessageKey: where-to-send-mail.this-could-be-a-friend-or-family-address
+    pageTitle: where-to-send-mail.title
+    contextFragment: mailContextFragment
+    primaryButtonTextKey: where-to-send-mail.I-have-a-place-to-get-mail
+    subtleLinkTextKey: where-to-send-mail.I-will-pick-up-my-mail-at-a-post-office
+  - &cityForGeneralDelivery
+    name: cityForGeneralDelivery
+    headerKey: city-for-general-delivery.help-us-route-your-mail
+    pageTitle: city-for-general-delivery.title
+    contextFragment: mailContextFragment
+    inputs:
+      - name: whatIsTheCity
+        type: CUSTOM
+        customInputFragment: selectCityCustomInput
+        validators:
+          - validation: NOT_BLANK
+            errorMessageKey: city-for-general-delivery.make-sure-to-provide-a-city
+  - &generalDeliveryAddress
+    name: generalDeliveryAddress
+    pageTitle: general-delivery-address.title
+    headerKey: general-delivery-address.the-county-will-send-all-mail-about-this-application-to
+    contextFragment: mailContextFragment
+  - &mailingAddress
+    name: mailingAddress
+    headerKey: mailing-address.where-can-the-county-send-your-mail
+    pageTitle: mailing-address.title
+    contextFragment: mailContextFragment
+    inputs:
+      - name: sameMailingAddress
+        type: CUSTOM
+        customInputFragment: addressInputFragment
+        options:
+          selectableOptions:
+            - value: "true"
+              messageKey: mailing-address.same-as-my-current-living-address
+        followUps:
+          - name: streetAddress
+            type: TEXT
+            promptMessage:
+              promptMessageKey: mailing-address.what-is-the-street-address
+            validators:
+              - validation: NOT_BLANK
+                errorMessageKey: general.validation.make-sure-you-answer-this-question
+                condition:
+                  input: sameMailingAddress
+                  matcher: DOES_NOT_CONTAIN
+                  value: "true"
+          - name: apartmentNumber
+            type: TEXT
+            promptMessage:
+              promptMessageKey: mailing-address.apartment-number
+          - name: city
+            type: TEXT
+            promptMessage:
+              promptMessageKey: mailing-address.what-is-the-city
+            validators:
+              - validation: NOT_BLANK
+                errorMessageKey: general.validation.make-sure-you-answer-this-question
+                condition:
+                  input: sameMailingAddress
+                  matcher: DOES_NOT_CONTAIN
+                  value: "true"
+          - name: state
+            type: TEXT
+            promptMessage:
+              promptMessageKey: mailing-address.what-is-the-state
+            validators:
+              - validation: STATE
+                errorMessageKey: general.validation.make-sure-to-provide-a-valid-2-letter-state-code
+                condition:
+                  input: sameMailingAddress
+                  matcher: DOES_NOT_CONTAIN
+                  value: "true"
+            defaultValue: MN
+          - name: zipCode
+            type: TEXT
+            promptMessage:
+              promptMessageKey: mailing-address.what-is-the-zip-code
+            validators:
+              - validation: ZIPCODE
+                errorMessageKey: general.validation.make-sure-to-enter-a-zip-code-with-5-digits
+                condition:
+                  input: sameMailingAddress
+                  matcher: DOES_NOT_CONTAIN
+                  value: "true"
+  - &reviewInfo
+    name: reviewInfo
+    pageTitle: review-info.title
+    headerKey: review-info.lets-review-your-info
+    contextFragment: docWithMagnifyingGlassContextFragment
+    primaryButtonTextKey: review-info.this-looks-correct
+    subtleLinkTextKey:
+      conditionalValues:
+        - value: review-info.submit-application-now-with-only-the-above-information
+          condition: *applicantChoseSNAP?
+  - &addHouseholdMembers
+    name: addHouseholdMembers
+    headerKey: add-household-members.do-you-want-to-add-household-members
+    contextFragment: householdMemberFragment
+    pageTitle: add-household-members.title
+    hasPrimaryButton: false
+    inputs:
+      - name: addHouseholdMembers
+        type: YES_NO
+        promptMessage:
+          promptMessageFragmentName: addHouseholdMembersPrompt
+  - &addChildrenConfirmation
+    name: addChildrenConfirmation
+    headerKey: no-child.since-you-are-applying-for-child-care
+    pageTitle: no-child.title
+    contextFragment: householdContextFragment
+    hasPrimaryButton: false
+  - &startHousehold
+    name: startHousehold
+    pageTitle: start-household.title
+    hasPrimaryButton: false
+  - &householdMemberInfo
+    name: householdMemberInfo
+    pageTitle: household-member-info.title
+    headerKey: household-member-info.add-a-person-who-lives-with-you
+    contextFragment: personContextFragment
+    inputs:
+      - name: firstName
+        type: TEXT
+        promptMessage:
+          promptMessageKey: household-member-info.whats-their-first-name
+        helpMessageKey: household-member-info.legally-as-it-appears-on-their-id
+        validators:
+          - validation: NOT_BLANK
+            errorMessageKey: general.validation.make-sure-to-provide-a-first-name
+      - name: middleName
+        type: TEXT
+        promptMessage:
+          promptMessageKey: household-member-info.whats-their-middle-name
+        helpMessageKey: household-member-info.legally-as-it-appears-on-their-id		  			
+      - name: lastName
+        type: TEXT
+        promptMessage:
+          promptMessageKey: household-member-info.whats-their-last-name
+        helpMessageKey: household-member-info.legally-as-it-appears-on-their-id
+        validators:
+          - validation: NOT_BLANK
+            errorMessageKey: general.validation.make-sure-to-provide-a-last-name
+      - name: otherName
+        type: TEXT
+        promptMessage:
+          promptMessageKey: household-member-info.list-any-other-names-they-have-gone-by-in-the-past
+        helpMessageKey: personal-info.include-maiden-names-or-legal-changes
+      - name: dateOfBirth
+        type: DATE
+        promptMessage:
+          promptMessageKey: household-member-info.when-were-they-born
+        validators:
+          - validation: DATE
+            condition:
+              input: dateOfBirth
+              matcher: NOT_EMPTY
+            errorMessageKey: general.validation.please-enter-your-birthday-in-this-format
+          - validation: DOB_VALID
+            condition:
+              input: dateOfBirth
+              matcher: NOT_EMPTY
+            errorMessageKey: general.validation.make-sure-to-provide-a-dob-between-1900-and-present
+      - name: maritalStatus
+        type: RADIO
+        promptMessage:
+          promptMessageKey: household-member-info.whats-their-martial-status
+        options:
+          selectableOptions:
+            - value: NEVER_MARRIED
+              messageKey: general.never-married
+            - value: MARRIED_LIVING_WITH_SPOUSE
+              messageKey: general.married-living-with-spouse
+            - value: MARRIED_NOT_LIVING_WITH_SPOUSE
+              messageKey: general.married-not-living-with-spouse
+            - value: LEGALLY_SEPARATED
+              messageKey: general.legally-separated
+            - value: DIVORCED
+              messageKey: general.divorced
+            - value: WIDOWED
+              messageKey: general.widowed
+      - name: sex
+        type: RADIO
+        promptMessage:
+          promptMessageKey: household-member-info.whats-their-sex
+        helpMessageKey: household-member-info.legally-as-it-appears-on-their-id-we-regret-that-this-question-is-limited
+        options:
+          selectableOptions:
+            - value: FEMALE
+              messageKey: general.female
+            - value: MALE
+              messageKey: general.male
+            - value: RATHER_NOT_SAY
+              messageKey: general.rather-not-say
+      - name: livedInMnWholeLife
+        type: RADIO
+        promptMessage:
+          promptMessageKey: household-member-info.have-they-lived-in-minnesota-their-whole-life
+        options:
+          selectableOptions:
+            - value: "false"
+              messageKey: general.inputs.no
+            - value: "true"
+              messageKey: general.inputs.yes
+        followUpValues:
+          - "true"
+        followUps:
+          - name: moveToMnDate
+            type: DATE
+            validators:
+              - validation: DATE
+                condition:
+                  input: moveToMnDate
+                  matcher: NOT_EMPTY
+                errorMessageKey: general.validation.make-sure-you-answer-this-question
+            promptMessage:
+              promptMessageKey: household-member-info.when-did-they-move-to-minnesota
+          - name: moveToMnPreviousState
+            type: TEXT
+            promptMessage:
+              promptMessageKey: household-member-info.what-state-did-they-move-from
+      - name: relationship
+        type: SELECT
+        options:
+          selectableOptions:
+            - value: ''
+              messageKey: household-member-info.select-relationship
+            - value: child
+              messageKey: household-member-info.child
+            - value: step-child
+              messageKey: household-member-info.step-child
+            - value: spouse
+              messageKey: household-member-info.spouse
+              limitSelection: true
+            - value: partner
+              messageKey: household-member-info.partner
+            - value: brother or sister
+              messageKey: household-member-info.brother-or-sister
+            - value: step brother or sister
+              messageKey: household-member-info.step-brother-or-sister
+            - value: half-brother or half-sister
+              messageKey: household-member-info.half-brother-or-sister
+            - value: parent or guardian
+              messageKey: household-member-info.parent-or-guardian
+            - value: grandparent
+              messageKey: household-member-info.grandparent
+            - value: child's parent
+              messageKey: household-member-info.childs-parent
+            - value: aunt or uncle
+              messageKey: household-member-info.aunt-or-uncle
+            - value: niece or nephew
+              messageKey: household-member-info.niece-or-nephew
+            - value: roommate
+              messageKey: household-member-info.roommate
+            - value: friend
+              messageKey: household-member-info.friend
+            - value: grandchild
+              messageKey: household-member-info.grandchild
+            - value: other
+              messageKey: household-member-info.other
+        promptMessage:
+          promptMessageKey: household-member-info.whats-their-relationship-to-you
+      - name: programs
+        type: CHECKBOX
+        promptMessage:
+          promptMessageKey: household-member-info.what-type-of-assistance-would-they-like-to-apply-for
+        helpMessageKey: general.check-all-that-apply
+        followUpValues:
+          - SNAP
+          - CASH
+          - EA
+          - CCAP
+        followUps:
+          - name: ssn
+            type: SSN
+            validators:
+              - validation: SSN
+                errorMessageKey: general.validation.make-sure-your-SSN-has-9-digits
+                condition:
+                  input: ssn
+                  matcher: NOT_EMPTY
+            promptMessage:
+              promptMessageKey: household-member-info.whats-their-social-security-number
+            helpMessageKey: household-member-info.if-they-have-one-we-strongly-recommend-including-it-here
+        validators:
+          - validation: SELECT_AT_LEAST_ONE
+            errorMessageKey: general.validation.make-sure-you-answer-this-question
+        options:
+          selectableOptions:
+            - value: SNAP
+              messageKey: choose-programs.food-snap
+            - value: CASH
+              messageKey: choose-programs.cash-programs
+            - value: EA
+              messageKey: choose-programs.emergency-assistance
+            - value: CCAP
+              messageKey: choose-programs.child-care-assistance
+            - value: NONE
+              messageKey: general.inputs.none-of-the-above
+              isNone: true
+          datasources:
+            - pageName: choosePrograms
+  - &householdList
+    name: householdList
+    pageTitle: household-list.title
+    primaryButtonTextKey: household-list.yes-thats-everyone
+    contextFragment: householdContextFragment
+  - &childrenUnder19
+    name: childrenUnder19
+    pageTitle: children-under-19.title
+    headerKey: children-under-19.header
+    hasPrimaryButton: false
+    contextFragment: LiveWithChildrenFragment
+    inputs:
+      - name: hasChildrenUnder19
+        type: YES_NO
+  - &parentNotAtHome
+    name: parentNotAtHome
+    pageTitle: parent-not-at-home-19.title
+    headerKey: parent-not-at-home-19.header
+    hasPrimaryButton: false
+    inputs:
+      - name: hasParentNotAtHome
+        type: YES_NO
+  - &temporaryAbsence
+    name: temporaryAbsence
+    pageTitle: temporary-absence.title
+    headerKey:
+      defaultValue: temporary-absence.header.household
+      conditionalValues:
+        - value: temporary-absence.header
+          condition: *livesAlone?
+    headerHelpMessageKey: temporary-absence.body
+    hasPrimaryButton: false
+    contextFragment: houseFragment
+    inputs:
+      - name: hasTemporaryAbsence
+        type: YES_NO
+  - &noProgramsSelected
+    name: noProgramsSelected
+    pageTitle: no-programs-selected.title
+    usingPageTemplateFragment: false
+  - &childrenInNeedOfCare
+    name: childrenInNeedOfCare
+    pageTitle: children-in-need-of-care.title
+    headerKey: children-in-need-of-care.who-are-the-children-in-need-of-childcare
+    inputs:
+      - type: CUSTOM
+        name: whoNeedsChildCare
+        customInputFragment: householdOptionsCheckboxes
+        options:
+          datasources:
+            - pageName: personalInfo
+            - groupName: household
+              pageName: householdMemberInfo
+  - &doYouHaveChildCareProvider
+    name: doYouHaveChildCareProvider
+    headerKey: child-care-intro.do-you-have-provider
+    headerHelpMessageKey: child-care-intro.this-may-include
+    pageTitle: child-care-intro.title
+    hasPrimaryButton: false
+    inputs:
+      - name: hasChildCareProvider
+        type: YES_NO
+  - &childCareProviderInfo
+    name: childCareProviderInfo
+    headerKey: child-care-info.header
+    pageTitle: child-care-info.title
+    inputs:
+      - name: childCareProviderName
+        type: TEXT
+        promptMessage:
+          promptMessageKey: child-care-info.provider-name
+        validators:
+          - validation: NOT_BLANK
+            errorMessageKey: general.validation.make-sure-you-answer-this-question          
+      - name: phoneNumber
+        type: PHONE
+        promptMessage:
+          promptMessageKey: child-care-info.phone-number
+        validators:
+          - validation: PHONE_STARTS_WITH_ZERO
+            errorMessageKey: general.validation.area-codes-can-not-begin-with-0
+            condition:
+              input: phoneNumber
+              matcher: NOT_EMPTY
+          - validation: PHONE_STARTS_WITH_ONE
+            errorMessageKey: general.validation.area-codes-can-not-begin-with-1
+            condition:
+              input: phoneNumber
+              matcher: NOT_EMPTY
+          - validation: PHONE
+            errorMessageKey: general.validation.make-sure-to-enter-a-phone-number-with-10-digits
+            condition:
+              input: phoneNumber
+              matcher: NOT_EMPTY
+      - name: streetAddress
+        type: TEXT
+        promptMessage:
+          promptMessageKey: child-care-info.street-address
+      - name: suiteNumber
+        type: TEXT
+        promptMessage:
+          promptMessageKey: child-care-info.suite
+      - name: city
+        type: TEXT
+        promptMessage:
+          promptMessageKey: child-care-info.city
+        validators:
+          - validation: NOT_BLANK
+            errorMessageKey: general.validation.make-sure-you-answer-this-question
+      - name: state
+        type: TEXT
+        promptMessage:
+          promptMessageKey: child-care-info.state
+        validators:
+          - validation: STATE
+            errorMessageKey: general.validation.make-sure-to-provide-a-valid-2-letter-state-code
+            condition:
+              input: state
+              matcher: NOT_EMPTY
+      - name: zipCode
+        type: NUMBER
+        promptMessage:
+          promptMessageKey: child-care-info.zip
+        validators:
+          - validation: ZIPCODE
+            errorMessageKey: general.validation.make-sure-to-enter-a-zip-code-with-5-digits
+            condition:
+              input: zipCode
+              matcher: NOT_EMPTY
+  - &childrenAtThisProvider
+    name: childrenAtThisProvider
+    pageTitle: child-care-who-uses.title
+    headerKey: child-care-who-uses.header
+    headerHelpMessageKey: child-care-who-uses.help-text
+    inputs:
+      - name: childrenNames
+        type: PEOPLE_CHECKBOX
+        validators:
+          - validation: SELECT_AT_LEAST_ONE
+            errorMessageKey: child-care-who-uses.select-at-least-one-child
+        datasources:
+          - pageName: childrenInNeedOfCare
+            inputName: whoNeedsChildCare
+          - pageName: choosePrograms   
+  - &childCareProviderList
+    name: childCareProviderList
+    pageTitle: child-care-provider-list.title
+    primaryButtonTextKey: child-care-provider-list.no-thats-it
+    contextFragment: householdContextFragment 
+    headerKey: child-care-provider-list.would-you-like-to-add
+    usingPageTemplateFragment: false
+  - &childCareProviderDeleteWarningPage
+    name: childCareProviderDeleteWarningPage
+    pageTitle: child-care-provider-delete.title
+    usingPageTemplateFragment: false
+  - &childCareProviderRedirectPage
+    name: childCareProviderRedirectPage
+    headerKey: child-care-provider-redirect.header
+    headerHelpMessageKey: child-care-provider-redirect.helper
+    pageTitle: warning-page.go-back-title
+    usingPageTemplateFragment: false
+  - &whoHasParentNotAtHome
+    name: whoHasParentNotAtHome
+    pageTitle: parent-not-at-home.title
+    headerKey: parent-not-at-home.who-are-the-children-that-have-a-parent-not-living-at-home
+    headerHelpMessageKey: parent-not-at-home.help-text
+    inputs:
+      - type: PEOPLE_CHECKBOX_WITH_NONE
+        noneCheckboxText: parent-not-at-home.none-of-the-children-have-parents-living-outside-the-home
+        name: whoHasAParentNotLivingAtHome
+        validators:
+          - validation: SELECT_AT_LEAST_ONE
+            errorMessageKey: general.validation.make-sure-you-choose-none-of-the-above-or-another-option
+        datasources:
+          - pageName: childrenInNeedOfCare
+            inputName: whoNeedsChildCare
+  - &parentNotAtHomeNames
+    name: parentNotAtHomeNames
+    pageTitle: parent-not-at-home-names.title
+    headerKey: parent-not-at-home-names.what-are-the-parents-names
+    inputs:
+      - type: CUSTOM
+        name: whatAreTheParentsNames
+        customInputFragment: parentNotAtHomeNameInput
+        promptMessage:
+          promptMessageKey: parent-not-at-home-names.what-is-the-parents-name
+        helpMessageKey: parent-not-at-home-names.what-is-the-parents-name
+        options:
+          datasources:
+            - pageName: whoHasParentNotAtHome
+      - type: HIDDEN
+        name: childIdMap # This input is controlled by whatAreTheParentsNames
+  - &childCareChildSupport
+    name: childCareChildSupport
+    pageTitle: child-care-child-support.title
+    headerKey: child-care-child-support.who-does-your-household-receive-child-support
+    headerHelpMessageKey: child-care-child-support.select-all-that-apply
+    inputs:
+      - type: PEOPLE_CHECKBOX_WITH_NONE
+        noneCheckboxText: child-care-child-support.none-receive-child-support
+        name: whoReceivesChildSupportPayments
+        validators:
+          - validation: SELECT_AT_LEAST_ONE
+            errorMessageKey: general.validation.make-sure-you-choose-none-of-the-above-or-another-option
+        datasources:
+          - pageName: whoHasParentNotAtHome
+            inputName: whoHasAParentNotLivingAtHome
+  - &childCareMentalHealth
+    name: childCareMentalHealth
+    pageTitle: child-care-mental-health.title
+    headerKey: 
+      defaultValue: child-care-mental-health.do-any-caregivers-need-help
+      conditionalValues:
+        - value: child-care-mental-health.do-you-need-help
+          customCondition: APPLICANT_IS_ONLY_ADULT
+    hasPrimaryButton: false
+    headerHelpMessageKey: child-care-mental-health.adults-and-caregivers
+    inputs:
+      - name: childCareMentalHealth
+        type: YES_NO
+        promptMessage:
+          promptMessageFragmentName: childCareMentalHealthPrompt
+  - &whoNeedsChildCareForMentalHealth
+    name: whoNeedsChildCareForMentalHealth
+    pageTitle: who-needs-child-care-mental-health.title
+    headerKey: who-needs-child-care-mental-health.who-needs-need-help
+    headerHelpMessageKey: who-needs-child-care-mental-health.check-all-that-apply
+    inputs:
+      - type: CUSTOM
+        name: whoNeedsChildCareMentalHealth
+        customInputFragment: mentalHealthCheckboxes
+        validators:
+          - validation: NOT_BLANK
+            errorMessageKey: general.validation.make-sure-to-select-a-person
+        options:
+          datasources:
+            - pageName: personalInfo
+            - groupName: household
+              pageName: householdMemberInfo
+            - pageName: childrenInNeedOfCare
+  - &childCareMentalHealthTimes
+    name: childCareMentalHealthTimes
+    pageTitle: child-care-mental-health-time.title
+    headerKey: 
+      defaultValue: child-care-mental-health-time.tell-us-how-much-time-is-needed
+      conditionalValues:
+        - value: child-care-mental-health-time.tell-us-how-much-time-you-need
+          customCondition: APPLICANT_IS_ONLY_ADULT
+    headerHelpMessageKey: child-care-mental-health-time.you-can-request
+    inputs:
+      - type: CUSTOM
+        name: childCareMentalHealthHours
+        inputPostfix: general.input.postfix.hours-per-week
+        customInputFragment: childCareMentalHealthTimeInput
+        promptMessage:
+          promptMessageKey: child-care-mental-health-time.weekly-amount
+        options:
+          datasources:
+            - pageName: personalInfo
+            - groupName: household
+              pageName: householdMemberInfo
+              optional: "true"
+            - pageName: whoNeedsChildCareForMentalHealth
+      - type: HIDDEN
+        name: childCareMentalHealthPersonIdMap
+  - &householdDeleteWarningPage
+    name: householdDeleteWarningPage
+    pageTitle: warning-page.delete-household-member-warning
+    usingPageTemplateFragment: false
+  - &introPersonalDetails
+    name: introPersonalDetails
+    pageTitle: intro-personal-details.title
+    hasPrimaryButton: false
+  - &preparingMealsTogether
+    name: preparingMealsTogether
+    pageTitle: preparing-meals-together.title
+    headerKey: preparing-meals-together.header
+    hasPrimaryButton: false
+    contextFragment: groceriesContextFragment
+    inputs:
+      - name: isPreparingMealsTogether
+        type: YES_NO
+  - &buyOrCookFood
+    name: buyOrCookFood
+    pageTitle: buy-or-cook-food.title
+    headerKey: buy-or-cook-food.header
+    hasPrimaryButton: false
+    contextFragment: groceriesContextFragment
+    inputs:
+      - name: isDisabledToBuyOrCookFood
+        type: YES_NO
+  - &goingToSchool
+    name: goingToSchool
+    pageTitle: going-to-school.title
+    headerKey:
+      defaultValue: going-to-school.header-household
+      conditionalValues:
+        - value: going-to-school.header
+          condition: *livesAlone?
+    headerHelpMessageKey: going-to-school.helper
+    hasPrimaryButton: false
+    contextFragment: schoolContextFragment
+    inputs:
+      - name: goingToSchool
+        type: YES_NO
+  - &whoIsGoingToSchool
+    name: whoIsGoingToSchool
+    pageTitle: who-is-going-to-school.title
+    headerKey: who-is-going-to-school.who-is-going-to-school
+    contextFragment: schoolContextFragment
+    headerHelpMessageKey: who-is-going-to-school.check-all-that-apply
+    inputs:
+      - type: CUSTOM
+        name: whoIsGoingToSchool
+        customInputFragment: householdOptionsCheckboxes
+        options:
+          datasources:
+            - pageName: personalInfo
+            - groupName: household
+  - &schoolDetails
+    name: schoolDetails
+    pageTitle: school-details.title
+    headerKey: school-details.header
+    headerHelpMessageKey: school-details.If-you-dont-have-all-this-information-right-now
+    contextFragment: schoolContextFragment
+    inputs:
+      - type: CUSTOM
+        name: schoolName
+        customInputFragment: schoolDetailsNameInput
+        promptMessage:
+          promptMessageKey: school-details.school-name
+        options:
+          datasources:
+            - pageName: whoIsGoingToSchool
+            - pageName: childrenInNeedOfCare
+      - type: HIDDEN
+        name: personIdMap
+  - &schoolGrade
+    name: schoolGrade 
+    pageTitle: school-grade.title
+    headerKey: school-grade.header
+    headerHelpMessageKey: school-grade.If-you-dont-have-all-this-information-right-now
+    contextFragment: schoolContextFragment
+    inputs:
+      - name: schoolGrade
+        type: CUSTOM
+        customInputFragment: schoolGradeInput
+        options:
+          selectableOptions:
+            - value: ''
+              messageKey: school-grade.select-their-grade
+            - value: Hd Strt
+              messageKey: school-grade.Head-Start
+            - value: Pre-K
+              messageKey: school-grade.Pre-K
+            - value: K
+              messageKey: school-grade.Kindergarten
+            - value: 1
+              messageKey: school-grade.1st-grade
+            - value: 2
+              messageKey: school-grade.2nd-grade
+            - value: 3
+              messageKey: school-grade.3rd-grade
+            - value: 4
+              messageKey: school-grade.4th-grade
+            - value: 5
+              messageKey: school-grade.5th-grade
+            - value: 6
+              messageKey: school-grade.6th-grade
+            - value: 7
+              messageKey: school-grade.7th-grade
+            - value: 8
+              messageKey: school-grade.8th-grade
+            - value: 9
+              messageKey: school-grade.9th-grade
+            - value: 10
+              messageKey: school-grade.10th-grade
+            - value: 11
+              messageKey: school-grade.11th-grade
+            - value: 12
+              messageKey: school-grade.12th-grade
+            - value: Other 
+              messageKey: school-grade.Other                     
+          datasources:
+            - pageName: schoolDetails
+            - groupName: household
+      - type: HIDDEN
+        name: schoolGradePersonIdMap
+  - &schoolStartDate
+    name: schoolStartDate
+    pageTitle: school-start-date.title
+    headerKey: school-start-date.header
+    contextFragment: schoolContextFragment
+    inputs:
+      - type: CUSTOM
+        name: schoolStartDate
+        customInputFragment: schoolStartDateInput
+        validators:
+          - validation: SCHOOL_START_DATES
+            errorMessageKey: general.validation.please-enter-valid-school-start-date
+        options:
+          datasources:
+            - pageName: schoolGrade
+            - groupName: household
+      - type: HIDDEN
+        name: schoolStartDatePersonIdMap                
+  - &housingSubsidy
+    name: housingSubsidy
+    pageTitle: housing-subsidy.title
+    headerKey:
+      defaultValue: housing-subsidy.header-household
+      conditionalValues:
+        - value: housing-subsidy.header-applicant-only
+          condition: *livesAlone?
+    hasPrimaryButton: false
+    contextFragment: housingSubsidyContextFragment
+    inputs:
+      - name: hasHousingSubsidy
+        type: YES_NO
+  - &pregnant
+    name: pregnant
+    pageTitle: pregnant.title
+    headerKey:
+      defaultValue: pregnant.is-anyone-pregnant
+      conditionalValues:
+        - value: pregnant.are-you-pregnant
+          condition: *livesAlone?
+    hasPrimaryButton: false
+    contextFragment: pregnantContextFragment
+    inputs:
+      - name: isPregnant
+        type: YES_NO
+  - &whoIsPregnant
+    name: whoIsPregnant
+    pageTitle: who-is-pregnant.title
+    headerKey: who-is-pregnant.header
+    headerHelpMessageKey: general.check-all-that-apply
+    contextFragment: pregnantContextFragment
+    inputs:
+      - type: CUSTOM
+        name: whoIsPregnant
+        customInputFragment: householdOptionsCheckboxes
+        options:
+          datasources:
+            - pageName: personalInfo
+            - groupName: household
+  - &citizenship
+    name: citizenship
+    pageTitle: citizenship.title
+    headerKey:
+      defaultValue: citizenship.please-confirm-the-citizenship-status-of-your-househould
+      conditionalValues:
+        - value: citizenship.please-confirm-your-citizenship-status
+          condition: *livesAlone?  
+    headerHelpMessageKey: 
+      defaultValue: citizenship.members-of-your-household-may-still-be-eligible
+      conditionalValues:
+        - value: citizenship.you-may-still-be-eligible-for-food-and-cash-benefits-if-you-are-not-a-us-citizen
+          condition: *livesAlone? 
+    hasPrimaryButton: true
+    contextFragment: passportContextFragment
+    additionalContentFragment: citizenshipAccordions
+    inputs:
+      - name: citizenshipStatus
+        type: CUSTOM
+        customInputFragment: citizenshipStatusInput
+        validators:
+          - validation: ALL_NON_BLANK
+            errorMessageKey: general.validation.make-sure-you-answer-this-question
+        options:
+          selectableOptions:
+            - value: BIRTH_RIGHT
+              messageKey: citizenship.birthright-us-citizen-or-us-national
+            - value: NATURALIZED
+              messageKey: citizenship.naturalized-us-citizen
+            - value: DERIVED
+              messageKey: citizenship.derived-us-citizen
+            - value: NOT_CITIZEN
+              messageKey: citizenship.not-a-us-citizen
+          datasources:
+            - pageName: personalInfo
+            - pageName: householdMemberInfo
+              groupName: household
+              optional: "true"
+      - type: HIDDEN
+        name: citizenshipIdMap	
+  - &usCitizen
+    name: usCitizen
+    pageTitle: us-citizen.title
+    headerKey:
+      defaultValue: us-citizen.is-everyone-us-citizen
+      conditionalValues:
+        - value: us-citizen.are-you-a-us-citizen
+          condition: *livesAlone?
+    headerHelpMessageKey: us-citizen.most-immigrants-are-still-eligible-for-food-and-cash-benefits
+    hasPrimaryButton: false
+    contextFragment: passportContextFragment
+    inputs:
+      - name: isUsCitizen
+        type: YES_NO		
+  - &whoIsNonCitizen
+    name: whoIsNonCitizen
+    pageTitle: who-is-non-citizen.title
+    headerKey: who-is-non-citizen.header
+    headerHelpMessageKey: general.check-all-that-apply
+    contextFragment: passportContextFragment
+    inputs:
+      - type: CUSTOM
+        name: whoIsNonCitizen
+        customInputFragment: householdOptionsCheckboxes
+        validators:
+          - validation: NOT_BLANK
+            errorMessageKey: general.validation.make-sure-you-answer-this-question
+        options:
+          datasources:
+            - pageName: personalInfo
+            - groupName: household
+  - &alienIdNumber
+    name: alienIdNumber
+    pageTitle: alien-id-number.title
+    headerKey: what-is-your-alien-id-number.header
+    headerHelpMessageKey: what-is-alien-id-number.this-will-help-caseworker
+    contextFragment: passportContextFragment
+    inputs:
+      - type: TEXT
+        name: alienIdNumber
+        placeholder: general.optional
+        options:
+          datasources:
+            - pageName: whoIsNonCitizen
+      - type: HIDDEN
+        name: alienIdMap # This input is controlled by whoIsNonCitizen
+  - &alienIdNumbers
+   name: alienIdNumbers
+   pageTitle: alien-id-number.title
+   headerKey: what-is-their-alien-id-number.header
+   headerHelpMessageKey: what-is-alien-id-number.this-will-help-caseworker
+   contextFragment: passportContextFragment
+   inputs:
+     - type: CUSTOM
+       name: alienIdNumber
+       customInputFragment: alienIdInput
+       helpMessageKey: general.inputs.optional
+       placeholder: general.optional
+       options:
+         datasources:
+           - pageName: whoIsNonCitizen
+     - type: HIDDEN
+       name: alienIdMap # This input is controlled by whoIsNonCitizen
+  - &doYouNeedHelpImmediately
+    name: doYouNeedHelpImmediately
+    pageTitle: do-you-need-help-immediately.title
+    headerKey: do-you-need-help-immediately.header
+    headerHelpMessageKey: do-you-need-help-immediately.we-encourage-you-to-answer-a-few-more-questions-that-will-help-us-figure-out-if-you-qualify-for-faster-service
+    hasPrimaryButton: false
+    inputs:
+      - name: needHelpImmediately
+        type: CUSTOM
+        customInputFragment: needHelpImmediatelyInput
+        options:
+          selectableOptions:
+            - value: true
+              messageKey: do-you-need-help-immediately.yes-I-want-to-see-if-I-qualify
+              cssClass: "button button--primary"
+            - value: false
+              messageKey: do-you-need-help-immediately.finish-application-now
+              cssClass: "button button--secondary"
+  - &thirtyDayIncome
+    headerKey:
+      defaultValue: thirty-day-income.how-much-money-has-your-household-made-in-the-last-30-days
+      conditionalValues:
+        - value: thirty-day-income.how-much-money-have-you-made-in-the-last-30-days
+          condition: *livesAloneOrIsApplicantsJob?
+    headerHelpMessageKey: thirty-day-income.if-you-dont-know-the-exact-amount
+    name: thirtyDayIncome
+    pageTitle:
+      defaultValue: thirty-day-income.title-household
+      conditionalValues:
+        - value: thirty-day-income.title-one-person
+          condition: *livesAlone?
+    inputs:
+      - name: moneyMadeLast30Days
+        type: MONEY
+        validators:
+          - validation: MONEY
+            errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
+            condition:
+              input: moneyMadeLast30Days
+              matcher: NOT_EMPTY
+  - &lastThirtyDaysJobIncome
+    headerKey:
+      conditionalValues:
+        - value: thirty-day-job-income.how-much-money-have-you-made-at-this-job-in-the-last-30-days
+          condition: *livesAloneOrIsApplicantsJob?
+        - value: thirty-day-job-income.how-much-money-have-they-made-at-this-job-in-the-last-30-days
+          condition:
+            pageName: householdSelectionForIncome
+            input: whoseJobIsIt
+            value: "applicant"
+            matcher: DOES_NOT_CONTAIN_SUBSTRING
+    headerHelpMessageKey: thirty-day-income.if-you-dont-know-the-exact-amount
+    name: lastThirtyDaysJobIncome
+    pageTitle: thirty-day-job-income.title
+    inputs:
+      - name: lastThirtyDaysJobIncome
+        type: MONEY
+        validators:
+          - validation: MONEY
+            errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
+            condition:
+              input: lastThirtyDaysJobIncome
+              matcher: NOT_EMPTY
+    contextFragment: jobContextFragment
+  - &liquidAssetsSingle
+    name: liquidAssetsSingle
+    pageTitle:
+      defaultValue: liquid-assets-prompt.title-household
+      conditionalValues:
+        - value: liquid-assets-prompt.title-one-person
+          condition: *livesAlone?
+    contextFragment: liquidAssetsSingleContextFragment
+    headerKey:
+      defaultValue: thirty-day-income.how-much-money-is-available
+      conditionalValues:
+        - value: thirty-day-income.how-much-money-do-you-have-available
+          condition: *livesAlone?
+        - value: thirty-day-income.how-much-money-do-you-have-available-in-these
+          condition: *livesAlone?
+        - value: thirty-day-income.how-much-money-is-available-in-these
+          condition: *livesAlone?
+    inputs:
+      - name: liquidAssets
+        type: MONEY
+        promptMessage:
+          promptMessageFragmentName: liquidAssetsPrompt
+        validators:
+          - validation: MONEY
+            errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
+            condition:
+              input: liquidAssets
+              matcher: NOT_EMPTY
+  - &expeditedExpenses
+    name: expeditedExpenses
+    pageTitle:
+      defaultValue: expedited-expenses.title-household
+      conditionalValues:
+        - value: expedited-expenses.title-one-person
+          condition: *livesAlone?
+    headerKey:
+      defaultValue: expedited-expenses.header-household
+      conditionalValues:
+        - value: expedited-expenses.header-one-person
+          condition: *livesAlone?
+    hasPrimaryButton: false
+    inputs:
+      - name: payRentOrMortgage
+        type: YES_NO
+  - &expeditedExpensesAmount
+    name: homeExpensesAmount
+    pageTitle:
+      defaultValue: expedited-expenses-amount.title-household
+      conditionalValues:
+        - value: expedited-expenses-amount.title-one-person
+          condition: *livesAlone?
+    headerKey:
+      defaultValue: expedited-expenses-amount.how-much-is-paid-for-rent-or-mortgage-every-month
+      conditionalValues:
+        - value: expedited-expenses-amount.how-much-do-you-pay-for-rent-or-mortgage-every-month
+          condition: *livesAlone?
+    inputs:
+      - name: homeExpensesAmount
+        type: MONEY
+        validators:
+          - validation: MONEY
+            errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
+            condition:
+              input: homeExpensesAmount
+              matcher: NOT_EMPTY
+  - &utilityPayments
+    name: utilityPayments
+    pageTitle:
+      defaultValue: utility-payments.title-household
+      conditionalValues:
+        - value: utility-payments.title-one-person
+          condition: *livesAlone?
+    headerKey:
+      defaultValue: utility-payments.does-anyone-in-your-household-pay-for-these-utilities
+      conditionalValues:
+        - value: utility-payments.do-you-pay-for-any-utilities
+          condition: *livesAlone?
+    headerHelpMessageKey:
+      defaultValue: utility-payments.household-billed
+      conditionalValues:
+        - value: utility-payments.select-all-that-you-are-billed-for-even-if-you-havent-paid-it-this-month
+          condition: *livesAlone?
+    inputs:
+      - name: payForUtilities
+        type: CHECKBOX
+        validators:
+          - validation: SELECT_AT_LEAST_ONE
+            errorMessageKey: general.validation.make-sure-you-choose-none-of-the-above-or-another-option
+        options:
+          selectableOptions:
+            - value: HEATING
+              messageKey: utility-payments.heating
+            - value: COOLING
+              messageKey: utility-payments.cooling
+            - value: ELECTRICITY
+              messageKey: utility-payments.electricity
+            - value: PHONE
+              messageKey: utility-payments.phone
+            - value: WATER
+              messageKey: utility-payments.water
+            - value: SEWER
+              messageKey: utility-payments.sewer
+            - value: GARBAGE_REMOVAL
+              messageKey: utility-payments.garbage-removal
+            - value: NONE_OF_THE_ABOVE
+              messageKey: general.inputs.none-of-the-above
+              isNone: true
+  - &energyAssistance
+    name: energyAssistance
+    pageTitle: energy-assistance.title
+    headerKey:
+      defaultValue: energy-assistance.household-received-money
+      conditionalValues:
+        - value: energy-assistance.have-you-received-money-for-energy-assistance
+          condition: *livesAlone?
+    hasPrimaryButton: false
+    inputs:
+      - name: energyAssistance
+        type: YES_NO
+  - &energyAssistanceMoreThan20
+    name: energyAssistanceMoreThan20
+    pageTitle: energy-assistance-more-than-20.title
+    headerKey:
+      defaultValue: energy-assistance-more-than-20.household-received
+      conditionalValues:
+        - value: energy-assistance-more-than-20.have-you-received-more-than-20-in-energy-assistance
+          condition: *livesAlone?
+    hasPrimaryButton: false
+    inputs:
+      - name: energyAssistanceMoreThan20
+        type: YES_NO
+  - &medicalExpenses
+    name: medicalExpenses
+    pageTitle: medical-expenses.title
+    headerKey:
+      defaultValue: medical-expenses.does-anyone-in-your-household-pay-for-medical-expenses
+      conditionalValues:
+        - value: medical-expenses.do-you-pay-for-medical-expenses
+          condition: *livesAlone?
+    headerHelpMessageKey: medical-expenses.let-us-know
+    inputs:
+      - name: medicalExpenses
+        type: CHECKBOX
+        validators:
+          - validation: SELECT_AT_LEAST_ONE
+            errorMessageKey: general.validation.make-sure-you-choose-none-of-the-above-or-another-option
+        options:
+          selectableOptions:
+            - value: MEDICAL_INSURANCE_PREMIUMS
+              messageKey: medical-expenses.medical-insurance-premiums
+            - value: DENTAL_INSURANCE_PREMIUMS
+              messageKey: medical-expenses.dental-insurance-premiums
+            - value: VISION_INSURANCE_PREMIUMS
+              messageKey: medical-expenses.vision-insurance-premiums
+            - value: MEDICAL_BILLS_OR_COPAYS
+              messageKey: medical-expenses.medical-bills-or-copays
+            - value: NONE_OF_THE_ABOVE
+              messageKey: general.inputs.none-of-the-above
+              isNone: true
+  - &childCareCosts
+    name: childCareCosts
+    pageTitle: child-care-costs.title
+    headerKey:
+      defaultValue: child-care-costs-household.header
+      conditionalValues:
+        - value: child-care-costs.header
+          condition: *livesAlone?
+    hasPrimaryButton: false
+    inputs:
+      - name: childCareCosts
+        type: YES_NO	
+  - &adultCareCosts
+    name: adultCareCosts
+    pageTitle: adult-care-costs.title
+    headerKey:
+      defaultValue: adult-care-costs-household.header
+      conditionalValues:
+        - value: adult-care-costs.header
+          condition: *livesAlone?
+    hasPrimaryButton: false
+    inputs:
+      - name: adultCareCosts
+        type: YES_NO	
+  - &pastEmployment
+    name: pastEmployment
+    pageTitle: past-employment.title
+    headerKey:
+      defaultValue: past-employment-household.header
+      conditionalValues:
+        - value: past-employment.header
+          condition: *livesAlone?
+    hasPrimaryButton: false
+    inputs:
+      - name: wereYouEmployed
+        type: YES_NO
+  - &medicalExpensesSources
+    name: medicalExpensesSources
+    pageTitle: medical-expenses-sources.title
+    headerKey:
+      defaultValue: medical-expenses-sources.tell-us-how-much-money-is-paid
+    headerHelpMessageKey: medical-expenses-source.if-you-dont-have-this-information-right-now
+    inputs:
+      - name: medicalInsurancePremiumAmount
+        type: MONEY
+        promptMessage:
+          promptMessageKey: medical-expenses-sources.medical-insurance-premiums
+        helpMessageKey: general.monthly-amount
+        validators:
+          - validation: MONEY
+            errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
+            condition:
+              input: medicalInsurancePremiumAmount
+              matcher: NOT_EMPTY
+        condition:
+          pageName: medicalExpenses
+          input: medicalExpenses
+          value: MEDICAL_INSURANCE_PREMIUMS
+      - name: dentalInsurancePremiumAmount
+        type: MONEY
+        promptMessage:
+          promptMessageKey: medical-expenses-sources.dental-insurance-premiums
+        helpMessageKey: general.monthly-amount
+        validators:
+          - validation: MONEY
+            errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
+            condition:
+              input: dentalInsurancePremiumAmount
+              matcher: NOT_EMPTY
+        condition:
+          pageName: medicalExpenses
+          input: medicalExpenses
+          value: DENTAL_INSURANCE_PREMIUMS
+      - name: visionInsurancePremiumAmount
+        type: MONEY
+        promptMessage:
+          promptMessageKey: medical-expenses-sources.vision-insurance-premiums
+        helpMessageKey: general.monthly-amount
+        validators:
+          - validation: MONEY
+            errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
+            condition:
+              input: visionInsurancePremiumAmount
+              matcher: NOT_EMPTY
+        condition:
+          pageName: medicalExpenses
+          input: medicalExpenses
+          value: VISION_INSURANCE_PREMIUMS
+  - &supportAndCare
+    name: supportAndCare
+    pageTitle: support-and-care.title
+    headerKey:
+      defaultValue: support-and-care.household-support
+      conditionalValues:
+        - value: support-and-care.do-you-pay-for-court-ordered-child-support-spousal-support
+          condition: *livesAlone?
+    headerHelpMessageKey: support-and-care.help
+    hasPrimaryButton: false
+    inputs:
+      - name: supportAndCare
+        type: YES_NO
+  - &migrantFarmWorker
+    name: migrantFarmWorker
+    pageTitle:
+      defaultValue: expedited-migrant-farm-worker.title-household
+      conditionalValues:
+        - value: expedited-migrant-farm-worker.title-one-person
+          condition: *livesAlone?
+    headerKey:
+      defaultValue: expedited-migrant-farm-worker.header-household
+      conditionalValues:
+        - value: expedited-migrant-farm-worker.header-one-person
+          condition: *livesAlone?
+    hasPrimaryButton: false
+    contextFragment: wheatContextFragment
+    inputs:
+      - name: migrantOrSeasonalFarmWorker
+        type: YES_NO
+  - &snapExpeditedDetermination
+    name: snapExpeditedDetermination
+    usingPageTemplateFragment: false
+  - &legalStuff
+    name: legalStuff
+    pageTitle: legal-stuff.title
+    headerKey: legal-stuff.the-legal-stuff
+    contextFragment: legalReview1ContextFragment
+    headerHelpMessageKey: legal-stuff.scroll-down-to-agree-to-the-terms
+    inputs:
+      - name: agreeToTerms
+        type: CHECKBOX
+        promptMessage:
+          promptMessageFragmentName: legal-terms-prompt
+        validators:
+          - validation: SELECT_AT_LEAST_ONE
+            errorMessageKey: general.validation.make-sure-to-agree-to-the-terms
+        options:
+          selectableOptions:
+            - value: "true"
+              messageKey: legal-stuff.i-agree
+        helpMessageKeyBelow: legal-stuff.copies-of-the-full-agreements
+      - name: drugFelony
+        type: RADIO
+        options:
+          selectableOptions:
+            - value: "true"
+              messageKey: general.inputs.yes
+            - value: "false"
+              messageKey: general.inputs.no
+# This condition is intended to prevent the input from ever being displayed on the page.
+# It allows us to keep the input defined on the page for data-pipelines backward compatibility.
+        condition:
+          pageName: legalStuff
+          input: showInput
+          value: never
+  - &secondSignatureLegalStuff
+    name: secondSignatureLegalStuff
+    pageTitle: legal-stuff-second-signature.title
+    headerKey: legal-stuff-second-signature.header-text
+    headerHelpMessageKey: legal-stuff.scroll-down-to-agree-to-the-terms
+    hasPrimaryButton: false
+    usingPageTemplateFragment: true
+    inputs:
+      - name: agreeToTerms
+        type: CHECKBOX
+        promptMessage:
+          promptMessageFragmentName: legal-terms-prompt
+        validators:
+          - validation: SELECT_AT_LEAST_ONE
+            errorMessageKey: general.validation.make-sure-to-agree-to-the-terms
+        options:
+          selectableOptions:
+            - value: "true"
+              messageKey: legal-stuff.i-agree
+        helpMessageKeyBelow: legal-stuff-second-signature.copies-of-the-full-agreements
+      - name: secondSignatureOption
+        type: CUSTOM
+        customInputFragment: secondSignatureOption
+        options:
+          selectableOptions:
+            - value: "CONTINUE_TO_SECOND_SIGNATURE"
+              messageKey: general.continue
+    subtleLinkTextKey: legal-stuff-second-signature.continue-without-another-signature
+  - &signThisApplication
+    name: signThisApplication
+    pageTitle: sign-this-application.title
+    headerKey: sign-this-application.type-your-full-legal-name-here-to-sign-this-application
+    headerHelpMessageKey: sign-this-application.by-signing-this-application-you-agree-that-you-want-to
+    primaryButtonTextKey: general.continue
+    inputs:
+      - name: applicantSignature
+        type: TEXT
+        validators:
+          - validation: NOT_BLANK
+            errorMessageKey: sign-this-application.make-sure-to-sign-the-application
+  - &secondSignatureNotification
+    name: secondSignatureNotification
+    pageTitle: second-signature-notification.title
+    headerKey: second-signature-notification.next-we-will-ask
+    headerHelpMessageKey: second-signature-notification.header-help-message
+    contextFragment: legalReview2ContextFragment
+    hasPrimaryButton: false
+  - &secondSignature
+    name: secondSignature
+    pageTitle: second-signature.title
+    headerKey: second-signature.great
+    headerHelpMessageKey: sign-this-application.by-signing-this-application-you-agree-that-you-want-to
+    hasPrimaryButton: false
+    usingPageTemplateFragment: true
+    inputs:
+      - name: secondSignature
+        type: TEXT
+      - name: secondSignatureOption
+        type: CUSTOM
+        customInputFragment: secondSignatureOption
+        options:
+          selectableOptions:
+            - value: "CONTINUE_TO_SECOND_SIGNATURE"
+              messageKey: general.continue
+    subtleLinkTextKey: legal-stuff-second-signature.continue-without-another-signature
+  - &submit
+    name: submit
+    pageTitle: submit.submit
+    headerKey: submit.header-text
+    usingPageTemplateFragment: false
+  - &submissionConfirmation
+    name: submissionConfirmation
+    pageTitle: submission-confirmation.title
+    contextFragment: icon-documents-sent
+    hasPrimaryButton: true
+    excludeGoBack: true
+  - &addingDocuments
+    name: addingDocuments
+    pageTitle: adding-documents.title
+    hasPrimaryButton: false
+  - &howToAddDocuments
+    name: howToAddDocuments
+    pageTitle: how-to-add-documents.title
+  - &documentRecommendation
+    name: documentRecommendation
+    pageTitle: document-recommendation.title
+    usingPageTemplateFragment: false
+  - &documentOffboarding
+    name: documentOffboarding
+    pageTitle: document-offboarding.title
+    headerKey: document-offboarding.finish-your-application-and-add-documents-on-MNbenefits-later
+    contextFragment: computerWithCheckContextFragment
+    hasPrimaryButton: false
+  - &uploadDocuments
+    name: uploadDocuments
+    pageTitle: upload-documents.title
+    usingPageTemplateFragment: false
+  - &uploadDocumentsDeleteWarningPage
+    name: uploadDocumentsDeleteWarningPage
+    headerKey: upload-documents-delete-warning.you-are-about-to-delete
+    pageTitle: upload-documents-delete-warning.title
+    usingPageTemplateFragment: false
+  - &documentSubmitConfirmation
+    name: documentSubmitConfirmation
+    pageTitle: document-submit-confirmation.title
+    headerKey: document-submit-confirmation.ready-to-submit-your-documents
+    contextFragment: documentsSuccessContextFragment
+    hasPrimaryButton: false
+  - &programDocuments
+    name: programDocuments
+    pageTitle: program-documents.title
+    headerKey: program-documents.header
+    hasPrimaryButton: true
+    excludeGoBack: true
+  - &identifyCounty
+    name: identifyCounty
+    pageTitle: identify-county.title
+    headerKey: identify-county.select-your-county
+    headerHelpMessageKey: 
+      defaultValue: identify-county.this-is-the-county
+      conditionalValues:
+        - value: identify-county.select-your-county-without-mn
+          condition: *laterDocsFlow?
+        - value: identify-county.select-your-county-without-mn
+          condition:
+            logicalOperator: OR
+            conditions:
+              - <<: *selectedCountyDoesNotMatchEnrichedCountyHome?
+                value: "true"
+              - <<: *selectedCountyDoesNotMatchEnrichedCountyMailing?
+                value: "true"
+    contextFragment: countyContextFragment
+    inputs:
+      - name: county
+        type: SELECT
+        validators:
+          - validation: NOT_BLANK
+            errorMessageKey: general.validation.make-sure-to-select-a-county
+          - validation: COUNTY
+            errorMessageKey: general.validation.invalid.select.option.value
+            condition: 
+              input: county
+              matcher: NOT_EMPTY
+        options:
+          selectableOptions:
+            - value: ''
+              messageKey: identify-county.select-your-county
+            - value: Aitkin
+              messageKey: identify-county-aitkin
+            - value: Anoka
+              messageKey: identify-county-anoka
+            - value: Becker
+              messageKey: identify-county-becker
+            - value: Beltrami
+              messageKey: identify-county-beltrami
+            - value: Benton
+              messageKey: identify-county-benton
+            - value: BigStone
+              messageKey: identify-county-big-stone
+            - value: BlueEarth
+              messageKey: identify-county-blue-earth
+            - value: Brown
+              messageKey: identify-county-brown
+            - value: Carlton
+              messageKey: identify-county-carlton
+            - value: Carver
+              messageKey: identify-county-carver
+            - value: Cass
+              messageKey: identify-county-cass
+            - value: Chippewa
+              messageKey: identify-county-chippewa
+            - value: Chisago
+              messageKey: identify-county-chisago
+            - value: Clay
+              messageKey: identify-county-clay
+            - value: Clearwater
+              messageKey: identify-county-clearwater
+            - value: Cook
+              messageKey: identify-county-cook
+            - value: Cottonwood
+              messageKey: identify-county-cottonwood
+            - value: CrowWing
+              messageKey: identify-county-crow-wing
+            - value: Dakota
+              messageKey: identify-county-dakota
+            - value: Dodge
+              messageKey: identify-county-dodge
+            - value: Douglas
+              messageKey: identify-county-douglas
+            - value: Faribault
+              messageKey: identify-county-faribault
+            - value: Fillmore
+              messageKey: identify-county-fillmore
+            - value: Freeborn
+              messageKey: identify-county-freeborn
+            - value: Goodhue
+              messageKey: identify-county-goodhue
+            - value: Grant
+              messageKey: identify-county-grant
+            - value: Hennepin
+              messageKey: identify-county-hennepin
+            - value: Houston
+              messageKey: identify-county-houston
+            - value: Hubbard
+              messageKey: identify-county-hubbard
+            - value: Isanti
+              messageKey: identify-county-isanti
+            - value: Itasca
+              messageKey: identify-county-itasca
+            - value: Jackson
+              messageKey: identify-county-jackson
+            - value: Kanabec
+              messageKey: identify-county-kanabec
+            - value: Kandiyohi
+              messageKey: identify-county-kandiyohi
+            - value: Kittson
+              messageKey: identify-county-kittson
+            - value: Koochiching
+              messageKey: identify-county-koochiching
+            - value: LacQuiParle
+              messageKey: identify-county-lac-qui-parle
+            - value: Lake
+              messageKey: identify-county-lake
+            - value: LakeOfTheWoods
+              messageKey: identify-county-lake-of-the-woods
+            - value: LeSueur
+              messageKey: identify-county-le-sueur
+            - value: Lincoln
+              messageKey: identify-county-lincoln
+            - value: Lyon
+              messageKey: identify-county-lyon
+            - value: McLeod
+              messageKey: identify-county-mcleod
+            - value: Mahnomen
+              messageKey: identify-county-mahnomen
+            - value: Marshall
+              messageKey: identify-county-marshall
+            - value: Meeker
+              messageKey: identify-county-meeker
+            - value: Martin
+              messageKey: identify-county-martin
+            - value: MilleLacs
+              messageKey: identify-county-mille-lacs
+            - value: Morrison
+              messageKey: identify-county-morrison
+            - value: Mower
+              messageKey: identify-county-mower
+            - value: Murray
+              messageKey: identify-county-murray
+            - value: Nicollet
+              messageKey: identify-county-nicollet
+            - value: Nobles
+              messageKey: identify-county-nobles
+            - value: Norman
+              messageKey: identify-county-norman
+            - value: Olmsted
+              messageKey: identify-county-olmsted
+            - value: OtterTail
+              messageKey: identify-county-otter-tail
+            - value: Pennington
+              messageKey: identify-county-pennington
+            - value: Pine
+              messageKey: identify-county-pine
+            - value: Pipestone
+              messageKey: identify-county-pipestone
+            - value: Polk
+              messageKey: identify-county-polk
+            - value: Pope
+              messageKey: identify-county-pope
+            - value: Ramsey
+              messageKey: identify-county-ramsey
+            - value: RedLake
+              messageKey: identify-county-red-lake
+            - value: Redwood
+              messageKey: identify-county-redwood
+            - value: Renville
+              messageKey: identify-county-renville
+            - value: Rice
+              messageKey: identify-county-rice
+            - value: Rock
+              messageKey: identify-county-rock
+            - value: Roseau
+              messageKey: identify-county-roseau
+            - value: StLouis
+              messageKey: identify-county-saint-louis
+            - value: Scott
+              messageKey: identify-county-scott
+            - value: Sherburne
+              messageKey: identify-county-sherburne
+            - value: Sibley
+              messageKey: identify-county-sibley
+            - value: Stearns
+              messageKey: identify-county-stearns
+            - value: Steele
+              messageKey: identify-county-steele
+            - value: Stevens
+              messageKey: identify-county-stevens
+            - value: Swift
+              messageKey: identify-county-swift
+            - value: Todd
+              messageKey: identify-county-todd
+            - value: Traverse
+              messageKey: identify-county-traverse
+            - value: Wabasha
+              messageKey: identify-county-wabasha
+            - value: Wadena
+              messageKey: identify-county-wadena
+            - value: Waseca
+              messageKey: identify-county-waseca
+            - value: Washington
+              messageKey: identify-county-washington
+            - value: Watonwan
+              messageKey: identify-county-watonwan
+            - value: Wilkin
+              messageKey: identify-county-wilkin
+            - value: Winona
+              messageKey: identify-county-winona
+            - value: Wright
+              messageKey: identify-county-wright
+            - value: YellowMedicine
+              messageKey: identify-county-yellow-medicine
+  - &matchInfo
+    name: matchInfo
+    headerKey: match-info.match-docs-to-app
+    headerHelpMessageKey: match-info.fill-in-as-much-as-you-can
+    pageTitle: match-info.title
+    contextFragment: matchInfoContextFragment
+    inputs:
+      - name: firstName
+        type: TEXT
+        promptMessage:
+          promptMessageKey: match-info.whats-your-first-name
+        helpMessageKey: match-info.legally-as-it-appears-on-your-id
+        validators:
+          - validation: NOT_BLANK
+            errorMessageKey: general.validation.make-sure-to-provide-a-first-name
+      - name: lastName
+        type: TEXT
+        promptMessage:
+          promptMessageKey: match-info.whats-your-last-name
+        helpMessageKey: match-info.legally-as-it-appears-on-your-id
+        validators:
+          - validation: NOT_BLANK
+            errorMessageKey: general.validation.make-sure-to-provide-a-last-name
+      - name: dateOfBirth
+        type: DATE
+        validators:
+          - validation: DATE
+            errorMessageKey: general.validation.please-enter-your-birthday-in-this-format
+            condition:
+              input: dateOfBirth
+              matcher: NOT_EMPTY
+          - validation: DOB_VALID
+            condition:
+              input: dateOfBirth
+              matcher: NOT_EMPTY
+            errorMessageKey: general.validation.make-sure-to-provide-a-dob-between-1900-and-present
+        promptMessage:
+          promptMessageKey: match-info.when-were-you-born
+      - name: ssn
+        type: SSN
+        validators:
+          - validation: SSN
+            errorMessageKey: general.validation.make-sure-your-SSN-has-9-digits
+            condition:
+              input: ssn
+              matcher: NOT_EMPTY
+        promptMessage:
+          promptMessageKey: match-info.whats-your-social-security-number
+        helpMessageKey: match-info.recommended-but-not-required
+      - name: phoneNumber
+        type: PHONE
+        promptMessage:
+          promptMessageKey: contact-info.whats-your-phone-number
+        validators:
+          - validation: PHONE_STARTS_WITH_ZERO
+            errorMessageKey: general.validation.area-codes-can-not-begin-with-0
+            condition:
+              input: phoneNumber
+              matcher: NOT_EMPTY
+          - validation: PHONE_STARTS_WITH_ONE
+            errorMessageKey: general.validation.area-codes-can-not-begin-with-1
+            condition:
+              input: phoneNumber
+              matcher: NOT_EMPTY
+          - validation: PHONE
+            errorMessageKey: general.validation.make-sure-to-enter-a-phone-number-with-10-digits
+            condition:
+              input: phoneNumber
+              matcher: NOT_EMPTY
+        helpMessageKey: match-info.county-can-contact-you-if-questions
+      - name: email
+        type: TEXT
+        validators:
+          - validation: EMAIL
+            errorMessageKey: general.validation.email
+            condition:
+              input: email
+              matcher: NOT_EMPTY
+        promptMessage:
+          promptMessageKey: contact-info.whats-your-email-address
+        helpMessageKey: match-info.county-can-contact-you-if-questions
+      - name: caseNumber
+        type: TEXT
+        validators:
+          - validation: CASE_NUMBER
+            errorMessageKey: general.validation.make-sure-your-case-number-has-4-to-7-digits
+            condition:
+              input: caseNumber
+              matcher: NOT_EMPTY
+        promptMessage:
+          promptMessageKey: match-info.case-number-if-you-have-it
+        helpMessageKey: match-info.recommended-but-not-required
+  - &nextSteps
+    name: nextSteps
+    pageTitle: next-steps.title
+    hasPrimaryButton: false
+  - &success
+    name: success
+    pageTitle: success.title
+    usingPageTemplateFragment: false
+  - &recommendations
+    name: recommendations
+    pageTitle: recommendations.title
+    usingPageTemplateFragment: false
+  - &feedback
+    name: feedback
+    pageTitle: feedback.title
+    usingPageTemplateFragment: false
+  - &documentsSent
+    name: documentsSent
+    pageTitle: documentsSent.title
+    contextFragment: icon-documents-sent
+    headerKey: documentsSent.great-your-documents-are-being-sent
+    hasPrimaryButton: false
+    excludeGoBack: true
+  - &disability
+    name: disability
+    pageTitle: disability.title
+    contextFragment: disabilityContextFragment
+    headerKey:
+      defaultValue: disability.does-anyone-in-your-household-have-a-physical-or-mental-disability-that-limits
+      conditionalValues:
+        - value: disability.do-you-have-a-physical-or-mental-disability-that-limits
+          condition: *livesAlone?
+    hasPrimaryButton: false
+    inputs:
+      - name: hasDisability
+        type: YES_NO	
+  - &unableToWork
+    name: unableToWork
+    pageTitle: unable-to-work.title
+    contextFragment: briefcaseContextFragment
+    headerKey:
+      defaultValue: unable-to-work.is-anyone-in-your-household-not-able-to-work-for-any-reason
+      conditionalValues:
+        - value: unable-to-work.are-you-not-able-to-work-for-any-reason
+          condition: *livesAlone?
+    hasPrimaryButton: false
+    inputs:
+      - name: unableToWork
+        type: YES_NO		
+# workSituation page is no longer used. However, we keep def. for data-pipelines compatibility
+  - &workSituation
+    name: workSituation
+    pageTitle: work-situation.title
+    headerKey:
+      defaultValue: work-situation.in-the-last-2-months-did-anyone-in-your-household-do-any-of-these-things
+      conditionalValues:
+        - value: work-situation.in-the-last-2-months-did-you-do-any-of-these-things
+          condition: *livesAlone?
+    hasPrimaryButton: false
+    contextFragment: briefcaseContextFragment
+    inputs:
+      - name: hasWorkSituation
+        type: YES_NO
+        promptMessage:
+          promptMessageFragmentName: workSituationPrompt
+  - &workChanges
+    name: workChanges
+    pageTitle: work-changes.title
+    headerKey:
+      defaultValue: work-changes.in-the-last-60-days-did-anyone-in-your-household-do-any-of-these-things
+      conditionalValues:
+        - value: work-changes.in-the-last-60-days-did-you-do-any-of-these-things
+          condition: *livesAlone?
+    headerHelpMessageKey: work-changes.check-all-that-apply
+    #hasPrimaryButton: true
+    contextFragment: briefcaseContextFragment
+    inputs:
+      - name: workChanges
+        type: CHECKBOX
+        validators:
+          - validation: SELECT_AT_LEAST_ONE
+            errorMessageKey: work-changes.make-sure-you-choose		
+        options:
+          selectableOptions:
+            - value: STOP_WORK
+              messageKey: work-changes.stop-working
+            - value: REFUSE_JOB
+              messageKey: work-changes.refuse-a-job-offer
+            - value: FEWER_HOURS
+              messageKey: work-changes.ask-to-work-fewer-hours
+            - value: ON_STRIKE
+              messageKey: work-changes.go-on-strike
+            - value: NONE_OF_THE_ABOVE
+              messageKey: general.inputs.none-of-the-above
+              isNone: true			  
+  - &tribalNationMember
+    name: tribalNationMember
+    pageTitle: tribal-nation-member.title
+    headerKey:
+      defaultValue: tribal-nation-member.is-anyone-in-your-household-a-member-of-a-tribal-nation
+      conditionalValues:
+        - value: tribal-nation-member.are-you-a-member-of-a-tribal-nation
+          condition: *livesAlone?
+    hasPrimaryButton: false
+    inputs:
+      - name: isTribalNationMember
+        type: YES_NO
+  - &selectTheTribe
+    name: selectTheTribe
+    pageTitle: select-the-tribe.title
+    headerKey: select-the-tribe.which-nation-do-they-belong-to
+    hasPrimaryButton: true
+    inputs:
+      - name: selectedTribe
+        type: SELECT
+        validators:
+          - validation: NOT_BLANK
+            errorMessageKey: general.validation.make-sure-to-select-a-tribe
+        options:
+          selectableOptions:
+            - value: ''
+              messageKey: select-the-tribe.select-the-tribe
+            - value: Bois Forte
+              messageKey: select-the-tribe.bois-forte
+            - value: Fond Du Lac
+              messageKey: select-the-tribe.fond-du-lac
+            - value: Grand Portage
+              messageKey: select-the-tribe.grand-portage
+            - value: Leech Lake
+              messageKey: select-the-tribe.leech-lake
+            - value: Lower Sioux
+              messageKey: select-the-tribe.lower-sioux
+            - value: Mille Lacs Band of Ojibwe
+              messageKey: select-the-tribe.mille-lacs
+            - value: Prairie Island
+              messageKey: select-the-tribe.prairie-island
+            - value: Red Lake Nation
+              messageKey: select-the-tribe.red-lake
+            - value: Shakopee Mdewakanton
+              messageKey: select-the-tribe.shakopee-mdewakanton
+            - value: Upper Sioux
+              messageKey: select-the-tribe.upper-sioux
+            - value: White Earth Nation
+              messageKey: select-the-tribe.white-earth
+            - value: Federally recognized tribe outside of MN
+              messageKey: select-the-tribe.other
+  - &nationOfResidence
+    name: nationOfResidence
+    pageTitle: nation-of-residence.title
+    headerKey:
+      defaultValue: nation-of-residence.header
+      conditionalValues:
+        - value: later-docs-nation-of-residence.header
+          condition: *laterDocsFlow?
+    hasPrimaryButton: true
+    inputs:
+      - name: selectedNationOfResidence
+        type: SELECT
+        validators:
+          - validation: NOT_BLANK
+            errorMessageKey: general.validation.make-sure-to-select-a-tribe
+        options:
+          selectableOptions:
+            - value: ''
+              messageKey: select-the-tribe.select-the-tribe
+            - value: Bois Forte
+              messageKey: select-the-tribe.bois-forte
+            - value: Fond Du Lac
+              messageKey: select-the-tribe.fond-du-lac
+            - value: Grand Portage
+              messageKey: select-the-tribe.grand-portage
+            - value: Leech Lake
+              messageKey: select-the-tribe.leech-lake
+            - value: Lower Sioux
+              messageKey: select-the-tribe.lower-sioux
+            - value: Mille Lacs Band of Ojibwe
+              messageKey: select-the-tribe.mille-lacs
+            - value: Prairie Island
+              messageKey: select-the-tribe.prairie-island
+            - value: Red Lake Nation
+              messageKey: select-the-tribe.red-lake
+            - value: Shakopee Mdewakanton
+              messageKey: select-the-tribe.shakopee-mdewakanton
+            - value: Upper Sioux
+              messageKey: select-the-tribe.upper-sioux
+            - value: White Earth Nation
+              messageKey: select-the-tribe.white-earth
+  - &linealDescendantWEN
+    name: linealDescendantWhiteEarthNation
+    pageTitle: lineal-descendant-WEN.title
+    headerKey:
+      defaultValue: lineal-descendant-WEN.is-anyone-a-lineal-descendant
+      conditionalValues:
+        - value: lineal-descendant-WEN.are-you-a-lineal-descendant
+          condition: *livesAlone?
+    hasPrimaryButton: false
+    inputs:
+      - name: linealDescendantWEN
+        promptMessage:
+          promptMessageFragmentName: linealDescendantWENPrompt
+        type: YES_NO
+  - &nationsBoundary
+    name: nationsBoundary
+    pageTitle: nations-boundary.title
+    headerKey:
+      defaultValue: nations-boundary.are-you-living-nations-boundary
+      conditionalValues:
+        - value: nations-boundary.are-you-living-nations-boundary
+          condition: *livesAlone?
+    hasPrimaryButton: false
+    inputs:
+      - name: livingInNationBoundary
+        type: YES_NO
+  - &applyForTribalTANF
+    name: applyForTribalTANF
+    pageTitle: apply-for-tribal-TANF.title
+    headerKey: apply-for-tribal-TANF.it-looks-like-you-might-be-eligible
+    hasPrimaryButton: false
+    inputs:
+      - name: applyForTribalTANF
+        promptMessage:
+          promptMessageFragmentName: applyForTribalTANFPrompt
+        type: YES_NO
+  - &tribalTANFConfirmation
+    name: tribalTANFConfirmation
+    pageTitle: tribal-tanf-confirmation.title
+    hasPrimaryButton: false
+  - &introIncome
+    name: introIncome
+    pageTitle: intro-income.title
+    hasPrimaryButton: false
+  - &employmentStatus
+    name: employmentStatus
+    pageTitle: employment-status.title
+    headerKey:
+      defaultValue: employment-status.is-anyone-in-your-household-making-money-from-a-job
+      conditionalValues:
+        - value: employment-status.are-you-making-money-from-a-job-self-employment
+          condition: *livesAlone?
+    hasPrimaryButton: false
+    inputs:
+      - name: areYouWorking
+        type: YES_NO
+  - &incomeByJob
+    name: incomeByJob
+    pageTitle: income-by-job.title
+    headerKey:
+      defaultValue: income-by-job.lets-add-all-the-jobs-in-your-household
+      conditionalValues:
+        - value: income-by-job.lets-add-your-job-information
+          condition: *livesAlone?
+    subtleLinkTextKey: income-by-job.id-rather-give-an-estimate
+    hasPrimaryButton: false
+  - &householdSelectionForIncome
+    name: householdSelectionForIncome
+    pageTitle: household-selection-for-income.title
+    headerKey: household-selection-for-income.header
+    inputs:
+      - type: CUSTOM
+        name: whoseJobIsIt
+        customInputFragment: householdOptionsRadios
+        validators:
+          - validation: NOT_BLANK
+            errorMessageKey: general.validation.make-sure-you-answer-this-question
+        options:
+          datasources:
+            - pageName: personalInfo
+            - groupName: household
+  - &incomeUpNext
+    name: incomeUpNext
+    pageTitle: income-up-next.title
+    hasPrimaryButton: false
+  - &jobSearch
+    name: jobSearch
+    pageTitle: ccap-job-search.title
+    headerKey:
+      defaultValue: ccap-job-search.is-household-currently-looking-for-a-job
+      conditionalValues:
+        - value: ccap-job-search.are-you-currently-looking-for-a-job
+          condition: *livesAlone?
+    hasPrimaryButton: false
+    inputs:
+      - name: currentlyLookingForJob
+        type: YES_NO
+  - &whoIsLookingForAJob
+    name: whoIsLookingForAJob
+    pageTitle: who-is-looking-for-job.title
+    headerKey: who-is-looking-for-job.who-in-your-household-is-looking-for-a-job
+    inputs:
+      - type: CUSTOM
+        name: whoIsLookingForAJob
+        customInputFragment: householdOptionsCheckboxes
+        options:
+          datasources:
+            - pageName: personalInfo
+            - groupName: household
+  - &specialCareExpenses
+    name: specialCareExpenses
+    pageTitle: special-care-expenses.title
+    headerKey:
+      defaultValue: special-care-expenses-household-header
+      conditionalValues:
+        - value: special-care-expenses-header
+          condition: *livesAlone?
+    headerHelpMessageKey: special-care-expenses-assets.select-all-that-apply
+    inputs:
+      - name: specialCareExpenses
+        type: CHECKBOX
+        validators:
+          - validation: SELECT_AT_LEAST_ONE
+            errorMessageKey: general.validation.make-sure-you-choose-none-of-the-above-or-another-option
+        options:
+          selectableOptions:
+            - value: REPRESENTATIVE_PAYEE_FEES
+              messageKey: special-care-expenses-representative
+            - value: GUARDIAN_AND_CONSERVATOR_FEES
+              messageKey: special-care-expenses-guardian
+            - value: SPECIAL_DIET_PRESCRIBED_BY_DOCTOR
+              messageKey: special-care-expenses-special-diet
+            - value: HIGH_HOUSING_COSTS
+              messageKey: special-care-expenses-housing
+            - value: NONE
+              messageKey: general.inputs.none-of-the-above
+              isNone: true
+
+  - &unearnedIncome
+    name: unearnedIncome
+    pageTitle: unearned-income.title
+    contextFragment: unearnedIncomeContextFragment
+    headerKey:
+      defaultValue: unearned-income.household-get-income-from-any-of-these-sources
+      conditionalValues:
+        - value: unearned-income.do-you-get-income-from-any-of-these-sources
+          condition: *livesAlone?
+    headerHelpMessageKey: unearned-income.check-all-that-apply-you-do-not-need-to-report-income-you-havent-received-yet
+    inputs:
+      - name: unearnedIncome
+        type: CHECKBOX
+        validators:
+          - validation: SELECT_AT_LEAST_ONE
+            errorMessageKey: general.validation.make-sure-you-choose-none-of-the-above-or-another-option
+        options:
+          selectableOptions:
+            - value: SOCIAL_SECURITY
+              messageKey: unearned-income.social-security
+            - value: SSI
+              messageKey: unearned-income.ssi
+            - value: VETERANS_BENEFITS
+              messageKey: unearned-income.veterans-benefits
+            - value: UNEMPLOYMENT
+              messageKey: unearned-income.unemployment
+            - value: WORKERS_COMPENSATION
+              messageKey: unearned-income.workers-compensation
+            - value: RETIREMENT
+              messageKey: unearned-income.retirement
+            - value: CHILD_OR_SPOUSAL_SUPPORT
+              messageKey: unearned-income.child-or-spousal-support
+            - value: TRIBAL_PAYMENTS
+              messageKey: unearned-income.tribal-payments
+            - value: NO_UNEARNED_INCOME_SELECTED
+              messageKey: general.inputs.none-of-the-above
+              isNone: true		  
+  - &emergencyType
+    name: emergencyType
+    pageTitle: emergency-type.title
+    headerKey: emergency-type.describes-emergency
+    contextFragment: emergencyTypeContextFragment
+    headerHelpMessageKey: emergency-type.check-all-that-apply
+    inputs:
+      - name: emergencyType
+        type: CHECKBOX
+        options:
+          selectableOptions:
+            - value: EVICTION_NOTICE
+              messageKey: emergency-type.eviction-notice
+            - value: UTILITY_SHUT_OFF
+              messageKey: emergency-type.utility-shut-off
+            - value: FIRST_MONTH_RENT_OR_DAMAGE
+              messageKey: emergency-type.first-month-rent-rent-or-damage-deposit
+            - value: OTHER_EMERGENCY
+              messageKey: emergency-type.other-emergency
+  - &otherEmergency
+    name: otherEmergency
+    pageTitle: other-emergency-type.title
+    headerKey: other-emergency-type.tell-us-your-emergency
+    headerHelpMessageKey: other-emergency-type.brief-description
+    inputs:
+      - name: otherEmergency
+        type: TEXTAREA
+        helpMessageKey: general.inputs.optional
+  - &unearnedIncomeSources
+    name: unearnedIncomeSources
+    pageTitle: unearned-income-sources.title
+    headerKey:
+      defaultValue: unearned-income-sources.tell-us-how-much-money-is-received
+      conditionalValues:
+        - value: unearned-income-sources.tell-us-how-much-money-you-receive
+          condition: *livesAlone?
+    headerHelpMessageKey: unearned-income-sources.if-you-dont-have-all-this-information-on-hand-skip
+    inputs:
+      - name: socialSecurityAmount
+        type: MONEY
+        inputPostfix: general.input.postfix.per-month
+        promptMessage:
+          promptMessageKey: unearned-income.social-security
+        helpMessageKey: general.monthly-amount
+        validators:
+          - validation: MONEY
+            errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
+            condition:
+              input: socialSecurityAmount
+              matcher: NOT_EMPTY
+        condition:
+          pageName: unearnedIncome
+          input: unearnedIncome
+          value: SOCIAL_SECURITY
+      - name: socialSecurityFrequency
+        type: SELECT
+        options:
+          selectableOptions:
+            - value: MONTHLY
+              messageKey: unearned-income.frequency.monthly
+            - value: TWICE_A_MONTH
+              messageKey: unearned-income.frequency.twice-a-month
+            - value: WEEKLY
+              messageKey: unearned-income.frequency.weekly
+            - value: OTHER
+              messageKey: unearned-income.frequency.other
+        promptMessage:
+          promptMessageKey: unearned-income-source.frequency-of-income
+        condition:
+          pageName: unearnedIncome
+          input: unearnedIncome
+          value: SOCIAL_SECURITY
+      - name: socialSecurityStartDate
+        type: DATE
+        promptMessage:
+          promptMessageKey: unearned-income-source.start-date
+        validators:
+          - validation: DATE
+            errorMessageKey: general.validation.please-enter-the-date-in-this-format
+            condition:
+              input: socialSecurityStartDate
+              matcher: NOT_EMPTY
+        condition:
+          pageName: unearnedIncome
+          input: unearnedIncome
+          value: SOCIAL_SECURITY
+      - name: socialSecurityEndDate
+        type: DATE
+        promptMessage:
+          promptMessageKey: unearned-income-source.end-date
+        helpMessageKey: unearned-income-source.no-end-date-help
+        validators:
+          - validation: DATE
+            errorMessageKey: general.validation.please-enter-the-date-in-this-format
+            condition:
+              input: socialSecurityEndDate
+              matcher: NOT_EMPTY
+          - validation: END_DATE_NOT_BEFORE_START_DATE
+            errorMessageKey: general.validation.end-date-must-be-on-or-after-start-date
+            startDateInputName: socialSecurityStartDate
+            condition:
+              input: socialSecurityEndDate
+              matcher: NOT_EMPTY
+        condition:
+          pageName: unearnedIncome
+          input: unearnedIncome
+          value: SOCIAL_SECURITY
+      - name: socialSecurityNoEndDate
+        type: CHECKBOX
+        promptMessage:
+          promptMessageKey: unearned-income-source.no-end-date
+        options:
+          selectableOptions:
+            - value: "true"
+              messageKey: unearned-income-source.no-end-date
+        condition:
+          pageName: unearnedIncome
+          input: unearnedIncome
+          value: SOCIAL_SECURITY
+      - name: supplementalSecurityIncomeAmount
+        type: MONEY
+        inputPostfix: general.input.postfix.per-month
+        promptMessage:
+          promptMessageKey: unearned-income.ssi
+        helpMessageKey: general.monthly-amount
+        validators:
+          - validation: MONEY
+            errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
+            condition:
+              input: supplementalSecurityIncomeAmount
+              matcher: NOT_EMPTY
+        condition:
+          pageName: unearnedIncome
+          input: unearnedIncome
+          value: SSI
+      - name: supplementalSecurityIncomeFrequency
+        type: SELECT
+        options:
+          selectableOptions:
+            - value: MONTHLY
+              messageKey: unearned-income.frequency.monthly
+            - value: TWICE_A_MONTH
+              messageKey: unearned-income.frequency.twice-a-month
+            - value: WEEKLY
+              messageKey: unearned-income.frequency.weekly
+            - value: OTHER
+              messageKey: unearned-income.frequency.other
+        promptMessage:
+          promptMessageKey: unearned-income-source.frequency-of-income
+        condition:
+          pageName: unearnedIncome
+          input: unearnedIncome
+          value: SSI
+      - name: supplementalSecurityIncomeStartDate
+        type: DATE
+        promptMessage:
+          promptMessageKey: unearned-income-source.start-date
+        validators:
+          - validation: DATE
+            errorMessageKey: general.validation.please-enter-the-date-in-this-format
+            condition:
+              input: supplementalSecurityIncomeStartDate
+              matcher: NOT_EMPTY
+        condition:
+          pageName: unearnedIncome
+          input: unearnedIncome
+          value: SSI
+      - name: supplementalSecurityIncomeEndDate
+        type: DATE
+        promptMessage:
+          promptMessageKey: unearned-income-source.end-date
+        helpMessageKey: unearned-income-source.no-end-date-help
+        validators:
+          - validation: DATE
+            errorMessageKey: general.validation.please-enter-the-date-in-this-format
+            condition:
+              input: supplementalSecurityIncomeEndDate
+              matcher: NOT_EMPTY
+          - validation: END_DATE_NOT_BEFORE_START_DATE
+            errorMessageKey: general.validation.end-date-must-be-on-or-after-start-date
+            startDateInputName: supplementalSecurityIncomeStartDate
+            condition:
+              input: supplementalSecurityIncomeEndDate
+              matcher: NOT_EMPTY
+        condition:
+          pageName: unearnedIncome
+          input: unearnedIncome
+          value: SSI
+      - name: supplementalSecurityIncomeNoEndDate
+        type: CHECKBOX
+        promptMessage:
+          promptMessageKey: unearned-income-source.no-end-date
+        options:
+          selectableOptions:
+            - value: "true"
+              messageKey: unearned-income-source.no-end-date
+        condition:
+          pageName: unearnedIncome
+          input: unearnedIncome
+          value: SSI
+      - name: veteransBenefitsAmount
+        type: MONEY
+        inputPostfix: general.input.postfix.per-month
+        promptMessage:
+          promptMessageKey: unearned-income.veterans-benefits
+        helpMessageKey: general.monthly-amount
+        validators:
+          - validation: MONEY
+            errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
+            condition:
+              input: veteransBenefitsAmount
+              matcher: NOT_EMPTY
+        condition:
+          pageName: unearnedIncome
+          input: unearnedIncome
+          value: VETERANS_BENEFITS
+      - name: veteransBenefitsFrequency
+        type: SELECT
+        options:
+          selectableOptions:
+            - value: MONTHLY
+              messageKey: unearned-income.frequency.monthly
+            - value: TWICE_A_MONTH
+              messageKey: unearned-income.frequency.twice-a-month
+            - value: WEEKLY
+              messageKey: unearned-income.frequency.weekly
+            - value: OTHER
+              messageKey: unearned-income.frequency.other
+        promptMessage:
+          promptMessageKey: unearned-income-source.frequency-of-income
+        condition:
+          pageName: unearnedIncome
+          input: unearnedIncome
+          value: VETERANS_BENEFITS
+      - name: veteransBenefitsStartDate
+        type: DATE
+        promptMessage:
+          promptMessageKey: unearned-income-source.start-date
+        validators:
+          - validation: DATE
+            errorMessageKey: general.validation.please-enter-the-date-in-this-format
+            condition:
+              input: veteransBenefitsStartDate
+              matcher: NOT_EMPTY
+        condition:
+          pageName: unearnedIncome
+          input: unearnedIncome
+          value: VETERANS_BENEFITS
+      - name: veteransBenefitsEndDate
+        type: DATE
+        promptMessage:
+          promptMessageKey: unearned-income-source.end-date
+        helpMessageKey: unearned-income-source.no-end-date-help
+        validators:
+          - validation: DATE
+            errorMessageKey: general.validation.please-enter-the-date-in-this-format
+            condition:
+              input: veteransBenefitsEndDate
+              matcher: NOT_EMPTY
+          - validation: END_DATE_NOT_BEFORE_START_DATE
+            errorMessageKey: general.validation.end-date-must-be-on-or-after-start-date
+            startDateInputName: veteransBenefitsStartDate
+            condition:
+              input: veteransBenefitsEndDate
+              matcher: NOT_EMPTY
+        condition:
+          pageName: unearnedIncome
+          input: unearnedIncome
+          value: VETERANS_BENEFITS
+      - name: veteransBenefitsNoEndDate
+        type: CHECKBOX
+        promptMessage:
+          promptMessageKey: unearned-income-source.no-end-date
+        options:
+          selectableOptions:
+            - value: "true"
+              messageKey: unearned-income-source.no-end-date
+        condition:
+          pageName: unearnedIncome
+          input: unearnedIncome
+          value: VETERANS_BENEFITS
+      - name: unemploymentAmount
+        type: MONEY
+        inputPostfix: general.input.postfix.per-month
+        promptMessage:
+          promptMessageKey: unearned-income.unemployment
+        helpMessageKey: general.monthly-amount
+        validators:
+          - validation: MONEY
+            errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
+            condition:
+              input: unemploymentAmount
+              matcher: NOT_EMPTY
+        condition:
+          pageName: unearnedIncome
+          input: unearnedIncome
+          value: UNEMPLOYMENT
+      - name: unemploymentFrequency
+        type: SELECT
+        options:
+          selectableOptions:
+            - value: MONTHLY
+              messageKey: unearned-income.frequency.monthly
+            - value: TWICE_A_MONTH
+              messageKey: unearned-income.frequency.twice-a-month
+            - value: WEEKLY
+              messageKey: unearned-income.frequency.weekly
+            - value: OTHER
+              messageKey: unearned-income.frequency.other
+        promptMessage:
+          promptMessageKey: unearned-income-source.frequency-of-income
+        condition:
+          pageName: unearnedIncome
+          input: unearnedIncome
+          value: UNEMPLOYMENT
+      - name: unemploymentStartDate
+        type: DATE
+        promptMessage:
+          promptMessageKey: unearned-income-source.start-date
+        validators:
+          - validation: DATE
+            errorMessageKey: general.validation.please-enter-the-date-in-this-format
+            condition:
+              input: unemploymentStartDate
+              matcher: NOT_EMPTY
+        condition:
+          pageName: unearnedIncome
+          input: unearnedIncome
+          value: UNEMPLOYMENT
+      - name: unemploymentEndDate
+        type: DATE
+        promptMessage:
+          promptMessageKey: unearned-income-source.end-date
+        helpMessageKey: unearned-income-source.no-end-date-help
+        validators:
+          - validation: DATE
+            errorMessageKey: general.validation.please-enter-the-date-in-this-format
+            condition:
+              input: unemploymentEndDate
+              matcher: NOT_EMPTY
+          - validation: END_DATE_NOT_BEFORE_START_DATE
+            errorMessageKey: general.validation.end-date-must-be-on-or-after-start-date
+            startDateInputName: unemploymentStartDate
+            condition:
+              input: unemploymentEndDate
+              matcher: NOT_EMPTY
+        condition:
+          pageName: unearnedIncome
+          input: unearnedIncome
+          value: UNEMPLOYMENT
+      - name: unemploymentNoEndDate
+        type: CHECKBOX
+        promptMessage:
+          promptMessageKey: unearned-income-source.no-end-date
+        options:
+          selectableOptions:
+            - value: "true"
+              messageKey: unearned-income-source.no-end-date
+        condition:
+          pageName: unearnedIncome
+          input: unearnedIncome
+          value: UNEMPLOYMENT
+      - name: workersCompensationAmount
+        type: MONEY
+        inputPostfix: general.input.postfix.per-month
+        promptMessage:
+          promptMessageKey: unearned-income.workers-compensation
+        helpMessageKey: general.monthly-amount
+        validators:
+          - validation: MONEY
+            errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
+            condition:
+              input: workersCompensationAmount
+              matcher: NOT_EMPTY
+        condition:
+          pageName: unearnedIncome
+          input: unearnedIncome
+          value: WORKERS_COMPENSATION
+      - name: workersCompensationFrequency
+        type: SELECT
+        options:
+          selectableOptions:
+            - value: MONTHLY
+              messageKey: unearned-income.frequency.monthly
+            - value: TWICE_A_MONTH
+              messageKey: unearned-income.frequency.twice-a-month
+            - value: WEEKLY
+              messageKey: unearned-income.frequency.weekly
+            - value: OTHER
+              messageKey: unearned-income.frequency.other
+        promptMessage:
+          promptMessageKey: unearned-income-source.frequency-of-income
+        condition:
+          pageName: unearnedIncome
+          input: unearnedIncome
+          value: WORKERS_COMPENSATION
+      - name: workersCompensationStartDate
+        type: DATE
+        promptMessage:
+          promptMessageKey: unearned-income-source.start-date
+        validators:
+          - validation: DATE
+            errorMessageKey: general.validation.please-enter-the-date-in-this-format
+            condition:
+              input: workersCompensationStartDate
+              matcher: NOT_EMPTY
+        condition:
+          pageName: unearnedIncome
+          input: unearnedIncome
+          value: WORKERS_COMPENSATION
+      - name: workersCompensationEndDate
+        type: DATE
+        promptMessage:
+          promptMessageKey: unearned-income-source.end-date
+        helpMessageKey: unearned-income-source.no-end-date-help
+        validators:
+          - validation: DATE
+            errorMessageKey: general.validation.please-enter-the-date-in-this-format
+            condition:
+              input: workersCompensationEndDate
+              matcher: NOT_EMPTY
+          - validation: END_DATE_NOT_BEFORE_START_DATE
+            errorMessageKey: general.validation.end-date-must-be-on-or-after-start-date
+            startDateInputName: workersCompensationStartDate
+            condition:
+              input: workersCompensationEndDate
+              matcher: NOT_EMPTY
+        condition:
+          pageName: unearnedIncome
+          input: unearnedIncome
+          value: WORKERS_COMPENSATION
+      - name: workersCompensationNoEndDate
+        type: CHECKBOX
+        promptMessage:
+          promptMessageKey: unearned-income-source.no-end-date
+        options:
+          selectableOptions:
+            - value: "true"
+              messageKey: unearned-income-source.no-end-date
+        condition:
+          pageName: unearnedIncome
+          input: unearnedIncome
+          value: WORKERS_COMPENSATION
+      - name: retirementAmount
+        type: MONEY
+        inputPostfix: general.input.postfix.per-month
+        promptMessage:
+          promptMessageKey: unearned-income.retirement
+        helpMessageKey: general.monthly-amount
+        validators:
+          - validation: MONEY
+            errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
+            condition:
+              input: retirementAmount
+              matcher: NOT_EMPTY
+        condition:
+          pageName: unearnedIncome
+          input: unearnedIncome
+          value: RETIREMENT
+      - name: retirementFrequency
+        type: SELECT
+        options:
+          selectableOptions:
+            - value: MONTHLY
+              messageKey: unearned-income.frequency.monthly
+            - value: TWICE_A_MONTH
+              messageKey: unearned-income.frequency.twice-a-month
+            - value: WEEKLY
+              messageKey: unearned-income.frequency.weekly
+            - value: OTHER
+              messageKey: unearned-income.frequency.other
+        promptMessage:
+          promptMessageKey: unearned-income-source.frequency-of-income
+        condition:
+          pageName: unearnedIncome
+          input: unearnedIncome
+          value: RETIREMENT
+      - name: retirementStartDate
+        type: DATE
+        promptMessage:
+          promptMessageKey: unearned-income-source.start-date
+        validators:
+          - validation: DATE
+            errorMessageKey: general.validation.please-enter-the-date-in-this-format
+            condition:
+              input: retirementStartDate
+              matcher: NOT_EMPTY
+        condition:
+          pageName: unearnedIncome
+          input: unearnedIncome
+          value: RETIREMENT
+      - name: retirementEndDate
+        type: DATE
+        promptMessage:
+          promptMessageKey: unearned-income-source.end-date
+        helpMessageKey: unearned-income-source.no-end-date-help
+        validators:
+          - validation: DATE
+            errorMessageKey: general.validation.please-enter-the-date-in-this-format
+            condition:
+              input: retirementEndDate
+              matcher: NOT_EMPTY
+          - validation: END_DATE_NOT_BEFORE_START_DATE
+            errorMessageKey: general.validation.end-date-must-be-on-or-after-start-date
+            startDateInputName: retirementStartDate
+            condition:
+              input: retirementEndDate
+              matcher: NOT_EMPTY
+        condition:
+          pageName: unearnedIncome
+          input: unearnedIncome
+          value: RETIREMENT
+      - name: retirementNoEndDate
+        type: CHECKBOX
+        promptMessage:
+          promptMessageKey: unearned-income-source.no-end-date
+        options:
+          selectableOptions:
+            - value: "true"
+              messageKey: unearned-income-source.no-end-date
+        condition:
+          pageName: unearnedIncome
+          input: unearnedIncome
+          value: RETIREMENT
+      - name: childOrSpousalSupportAmount
+        type: MONEY
+        inputPostfix: general.input.postfix.per-month
+        promptMessage:
+          promptMessageKey: unearned-income.child-or-spousal-support
+        helpMessageKey: general.monthly-amount
+        validators:
+          - validation: MONEY
+            errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
+            condition:
+              input: childOrSpousalSupportAmount
+              matcher: NOT_EMPTY
+        condition:
+          pageName: unearnedIncome
+          input: unearnedIncome
+          value: CHILD_OR_SPOUSAL_SUPPORT
+      - name: childOrSpousalSupportFrequency
+        type: SELECT
+        options:
+          selectableOptions:
+            - value: MONTHLY
+              messageKey: unearned-income.frequency.monthly
+            - value: TWICE_A_MONTH
+              messageKey: unearned-income.frequency.twice-a-month
+            - value: WEEKLY
+              messageKey: unearned-income.frequency.weekly
+            - value: OTHER
+              messageKey: unearned-income.frequency.other
+        promptMessage:
+          promptMessageKey: unearned-income-source.frequency-of-income
+        condition:
+          pageName: unearnedIncome
+          input: unearnedIncome
+          value: CHILD_OR_SPOUSAL_SUPPORT
+      - name: childOrSpousalSupportStartDate
+        type: DATE
+        promptMessage:
+          promptMessageKey: unearned-income-source.start-date
+        validators:
+          - validation: DATE
+            errorMessageKey: general.validation.please-enter-the-date-in-this-format
+            condition:
+              input: childOrSpousalSupportStartDate
+              matcher: NOT_EMPTY
+        condition:
+          pageName: unearnedIncome
+          input: unearnedIncome
+          value: CHILD_OR_SPOUSAL_SUPPORT
+      - name: childOrSpousalSupportEndDate
+        type: DATE
+        promptMessage:
+          promptMessageKey: unearned-income-source.end-date
+        helpMessageKey: unearned-income-source.no-end-date-help
+        validators:
+          - validation: DATE
+            errorMessageKey: general.validation.please-enter-the-date-in-this-format
+            condition:
+              input: childOrSpousalSupportEndDate
+              matcher: NOT_EMPTY
+          - validation: END_DATE_NOT_BEFORE_START_DATE
+            errorMessageKey: general.validation.end-date-must-be-on-or-after-start-date
+            startDateInputName: childOrSpousalSupportStartDate
+            condition:
+              input: childOrSpousalSupportEndDate
+              matcher: NOT_EMPTY
+        condition:
+          pageName: unearnedIncome
+          input: unearnedIncome
+          value: CHILD_OR_SPOUSAL_SUPPORT
+      - name: childOrSpousalSupportNoEndDate
+        type: CHECKBOX
+        promptMessage:
+          promptMessageKey: unearned-income-source.no-end-date
+        options:
+          selectableOptions:
+            - value: "true"
+              messageKey: unearned-income-source.no-end-date
+        condition:
+          pageName: unearnedIncome
+          input: unearnedIncome
+          value: CHILD_OR_SPOUSAL_SUPPORT
+      - name: tribalPaymentsAmount
+        type: MONEY
+        inputPostfix: general.input.postfix.per-month
+        promptMessage:
+          promptMessageKey: unearned-income.tribal-payments
+        helpMessageKey: general.monthly-amount
+        validators:
+          - validation: MONEY
+            errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
+            condition:
+              input: tribalPaymentsAmount
+              matcher: NOT_EMPTY
+        condition:
+          pageName: unearnedIncome
+          input: unearnedIncome
+          value: TRIBAL_PAYMENTS
+      - name: tribalPaymentsFrequency
+        type: SELECT
+        options:
+          selectableOptions:
+            - value: MONTHLY
+              messageKey: unearned-income.frequency.monthly
+            - value: TWICE_A_MONTH
+              messageKey: unearned-income.frequency.twice-a-month
+            - value: WEEKLY
+              messageKey: unearned-income.frequency.weekly
+            - value: OTHER
+              messageKey: unearned-income.frequency.other
+        promptMessage:
+          promptMessageKey: unearned-income-source.frequency-of-income
+        condition:
+          pageName: unearnedIncome
+          input: unearnedIncome
+          value: TRIBAL_PAYMENTS
+      - name: tribalPaymentsStartDate
+        type: DATE
+        promptMessage:
+          promptMessageKey: unearned-income-source.start-date
+        validators:
+          - validation: DATE
+            errorMessageKey: general.validation.please-enter-the-date-in-this-format
+            condition:
+              input: tribalPaymentsStartDate
+              matcher: NOT_EMPTY
+        condition:
+          pageName: unearnedIncome
+          input: unearnedIncome
+          value: TRIBAL_PAYMENTS
+      - name: tribalPaymentsEndDate
+        type: DATE
+        promptMessage:
+          promptMessageKey: unearned-income-source.end-date
+        helpMessageKey: unearned-income-source.no-end-date-help
+        validators:
+          - validation: DATE
+            errorMessageKey: general.validation.please-enter-the-date-in-this-format
+            condition:
+              input: tribalPaymentsEndDate
+              matcher: NOT_EMPTY
+          - validation: END_DATE_NOT_BEFORE_START_DATE
+            errorMessageKey: general.validation.end-date-must-be-on-or-after-start-date
+            startDateInputName: tribalPaymentsStartDate
+            condition:
+              input: tribalPaymentsEndDate
+              matcher: NOT_EMPTY
+        condition:
+          pageName: unearnedIncome
+          input: unearnedIncome
+          value: TRIBAL_PAYMENTS
+      - name: tribalPaymentsNoEndDate
+        type: CHECKBOX
+        promptMessage:
+          promptMessageKey: unearned-income-source.no-end-date
+        options:
+          selectableOptions:
+            - value: "true"
+              messageKey: unearned-income-source.no-end-date
+        condition:
+          pageName: unearnedIncome
+          input: unearnedIncome
+          value: TRIBAL_PAYMENTS
+  - &socialSecurityIncomeSource
+    name: socialSecurityIncomeSource
+    pageTitle: unearned-income-source.title
+    headerKey: social-security-income-source.who-receives
+    headerHelpMessageKey: unearned-income-source.you-can-select-more
+    contextFragment: personIncomeContextFragment
+    inputs:
+      - type: CUSTOM
+        name: monthlyIncomeSSorRSDI
+        helpMessageKey: general.if-you-dont-have
+        customInputFragment: householdOptionsCheckboxesWithFollowup
+        customFollowUps: 'true'
+        validators:
+          - validation: NOT_BLANK
+            errorMessageKey: general.validation.make-sure-to-select-a-person
+        options:
+          datasources:
+            - pageName: personalInfo
+            - groupName: household
+        followUps:
+          - name: socialSecurityAmount
+            type: MONEY
+            inputPostfix: general.input.postfix.per-month
+            validators:
+              - validation: MONEY
+                errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
+                condition:
+                  input: socialSecurityAmount
+                  matcher: NOT_EMPTY
+            promptMessage:
+              promptMessageKey: unearned-income-source.how-much-income-monthly
+            helpMessageKey: general.if-you-dont-have
+  - &supplementalSecurityIncomeSource
+    name: supplementalSecurityIncomeSource
+    pageTitle: unearned-income-source.title
+    headerKey: supplemental-security-income-source.who-receives
+    headerHelpMessageKey: unearned-income-source.you-can-select-more
+    contextFragment: personIncomeContextFragment
+    inputs:
+      - type: CUSTOM
+        name: monthlyIncomeSSI
+        helpMessageKey: general.if-you-dont-have
+        customInputFragment: householdOptionsCheckboxesWithFollowup
+        customFollowUps: 'true'
+        validators:
+          - validation: NOT_BLANK
+            errorMessageKey: general.validation.make-sure-to-select-a-person
+        options:
+          datasources:
+            - pageName: personalInfo
+            - groupName: household
+        followUps:
+          - name: supplementalSecurityIncomeAmount
+            type: MONEY
+            inputPostfix: general.input.postfix.per-month
+            validators:
+              - validation: MONEY
+                errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
+                condition:
+                  input: supplementalSecurityIncomeAmount
+                  matcher: NOT_EMPTY
+            promptMessage:
+              promptMessageKey: unearned-income-source.how-much-income-monthly
+            helpMessageKey: general.if-you-dont-have
+  - &veteransBenefitsIncomeSource
+    name: veteransBenefitsIncomeSource
+    pageTitle: unearned-income-source.title
+    headerKey: veterans-benefits-income-source.who-receives
+    headerHelpMessageKey: unearned-income-source.you-can-select-more
+    contextFragment: personIncomeContextFragment
+    inputs:
+      - type: CUSTOM
+        name: monthlyIncomeVeteransBenefits
+        helpMessageKey: general.if-you-dont-have
+        customInputFragment: householdOptionsCheckboxesWithFollowup
+        customFollowUps: 'true'
+        validators:
+          - validation: NOT_BLANK
+            errorMessageKey: general.validation.make-sure-to-select-a-person
+        options:
+          datasources:
+            - pageName: personalInfo
+            - groupName: household
+        followUps:
+          - name: veteransBenefitsAmount
+            type: MONEY
+            inputPostfix: general.input.postfix.per-month
+            validators:
+              - validation: MONEY
+                errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
+                condition:
+                  input: veteransBenefitsAmount
+                  matcher: NOT_EMPTY
+            promptMessage:
+              promptMessageKey: unearned-income-source.how-much-income-received
+            helpMessageKey: general.if-you-dont-have
+          - name: veteransBenefitsFrequency
+            type: SELECT
+            validators:
+              - validation: NOT_BLANK
+                errorMessageKey: general.validation.make-sure-you-answer-this-question
+            options:
+              selectableOptions:
+                - value: MONTHLY
+                  messageKey: unearned-income.frequency.monthly
+                - value: TWICE_A_MONTH
+                  messageKey: unearned-income.frequency.twice-a-month
+                - value: WEEKLY
+                  messageKey: unearned-income.frequency.weekly
+                - value: OTHER
+                  messageKey: unearned-income.frequency.other
+            promptMessage:
+              promptMessageKey: unearned-income-source.frequency-of-income
+          - name: veteransBenefitsStartDate
+            type: DATE
+            promptMessage:
+              promptMessageKey: unearned-income-source.start-date
+          - name: veteransBenefitsEndDate
+            type: DATE
+            promptMessage:
+              promptMessageKey: unearned-income-source.end-date
+            helpMessageKey: unearned-income-source.no-end-date-help
+          - name: veteransBenefitsNoEndDate
+            type: CHECKBOX
+            promptMessage:
+              promptMessageKey: unearned-income-source.no-end-date
+            options:
+              selectableOptions:
+                - value: "true"
+                  messageKey: unearned-income-source.no-end-date
+  - &unemploymentIncomeSource
+    name: unemploymentIncomeSource
+    pageTitle: unearned-income-source.title
+    headerKey: unemployment-income-source.who-receives
+    headerHelpMessageKey: unearned-income-source.you-can-select-more
+    contextFragment: personIncomeContextFragment
+    inputs:
+      - type: CUSTOM
+        name: monthlyIncomeUnemployment
+        helpMessageKey: general.if-you-dont-have
+        customInputFragment: householdOptionsCheckboxesWithFollowup
+        customFollowUps: 'true'
+        validators:
+          - validation: NOT_BLANK
+            errorMessageKey: general.validation.make-sure-to-select-a-person
+        options:
+          datasources:
+            - pageName: personalInfo
+            - groupName: household
+        followUps:
+          - name: unemploymentAmount
+            type: MONEY
+            inputPostfix: general.input.postfix.per-month
+            validators:
+              - validation: MONEY
+                errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
+                condition:
+                  input: unemploymentAmount
+                  matcher: NOT_EMPTY
+            promptMessage:
+              promptMessageKey: unearned-income-source.how-much-income-monthly
+            helpMessageKey: general.if-you-dont-have
+  - &workersCompIncomeSource
+    name: workersCompIncomeSource
+    pageTitle: unearned-income-source.title
+    headerKey: workers-comp-income-source.who-receives
+    headerHelpMessageKey: unearned-income-source.you-can-select-more
+    contextFragment: personIncomeContextFragment
+    inputs:
+      - type: CUSTOM
+        name: monthlyIncomeWorkersComp
+        helpMessageKey: general.if-you-dont-have
+        customInputFragment: householdOptionsCheckboxesWithFollowup
+        customFollowUps: 'true'
+        validators:
+          - validation: NOT_BLANK
+            errorMessageKey: general.validation.make-sure-to-select-a-person
+        options:
+          datasources:
+            - pageName: personalInfo
+            - groupName: household
+        followUps:
+          - name: workersCompensationAmount
+            type: MONEY
+            inputPostfix: general.input.postfix.per-month
+            validators:
+              - validation: MONEY
+                errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
+                condition:
+                  input: workersCompensationAmount
+                  matcher: NOT_EMPTY
+            promptMessage:
+              promptMessageKey: unearned-income-source.how-much-income-monthly
+            helpMessageKey: general.if-you-dont-have
+  - &retirementIncomeSource
+    name: retirementIncomeSource
+    pageTitle: unearned-income-source.title
+    headerKey: retirement-income-source.who-receives
+    headerHelpMessageKey: retirement-income-source.additional-help
+    contextFragment: personIncomeContextFragment
+    inputs:
+      - type: CUSTOM
+        name: monthlyIncomeRetirement
+        helpMessageKey: general.if-you-dont-have
+        customInputFragment: householdOptionsCheckboxesWithFollowup
+        customFollowUps: 'true'
+        validators:
+          - validation: NOT_BLANK
+            errorMessageKey: general.validation.make-sure-to-select-a-person
+        options:
+          datasources:
+            - pageName: personalInfo
+            - groupName: household
+        followUps:
+          - name: retirementAmount
+            type: MONEY
+            inputPostfix: general.input.postfix.per-month
+            validators:
+              - validation: MONEY
+                errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
+                condition:
+                  input: retirementAmount
+                  matcher: NOT_EMPTY
+            promptMessage:
+              promptMessageKey: unearned-income-source.how-much-income-monthly
+            helpMessageKey: general.if-you-dont-have
+  - &childOrSpousalSupportIncomeSource
+    name: childOrSpousalSupportIncomeSource
+    pageTitle: unearned-income-source.title
+    headerKey: child-or-spousal-support-income-source.who-receives
+    headerHelpMessageKey: unearned-income-source.you-can-select-more
+    contextFragment: personIncomeContextFragment
+    inputs:
+      - type: CUSTOM
+        name: monthlyIncomeChildOrSpousalSupport
+        helpMessageKey: general.if-you-dont-have
+        customInputFragment: householdOptionsCheckboxesWithFollowup
+        customFollowUps: 'true'
+        validators:
+          - validation: NOT_BLANK
+            errorMessageKey: general.validation.make-sure-to-select-a-person
+        options:
+          datasources:
+            - pageName: personalInfo
+            - groupName: household
+        followUps:
+          - name: childOrSpousalSupportAmount
+            type: MONEY
+            inputPostfix: general.input.postfix.per-month
+            validators:
+              - validation: MONEY
+                errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
+                condition:
+                  input: childOrSpousalSupportAmount
+                  matcher: NOT_EMPTY
+            promptMessage:
+              promptMessageKey: unearned-income-source.how-much-income-monthly
+            helpMessageKey: general.if-you-dont-have
+  - &tribalPaymentIncomeSource
+    name: tribalPaymentIncomeSource
+    pageTitle: unearned-income-source.title
+    headerKey: tribal-payment-income-source.who-receives
+    headerHelpMessageKey: unearned-income-source.you-can-select-more
+    contextFragment: personIncomeContextFragment
+    inputs:
+      - type: CUSTOM
+        name: monthlyIncomeTribalPayment
+        helpMessageKey: general.if-you-dont-have
+        customInputFragment: householdOptionsCheckboxesWithFollowup
+        customFollowUps: 'true'
+        validators:
+          - validation: NOT_BLANK
+            errorMessageKey: general.validation.make-sure-to-select-a-person
+        options:
+          datasources:
+            - pageName: personalInfo
+            - groupName: household
+        followUps:
+          - name: tribalPaymentsAmount
+            type: MONEY
+            inputPostfix: general.input.postfix.per-month
+            validators:
+              - validation: MONEY
+                errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
+                condition:
+                  input: tribalPaymentsAmount
+                  matcher: NOT_EMPTY
+            promptMessage:
+              promptMessageKey: unearned-income-source.how-much-income-monthly
+            helpMessageKey: general.if-you-dont-have
+  - &otherUnearnedIncome
+    name: otherUnearnedIncome
+    pageTitle: unearned-income.title
+    contextFragment: unearnedIncomeContextFragment
+    headerKey:
+      defaultValue: unearned-income-other.household-get-income-from-any-of-these-sources
+      conditionalValues:
+        - value: unearned-income-other.do-you-get-income-from-any-of-these-sources
+          condition: *livesAlone?
+    headerHelpMessageKey: unearned-income.check-all-that-apply-you-do-not-need-to-report-income-you-havent-received-yet
+    inputs:
+      - name: otherUnearnedIncome
+        type: CHECKBOX
+        validators:
+          - validation: SELECT_AT_LEAST_ONE
+            errorMessageKey: general.validation.make-sure-you-choose-none-of-the-above-or-another-option
+        options:
+          selectableOptions:
+            - value: INSURANCE_PAYMENTS
+              messageKey: unearned-income-other.insurance-payments
+            - value: TRUST_MONEY
+              messageKey: unearned-income-other.money-from-a-trust
+            - value: RENTAL_INCOME
+              messageKey: unearned-income-other.rental-income
+            - value: INTEREST_DIVIDENDS
+              messageKey: unearned-income-other.interest-dividends
+            - value: HEALTH_CARE_REIMBURSEMENT
+              messageKey: unearned-income-other.health-care-reimbursement
+            - value: CONTRACT_FOR_DEED
+              messageKey: unearned-income-other.contract-for-deed
+            - value: BENEFITS
+              messageKey: unearned-income-other.benefits-programs
+            - value: ANNUITY_PAYMENTS
+              messageKey: unearned-income-other.annuity-payments
+            - value: GIFTS
+              messageKey: unearned-income-other.gifts
+            - value: LOTTERY_GAMBLING
+              messageKey: unearned-income-other.lottery-gambling
+            - value: DAY_TRADING
+              messageKey: unearned-income-other.day-trading-proceeds
+            - value: OTHER_PAYMENTS
+              messageKey: unearned-income-other.other-payments
+            - value: NO_OTHER_UNEARNED_INCOME_SELECTED
+              messageKey: general.inputs.none-of-the-above
+              isNone: true
+          datasources:
+            - pageName: choosePrograms
+  - &otherUnearnedIncomeSources
+    name: otherUnearnedIncomeSources
+    pageTitle: unearned-income-sources.title
+    headerKey:
+      defaultValue: unearned-income-sources.tell-us-how-much-money-is-received
+      conditionalValues:
+        - value: unearned-income-sources.tell-us-how-much-money-you-receive
+          condition: *livesAlone?
+    headerHelpMessageKey: unearned-income-sources.if-you-dont-have-all-this-information-on-hand-skip
+    inputs:
+      - name: insurancePaymentsAmount
+        type: MONEY
+        inputPostfix: general.input.postfix.per-month
+        promptMessage:
+          promptMessageKey: unearned-income-other.insurance-payments
+        helpMessageKey: general.monthly-amount
+        validators:
+          - validation: MONEY
+            errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
+            condition:
+              input: insurancePaymentsAmount
+              matcher: NOT_EMPTY
+        condition:
+          pageName: otherUnearnedIncome
+          input: otherUnearnedIncome
+          value: INSURANCE_PAYMENTS
+      - name: insurancePaymentsFrequency
+        type: SELECT
+        options:
+          selectableOptions:
+            - value: MONTHLY
+              messageKey: unearned-income.frequency.monthly
+            - value: TWICE_A_MONTH
+              messageKey: unearned-income.frequency.twice-a-month
+            - value: WEEKLY
+              messageKey: unearned-income.frequency.weekly
+            - value: OTHER
+              messageKey: unearned-income.frequency.other
+        promptMessage:
+          promptMessageKey: unearned-income-source.frequency-of-income
+        condition:
+          pageName: otherUnearnedIncome
+          input: otherUnearnedIncome
+          value: INSURANCE_PAYMENTS
+      - name: insurancePaymentsStartDate
+        type: DATE
+        promptMessage:
+          promptMessageKey: unearned-income-source.start-date
+        validators:
+          - validation: DATE
+            errorMessageKey: general.validation.please-enter-the-date-in-this-format
+            condition:
+              input: insurancePaymentsStartDate
+              matcher: NOT_EMPTY
+        condition:
+          pageName: otherUnearnedIncome
+          input: otherUnearnedIncome
+          value: INSURANCE_PAYMENTS
+      - name: insurancePaymentsEndDate
+        type: DATE
+        promptMessage:
+          promptMessageKey: unearned-income-source.end-date
+        helpMessageKey: unearned-income-source.no-end-date-help
+        validators:
+          - validation: DATE
+            errorMessageKey: general.validation.please-enter-the-date-in-this-format
+            condition:
+              input: insurancePaymentsEndDate
+              matcher: NOT_EMPTY
+          - validation: END_DATE_NOT_BEFORE_START_DATE
+            errorMessageKey: general.validation.end-date-must-be-on-or-after-start-date
+            startDateInputName: insurancePaymentsStartDate
+            condition:
+              input: insurancePaymentsEndDate
+              matcher: NOT_EMPTY
+        condition:
+          pageName: otherUnearnedIncome
+          input: otherUnearnedIncome
+          value: INSURANCE_PAYMENTS
+      - name: insurancePaymentsNoEndDate
+        type: CHECKBOX
+        promptMessage:
+          promptMessageKey: unearned-income-source.no-end-date
+        options:
+          selectableOptions:
+            - value: "true"
+              messageKey: unearned-income-source.no-end-date
+        condition:
+          pageName: otherUnearnedIncome
+          input: otherUnearnedIncome
+          value: INSURANCE_PAYMENTS
+      - name: trustMoneyAmount
+        type: MONEY
+        inputPostfix: general.input.postfix.per-month
+        promptMessage:
+          promptMessageKey: unearned-income-other.money-from-a-trust
+        helpMessageKey: general.monthly-amount
+        validators:
+          - validation: MONEY
+            errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
+            condition:
+              input: trustMoneyAmount
+              matcher: NOT_EMPTY
+        condition:
+          pageName: otherUnearnedIncome
+          input: otherUnearnedIncome
+          value: TRUST_MONEY
+      - name: trustMoneyFrequency
+        type: SELECT
+        options:
+          selectableOptions:
+            - value: MONTHLY
+              messageKey: unearned-income.frequency.monthly
+            - value: TWICE_A_MONTH
+              messageKey: unearned-income.frequency.twice-a-month
+            - value: WEEKLY
+              messageKey: unearned-income.frequency.weekly
+            - value: OTHER
+              messageKey: unearned-income.frequency.other
+        promptMessage:
+          promptMessageKey: unearned-income-source.frequency-of-income
+        condition:
+          pageName: otherUnearnedIncome
+          input: otherUnearnedIncome
+          value: TRUST_MONEY
+      - name: trustMoneyStartDate
+        type: DATE
+        promptMessage:
+          promptMessageKey: unearned-income-source.start-date
+        validators:
+          - validation: DATE
+            errorMessageKey: general.validation.please-enter-the-date-in-this-format
+            condition:
+              input: trustMoneyStartDate
+              matcher: NOT_EMPTY
+        condition:
+          pageName: otherUnearnedIncome
+          input: otherUnearnedIncome
+          value: TRUST_MONEY
+      - name: trustMoneyEndDate
+        type: DATE
+        promptMessage:
+          promptMessageKey: unearned-income-source.end-date
+        helpMessageKey: unearned-income-source.no-end-date-help
+        validators:
+          - validation: DATE
+            errorMessageKey: general.validation.please-enter-the-date-in-this-format
+            condition:
+              input: trustMoneyEndDate
+              matcher: NOT_EMPTY
+          - validation: END_DATE_NOT_BEFORE_START_DATE
+            errorMessageKey: general.validation.end-date-must-be-on-or-after-start-date
+            startDateInputName: trustMoneyStartDate
+            condition:
+              input: trustMoneyEndDate
+              matcher: NOT_EMPTY
+        condition:
+          pageName: otherUnearnedIncome
+          input: otherUnearnedIncome
+          value: TRUST_MONEY
+      - name: trustMoneyNoEndDate
+        type: CHECKBOX
+        promptMessage:
+          promptMessageKey: unearned-income-source.no-end-date
+        options:
+          selectableOptions:
+            - value: "true"
+              messageKey: unearned-income-source.no-end-date
+        condition:
+          pageName: otherUnearnedIncome
+          input: otherUnearnedIncome
+          value: TRUST_MONEY
+      - name: rentalIncomeAmount
+        type: MONEY
+        inputPostfix: general.input.postfix.per-month
+        promptMessage:
+          promptMessageKey: unearned-income-other.rental-income
+        helpMessageKey: general.monthly-amount
+        validators:
+          - validation: MONEY
+            errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
+            condition:
+              input: rentalIncomeAmount
+              matcher: NOT_EMPTY
+        condition:
+          pageName: otherUnearnedIncome
+          input: otherUnearnedIncome
+          value: RENTAL_INCOME
+      - name: rentalIncomeFrequency
+        type: SELECT
+        options:
+          selectableOptions:
+            - value: MONTHLY
+              messageKey: unearned-income.frequency.monthly
+            - value: TWICE_A_MONTH
+              messageKey: unearned-income.frequency.twice-a-month
+            - value: WEEKLY
+              messageKey: unearned-income.frequency.weekly
+            - value: OTHER
+              messageKey: unearned-income.frequency.other
+        promptMessage:
+          promptMessageKey: unearned-income-source.frequency-of-income
+        condition:
+          pageName: otherUnearnedIncome
+          input: otherUnearnedIncome
+          value: RENTAL_INCOME
+      - name: rentalIncomeStartDate
+        type: DATE
+        promptMessage:
+          promptMessageKey: unearned-income-source.start-date
+        validators:
+          - validation: DATE
+            errorMessageKey: general.validation.please-enter-the-date-in-this-format
+            condition:
+              input: rentalIncomeStartDate
+              matcher: NOT_EMPTY
+        condition:
+          pageName: otherUnearnedIncome
+          input: otherUnearnedIncome
+          value: RENTAL_INCOME
+      - name: rentalIncomeEndDate
+        type: DATE
+        promptMessage:
+          promptMessageKey: unearned-income-source.end-date
+        helpMessageKey: unearned-income-source.no-end-date-help
+        validators:
+          - validation: DATE
+            errorMessageKey: general.validation.please-enter-the-date-in-this-format
+            condition:
+              input: rentalIncomeEndDate
+              matcher: NOT_EMPTY
+          - validation: END_DATE_NOT_BEFORE_START_DATE
+            errorMessageKey: general.validation.end-date-must-be-on-or-after-start-date
+            startDateInputName: rentalIncomeStartDate
+            condition:
+              input: rentalIncomeEndDate
+              matcher: NOT_EMPTY
+        condition:
+          pageName: otherUnearnedIncome
+          input: otherUnearnedIncome
+          value: RENTAL_INCOME
+      - name: rentalIncomeNoEndDate
+        type: CHECKBOX
+        promptMessage:
+          promptMessageKey: unearned-income-source.no-end-date
+        options:
+          selectableOptions:
+            - value: "true"
+              messageKey: unearned-income-source.no-end-date
+        condition:
+          pageName: otherUnearnedIncome
+          input: otherUnearnedIncome
+          value: RENTAL_INCOME
+      - name: interestDividendsAmount
+        type: MONEY
+        inputPostfix: general.input.postfix.per-month
+        promptMessage:
+          promptMessageKey: unearned-income-other.interest-dividends
+        helpMessageKey: general.monthly-amount
+        validators:
+          - validation: MONEY
+            errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
+            condition:
+              input: interestDividendsAmount
+              matcher: NOT_EMPTY
+        condition:
+          pageName: otherUnearnedIncome
+          input: otherUnearnedIncome
+          value: INTEREST_DIVIDENDS
+      - name: interestDividendsFrequency
+        type: SELECT
+        options:
+          selectableOptions:
+            - value: MONTHLY
+              messageKey: unearned-income.frequency.monthly
+            - value: TWICE_A_MONTH
+              messageKey: unearned-income.frequency.twice-a-month
+            - value: WEEKLY
+              messageKey: unearned-income.frequency.weekly
+            - value: OTHER
+              messageKey: unearned-income.frequency.other
+        promptMessage:
+          promptMessageKey: unearned-income-source.frequency-of-income
+        condition:
+          pageName: otherUnearnedIncome
+          input: otherUnearnedIncome
+          value: INTEREST_DIVIDENDS
+      - name: interestDividendsStartDate
+        type: DATE
+        promptMessage:
+          promptMessageKey: unearned-income-source.start-date
+        validators:
+          - validation: DATE
+            errorMessageKey: general.validation.please-enter-the-date-in-this-format
+            condition:
+              input: interestDividendsStartDate
+              matcher: NOT_EMPTY
+        condition:
+          pageName: otherUnearnedIncome
+          input: otherUnearnedIncome
+          value: INTEREST_DIVIDENDS
+      - name: interestDividendsEndDate
+        type: DATE
+        promptMessage:
+          promptMessageKey: unearned-income-source.end-date
+        helpMessageKey: unearned-income-source.no-end-date-help
+        validators:
+          - validation: DATE
+            errorMessageKey: general.validation.please-enter-the-date-in-this-format
+            condition:
+              input: interestDividendsEndDate
+              matcher: NOT_EMPTY
+          - validation: END_DATE_NOT_BEFORE_START_DATE
+            errorMessageKey: general.validation.end-date-must-be-on-or-after-start-date
+            startDateInputName: interestDividendsStartDate
+            condition:
+              input: interestDividendsEndDate
+              matcher: NOT_EMPTY
+        condition:
+          pageName: otherUnearnedIncome
+          input: otherUnearnedIncome
+          value: INTEREST_DIVIDENDS
+      - name: interestDividendsNoEndDate
+        type: CHECKBOX
+        promptMessage:
+          promptMessageKey: unearned-income-source.no-end-date
+        options:
+          selectableOptions:
+            - value: "true"
+              messageKey: unearned-income-source.no-end-date
+        condition:
+          pageName: otherUnearnedIncome
+          input: otherUnearnedIncome
+          value: INTEREST_DIVIDENDS
+      - name: healthCareReimbursementAmount
+        type: MONEY
+        inputPostfix: general.input.postfix.per-month
+        promptMessage:
+          promptMessageKey: unearned-income-other.health-care-reimbursement
+        helpMessageKey: general.monthly-amount
+        validators:
+          - validation: MONEY
+            errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
+            condition:
+              input: healthCareReimbursementAmount
+              matcher: NOT_EMPTY
+        condition:
+          pageName: otherUnearnedIncome
+          input: otherUnearnedIncome
+          value: HEALTH_CARE_REIMBURSEMENT
+      - name: healthCareReimbursementFrequency
+        type: SELECT
+        options:
+          selectableOptions:
+            - value: MONTHLY
+              messageKey: unearned-income.frequency.monthly
+            - value: TWICE_A_MONTH
+              messageKey: unearned-income.frequency.twice-a-month
+            - value: WEEKLY
+              messageKey: unearned-income.frequency.weekly
+            - value: OTHER
+              messageKey: unearned-income.frequency.other
+        promptMessage:
+          promptMessageKey: unearned-income-source.frequency-of-income
+        condition:
+          pageName: otherUnearnedIncome
+          input: otherUnearnedIncome
+          value: HEALTH_CARE_REIMBURSEMENT
+      - name: healthCareReimbursementStartDate
+        type: DATE
+        promptMessage:
+          promptMessageKey: unearned-income-source.start-date
+        validators:
+          - validation: DATE
+            errorMessageKey: general.validation.please-enter-the-date-in-this-format
+            condition:
+              input: healthCareReimbursementStartDate
+              matcher: NOT_EMPTY
+        condition:
+          pageName: otherUnearnedIncome
+          input: otherUnearnedIncome
+          value: HEALTH_CARE_REIMBURSEMENT
+      - name: healthCareReimbursementEndDate
+        type: DATE
+        promptMessage:
+          promptMessageKey: unearned-income-source.end-date
+        helpMessageKey: unearned-income-source.no-end-date-help
+        validators:
+          - validation: DATE
+            errorMessageKey: general.validation.please-enter-the-date-in-this-format
+            condition:
+              input: healthCareReimbursementEndDate
+              matcher: NOT_EMPTY
+          - validation: END_DATE_NOT_BEFORE_START_DATE
+            errorMessageKey: general.validation.end-date-must-be-on-or-after-start-date
+            startDateInputName: healthCareReimbursementStartDate
+            condition:
+              input: healthCareReimbursementEndDate
+              matcher: NOT_EMPTY
+        condition:
+          pageName: otherUnearnedIncome
+          input: otherUnearnedIncome
+          value: HEALTH_CARE_REIMBURSEMENT
+      - name: healthCareReimbursementNoEndDate
+        type: CHECKBOX
+        promptMessage:
+          promptMessageKey: unearned-income-source.no-end-date
+        options:
+          selectableOptions:
+            - value: "true"
+              messageKey: unearned-income-source.no-end-date
+        condition:
+          pageName: otherUnearnedIncome
+          input: otherUnearnedIncome
+          value: HEALTH_CARE_REIMBURSEMENT
+      - name: contractForDeedAmount
+        type: MONEY
+        inputPostfix: general.input.postfix.per-month
+        promptMessage:
+          promptMessageKey: unearned-income-other.contract-for-deed
+        helpMessageKey: general.monthly-amount
+        validators:
+          - validation: MONEY
+            errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
+            condition:
+              input: contractForDeedAmount
+              matcher: NOT_EMPTY
+        condition:
+          pageName: otherUnearnedIncome
+          input: otherUnearnedIncome
+          value: CONTRACT_FOR_DEED
+      - name: contractForDeedFrequency
+        type: SELECT
+        options:
+          selectableOptions:
+            - value: MONTHLY
+              messageKey: unearned-income.frequency.monthly
+            - value: TWICE_A_MONTH
+              messageKey: unearned-income.frequency.twice-a-month
+            - value: WEEKLY
+              messageKey: unearned-income.frequency.weekly
+            - value: OTHER
+              messageKey: unearned-income.frequency.other
+        promptMessage:
+          promptMessageKey: unearned-income-source.frequency-of-income
+        condition:
+          pageName: otherUnearnedIncome
+          input: otherUnearnedIncome
+          value: CONTRACT_FOR_DEED
+      - name: contractForDeedStartDate
+        type: DATE
+        promptMessage:
+          promptMessageKey: unearned-income-source.start-date
+        validators:
+          - validation: DATE
+            errorMessageKey: general.validation.please-enter-the-date-in-this-format
+            condition:
+              input: contractForDeedStartDate
+              matcher: NOT_EMPTY
+        condition:
+          pageName: otherUnearnedIncome
+          input: otherUnearnedIncome
+          value: CONTRACT_FOR_DEED
+      - name: contractForDeedEndDate
+        type: DATE
+        promptMessage:
+          promptMessageKey: unearned-income-source.end-date
+        helpMessageKey: unearned-income-source.no-end-date-help
+        validators:
+          - validation: DATE
+            errorMessageKey: general.validation.please-enter-the-date-in-this-format
+            condition:
+              input: contractForDeedEndDate
+              matcher: NOT_EMPTY
+          - validation: END_DATE_NOT_BEFORE_START_DATE
+            errorMessageKey: general.validation.end-date-must-be-on-or-after-start-date
+            startDateInputName: contractForDeedStartDate
+            condition:
+              input: contractForDeedEndDate
+              matcher: NOT_EMPTY
+        condition:
+          pageName: otherUnearnedIncome
+          input: otherUnearnedIncome
+          value: CONTRACT_FOR_DEED
+      - name: contractForDeedNoEndDate
+        type: CHECKBOX
+        promptMessage:
+          promptMessageKey: unearned-income-source.no-end-date
+        options:
+          selectableOptions:
+            - value: "true"
+              messageKey: unearned-income-source.no-end-date
+        condition:
+          pageName: otherUnearnedIncome
+          input: otherUnearnedIncome
+          value: CONTRACT_FOR_DEED
+      - name: benefitsAmount
+        type: MONEY
+        inputPostfix: general.input.postfix.per-month
+        promptMessage:
+          promptMessageKey: unearned-income-other.benefits-programs
+        helpMessageKey: general.monthly-amount
+        validators:
+          - validation: MONEY
+            errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
+            condition:
+              input: benefitsAmount
+              matcher: NOT_EMPTY
+        condition:
+          pageName: otherUnearnedIncome
+          input: otherUnearnedIncome
+          value: BENEFITS
+      - name: benefitsFrequency
+        type: SELECT
+        options:
+          selectableOptions:
+            - value: MONTHLY
+              messageKey: unearned-income.frequency.monthly
+            - value: TWICE_A_MONTH
+              messageKey: unearned-income.frequency.twice-a-month
+            - value: WEEKLY
+              messageKey: unearned-income.frequency.weekly
+            - value: OTHER
+              messageKey: unearned-income.frequency.other
+        promptMessage:
+          promptMessageKey: unearned-income-source.frequency-of-income
+        condition:
+          pageName: otherUnearnedIncome
+          input: otherUnearnedIncome
+          value: BENEFITS
+      - name: benefitsStartDate
+        type: DATE
+        promptMessage:
+          promptMessageKey: unearned-income-source.start-date
+        validators:
+          - validation: DATE
+            errorMessageKey: general.validation.please-enter-the-date-in-this-format
+            condition:
+              input: benefitsStartDate
+              matcher: NOT_EMPTY
+        condition:
+          pageName: otherUnearnedIncome
+          input: otherUnearnedIncome
+          value: BENEFITS
+      - name: benefitsEndDate
+        type: DATE
+        promptMessage:
+          promptMessageKey: unearned-income-source.end-date
+        helpMessageKey: unearned-income-source.no-end-date-help
+        validators:
+          - validation: DATE
+            errorMessageKey: general.validation.please-enter-the-date-in-this-format
+            condition:
+              input: benefitsEndDate
+              matcher: NOT_EMPTY
+          - validation: END_DATE_NOT_BEFORE_START_DATE
+            errorMessageKey: general.validation.end-date-must-be-on-or-after-start-date
+            startDateInputName: benefitsStartDate
+            condition:
+              input: benefitsEndDate
+              matcher: NOT_EMPTY
+        condition:
+          pageName: otherUnearnedIncome
+          input: otherUnearnedIncome
+          value: BENEFITS
+      - name: benefitsNoEndDate
+        type: CHECKBOX
+        promptMessage:
+          promptMessageKey: unearned-income-source.no-end-date
+        options:
+          selectableOptions:
+            - value: "true"
+              messageKey: unearned-income-source.no-end-date
+        condition:
+          pageName: otherUnearnedIncome
+          input: otherUnearnedIncome
+          value: BENEFITS
+      - name: annuityPaymentsAmount
+        type: MONEY
+        inputPostfix: general.input.postfix.per-month
+        promptMessage:
+          promptMessageKey: unearned-income-other.annuity-payments
+        helpMessageKey: general.monthly-amount
+        validators:
+          - validation: MONEY
+            errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
+            condition:
+              input: annuityPaymentsAmount
+              matcher: NOT_EMPTY
+        condition:
+          pageName: otherUnearnedIncome
+          input: otherUnearnedIncome
+          value: ANNUITY_PAYMENTS 
+      - name: annuityPaymentsFrequency
+        type: SELECT
+        options:
+          selectableOptions:
+            - value: MONTHLY
+              messageKey: unearned-income.frequency.monthly
+            - value: TWICE_A_MONTH
+              messageKey: unearned-income.frequency.twice-a-month
+            - value: WEEKLY
+              messageKey: unearned-income.frequency.weekly
+            - value: OTHER
+              messageKey: unearned-income.frequency.other
+        promptMessage:
+          promptMessageKey: unearned-income-source.frequency-of-income
+        condition:
+          pageName: otherUnearnedIncome
+          input: otherUnearnedIncome
+          value: ANNUITY_PAYMENTS
+      - name: annuityPaymentsStartDate
+        type: DATE
+        promptMessage:
+          promptMessageKey: unearned-income-source.start-date
+        validators:
+          - validation: DATE
+            errorMessageKey: general.validation.please-enter-the-date-in-this-format
+            condition:
+              input: annuityPaymentsStartDate
+              matcher: NOT_EMPTY
+        condition:
+          pageName: otherUnearnedIncome
+          input: otherUnearnedIncome
+          value: ANNUITY_PAYMENTS
+      - name: annuityPaymentsEndDate
+        type: DATE
+        promptMessage:
+          promptMessageKey: unearned-income-source.end-date
+        helpMessageKey: unearned-income-source.no-end-date-help
+        validators:
+          - validation: DATE
+            errorMessageKey: general.validation.please-enter-the-date-in-this-format
+            condition:
+              input: annuityPaymentsEndDate
+              matcher: NOT_EMPTY
+          - validation: END_DATE_NOT_BEFORE_START_DATE
+            errorMessageKey: general.validation.end-date-must-be-on-or-after-start-date
+            startDateInputName: annuityPaymentsStartDate
+            condition:
+              input: annuityPaymentsEndDate
+              matcher: NOT_EMPTY
+        condition:
+          pageName: otherUnearnedIncome
+          input: otherUnearnedIncome
+          value: ANNUITY_PAYMENTS
+      - name: annuityPaymentsNoEndDate
+        type: CHECKBOX
+        promptMessage:
+          promptMessageKey: unearned-income-source.no-end-date
+        options:
+          selectableOptions:
+            - value: "true"
+              messageKey: unearned-income-source.no-end-date
+        condition:
+          pageName: otherUnearnedIncome
+          input: otherUnearnedIncome
+          value: ANNUITY_PAYMENTS
+      - name: giftsAmount
+        type: MONEY
+        inputPostfix: general.input.postfix.per-month
+        promptMessage:
+          promptMessageKey: unearned-income-other.gifts
+        helpMessageKey: general.monthly-amount
+        validators:
+          - validation: MONEY
+            errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
+            condition:
+              input: giftsAmount
+              matcher: NOT_EMPTY
+        condition:
+          pageName: otherUnearnedIncome
+          input: otherUnearnedIncome
+          value: GIFTS  
+      - name: giftsFrequency
+        type: SELECT
+        options:
+          selectableOptions:
+            - value: MONTHLY
+              messageKey: unearned-income.frequency.monthly
+            - value: TWICE_A_MONTH
+              messageKey: unearned-income.frequency.twice-a-month
+            - value: WEEKLY
+              messageKey: unearned-income.frequency.weekly
+            - value: OTHER
+              messageKey: unearned-income.frequency.other
+        promptMessage:
+          promptMessageKey: unearned-income-source.frequency-of-income
+        condition:
+          pageName: otherUnearnedIncome
+          input: otherUnearnedIncome
+          value: GIFTS
+      - name: giftsStartDate
+        type: DATE
+        promptMessage:
+          promptMessageKey: unearned-income-source.start-date
+        validators:
+          - validation: DATE
+            errorMessageKey: general.validation.please-enter-the-date-in-this-format
+            condition:
+              input: giftsStartDate
+              matcher: NOT_EMPTY
+        condition:
+          pageName: otherUnearnedIncome
+          input: otherUnearnedIncome
+          value: GIFTS
+      - name: giftsEndDate
+        type: DATE
+        promptMessage:
+          promptMessageKey: unearned-income-source.end-date
+        helpMessageKey: unearned-income-source.no-end-date-help
+        validators:
+          - validation: DATE
+            errorMessageKey: general.validation.please-enter-the-date-in-this-format
+            condition:
+              input: giftsEndDate
+              matcher: NOT_EMPTY
+          - validation: END_DATE_NOT_BEFORE_START_DATE
+            errorMessageKey: general.validation.end-date-must-be-on-or-after-start-date
+            startDateInputName: giftsStartDate
+            condition:
+              input: giftsEndDate
+              matcher: NOT_EMPTY
+        condition:
+          pageName: otherUnearnedIncome
+          input: otherUnearnedIncome
+          value: GIFTS
+      - name: giftsNoEndDate
+        type: CHECKBOX
+        promptMessage:
+          promptMessageKey: unearned-income-source.no-end-date
+        options:
+          selectableOptions:
+            - value: "true"
+              messageKey: unearned-income-source.no-end-date
+        condition:
+          pageName: otherUnearnedIncome
+          input: otherUnearnedIncome
+          value: GIFTS
+      - name: lotteryGamblingAmount
+        type: MONEY
+        inputPostfix: general.input.postfix.per-month
+        promptMessage:
+          promptMessageKey: unearned-income-other.lottery-gambling
+        helpMessageKey: general.monthly-amount
+        validators:
+          - validation: MONEY
+            errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
+            condition:
+              input: lotteryGamblingAmount
+              matcher: NOT_EMPTY
+        condition:
+          pageName: otherUnearnedIncome
+          input: otherUnearnedIncome
+          value: LOTTERY_GAMBLING
+      - name: lotteryGamblingFrequency
+        type: SELECT
+        options:
+          selectableOptions:
+            - value: MONTHLY
+              messageKey: unearned-income.frequency.monthly
+            - value: TWICE_A_MONTH
+              messageKey: unearned-income.frequency.twice-a-month
+            - value: WEEKLY
+              messageKey: unearned-income.frequency.weekly
+            - value: OTHER
+              messageKey: unearned-income.frequency.other
+        promptMessage:
+          promptMessageKey: unearned-income-source.frequency-of-income
+        condition:
+          pageName: otherUnearnedIncome
+          input: otherUnearnedIncome
+          value: LOTTERY_GAMBLING
+      - name: lotteryGamblingStartDate
+        type: DATE
+        promptMessage:
+          promptMessageKey: unearned-income-source.start-date
+        validators:
+          - validation: DATE
+            errorMessageKey: general.validation.please-enter-the-date-in-this-format
+            condition:
+              input: lotteryGamblingStartDate
+              matcher: NOT_EMPTY
+        condition:
+          pageName: otherUnearnedIncome
+          input: otherUnearnedIncome
+          value: LOTTERY_GAMBLING
+      - name: lotteryGamblingEndDate
+        type: DATE
+        promptMessage:
+          promptMessageKey: unearned-income-source.end-date
+        helpMessageKey: unearned-income-source.no-end-date-help
+        validators:
+          - validation: DATE
+            errorMessageKey: general.validation.please-enter-the-date-in-this-format
+            condition:
+              input: lotteryGamblingEndDate
+              matcher: NOT_EMPTY
+          - validation: END_DATE_NOT_BEFORE_START_DATE
+            errorMessageKey: general.validation.end-date-must-be-on-or-after-start-date
+            startDateInputName: lotteryGamblingStartDate
+            condition:
+              input: lotteryGamblingEndDate
+              matcher: NOT_EMPTY
+        condition:
+          pageName: otherUnearnedIncome
+          input: otherUnearnedIncome
+          value: LOTTERY_GAMBLING
+      - name: lotteryGamblingNoEndDate
+        type: CHECKBOX
+        promptMessage:
+          promptMessageKey: unearned-income-source.no-end-date
+        options:
+          selectableOptions:
+            - value: "true"
+              messageKey: unearned-income-source.no-end-date
+        condition:
+          pageName: otherUnearnedIncome
+          input: otherUnearnedIncome
+          value: LOTTERY_GAMBLING
+      - name: dayTradingProceedsAmount
+        type: MONEY
+        inputPostfix: general.input.postfix.per-month
+        promptMessage:
+          promptMessageKey: unearned-income-other.day-trading-proceeds
+        helpMessageKey: general.monthly-amount
+        validators:
+          - validation: MONEY
+            errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
+            condition:
+              input: dayTradingProceedsAmount
+              matcher: NOT_EMPTY
+        condition:
+          pageName: otherUnearnedIncome
+          input: otherUnearnedIncome
+          value: DAY_TRADING
+      - name: dayTradingProceedsFrequency
+        type: SELECT
+        options:
+          selectableOptions:
+            - value: MONTHLY
+              messageKey: unearned-income.frequency.monthly
+            - value: TWICE_A_MONTH
+              messageKey: unearned-income.frequency.twice-a-month
+            - value: WEEKLY
+              messageKey: unearned-income.frequency.weekly
+            - value: OTHER
+              messageKey: unearned-income.frequency.other
+        promptMessage:
+          promptMessageKey: unearned-income-source.frequency-of-income
+        condition:
+          pageName: otherUnearnedIncome
+          input: otherUnearnedIncome
+          value: DAY_TRADING
+      - name: dayTradingProceedsStartDate
+        type: DATE
+        promptMessage:
+          promptMessageKey: unearned-income-source.start-date
+        validators:
+          - validation: DATE
+            errorMessageKey: general.validation.please-enter-the-date-in-this-format
+            condition:
+              input: dayTradingProceedsStartDate
+              matcher: NOT_EMPTY
+        condition:
+          pageName: otherUnearnedIncome
+          input: otherUnearnedIncome
+          value: DAY_TRADING
+      - name: dayTradingProceedsEndDate
+        type: DATE
+        promptMessage:
+          promptMessageKey: unearned-income-source.end-date
+        helpMessageKey: unearned-income-source.no-end-date-help
+        validators:
+          - validation: DATE
+            errorMessageKey: general.validation.please-enter-the-date-in-this-format
+            condition:
+              input: dayTradingProceedsEndDate
+              matcher: NOT_EMPTY
+          - validation: END_DATE_NOT_BEFORE_START_DATE
+            errorMessageKey: general.validation.end-date-must-be-on-or-after-start-date
+            startDateInputName: dayTradingProceedsStartDate
+            condition:
+              input: dayTradingProceedsEndDate
+              matcher: NOT_EMPTY
+        condition:
+          pageName: otherUnearnedIncome
+          input: otherUnearnedIncome
+          value: DAY_TRADING
+      - name: dayTradingProceedsNoEndDate
+        type: CHECKBOX
+        promptMessage:
+          promptMessageKey: unearned-income-source.no-end-date
+        options:
+          selectableOptions:
+            - value: "true"
+              messageKey: unearned-income-source.no-end-date
+        condition:
+          pageName: otherUnearnedIncome
+          input: otherUnearnedIncome
+          value: DAY_TRADING
+      - name: otherPaymentsAmount
+        type: MONEY
+        inputPostfix: general.input.postfix.per-month
+        promptMessage:
+          promptMessageKey: unearned-income-other.other-payments
+        helpMessageKey: general.monthly-amount
+        validators:
+          - validation: MONEY
+            errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
+            condition:
+              input: otherPaymentsAmount
+              matcher: NOT_EMPTY
+        condition:
+          pageName: otherUnearnedIncome
+          input: otherUnearnedIncome
+          value: OTHER_PAYMENTS
+      - name: otherPaymentsFrequency
+        type: SELECT
+        options:
+          selectableOptions:
+            - value: MONTHLY
+              messageKey: unearned-income.frequency.monthly
+            - value: TWICE_A_MONTH
+              messageKey: unearned-income.frequency.twice-a-month
+            - value: WEEKLY
+              messageKey: unearned-income.frequency.weekly
+            - value: OTHER
+              messageKey: unearned-income.frequency.other
+        promptMessage:
+          promptMessageKey: unearned-income-source.frequency-of-income
+        condition:
+          pageName: otherUnearnedIncome
+          input: otherUnearnedIncome
+          value: OTHER_PAYMENTS
+      - name: otherPaymentsStartDate
+        type: DATE
+        promptMessage:
+          promptMessageKey: unearned-income-source.start-date
+        validators:
+          - validation: DATE
+            errorMessageKey: general.validation.please-enter-the-date-in-this-format
+            condition:
+              input: otherPaymentsStartDate
+              matcher: NOT_EMPTY
+        condition:
+          pageName: otherUnearnedIncome
+          input: otherUnearnedIncome
+          value: OTHER_PAYMENTS
+      - name: otherPaymentsEndDate
+        type: DATE
+        promptMessage:
+          promptMessageKey: unearned-income-source.end-date
+        helpMessageKey: unearned-income-source.no-end-date-help
+        validators:
+          - validation: DATE
+            errorMessageKey: general.validation.please-enter-the-date-in-this-format
+            condition:
+              input: otherPaymentsEndDate
+              matcher: NOT_EMPTY
+          - validation: END_DATE_NOT_BEFORE_START_DATE
+            errorMessageKey: general.validation.end-date-must-be-on-or-after-start-date
+            startDateInputName: otherPaymentsStartDate
+            condition:
+              input: otherPaymentsEndDate
+              matcher: NOT_EMPTY
+        condition:
+          pageName: otherUnearnedIncome
+          input: otherUnearnedIncome
+          value: OTHER_PAYMENTS
+      - name: otherPaymentsNoEndDate
+        type: CHECKBOX
+        promptMessage:
+          promptMessageKey: unearned-income-source.no-end-date
+        options:
+          selectableOptions:
+            - value: "true"
+              messageKey: unearned-income-source.no-end-date
+        condition:
+          pageName: otherUnearnedIncome
+          input: otherUnearnedIncome
+          value: OTHER_PAYMENTS
+  - &advancedChildTaxCredit
+    name: advancedChildTaxCredit
+    pageTitle: advanced-child-tax-credit.title
+    headerKey:
+      defaultValue:  advanced-child-tax-credit.single
+      conditionalValues:
+        - value: advanced-child-tax-credit.household
+          condition: *doesNotLiveAlone?
+    headerHelpMessageKey: advanced-child-tax-credit.body
+    contextFragment: cashBenefitsContextFragment 
+    additionalContentFragment: childTaxCreditInfo
+    hasPrimaryButton: false
+    inputs:
+      - name: hasAdvancedChildTaxCredit
+        type: YES_NO
+  - &benefitsProgramsIncomeSource
+    name: benefitsProgramsIncomeSource
+    pageTitle: unearned-income-benefits-programs.title
+    headerKey: unearned-income-benefits-programs.header
+    headerHelpMessageKey: unearned-income-source.you-can-select-more
+    contextFragment: personIncomeContextFragment
+    inputs:
+      - type: CUSTOM
+        name: monthlyIncomeBenefitsPrograms
+        helpMessageKey: general.if-you-dont-have
+        customInputFragment: householdOptionsCheckboxesWithFollowup
+        customFollowUps: 'true'
+        validators:
+          - validation: NOT_BLANK
+            errorMessageKey: general.validation.make-sure-to-select-a-person
+        options:
+          datasources:
+            - pageName: personalInfo
+            - groupName: household
+        followUps:
+          - name: benefitsAmount
+            type: MONEY
+            inputPostfix: general.input.postfix.per-month
+            validators:
+              - validation: MONEY
+                errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
+                condition:
+                  input: benefitsAmount
+                  matcher: NOT_EMPTY
+            promptMessage:
+              promptMessageKey: unearned-income-source.how-much-income-monthly
+            helpMessageKey: general.if-you-dont-have
+  - &insurancePaymentsIncomeSource
+    name: insurancePaymentsIncomeSource
+    pageTitle: unearned-income-other.insurance-payments
+    headerKey: unearned-income-insurance-payments.header
+    headerHelpMessageKey: unearned-income-source.you-can-select-more
+    contextFragment: personIncomeContextFragment
+    inputs:
+      - type: CUSTOM
+        name: monthlyIncomeInsurancePayments
+        helpMessageKey: general.if-you-dont-have
+        customInputFragment: householdOptionsCheckboxesWithFollowup
+        customFollowUps: 'true'
+        validators:
+          - validation: NOT_BLANK
+            errorMessageKey: general.validation.make-sure-to-select-a-person
+        options:
+          datasources:
+            - pageName: personalInfo
+            - groupName: household
+        followUps:
+          - name: insurancePaymentsAmount
+            type: MONEY
+            inputPostfix: general.input.postfix.per-month
+            validators:
+              - validation: MONEY
+                errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
+                condition:
+                  input: insurancePaymentsAmount
+                  matcher: NOT_EMPTY
+            promptMessage:
+              promptMessageKey: unearned-income-source.how-much-income-monthly
+            helpMessageKey: general.if-you-dont-have
+  - &contractForDeedIncomeSource
+    name: contractForDeedIncomeSource
+    pageTitle: unearned-income-other.contract-for-deed
+    headerKey: unearned-income-contract-for-deed.header
+    headerHelpMessageKey: unearned-income-source.you-can-select-more
+    contextFragment: personIncomeContextFragment
+    inputs:
+      - type: CUSTOM
+        name: monthlyIncomeContractForDeed
+        helpMessageKey: general.if-you-dont-have
+        customInputFragment: householdOptionsCheckboxesWithFollowup
+        customFollowUps: 'true'
+        validators:
+          - validation: NOT_BLANK
+            errorMessageKey: general.validation.make-sure-to-select-a-person
+        options:
+          datasources:
+            - pageName: personalInfo
+            - groupName: household
+        followUps:
+          - name: contractForDeedAmount
+            type: MONEY
+            inputPostfix: general.input.postfix.per-month
+            validators:
+              - validation: MONEY
+                errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
+                condition:
+                  input: contractForDeedAmount
+                  matcher: NOT_EMPTY
+            promptMessage:
+              promptMessageKey: unearned-income-source.how-much-income-monthly
+            helpMessageKey: general.if-you-dont-have
+  - &trustMoneyIncomeSource
+    name: trustMoneyIncomeSource
+    pageTitle: unearned-income-other.money-from-a-trust
+    headerKey: unearned-income-money-from-a-trust.header
+    headerHelpMessageKey: unearned-income-source.you-can-select-more
+    contextFragment: personIncomeContextFragment
+    inputs:
+      - type: CUSTOM
+        name: monthlyIncomeTrustMoney
+        helpMessageKey: general.if-you-dont-have
+        customInputFragment: householdOptionsCheckboxesWithFollowup
+        customFollowUps: 'true'
+        validators:
+          - validation: NOT_BLANK
+            errorMessageKey: general.validation.make-sure-to-select-a-person
+        options:
+          datasources:
+            - pageName: personalInfo
+            - groupName: household
+        followUps:
+          - name: trustMoneyAmount
+            type: MONEY
+            inputPostfix: general.input.postfix.per-month
+            validators:
+              - validation: MONEY
+                errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
+                condition:
+                  input: trustMoneyAmount
+                  matcher: NOT_EMPTY
+            promptMessage:
+              promptMessageKey: unearned-income-source.how-much-income-monthly
+            helpMessageKey: general.if-you-dont-have
+  - &healthcareReimbursementIncomeSource
+    name: healthcareReimbursementIncomeSource
+    pageTitle: unearned-income-other.health-care-reimbursement
+    headerKey: unearned-income-health-care-reimbursement.header
+    headerHelpMessageKey: unearned-income-source.you-can-select-more
+    contextFragment: personIncomeContextFragment
+    inputs:
+      - type: CUSTOM
+        name: monthlyIncomeHealthcareReimbursement
+        helpMessageKey: general.if-you-dont-have
+        customInputFragment: householdOptionsCheckboxesWithFollowup
+        customFollowUps: 'true'
+        validators:
+          - validation: NOT_BLANK
+            errorMessageKey: general.validation.make-sure-to-select-a-person
+        options:
+          datasources:
+            - pageName: personalInfo
+            - groupName: household
+        followUps:
+          - name: healthCareReimbursementAmount
+            type: MONEY
+            inputPostfix: general.input.postfix.per-month
+            validators:
+              - validation: MONEY
+                errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
+                condition:
+                  input: healthCareReimbursementAmount
+                  matcher: NOT_EMPTY
+            promptMessage:
+              promptMessageKey: unearned-income-source.how-much-income-monthly
+            helpMessageKey: general.if-you-dont-have
+  - &interestDividendsIncomeSource
+    name: interestDividendsIncomeSource
+    pageTitle: unearned-income-other.interest-dividends
+    headerKey: unearned-income-interest-dividends.header
+    headerHelpMessageKey: unearned-income-source.you-can-select-more
+    contextFragment: personIncomeContextFragment
+    inputs:
+      - type: CUSTOM
+        name: monthlyIncomeInterestDividends
+        helpMessageKey: general.if-you-dont-have
+        customInputFragment: householdOptionsCheckboxesWithFollowup
+        customFollowUps: 'true'
+        validators:
+          - validation: NOT_BLANK
+            errorMessageKey: general.validation.make-sure-to-select-a-person
+        options:
+          datasources:
+            - pageName: personalInfo
+            - groupName: household
+        followUps:
+          - name: interestDividendsAmount
+            type: MONEY
+            inputPostfix: general.input.postfix.per-month
+            validators:
+              - validation: MONEY
+                errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
+                condition:
+                  input: interestDividendsAmount
+                  matcher: NOT_EMPTY
+            promptMessage:
+              promptMessageKey: unearned-income-source.how-much-income-monthly
+            helpMessageKey: general.if-you-dont-have
+  - &rentalIncomeSource
+    name: rentalIncomeSource
+    pageTitle: unearned-income-other.rental-income
+    headerKey: unearned-income-rental-income.header
+    headerHelpMessageKey: unearned-income-source.you-can-select-more
+    contextFragment: personIncomeContextFragment
+    inputs:
+      - type: CUSTOM
+        name: monthlyIncomeRental
+        helpMessageKey: general.if-you-dont-have
+        customInputFragment: householdOptionsCheckboxesWithFollowup
+        customFollowUps: 'true'
+        validators:
+          - validation: NOT_BLANK
+            errorMessageKey: general.validation.make-sure-to-select-a-person
+        options:
+          datasources:
+            - pageName: personalInfo
+            - groupName: household
+        followUps:
+          - name: rentalIncomeAmount
+            type: MONEY
+            inputPostfix: general.input.postfix.per-month
+            validators:
+              - validation: MONEY
+                errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
+                condition:
+                  input: rentalIncomeAmount
+                  matcher: NOT_EMPTY
+            promptMessage:
+              promptMessageKey: unearned-income-source.how-much-income-monthly
+            helpMessageKey: general.if-you-dont-have
+  - &annuityIncomeSource
+    name: annuityIncomeSource
+    pageTitle: unearned-income-other.annuity-payments
+    headerKey: unearned-income-annuity-payments.header
+    headerHelpMessageKey: unearned-income-source.you-can-select-more
+    contextFragment: personIncomeContextFragment
+    inputs:
+      - type: CUSTOM
+        name: monthlyIncomeAnnuityPayments
+        helpMessageKey: general.if-you-dont-have
+        customInputFragment: householdOptionsCheckboxesWithFollowup
+        customFollowUps: 'true'
+        validators:
+          - validation: NOT_BLANK
+            errorMessageKey: general.validation.make-sure-to-select-a-person
+        options:
+          datasources:
+            - pageName: personalInfo
+            - groupName: household
+        followUps:
+          - name: annuityPaymentsAmount
+            type: MONEY
+            inputPostfix: general.input.postfix.per-month
+            validators:
+              - validation: MONEY
+                errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
+                condition:
+                  input: annuityPaymentsAmount
+                  matcher: NOT_EMPTY
+            promptMessage:
+              promptMessageKey: unearned-income-source.how-much-income-monthly
+            helpMessageKey: general.if-you-dont-have
+  - &giftsIncomeSource
+    name: giftsIncomeSource
+    pageTitle: unearned-income-other.gifts
+    headerKey: unearned-income-gifts-income.header
+    headerHelpMessageKey: unearned-income-gifts.other-additional-help
+    contextFragment: personIncomeContextFragment
+    inputs:
+      - type: CUSTOM
+        name: monthlyIncomeGifts
+        helpMessageKey: general.if-you-dont-have
+        customInputFragment: householdOptionsCheckboxesWithFollowup
+        customFollowUps: 'true'
+        validators:
+          - validation: NOT_BLANK
+            errorMessageKey: general.validation.make-sure-to-select-a-person
+        options:
+          datasources:
+            - pageName: personalInfo
+            - groupName: household
+        followUps:
+          - name: giftsAmount
+            type: MONEY
+            inputPostfix: general.input.postfix.per-month
+            validators:
+              - validation: MONEY
+                errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
+                condition:
+                  input:  giftsAmount
+                  matcher: NOT_EMPTY
+            promptMessage:
+              promptMessageKey: unearned-income-source.how-much-income-monthly
+            helpMessageKey: general.if-you-dont-have
+  - &lotteryIncomeSource
+    name: lotteryIncomeSource
+    pageTitle: unearned-income-lottery-gambling.title
+    headerKey: unearned-income-lottery-gambling.header
+    headerHelpMessageKey: unearned-income-lottery-gambling.other-additional-help
+    contextFragment: personIncomeContextFragment
+    inputs:
+      - type: CUSTOM
+        name: monthlyIncomeLotteryGambling
+        helpMessageKey: general.if-you-dont-have
+        customInputFragment: householdOptionsCheckboxesWithFollowup
+        customFollowUps: 'true'
+        validators:
+          - validation: NOT_BLANK
+            errorMessageKey: general.validation.make-sure-to-select-a-person
+        options:
+          datasources:
+            - pageName: personalInfo
+            - groupName: household
+        followUps:
+          - name: lotteryGamblingAmount
+            type: MONEY
+            inputPostfix: general.input.postfix.per-month
+            validators:
+              - validation: MONEY
+                errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
+                condition:
+                  input: lotteryGamblingAmount
+                  matcher: NOT_EMPTY
+            promptMessage:
+              promptMessageKey: unearned-income-source.how-much-income-monthly
+            helpMessageKey: general.if-you-dont-have
+  - &dayTradingIncomeSource
+    name: dayTradingIncomeSource
+    pageTitle: unearned-income-other.day-trading-proceeds
+    headerKey: unearned-income-day-trading-proceeds.header
+    headerHelpMessageKey: unearned-income-source.you-can-select-more
+    contextFragment: personIncomeContextFragment
+    inputs:
+      - type: CUSTOM
+        name: monthlyIncomeDayTradingProceeds
+        helpMessageKey: general.if-you-dont-have
+        customInputFragment: householdOptionsCheckboxesWithFollowup
+        customFollowUps: 'true'
+        validators:
+          - validation: NOT_BLANK
+            errorMessageKey: general.validation.make-sure-to-select-a-person
+        options:
+          datasources:
+            - pageName: personalInfo
+            - groupName: household
+        followUps:
+          - name: dayTradingProceedsAmount
+            type: MONEY
+            inputPostfix: general.input.postfix.per-month
+            validators:
+              - validation: MONEY
+                errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
+                condition:
+                  input: dayTradingProceedsAmount
+                  matcher: NOT_EMPTY
+            promptMessage:
+              promptMessageKey: unearned-income-source.how-much-income-monthly
+            helpMessageKey: general.if-you-dont-have										
+  - &otherPaymentsIncomeSource
+    name: otherPaymentsIncomeSource
+    pageTitle: unearned-income-other.other-payments
+    headerKey: unearned-income-other.other-payments.header
+    headerHelpMessageKey: unearned-income-other.other-additional-help
+    inputs:
+      - type: CUSTOM
+        name: monthlyIncomeOtherPayments
+        helpMessageKey: general.if-you-dont-have
+        customInputFragment: householdOptionsCheckboxesWithFollowup
+        customFollowUps: 'true'
+        validators:
+          - validation: NOT_BLANK
+            errorMessageKey: general.validation.make-sure-to-select-a-person
+        options:
+          datasources:
+            - pageName: personalInfo
+            - groupName: household
+        followUps:
+          - name: otherPaymentsAmount
+            type: MONEY
+            inputPostfix: general.input.postfix.per-month
+            validators:
+              - validation: MONEY
+                errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
+                condition:
+                  input: otherPaymentsAmount
+                  matcher: NOT_EMPTY
+            promptMessage:
+              promptMessageKey: unearned-income-source.how-much-income-monthly
+            helpMessageKey: general.if-you-dont-have
+  - &livingSituation
+    name: livingSituation
+    pageTitle: living-situation.title
+    headerKey: living-situation.what-is-your-current-living-situation
+    inputs:
+      - name: livingSituation
+        type: RADIO
+        options:
+          selectableOptions:
+            - value: PAYING_FOR_HOUSING_WITH_RENT_LEASE_OR_MORTGAGE
+              messageKey: living-situation.paying-for-my-own-housing-with-rent-lease-or-mortgage-payments
+            - value: LIVING_IN_A_PLACE_NOT_MEANT_FOR_HOUSING
+              messageKey: living-situation.living-outside-in-a-vehicle-or-another-place-not-meant-for-housing
+            - value: TEMPORARILY_WITH_FRIENDS_OR_FAMILY_DUE_TO_ECONOMIC_HARDSHIP
+              messageKey: living-situation.temporarily-staying-with-friends-or-family-due-to-economic-hardship
+            - value: TEMPORARILY_WITH_FRIENDS_OR_FAMILY_OTHER_REASONS
+              messageKey: living-situation.temporarily-staying-with-friends-or-family-for-other-reasons
+            - value: HOTEL_OR_MOTEL
+              messageKey: living-situation.staying-in-a-hotel-or-motel
+            - value: EMERGENCY_SHELTER
+              messageKey: living-situation.staying-in-an-emergency-shelter
+            - value: FOSTER_CARE_OR_GROUP_HOME
+              messageKey: living-situation.living-in-foster-care-or-a-group-home
+            - value: HOSPITAL_OR_OTHER_TREATMENT_FACILITY
+              messageKey: living-situation.staying-in-a-hospital-treatment-facility-detox-center-or-nursing-home
+            - value: JAIL_OR_JUVENILE_DETENTION_FACILITY
+              messageKey: living-situation.in-jail-prison-or-juvenile-detention
+            - value: UNKNOWN
+              messageKey: living-situation.none-of-these
+            - value: PREFER_NOT_TO_SAY
+              messageKey: living-situation.i-prefer-not-to-say
+  - &studentFinancialAid
+    name: studentFinancialAid
+    pageTitle: student-financial-aid.title
+    headerKey:
+      defaultValue: student-financial-aid.household-header
+      conditionalValues:
+        - value: student-financial-aid.header
+          condition: *livesAlone?
+    headerHelpMessageKey: student-financial-aid.header-help-message
+    contextFragment: schoolContextFragment
+    hasPrimaryButton: false
+    inputs:
+      - name: studentFinancialAid
+        type: YES_NO
+  - &housingProvider
+    name: housingProvider
+    pageTitle: housing-provider.title
+    headerKey:
+      defaultValue: housing-provider.is-your-household-working-with-a-provider
+      conditionalValues:
+      - value: housing-provider.are-you-working-with-a-provider
+        condition: *livesAlone?
+    headerHelpMessageKey: housing-provider.we-will-use-this-information
+    hasPrimaryButton: false
+    contextFragment: housingSupportsFragment
+    inputs:
+      - name: housingProvider
+        type: YES_NO
+  - &housingProviderInfo
+    name: housingProviderInfo
+    pageTitle: housing-provider-info.title
+    headerKey: housing-provider-info.tell-us-about-your-housing-provider
+    headerHelpMessageKey: housing-provider-info.include-any-information
+    inputs:
+      - name: housingProviderName
+        type: LONG_TEXT
+        promptMessage:
+          promptMessageKey: housing-provider-info.what-is-the-providers-name
+        helpMessageKey: 
+      - name: housingProviderVendorNumber
+        type: LONG_TEXT
+        promptMessage:
+          promptMessageKey: housing-provider-info.providers-vendor-number
+        helpMessageKey: housing-provider-info.if-you-are-not-sure
+  - &futureIncome
+    name: futureIncome
+    pageTitle: future-income.title
+    headerKey:
+      defaultValue: future-income.do-you-think-household-will-earn-less-money-this-month-than-last-month
+      conditionalValues:
+        - value: future-income.do-you-think-youll-earn-less-money-this-month-than-last-month
+          condition: *livesAlone?
+    headerHelpMessageKey: future-income.if-youre-not-sure-you-can-guess
+    inputs:
+      - name: earnLessMoneyThisMonth
+        type: RADIO
+        options:
+          selectableOptions:
+            - value: "true"
+              messageKey: general.inputs.yes
+            - value: "false"
+              messageKey: general.inputs.no
+      - name: additionalIncomeInfo
+        type: TEXTAREA
+        promptMessage:
+          promptMessageKey: future-income.is-there-anything-else-youd-like-to-share-about-your-income
+        helpMessageKey: general.inputs.optional
+  - &employersName
+    name: employersName
+    pageTitle: employers-name.title
+    headerKey:
+      defaultValue: employers-name.add-a-job-they-have
+      conditionalValues:
+        - value: employers-name.add-a-job-you-have
+          condition: *livesAloneOrIsApplicantsJob?
+    inputs:
+      - name: employersName
+        type: LONG_TEXT
+        validators:
+          - validation: NOT_BLANK
+            errorMessageKey: general.validation.make-sure-you-answer-this-question
+        promptMessage:
+          promptMessageKey: employers-name.what-is-the-employers-name
+  - &selfEmployment
+    name: selfEmployment
+    pageTitle: self-employment.title
+    headerKey:
+      defaultValue: self-employment.is-their-work-here
+      conditionalValues:
+        - value: self-employment.is-your-work-here
+          condition: *livesAloneOrIsApplicantsJob?
+    hasPrimaryButton: false
+    inputs:
+      - name: selfEmployment
+        promptMessage:
+          promptMessageFragmentName: selfEmploymentPrompt
+        type: YES_NO
+    contextFragment: jobContextFragment
+  - &paidByTheHour
+    name: paidByTheHour
+    pageTitle: paid-by-the-hour.title
+    headerKey:
+      defaultValue: paid-by-the-hour.do-they-get-paid-by-the-hour
+      conditionalValues:
+        - value: paid-by-the-hour.do-you-get-paid-by-the-hour
+          condition: *livesAloneOrIsApplicantsJob?
+    hasPrimaryButton: false
+    inputs:
+      - name: paidByTheHour
+        type: YES_NO
+    subtleLinkTextKey: paid-by-the-hour.i-dont-know-these-details
+    contextFragment: jobContextFragment
+  - &hourlyWage
+    name: hourlyWage
+    pageTitle: hourly-wage.title
+    headerKey:
+      defaultValue: hourly-wage.what-is-their-hourly-wage
+      conditionalValues:
+        - value: hourly-wage.what-is-your-hourly-wage
+          condition: *livesAloneOrIsApplicantsJob?
+    inputs:
+      - name: hourlyWage
+        type: HOURLY_WAGE
+        validators:
+          - validation: MONEY
+            errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
+            condition:
+              input: hourlyWage
+              matcher: NOT_EMPTY
+    contextFragment: jobContextFragment
+  - &hoursAWeek
+    name: hoursAWeek
+    pageTitle: hours-a-week.title
+    headerKey:
+      defaultValue: hours-a-week.how-many-hours-a-week-do-they-work
+      conditionalValues:
+        - value: hours-a-week.how-many-hours-a-week-do-you-work
+          condition: *livesAloneOrIsApplicantsJob?
+    headerHelpMessageKey:
+      defaultValue: hours-a-week.we-know-this-can-be-hard-to-answer-so-just-estimate-based-on-their
+      conditionalValues:
+        - value: hours-a-week.we-know-this-can-be-hard-to-answer-so-just-estimate-based-on
+          condition: *livesAloneOrIsApplicantsJob?
+    inputs:
+      - name: hoursAWeek
+        type: NUMBER
+        validators:
+          - validation: NUMBER
+            errorMessageKey: general.validation.make-sure-you-enter-a-number
+    contextFragment: jobContextFragment
+  - &payPeriod
+    name: payPeriod
+    pageTitle: pay-period.title
+    headerKey:
+      defaultValue: pay-period.how-often-do-they-get-paid
+      conditionalValues:
+        - value: pay-period.how-often-do-you-get-paid
+          condition: *livesAloneOrIsApplicantsJob?
+    inputs:
+      - name: payPeriod
+        type: RADIO
+        validators:
+          - validation: NOT_BLANK
+            errorMessageKey: general.validation.make-sure-you-answer-this-question
+        options:
+          selectableOptions:
+            - value: EVERY_DAY
+              messageKey: pay-period.every-day 
+            - value: EVERY_WEEK
+              messageKey: pay-period.every-week
+            - value: EVERY_TWO_WEEKS
+              messageKey: pay-period.every-two-weeks
+            - value: TWICE_A_MONTH
+              messageKey: pay-period.twice-a-month
+            - value: EVERY_MONTH
+              messageKey: pay-period.every-month
+            - value: IT_VARIES
+              messageKey: pay-period.it-varies
+    contextFragment: jobContextFragment
+  - &incomePerPayPeriod
+    name: incomePerPayPeriod
+    pageTitle: income-per-pay-period.title
+    headerKey:
+      conditionalValues:
+        - value: income-per-pay-period.every-day
+          condition:
+            pageName: payPeriod
+            input: payPeriod
+            value: EVERY_DAY
+        - value: income-per-pay-period.every-week
+          condition:
+            pageName: payPeriod
+            input: payPeriod
+            value: EVERY_WEEK
+        - value: income-per-pay-period.every-two-weeks
+          condition:
+            pageName: payPeriod
+            input: payPeriod
+            value: EVERY_TWO_WEEKS
+        - value: income-per-pay-period.twice-a-month
+          condition:
+            pageName: payPeriod
+            input: payPeriod
+            value: TWICE_A_MONTH
+        - value: income-per-pay-period.every-month
+          condition:
+            pageName: payPeriod
+            input: payPeriod
+            value: EVERY_MONTH
+        - value: income-per-pay-period.it-varies
+          condition:
+            pageName: payPeriod
+            input: payPeriod
+            value: IT_VARIES
+    headerHelpMessageKey: income-per-pay-period.provide-income-before-taxes-we-know-this-can-be-hard-to
+    inputs:
+      - name: incomePerPayPeriod
+        type: MONEY
+        validators:
+          - validation: MONEY
+            errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
+    contextFragment: jobContextFragment
+  - &jobBuilder
+    name: jobBuilder
+    pageTitle: job-builder.title
+    headerKey:
+      defaultValue: job-builder.your-household-jobs
+      conditionalValues:
+        - value: job-builder.your-jobs
+          condition: *livesAlone?
+    usingPageTemplateFragment: false
+  - &jobRedirectPage
+    name: jobRedirectPage
+    headerKey: warning-page.going-back-will-take-you-to-the-beginning-of-the-jobs-section-where-you-will-start-over
+    pageTitle: warning-page.go-back-title
+    usingPageTemplateFragment: false
+  - &jobDeleteWarningPage
+    name: jobDeleteWarningPage
+    headerKey:
+      conditionalValues:
+        - value: warning-page.you-are-about-to-delete-your-job
+          condition: *livesAloneOrIsApplicantsJob?
+        - value: warning-page.you-are-about-to-delete-member-job
+          condition:
+            pageName: householdSelectionForIncome
+            input: whoseJobIsIt
+            value: "applicant"
+            matcher: DOES_NOT_CONTAIN_SUBSTRING
+    pageTitle: warning-page.no-data-title
+    usingPageTemplateFragment: false
+  - &principalWageEarner
+    name: principalWageEarner
+    pageTitle: principal-wage-earner.title
+    headerKey: principal-wage-earner.header
+    headerHelpMessageKey: principal-wage-earner.snap-households-must-designate
+    contextFragment: personMoneyCoinFragment
+    inputs:
+      - name: principalWageEarner
+        type: CUSTOM
+        customInputFragment: principalWageEarnerInput
+        options:
+          datasources:
+            - pageName: personalInfo
+            - groupName: household
+              pageName: householdMemberInfo
+              optional: "true"
+        validators:
+          - validation: SELECT_AT_LEAST_ONE
+            errorMessageKey: general.validation.make-sure-you-answer-this-question			  
+  - &startExpenses
+    name: startExpenses
+    pageTitle: start-expenses.title
+    hasPrimaryButton: false
+  - &homeExpenses
+    name: homeExpenses
+    pageTitle: home-expenses.title
+    headerKey:
+      defaultValue: home-expenses.household-pay-for-these
+      conditionalValues:
+        - value: home-expenses.do-you-pay-for-any-of-these
+          condition: *livesAlone?
+    headerHelpMessageKey: general.check-all-that-apply
+    inputs:
+      - name: homeExpenses
+        type: CHECKBOX
+        validators:
+          - validation: SELECT_AT_LEAST_ONE
+            errorMessageKey: general.validation.make-sure-you-choose-none-of-the-above-or-another-option
+        options:
+          selectableOptions:
+            - value: RENT
+              messageKey: home-expenses.rent
+            - value: MORTGAGE
+              messageKey: home-expenses.mortgage
+            - value: HOMEOWNERS_INSURANCE
+              messageKey: home-expenses.homeowners-insurance
+            - value: REAL_ESTATE_TAXES
+              messageKey: home-expenses.real-estate-taxes
+            - value: ASSOCIATION_FEES
+              messageKey: home-expenses.association-fees
+            - value: ROOM_AND_BOARD
+              messageKey: home-expenses.room-and-board
+            - value: NONE_OF_THE_ABOVE
+              messageKey: general.inputs.none-of-the-above
+              isNone: true
+  - &homeExpensesAmount
+    name: homeExpensesAmount
+    pageTitle: home-expenses-amount.title
+    headerKey:
+      conditionalValues:
+        - value: home-expenses-amount.how-much-do-you-pay-for-rent-mortgage-and-room-and-board-every-month
+          condition:
+            logicalOperator: AND
+            conditions:
+              - *livesAlone?
+              - *hasMortgage?
+              - *hasRent?
+              - *hasRoomAndBoard?
+        - value: home-expenses-amount.how-much-do-you-pay-for-rent-every-month
+          condition:
+            logicalOperator: AND
+            conditions:
+              - *doesNotHaveMortgage?
+              - *doesNotHaveRoomAndBoard?
+              - *livesAlone?
+        - value: home-expenses-amount.how-much-do-you-pay-for-room-and-board-every-month
+          condition:
+            logicalOperator: AND
+            conditions:
+              - *doesNotHaveMortgage?
+              - *doesNotHaveRent?
+              - *livesAlone?
+        - value: home-expenses-amount.how-much-do-you-pay-for-rent-and-room-and-board-every-month
+          condition:
+            logicalOperator: AND
+            conditions:
+              - *doesNotHaveMortgage?
+              - *livesAlone?
+        - value: home-expenses-amount.how-much-do-you-pay-for-mortgage-every-month
+          condition:
+            logicalOperator: AND
+            conditions:
+              - *doesNotHaveRent?
+              - *doesNotHaveRoomAndBoard?
+              - *livesAlone?
+        - value: home-expenses-amount.how-much-do-you-pay-for-mortgage-and-room-and-board-every-month
+          condition:
+            logicalOperator: AND
+            conditions:
+              - *doesNotHaveRent?
+              - *livesAlone?
+        - value: home-expenses-amount.how-much-do-you-pay-for-rent-and-mortgage-every-month
+          condition:
+            logicalOperator: AND
+            conditions:
+              - *livesAlone?
+              - *hasRent?
+              - *hasMortgage?
+        # This condition needs to come first among the household conditions in order to get evaluated correctly
+        - value: home-expenses-amount.household-pay-for-rent-mortgage-and-room-and-board-every-month
+          condition:
+            logicalOperator: AND
+            conditions:
+              - *doesNotLiveAlone?
+              - *hasRoomAndBoard?
+              - *hasRent?
+              - *hasMortgage?
+        - value: home-expenses-amount.household-pay-rent-every-month
+          condition:
+            logicalOperator: AND
+            conditions:
+              - *doesNotHaveMortgage?
+              - *doesNotHaveRoomAndBoard?
+              - *doesNotLiveAlone?
+        - value: home-expenses-amount.household-pay-for-room-and-board-every-month
+          condition:
+            logicalOperator: AND
+            conditions:
+              - *doesNotHaveMortgage?
+              - *doesNotHaveRent?
+              - *doesNotLiveAlone?
+        - value: home-expenses-amount.household-pay-mortgage-every-month
+          condition:
+            logicalOperator: AND
+            conditions:
+              - *doesNotHaveRent?
+              - *doesNotHaveRoomAndBoard?
+              - *doesNotLiveAlone?
+        - value: home-expenses-amount.how-much-does-household-pay-for-rent-and-mortgage-every-month
+          condition:
+            logicalOperator: AND
+            conditions:
+              - *doesNotLiveAlone?
+              - *hasRent?
+              - *hasMortgage?
+        - value: home-expenses-amount.household-pay-for-mortgage-and-room-and-board-every-month
+          condition:
+            logicalOperator: AND
+            conditions:
+              - *doesNotLiveAlone?
+              - *hasRoomAndBoard?
+              - *hasMortgage?
+        - value: home-expenses-amount.household-pay-for-rent-and-room-and-board-every-month
+          condition:
+            logicalOperator: AND
+            conditions:
+              - *doesNotLiveAlone?
+              - *hasRoomAndBoard?
+              - *hasRent?
+    inputs:
+      - name: homeExpensesAmount
+        type: MONEY
+        validators:
+          - validation: MONEY
+            errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
+  - &savings
+    name: savings
+    pageTitle: savings.title
+    headerKey:
+      defaultValue: savings.household-bank-account
+      conditionalValues:
+        - value: savings.do-you-have-money-in-a-bank-account-or-debit-card
+          condition: *livesAlone?
+    contextFragment: savingsContextFragment
+    hasPrimaryButton: false
+    inputs:
+    - name: haveSavings
+      type: YES_NO
+      promptMessage:
+        promptMessageFragmentName: savingsPrompt
+  - &soldAssets
+    name: soldAssets
+    pageTitle: sold-assets.title
+    headerKey:
+      defaultValue: sold-assets.households-given-or-sold
+      conditionalValues:
+        - value: sold-assets.in-the-last-12-months-have-you-given-away-or-sold-any-assets
+          condition: *livesAlone?
+    hasPrimaryButton: false
+    inputs:
+      - name: haveSoldAssets
+        type: YES_NO
+        promptMessage:
+          promptMessageFragmentName: soldAssetsPrompt
+  - &submittingApplication
+    name: submittingApplication
+    pageTitle: submitting-application.title
+    hasPrimaryButton: false
+  - &homeAddressValidation
+    name: homeAddressValidation
+    pageTitle: address-validation.title
+    hasPrimaryButton: false
+    inputs:
+      - name: useEnrichedAddress
+        type: CUSTOM
+        customInputFragment: addressValidationInput
+        options:
+          selectableOptions:
+            - value: "true"
+              messageKey: address-validation.suggested-address
+            - value: "false"
+              messageKey: address-validation.address-you-entered
+      - name: enrichedCountyDifferentFromSelected
+        type: HIDDEN
+  - &outOfStateAddressNotice
+    name: outOfStateAddressNotice
+    pageTitle: out-of-state-address-notice.title
+    hasPrimaryButton: false
+    usingPageTemplateFragment: true
+    inputs:
+      - name: selectedOutOfStateAddressOption
+        type: CUSTOM
+        customInputFragment: outOfStateAddressNoticeInput
+        options:
+          selectableOptions:
+            - value: "CONTINUE"
+              messageKey: out-of-state-address-notice.yes-continue
+            - value: "QUIT"
+              messageKey: out-of-state-address-notice.no-quit-application
+            - value: "EDIT"
+              messageKey: out-of-state-address-notice.edit-my-address
+        datasources:
+          - pageName: homeAddress  
+  - &outOfStateQuitVerify
+    name: outOfStateQuitVerify
+    pageTitle: out-of-state-quit-verify.title
+    contextFragment: StateQuitFragment
+    hasPrimaryButton: false
+  - &mailingAddressValidation
+    name: mailingAddressValidation
+    pageTitle: address-validation.title
+    hasPrimaryButton: false
+    inputs:
+      - name: useEnrichedAddress
+        type: CUSTOM
+        customInputFragment: addressValidationInput
+        options:
+          selectableOptions:
+            - value: "true"
+              messageKey: address-validation.suggested-address
+            - value: "false"
+              messageKey: address-validation.address-you-entered
+      - name: enrichedCountyDifferentFromSelected
+        type: HIDDEN
+  - &countyValidation
+    name: countyValidation
+    pageTitle: county-validation.title
+    hasPrimaryButton: false
+    inputs:
+      - name: useEnrichedCounty
+        type: CUSTOM
+        customInputFragment: countyValidationInput
+        options:
+          selectableOptions:
+            - value: "true"
+              messageKey: county-validation.suggested-county
+            - value: "false"
+              messageKey: county-validation.county-you-entered
+  - &registerToVote
+    name: registerToVote
+    headerKey: register-to-vote.do-you-want-to-register-to-vote
+    inputs:
+      - name: registerToVote
+        type: CUSTOM
+        customInputFragment: registerToVoteInput
+        options:
+          selectableOptions:
+            - value: "YES"
+              messageKey: register-to-vote.yes-send-me-more-info
+            - value: NO_ALREADY_REGISTERED
+              messageKey: register-to-vote.ive-already-registered
+            - value: "NO"
+              messageKey: register-to-vote.no-thanks
+    pageTitle: register-to-vote.title
+    hasPrimaryButton: false
+  - &healthcareCoverage
+    name: healthcareCoverage
+    headerKey: healthcareCoverage.do-you-currently-have-healthcare-coverage
+    contextFragment: healthcareCoverageFragment
+    inputs:
+      - name: healthcareCoverage
+        type: RADIO
+        options:
+          selectableOptions:
+            - value: "YES"
+              messageKey: general.inputs.yes
+            - value: "NO"
+              messageKey: general.inputs.no
+            - value: "NOT_SURE"
+              messageKey: general.inputs.not-sure
+    pageTitle: healthcareCoverage.title
+  - &authorizedRep
+    name: authorizedRep
+    headerKey: authorized-rep.do-you-want-to
+    headerHelpMessageKey: authorized-rep.this-person-can-help
+    inputs:
+      - name: helpWithBenefits
+        type: YES_NO
+    pageTitle: authorized-rep.title
+    hasPrimaryButton: false
+    contextFragment: authorizedRepContextFragment
+  - &authorizedRepCommunicate
+    name: authorizedRepCommunicate
+    headerKey: authorized-rep-communicate.do-you-want-your-helper-to-communicate-with-the-county-on-your-behalf
+    inputs:
+      - name: communicateOnYourBehalf
+        type: YES_NO
+        promptMessage:
+          promptMessageFragmentName: authorizedRepCommunicatePrompt
+    pageTitle: authorized-rep-communicate.title
+    hasPrimaryButton: false
+    contextFragment: authorizedRepContextFragment
+  - &authorizedRepMailNotices
+    name: authorizedRepMailNotices
+    headerKey: authorized-rep-speak-to-county.do-you-want-your-helper-to-get-mail-and-notices-for-you
+    inputs:
+      - name: getMailNotices
+        type: YES_NO
+        promptMessage:
+          promptMessageFragmentName: getMailNoticesPrompt
+    pageTitle: authorized-rep-speak-to-county.title
+    hasPrimaryButton: false
+    contextFragment: authorizedRepContextFragment
+  - &authorizedRepSpendOnYourBehalf
+    name: authorizedRepSpendOnYourBehalf
+    headerKey: authorized-rep-spend-on-your-behalf.do-you-want-your-authorized-rep-to-spend-your-benefits-on-your-behalf
+    inputs:
+      - name: authorizedRepSpendOnYourBehalf
+        type: YES_NO
+        promptMessage:
+          promptMessageFragmentName: spendOnYourBehalfPrompt
+    pageTitle: authorized-rep-spend-on-your-behalf.title
+    hasPrimaryButton: false
+    contextFragment: authorizedRepContextFragment
+  - &authorizedRepContactInfo
+    name: authorizedRepContactInfo
+    pageTitle: authorized-rep-contact-info.title
+    headerKey: authorized-rep-contact-info.lets-get-your-authorized-reps-contact-information
+    headerHelpMessageKey: authorized-rep-contact-info.we-need-to-send-this-information-to-your-county
+    inputs:
+      - name: authorizedRepFullName
+        type: TEXT
+        promptMessage:
+          promptMessageKey: authorized-rep-contact-info.whats-their-name
+      - name: authorizedRepStreetAddress
+        type: TEXT
+        promptMessage:
+          promptMessageKey: authorized-rep-contact-info.whats-their-street-address
+      - name: authorizedRepCity
+        type: TEXT
+        promptMessage:
+          promptMessageKey: authorized-rep-contact-info.what-city-do-they-live-in
+      - name: authorizedRepZipCode
+        type: TEXT
+        promptMessage:
+          promptMessageKey: authorized-rep-contact-info.what-is-their-zip-code
+      - name: authorizedRepPhoneNumber
+        type: PHONE
+        promptMessage:
+          promptMessageKey: authorized-rep-contact-info.what-is-their-phone-number
+        validators:
+          - validation: PHONE_STARTS_WITH_ZERO
+            errorMessageKey: general.validation.area-codes-can-not-begin-with-0
+          - validation: PHONE_STARTS_WITH_ONE
+            errorMessageKey: general.validation.area-codes-can-not-begin-with-1
+          - validation: PHONE
+            errorMessageKey: general.validation.make-sure-to-enter-a-phone-number-with-10-digits
+    contextFragment: authorizedRepContextFragment
+  - &additionalInfo
+    name: additionalInfo
+    headerKey: additional-info.is-there-anything-else-you-want-to-share
+    headerHelpMessageKey: additional-info.this-is-optional
+    inputs:
+      - name: additionalInfo
+        type: TEXTAREA
+      - name: caseNumber
+        type: TEXT
+        placeholder: general.optional
+        validators:
+          - validation: CASE_NUMBER
+            errorMessageKey: general.validation.make-sure-your-case-number-has-4-to-7-digits
+            condition:
+              input: caseNumber
+              matcher: NOT_EMPTY
+        promptMessage:
+          promptMessageKey: additional-info.whats-your-case-number
+        helpMessageKey: additional-info.case-number-is-optional
+      - name: caseNumberImages
+        type: CUSTOM
+        customInputFragment: caseNumberImages
+    pageTitle: additional-info.title
+  - &canWeAsk
+    name: canWeAsk
+    pageTitle: can-we-ask.title
+    headerKey: can-we-ask.can-we-ask-about-your-race-and-ethnicity
+    contextFragment: raceAndEthnicityFragment
+    hasPrimaryButton: false
+  - &raceAndEthnicity
+    name: raceAndEthnicity
+    pageTitle: race-and-ethnicity.title
+    headerKey: race-and-ethnicity.what-races-or-ethnicities-do-you-identify-with
+    headerHelpMessageKey: race-and-ethnicity.select-all-that-apply
+    contextFragment: raceAndEthnicityFragment
+    inputs:
+      - name: raceAndEthnicity
+        type: CHECKBOX
+        validators:
+          - validation: SELECT_AT_LEAST_ONE
+            errorMessageKey: general.validation.make-sure-you-answer-this-question
+        options:
+          selectableOptions:
+            - value: AMERICAN_INDIAN_OR_ALASKA_NATIVE
+              messageKey: race-and-ethnicity.native-american-or-alaska-native
+            - value: ASIAN
+              messageKey: race-and-ethnicity.asian
+            - value: BLACK_OR_AFRICAN_AMERICAN
+              messageKey: race-and-ethnicity.black-or-african-american
+            - value: HISPANIC_LATINO_OR_SPANISH
+              messageKey: race-and-ethnicity.hispanic-latino-or-spanish
+            - value: MIDDLE_EASTERN_OR_NORTH_AFRICAN
+              messageKey: race-and-ethnicity.middle-eastern-or-north-african
+            - value: NATIVE_HAWAIIAN_OR_PACIFIC_ISLANDER
+              messageKey: race-and-ethnicity.native-hawaiian-or-pacific-islander
+            - value: WHITE
+              messageKey: race-and-ethnicity.white
+            - value: SOME_OTHER_RACE_OR_ETHNICITY
+              messageKey: race-and-ethnicity.some-other-race
+        followUpValues:
+          - SOME_OTHER_RACE_OR_ETHNICITY
+        followUps:
+          - name: otherRaceOrEthnicity
+            type: TEXT
+            promptMessage:
+              promptMessageKey: race-and-ethnicity.write-your-race-or-ethnicity
+  - &assets
+    name: assets
+    pageTitle: assets.title
+    headerKey:
+      defaultValue: assets.does-any-one-in-your
+      conditionalValues:
+        - value: assets.do-you-have-any
+          condition: *livesAlone?
+    headerHelpMessageKey: assets.select-all-that-apply
+    contextFragment: assetsContextFragment
+    inputs:
+    - name: assets
+      type: CHECKBOX
+      validators:
+        - validation: SELECT_AT_LEAST_ONE
+          errorMessageKey: general.validation.make-sure-you-answer-this-question
+      options:
+        selectableOptions:
+          - value: CASH
+            messageKey: assets.cash
+  #          condition: *someoneChoseCAFProgram?
+          - value: BANK_ACCOUNT
+            messageKey: assets.bank-account
+  #          condition: *someoneChoseCAFProgram?
+          - value: ELECTRONIC_PAYMENT_CARD
+            messageKey: assets.electronic-payment
+          - value: VEHICLE
+            messageKey: assets.a-vehicle
+          - value: STOCK_BOND
+            messageKey: assets.stocks-bonds-401k
+          - value: REAL_ESTATE
+            messageKey: assets.real-estate
+            condition:
+              pageName: choosePrograms
+              input: programs
+              matcher: CONTAINS
+              value: CCAP
+          - value: ONE_MILLION_ASSETS
+            messageKey: assets.more-than-1-million-in-family-assets
+            helpMessageKey: assets.assets-include-cash-bank-accounts
+            condition:
+              pageName: choosePrograms
+              input: programs
+              matcher: CONTAINS
+              value: CCAP
+          - value: NONE
+            messageKey: assets.none-of-the-above
+            isNone: true
+        datasources:
+          - pageName: choosePrograms
+  - &investmentTypesIndividual
+    name: investmentTypesIndividual
+    pageTitle: investments.title
+    headerKey: investments.tell-us-which-you-have
+    headerHelpMessageKey: investments.select-all-that-apply
+    contextFragment: cashAccountsContextFragment
+    inputs:
+      - type: CHECKBOX
+        validators:
+        - validation: SELECT_AT_LEAST_ONE
+          errorMessageKey: general.validation.make-sure-you-answer-this-question
+        name: investmentTypes
+        options:
+          selectableOptions:
+          - value: STOCKS
+            messageKey: investments.stocks
+          - value: BONDS
+            messageKey: investments.bonds
+          - value: RETIREMENT_ACCOUNTS
+            messageKey: investments.rsa
+          datasources:
+            - pageName: personalInfo
+            - groupName: household
+#HC renewal pages
+  - &healthcareRenewalUpload
+    name: healthcareRenewalUpload
+    pageTitle: healthcare-Renewal-Upload.title
+    headerKey: healthcare-Renewal-Upload.where-would-you-like-to-send-documents
+    headerHelpMessageKey: healthcare-Renewal-Upload.choose-a-location
+    contextFragment: countyContextFragment
+    inputs:
+      - name: county
+        type: SELECT
+        promptMessage:
+          promptMessageKey: identify-county.select-a-county
+        validators:
+          - validation: NOT_BLANK
+            errorMessageKey: general.validation.blank
+            condition: 
+              input: tribalNation
+              matcher: EMPTY
+          - validation: SHOULD_BE_BLANK
+            errorMessageKey: general.validation.blank
+            condition: 
+              input: tribalNation
+              matcher: NOT_EMPTY
+        validationIcon: false
+        options:
+          selectableOptions:
+            - value: ''
+              messageKey: identify-county.select-your-county
+            - value: Aitkin
+              messageKey: identify-county-aitkin
+            - value: Anoka
+              messageKey: identify-county-anoka
+            - value: Becker
+              messageKey: identify-county-becker
+            - value: Beltrami
+              messageKey: identify-county-beltrami
+            - value: Benton
+              messageKey: identify-county-benton
+            - value: BigStone
+              messageKey: identify-county-big-stone
+            - value: BlueEarth
+              messageKey: identify-county-blue-earth
+            - value: Brown
+              messageKey: identify-county-brown
+            - value: Carlton
+              messageKey: identify-county-carlton
+            - value: Carver
+              messageKey: identify-county-carver
+            - value: Cass
+              messageKey: identify-county-cass
+            - value: Chippewa
+              messageKey: identify-county-chippewa
+            - value: Chisago
+              messageKey: identify-county-chisago
+            - value: Clay
+              messageKey: identify-county-clay
+            - value: Clearwater
+              messageKey: identify-county-clearwater
+            - value: Cook
+              messageKey: identify-county-cook
+            - value: Cottonwood
+              messageKey: identify-county-cottonwood
+            - value: CrowWing
+              messageKey: identify-county-crow-wing
+            - value: Dakota
+              messageKey: identify-county-dakota
+            - value: Dodge
+              messageKey: identify-county-dodge
+            - value: Douglas
+              messageKey: identify-county-douglas
+            - value: Faribault
+              messageKey: identify-county-faribault
+            - value: Fillmore
+              messageKey: identify-county-fillmore
+            - value: Freeborn
+              messageKey: identify-county-freeborn
+            - value: Goodhue
+              messageKey: identify-county-goodhue
+            - value: Grant
+              messageKey: identify-county-grant
+            - value: Hennepin
+              messageKey: identify-county-hennepin
+            - value: Houston
+              messageKey: identify-county-houston
+            - value: Hubbard
+              messageKey: identify-county-hubbard
+            - value: Isanti
+              messageKey: identify-county-isanti
+            - value: Itasca
+              messageKey: identify-county-itasca
+            - value: Jackson
+              messageKey: identify-county-jackson
+            - value: Kanabec
+              messageKey: identify-county-kanabec
+            - value: Kandiyohi
+              messageKey: identify-county-kandiyohi
+            - value: Kittson
+              messageKey: identify-county-kittson
+            - value: Koochiching
+              messageKey: identify-county-koochiching
+            - value: LacQuiParle
+              messageKey: identify-county-lac-qui-parle
+            - value: Lake
+              messageKey: identify-county-lake
+            - value: LakeOfTheWoods
+              messageKey: identify-county-lake-of-the-woods
+            - value: LeSueur
+              messageKey: identify-county-le-sueur
+            - value: Lincoln
+              messageKey: identify-county-lincoln
+            - value: Lyon
+              messageKey: identify-county-lyon
+            - value: McLeod
+              messageKey: identify-county-mcleod
+            - value: Mahnomen
+              messageKey: identify-county-mahnomen
+            - value: Marshall
+              messageKey: identify-county-marshall
+            - value: Meeker
+              messageKey: identify-county-meeker
+            - value: Martin
+              messageKey: identify-county-martin
+            - value: MilleLacs
+              messageKey: identify-county-mille-lacs
+            - value: Morrison
+              messageKey: identify-county-morrison
+            - value: Mower
+              messageKey: identify-county-mower
+            - value: Murray
+              messageKey: identify-county-murray
+            - value: Nicollet
+              messageKey: identify-county-nicollet
+            - value: Nobles
+              messageKey: identify-county-nobles
+            - value: Norman
+              messageKey: identify-county-norman
+            - value: Olmsted
+              messageKey: identify-county-olmsted
+            - value: OtterTail
+              messageKey: identify-county-otter-tail
+            - value: Pennington
+              messageKey: identify-county-pennington
+            - value: Pine
+              messageKey: identify-county-pine
+            - value: Pipestone
+              messageKey: identify-county-pipestone
+            - value: Polk
+              messageKey: identify-county-polk
+            - value: Pope
+              messageKey: identify-county-pope
+            - value: Ramsey
+              messageKey: identify-county-ramsey
+            - value: RedLake
+              messageKey: identify-county-red-lake
+            - value: Redwood
+              messageKey: identify-county-redwood
+            - value: Renville
+              messageKey: identify-county-renville
+            - value: Rice
+              messageKey: identify-county-rice
+            - value: Rock
+              messageKey: identify-county-rock
+            - value: Roseau
+              messageKey: identify-county-roseau
+            - value: StLouis
+              messageKey: identify-county-saint-louis
+            - value: Scott
+              messageKey: identify-county-scott
+            - value: Sherburne
+              messageKey: identify-county-sherburne
+            - value: Sibley
+              messageKey: identify-county-sibley
+            - value: Stearns
+              messageKey: identify-county-stearns
+            - value: Steele
+              messageKey: identify-county-steele
+            - value: Stevens
+              messageKey: identify-county-stevens
+            - value: Swift
+              messageKey: identify-county-swift
+            - value: Todd
+              messageKey: identify-county-todd
+            - value: Traverse
+              messageKey: identify-county-traverse
+            - value: Wabasha
+              messageKey: identify-county-wabasha
+            - value: Wadena
+              messageKey: identify-county-wadena
+            - value: Waseca
+              messageKey: identify-county-waseca
+            - value: Washington
+              messageKey: identify-county-washington
+            - value: Watonwan
+              messageKey: identify-county-watonwan
+            - value: Wilkin
+              messageKey: identify-county-wilkin
+            - value: Winona
+              messageKey: identify-county-winona
+            - value: Wright
+              messageKey: identify-county-wright
+            - value: YellowMedicine
+              messageKey: identify-county-yellow-medicine
+      - name: OR
+        type: CUSTOM
+        customInputFragment: orLabelFragment
+      - name: tribalNation
+        type: SELECT
+        promptMessage:
+          promptMessageKey: identify-county.select-a-tribal-nation
+        validators:
+          - validation: NOT_BLANK
+            errorMessageKey: general.validation.make-sure-to-make-a-selection
+            condition: 
+              input: county
+              matcher: EMPTY
+          - validation: SHOULD_BE_BLANK
+            errorMessageKey: general.validation.select-county-tribe
+            condition: 
+              input: county
+              matcher: NOT_EMPTY
+        options:
+          selectableOptions:
+            - value: ''
+              messageKey: select-the-tribe.select-the-tribe
+            - value: White Earth Nation
+              messageKey: select-the-tribe.white-earth
+      - name: notice
+        type: NOTICE
+        noticeMessage: healthcare-Renewal-Upload.you-can-see-where-your-application
+      - name: privacyNotice
+        type: CUSTOM
+        customInputFragment: privacyNoticesFragment 
+  - &healthcareRenewalMatchInfo
+    name: healthcareRenewalMatchInfo
+    headerKey: match-info-hc.match-docs-to-case
+    headerHelpMessageKey: match-info-hc.fill-in-as-much-as-you-can
+    pageTitle: match-info.title
+    contextFragment: matchInfoContextFragment
+    inputs:
+      - name: firstName
+        type: TEXT
+        promptMessage:
+          promptMessageKey: match-info.whats-your-first-name
+        helpMessageKey: match-info.legally-as-it-appears-on-your-id
+        validators:
+          - validation: NOT_BLANK
+            errorMessageKey: general.validation.make-sure-to-provide-a-first-name
+      - name: lastName
+        type: TEXT
+        promptMessage:
+          promptMessageKey: match-info.whats-your-last-name
+        helpMessageKey: match-info.legally-as-it-appears-on-your-id
+        validators:
+          - validation: NOT_BLANK
+            errorMessageKey: general.validation.make-sure-to-provide-a-last-name
+      - name: dateOfBirth
+        type: DATE
+        validators:
+          - validation: DATE
+            errorMessageKey: general.validation.please-enter-your-birthday-in-this-format
+            condition:
+              input: dateOfBirth
+              matcher: NOT_EMPTY
+          - validation: DOB_VALID
+            condition:
+              input: dateOfBirth
+              matcher: NOT_EMPTY
+            errorMessageKey: general.validation.make-sure-to-provide-a-dob-between-1900-and-present
+        promptMessage:
+          promptMessageKey: match-info.when-were-you-born
+      - name: ssn
+        type: SSN
+        validators:
+          - validation: SSN
+            errorMessageKey: general.validation.make-sure-your-SSN-has-9-digits
+            condition:
+              input: ssn
+              matcher: NOT_EMPTY
+        promptMessage:
+          promptMessageKey: match-info.whats-your-social-security-number
+        helpMessageKey: match-info.recommended-but-not-required
+      - name: phoneNumber
+        type: PHONE
+        promptMessage:
+          promptMessageKey: contact-info.whats-your-phone-number
+        validators:
+          - validation: PHONE_STARTS_WITH_ZERO
+            errorMessageKey: general.validation.area-codes-can-not-begin-with-0
+            condition:
+              input: phoneNumber
+              matcher: NOT_EMPTY
+          - validation: PHONE_STARTS_WITH_ONE
+            errorMessageKey: general.validation.area-codes-can-not-begin-with-1
+            condition:
+              input: phoneNumber
+              matcher: NOT_EMPTY
+          - validation: PHONE
+            errorMessageKey: general.validation.make-sure-to-enter-a-phone-number-with-10-digits
+            condition:
+              input: phoneNumber
+              matcher: NOT_EMPTY
+        helpMessageKey: match-info.county-can-contact-you-if-questions
+      - name: email
+        type: TEXT
+        validators:
+          - validation: EMAIL
+            errorMessageKey: general.validation.email
+            condition:
+              input: email
+              matcher: NOT_EMPTY
+        promptMessage:
+          promptMessageKey: contact-info.whats-your-email-address
+        helpMessageKey: match-info.county-can-contact-you-if-questions
+      - name: caseNumber
+        type: TEXT
+        validators:
+          - validation: CASE_NUMBER_HC
+            errorMessageKey: general.validation.make-sure-your-case-number-has-4-to-8-digits
+            condition:
+              input: caseNumber
+              matcher: NOT_EMPTY
+        promptMessage:
+          promptMessageKey: match-info.case-number-if-you-have-it
+        helpMessageKey: match-info.recommended-but-not-required
+  - &healthcareRenewalHowToAddDocuments
+    name: healthcareRenewalHowToAddDocuments
+    pageTitle: how-to-add-documents.title
+  - &healthcareRenewalUploadDocuments
+    name: healthcareRenewalUploadDocuments
+    pageTitle: upload-documents.title
+    usingPageTemplateFragment: false
+  - &healthcareRenewalUploadDocumentsDeleteWarningPage
+    name: healthcareRenewalUploadDocumentsDeleteWarningPage
+    headerKey: upload-documents-delete-warning.you-are-about-to-delete
+    pageTitle: upload-documents-delete-warning.title
+    usingPageTemplateFragment: false
+  - &healthcareRenewalDocumentSubmitConfirmation
+    name: healthcareRenewalDocumentSubmitConfirmation
+    pageTitle: document-submit-confirmation.title
+    headerKey: healthcare-Renewal-Document-Submit-Confirmation.ready-to-submit
+    contextFragment: documentsSuccessContextFragment
+    hasPrimaryButton: false
+  - &healthcareRenewalDocumentsSent
+    name: healthcareRenewalDocumentsSent
+    pageTitle: documentsSent.title
+    contextFragment: icon-documents-sent
+    headerKey: hc-documentsSent.great-weve-received-your-docs
+    hasPrimaryButton: false
+    excludeGoBack: true
+workflow:
+  landing:
+    pageConfiguration: *landing
+    nextPages:
+      - pageName: identifyCountyBeforeApplying
+  identifyCountyBeforeApplying:
+    pageConfiguration: *identifyCounty
+    nextPages:
+      - pageName: prepareToApply
+  readyToUploadDocuments:
+    pageConfiguration: *readyToUploadDocuments
+    nextPages:
+      - pageName: matchInfo
+        flow: LATER_DOCS
+  identifyCounty:
+    pageConfiguration: *identifyCounty
+    nextPages:
+      - pageName: tribalNationMember
+    datasources:
+      - pageName: matchInfo
+  matchInfo:
+    pageConfiguration: *matchInfo
+    enrichment: matchInfoDateOfBirthEnrichment
+    nextPages:
+      - pageName: identifyCounty
+  prepareToApply:
+    pageConfiguration: *prepareToApply
+    nextPages:
+      - pageName: timeoutNotice
+  timeoutNotice:
+    pageConfiguration: *timeoutNotice
+    nextPages:
+      - pageName: writtenLanguage
+  writtenLanguage:
+    pageConfiguration: *writtenLanguage
+    nextPages:
+      - pageName: spokenLanguage
+  spokenLanguage:
+    pageConfiguration: *spokenLanguage
+    nextPages:
+      - pageName: choosePrograms
+  choosePrograms:
+    pageConfiguration: *choosePrograms
+    nextPages:
+      - pageName: emergencyType
+        condition:
+          pageName: choosePrograms
+          input: programs
+          matcher: CONTAINS
+          value: EA
+      - pageName: expeditedNotice
+        condition:
+          pageName: choosePrograms
+          input: programs
+          matcher: CONTAINS
+          value: SNAP
+      - pageName: introBasicInfo
+  emergencyType:
+    pageConfiguration: *emergencyType
+    nextPages:
+      - pageName: otherEmergency
+        condition:
+          pageName: emergencyType
+          input: emergencyType
+          matcher: CONTAINS
+          value: OTHER_EMERGENCY
+      - pageName: expeditedNotice
+        condition:
+          pageName: choosePrograms
+          input: programs
+          matcher: CONTAINS
+          value: SNAP
+      - pageName: introBasicInfo
+    datasources:
+      - pageName: emergencyType
+      - pageName: choosePrograms
+  otherEmergency:
+    pageConfiguration: *otherEmergency
+    nextPages:
+      - pageName: expeditedNotice
+        condition:
+          pageName: choosePrograms
+          input: programs
+          matcher: CONTAINS
+          value: SNAP
+      - pageName: introBasicInfo
+    datasources:
+      - pageName: emergencyType
+      - pageName: choosePrograms
+  expeditedNotice:
+    pageConfiguration: *expeditedNotice
+    nextPages:
+      - pageName: introBasicInfo
+  addOtherPrograms:
+    pageConfiguration: *addOtherPrograms
+    nextPages:
+      - pageName: choosePrograms
+      - pageName: landing
+  introBasicInfo:
+    pageConfiguration: *introBasicInfo
+    nextPages:
+      - pageName: personalInfo
+  personalInfo:
+    pageConfiguration: *personalInfo
+    enrichment: personalInfoDateOfBirthEnrichment
+    nextPages:
+      - pageName: homeAddress
+    datasources:
+      - pageName: choosePrograms
+  contactInfo:
+    pageConfiguration: *contactInfo
+    nextPages:
+      - pageName: noPhoneNumberConfirmation
+        condition:
+          pageName: contactInfo
+          input: phoneNumber
+          matcher: EMPTY
+      - pageName: reviewInfo
+  noPhoneNumberConfirmation:
+    pageConfiguration: *noPhoneNumberConfirmation
+    nextPages:
+      - pageName: contactInfo
+      - pageName: reviewInfo
+  homeAddress:
+    pageConfiguration: *homeAddress
+    enrichment: homeAddressEnrichment
+    nextPages:
+      - pageName: whereToSendMail
+        condition:
+          pageName: homeAddress
+          input: isHomeless
+          value: "true"
+      - pageName: outOfStateAddressNotice
+        condition:
+          pageName: homeAddress
+          input: state
+          matcher: DOES_NOT_EQUAL_IGNORE_CASE
+          value: "MN"
+      - pageName: mailingAddress
+  outOfStateAddressNotice:
+    pageConfiguration: *outOfStateAddressNotice
+    nextPages:
+      - pageName: mailingAddress
+        condition:
+          pageName: outOfStateAddressNotice
+          input: selectedOutOfStateAddressOption
+          value: "CONTINUE"
+      - pageName: homeAddress
+        condition:
+          pageName: outOfStateAddressNotice
+          input: selectedOutOfStateAddressOption
+          value: "EDIT"
+      - pageName: outOfStateQuitVerify
+        condition:
+          pageName: outOfStateAddressNotice
+          input: selectedOutOfStateAddressOption
+          value: "QUIT"     
+  outOfStateQuitVerify:
+    pageConfiguration: *outOfStateQuitVerify
+    nextPages:
+      - pageName: landing
+      - pageName: outOfStateAddressNotice     
+  whereToSendMail:
+    pageConfiguration: *whereToSendMail
+    subtleLinkTargetPage: cityForGeneralDelivery
+    nextPages:
+      - pageName: mailingAddress
+  cityForGeneralDelivery:
+    pageConfiguration: *cityForGeneralDelivery
+    enrichment: generalDeliveryAddressEnrichment
+    nextPages:
+      - pageName: generalDeliveryAddress
+  generalDeliveryAddress:
+    pageConfiguration: *generalDeliveryAddress
+    nextPages:
+      - pageName: contactInfo
+    datasources:
+      - pageName: cityForGeneralDelivery
+  mailingAddress:
+    pageConfiguration: *mailingAddress
+    enrichment: mailingAddressEnrichment
+    nextPages:
+      - pageName: verifyHomeAddress
+    datasources:
+      - pageName: homeAddress
+      - pageName: mailingAddress
+  verifyHomeAddress:
+    pageConfiguration: *homeAddressValidation
+    skipCondition:
+      logicalOperator: OR
+      conditions:
+        - <<: *isHomeless?
+          matcher: CONTAINS
+        - pageName: mailingAddress
+          input: sameMailingAddress
+          matcher: DOES_NOT_CONTAIN
+          value: "true"
+    datasources:
+      - pageName: homeAddress
+      - pageName: mailingAddress
+      - pageName: identifyCounty
+    nextPages:
+      - pageName: verifyMailingAddress
+      - pageName: homeAddress
+  verifyMailingAddress:
+    pageConfiguration: *mailingAddressValidation
+    skipCondition:
+      pageName: mailingAddress
+      input: sameMailingAddress
+      matcher: CONTAINS
+      value: "true"
+    datasources:
+      - pageName: mailingAddress
+      - pageName: homeAddress
+      - pageName: identifyCounty
+    nextPages:
+      - pageName: verifyCounty
+        condition:
+          name: homeStateIsMN
+          pageName: homeAddress
+          input: state
+          matcher: CONTAINS_ONLY
+          value: "MN"
+      - pageName: contactInfo
+      - pageName: homeAddress
+      - pageName: mailingAddress
+  verifyCounty:
+    pageConfiguration: *countyValidation
+    skipCondition: 
+      logicalOperator: OR
+      conditions:
+        - *selectedCountyDoesNotMatchEnrichedCountyHome?
+        - *selectedCountyDoesNotMatchEnrichedCountyMailing?
+        - <<: *isHomeless?
+          matcher: CONTAINS
+    datasources:
+      - pageName: homeAddress
+      - pageName: mailingAddress
+      - pageName: identifyCounty
+      - pageName: verifyHomeAddress
+      - pageName: homeAddressValidation
+      - pageName: mailingAddressValidation
+    nextPages:
+      - pageName: contactInfo
+      - pageName: identifyCountyAgain
+  identifyCountyAgain:
+    pageConfiguration: *identifyCounty
+    nextPages:
+      - pageName: contactInfo
+    datasources:
+      - pageName: homeAddressValidation
+      - pageName: mailingAddressValidation
+  reviewInfo:
+    subtleLinkTargetPage: doYouNeedHelpImmediately
+    pageConfiguration: *reviewInfo
+    nextPages:
+      - pageName: startHousehold
+        flow: FULL
+        condition: *onlyApplyingForOthers?
+      - pageName: addHouseholdMembers
+        flow: FULL
+    datasources:
+      - pageName: identifyCounty
+      - pageName: personalInfo
+      - pageName: homeAddress
+      - pageName: homeAddressValidation
+      - pageName: mailingAddress
+      - pageName: mailingAddressValidation
+      - pageName: cityForGeneralDelivery
+      - pageName: contactInfo
+      - pageName: choosePrograms
+      - pageName: countyValidation
+  addHouseholdMembers:
+    pageConfiguration: *addHouseholdMembers
+    nextPages:
+      - pageName: startHousehold
+        condition: *onlyApplyingForOthers?
+      - pageName: temporaryAbsence
+        condition:
+          logicalOperator: AND
+          conditions:
+            - *applicantDidNotChooseCCAP?
+            - pageName: addHouseholdMembers
+              input: addHouseholdMembers
+              value: "false"
+      - pageName: addChildrenConfirmation
+        condition:
+          logicalOperator: AND
+          conditions:
+            - *applicantChoseCCAPProgram?
+            - pageName: addHouseholdMembers
+              input: addHouseholdMembers
+              value: "false"
+      - pageName: startHousehold
+        condition:
+          pageName: addHouseholdMembers
+          input: addHouseholdMembers
+          value: "true"
+      - pageName: addHouseholdMembers
+    skipCondition: *onlyApplyingForOthers?
+    datasources:
+      - pageName: choosePrograms
+  addChildrenConfirmation:
+    pageConfiguration: *addChildrenConfirmation
+    nextPages:
+      - pageName: startHousehold
+      - pageName: temporaryAbsence
+  startHousehold:
+    pageConfiguration: *startHousehold
+    nextPages:
+      - pageName: householdMemberInfo
+  householdMemberInfo:
+    pageConfiguration: *householdMemberInfo
+    groupName: household
+    enrichment: householdMemberDateOfBirthEnrichment
+    nextPages:
+      - pageName: householdList
+  householdList:
+    pageConfiguration: *householdList
+    dataMissingRedirect: reviewInfo
+    nextPages:
+      - pageName: noProgramsSelected
+      - pageName: householdMemberInfo
+    datasources:
+      - groupName: household
+      - pageName: personalInfo
+  temporaryAbsence:
+    pageConfiguration: *temporaryAbsence
+    nextPages:
+      ## If CASH and CCAP AND Not living alone 
+      - pageName: parentNotAtHome
+        condition:
+          name: CashAndCCAP
+          logicalOperator: AND
+          conditions:
+            - *someoneChoseCASH?
+            - *someoneChoseCCAP?
+            - *doesNotLiveAlone?
+      ## If CASH and NOT CCAP AND Not living alone 
+      - pageName: childrenUnder19
+        condition:
+          name: CashAndNotCCAP
+          logicalOperator: AND
+          conditions:
+            - *someoneChoseCASH?
+            - *noOneChoseCCAP?
+            - *doesNotLiveAlone?
+      ## If CCAP AND HOUSEHOLD
+      - pageName: childrenInNeedOfCare
+        condition:
+          name: CCAPAndHousehold
+          logicalOperator: AND
+          conditions:
+            - *doesNotLiveAlone?
+            - *someoneChoseCCAP?            
+      ## If SNAP household
+      - pageName: preparingMealsTogether
+        condition:
+          name: SNAPAndHousehold
+          logicalOperator: AND
+          conditions:
+            - *doesNotLiveAlone?
+            - *someoneChoseSNAP? 
+      ## If NOT CCAP and NOT SNAP 
+      - pageName: housingSubsidy
+        condition:
+          name: NotCCAPAndNOTSnap
+          logicalOperator: AND
+          conditions:
+            - *noOneChoseCCAP?
+            - *noOneChoseSNAP? 
+            - *doesNotLiveAlone?
+      ## If  YES OR NO is selected
+      - pageName: introPersonalDetails
+    skipCondition:
+      logicalOperator: AND
+      conditions:
+        - *someoneChoseCCAP?
+        - *noOneChoseCAF?
+    datasources:
+      - pageName: choosePrograms
+      - pageName: addHouseholdMembers
+      - pageName: householdMemberInfo
+        groupName: household
+  householdDeleteWarningPage:
+    pageConfiguration: *householdDeleteWarningPage
+    appliesToGroup: household
+    dataMissingRedirect: reviewInfo
+    nextPages:
+      - pageName: householdList
+    datasources:
+      - groupName: household
+  noProgramsSelected:
+    pageConfiguration: *noProgramsSelected
+    nextPages:
+      - pageName: temporaryAbsence
+        condition: *someoneChoseCAFProgram?
+      - pageName: childrenInNeedOfCare
+    skipCondition:
+      logicalOperator: OR
+      conditions:
+        - *applicantChoseAtLeastOneProgram?
+        - *householdMemberChoseAtLeastOneProgram?
+    datasources:
+      - groupName: household
+        pageName: householdMemberInfo
+      - pageName: choosePrograms
+  childrenUnder19:
+    pageConfiguration: *childrenUnder19
+    nextPages:
+      - pageName: parentNotAtHome
+        condition: 
+          pageName: childrenUnder19
+          name: hasChildrenUnder19
+          input: hasChildrenUnder19
+          value: "true"
+      - pageName: preparingMealsTogether
+        condition:
+          name: isCASHAndSNAPNoCCAP
+          logicalOperator: AND
+          conditions:
+            - *someoneChoseCASH?
+            - *noOneChoseCCAP?
+            - *someoneChoseSNAP?
+      - pageName: housingSubsidy
+    datasources:
+      - groupName: household
+        pageName: householdMemberInfo
+      - pageName: choosePrograms
+  parentNotAtHome:
+    pageConfiguration: *parentNotAtHome
+    nextPages:
+      - pageName: preparingMealsTogether
+        condition:
+          name: isCASHAndSNAP
+          logicalOperator: AND
+          conditions:
+            - *someoneChoseCASH?
+            - *noOneChoseCCAP?
+            - *someoneChoseSNAP?
+      - pageName: childrenInNeedOfCare
+        condition: *someoneChoseCCAP?  
+      - pageName: housingSubsidy
+    datasources:
+      - groupName: household
+        pageName: householdMemberInfo
+      - pageName: choosePrograms
+  childrenInNeedOfCare:
+    pageConfiguration: *childrenInNeedOfCare
+    nextPages:
+      - pageName: doYouHaveChildCareProvider
+        condition:
+          name: childrenSelectedNotEmpty
+          pageName: childrenInNeedOfCare
+          input: whoNeedsChildCare
+          matcher: NOT_EMPTY
+      - pageName: whoHasParentNotAtHome
+    datasources:
+      - pageName: choosePrograms
+      - groupName: household
+        pageName: householdMemberInfo
+    skipCondition: *noOneChoseCCAP?
+  doYouHaveChildCareProvider:
+    pageConfiguration: *doYouHaveChildCareProvider
+    skipCondition: *noOneChoseCCAP?
+    nextPages:
+      - pageName: childCareProviderInfo
+        condition:
+          name: yesHasChildCareProvider
+          pageName: doYouHaveChildCareProvider
+          input: hasChildCareProvider
+          value: "true"
+      - pageName: whoHasParentNotAtHome
+        condition:
+            name: noDoesNotHaveChildCareProvider
+            pageName: doYouHaveChildCareProvider
+            input: hasChildCareProvider
+            value: "false"
+    datasources:
+      - pageName: doYouHaveChildCareProvider
+      - pageName: choosePrograms
+      - groupName: household
+        pageName: householdMemberInfo
+  childCareProviderInfo:
+    pageConfiguration: *childCareProviderInfo
+    skipCondition: *noOneChoseCCAP?
+    groupName: childCareProviders
+    nextPages:
+      - pageName: childrenAtThisProvider
+    datasources:
+      - pageName: childrenInNeedOfCare
+      - pageName: choosePrograms
+      - groupName: household
+        pageName: householdMemberInfo
+  childrenAtThisProvider:
+    pageConfiguration: *childrenAtThisProvider
+    skipCondition: *noOneChoseCCAP?
+    groupName: childCareProviders
+    nextPages:
+      - pageName: childCareProviderList
+    datasources:
+      - pageName: childrenInNeedOfCare
+      - pageName: choosePrograms
+  childCareProviderList:
+    pageConfiguration: *childCareProviderList
+    skipCondition: *noOneChoseCCAP?
+    nextPages:
+      - pageName: childCareProviderInfo
+      - pageName: whoHasParentNotAtHome
+    datasources:
+      - groupName: childCareProviders
+      - pageName: childCareProviderInfo
+  childCareProviderDeleteWarningPage:
+    pageConfiguration: *childCareProviderDeleteWarningPage
+    appliesToGroup: childCareProviders
+    dataMissingRedirect: childCareProviderList
+    nextPages:
+      - pageName: childCareProviderList
+    datasources:
+      - groupName: childCareProviders
+  childCareProviderRedirectPage:
+    pageConfiguration: *childCareProviderRedirectPage
+    dataMissingRedirect: doYouHaveChildCareProvider
+    nextPages:
+      - pageName: childCareProviderList
+    datasources:
+      - groupName: childCareProviders
+  whoHasParentNotAtHome:
+    pageConfiguration: *whoHasParentNotAtHome
+    nextPages:
+      - pageName: parentNotAtHomeNames
+    datasources:
+      - pageName: childrenInNeedOfCare
+      - pageName: choosePrograms
+      - groupName: household
+        pageName: householdMemberInfo
+    skipCondition:
+      logicalOperator: OR
+      conditions:
+        - *noOneChoseCCAP?
+        - pageName: childrenInNeedOfCare
+          input: whoNeedsChildCare
+          matcher: NONE_SELECTED
+  parentNotAtHomeNames:
+    pageConfiguration: *parentNotAtHomeNames
+    nextPages:
+      - pageName: childCareChildSupport
+    datasources:
+      - pageName: choosePrograms
+      - groupName: household
+        pageName: householdMemberInfo
+      - pageName: childrenInNeedOfCare
+      - pageName: whoHasParentNotAtHome
+    skipCondition:
+      logicalOperator: OR
+      conditions:
+        - *noOneChoseCCAP?
+        - pageName: childrenInNeedOfCare
+          input: whoNeedsChildCare
+          matcher: NONE_SELECTED
+        - pageName: whoHasParentNotAtHome
+          input: whoHasAParentNotLivingAtHome
+          value: NONE_OF_THE_ABOVE
+  childCareChildSupport:
+    pageConfiguration: *childCareChildSupport
+    skipCondition:
+      logicalOperator: OR
+      conditions:
+        - *noOneChoseCCAP?
+        - pageName: childrenInNeedOfCare
+          input: whoNeedsChildCare
+          matcher: NONE_SELECTED
+        - pageName: whoHasParentNotAtHome
+          input: whoHasAParentNotLivingAtHome
+          value: NONE_OF_THE_ABOVE
+    nextPages:
+      - pageName: housingSubsidy
+        condition:
+          logicalOperator: AND
+          conditions:
+            - *noOneChoseSNAP?
+            - *noOneChoseCCAP?
+      - pageName: childCareMentalHealth
+    datasources:
+      - pageName: choosePrograms
+      - pageName: whoHasParentNotAtHome
+      - groupName: household
+        pageName: householdMemberInfo
+      - pageName: childrenInNeedOfCare
+  childCareMentalHealth:
+    pageConfiguration: *childCareMentalHealth
+    skipCondition: *noOneChoseCCAP?
+    nextPages:
+      - pageName: whoNeedsChildCareForMentalHealth
+        condition: 
+          pageName: childCareMentalHealth
+          input: childCareMentalHealth
+          value: "true"
+      - pageName: preparingMealsTogether
+        condition:
+          logicalOperator: AND
+          conditions:
+            - *someoneChoseSNAP? 
+            - *doesNotLiveAlone?
+      - pageName: introPersonalDetails
+        condition:
+          logicalOperator: AND
+          conditions:
+            - *applicantChoseCCAPProgram?
+            - *livesAlone?
+      - pageName: housingSubsidy
+    datasources:
+      - pageName: childrenInNeedOfCare
+      - pageName: childCareMentalHealth
+      - pageName: choosePrograms
+      - pageName: addHouseholdMembers
+      - groupName: household
+        pageName: householdMemberInfo
+  whoNeedsChildCareForMentalHealth:
+    pageConfiguration: *whoNeedsChildCareForMentalHealth
+    skipCondition:
+      customCondition: APPLICANT_IS_ONLY_ADULT
+      name: childCareMentalHealthSelectedNo
+    nextPages:
+      - pageName: childCareMentalHealthTimes
+    datasources:
+      - pageName: childCareMentalHealth
+      - pageName: childrenInNeedOfCare
+      - groupName: household
+        pageName: householdMemberInfo
+  childCareMentalHealthTimes:
+    pageConfiguration: *childCareMentalHealthTimes
+    skipCondition:
+      logicalOperator: OR
+      conditions:
+        - *noOneChoseCCAP?
+        - name: childCareMentalHealthSelectedNo
+          pageName: childCareMentalHealth
+          input: childCareMentalHealth
+          matcher: CONTAINS
+          value: "false"
+    nextPages:
+      - pageName: preparingMealsTogether
+        condition:
+          logicalOperator: AND
+          conditions:
+            - *doesNotLiveAlone?
+            - *someoneChoseSNAP?
+      - pageName: introPersonalDetails
+        condition: *livesAlone?
+      - pageName: housingSubsidy
+    datasources:
+      - pageName: childrenInNeedOfCare
+      - pageName: childCareMentalHealth
+      - pageName: whoNeedsChildCareForMentalHealth
+      - pageName: addHouseholdMembers
+      - pageName: choosePrograms
+      - groupName: household
+        pageName: householdMemberInfo
+  introPersonalDetails:
+    pageConfiguration: *introPersonalDetails
+    nextPages:
+      - pageName: housingSubsidy
+  preparingMealsTogether:
+    pageConfiguration: *preparingMealsTogether
+    skipCondition: 
+      logicalOperator: OR
+      conditions:
+        - *noOneChoseSNAP?
+        - *livesAlone?
+    nextPages:
+      - pageName: buyOrCookFood
+        condition:
+          name: hasHouseholdAndSomeoneChooseSNAP
+          logicalOperator: AND
+          conditions:
+            - *doesNotLiveAlone?
+            - *someoneChoseSNAP?
+      - pageName: housingSubsidy 
+    datasources:
+      - pageName: choosePrograms
+      - groupName: household
+        pageName: householdMemberInfo
+      - pageName: addHouseholdMembers
+  buyOrCookFood:
+    pageConfiguration: *buyOrCookFood
+    nextPages:
+      - pageName: housingSubsidy
+  housingSubsidy:
+    pageConfiguration: *housingSubsidy
+    datasources:
+      - pageName: addHouseholdMembers
+      - pageName: choosePrograms
+      - pageName: householdMemberInfo
+        groupName: household
+    nextPages:
+      - pageName: livingSituation
+  livingSituation:
+    pageConfiguration: *livingSituation
+    nextPages:
+      - pageName: housingProvider
+    skipCondition:
+      logicalOperator: AND
+      conditions:
+        - *applicantDidNotChooseGRH?
+        - *noOneChoseCCAP?
+    datasources:
+      - pageName: choosePrograms
+      - pageName: addHouseholdMembers
+      - groupName: household
+        pageName: householdMemberInfo
+  housingProvider:
+    pageConfiguration: *housingProvider
+    skipCondition: *applicantDidNotChooseGRH?
+    nextPages:
+      - pageName: housingProviderInfo
+    datasources:
+      - pageName: choosePrograms
+      - pageName: addHouseholdMembers
+  housingProviderInfo:
+    pageConfiguration: *housingProviderInfo
+    skipCondition:
+      logicalOperator: OR
+      conditions:
+        - *applicantDidNotChooseGRH?
+        - pageName: housingProvider
+          value: "false"
+          input: housingProvider
+    nextPages:
+      - pageName: goingToSchool
+    datasources:
+      - pageName: choosePrograms
+      - pageName: housingProvider
+  goingToSchool:
+    pageConfiguration: *goingToSchool
+    datasources:
+      - pageName: addHouseholdMembers
+    nextPages:
+      - pageName: whoIsGoingToSchool
+        condition: *doesNotLiveAlone?
+      - pageName: pregnant
+  whoIsGoingToSchool:
+    pageConfiguration: *whoIsGoingToSchool
+    datasources:
+      - pageName: choosePrograms
+      - pageName: goingToSchool
+      - groupName: household
+        pageName: householdMemberInfo
+    skipCondition:
+      logicalOperator: OR
+      conditions:
+        - conditions:
+            - *applicantDidNotChooseCCAP?
+            - *householdMemberDidNotChooseCCAP?
+        - pageName: goingToSchool
+          value: "false"
+          input: goingToSchool
+    nextPages:
+      - pageName: schoolDetails
+  schoolDetails:
+    pageConfiguration: *schoolDetails
+    datasources:
+      - pageName: choosePrograms
+      - pageName: childrenInNeedOfCare
+      - pageName: goingToSchool
+      - pageName: whoIsGoingToSchool
+      - groupName: household
+        pageName: householdMemberInfo
+    skipCondition:
+      logicalOperator: OR
+      conditions:
+        - conditions:
+            - *applicantDidNotChooseCCAP?
+            - *householdMemberDidNotChooseCCAP?
+        - pageName: goingToSchool
+          value: "false"
+          input: goingToSchool
+        - customCondition: SKIP_SCHOOL_DETAILS
+    nextPages:
+      - pageName: schoolGrade
+  schoolGrade:
+    pageConfiguration: *schoolGrade
+    datasources:
+      - pageName: personalInfo
+      - pageName: schoolDetails
+      - pageName: choosePrograms
+      - pageName: childrenInNeedOfCare
+      - pageName: goingToSchool
+      - pageName: whoIsGoingToSchool
+      - groupName: household
+        pageName: householdMemberInfo
+    skipCondition:
+      logicalOperator: OR
+      conditions:
+        - conditions:
+            - *applicantDidNotChooseCCAP?
+            - *householdMemberDidNotChooseCCAP?
+        - pageName: goingToSchool
+          value: "false"
+          input: goingToSchool
+        - customCondition: SKIP_SCHOOL_DETAILS
+    nextPages:
+      - pageName: schoolStartDate
+      - pageName: pregnant            
+  schoolStartDate:
+    pageConfiguration: *schoolStartDate
+    enrichment: schoolStartDateEnrichment
+    nextPages:
+      - pageName: pregnant
+    datasources:
+      - pageName: schoolGrade
+    skipCondition:
+      conditions:
+        - customCondition: SKIP_SCHOOL_START_DATE
+  pregnant:
+    pageConfiguration: *pregnant
+    nextPages:
+      - pageName: whoIsPregnant
+    datasources:
+      - pageName: addHouseholdMembers
+  whoIsPregnant:
+    pageConfiguration: *whoIsPregnant
+    nextPages:
+      - pageName: migrantFarmWorker
+    datasources:
+      - pageName: addHouseholdMembers
+      - pageName: pregnant
+    skipCondition:
+      logicalOperator: OR
+      conditions:
+        - *livesAlone?
+        - pageName: pregnant
+          input: isPregnant
+          value: "false"
+  migrantFarmWorker:
+    pageConfiguration: *migrantFarmWorker
+    nextPages:
+      - pageName: citizenship
+    datasources:
+      - pageName: addHouseholdMembers
+  citizenship:
+    pageConfiguration: *citizenship
+    nextPages:
+      - pageName: disability
+    datasources:
+      - pageName: addHouseholdMembers
+      - pageName: personalInfo 
+      - groupName: household
+  whoIsNonCitizen:
+    pageConfiguration: *whoIsNonCitizen
+    nextPages:
+      - pageName: alienIdNumber
+    datasources:
+      - pageName: addHouseholdMembers
+      - pageName: citizenship
+    skipCondition: *livesAlone?
+  alienIdNumber:
+    pageConfiguration: *alienIdNumber
+    nextPages:
+      - pageName: alienIdNumbers
+    datasources:
+      - pageName: choosePrograms
+      - pageName: addHouseholdMembers
+    skipCondition: *doesNotLiveAlone? 
+  alienIdNumbers:
+    pageConfiguration: *alienIdNumbers
+    nextPages:
+      - pageName: disability
+    datasources:
+      - pageName: choosePrograms
+      - pageName: addHouseholdMembers
+    skipCondition: *livesAlone?   
+  disability:
+    pageConfiguration: *disability
+    skipCondition:
+        logicalOperator: OR
+        conditions:
+          - logicalOperator: AND
+            conditions:
+              - *applicantOnlyChoseCCAP?
+              - *householdOnlyChoseCCAP?
+          - logicalOperator: AND
+            conditions:
+              - *livesAlone?
+              - *applicantOnlyChoseCCAP?
+    datasources:
+      - pageName: addHouseholdMembers
+      - pageName: householdMemberInfo
+        groupName: household
+      - pageName: choosePrograms			  
+    nextPages:
+      - pageName: unableToWork
+        condition: *someoneChoseCAFProgram?
+      - pageName: workChanges			
+  unableToWork:
+    pageConfiguration: *unableToWork
+    datasources:
+      - pageName: addHouseholdMembers
+    nextPages:
+      - pageName: workChanges			  
+  workChanges:
+    pageConfiguration: *workChanges
+    skipCondition:
+        logicalOperator: OR
+        conditions:
+          - logicalOperator: AND
+            conditions:
+              - *applicantOnlyChoseCCAP?
+              - *householdOnlyChoseCCAP?
+          - logicalOperator: AND
+            conditions:
+              - *livesAlone?
+              - *applicantOnlyChoseCCAP?
+    datasources:
+      - pageName: addHouseholdMembers
+      - pageName: householdMemberInfo
+        groupName: household
+      - pageName: choosePrograms
+    nextPages:
+      - pageName: tribalNationMember
+  tribalNationMember:
+    pageConfiguration: *tribalNationMember
+    nextPages:
+      - pageName: selectTheTribe
+        condition:
+          pageName: tribalNationMember
+          name: isTribalNationMemberTrue
+          input: isTribalNationMember
+          value: "true"
+      - pageName: howToAddDocuments
+        condition: *laterDocsFlow?
+      - pageName: linealDescendantWEN
+        condition:
+          conditions:
+            - *WENCountySelected?
+            - pageName: tribalNationMember
+              name: isTribalNationMemberFalse
+              input: isTribalNationMember
+              value: "false"
+        flag: WEN-lineal-descendant
+      - pageName: introIncome
+    datasources:
+      - pageName: choosePrograms
+      - pageName: addHouseholdMembers
+      - pageName: identifyCounty
+      - pageName: matchInfo
+  selectTheTribe:
+    pageConfiguration: *selectTheTribe
+    nextPages:
+      - pageName: nationsBoundary
+        condition: 
+          logicalOperator: AND
+          conditions:
+            - *laterDocsFlow?
+            - *isTribalMemberNotWhiteEarthNationLivingInClearwaterCounty?
+      - pageName: howToAddDocuments
+        condition: *laterDocsFlow?
+      - pageName: nationsBoundary
+    datasources:
+      - pageName: choosePrograms
+      - pageName: addHouseholdMembers
+      - pageName: matchInfo
+      - pageName: identifyCounty
+      - pageName: tribalNationMember
+      - pageName: selectTheTribe
+  linealDescendantWEN:
+    pageConfiguration: *linealDescendantWEN
+    datasources:
+      - pageName: addHouseholdMembers
+    nextPages:
+      - pageName: introIncome
+  nationsBoundary:
+    pageConfiguration: *nationsBoundary
+    nextPages:
+    # page flow when response is "Yes"
+      - pageName: nationOfResidence
+        condition:
+          pageName: nationsBoundary
+          name: livingInNationBoundaryIsTrue
+          input: livingInNationBoundary
+          value: "true"
+    # page flow when response is "No"
+      - pageName: howToAddDocuments
+        condition: *laterDocsFlow?
+      - pageName: applyForTribalTANF
+        condition: *isEligibleForTribalTANFonNationsBoundaryPage?
+      - pageName: introIncome
+    datasources:
+      - groupName: household
+        pageName: householdMemberInfo
+        optional: "true"
+      - pageName: choosePrograms
+      - pageName: addHouseholdMembers
+      - pageName: selectTheTribe
+      - pageName: identifyCounty
+      - pageName: pregnant
+      - pageName: tribalNationMember
+      - pageName: matchInfo
+  nationOfResidence:
+    pageConfiguration: *nationOfResidence
+    nextPages:
+      - pageName: howToAddDocuments
+        condition: *laterDocsFlow?
+      - pageName: applyForTribalTANF
+        condition: *isEligibleForTribalTANFonNationOfResidencePage?
+      - pageName: introIncome
+    datasources:
+      - groupName: household
+        pageName: householdMemberInfo
+        optional: "true"
+      - pageName: addHouseholdMembers
+      - pageName: tribalNationMember
+      - pageName: selectTheTribe
+      - pageName: identifyCounty
+      - pageName: pregnant
+      - pageName: matchInfo
+  applyForTribalTANF:
+    pageConfiguration: *applyForTribalTANF
+    nextPages:
+      - pageName: tribalTANFConfirmation
+        condition:
+          pageName: applyForTribalTANF
+          input: applyForTribalTANF
+          value: "true"
+      - pageName: introIncome
+    skipCondition:
+      name: livesAloneAndIsNotPregnant
+      logicalOperator: AND
+      conditions:
+        - *livesAlone?
+        - pageName: pregnant
+          name: isNotPregnant
+          input: isPregnant
+          value: "false"
+    datasources:
+      - pageName: choosePrograms
+      - pageName: pregnant
+      - pageName: addHouseholdMembers
+      - pageName: identifyCounty
+  tribalTANFConfirmation:
+    pageConfiguration: *tribalTANFConfirmation
+    nextPages:
+      - pageName: introIncome
+    datasources:
+      - pageName: identifyCounty
+      - pageName: choosePrograms
+  introIncome:
+    pageConfiguration: *introIncome
+    nextPages:
+      - pageName: employmentStatus
+  employmentStatus:
+    pageConfiguration: *employmentStatus
+    datasources:
+      - pageName: addHouseholdMembers
+      - pageName: choosePrograms
+      - pageName: householdMemberInfo
+        groupName: household
+    nextPages:
+      - pageName: pastEmployment
+        condition:
+          name: someoneChoseSNAPandNotWorking
+          logicalOperator: AND
+          conditions:
+            - *someoneChoseSNAP?
+            - pageName: employmentStatus
+              input: areYouWorking
+              value: "false"
+      - pageName: jobSearch
+        condition:
+          name: notWorking
+          pageName: employmentStatus
+          input: areYouWorking
+          value: "false"
+      - pageName: incomeByJob
+  incomeByJob:
+    pageConfiguration: *incomeByJob
+    subtleLinkTargetPage: thirtyDayIncome
+    datasources:
+      - pageName: addHouseholdMembers
+    nextPages:
+      - pageName: householdSelectionForIncome
+  householdSelectionForIncome:
+    pageConfiguration: *householdSelectionForIncome
+    groupName: jobs
+    enrichment: fullNameEnrichment
+    datasources:
+      - pageName: addHouseholdMembers
+    nextPages:
+      - pageName: employersName
+    skipCondition: *livesAlone?
+  employersName:
+    pageConfiguration: *employersName
+    groupName: jobs
+    nextPages:
+      - pageName: selfEmployment
+    datasources:
+      - pageName: householdSelectionForIncome
+      - pageName: addHouseholdMembers
+  selfEmployment:
+    pageConfiguration: *selfEmployment
+    groupName: jobs
+    nextPages:
+      - pageName: paidByTheHour
+    datasources:
+      - pageName: employersName
+      - pageName: householdSelectionForIncome
+      - pageName: addHouseholdMembers
+  paidByTheHour:
+    pageConfiguration: *paidByTheHour
+    groupName: jobs
+    nextPages:
+      - pageName: hourlyWage
+        condition:
+          input: paidByTheHour
+          value: "true"
+      - pageName: payPeriod
+        condition:
+          input: paidByTheHour
+          value: "false"
+    datasources:
+      - pageName: employersName
+      - pageName: householdSelectionForIncome
+      - pageName: addHouseholdMembers
+    subtleLinkTargetPage: lastThirtyDaysJobIncome
+  hourlyWage:
+    pageConfiguration: *hourlyWage
+    groupName: jobs
+    nextPages:
+      - pageName: hoursAWeek
+    datasources:
+      - pageName: employersName
+      - pageName: householdSelectionForIncome
+      - pageName: addHouseholdMembers
+  hoursAWeek:
+    pageConfiguration: *hoursAWeek
+    groupName: jobs
+    nextPages:
+      - pageName: jobBuilder
+    datasources:
+      - pageName: employersName
+      - pageName: householdSelectionForIncome
+      - pageName: addHouseholdMembers
+  payPeriod:
+    pageConfiguration: *payPeriod
+    groupName: jobs
+    nextPages:
+      - pageName: incomePerPayPeriod
+    datasources:
+      - pageName: employersName
+      - pageName: householdSelectionForIncome
+      - pageName: addHouseholdMembers
+  incomePerPayPeriod:
+    pageConfiguration: *incomePerPayPeriod
+    groupName: jobs
+    nextPages:
+      - pageName: jobBuilder
+    datasources:
+      - pageName: employersName
+      - pageName: payPeriod
+  jobBuilder:
+    pageConfiguration: *jobBuilder
+    dataMissingRedirect: introIncome
+    nextPages:
+      - pageName: householdSelectionForIncome
+      - pageName: jobSearch
+    datasources:
+      - groupName: jobs
+      - pageName: addHouseholdMembers
+  jobRedirectPage:
+    pageConfiguration: *jobRedirectPage
+    dataMissingRedirect: workChanges
+    nextPages:
+      - pageName: jobBuilder
+    datasources:
+      - groupName: jobs
+  jobDeleteWarningPage:
+    pageConfiguration: *jobDeleteWarningPage
+    dataMissingRedirect: employmentStatus
+    appliesToGroup: jobs
+    nextPages:
+      - pageName: jobBuilder
+    datasources:
+      - groupName: jobs
+      - pageName: addHouseholdMembers
+      - pageName: householdSelectionForIncome
+  thirtyDayIncome:
+    pageConfiguration: *thirtyDayIncome
+    nextPages:
+      - pageName: principalWageEarner
+        condition: *someoneChoseSNAP?
+      - pageName: incomeUpNext
+    datasources:
+      - pageName: addHouseholdMembers
+      - pageName: householdSelectionForIncome
+  lastThirtyDaysJobIncome:
+    pageConfiguration: *lastThirtyDaysJobIncome
+    nextPages:
+      - pageName: jobBuilder
+    datasources:
+      - pageName: addHouseholdMembers
+      - pageName: householdSelectionForIncome
+      - pageName: employersName
+    groupName: jobs
+  pastEmployment:
+    pageConfiguration: *pastEmployment
+    datasources:
+      - pageName: choosePrograms
+      - pageName: addHouseholdMembers
+      - pageName: householdMemberInfo
+        groupName: household
+    nextPages:
+      - pageName: principalWageEarner
+        condition: *someoneChoseSNAP?
+      - pageName: jobSearch
+        condition: *someoneChoseCCAP?
+      - pageName: incomeUpNext
+  principalWageEarner:
+    pageConfiguration: *principalWageEarner
+    datasources:
+     - pageName: addHouseholdMembers
+     - pageName: householdMemberInfo
+       groupName: household
+       optional: "true"
+     - pageName: choosePrograms
+    nextPages:
+      - pageName: incomeUpNext
+  incomeUpNext:
+    pageConfiguration: *incomeUpNext
+    nextPages:
+      - pageName: unearnedIncome
+  unearnedIncome:
+    pageConfiguration: *unearnedIncome
+    nextPages:
+      - pageName: unearnedIncomeSources 
+        condition: *livesAlone? 
+      - pageName: otherUnearnedIncome
+        condition: 
+          name: doesNotLiveAloneANDnoUnearnedIncomeSelected
+          logicalOperator: AND
+          conditions:
+            - *doesNotLiveAlone?
+            - *noUnearnedIncomeSelected?
+      - pageName: socialSecurityIncomeSource
+        condition:
+          logicalOperator: AND
+          conditions:
+            - pageName: unearnedIncome
+              input: unearnedIncome
+              value: SOCIAL_SECURITY
+            - *doesNotLiveAlone?
+      - pageName: supplementalSecurityIncomeSource
+        condition:
+          logicalOperator: AND
+          conditions:
+            - pageName: unearnedIncome
+              input: unearnedIncome
+              value: SSI
+            - *doesNotLiveAlone?
+      - pageName: veteransBenefitsIncomeSource
+        condition:
+          logicalOperator: AND
+          conditions:
+            - pageName: unearnedIncome
+              input: unearnedIncome
+              value: VETERANS_BENEFITS
+            - *doesNotLiveAlone?
+      - pageName: unemploymentIncomeSource
+        condition:
+          name: selectedUnemploymentANDdoesNotLiveAlone
+          logicalOperator: AND
+          conditions:
+            - pageName: unearnedIncome
+              name: selectedUnemployment
+              input: unearnedIncome
+              value: UNEMPLOYMENT
+            - *doesNotLiveAlone?
+      - pageName: workersCompIncomeSource
+        condition:
+          logicalOperator: AND
+          conditions:
+            - pageName: unearnedIncome
+              input: unearnedIncome
+              value: WORKERS_COMPENSATION
+            - *doesNotLiveAlone?
+      - pageName: retirementIncomeSource
+        condition:
+          logicalOperator: AND
+          conditions:
+            - pageName: unearnedIncome
+              input: unearnedIncome
+              value: RETIREMENT
+            - *doesNotLiveAlone?
+      - pageName: childOrSpousalSupportIncomeSource
+        condition:
+          logicalOperator: AND
+          conditions:
+            - pageName: unearnedIncome
+              input: unearnedIncome
+              value: CHILD_OR_SPOUSAL_SUPPORT
+            - *doesNotLiveAlone?
+      - pageName: tribalPaymentIncomeSource
+        condition:
+          logicalOperator: AND
+          conditions:
+            - pageName: unearnedIncome
+              input: unearnedIncome
+              value: TRIBAL_PAYMENTS
+            - *doesNotLiveAlone?
+      - pageName: unearnedIncomeSources
+    datasources:
+      - pageName: addHouseholdMembers
+      - pageName: choosePrograms
+      - pageName: householdMemberInfo
+        groupName: household
+  unearnedIncomeSources:
+    pageConfiguration: *unearnedIncomeSources
+    nextPages:
+      - pageName: otherUnearnedIncome
+    skipCondition:
+      conditions:
+        - *noUnearnedIncomeSelected?
+    datasources:
+      - pageName: unearnedIncome
+      - pageName: addHouseholdMembers
+  otherUnearnedIncomeSources:
+    pageConfiguration: *otherUnearnedIncomeSources
+    nextPages:
+      - pageName: advancedChildTaxCredit
+        condition: *someoneChoseSNAP?
+      - pageName: studentFinancialAid
+        condition: *someoneChoseCAFProgram?
+      - pageName: futureIncome
+    datasources:
+      - pageName: otherUnearnedIncome
+      - pageName: addHouseholdMembers
+      - pageName: choosePrograms
+      - pageName: householdMemberInfo
+        groupName: household
+  socialSecurityIncomeSource:
+    pageConfiguration: *socialSecurityIncomeSource
+    nextPages:
+      - pageName: supplementalSecurityIncomeSource
+    skipCondition:
+      logicalOperator: OR
+      conditions:
+        - *noUnearnedIncomeSelected?
+        - pageName: unearnedIncome
+          input: unearnedIncome
+          matcher: DOES_NOT_CONTAIN
+          value: SOCIAL_SECURITY
+    datasources:
+      - pageName: unearnedIncome
+        groupName: unearnedIncomeGroup
+      - pageName: addHouseholdMembers
+      - pageName: choosePrograms
+  supplementalSecurityIncomeSource:
+    pageConfiguration: *supplementalSecurityIncomeSource
+    nextPages:
+      - pageName: veteransBenefitsIncomeSource
+    skipCondition:
+      logicalOperator: OR
+      conditions:
+        - *noUnearnedIncomeSelected?
+        - pageName: unearnedIncome
+          input: unearnedIncome
+          matcher: DOES_NOT_CONTAIN
+          value: SSI
+    datasources:
+      - pageName: unearnedIncome
+      - pageName: addHouseholdMembers
+      - pageName: choosePrograms
+  veteransBenefitsIncomeSource:
+    pageConfiguration: *veteransBenefitsIncomeSource
+    nextPages:
+      - pageName: unemploymentIncomeSource
+    skipCondition:
+      logicalOperator: OR
+      conditions:
+        - *noUnearnedIncomeSelected?
+        - pageName: unearnedIncome
+          input: unearnedIncome
+          matcher: DOES_NOT_CONTAIN
+          value: VETERANS_BENEFITS
+    datasources:
+      - pageName: unearnedIncome
+      - pageName: addHouseholdMembers
+      - pageName: choosePrograms
+  unemploymentIncomeSource:
+    pageConfiguration: *unemploymentIncomeSource
+    nextPages:
+      - pageName: workersCompIncomeSource
+    skipCondition:
+      logicalOperator: OR
+      conditions:
+        - *noUnearnedIncomeSelected?
+        - pageName: unearnedIncome
+          input: unearnedIncome
+          matcher: DOES_NOT_CONTAIN
+          value: UNEMPLOYMENT
+    datasources:
+      - pageName: unearnedIncome
+      - pageName: addHouseholdMembers
+      - pageName: choosePrograms
+  workersCompIncomeSource:
+    pageConfiguration: *workersCompIncomeSource
+    nextPages:
+      - pageName: retirementIncomeSource
+    skipCondition:
+      logicalOperator: OR
+      conditions:
+        - *noUnearnedIncomeSelected?
+        - pageName: unearnedIncome
+          input: unearnedIncome
+          matcher: DOES_NOT_CONTAIN
+          value: WORKERS_COMPENSATION
+    datasources:
+      - pageName: unearnedIncome
+      - pageName: addHouseholdMembers
+      - pageName: choosePrograms
+  retirementIncomeSource:
+    pageConfiguration: *retirementIncomeSource
+    nextPages:
+      - pageName: childOrSpousalSupportIncomeSource
+    skipCondition:
+      logicalOperator: OR
+      conditions:
+        - *noUnearnedIncomeSelected?
+        - pageName: unearnedIncome
+          input: unearnedIncome
+          matcher: DOES_NOT_CONTAIN
+          value: RETIREMENT
+    datasources:
+      - pageName: unearnedIncome
+      - pageName: addHouseholdMembers
+      - pageName: choosePrograms
+  childOrSpousalSupportIncomeSource:
+    pageConfiguration: *childOrSpousalSupportIncomeSource
+    nextPages:
+      - pageName: tribalPaymentIncomeSource
+    skipCondition:
+      logicalOperator: OR
+      conditions:
+        - *noUnearnedIncomeSelected?
+        - pageName: unearnedIncome
+          input: unearnedIncome
+          matcher: DOES_NOT_CONTAIN
+          value: CHILD_OR_SPOUSAL_SUPPORT
+    datasources:
+      - pageName: unearnedIncome
+      - pageName: addHouseholdMembers
+      - pageName: choosePrograms
+  tribalPaymentIncomeSource:
+    pageConfiguration: *tribalPaymentIncomeSource
+    nextPages:
+      - pageName: otherUnearnedIncome
+    skipCondition:
+      logicalOperator: OR
+      conditions:
+        - *noUnearnedIncomeSelected?
+        - pageName: unearnedIncome
+          input: unearnedIncome
+          matcher: DOES_NOT_CONTAIN
+          value: TRIBAL_PAYMENTS
+    datasources:
+      - pageName: unearnedIncome
+      - pageName: addHouseholdMembers
+      - pageName: choosePrograms
+  otherUnearnedIncome:
+    pageConfiguration: *otherUnearnedIncome
+    nextPages:
+      - pageName: otherUnearnedIncomeSources
+        condition:
+          logicalOperator: AND
+          conditions:
+            - *selectedOtherUnearnedIncome?
+            - logicalOperator: OR
+              conditions:
+                - *livesAlone?
+      - pageName: insurancePaymentsIncomeSource
+        condition: *selectedOtherUnearnedIncome?
+      - pageName: insurancePaymentsIncomeSource
+        condition:
+          logicalOperator: AND
+          conditions:
+            - pageName: otherUnearnedIncome
+              input: otherUnearnedIncome
+              value: INSURANCE_PAYMENTS
+            - *doesNotLiveAlone?
+      - pageName: advancedChildTaxCredit
+        condition:
+          logicalOperator: AND
+          conditions:
+            - pageName: otherUnearnedIncome
+              input: otherUnearnedIncome
+              value: NO_OTHER_UNEARNED_INCOME_SELECTED
+            - *someoneChoseSNAP?
+      - pageName: studentFinancialAid
+        condition: 
+          logicalOperator: AND
+          conditions: 
+            - pageName: otherUnearnedIncome
+              input: otherUnearnedIncome
+              value: NO_OTHER_UNEARNED_INCOME_SELECTED
+            - *someoneChoseCAFProgram?
+      - pageName: futureIncome
+    datasources:
+      - pageName: choosePrograms
+      - pageName: addHouseholdMembers
+      - pageName: householdMemberInfo
+        groupName: household
+      - pageName: unearnedIncome
+      - pageName: otherUnearnedIncome
+      - pageName: employmentStatus
+  insurancePaymentsIncomeSource:
+    pageConfiguration: *insurancePaymentsIncomeSource
+    skipCondition:
+      pageName: otherUnearnedIncome
+      input: otherUnearnedIncome
+      matcher: DOES_NOT_CONTAIN
+      value: INSURANCE_PAYMENTS
+    nextPages:
+      - pageName: trustMoneyIncomeSource
+    datasources:
+      - pageName: otherUnearnedIncome
+  trustMoneyIncomeSource:
+    pageConfiguration: *trustMoneyIncomeSource
+    skipCondition:
+      pageName: otherUnearnedIncome
+      input: otherUnearnedIncome
+      matcher: DOES_NOT_CONTAIN
+      value: TRUST_MONEY
+    nextPages:
+      - pageName: rentalIncomeSource
+    datasources:
+      - pageName: otherUnearnedIncome
+  rentalIncomeSource:
+    pageConfiguration: *rentalIncomeSource
+    skipCondition:
+      pageName: otherUnearnedIncome
+      input: otherUnearnedIncome
+      matcher: DOES_NOT_CONTAIN
+      value: RENTAL_INCOME
+    nextPages:
+      - pageName: interestDividendsIncomeSource
+    datasources:
+      - pageName: otherUnearnedIncome
+  interestDividendsIncomeSource:
+    pageConfiguration: *interestDividendsIncomeSource
+    skipCondition:
+      pageName: otherUnearnedIncome
+      input: otherUnearnedIncome
+      matcher: DOES_NOT_CONTAIN
+      value: INTEREST_DIVIDENDS
+    nextPages:
+      - pageName: healthcareReimbursementIncomeSource
+    datasources:
+      - pageName: otherUnearnedIncome
+  healthcareReimbursementIncomeSource:
+    pageConfiguration: *healthcareReimbursementIncomeSource
+    skipCondition:
+      pageName: otherUnearnedIncome
+      input: otherUnearnedIncome
+      matcher: DOES_NOT_CONTAIN
+      value: HEALTH_CARE_REIMBURSEMENT
+    nextPages:
+      - pageName: benefitsProgramsIncomeSource
+    datasources:
+      - pageName: otherUnearnedIncome
+  benefitsProgramsIncomeSource:
+    pageConfiguration: *benefitsProgramsIncomeSource
+    skipCondition:
+      pageName: otherUnearnedIncome
+      input: otherUnearnedIncome
+      matcher: DOES_NOT_CONTAIN
+      value: BENEFITS
+    nextPages:
+      - pageName: contractForDeedIncomeSource
+    datasources:
+      - pageName: otherUnearnedIncome
+  contractForDeedIncomeSource:
+    pageConfiguration: *contractForDeedIncomeSource
+    skipCondition:
+      pageName: otherUnearnedIncome
+      input: otherUnearnedIncome
+      matcher: DOES_NOT_CONTAIN
+      value: CONTRACT_FOR_DEED
+    nextPages:
+      - pageName: annuityIncomeSource
+    datasources:
+      - pageName: otherUnearnedIncome
+  annuityIncomeSource:
+    pageConfiguration: *annuityIncomeSource
+    skipCondition:
+      pageName: otherUnearnedIncome
+      input: otherUnearnedIncome
+      matcher: DOES_NOT_CONTAIN
+      value: ANNUITY_PAYMENTS
+    nextPages:
+      - pageName: giftsIncomeSource
+    datasources:
+      - pageName: otherUnearnedIncome
+  giftsIncomeSource:
+    pageConfiguration: *giftsIncomeSource
+    skipCondition:
+      pageName: otherUnearnedIncome
+      input: otherUnearnedIncome
+      matcher: DOES_NOT_CONTAIN
+      value: GIFTS
+    nextPages:
+      - pageName: lotteryIncomeSource
+    datasources:
+      - pageName: otherUnearnedIncome 
+  lotteryIncomeSource:
+    pageConfiguration: *lotteryIncomeSource
+    skipCondition:
+      pageName: otherUnearnedIncome
+      input: otherUnearnedIncome
+      matcher: DOES_NOT_CONTAIN
+      value: LOTTERY_GAMBLING
+    nextPages:
+      - pageName: dayTradingIncomeSource
+    datasources:
+      - pageName: otherUnearnedIncome 
+  dayTradingIncomeSource:
+    pageConfiguration: *dayTradingIncomeSource
+    skipCondition:
+      pageName: otherUnearnedIncome
+      input: otherUnearnedIncome
+      matcher: DOES_NOT_CONTAIN
+      value: DAY_TRADING
+    nextPages:
+      - pageName: otherPaymentsIncomeSource
+    datasources:
+      - pageName: otherUnearnedIncome
+      - pageName: addHouseholdMembers
+      - pageName: choosePrograms
+      - groupName: household
+        pageName: householdMemberInfo		  	  		    	  
+  otherPaymentsIncomeSource:
+    pageConfiguration: *otherPaymentsIncomeSource
+    skipCondition:
+      pageName: otherUnearnedIncome
+      input: otherUnearnedIncome
+      matcher: DOES_NOT_CONTAIN
+      value: OTHER_PAYMENTS
+    nextPages:
+      - pageName: advancedChildTaxCredit
+        condition: *someoneChoseSNAP?
+      - pageName: studentFinancialAid
+        condition: *someoneChoseCAFProgram?
+      - pageName: futureIncome
+    datasources:
+      - pageName: otherUnearnedIncome 
+      - pageName: addHouseholdMembers
+      - pageName: choosePrograms
+      - groupName: household
+        pageName: householdMemberInfo      
+  advancedChildTaxCredit:
+    pageConfiguration: *advancedChildTaxCredit
+    nextPages:
+      - pageName: studentFinancialAid
+    datasources:
+      - pageName: addHouseholdMembers
+  studentFinancialAid:
+    pageConfiguration: *studentFinancialAid
+    nextPages:
+      - pageName: futureIncome
+    datasources:
+      - pageName: addHouseholdMembers
+      - pageName: householdMemberInfo
+        groupName: household
+  futureIncome:
+    pageConfiguration: *futureIncome
+    nextPages:
+      - pageName: startExpenses
+    datasources:
+      - pageName: addHouseholdMembers
+  startExpenses:
+    pageConfiguration: *startExpenses
+    nextPages:
+      - pageName: homeExpenses
+  homeExpenses:
+    pageConfiguration: *homeExpenses
+    skipCondition:
+        logicalOperator: OR
+        conditions:
+          - logicalOperator: AND
+            conditions:
+              - *applicantOnlyChoseCCAP?
+              - *householdOnlyChoseCCAP?
+          - logicalOperator: AND
+            conditions:
+              - *livesAlone?
+              - *applicantOnlyChoseCCAP?
+    nextPages:
+      - pageName: homeExpensesAmount
+        condition:
+          logicalOperator: OR
+          conditions:
+            - pageName: homeExpenses
+              input: homeExpenses
+              value: RENT
+            - pageName: homeExpenses
+              input: homeExpenses
+              value: MORTGAGE
+            - pageName: homeExpenses
+              input: homeExpenses
+              value: ROOM_AND_BOARD
+      - pageName: utilities
+    datasources:
+      - pageName: addHouseholdMembers
+      - pageName: householdMemberInfo
+        groupName: household
+      - pageName: choosePrograms
+  homeExpensesAmount:
+    pageConfiguration: *homeExpensesAmount
+    nextPages:
+      - pageName: utilities
+    datasources:
+      - pageName: homeExpenses
+      - pageName: addHouseholdMembers
+      - pageName: choosePrograms
+  utilities:
+    pageConfiguration: *utilityPayments
+    skipCondition:
+        logicalOperator: OR
+        conditions:
+          - logicalOperator: AND
+            conditions:
+              - *applicantOnlyChoseCCAP?
+              - *householdOnlyChoseCCAP?
+          - logicalOperator: AND
+            conditions:
+              - *livesAlone?
+              - *applicantOnlyChoseCCAP?
+    nextPages:
+      - pageName: energyAssistance
+    datasources:
+      - pageName: addHouseholdMembers
+      - pageName: householdMemberInfo
+        groupName: household
+      - pageName: choosePrograms
+  energyAssistance:
+    pageConfiguration: *energyAssistance
+    skipCondition:
+        logicalOperator: OR
+        conditions:
+          - logicalOperator: AND
+            conditions:
+              - *applicantOnlyChoseCCAP?
+              - *householdOnlyChoseCCAP?
+          - logicalOperator: AND
+            conditions:
+              - *livesAlone?
+              - *applicantOnlyChoseCCAP?
+    nextPages:
+      - pageName: energyAssistanceMoreThan20
+        condition:
+          pageName: energyAssistance
+          input: energyAssistance
+          value: "true"
+      - pageName: medicalExpenses
+    datasources:
+      - pageName: addHouseholdMembers
+      - pageName: householdMemberInfo
+        groupName: household
+      - pageName: choosePrograms
+  energyAssistanceMoreThan20:
+    pageConfiguration: *energyAssistanceMoreThan20
+    skipCondition:
+      pageName: energyAssistance
+      input: energyAssistance
+      value: "false"
+    nextPages:
+      - pageName: medicalExpenses
+    datasources:
+      - pageName: energyAssistance
+      - pageName: addHouseholdMembers
+  medicalExpenses:
+    pageConfiguration: *medicalExpenses
+    skipCondition:
+      logicalOperator: AND
+      conditions:
+        - *noOneChoseCCAP?
+        - *noOneChoseSNAP?
+    nextPages:
+      - pageName: specialCareExpenses
+        condition:
+          name: noMedicalSources
+          logicalOperator: OR
+          conditions:
+            - pageName: medicalExpenses
+              input: medicalExpenses
+              value: NONE_OF_THE_ABOVE
+            - pageName: medicalExpenses
+              input: medicalExpenses
+              value: MEDICAL_BILLS_OR_COPAYS
+              matcher: CONTAINS_ONLY
+      - pageName: medicalExpensesSources
+    datasources:
+      - pageName: choosePrograms
+      - pageName: addHouseholdMembers
+      - pageName: householdMemberInfo
+        groupName: household
+  specialCareExpenses:
+    pageConfiguration: *specialCareExpenses
+    skipCondition: *noOneChoseCASH?
+    datasources:
+     - pageName: addHouseholdMembers
+     - pageName: householdMemberInfo
+       groupName: household
+     - pageName: choosePrograms
+    nextPages:
+      - pageName: supportAndCare
+  childCareCosts:
+    pageConfiguration: *childCareCosts
+    datasources:
+     - pageName: addHouseholdMembers
+    nextPages:
+      - pageName: adultCareCosts
+  adultCareCosts:
+    pageConfiguration: *adultCareCosts
+    datasources:
+      - pageName: addHouseholdMembers
+    nextPages:
+      - pageName: assets	  
+  medicalExpensesSources:
+    pageConfiguration: *medicalExpensesSources
+    nextPages:
+      - pageName: specialCareExpenses
+    skipCondition:
+      logicalOperator: AND
+      conditions: 
+        - *noOneChoseCCAP?
+        - *noOneChoseSNAP?
+    datasources:
+      - pageName: medicalExpenses
+      - pageName: addHouseholdMembers
+      - pageName: householdMemberInfo
+        groupName: household
+      - pageName: choosePrograms
+  supportAndCare:
+    pageConfiguration: *supportAndCare
+    nextPages:
+      - pageName: childCareCosts
+        condition: *someoneChoseCAFProgram?
+      - pageName: assets
+    datasources:
+      - pageName: addHouseholdMembers
+      - pageName: householdMemberInfo
+        groupName: household
+      - pageName: choosePrograms
+  assets:
+    pageConfiguration: *assets
+    datasources:
+      - pageName: choosePrograms
+      - pageName: addHouseholdMembers
+      - pageName: householdMemberInfo
+        groupName: household
+      - pageName: assets
+    nextPages:
+      # CAF program selected and cash and or bank accounts → liquidAssetsSingle new revised page
+      - pageName: liquidAssetsSingle
+        condition:
+          name: CAFAndcashOrBank
+          logicalOperator: AND
+          conditions:
+            - *someoneChoseCAFProgram? 
+            - logicalOperator: OR
+              name: CashOrBankOrElectronic
+              conditions:
+                - pageName: assets
+                  input: assets
+                  value: "CASH"
+                - pageName: assets
+                  input: assets
+                  value: "BANK_ACCOUNT"
+      # DEFAULT NEXT PAGE
+      - pageName: soldAssets
+  investmentTypesIndividual:
+    pageConfiguration: *investmentTypesIndividual
+    nextPages:
+      - pageName: soldAssets
+    skipCondition:
+      logicalOperator: OR
+      conditions:
+        - pageName: assets
+          input: assets
+          value: STOCK_BOND
+          matcher: DOES_NOT_CONTAIN
+        - *doesNotLiveAlone?
+    datasources:
+      - pageName: addHouseholdMembers
+      - pageName: assets
+      - pageName: choosePrograms
+  liquidAssetsSingle:
+    pageConfiguration: *liquidAssetsSingle
+    nextPages:
+      - pageName: soldAssets
+  soldAssets:
+    pageConfiguration: *soldAssets
+    nextPages:
+      - pageName: submittingApplication
+    datasources:
+      - pageName: addHouseholdMembers
+  submittingApplication:
+    pageConfiguration: *submittingApplication
+    nextPages:
+      - pageName: registerToVote
+  registerToVote:
+    pageConfiguration: *registerToVote
+    nextPages:
+      - pageName: healthcareCoverage
+  healthcareCoverage:
+    pageConfiguration: *healthcareCoverage
+    nextPages:
+      - pageName: authorizedRep
+  authorizedRep:
+    pageConfiguration: *authorizedRep
+    nextPages:
+      - pageName: additionalInfo
+        condition:
+          pageName: authorizedRep
+          input: helpWithBenefits
+          value: "false"
+      - pageName: authorizedRepCommunicate
+        condition:
+          pageName: authorizedRep
+          input: helpWithBenefits
+          value: "true"
+  authorizedRepCommunicate:
+    pageConfiguration: *authorizedRepCommunicate
+    nextPages:
+      - pageName: authorizedRepMailNotices
+  authorizedRepMailNotices:
+    pageConfiguration: *authorizedRepMailNotices
+    nextPages:
+      - pageName: authorizedRepSpendOnYourBehalf
+  authorizedRepSpendOnYourBehalf:
+    pageConfiguration: *authorizedRepSpendOnYourBehalf
+    nextPages:
+      - pageName: authorizedRepContactInfo
+  authorizedRepContactInfo:
+    pageConfiguration: *authorizedRepContactInfo
+    nextPages:
+      - pageName: additionalInfo
+    skipCondition:
+      logicalOperator: AND
+      conditions:
+        - pageName: authorizedRep
+          input: communicateOnYourBehalf
+          value: "false"
+        - pageName: authorizedRepMailNotices
+          input: getMailNotices
+          value: "false"
+        - pageName: authorizedRepSpendOnYourBehalf
+          input: spendOnYourBehalf
+          value: "false"
+  jobSearch:
+    pageConfiguration: *jobSearch
+    skipCondition: *noOneChoseCCAP?
+    nextPages:
+      - pageName: whoIsLookingForAJob
+    datasources:
+      - pageName: choosePrograms
+      - pageName: addHouseholdMembers
+      - pageName: householdMemberInfo
+        groupName: household
+  whoIsLookingForAJob:
+    pageConfiguration: *whoIsLookingForAJob
+    nextPages:
+      - pageName: principalWageEarner
+        condition: *someoneChoseSNAP?
+      - pageName: incomeUpNext
+    datasources:
+      - pageName: addHouseholdMembers
+      - pageName: jobSearch
+      - pageName: choosePrograms
+      - pageName: householdMemberInfo
+        groupName: household
+    skipCondition:
+      logicalOperator: OR
+      conditions:
+        - logicalOperator: AND
+          conditions:
+            - *applicantDidNotChooseCCAP?
+            - *householdMemberDidNotChooseCCAP?
+        - logicalOperator: OR
+          conditions:
+            - *livesAlone?
+            - pageName: jobSearch
+              input: currentlyLookingForJob
+              value: "false"
+  doYouNeedHelpImmediately:
+    pageConfiguration: *doYouNeedHelpImmediately
+    nextPages:
+      - pageName: addHouseholdMembersExpedited
+        flow: EXPEDITED
+        condition:
+          pageName: doYouNeedHelpImmediately
+          input: needHelpImmediately
+          value: "true"
+      - pageName: additionalInfo
+        flow: MINIMUM
+        condition:
+          pageName: doYouNeedHelpImmediately
+          input: needHelpImmediately
+          value: "false"
+    datasources:
+      - pageName: doYouNeedHelpImmediately
+  addHouseholdMembersExpedited:
+    pageConfiguration: *addHouseholdMembers
+    nextPages:
+      - pageName: expeditedIncome
+  expeditedIncome:
+    pageConfiguration: *thirtyDayIncome
+    nextPages:
+      - pageName: expeditedHasSavings
+    datasources:
+      - pageName: addHouseholdMembers
+  expeditedHasSavings:
+    pageConfiguration: *savings
+    nextPages:
+      - pageName: liquidAssets
+    datasources:
+      - pageName: addHouseholdMembers
+  liquidAssets:
+    pageConfiguration: *liquidAssetsSingle
+    skipCondition:
+      pageName: savings
+      input: haveSavings
+      value: "false"
+    nextPages:
+      - pageName: expeditedExpenses
+    datasources:
+      - pageName: addHouseholdMembers
+      - pageName: savings
+      - pageName: choosePrograms
+  expeditedExpenses:
+    pageConfiguration: *expeditedExpenses
+    nextPages:
+      - pageName: expeditedExpensesAmount
+    datasources:
+      - pageName: addHouseholdMembers
+      - pageName: choosePrograms
+  expeditedExpensesAmount:
+    pageConfiguration: *expeditedExpensesAmount
+    skipCondition:
+      pageName: expeditedExpenses
+      input: payRentOrMortgage
+      value: "false"
+    nextPages:
+      - pageName: expeditedUtilityPayments
+    datasources:
+      - pageName: addHouseholdMembers
+      - pageName: choosePrograms
+      - pageName: expeditedExpenses
+  expeditedUtilityPayments:
+    pageConfiguration: *utilityPayments
+    nextPages:
+      - pageName: expeditedMigrantFarmWorker
+    datasources:
+      - pageName: addHouseholdMembers
+  expeditedMigrantFarmWorker:
+    pageConfiguration: *migrantFarmWorker
+    nextPages:
+      - pageName: snapExpeditedDetermination
+    datasources:
+      - pageName: addHouseholdMembers
+  snapExpeditedDetermination:
+    pageConfiguration: *snapExpeditedDetermination
+    nextPages:
+      - pageName: penaltyWarnings
+  additionalInfo:
+    pageConfiguration: *additionalInfo
+    nextPages:
+      - pageName: canWeAsk
+  canWeAsk:
+    pageConfiguration: *canWeAsk
+    nextPages:
+      - pageName: raceAndEthnicity
+      - pageName: penaltyWarnings
+  raceAndEthnicity:
+    pageConfiguration: *raceAndEthnicity
+    nextPages:
+      - pageName: penaltyWarnings
+  penaltyWarnings:
+    pageConfiguration: *penaltyWarnings
+    nextPages:
+      - pageName: legalStuff
+    skipCondition:
+      logicalOperator: AND
+      conditions:
+        - *someoneChoseCCAP?
+        - *noOneChoseCAF?
+    datasources:
+      - pageName: choosePrograms
+      - pageName: addHouseholdMembers
+      - pageName: householdMemberInfo
+        groupName: household
+  legalStuff:
+    pageConfiguration: *legalStuff
+    nextPages:
+      - pageName: signThisApplication
+    datasources:
+      - pageName: choosePrograms
+      - pageName: householdMemberInfo
+        groupName: household
+  secondSignatureLegalStuff:
+    pageConfiguration: *secondSignatureLegalStuff
+    subtleLinkTargetPage: submit
+    nextPages:
+      - pageName: secondSignature
+    datasources:
+      - pageName: choosePrograms
+      - pageName: householdMemberInfo
+        groupName: household
+  signThisApplication:
+    pageConfiguration: *signThisApplication
+    nextPages:
+      - pageName: secondSignatureNotification
+        condition:
+          logicalOperator: AND
+          conditions:
+            - *doesNotLiveAlone?
+            - *someoneChoseCASH?
+      - pageName: submit
+    datasources:
+      - pageName: choosePrograms
+      - pageName: addHouseholdMembers
+      - pageName: householdMemberInfo
+        groupName: household
+  secondSignatureNotification:
+    pageConfiguration: *secondSignatureNotification
+    skipCondition:
+      logicalOperator: OR
+      conditions: 
+        - *livesAlone?
+        - *minimumFlow?
+    nextPages:
+      - pageName: secondSignatureLegalStuff
+      - pageName: submit
+    datasources:
+      - pageName: addHouseholdMembers
+      - pageName: doYouNeedHelpImmediately
+  secondSignature:
+    pageConfiguration: *secondSignature
+    subtleLinkTargetPage: submit
+    skipCondition:
+      logicalOperator: OR
+      conditions: 
+        - *continueWithoutSecondSignature?
+        - *livesAlone?
+        - *minimumFlow?
+    nextPages:
+      - pageName: submit
+    datasources:
+      - pageName: secondSignatureLegalStuff
+      - pageName: addHouseholdMembers
+      - pageName: doYouNeedHelpImmediately
+  submit:
+    pageConfiguration: *submit
+    nextPages:
+      - pageName: submissionConfirmation
+  submissionConfirmation:
+    pageConfiguration: *submissionConfirmation
+    nextPages:
+      - pageName: addingDocuments
+  addingDocuments:
+    pageConfiguration: *addingDocuments
+    nextPages:
+      - pageName: documentRecommendation
+    datasources:
+      - pageName: choosePrograms
+      - pageName: employmentStatus
+      - pageName: homeExpenses
+      - pageName: workChanges
+      - pageName: addHouseholdMembers
+      - groupName: household
+        pageName: householdMemberInfo
+        optional: "true"
+      - pageName: medicalExpenses
+
+  howToAddDocuments:
+    pageConfiguration: *howToAddDocuments
+    nextPages:
+      - pageName: uploadDocuments
+    datasources:
+      - pageName: choosePrograms
+      - pageName: employmentStatus
+      - pageName: homeExpenses
+      - pageName: workChanges
+      - pageName: addHouseholdMembers
+      - groupName: household
+        pageName: householdMemberInfo
+        optional: "true"
+      - pageName: medicalExpenses
+
+  documentRecommendation:
+    pageConfiguration: *documentRecommendation
+    nextPages:
+      - pageName: howToAddDocuments
+      - pageName: documentOffboarding
+    datasources:
+      - pageName: choosePrograms
+      - pageName: employmentStatus
+      - pageName: homeExpenses
+      - pageName: workChanges
+      - pageName: addHouseholdMembers
+      - groupName: household
+        pageName: householdMemberInfo
+        optional: "true"
+      - pageName: medicalExpenses
+
+  uploadDocuments:
+    pageConfiguration: *uploadDocuments
+    nextPages:
+      - pageName: documentSubmitConfirmation
+    datasources:
+      - pageName: choosePrograms
+      - pageName: employmentStatus
+      - pageName: homeExpenses
+      - pageName: workChanges
+      - pageName: addHouseholdMembers
+      - groupName: household
+        pageName: householdMemberInfo
+        optional: "true"
+      - pageName: medicalExpenses
+      
+  uploadDocumentsDeleteWarningPage:
+    pageConfiguration: *uploadDocumentsDeleteWarningPage
+    nextPages:
+      - pageName: uploadDocuments
+  programDocuments:
+    pageConfiguration: *programDocuments
+    nextPages:
+      - pageName: nextSteps
+  documentSubmitConfirmation:
+    pageConfiguration: *documentSubmitConfirmation
+    nextPages:
+      - pageName: programDocuments
+      - pageName: uploadDocuments
+    datasources:
+      - pageName: choosePrograms
+      - pageName: employmentStatus
+      - pageName: homeExpenses
+      - pageName: workChanges
+      - pageName: addHouseholdMembers
+      - groupName: household
+        pageName: householdMemberInfo
+        optional: "true"
+      - pageName: medicalExpenses
+  documentOffboarding:
+    pageConfiguration: *documentOffboarding
+    nextPages:
+      - pageName: programDocuments
+      - pageName: documentRecommendation
+    datasources:
+      - pageName: choosePrograms
+      - pageName: employmentStatus
+      - pageName: homeExpenses
+      - pageName: workChanges
+      - pageName: addHouseholdMembers
+      - groupName: household
+        pageName: householdMemberInfo
+        optional: "true"
+      - pageName: medicalExpenses
+  nextSteps:
+    pageConfiguration: *nextSteps
+    nextPages:
+      - pageName: success
+    datasources:
+      - pageName: contactInfo
+  success:
+    pageConfiguration: *success
+#   We navigate to the recommendations page when the conditions are the same
+#   as when we change the button text on the success page to "View more programs".
+#   From PageController: showRecommendationLink = recommendHealthCare || isCCAP || recommendWIC
+    nextPages:
+      - pageName: recommendations
+        flow: EXPEDITED
+        condition: *expeditedFlow?
+      - pageName: recommendations
+        flow: MINIMUM
+        condition: *minimumFlow?
+      - pageName: recommendations
+        condition:
+          logicalOperator: OR
+          conditions:
+            - *someoneChoseCCAP?
+            - *doesNotHaveHealthcare?
+      - pageName: recommendations
+        condition:
+          logicalOperator: OR
+          conditions:
+            - *someoneChoseCCAP?
+            - *doesNotHaveHealthcare?
+            - logicalOperator: OR
+              conditions:
+                - *isSomeonePregnant?
+                - *householdMemberLessThanAge5?
+      - pageName: feedback
+    datasources:
+      - pageName: pregnant
+      - groupName: household
+        pageName: householdMemberInfo
+        optional: "true"
+      - pageName: healthcareCoverage
+      - pageName: choosePrograms
+      - pageName: doYouNeedHelpImmediately
+  recommendations:
+    pageConfiguration: *recommendations
+    nextPages:
+      - pageName: feedback
+  documentsSent:
+    pageConfiguration: *documentsSent
+  feedback:
+    pageConfiguration: *feedback
+# The public is navigating directly from https://mn.gov/dhs/renewmycoverage/ to here:
+  healthcareRenewalUpload:
+    pageConfiguration: *healthcareRenewalUpload
+    nextPages:
+      - pageName: healthcareRenewalMatchInfo
+        flow: HEALTHCARE_RENEWAL
+
+  healthcareRenewalMatchInfo:
+    pageConfiguration: *healthcareRenewalMatchInfo
+    enrichment: matchInfoDateOfBirthEnrichment
+    nextPages:
+      - pageName: healthcareRenewalHowToAddDocuments
+        flow: HEALTHCARE_RENEWAL
+        
+  healthcareRenewalHowToAddDocuments:
+    pageConfiguration: *healthcareRenewalHowToAddDocuments
+    nextPages:
+      - pageName: healthcareRenewalUploadDocuments
+      
+  healthcareRenewalUploadDocuments:
+    pageConfiguration: *healthcareRenewalUploadDocuments
+    nextPages:
+      - pageName: healthcareRenewalDocumentSubmitConfirmation
+      
+  healthcareRenewalUploadDocumentsDeleteWarningPage:
+    pageConfiguration: *healthcareRenewalUploadDocumentsDeleteWarningPage
+    nextPages:
+      - pageName: healthcareRenewalUploadDocuments
+      
+  healthcareRenewalDocumentSubmitConfirmation:
+    pageConfiguration: *healthcareRenewalDocumentSubmitConfirmation
+    nextPages:
+      - pageName: healthcareRenewalUploadDocuments
+ 
+  healthcareRenewalDocumentsSent:
+    pageConfiguration: *healthcareRenewalDocumentsSent     
+    
+pageGroups:
+  jobs:
+    startPages:
+      - householdSelectionForIncome
+      - employersName
+    completePages:
+      - hoursAWeek
+      - incomePerPayPeriod
+      - lastThirtyDaysJobIncome
+    reviewPage: jobBuilder
+    redirectPage: jobRedirectPage
+    deleteWarningPage: jobDeleteWarningPage
+    restartPage: incomeByJob
+  household:
+    startPages:
+      - householdMemberInfo
+    completePages:
+      - householdMemberInfo
+    reviewPage: householdList
+    deleteWarningPage: householdDeleteWarningPage
+    restartPage: addHouseholdMembers
+    startingCount: 1
+  childCareProviders:
+    startPages:
+      - childCareProviderInfo
+    completePages:
+      - childrenAtThisProvider
+    reviewPage: childCareProviderList
+    redirectPage: childCareProviderRedirectPage
+    deleteWarningPage: childCareProviderDeleteWarningPage
+    restartPage: doYouHaveChildCareProvider
+  unearnedIncomeGroup:
+    startPages:
+      - unearnedIncome
+      - socialSecurityIncomeSource
+      - supplementalSecurityIncomeSource
+      - veteransBenefitsIncomeSource
+      - unemploymentIncomeSource
+      - workersCompIncomeSource
+      - retirementIncomeSource
+      - childOrSpoucalSupportIncomeSource
+      - tribalPaymentIncomeSource
+    completePages:
+      - unearnedIncome
+      - socialSecurityIncomeSource
+      - supplementalSecurityIncomeSource
+      - veteransBenefitsIncomeSource
+      - unemploymentIncomeSource
+      - workersCompIncomeSource
+      - retirementIncomeSource
+      - childOrSpoucalSupportIncomeSource
+      - tribalPaymentIncomeSource
+    restartPage: unearnedIncome
+landmarkPages:
+  startTimerPages: # "the first page" of a flow, where we set applicationData.startTime
+    - identifyCountyBeforeApplying
+    - readyToUploadDocuments
+    - healthcareRenewalUpload
+  landingPages: # the home page of the app
+    - landing
+  postSubmitPages: # pages which are accessible after submitting an application
+    - addingDocuments
+    - documentRecommendation
+    - uploadDocuments
+    - uploadDocumentsDeleteWarningPage
+    - programDocuments
+    - howToAddDocuments
+    - documentOffboarding
+    - documentSubmitConfirmation
+    - nextSteps
+    - submissionConfirmation
+    - success
+    - recommendations
+    - feedback
+    - documentsSent
+    #For healthcare renewal
+    - healthcareRenewalAddingDocuments
+    - healthcareRenewalHowToAddDocuments
+    - healthcareRenewalDocumentRecommendation
+    - healthcareRenewalUploadDocuments
+    - healthcareRenewalUploadDocumentsDeleteWarningPage
+    - healthcareRenewalDocumentOffboarding
+    - healthcareRenewalDocumentSubmitConfirmation
+    - healthcareRenewalSubmissionConfirmation
+    - healthcareRenewalMatchInfo
+    - healthcareRenewalDocumentsSent
+#  all pages of the laterdocs flow to restrict them from back navigation
+  laterDocsPostSubmitExcludePages:
+    - matchInfo
+    - tribalNationMember
+    - selectTheTribe
+    - identifyCounty
+    - nationOfResidence
+    - nationsBoundary
+    - readyToUploadDocuments
+    - howToAddDocuments
+    - documentSubmitConfirmation
+    - uploadDocuments
+    - uploadDocumentsDeleteWarningPage
+    - programDocuments
+  nextStepsPage: nextSteps
+  programDocumentsPage: programDocuments
+  terminalPage: success # the final page of the main flow ("Done! Your application has been submitted.")
+  submissionConfirmationPage: submissionConfirmation
+  feedbackPage: feedback
+  recommendationsPage: recommendations
+  laterDocsTerminalPage: documentsSent # the final page of the laterdocs flow  healthcareRenewalUpload
+  healthcareRenewalTerminalPage: healthcareRenewalDocumentsSent # the final page of the healthcare renewal flow
+  healthcareRenewalLandingPage: healthcareRenewalUpload
+  submitPage: submit
+  uploadDocumentsPage: 
+    - uploadDocuments # the page where applicants upload documents
+    - healthcareRenewalUploadDocuments # the page where applicants upload documents
+  submitUploadedDocumentsPage: 
+    - documentSubmitConfirmation # the page where applicants confirm that the documents should be submitted
+    - healthcareRenewalDocumentSubmitConfirmation # the page where applicants confirm that the documents should be submitted for healthcare
