@@ -1,1 +1,3 @@
-                                  optionId=${option.isNone ? (input.name + '-none') : (input.name + '-' + (option.value != null ? option.value : ''))}">
+<th:block th:each="option, optionStat : ${input.options.selectableOptions}"
+                          th:with="formInputName=${T(org.codeforamerica.shiba.pages.PageUtils).getFormInputName(input.name)},
+                                  optionId=${input.name + '-' + optionStat.index}">
