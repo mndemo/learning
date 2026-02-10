@@ -24,7 +24,8 @@ import org.springframework.web.bind.annotation.RestController;
  * as stored in the database ({@code application_data} column, jsonb).
  *
  * <p>Response shape matches what is recorded in the DB: pagesData (page -&gt; input -&gt; {"value": [...]}),
- * subworkflows (group -&gt; [{"id", "pagesData"}]), etc.
+ * subworkflows (group -&gt; [{"id", "pagesData"}]), etc. Also includes {@code groupedBySection} for a
+ * logical grouping (e.g. unearnedIncome + unearnedIncomeSources under section "unearnedIncome").
  *
  * <p>Usage: {@code GET /api/application-data} in the same browser session.
  *
@@ -61,6 +62,7 @@ public class ApplicationDataApiController {
       view.put("flow", applicationData.getFlow() != null ? applicationData.getFlow().name() : null);
       view.put("isSubmitted", applicationData.isSubmitted());
       view.put("pagesData", pagesDataToDbShape(applicationData.getPagesData()));
+      view.put("groupedBySection", buildGroupedBySection(applicationData.getPagesData()));
       view.put("subworkflows", subworkflowsToDbShape(applicationData.getSubworkflows()));
       Map<String, PagesData> incomplete = applicationData.getIncompleteIterations();
       view.put("incompleteIterations", incomplete != null
@@ -104,6 +106,28 @@ public class ApplicationDataApiController {
     m.put("size", doc.getSize());
     m.put("sysFileName", doc.getSysFileName());
     return m;
+  }
+
+  /**
+   * Groups pages by logical section so e.g. unearnedIncome and unearnedIncomeSources appear under
+   * "unearnedIncome". Section = page name without trailing "Sources" when it ends with "Sources".
+   */
+  private static Map<String, Object> buildGroupedBySection(PagesData pagesData) {
+    if (pagesData == null) return Map.of();
+    Map<String, Object> grouped = new LinkedHashMap<>();
+    pagesData.forEach((pageName, pageData) -> {
+      String section = sectionForPage(pageName);
+      @SuppressWarnings("unchecked")
+      Map<String, Object> sectionMap = (Map<String, Object>) grouped.computeIfAbsent(section, k -> new LinkedHashMap<String, Object>());
+      sectionMap.put(pageName, pageDataToDbShape(pageData));
+    });
+    return grouped;
+  }
+
+  private static String sectionForPage(String pageName) {
+    if (pageName == null || pageName.isEmpty()) return "other";
+    if (pageName.endsWith("Sources")) return pageName.substring(0, pageName.length() - 7);
+    return pageName;
   }
 
   /** DB shape: page name -&gt; input name -&gt; {"value": ["..."]}. */
