@@ -55,22 +55,55 @@ public class ApplicationDataApiController {
       view.put("lastPageViewed", applicationData.getLastPageViewed());
       view.put("deviceType", applicationData.getDeviceType());
       view.put("devicePlatform", applicationData.getDevicePlatform());
-      view.put("expeditedEligibility", applicationData.getExpeditedEligibility());
+      view.put("expeditedEligibility", applicationData.getExpeditedEligibility() != null
+          ? applicationData.getExpeditedEligibility().stream().map(Enum::name).toList()
+          : List.<String>of());
       view.put("flow", applicationData.getFlow() != null ? applicationData.getFlow().name() : null);
       view.put("isSubmitted", applicationData.isSubmitted());
       view.put("pagesData", pagesDataToDbShape(applicationData.getPagesData()));
       view.put("subworkflows", subworkflowsToDbShape(applicationData.getSubworkflows()));
-      view.put("incompleteIterations", applicationData.getIncompleteIterations().entrySet().stream()
-          .collect(LinkedHashMap::new, (m, e) -> m.put(e.getKey(), pagesDataToDbShape(e.getValue())), Map::putAll));
-      view.put("uploadedDocs", applicationData.getUploadedDocs());
+      Map<String, PagesData> incomplete = applicationData.getIncompleteIterations();
+      view.put("incompleteIterations", incomplete != null
+          ? incomplete.entrySet().stream()
+              .collect(LinkedHashMap::new, (m, e) -> m.put(e.getKey(), pagesDataToDbShape(e.getValue())), Map::putAll)
+          : Map.of());
+      view.put("uploadedDocs", applicationData.getUploadedDocs() != null
+          ? applicationData.getUploadedDocs().stream().map(ApplicationDataApiController::uploadedDocToMap).toList()
+          : List.of());
       view.put("originalCounty", applicationData.getOriginalCounty());
 
       String json = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(view);
       return ResponseEntity.ok(json);
     } catch (JsonProcessingException e) {
+      String msg = e.getMessage();
+      if (e.getCause() != null) {
+        msg = msg + " | cause: " + e.getCause().getMessage();
+      }
       return ResponseEntity.internalServerError()
-          .body("{\"error\": \"Failed to serialize application data: " + e.getMessage() + "\"}");
+          .body("{\"error\": \"Failed to serialize application data: " + escapeJson(msg) + "\"}");
+    } catch (Exception e) {
+      String msg = e.getMessage() != null ? e.getMessage() : e.getClass().getName();
+      if (e.getCause() != null && e.getCause().getMessage() != null) {
+        msg = msg + " | cause: " + e.getCause().getMessage();
+      }
+      return ResponseEntity.internalServerError()
+          .body("{\"error\": \"Failed to serialize application data: " + escapeJson(msg) + "\"}");
     }
+  }
+
+  private static String escapeJson(String s) {
+    return s == null ? "" : s.replace("\\", "\\\\").replace("\"", "\\\"").replace("\n", " ").replace("\r", " ");
+  }
+
+  private static Map<String, Object> uploadedDocToMap(UploadedDocument doc) {
+    Map<String, Object> m = new LinkedHashMap<>();
+    m.put("filename", doc.getFilename());
+    m.put("s3Filepath", doc.getS3Filepath());
+    m.put("thumbnailFilepath", doc.getThumbnailFilepath());
+    m.put("type", doc.getType());
+    m.put("size", doc.getSize());
+    m.put("sysFileName", doc.getSysFileName());
+    return m;
   }
 
   /** DB shape: page name -&gt; input name -&gt; {"value": ["..."]}. */
@@ -85,7 +118,10 @@ public class ApplicationDataApiController {
   private static Map<String, Object> pageDataToDbShape(PageData pageData) {
     if (pageData == null) return Map.of();
     Map<String, Object> out = new LinkedHashMap<>();
-    pageData.forEach((inputName, inputData) -> out.put(inputName, Map.<String, Object>of("value", new ArrayList<>(inputData.getValue()))));
+    pageData.forEach((inputName, inputData) -> {
+      List<String> value = inputData.getValue() != null ? new ArrayList<>(inputData.getValue()) : new ArrayList<>();
+      out.put(inputName, Map.<String, Object>of("value", value));
+    });
     return out;
   }
 
