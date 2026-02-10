@@ -46,3 +46,7 @@ public class ApplicationDataApiController {
     }
   }
 }
+
+
+
+curl -b cookies.txt http://localhost:8080/api/application-data
