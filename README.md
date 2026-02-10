@@ -2,7 +2,17 @@ package org.codeforamerica.shiba.pages;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 import org.codeforamerica.shiba.pages.data.ApplicationData;
+import org.codeforamerica.shiba.pages.data.Iteration;
+import org.codeforamerica.shiba.pages.data.PageData;
+import org.codeforamerica.shiba.pages.data.PagesData;
+import org.codeforamerica.shiba.pages.data.Subworkflow;
+import org.codeforamerica.shiba.pages.data.Subworkflows;
+import org.codeforamerica.shiba.pages.data.UploadedDocument;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,15 +23,12 @@ import org.springframework.web.bind.annotation.RestController;
  * Exposes the current session's application data as JSON in the same structure
  * as stored in the database ({@code application_data} column, jsonb).
  *
- * <p>Uses the same serialization as {@link org.codeforamerica.shiba.application.ApplicationDataEncryptor}
- * (without encrypting SSN). Response shape matches what is recorded in the DB.
+ * <p>Response shape matches what is recorded in the DB: pagesData (page -&gt; input -&gt; {"value": [...]}),
+ * subworkflows (group -&gt; [{"id", "pagesData"}]), etc.
  *
  * <p>Usage: {@code GET /api/application-data} in the same browser session.
  *
  * <p>Security: returns PII. Restrict in production (e.g. dev profile only).
- * import com.fasterxml.jackson.annotation.JsonIgnore;
- *   @JsonIgnore
-
  */
 @RestController
 @RequestMapping("/api")
@@ -40,11 +47,65 @@ public class ApplicationDataApiController {
   @GetMapping(value = "/application-data", produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<String> getApplicationData() {
     try {
-      String json = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(applicationData);
+      Map<String, Object> view = new LinkedHashMap<>();
+      view.put("id", applicationData.getId());
+      view.put("clientIP", applicationData.getClientIP());
+      view.put("startTime", applicationData.getStartTime() != null ? applicationData.getStartTime().toString() : null);
+      view.put("utmSource", applicationData.getUtmSource());
+      view.put("lastPageViewed", applicationData.getLastPageViewed());
+      view.put("deviceType", applicationData.getDeviceType());
+      view.put("devicePlatform", applicationData.getDevicePlatform());
+      view.put("expeditedEligibility", applicationData.getExpeditedEligibility());
+      view.put("flow", applicationData.getFlow() != null ? applicationData.getFlow().name() : null);
+      view.put("isSubmitted", applicationData.isSubmitted());
+      view.put("pagesData", pagesDataToDbShape(applicationData.getPagesData()));
+      view.put("subworkflows", subworkflowsToDbShape(applicationData.getSubworkflows()));
+      view.put("incompleteIterations", applicationData.getIncompleteIterations().entrySet().stream()
+          .collect(LinkedHashMap::new, (m, e) -> m.put(e.getKey(), pagesDataToDbShape(e.getValue())), Map::putAll));
+      view.put("uploadedDocs", applicationData.getUploadedDocs());
+      view.put("originalCounty", applicationData.getOriginalCounty());
+
+      String json = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(view);
       return ResponseEntity.ok(json);
     } catch (JsonProcessingException e) {
       return ResponseEntity.internalServerError()
           .body("{\"error\": \"Failed to serialize application data: " + e.getMessage() + "\"}");
     }
+  }
+
+  /** DB shape: page name -&gt; input name -&gt; {"value": ["..."]}. */
+  private static Map<String, Object> pagesDataToDbShape(PagesData pagesData) {
+    if (pagesData == null) return Map.of();
+    Map<String, Object> out = new LinkedHashMap<>();
+    pagesData.forEach((pageName, pageData) -> out.put(pageName, pageDataToDbShape(pageData)));
+    return out;
+  }
+
+  /** DB shape: input name -&gt; {"value": ["..."]} (same as InputData in DB). */
+  private static Map<String, Object> pageDataToDbShape(PageData pageData) {
+    if (pageData == null) return Map.of();
+    Map<String, Object> out = new LinkedHashMap<>();
+    pageData.forEach((inputName, inputData) -> out.put(inputName, Map.<String, Object>of("value", new ArrayList<>(inputData.getValue()))));
+    return out;
+  }
+
+  /** DB shape: group name -&gt; [{"id": "...", "pagesData": {...}}]. */
+  private static Map<String, Object> subworkflowsToDbShape(Subworkflows subworkflows) {
+    if (subworkflows == null) return Map.of();
+    Map<String, Object> out = new LinkedHashMap<>();
+    subworkflows.forEach((groupName, subworkflow) -> out.put(groupName, subworkflowToDbShape(subworkflow)));
+    return out;
+  }
+
+  private static List<Map<String, Object>> subworkflowToDbShape(Subworkflow subworkflow) {
+    if (subworkflow == null) return List.of();
+    List<Map<String, Object>> list = new ArrayList<>();
+    for (Iteration iter : subworkflow) {
+      Map<String, Object> m = new LinkedHashMap<>();
+      m.put("id", iter.getId() != null ? iter.getId().toString() : null);
+      m.put("pagesData", pagesDataToDbShape(iter.getPagesData()));
+      list.add(m);
+    }
+    return list;
   }
 }
