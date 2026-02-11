@@ -39,38 +39,32 @@
 			</div>
 			<!-- Applicant follow-up: all follow-up inputs use value index 0 (single-value) or 0,1,2 (DATE) -->
 			<div class="question-with-follow-up__follow-up" th:id="|${input.name}-follow-up|">
-				<th:block th:each="youFollowUp: ${input.followUps}"
-					th:with="
-						currentFollowupData=${data.get(youFollowUp.name)},
-						currentFollowupFormName=${T(org.codeforamerica.shiba.pages.PageUtils).getFormInputName(youFollowUp.name)},
-						applicantHasError=${T(org.codeforamerica.shiba.pages.PageUtils).hasErrorAtIndex(data, youFollowUp, 0)},
-						inputFollowupsHasErrors=${applicantHasError}
-					">
-					<div th:replace="~{fragments/form-question-prompt :: formQuestionPrompt(${youFollowUp})}"></div>
-					<p class="text--help" th:id="${youFollowUp.name + '-help-message'}" th:if="${youFollowUp.helpMessageKey != null}"
-						th:utext="#{${youFollowUp.helpMessageKey}}"></p>
-					<th:block th:switch="${youFollowUp.type}">
+				<th:block th:each="applicantFollowUp: ${input.followUps}" th:with="currentFollowupData=${data.get(applicantFollowUp.name)}, currentFollowupFormName=${T(org.codeforamerica.shiba.pages.PageUtils).getFormInputName(applicantFollowUp.name)}, applicantHasError=${T(org.codeforamerica.shiba.pages.PageUtils).hasErrorAtIndex(data, applicantFollowUp, 0)}, inputFollowupsHasErrors=${applicantHasError}">
+					<div th:replace="~{fragments/form-question-prompt :: formQuestionPrompt(${applicantFollowUp})}"></div>
+					<p class="text--help" th:id="${applicantFollowUp.name + '-help-message'}" th:if="${applicantFollowUp.helpMessageKey != null}"
+						th:utext="#{${applicantFollowUp.helpMessageKey}}"></p>
+					<th:block th:switch="${applicantFollowUp.type}">
 						<!-- APPLICANT: MONEY - value[0] -->
 						<div class="form-group" th:case="${T(org.codeforamerica.shiba.pages.config.FormInputType).MONEY}" th:classappend="${inputFollowupsHasErrors and youIsChecked} ? 'form-group--error' : ''">
 							<div class="text-input-group">
 								<div class="text-input-group__prefix" style="background-color:#FFFFFF">$</div>
 								<input type="text" class="text-input"
-									th:aria-describedby="${youFollowUp.helpMessageKey != null ? youFollowUp.name + '-help-message' : ''}"
-									th:aria-labelledby="${needsAriaLabel ? youFollowUp.name + '-label' : ''}"
+									th:aria-describedby="${applicantFollowUp.helpMessageKey != null ? applicantFollowUp.name + '-help-message' : ''}"
+									th:aria-labelledby="${needsAriaLabel ? applicantFollowUp.name + '-label' : ''}"
 									th:aria-invalid="${hasError}"
-									th:id="|${youFollowUp.name}|" th:name="${currentFollowupFormName}"
+									th:id="|${applicantFollowUp.name}|" th:name="${currentFollowupFormName}"
 									th:value="${(#lists.size(currentFollowupData.value) > 0 and currentFollowupData.value[0] != null and !currentFollowupData.value[0].isEmpty()) ? currentFollowupData.value[0] : ''}">
 								<div class="text-input-group__postfix" style="white-space: nowrap; background-color:#FFFFFF"
-									th:if="${youFollowUp.inputPostfix != null}" th:text="#{${youFollowUp.inputPostfix}}"></div>
+									th:if="${applicantFollowUp.inputPostfix != null}" th:text="#{${applicantFollowUp.inputPostfix}}"></div>
 							</div>
 						</div>
 						<!-- APPLICANT: SELECT (e.g. frequency) - value[0] -->
 						<div th:case="${T(org.codeforamerica.shiba.pages.config.FormInputType).SELECT}" class="form-group">
 							<div class="select">
-								<select th:id="${youFollowUp.name}" class="select__element"
+								<select th:id="${applicantFollowUp.name}" class="select__element"
 									th:name="${currentFollowupFormName}"
 									th:aria-invalid="${hasError}">
-									<th:block th:each="option: ${youFollowUp.options.selectableOptions}">
+									<th:block th:each="option: ${applicantFollowUp.options.selectableOptions}">
 										<option th:value="${option.value}" th:text="#{${option.messageKey}}"
 											th:selected="${#lists.size(currentFollowupData.value) > 0 and currentFollowupData.value[0] == option.value}"></option>
 									</th:block>
@@ -86,29 +80,29 @@
 							">
 							<fieldset class="date-input">
 								<p class="text--help">
-									<label th:for="${youFollowUp.name + '-month'}" th:text="#{general.month}"></label>
+									<label th:for="${applicantFollowUp.name + '-month'}" th:text="#{general.month}"></label>
 									&nbsp;/&nbsp;
-									<label th:for="${youFollowUp.name + '-day'}" th:text="#{general.day}"></label>
+									<label th:for="${applicantFollowUp.name + '-day'}" th:text="#{general.day}"></label>
 									&nbsp;/&nbsp;
-									<label th:for="${youFollowUp.name + '-year'}" th:text="#{general.year}"></label>
+									<label th:for="${applicantFollowUp.name + '-year'}" th:text="#{general.year}"></label>
 								</p>
 								<input type="text" inputmode="numeric" maxlength="2" class="text-input form-width--2-character dob-input"
-									th:id="${youFollowUp.name + '-month'}" th:name="${currentFollowupFormName}"
+									th:id="${applicantFollowUp.name + '-month'}" th:name="${currentFollowupFormName}"
 									th:value="${month}" th:placeholder="mm"/>
 								&nbsp;/&nbsp;
 								<input type="text" inputmode="numeric" maxlength="2" class="text-input form-width--2-character dob-input"
-									th:id="${youFollowUp.name + '-day'}" th:name="${currentFollowupFormName}"
+									th:id="${applicantFollowUp.name + '-day'}" th:name="${currentFollowupFormName}"
 									th:value="${date}" th:placeholder="dd"/>
 								&nbsp;/&nbsp;
 								<input type="text" inputmode="numeric" maxlength="4" class="text-input form-width--4-character dob-input"
-									th:id="${youFollowUp.name + '-year'}" th:name="${currentFollowupFormName}"
+									th:id="${applicantFollowUp.name + '-year'}" th:name="${currentFollowupFormName}"
 									th:value="${year}" th:placeholder="yyyy"/>
 							</fieldset>
 						</div>
 						<!-- APPLICANT: CHECKBOX (e.g. No end date) - value contains NO_END_DATE_0 -->
 						<div th:case="${T(org.codeforamerica.shiba.pages.config.FormInputType).CHECKBOX}" class="form-group"
 							th:with="
-								message=${youFollowUp.options.selectableOptions.get(0).messageKey},
+								message=${applicantFollowUp.options.selectableOptions.get(0).messageKey},
 								checkboxValues=${currentFollowupData.value},
 								isChecked=${checkboxValues != null and checkboxValues.contains('NO_END_DATE_0')}
 							">
@@ -121,11 +115,11 @@
 						</div>
 					</th:block>
 					<!-- Applicant follow-up errors (per-index from PageUtils); outside switch so it shows for every follow-up when applicable -->
-					<th:block th:if="${youIsChecked and applicantHasError}" th:with="errorKeysForApplicant=${T(org.codeforamerica.shiba.pages.PageUtils).getErrorKeysForIndex(data, youFollowUp, 0)}">
-						<p th:if="${!#lists.isEmpty(errorKeysForApplicant)}" class="text--error" th:aria-label="#{error.title}" th:id="${youFollowUp.name + '-error-p'}">
+					<th:block th:if="${youIsChecked and applicantHasError}" th:with="errorKeysForApplicant=${T(org.codeforamerica.shiba.pages.PageUtils).getErrorKeysForIndex(data, applicantFollowUp, 0)}">
+						<p th:if="${!#lists.isEmpty(errorKeysForApplicant)}" class="text--error" th:aria-label="#{error.title}" th:id="${applicantFollowUp.name + '-error-p'}">
 							<th:block th:each="errKey, errIter : ${errorKeysForApplicant}">
-								<i th:if="${youFollowUp.validationIcon}" class="icon-warning" th:id="${youFollowUp.name + '-error-icon-' + (errIter.index + 1)}"></i>
-								<span th:id="${youFollowUp.name + '-error-message-' + (errIter.index + 1)}" th:class="${youFollowUp.name + '-error'}" th:text="#{${errKey}}"></span>
+								<i th:if="${applicantFollowUp.validationIcon}" class="icon-warning" th:id="${applicantFollowUp.name + '-error-icon-' + (errIter.index + 1)}"></i>
+								<span th:id="${applicantFollowUp.name + '-error-message-' + (errIter.index + 1)}" th:class="${applicantFollowUp.name + '-error'}" th:text="#{${errKey}}"></span>
 								<br th:if="${!errIter.last}"/>
 							</th:block>
 						</p>
