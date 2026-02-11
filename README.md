@@ -52,7 +52,8 @@
 				<th:block th:each="youFollowUp: ${input.followUps}"
 					th:with="currentFollowupData=${data.get(youFollowUp.name)},
 					         currentFollowupFormName=${T(org.codeforamerica.shiba.pages.PageUtils).getFormInputName(youFollowUp.name)},
-					         inputFollowupsHasErrors=!${#lists.isEmpty(youFollowUp.validationErrorMessageKeys)}
+					         applicantHasError=${T(org.codeforamerica.shiba.pages.PageUtils).hasErrorAtIndex(data, youFollowUp, 0)},
+					         inputFollowupsHasErrors=${applicantHasError}
 					         ">
 					<div th:replace="~{fragments/form-question-prompt :: formQuestionPrompt(${youFollowUp})}"></div>
 					<p class="text--help" th:id="${youFollowUp.name + '-help-message'}" th:if="${youFollowUp.helpMessageKey != null}"
@@ -131,8 +132,14 @@
 					                <span th:utext="#{${message}}"></span>
            						</label>
 						</div>
-						<th:block th:if="${youIsChecked}" th:with="inputData=${data.get(youFollowUp.name)}">
-							<div th:replace="~{fragments/inputErrorFragment :: validationError(${data}, ${youFollowUp})}"></div>
+						<th:block th:if="${youIsChecked and applicantHasError}" th:with="errorKeysForApplicant=${T(org.codeforamerica.shiba.pages.PageUtils).getErrorKeysForIndex(data, youFollowUp, 0)}">
+							<p th:if="${!#lists.isEmpty(errorKeysForApplicant)}" class="text--error" th:aria-label="#{error.title}" th:id="${youFollowUp.name + '-error-p'}">
+								<th:block th:each="errKey, errIter : ${errorKeysForApplicant}">
+									<i th:if="${youFollowUp.validationIcon}" class="icon-warning" th:id="${youFollowUp.name + '-error-icon-' + (errIter.index + 1)}"></i>
+									<span th:id="${youFollowUp.name + '-error-message-' + (errIter.index + 1)}" th:class="${youFollowUp.name + '-error'}" th:text="#{${errKey}}"></span>
+									<br th:if="${!errIter.last}"/>
+								</th:block>
+							</p>
 						</th:block>
 					</th:block>
 				</th:block>
@@ -160,7 +167,8 @@
 					<th:block th:each="followUp: ${input.followUps}"
 						th:with="currentFollowupData=${data.get(followUp.name)},
 						         currentFollowupFormName=${T(org.codeforamerica.shiba.pages.PageUtils).getFormInputName(followUp.name)},
-						         inputFollowupHasErrors=!${#lists.isEmpty(followUp.validationErrorMessageKeys)}
+						         memberHasError=${T(org.codeforamerica.shiba.pages.PageUtils).hasErrorAtIndex(data, followUp, iterationStat.count)},
+						         inputFollowupHasErrors=${memberHasError}
 						         ">
 						<div class="form-group" th:classappend="${inputFollowupHasErrors} ? 'form-group--error' : ''">
 							<div th:replace="~{fragments/form-question-prompt :: formQuestionPrompt(${followUp})}"></div>
@@ -240,8 +248,14 @@
            						</label>
 								</div>
 							</th:block>
- 						<th:block th:if="${memberIsChecked}" th:with="inputData=${data.get(followUp.name)}">
-							<div th:replace="~{fragments/inputErrorFragment :: validationError(${data}, ${followUp})}"></div>
+ 						<th:block th:if="${memberIsChecked and memberHasError}" th:with="errorKeysForMember=${T(org.codeforamerica.shiba.pages.PageUtils).getErrorKeysForIndex(data, followUp, iterationStat.count)}">
+							<p th:if="${!#lists.isEmpty(errorKeysForMember)}" class="text--error" th:aria-label="#{error.title}" th:id="${followUp.name + iterationStat.index + '-error-p'}">
+								<th:block th:each="errKey, errIter : ${errorKeysForMember}">
+									<i th:if="${followUp.validationIcon}" class="icon-warning" th:id="${followUp.name + iterationStat.index + '-error-icon-' + (errIter.index + 1)}"></i>
+									<span th:id="${followUp.name + iterationStat.index + '-error-message-' + (errIter.index + 1)}" th:class="${followUp.name + '-error'}" th:text="#{${errKey}}"></span>
+									<br th:if="${!errIter.last}"/>
+								</th:block>
+							</p>
 						</th:block>
 						</div>
 						
