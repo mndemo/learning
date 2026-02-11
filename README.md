@@ -1,184 +1,187 @@
-package org.codeforamerica.shiba.pages;
+package org.codeforamerica.shiba.pages.data;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.Objects;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import lombok.Value;
+import org.codeforamerica.shiba.inputconditions.Condition;
+import org.codeforamerica.shiba.pages.config.Validation;
+import org.codeforamerica.shiba.pages.config.Validator;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import org.apache.commons.lang3.StringUtils;
-import org.codeforamerica.shiba.pages.config.FormInputTemplate;
-import org.codeforamerica.shiba.pages.config.FormInputType;
-import org.codeforamerica.shiba.pages.data.DatasourcePages;
-import org.codeforamerica.shiba.pages.data.PageData;
-import org.codeforamerica.shiba.pages.data.Subworkflow;
+@Value
+public class InputData implements Serializable {
 
-public class PageUtils {
+  @Serial
+  private static final long serialVersionUID = 8511070147741948268L;
 
-  private static final String WEB_INPUT_ARRAY_TOKEN = "[]";
+  @NotNull List<String> value;
+  @NotNull
+  @JsonIgnore
+  List<Validator> validators;
 
-  private PageUtils() {
-    throw new AssertionError("Cannot instantiate utility class");
+  InputData(List<String> value, @NotNull List<Validator> validators) {
+    this.value = Objects.requireNonNullElseGet(value, List::of);
+    this.validators = Objects.requireNonNullElseGet(validators, List::of);
   }
 
-  public static String getFormInputName(String name) {
-    return name + WEB_INPUT_ARRAY_TOKEN;
+  InputData() {
+    this(new ArrayList<>(), new ArrayList<>());
   }
 
-  public static String getTitleString(List<String> strings) {
-    if (strings.size() == 1) {
-      return strings.iterator().next();
-    } else {
-      Iterator<String> iterator = strings.iterator();
-      StringBuilder stringBuilder = new StringBuilder(iterator.next());
-      while (iterator.hasNext()) {
-        String string = iterator.next();
-        if (iterator.hasNext()) {
-          stringBuilder.append(", ");
-        } else {
-          stringBuilder.append(" and ");
-        }
-        stringBuilder.append(string);
-      }
-      return stringBuilder.toString();
+  public InputData(@NotNull List<String> value) {
+    this(value, new ArrayList<>());
+  }
+
+  public Boolean valid(PageData pageData) {
+    return valid(pageData, null);
+  }
+
+  public Boolean valid(PageData pageData, @Nullable ApplicationData applicationData) {
+    return validators.stream().filter(
+            validator -> validatorShouldRun(validator, pageData, applicationData))
+        .allMatch(validator -> {
+          Validation validation = validator.getValidation();
+          if (validator.getStartDateInputName() != null) {
+            return Validation.applyWithPageData(validation, value, pageData, validator);
+          }
+          return validation.apply(value);
+        });
+  }
+
+  private boolean validatorShouldRun(Validator validator, PageData pageData, @Nullable ApplicationData applicationData) {
+    if (validator.getCondition() == null) return true;
+    Condition condition = validator.getCondition();
+    if (condition.getCustomCondition() != null && applicationData != null) {
+      return condition.satisfies(pageData, applicationData);
     }
-  }
-
-  public static List<String> householdMemberSort(Collection<String> householdMembers) {
-    Stream<String> applicant = householdMembers.stream()
-        .filter(householdMember -> householdMember.endsWith("applicant"));
-    Stream<String> nonApplicantHouseholdMembers = householdMembers.stream()
-        .filter(householdMember -> !householdMember.endsWith("applicant")).sorted();
-
-    return Stream.concat(applicant, nonApplicantHouseholdMembers).collect(Collectors.toList());
+    return condition.satisfies(pageData);
   }
   
- 
-  public static List<String> getEligibleSchoolAndChildCareMembers(Collection<String> childrenInNeedOfCare , Collection<String> childrenGoingToSchool) {
-	    return childrenInNeedOfCare.stream()
-	    		.filter(childrenGoingToSchool::contains)
-	    		.collect(Collectors.toList());
+  // This method is only called from schoolStartDateInput.html
+  public Boolean valid(String input) {
+	  List<String> inputList = Arrays.asList(input.split(",", -1));
+	  boolean isEmpty = inputList.stream().allMatch(string -> string.isEmpty());
+	  if(isEmpty) {
+		  return true;
 	  }
- 
-  public static Boolean isProgramEligible(DatasourcePages datasourcePages, String program) {
-    List<String> applicantPrograms = datasourcePages.get("choosePrograms").get("programs")
-        .getValue();
-    boolean applicantHasProgram = applicantPrograms.contains(program);
-    boolean hasHousehold = !datasourcePages.get("householdMemberInfo").isEmpty();
-    boolean householdHasProgram = false;
-    if (hasHousehold) {
-      householdHasProgram = datasourcePages.get("householdMemberInfo").get("programs").getValue()
-          .stream().anyMatch(iteration ->
-              iteration.contains(program));
-    }
-    return applicantHasProgram || householdHasProgram;
+	  
+	  boolean isValid = validators.stream().filter(
+	            validator -> validator.getCondition() == null || validator.getCondition()
+                .satisfies(input)).map(Validator::getValidation)
+        .allMatch(validation -> validation.apply(inputList));
+	  return isValid;
+	  }
+
+  public List<String> errorMessageKeys(PageData pageData) {
+    return errorMessageKeys(pageData, null);
+  }
+
+  public List<String> errorMessageKeys(PageData pageData, @Nullable ApplicationData applicationData) {
+    return errorMessageKeysImpl(value, pageData, applicationData);
   }
 
   /**
-   * @param householdMemberNameAndId a string in the form "firstname lastname id".
-   * @param translatedYou                       the string "you" in whatever language the client is using
-   * @return the full name without an id, or "you" if the id is the string "applicant"
+   * Returns whether the value at the given person index passes all validators.
+   * Used for household follow-up inputs so errors can be shown next to the correct person.
+   * @param stride 1 for single-value inputs (MONEY, SELECT, CHECKBOX), 3 for DATE
    */
-  public static String householdMemberName(String householdMemberNameAndId, String translatedYou) {
-    String[] householdMemberInfo = householdMemberNameAndId.split(" ");
-    String childId = householdMemberInfo[householdMemberInfo.length - 1];
-    String[] fullNameParts = Arrays
-    		.copyOfRange(householdMemberInfo, 0, householdMemberInfo.length - 1);
-    
-    if ("applicant".equals(childId)) {
-      return StringUtils.join(fullNameParts, " ") + " " + translatedYou;
-    }
-
-    return StringUtils.join(fullNameParts, " ");
+  public boolean validForIndex(PageData pageData, @Nullable ApplicationData applicationData,
+      int personIndex, int stride) {
+    List<String> slice = valueSliceForIndex(personIndex, stride);
+    return validators.stream()
+        .filter(validator -> validatorShouldRun(validator, pageData, applicationData))
+        .allMatch(validator -> {
+          Validation validation = validator.getValidation();
+          if (validator.getStartDateInputName() != null && pageData != null) {
+            List<String> startSlice = getStartDateSlice(pageData, validator.getStartDateInputName(), personIndex);
+            return Validation.applyWithPageDataForSlice(validation, slice, startSlice, validator);
+          }
+          return validation.apply(slice);
+        });
   }
-  
-	/**
-	 * Tests if String name is in a list of names, of which each name contains the name plus id.
-	 * This method is different than Arraylist.contains() which simply matches each string.
-	 * @param listOfNames
-	 * @param name
-	 * @return
-	 */
-	public static boolean listOfNamesContainsName(Collection<String> listOfNames, String name) {
-		return listOfNames.stream().filter(k -> k.equals(name)).collect(Collectors.toList()).size() > 0;
-	}
 
-	/**
-	 * Whether the follow-up input has a validation error for the given person index only.
-	 * Used so errors can be shown next to the correct person (applicant = 0, first household member = 1, etc.).
-	 */
-	public static boolean hasErrorAtIndex(PageData data, FormInputTemplate followUp, int personIndex) {
-		if (data == null || followUp == null) return false;
-		org.codeforamerica.shiba.pages.data.InputData inputData = data.get(followUp.getName());
-		if (inputData == null) return false;
-		int stride = followUp.getType() == FormInputType.DATE ? 3 : 1;
-		return !inputData.validForIndex(data, null, personIndex, stride);
-	}
+  /**
+   * Returns error message keys for the value at the given person index only.
+   */
+  public List<String> errorMessageKeysForIndex(PageData pageData, @Nullable ApplicationData applicationData,
+      int personIndex, int stride) {
+    List<String> slice = valueSliceForIndex(personIndex, stride);
+    return errorMessageKeysImplWithSlice(slice, pageData, applicationData, personIndex, stride);
+  }
 
-	/**
-	 * Error message keys for the follow-up input at the given person index only.
-	 * Use to display errors next to the correct person in household follow-up inputs.
-	 */
-	public static List<String> getErrorKeysForIndex(PageData data, FormInputTemplate followUp, int personIndex) {
-		if (data == null || followUp == null) return Collections.emptyList();
-		org.codeforamerica.shiba.pages.data.InputData inputData = data.get(followUp.getName());
-		if (inputData == null) return Collections.emptyList();
-		int stride = followUp.getType() == FormInputType.DATE ? 3 : 1;
-		return inputData.errorMessageKeysForIndex(data, null, personIndex, stride);
+  private List<String> valueSliceForIndex(int personIndex, int stride) {
+    int from = personIndex * stride;
+    int to = Math.min(value.size(), from + stride);
+    if (from >= value.size()) {
+      return stride == 3 ? List.of("", "", "") : List.of("");
+    }
+    if (stride == 3) {
+      if (to - from == 3) return value.subList(from, to);
+      List<String> out = new ArrayList<>();
+      for (int i = 0; i < 3; i++) out.add(from + i < value.size() ? value.get(from + i) : "");
+      return out;
+    }
+    return List.of(from < value.size() ? value.get(from) : "");
+  }
+
+  private List<String> getStartDateSlice(PageData pageData, String startDateInputName, int personIndex) {
+    InputData startData = pageData.get(startDateInputName);
+    if (startData == null || startData.getValue() == null) return List.of("", "", "");
+    List<String> v = startData.getValue();
+    int from = personIndex * 3;
+    if (from + 3 > v.size()) return List.of("", "", "");
+    return new ArrayList<>(v.subList(from, from + 3));
+  }
+
+  private List<String> errorMessageKeysImpl(List<String> valuesToValidate, PageData pageData,
+      @Nullable ApplicationData applicationData) {
+    return validators.stream()
+        .filter(validator ->
+            (validator.getCondition() == null
+                || (applicationData != null
+                    ? validator.getCondition().satisfies(pageData, applicationData)
+                    : validator.getCondition().satisfies(pageData)))
+            && !(validator.getStartDateInputName() != null
+                ? Validation.applyWithPageData(validator.getValidation(), valuesToValidate, pageData, validator)
+                : validator.getValidation().apply(valuesToValidate)))
+        .map(Validator::getErrorMessageKey).collect(Collectors.toList());
+  }
+
+  private List<String> errorMessageKeysImplWithSlice(List<String> slice, PageData pageData,
+      @Nullable ApplicationData applicationData, int personIndex, int stride) {
+    return validators.stream()
+        .filter(validator ->
+            (validator.getCondition() == null
+                || (applicationData != null
+                    ? validator.getCondition().satisfies(pageData, applicationData)
+                    : validator.getCondition().satisfies(pageData)))
+        .filter(validator -> {
+          if (validator.getStartDateInputName() != null && pageData != null) {
+            List<String> startSlice = getStartDateSlice(pageData, validator.getStartDateInputName(), personIndex);
+            return !Validation.applyWithPageDataForSlice(validator.getValidation(), slice, startSlice, validator);
+          }
+          return !validator.getValidation().apply(slice);
+        })
+        .map(Validator::getErrorMessageKey).collect(Collectors.toList());
+  }
+
+  public String getValue(int i) {
+    return this.getValue().get(i);
+  }
+
+  public void setValue(String newValue, int i) {
+    this.value.set(i, newValue);
+  }
+
+	@Override
+	public String toString() {
+		return "InputData [value=" + value + ", validators=" + validators + "]";
 	}
-	
-	public static int findNumberOfHouseholdMembers(Subworkflow datasourcePages) {
-		return datasourcePages.size();
-	}
-	
-	/**
-	 * Create a HashMap that is used to retrieve a date for a particular id.
-	 * @param ids
-	 * @param dates
-	 * @return
-	 */
-	public static Map<String, List<String>> createDateMap(List<String> ids, List<String> dates) {
-		Map<String, List<String>> retVal = new HashMap<String, List<String>>();
-		Iterator<String> ik = ids.iterator();
-		Iterator<List<String>> iv = partitionDateList(dates).iterator();
-		while (ik.hasNext() && iv.hasNext()) {
-			retVal.put(ik.next(), iv.next());
-		}
-		return retVal;
-	}
-	
-	private static <T> Collection<List<T>> partitionDateList(List<T> inputList) {
-		final AtomicInteger counter = new AtomicInteger(0);
-		return inputList.stream().collect(Collectors.groupingBy(s -> counter.getAndIncrement() / 3)).values();
-	}
-	
-	/**
-	 * Builds a list of person IDs for the citizenship page
-	 * Always includes "applicant" first, then adds household member IDs
-	 * creates a predictable, ordered list of all people who need to answer the citizenship question, 
-	 * which the HTML then uses to display each person's name and collect their citizenship status in the correct order.
-	 */
-	public static List<String> buildCitizenshipIdList(Subworkflow householdSubworkflow) {
-	    List<String> idList = new ArrayList<>();
-	    
-	    // Always add applicant first
-	    idList.add("applicant");
-	    
-	    // Add household members if they exist
-	    if (householdSubworkflow != null && !householdSubworkflow.isEmpty()) {
-	        for (int i = 0; i < householdSubworkflow.size(); i++) {
-	            idList.add(householdSubworkflow.get(i).getId().toString());
-	        }
-	    }
-	    
-	    return idList;
-	}	
-	
-  
 }
