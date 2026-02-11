@@ -41,7 +41,7 @@
 			<div class="question-with-follow-up__question">
 				<div class="form-group">
 					<label th:for="householdMember-me" class="checkbox display-flex" style="margin-bottom: 1rem;">
-						<input type="checkbox" th:id="householdMember-me" th:value="${yourFullName} + ' applicant'"
+						<input type="checkbox" th:id="householdMember-me" th:value="${yourFullName + ' applicant'}"
 							th:name="${formInputName}" th:checked="${youIsChecked}" 
 							th:attrappend="data-follow-up=|#${input.name}-follow-up|">
 						<span th:text="|${yourFullName} #{general.you}|"> </span>
@@ -145,14 +145,14 @@
 			</div>
 		</div>
 		<th:block th:each="iteration, iterationStat: ${input.options.subworkflows != null and input.options.subworkflows.get('household') != null ? input.options.subworkflows.get('household') : T(java.util.Collections).emptyList()}"
-			th:with="fullName=${iteration.getPagesData().get('householdMemberInfo').get('firstName').value[0]} + ' ' + ${iteration.getPagesData().get('householdMemberInfo').get('lastName').value[0]}">
+			th:with="fullName=${iteration.getPagesData().get('householdMemberInfo').get('firstName').value[0] + ' ' + iteration.getPagesData().get('householdMemberInfo').get('lastName').value[0]}">
 			<div class="question-with-follow-up" style="margin-bottom: 1rem;">
 				<div class="question-with-follow-up__question">
 					<div class="form-group">
 
 						<label th:for="|${formInputName}${iterationStat.index}|" class="checkbox display-flex">
 							<input type="checkbox" th:id="|${formInputName}${iterationStat.index}|"
-								th:value="${fullName} + ' ' + ${iteration.id}" th:name="${formInputName}"
+								th:value="${fullName + ' ' + iteration.id}" th:name="${formInputName}"
 								th:checked="${T(org.codeforamerica.shiba.pages.PageUtils).listOfNamesContainsName(sortedHouseholdMembers, fullName + ' ' + iteration.id)}"
 								th:attrappend="data-follow-up=|#${input.name}${iterationStat.index}-follow-up|">
 							<span th:text="${fullName}"></span>
@@ -169,7 +169,7 @@
                     			inputFollowupHasErrors=!${#arrays.isEmpty(followupDataError)},
 						         errorMessage=${#messages.msg(followupDataError)}
 						         ">
-						<div class="form-group" th:classappend="${inputFollowupsHasErrors} ? 'form-group--error' : ''">
+						<div class="form-group" th:classappend="${inputFollowupHasErrors} ? 'form-group--error' : ''">
 							<div th:replace="~{fragments/form-question-prompt :: formQuestionPrompt(${followUp})}"></div>
 							<p class="text--help" th:id="|${followUp.name}${iterationStat.index}-help-message|" th:if="${followUp.helpMessageKey != null}"
 								th:utext="#{${followUp.helpMessageKey}}"></p>
@@ -247,7 +247,7 @@
            						</label>
 								</div>
 							</th:block>
- 						<div th:if="${inputFollowupsHasErrors}">
+ 						<div th:if="${inputFollowupHasErrors}">
 							<p class="text--error" th:aria-label="#{error.title}" th:id="${input.name} + '-error-p'">
 								<i class="icon-warning" th:id="${input.name + '-error-icon'}"></i>
 								<span th:id="${input.name} + '-error-message-'" th:class="${input.name + '-error'}"
