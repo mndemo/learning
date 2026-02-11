@@ -52,9 +52,7 @@
 				<th:block th:each="youFollowUp: ${input.followUps}"
 					th:with="currentFollowupData=${data.get(youFollowUp.name)},
 					         currentFollowupFormName=${T(org.codeforamerica.shiba.pages.PageUtils).getFormInputName(youFollowUp.name)},
-					         youFollowupDataError=${youFollowUp.validationErrorMessageKeys},
-					         errorMessage=${#messages.msg(youFollowupDataError)},
-                    		 inputFollowupsHasErrors=!${#arrays.isEmpty(youFollowupDataError)}
+					         inputFollowupsHasErrors=!${#lists.isEmpty(youFollowUp.validationErrorMessageKeys)}
 					         ">
 					<div th:replace="~{fragments/form-question-prompt :: formQuestionPrompt(${youFollowUp})}"></div>
 					<p class="text--help" th:id="${youFollowUp.name + '-help-message'}" th:if="${youFollowUp.helpMessageKey != null}"
@@ -89,9 +87,9 @@
 						</div>
 						<div th:case="${T(org.codeforamerica.shiba.pages.config.FormInputType).DATE}" class="form-group"
 							th:with="
-							month=${(#lists.size(currentFollowupData.value) > 1 and !currentFollowupData.value[0].isEmpty()) ? currentFollowupData.value[0] : '' },
-							date=${(#lists.size(currentFollowupData.value) > 2 and !currentFollowupData.value[1].isEmpty()) ? currentFollowupData.value[1] : '' },
-							year=${(#lists.size(currentFollowupData.value) > 3 and !currentFollowupData.value[2].isEmpty()) ? currentFollowupData.value[2] : '' }
+							month=${(#lists.size(currentFollowupData.value) > 0 and !currentFollowupData.value[0].isEmpty()) ? currentFollowupData.value[0] : ''},
+							date=${(#lists.size(currentFollowupData.value) > 1 and !currentFollowupData.value[1].isEmpty()) ? currentFollowupData.value[1] : ''},
+							year=${(#lists.size(currentFollowupData.value) > 2 and !currentFollowupData.value[2].isEmpty()) ? currentFollowupData.value[2] : ''}
 							">
 							<fieldset class="date-input">
 								<p class="text--help">
@@ -133,19 +131,16 @@
 					                <span th:utext="#{${message}}"></span>
            						</label>
 						</div>
-						<div th:if="${inputFollowupsHasErrors && youIsChecked}">
-							<p class="text--error" th:aria-label="#{error.title}" th:id="${input.name} + '-error-p'">
-								<i class="icon-warning" th:id="${input.name + '-error-icon'}"></i>
-								<span th:id="${input.name} + '-error-message-'" th:class="${input.name + '-error'}"
-									th:text="${errorMessage}"></span>
-							</p>
-						</div>
+						<th:block th:if="${youIsChecked}" th:with="inputData=${data.get(youFollowUp.name)}">
+							<div th:replace="~{fragments/inputErrorFragment :: validationError(${data}, ${youFollowUp})}"></div>
+						</th:block>
 					</th:block>
 				</th:block>
 			</div>
 		</div>
 		<th:block th:each="iteration, iterationStat: ${input.options.subworkflows != null and input.options.subworkflows.get('household') != null ? input.options.subworkflows.get('household') : T(java.util.Collections).emptyList()}"
-			th:with="fullName=${iteration.getPagesData().get('householdMemberInfo').get('firstName').value[0] + ' ' + iteration.getPagesData().get('householdMemberInfo').get('lastName').value[0]}">
+			th:with="fullName=${iteration.getPagesData().get('householdMemberInfo').get('firstName').value[0] + ' ' + iteration.getPagesData().get('householdMemberInfo').get('lastName').value[0]},
+			         memberIsChecked=${T(org.codeforamerica.shiba.pages.PageUtils).listOfNamesContainsName(sortedHouseholdMembers, fullName + ' ' + iteration.id)}">
 			<div class="question-with-follow-up" style="margin-bottom: 1rem;">
 				<div class="question-with-follow-up__question">
 					<div class="form-group">
@@ -165,9 +160,7 @@
 					<th:block th:each="followUp: ${input.followUps}"
 						th:with="currentFollowupData=${data.get(followUp.name)},
 						         currentFollowupFormName=${T(org.codeforamerica.shiba.pages.PageUtils).getFormInputName(followUp.name)},
-						         followupDataError=${followUp.validationErrorMessageKeys},
-                    			inputFollowupHasErrors=!${#arrays.isEmpty(followupDataError)},
-						         errorMessage=${#messages.msg(followupDataError)}
+						         inputFollowupHasErrors=!${#lists.isEmpty(followUp.validationErrorMessageKeys)}
 						         ">
 						<div class="form-group" th:classappend="${inputFollowupHasErrors} ? 'form-group--error' : ''">
 							<div th:replace="~{fragments/form-question-prompt :: formQuestionPrompt(${followUp})}"></div>
@@ -247,13 +240,9 @@
            						</label>
 								</div>
 							</th:block>
- 						<div th:if="${inputFollowupHasErrors}">
-							<p class="text--error" th:aria-label="#{error.title}" th:id="${input.name} + '-error-p'">
-								<i class="icon-warning" th:id="${input.name + '-error-icon'}"></i>
-								<span th:id="${input.name} + '-error-message-'" th:class="${input.name + '-error'}"
-									th:text="${errorMessage}"></span>
-							</p>
-						</div> 
+ 						<th:block th:if="${memberIsChecked}" th:with="inputData=${data.get(followUp.name)}">
+							<div th:replace="~{fragments/inputErrorFragment :: validationError(${data}, ${followUp})}"></div>
+						</th:block>
 						</div>
 						
 					</th:block>
@@ -262,13 +251,7 @@
 				
 			</div>
 		</th:block>
-		<div th:if="!${#arrays.isEmpty(inputDataErrors)}">
-			<p class="text--error" th:aria-label="#{error.title}" th:id="${input.name} + '-error-p'">
-				<i class="icon-warning" th:id="${input.name + '-error-icon'}"></i>
-				<span th:id="${input.name} + '-error-message-'" th:class="${input.name + '-error'}"
-					th:text="#{${inputDataErrors[0]}}"></span>
-			</p>
-		</div>
+		<div th:replace="~{fragments/inputErrorFragment :: validationError(${data}, ${input})}"></div>
 
 	</div>
 </th:block>
