@@ -98,7 +98,7 @@
 									th:value="${year}" th:placeholder="yyyy"/>
 							</fieldset>
 						</div>
-						<!-- APPLICANT: CHECKBOX (e.g. No end date) - value contains NO_END_DATE_0 -->
+						<!-- APPLICANT: CHECKBOX (e.g. No end date) - value contains NO_END_DATE_0; hidden when unchecked so list length matches person count -->
 						<div th:case="${T(org.codeforamerica.shiba.pages.config.FormInputType).CHECKBOX}" class="form-group"
 							th:with="
 								message=${applicantFollowUp.options != null and applicantFollowUp.options.selectableOptions != null and !applicantFollowUp.options.selectableOptions.isEmpty() ? applicantFollowUp.options.selectableOptions.get(0).messageKey : 'general.yes'},
@@ -109,6 +109,7 @@
 								<input type="checkbox" th:id="no_end_date_checkbox"
 									th:value="NO_END_DATE_0" th:name="${currentFollowupFormName}"
 									th:checked="${isChecked}">
+								<input th:if="${!isChecked}" type="hidden" th:name="${currentFollowupFormName}" value="">
 								<span th:utext="#{${message}}"></span>
 							</label>
 						</div>
@@ -209,7 +210,7 @@
 											th:value="${year}" th:placeholder="yyyy"/>
 									</fieldset>
 								</div>
-								<!-- MEMBER: CHECKBOX (No end date) - value contains NO_END_DATE_1, NO_END_DATE_2, ... -->
+								<!-- MEMBER: CHECKBOX (No end date) - value contains NO_END_DATE_1, NO_END_DATE_2, ...; hidden when unchecked so list length matches person count -->
 								<div th:case="${T(org.codeforamerica.shiba.pages.config.FormInputType).CHECKBOX}" class="form-group"
 									th:with="
 										noEndMsgKey=${followUp.options != null and followUp.options.selectableOptions != null and !followUp.options.selectableOptions.isEmpty() ? followUp.options.selectableOptions.get(0).messageKey : 'general.yes'},
@@ -223,6 +224,7 @@
 											th:value="${noEndVal}"
 											th:name="${currentFollowupFormName}"
 											th:checked="${isChecked}">
+										<input th:if="${!isChecked}" type="hidden" th:name="${currentFollowupFormName}" value="">
 										<span th:utext="#{${noEndMsgKey}}"></span>
 									</label>
 								</div>
