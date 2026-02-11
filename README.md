@@ -1,239 +1,184 @@
-<!DOCTYPE html>
-<html th:lang="${#locale.language}" xmlns:th="http://www.thymeleaf.org">
-<!--
-  HOUSEHOLD OPTIONS CHECKBOXES WITH FOLLOW-UP
-  Renders: (1) main checkbox list = which household members get this option (e.g. income type),
-           (2) for each selected person, a follow-up block (amount, frequency, start date, end date, no end date).
-  VALUE LAYOUT: Single-value (MONEY, SELECT, CHECKBOX) = value[0] applicant, value[1] 1st member, ...
-  DATE = value[0,1,2] applicant month/day/year, value[3,4,5] 1st member, ...
-  No end date CHECKBOX = NO_END_DATE_0 (applicant), NO_END_DATE_1 (1st member), ...
-  Person index: applicant = 0, first household member = 1 (iterationStat.count), etc.
--->
-<th:block th:fragment="householdOptionsCheckboxesWithFollowup (input, data)"
-	th:with="
-		formInputName=${T(org.codeforamerica.shiba.pages.PageUtils).getFormInputName(input.name)},
-		inputData=${data.get(input.name)},
-		inputDataErrors=${input.validationErrorMessageKeys},
-		inputDataNames=${data.get(input.name)},
-		sortedHouseholdMembers=${T(org.codeforamerica.shiba.pages.PageUtils).householdMemberSort(inputDataNames.value)},
-		hasError=${!data.isValid() and !inputData.valid(data)},
-		personalInfoPage=${(input.options != null and input.options.datasources != null and input.options.datasources.get('personalInfo') != null) ? input.options.datasources.get('personalInfo') : null},
-		yourFullName=${personalInfoPage != null and personalInfoPage.get('firstName') != null and !personalInfoPage.get('firstName').value.isEmpty() and personalInfoPage.get('lastName') != null and !personalInfoPage.get('lastName').value.isEmpty() ? (personalInfoPage.get('firstName').value[0] + ' ' + personalInfoPage.get('lastName').value[0]) : 'You'},
-		needsAriaLabel=${input.needsAriaLabel()},
-		youIsChecked=${T(org.codeforamerica.shiba.pages.PageUtils).listOfNamesContainsName(sortedHouseholdMembers, yourFullName + ' applicant')},
-		noPersonsChecked=${#arrays.isEmpty(sortedHouseholdMembers)}
-	">
-	<div class="form-group" th:classappend="${hasError} ? 'form-group--error' : ''">
-		<!-- APPLICANT ROW: "You" checkbox + follow-up inputs (person index 0) -->
-		<div class="question-with-follow-up" style="margin-bottom: 1rem;">
-			<div class="question-with-follow-up__question">
-				<div class="form-group">
-					<label th:for="householdMember-me" class="checkbox display-flex" style="margin-bottom: 1rem;">
-						<input type="checkbox" th:id="householdMember-me"
-							th:value="${yourFullName + ' applicant'}"
-							th:name="${formInputName}" th:checked="${youIsChecked}"
-							th:attrappend="data-follow-up=|#${input.name}-follow-up|">
-						<span th:text="|${yourFullName} #{general.you}|"> </span>
-					</label>
-				</div>
-			</div>
-			<!-- Applicant follow-up: all follow-up inputs use value index 0 (single-value) or 0,1,2 (DATE) -->
-			<div class="question-with-follow-up__follow-up" th:id="|${input.name}-follow-up|">
-				<th:block th:each="applicantFollowUp: ${input.followUps}" th:with="currentFollowupData=${data.get(applicantFollowUp.name)}, currentFollowupFormName=${T(org.codeforamerica.shiba.pages.PageUtils).getFormInputName(applicantFollowUp.name)}">
-					<div th:replace="~{fragments/form-question-prompt :: formQuestionPrompt(${applicantFollowUp})}"></div>
-					<p class="text--help" th:id="${applicantFollowUp.name + '-help-message'}" th:if="${applicantFollowUp.helpMessageKey != null}"
-						th:utext="#{${applicantFollowUp.helpMessageKey}}"></p>
-					<th:block th:switch="${applicantFollowUp.type}">
-						<!-- APPLICANT: MONEY - value[0] -->
-						<div class="form-group" th:case="${T(org.codeforamerica.shiba.pages.config.FormInputType).MONEY}" th:classappend="${youIsChecked and !data.get(applicantFollowUp.name).valid(data)} ? 'form-group--error' : ''">
-							<div class="text-input-group">
-								<div class="text-input-group__prefix" style="background-color:#FFFFFF">$</div>
-								<input type="text" class="text-input"
-									th:aria-describedby="${applicantFollowUp.helpMessageKey != null ? applicantFollowUp.name + '-help-message' : ''}"
-									th:aria-labelledby="${needsAriaLabel ? applicantFollowUp.name + '-label' : ''}"
-									th:aria-invalid="${hasError}"
-									th:id="|${applicantFollowUp.name}|" th:name="${currentFollowupFormName}"
-									th:value="${(#lists.size(currentFollowupData.value) > 0 and currentFollowupData.value[0] != null and !currentFollowupData.value[0].isEmpty()) ? currentFollowupData.value[0] : ''}">
-								<div class="text-input-group__postfix" style="white-space: nowrap; background-color:#FFFFFF"
-									th:if="${applicantFollowUp.inputPostfix != null}" th:text="#{${applicantFollowUp.inputPostfix}}"></div>
-							</div>
-						</div>
-						<!-- APPLICANT: SELECT (e.g. frequency) - value[0] -->
-						<div th:case="${T(org.codeforamerica.shiba.pages.config.FormInputType).SELECT}" class="form-group">
-							<div class="select">
-								<select th:id="${applicantFollowUp.name}" class="select__element"
-									th:name="${currentFollowupFormName}"
-									th:aria-invalid="${hasError}">
-									<th:block th:each="option: ${applicantFollowUp.options.selectableOptions}">
-										<option th:value="${option.value}" th:text="#{${option.messageKey}}"
-											th:selected="${#lists.size(currentFollowupData.value) > 0 and currentFollowupData.value[0] == option.value}"></option>
-									</th:block>
-								</select>
-							</div>
-						</div>
-						<!-- APPLICANT: DATE (start/end) - value[0]=month, value[1]=day, value[2]=year -->
-						<div th:case="${T(org.codeforamerica.shiba.pages.config.FormInputType).DATE}" class="form-group"
-							th:with="
-								month=${(#lists.size(currentFollowupData.value) > 0 and currentFollowupData.value[0] != null and !currentFollowupData.value[0].isEmpty()) ? currentFollowupData.value[0] : ''},
-								date=${(#lists.size(currentFollowupData.value) > 1 and currentFollowupData.value[1] != null and !currentFollowupData.value[1].isEmpty()) ? currentFollowupData.value[1] : ''},
-								year=${(#lists.size(currentFollowupData.value) > 2 and currentFollowupData.value[2] != null and !currentFollowupData.value[2].isEmpty()) ? currentFollowupData.value[2] : ''}
-							">
-							<fieldset class="date-input">
-								<p class="text--help">
-									<label th:for="${applicantFollowUp.name + '-month'}" th:text="#{general.month}"></label>
-									&nbsp;/&nbsp;
-									<label th:for="${applicantFollowUp.name + '-day'}" th:text="#{general.day}"></label>
-									&nbsp;/&nbsp;
-									<label th:for="${applicantFollowUp.name + '-year'}" th:text="#{general.year}"></label>
-								</p>
-								<input type="text" inputmode="numeric" maxlength="2" class="text-input form-width--2-character dob-input"
-									th:id="${applicantFollowUp.name + '-month'}" th:name="${currentFollowupFormName}"
-									th:value="${month}" th:placeholder="mm"/>
-								&nbsp;/&nbsp;
-								<input type="text" inputmode="numeric" maxlength="2" class="text-input form-width--2-character dob-input"
-									th:id="${applicantFollowUp.name + '-day'}" th:name="${currentFollowupFormName}"
-									th:value="${date}" th:placeholder="dd"/>
-								&nbsp;/&nbsp;
-								<input type="text" inputmode="numeric" maxlength="4" class="text-input form-width--4-character dob-input"
-									th:id="${applicantFollowUp.name + '-year'}" th:name="${currentFollowupFormName}"
-									th:value="${year}" th:placeholder="yyyy"/>
-							</fieldset>
-						</div>
-						<!-- APPLICANT: CHECKBOX (e.g. No end date) - value contains NO_END_DATE_0 -->
-						<div th:case="${T(org.codeforamerica.shiba.pages.config.FormInputType).CHECKBOX}" class="form-group"
-							th:with="
-								message=${applicantFollowUp.options.selectableOptions.get(0).messageKey},
-								checkboxValues=${currentFollowupData.value},
-								isChecked=${checkboxValues != null and checkboxValues.contains('NO_END_DATE_0')}
-							">
-							<label th:for="no_end_date_checkbox" class="checkbox">
-								<input type="checkbox" th:id="no_end_date_checkbox"
-									th:value="NO_END_DATE_0" th:name="${currentFollowupFormName}"
-									th:checked="${isChecked}">
-								<span th:utext="#{${message}}"></span>
-							</label>
-						</div>
-					</th:block>
-					<!-- Applicant follow-up errors: use standard fragment when applicant is checked and this follow-up has errors -->
-					<th:block th:if="${youIsChecked}" th:with="inputData=${data.get(applicantFollowUp.name)}">
-						<div th:replace="~{fragments/inputErrorFragment :: validationError(${data}, ${applicantFollowUp})}"></div>
-					</th:block>
-				</th:block>
-			</div>
-		</div>
+package org.codeforamerica.shiba.pages;
 
-		<!-- HOUSEHOLD MEMBER ROWS: each member checkbox + follow-up (person index = iterationStat.count: 1, 2, 3, ...) -->
-		<th:block th:each="iteration, iterationStat: ${input.options.subworkflows != null and input.options.subworkflows.get('household') != null ? input.options.subworkflows.get('household') : T(java.util.Collections).emptyList()}"
-			th:with="
-				fullName=${iteration.getPagesData().get('householdMemberInfo').get('firstName').value[0] + ' ' + iteration.getPagesData().get('householdMemberInfo').get('lastName').value[0]},
-				memberIsChecked=${T(org.codeforamerica.shiba.pages.PageUtils).listOfNamesContainsName(sortedHouseholdMembers, fullName + ' ' + iteration.id)}
-			">
-			<div class="question-with-follow-up" style="margin-bottom: 1rem;">
-				<div class="question-with-follow-up__question">
-					<div class="form-group">
-						<label th:for="|${formInputName}${iterationStat.index}|" class="checkbox display-flex">
-							<input type="checkbox" th:id="|${formInputName}${iterationStat.index}|"
-								th:value="${fullName + ' ' + iteration.id}" th:name="${formInputName}"
-								th:checked="${memberIsChecked}"
-								th:attrappend="data-follow-up=|#${input.name}${iterationStat.index}-follow-up|">
-							<span th:text="${fullName}"></span>
-						</label>
-					</div>
-				</div>
-				<!-- Member follow-up: single-value inputs use value[iterationStat.count]; DATE uses value[count*3], value[count*3+1], value[count*3+2] -->
-				<div class="question-with-follow-up__follow-up" th:id="|${input.name}${iterationStat.index}-follow-up|">
-					<th:block th:each="followUp: ${input.followUps}"
-						th:with="
-							currentFollowupData=${data.get(followUp.name)},
-							currentFollowupFormName=${T(org.codeforamerica.shiba.pages.PageUtils).getFormInputName(followUp.name)}
-						">
-						<div class="form-group" th:classappend="${memberIsChecked and !data.get(followUp.name).valid(data)} ? 'form-group--error' : ''">
-							<div th:replace="~{fragments/form-question-prompt :: formQuestionPrompt(${followUp})}"></div>
-							<p class="text--help" th:id="${followUp.name + iterationStat.index + '-help-message'}" th:if="${followUp.helpMessageKey != null}"
-								th:utext="#{${followUp.helpMessageKey}}"></p>
-							<th:block th:switch="${followUp.type}">
-								<!-- MEMBER: MONEY - value[iterationStat.count] -->
-								<div class="text-input-group" th:case="${T(org.codeforamerica.shiba.pages.config.FormInputType).MONEY}">
-									<div class="text-input-group__prefix" style="background-color: #FFFFFF">$</div>
-									<input type="text" class="text-input"
-										th:aria-describedby="${followUp.helpMessageKey != null ? followUp.name + iterationStat.index + '-help-message' : ''}"
-										th:aria-labelledby="${needsAriaLabel ? followUp.name + '-label' : ''}"
-										th:aria-invalid="${hasError}"
-										th:id="|${followUp.name}${iterationStat.index}|" th:name="${currentFollowupFormName}"
-										th:value="${(iterationStat.count < currentFollowupData.value.size() and currentFollowupData.value[iterationStat.count] != null and !currentFollowupData.value[iterationStat.count].isEmpty()) ? currentFollowupData.value[iterationStat.count] : ''}">
-									<div class="text-input-group__postfix" style="white-space: nowrap; background-color: #FFFFFF"
-										th:if="${followUp.inputPostfix != null}" th:text="#{${followUp.inputPostfix}}"></div>
-								</div>
-								<!-- MEMBER: SELECT - value[iterationStat.count] -->
-								<div th:case="${T(org.codeforamerica.shiba.pages.config.FormInputType).SELECT}" class="form-group">
-									<div class="select">
-										<select th:id="|${followUp.name}${iterationStat.index}|" class="select__element"
-											th:name="${currentFollowupFormName}"
-											th:aria-invalid="${hasError}">
-											<th:block th:each="option: ${followUp.options.selectableOptions}">
-												<option th:value="${option.value}" th:text="#{${option.messageKey}}"
-													th:selected="${iterationStat.count < currentFollowupData.value.size() and currentFollowupData.value[iterationStat.count] == option.value}"></option>
-											</th:block>
-										</select>
-									</div>
-								</div>
-								<!-- MEMBER: DATE - value[count*3]=month, value[count*3+1]=day, value[count*3+2]=year -->
-								<div th:case="${T(org.codeforamerica.shiba.pages.config.FormInputType).DATE}" class="form-group"
-									th:with="
-										month=${(#lists.size(currentFollowupData.value) > (iterationStat.count * 3) and currentFollowupData.value[iterationStat.count * 3] != null and !currentFollowupData.value[iterationStat.count * 3].isEmpty()) ? currentFollowupData.value[iterationStat.count * 3] : ''},
-										date=${(#lists.size(currentFollowupData.value) > (iterationStat.count * 3 + 1) and currentFollowupData.value[iterationStat.count * 3 + 1] != null and !currentFollowupData.value[iterationStat.count * 3 + 1].isEmpty()) ? currentFollowupData.value[iterationStat.count * 3 + 1] : ''},
-										year=${(#lists.size(currentFollowupData.value) > (iterationStat.count * 3 + 2) and currentFollowupData.value[iterationStat.count * 3 + 2] != null and !currentFollowupData.value[iterationStat.count * 3 + 2].isEmpty()) ? currentFollowupData.value[iterationStat.count * 3 + 2] : ''}
-									">
-									<fieldset class="date-input">
-										<p class="text--help">
-											<label th:for="|${followUp.name}${iterationStat.index}-month|" th:text="#{general.month}"></label>
-											&nbsp;/&nbsp;
-											<label th:for="|${followUp.name}${iterationStat.index}-day|" th:text="#{general.day}"></label>
-											&nbsp;/&nbsp;
-											<label th:for="|${followUp.name}${iterationStat.index}-year|" th:text="#{general.year}"></label>
-										</p>
-										<input type="text" inputmode="numeric" maxlength="2" class="text-input form-width--2-character dob-input"
-											th:id="|${followUp.name}${iterationStat.index}-month|" th:name="${currentFollowupFormName}"
-											th:value="${month}" th:placeholder="mm"/>
-										&nbsp;/&nbsp;
-										<input type="text" inputmode="numeric" maxlength="2" class="text-input form-width--2-character dob-input"
-											th:id="|${followUp.name}${iterationStat.index}-day|" th:name="${currentFollowupFormName}"
-											th:value="${date}" th:placeholder="dd"/>
-										&nbsp;/&nbsp;
-										<input type="text" inputmode="numeric" maxlength="4" class="text-input form-width--4-character dob-input"
-											th:id="|${followUp.name}${iterationStat.index}-year|" th:name="${currentFollowupFormName}"
-											th:value="${year}" th:placeholder="yyyy"/>
-									</fieldset>
-								</div>
-								<!-- MEMBER: CHECKBOX (No end date) - value contains NO_END_DATE_ + iterationStat.count -->
-								<div th:case="${T(org.codeforamerica.shiba.pages.config.FormInputType).CHECKBOX}" class="form-group"
-									th:with="
-										message=${followUp.options.selectableOptions.get(0).messageKey},
-										checkboxValues=${currentFollowupData.value},
-										isChecked=${checkboxValues != null and checkboxValues.contains('NO_END_DATE_' + iterationStat.count)}
-									">
-									<label th:for="no_end_date_checkbox" class="checkbox">
-										<input type="checkbox"
-											th:id="|${followUp.name}${iterationStat.count}|"
-											th:value="|${followUp.options.selectableOptions.get(0).value}_${iterationStat.count}|"
-											th:name="${currentFollowupFormName}"
-											th:checked="${isChecked}">
-										<span th:utext="#{${message}}"></span>
-									</label>
-								</div>
-							</th:block>
-						</div>
-						<!-- Member follow-up errors: use standard fragment when member is checked and this follow-up has errors -->
-						<th:block th:if="${memberIsChecked}" th:with="inputData=${data.get(followUp.name)}">
-							<div th:replace="~{fragments/inputErrorFragment :: validationError(${data}, ${followUp})}"></div>
-						</th:block>
-					</th:block>
-				</div>
-			</div>
-		</th:block>
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-		<!-- Main input error (e.g. "select at least one") -->
-		<div th:replace="~{fragments/inputErrorFragment :: validationError(${data}, ${input})}"></div>
-	</div>
-</th:block>
-</html>
+import org.apache.commons.lang3.StringUtils;
+import org.codeforamerica.shiba.pages.config.FormInputTemplate;
+import org.codeforamerica.shiba.pages.config.FormInputType;
+import org.codeforamerica.shiba.pages.data.DatasourcePages;
+import org.codeforamerica.shiba.pages.data.PageData;
+import org.codeforamerica.shiba.pages.data.Subworkflow;
+
+public class PageUtils {
+
+  private static final String WEB_INPUT_ARRAY_TOKEN = "[]";
+
+  private PageUtils() {
+    throw new AssertionError("Cannot instantiate utility class");
+  }
+
+  public static String getFormInputName(String name) {
+    return name + WEB_INPUT_ARRAY_TOKEN;
+  }
+
+  public static String getTitleString(List<String> strings) {
+    if (strings.size() == 1) {
+      return strings.iterator().next();
+    } else {
+      Iterator<String> iterator = strings.iterator();
+      StringBuilder stringBuilder = new StringBuilder(iterator.next());
+      while (iterator.hasNext()) {
+        String string = iterator.next();
+        if (iterator.hasNext()) {
+          stringBuilder.append(", ");
+        } else {
+          stringBuilder.append(" and ");
+        }
+        stringBuilder.append(string);
+      }
+      return stringBuilder.toString();
+    }
+  }
+
+  public static List<String> householdMemberSort(Collection<String> householdMembers) {
+    Stream<String> applicant = householdMembers.stream()
+        .filter(householdMember -> householdMember.endsWith("applicant"));
+    Stream<String> nonApplicantHouseholdMembers = householdMembers.stream()
+        .filter(householdMember -> !householdMember.endsWith("applicant")).sorted();
+
+    return Stream.concat(applicant, nonApplicantHouseholdMembers).collect(Collectors.toList());
+  }
+  
+ 
+  public static List<String> getEligibleSchoolAndChildCareMembers(Collection<String> childrenInNeedOfCare , Collection<String> childrenGoingToSchool) {
+	    return childrenInNeedOfCare.stream()
+	    		.filter(childrenGoingToSchool::contains)
+	    		.collect(Collectors.toList());
+	  }
+ 
+  public static Boolean isProgramEligible(DatasourcePages datasourcePages, String program) {
+    List<String> applicantPrograms = datasourcePages.get("choosePrograms").get("programs")
+        .getValue();
+    boolean applicantHasProgram = applicantPrograms.contains(program);
+    boolean hasHousehold = !datasourcePages.get("householdMemberInfo").isEmpty();
+    boolean householdHasProgram = false;
+    if (hasHousehold) {
+      householdHasProgram = datasourcePages.get("householdMemberInfo").get("programs").getValue()
+          .stream().anyMatch(iteration ->
+              iteration.contains(program));
+    }
+    return applicantHasProgram || householdHasProgram;
+  }
+
+  /**
+   * @param householdMemberNameAndId a string in the form "firstname lastname id".
+   * @param translatedYou                       the string "you" in whatever language the client is using
+   * @return the full name without an id, or "you" if the id is the string "applicant"
+   */
+  public static String householdMemberName(String householdMemberNameAndId, String translatedYou) {
+    String[] householdMemberInfo = householdMemberNameAndId.split(" ");
+    String childId = householdMemberInfo[householdMemberInfo.length - 1];
+    String[] fullNameParts = Arrays
+    		.copyOfRange(householdMemberInfo, 0, householdMemberInfo.length - 1);
+    
+    if ("applicant".equals(childId)) {
+      return StringUtils.join(fullNameParts, " ") + " " + translatedYou;
+    }
+
+    return StringUtils.join(fullNameParts, " ");
+  }
+  
+	/**
+	 * Tests if String name is in a list of names, of which each name contains the name plus id.
+	 * This method is different than Arraylist.contains() which simply matches each string.
+	 * @param listOfNames
+	 * @param name
+	 * @return
+	 */
+	public static boolean listOfNamesContainsName(Collection<String> listOfNames, String name) {
+		return listOfNames.stream().filter(k -> k.equals(name)).collect(Collectors.toList()).size() > 0;
+	}
+
+	/**
+	 * Whether the follow-up input has a validation error for the given person index only.
+	 * Used so errors can be shown next to the correct person (applicant = 0, first household member = 1, etc.).
+	 */
+	public static boolean hasErrorAtIndex(PageData data, FormInputTemplate followUp, int personIndex) {
+		if (data == null || followUp == null) return false;
+		org.codeforamerica.shiba.pages.data.InputData inputData = data.get(followUp.getName());
+		if (inputData == null) return false;
+		int stride = followUp.getType() == FormInputType.DATE ? 3 : 1;
+		return !inputData.validForIndex(data, null, personIndex, stride);
+	}
+
+	/**
+	 * Error message keys for the follow-up input at the given person index only.
+	 * Use to display errors next to the correct person in household follow-up inputs.
+	 */
+	public static List<String> getErrorKeysForIndex(PageData data, FormInputTemplate followUp, int personIndex) {
+		if (data == null || followUp == null) return Collections.emptyList();
+		org.codeforamerica.shiba.pages.data.InputData inputData = data.get(followUp.getName());
+		if (inputData == null) return Collections.emptyList();
+		int stride = followUp.getType() == FormInputType.DATE ? 3 : 1;
+		return inputData.errorMessageKeysForIndex(data, null, personIndex, stride);
+	}
+	
+	public static int findNumberOfHouseholdMembers(Subworkflow datasourcePages) {
+		return datasourcePages.size();
+	}
+	
+	/**
+	 * Create a HashMap that is used to retrieve a date for a particular id.
+	 * @param ids
+	 * @param dates
+	 * @return
+	 */
+	public static Map<String, List<String>> createDateMap(List<String> ids, List<String> dates) {
+		Map<String, List<String>> retVal = new HashMap<String, List<String>>();
+		Iterator<String> ik = ids.iterator();
+		Iterator<List<String>> iv = partitionDateList(dates).iterator();
+		while (ik.hasNext() && iv.hasNext()) {
+			retVal.put(ik.next(), iv.next());
+		}
+		return retVal;
+	}
+	
+	private static <T> Collection<List<T>> partitionDateList(List<T> inputList) {
+		final AtomicInteger counter = new AtomicInteger(0);
+		return inputList.stream().collect(Collectors.groupingBy(s -> counter.getAndIncrement() / 3)).values();
+	}
+	
+	/**
+	 * Builds a list of person IDs for the citizenship page
+	 * Always includes "applicant" first, then adds household member IDs
+	 * creates a predictable, ordered list of all people who need to answer the citizenship question, 
+	 * which the HTML then uses to display each person's name and collect their citizenship status in the correct order.
+	 */
+	public static List<String> buildCitizenshipIdList(Subworkflow householdSubworkflow) {
+	    List<String> idList = new ArrayList<>();
+	    
+	    // Always add applicant first
+	    idList.add("applicant");
+	    
+	    // Add household members if they exist
+	    if (householdSubworkflow != null && !householdSubworkflow.isEmpty()) {
+	        for (int i = 0; i < householdSubworkflow.size(); i++) {
+	            idList.add(householdSubworkflow.get(i).getId().toString());
+	        }
+	    }
+	    
+	    return idList;
+	}	
+	
+  
+}
