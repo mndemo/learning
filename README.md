@@ -2,19 +2,12 @@
 <html th:lang="${#locale.language}" xmlns:th="http://www.thymeleaf.org">
 <!--
   HOUSEHOLD OPTIONS CHECKBOXES WITH FOLLOW-UP
-  ------------------------------------------
   Renders: (1) main checkbox list = which household members get this option (e.g. income type),
-           (2) for each selected person, a follow-up block with multiple inputs (amount, frequency, start date, end date, no end date).
-
-  VALUE LAYOUT (per follow-up input name, e.g. socialSecurityAmount, socialSecurityFrequency, ...):
-  - Single-value follow-ups (MONEY, SELECT, CHECKBOX):
-    value[0] = applicant, value[1] = 1st household member, value[2] = 2nd, ...
-  - DATE follow-ups (start/end date):
-    value[0],value[1],value[2] = applicant (month, day, year)
-    value[3],value[4],value[5] = 1st member; value[6],value[7],value[8] = 2nd; ...
-  - "No end date" CHECKBOX: stored as NO_END_DATE_0 (applicant), NO_END_DATE_1 (1st member), ...
-
-  Person index: applicant = 0, first household member = 1 (iterationStat.count in the member loop), etc.
+           (2) for each selected person, a follow-up block (amount, frequency, start date, end date, no end date).
+  VALUE LAYOUT: Single-value (MONEY, SELECT, CHECKBOX) = value[0] applicant, value[1] 1st member, ...
+  DATE = value[0,1,2] applicant month/day/year, value[3,4,5] 1st member, ...
+  No end date CHECKBOX = NO_END_DATE_0 (applicant), NO_END_DATE_1 (1st member), ...
+  Person index: applicant = 0, first household member = 1 (iterationStat.count), etc.
 -->
 <th:block th:fragment="householdOptionsCheckboxesWithFollowup (input, data)"
 	th:with="
@@ -31,7 +24,7 @@
 		noPersonsChecked=${#arrays.isEmpty(sortedHouseholdMembers)}
 	">
 	<div class="form-group" th:classappend="${hasError} ? 'form-group--error' : ''">
-		<!-- ========== APPLICANT ROW: "You" checkbox + follow-up inputs (person index 0) ========== -->
+		<!-- APPLICANT ROW: "You" checkbox + follow-up inputs (person index 0) -->
 		<div class="question-with-follow-up" style="margin-bottom: 1rem;">
 			<div class="question-with-follow-up__question">
 				<div class="form-group">
@@ -62,9 +55,9 @@
 							<div class="text-input-group" th:case="${T(org.codeforamerica.shiba.pages.config.FormInputType).MONEY}">
 								<div class="text-input-group__prefix" style="background-color:#FFFFFF">$</div>
 								<input type="text" class="text-input"
-									th:attr="aria-describedby=${youFollowUp.helpMessageKey != null ? youFollowUp.name + '-help-message' : ''},
-										aria-labelledby=${needsAriaLabel ? youFollowUp.name + '-label' : ''},
-										aria-invalid=${hasError}"
+									th:aria-describedby="${youFollowUp.helpMessageKey != null ? youFollowUp.name + '-help-message' : ''}"
+									th:aria-labelledby="${needsAriaLabel ? youFollowUp.name + '-label' : ''}"
+									th:aria-invalid="${hasError}"
 									th:id="|${youFollowUp.name}|" th:name="${currentFollowupFormName}"
 									th:value="${(#lists.size(currentFollowupData.value) > 0 and currentFollowupData.value[0] != null and !currentFollowupData.value[0].isEmpty()) ? currentFollowupData.value[0] : ''}">
 								<div class="text-input-group__postfix" style="white-space: nowrap; background-color:#FFFFFF"
@@ -76,7 +69,7 @@
 							<div class="select">
 								<select th:id="${youFollowUp.name}" class="select__element"
 									th:name="${currentFollowupFormName}"
-									th:attr="aria-invalid=${hasError}">
+									th:aria-invalid="${hasError}">
 									<th:block th:each="option: ${youFollowUp.options.selectableOptions}">
 										<option th:value="${option.value}" th:text="#{${option.messageKey}}"
 											th:selected="${#lists.size(currentFollowupData.value) > 0 and currentFollowupData.value[0] == option.value}"></option>
@@ -141,7 +134,7 @@
 			</div>
 		</div>
 
-		<!-- ========== HOUSEHOLD MEMBER ROWS: each member checkbox + follow-up (person index = iterationStat.count: 1, 2, 3, ...) ========== -->
+		<!-- HOUSEHOLD MEMBER ROWS: each member checkbox + follow-up (person index = iterationStat.count: 1, 2, 3, ...) -->
 		<th:block th:each="iteration, iterationStat: ${input.options.subworkflows != null and input.options.subworkflows.get('household') != null ? input.options.subworkflows.get('household') : T(java.util.Collections).emptyList()}"
 			th:with="
 				fullName=${iteration.getPagesData().get('householdMemberInfo').get('firstName').value[0] + ' ' + iteration.getPagesData().get('householdMemberInfo').get('lastName').value[0]},
@@ -177,9 +170,9 @@
 								<div class="text-input-group" th:case="${T(org.codeforamerica.shiba.pages.config.FormInputType).MONEY}">
 									<div class="text-input-group__prefix" style="background-color: #FFFFFF">$</div>
 									<input type="text" class="text-input"
-										th:attr="aria-describedby=${followUp.helpMessageKey != null ? followUp.name + iterationStat.index + '-help-message' : ''},
-											aria-labelledby=${needsAriaLabel ? followUp.name + '-label' : ''},
-											aria-invalid=${hasError}"
+										th:aria-describedby="${followUp.helpMessageKey != null ? followUp.name + iterationStat.index + '-help-message' : ''}"
+										th:aria-labelledby="${needsAriaLabel ? followUp.name + '-label' : ''}"
+										th:aria-invalid="${hasError}"
 										th:id="|${followUp.name}${iterationStat.index}|" th:name="${currentFollowupFormName}"
 										th:value="${(iterationStat.count < currentFollowupData.value.size() and currentFollowupData.value[iterationStat.count] != null and !currentFollowupData.value[iterationStat.count].isEmpty()) ? currentFollowupData.value[iterationStat.count] : ''}">
 									<div class="text-input-group__postfix" style="white-space: nowrap; background-color: #FFFFFF"
@@ -190,7 +183,7 @@
 									<div class="select">
 										<select th:id="|${followUp.name}${iterationStat.index}|" class="select__element"
 											th:name="${currentFollowupFormName}"
-											th:attr="aria-invalid=${hasError}">
+											th:aria-invalid="${hasError}">
 											<th:block th:each="option: ${followUp.options.selectableOptions}">
 												<option th:value="${option.value}" th:text="#{${option.messageKey}}"
 													th:selected="${iterationStat.count < currentFollowupData.value.size() and currentFollowupData.value[iterationStat.count] == option.value}"></option>
@@ -201,12 +194,9 @@
 								<!-- MEMBER: DATE — value[count*3]=month, value[count*3+1]=day, value[count*3+2]=year (e.g. count=1 → indices 3,4,5) -->
 								<div th:case="${T(org.codeforamerica.shiba.pages.config.FormInputType).DATE}" class="form-group"
 									th:with="
-										monthIdx=${iterationStat.count * 3},
-										dayIdx=${iterationStat.count * 3 + 1},
-										yearIdx=${iterationStat.count * 3 + 2},
-										month=${(#lists.size(currentFollowupData.value) > monthIdx and currentFollowupData.value[monthIdx] != null and !currentFollowupData.value[monthIdx].isEmpty()) ? currentFollowupData.value[monthIdx] : ''},
-										date=${(#lists.size(currentFollowupData.value) > dayIdx and currentFollowupData.value[dayIdx] != null and !currentFollowupData.value[dayIdx].isEmpty()) ? currentFollowupData.value[dayIdx] : ''},
-										year=${(#lists.size(currentFollowupData.value) > yearIdx and currentFollowupData.value[yearIdx] != null and !currentFollowupData.value[yearIdx].isEmpty()) ? currentFollowupData.value[yearIdx] : ''}
+										month=${(#lists.size(currentFollowupData.value) > (iterationStat.count * 3) and currentFollowupData.value[iterationStat.count * 3] != null and !currentFollowupData.value[iterationStat.count * 3].isEmpty()) ? currentFollowupData.value[iterationStat.count * 3] : ''},
+										date=${(#lists.size(currentFollowupData.value) > (iterationStat.count * 3 + 1) and currentFollowupData.value[iterationStat.count * 3 + 1] != null and !currentFollowupData.value[iterationStat.count * 3 + 1].isEmpty()) ? currentFollowupData.value[iterationStat.count * 3 + 1] : ''},
+										year=${(#lists.size(currentFollowupData.value) > (iterationStat.count * 3 + 2) and currentFollowupData.value[iterationStat.count * 3 + 2] != null and !currentFollowupData.value[iterationStat.count * 3 + 2].isEmpty()) ? currentFollowupData.value[iterationStat.count * 3 + 2] : ''}
 									">
 									<fieldset class="date-input">
 										<p class="text--help">
