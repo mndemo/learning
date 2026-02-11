@@ -161,7 +161,7 @@ public class InputData implements Serializable {
             (validator.getCondition() == null
                 || (applicationData != null
                     ? validator.getCondition().satisfies(pageData, applicationData)
-                    : validator.getCondition().satisfies(pageData)))
+                    : validator.getCondition().satisfies(pageData))))
         .filter(validator -> {
           if (validator.getStartDateInputName() != null && pageData != null) {
             List<String> startSlice = getStartDateSlice(pageData, validator.getStartDateInputName(), personIndex);
