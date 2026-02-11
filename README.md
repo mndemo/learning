@@ -39,13 +39,13 @@
 			</div>
 			<!-- Applicant follow-up: all follow-up inputs use value index 0 (single-value) or 0,1,2 (DATE) -->
 			<div class="question-with-follow-up__follow-up" th:id="|${input.name}-follow-up|">
-				<th:block th:each="applicantFollowUp: ${input.followUps}" th:with="currentFollowupData=${data.get(applicantFollowUp.name)}, currentFollowupFormName=${T(org.codeforamerica.shiba.pages.PageUtils).getFormInputName(applicantFollowUp.name)}, applicantHasError=${T(org.codeforamerica.shiba.pages.PageUtils).hasErrorAtIndex(data, applicantFollowUp, 0)}, inputFollowupsHasErrors=${applicantHasError}">
+				<th:block th:each="applicantFollowUp: ${input.followUps}" th:with="currentFollowupData=${data.get(applicantFollowUp.name)}, currentFollowupFormName=${T(org.codeforamerica.shiba.pages.PageUtils).getFormInputName(applicantFollowUp.name)}">
 					<div th:replace="~{fragments/form-question-prompt :: formQuestionPrompt(${applicantFollowUp})}"></div>
 					<p class="text--help" th:id="${applicantFollowUp.name + '-help-message'}" th:if="${applicantFollowUp.helpMessageKey != null}"
 						th:utext="#{${applicantFollowUp.helpMessageKey}}"></p>
 					<th:block th:switch="${applicantFollowUp.type}">
 						<!-- APPLICANT: MONEY - value[0] -->
-						<div class="form-group" th:case="${T(org.codeforamerica.shiba.pages.config.FormInputType).MONEY}" th:classappend="${inputFollowupsHasErrors and youIsChecked} ? 'form-group--error' : ''">
+						<div class="form-group" th:case="${T(org.codeforamerica.shiba.pages.config.FormInputType).MONEY}" th:classappend="${youIsChecked and !data.get(applicantFollowUp.name).valid(data)} ? 'form-group--error' : ''">
 							<div class="text-input-group">
 								<div class="text-input-group__prefix" style="background-color:#FFFFFF">$</div>
 								<input type="text" class="text-input"
@@ -114,15 +114,9 @@
 							</label>
 						</div>
 					</th:block>
-					<!-- Applicant follow-up errors (per-index from PageUtils); outside switch so it shows for every follow-up when applicable -->
-					<th:block th:if="${youIsChecked and applicantHasError}" th:with="errorKeysForApplicant=${T(org.codeforamerica.shiba.pages.PageUtils).getErrorKeysForIndex(data, applicantFollowUp, 0)}">
-						<p th:if="${!#lists.isEmpty(errorKeysForApplicant)}" class="text--error" th:aria-label="#{error.title}" th:id="${applicantFollowUp.name + '-error-p'}">
-							<th:block th:each="errKey, errIter : ${errorKeysForApplicant}">
-								<i th:if="${applicantFollowUp.validationIcon}" class="icon-warning" th:id="${applicantFollowUp.name + '-error-icon-' + (errIter.index + 1)}"></i>
-								<span th:id="${applicantFollowUp.name + '-error-message-' + (errIter.index + 1)}" th:class="${applicantFollowUp.name + '-error'}" th:text="#{${errKey}}"></span>
-								<br th:if="${!errIter.last}"/>
-							</th:block>
-						</p>
+					<!-- Applicant follow-up errors: use standard fragment when applicant is checked and this follow-up has errors -->
+					<th:block th:if="${youIsChecked}" th:with="inputData=${data.get(applicantFollowUp.name)}">
+						<div th:replace="~{fragments/inputErrorFragment :: validationError(${data}, ${applicantFollowUp})}"></div>
 					</th:block>
 				</th:block>
 			</div>
@@ -151,11 +145,9 @@
 					<th:block th:each="followUp: ${input.followUps}"
 						th:with="
 							currentFollowupData=${data.get(followUp.name)},
-							currentFollowupFormName=${T(org.codeforamerica.shiba.pages.PageUtils).getFormInputName(followUp.name)},
-							memberHasError=${T(org.codeforamerica.shiba.pages.PageUtils).hasErrorAtIndex(data, followUp, iterationStat.count)},
-							inputFollowupHasErrors=${memberHasError}
+							currentFollowupFormName=${T(org.codeforamerica.shiba.pages.PageUtils).getFormInputName(followUp.name)}
 						">
-						<div class="form-group" th:classappend="${inputFollowupHasErrors} ? 'form-group--error' : ''">
+						<div class="form-group" th:classappend="${memberIsChecked and !data.get(followUp.name).valid(data)} ? 'form-group--error' : ''">
 							<div th:replace="~{fragments/form-question-prompt :: formQuestionPrompt(${followUp})}"></div>
 							<p class="text--help" th:id="${followUp.name + iterationStat.index + '-help-message'}" th:if="${followUp.helpMessageKey != null}"
 								th:utext="#{${followUp.helpMessageKey}}"></p>
@@ -231,15 +223,9 @@
 								</div>
 							</th:block>
 						</div>
-						<!-- Member follow-up errors (per-index from PageUtils); outside switch so it shows for every follow-up when applicable -->
-						<th:block th:if="${memberIsChecked and memberHasError}" th:with="errorKeysForMember=${T(org.codeforamerica.shiba.pages.PageUtils).getErrorKeysForIndex(data, followUp, iterationStat.count)}">
-							<p th:if="${!#lists.isEmpty(errorKeysForMember)}" class="text--error" th:aria-label="#{error.title}" th:id="${followUp.name + iterationStat.index + '-error-p'}">
-								<th:block th:each="errKey, errIter : ${errorKeysForMember}">
-									<i th:if="${followUp.validationIcon}" class="icon-warning" th:id="${followUp.name + iterationStat.index + '-error-icon-' + (errIter.index + 1)}"></i>
-									<span th:id="${followUp.name + iterationStat.index + '-error-message-' + (errIter.index + 1)}" th:class="${followUp.name + '-error'}" th:text="#{${errKey}}"></span>
-									<br th:if="${!errIter.last}"/>
-								</th:block>
-							</p>
+						<!-- Member follow-up errors: use standard fragment when member is checked and this follow-up has errors -->
+						<th:block th:if="${memberIsChecked}" th:with="inputData=${data.get(followUp.name)}">
+							<div th:replace="~{fragments/inputErrorFragment :: validationError(${data}, ${followUp})}"></div>
 						</th:block>
 					</th:block>
 				</div>
