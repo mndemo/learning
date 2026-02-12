@@ -31,7 +31,7 @@
 					<p class="text--help" th:id="${youFollowUp.name + '-help-message'}" th:if="${youFollowUp.helpMessageKey != null}"
 						th:utext="#{${youFollowUp.helpMessageKey}}"></p>
 					<th:block th:switch="${youFollowUp.type}">
-						<div class="form-group" th:case="${T(org.codeforamerica.shiba.pages.config.FormInputType).MONEY}" th:classappend="${youIsChecked and currentFollowupData != null and !currentFollowupData.valid(data)} ? 'form-group--error' : ''">
+						<div class="form-group" th:case="${T(org.codeforamerica.shiba.pages.config.FormInputType).MONEY}">
 							<div class="text-input-group">
 								<div class="text-input-group__prefix" style="background-color:#FFFFFF">$</div>
 								<input type="text" class="text-input" th:attr="aria-describedby=${youFollowUp.helpMessageKey != null ? youFollowUp.name + '-help-message' : ''}, aria-labelledby=${needsAriaLabel ? youFollowUp.name + '-label' : ''}, aria-invalid=${hasError}" th:id="|${youFollowUp.name}|" th:name="${currentFollowupFormName}"
@@ -72,9 +72,6 @@
 							</label>
 						</div>
 					</th:block>
-					<th:block th:if="${youIsChecked}" th:with="inputData=${data.get(youFollowUp.name)}">
-						<div th:replace="~{fragments/inputErrorFragment :: validationError(${data}, ${youFollowUp})}"></div>
-					</th:block>
 				</th:block>
 			</div>
 		</div>
@@ -99,7 +96,7 @@
 				</div>
 				<div class="question-with-follow-up__follow-up" th:id="|${input.name}${iterationStat.index}-follow-up|">
 					<th:block th:each="followUp: ${input.followUps != null ? input.followUps : T(java.util.Collections).emptyList()}" th:with="currentFollowupData=${data.get(followUp.name)}, currentFollowupFormName=${T(org.codeforamerica.shiba.pages.PageUtils).getFormInputName(followUp.name)}">
-						<div class="form-group" th:classappend="${memberIsChecked and currentFollowupData != null and !currentFollowupData.valid(data)} ? 'form-group--error' : ''">
+						<div class="form-group">
 							<div th:replace="~{fragments/form-question-prompt :: formQuestionPrompt(${followUp})}"></div>
 							<p class="text--help" th:id="${followUp.name + iterationStat.index + '-help-message'}" th:if="${followUp.helpMessageKey != null}"
 								th:utext="#{${followUp.helpMessageKey}}"></p>
@@ -146,12 +143,13 @@
 								</div>
 							</th:block>
 						</div>
-						<th:block th:if="${memberIsChecked}" th:with="inputData=${data.get(followUp.name)}">
-							<div th:replace="~{fragments/inputErrorFragment :: validationError(${data}, ${followUp})}"></div>
-						</th:block>
 					</th:block>
 				</div>
 			</div>
+		</th:block>
+		<!-- Follow-up errors: show once per follow-up (so we don't show on applicant when a member has the error) -->
+		<th:block th:each="followUpForError: ${input.followUps != null ? input.followUps : T(java.util.Collections).emptyList()}" th:with="inputData=${data.get(followUpForError.name)}">
+			<div th:replace="~{fragments/inputErrorFragment :: validationError(${data}, ${followUpForError})}"></div>
 		</th:block>
 		<!-- Main input error (e.g. "select at least one") -->
 		<th:block th:with="inputData=${data.get(input.name)}">
