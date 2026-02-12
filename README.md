@@ -72,9 +72,6 @@
 							</label>
 						</div>
 					</th:block>
-					<th:block th:with="inputData=${data.get(youFollowUp.name)}">
-						<div th:replace="~{fragments/inputErrorFragment :: validationError(${data}, ${youFollowUp})}"></div>
-					</th:block>
 				</th:block>
 			</div>
 		</div>
@@ -145,13 +142,14 @@
 									</label>
 								</div>
 							</th:block>
-							<th:block th:with="inputData=${data.get(followUp.name)}">
-								<div th:replace="~{fragments/inputErrorFragment :: validationError(${data}, ${followUp})}"></div>
-							</th:block>
 						</div>
 					</th:block>
 				</div>
 			</div>
+		</th:block>
+		<!-- Follow-up errors: show once per follow-up type (e.g. amount, frequency) -->
+		<th:block th:each="followUpForError: ${input.followUps != null ? input.followUps : T(java.util.Collections).emptyList()}" th:with="inputData=${data.get(followUpForError.name)}">
+			<div th:replace="~{fragments/inputErrorFragment :: validationError(${data}, ${followUpForError})}"></div>
 		</th:block>
 		<!-- Main input error (e.g. "select at least one") -->
 		<th:block th:with="inputData=${data.get(input.name)}">
