@@ -26,23 +26,23 @@
 				</div>
 			</div>
 			<div class="question-with-follow-up__follow-up" th:id="|${input.name}-follow-up|">
-				<th:block th:each="youFollowUp: ${input.followUps != null ? input.followUps : T(java.util.Collections).emptyList()}" th:with="currentFollowupData=${data.get(youFollowUp.name)}, currentFollowupFormName=${T(org.codeforamerica.shiba.pages.PageUtils).getFormInputName(youFollowUp.name)}, hasFollowUpError=${data.get(youFollowUp.name) != null and !data.isValid() and !data.get(youFollowUp.name).valid(data)}">
+				<th:block th:each="youFollowUp: ${input.followUps != null ? input.followUps : T(java.util.Collections).emptyList()}" th:with="currentFollowupData=${data.get(youFollowUp.name)}, currentFollowupFormName=${T(org.codeforamerica.shiba.pages.PageUtils).getFormInputName(youFollowUp.name)}">
 					<div th:replace="~{fragments/form-question-prompt :: formQuestionPrompt(${youFollowUp})}"></div>
 					<p class="text--help" th:id="${youFollowUp.name + '-help-message'}" th:if="${youFollowUp.helpMessageKey != null}"
 						th:utext="#{${youFollowUp.helpMessageKey}}"></p>
 					<th:block th:switch="${youFollowUp.type}">
-						<div class="form-group" th:case="${T(org.codeforamerica.shiba.pages.config.FormInputType).MONEY}" th:classappend="${hasFollowUpError} ? 'form-group--error' : ''">
+						<div class="form-group" th:case="${T(org.codeforamerica.shiba.pages.config.FormInputType).MONEY}">
 							<div class="text-input-group">
 								<div class="text-input-group__prefix" style="background-color:#FFFFFF">$</div>
-								<input type="text" class="text-input" th:attr="aria-describedby=${youFollowUp.helpMessageKey != null ? youFollowUp.name + '-help-message' : ''}, aria-labelledby=${needsAriaLabel ? youFollowUp.name + '-label' : ''}, aria-invalid=${hasFollowUpError}" th:id="|${youFollowUp.name}|" th:name="${currentFollowupFormName}"
+								<input type="text" class="text-input" th:attr="aria-describedby=${youFollowUp.helpMessageKey != null ? youFollowUp.name + '-help-message' : ''}, aria-labelledby=${needsAriaLabel ? youFollowUp.name + '-label' : ''}" th:id="|${youFollowUp.name}|" th:name="${currentFollowupFormName}"
 									th:value="${(currentFollowupData != null and currentFollowupData.value != null and #lists.size(currentFollowupData.value) > 0 and currentFollowupData.value[0] != null and !currentFollowupData.value[0].isEmpty()) ? currentFollowupData.value[0] : ''}">
 								<div class="text-input-group__postfix" style="white-space: nowrap; background-color:#FFFFFF"
 									th:if="${youFollowUp.inputPostfix != null}" th:text="#{${youFollowUp.inputPostfix}}"></div>
 							</div>
 						</div>
-						<div th:case="${T(org.codeforamerica.shiba.pages.config.FormInputType).SELECT}" class="form-group" th:classappend="${hasFollowUpError} ? 'form-group--error' : ''">
+						<div th:case="${T(org.codeforamerica.shiba.pages.config.FormInputType).SELECT}" class="form-group">
 							<div class="select">
-								<select th:id="${youFollowUp.name}" class="select__element" th:name="${currentFollowupFormName}" th:attr="aria-invalid=${hasFollowUpError}">
+								<select th:id="${youFollowUp.name}" class="select__element" th:name="${currentFollowupFormName}">
 									<th:block th:each="option: ${youFollowUp.options != null and youFollowUp.options.selectableOptions != null ? youFollowUp.options.selectableOptions : T(java.util.Collections).emptyList()}">
 										<option th:value="${option.value}" th:text="#{${option.messageKey}}"
 											th:selected="${currentFollowupData != null and currentFollowupData.value != null and #lists.size(currentFollowupData.value) > 0 and currentFollowupData.value[0] == option.value}"></option>
@@ -50,7 +50,7 @@
 								</select>
 							</div>
 						</div>
-						<div th:case="${T(org.codeforamerica.shiba.pages.config.FormInputType).DATE}" class="form-group" th:classappend="${hasFollowUpError} ? 'form-group--error' : ''"
+						<div th:case="${T(org.codeforamerica.shiba.pages.config.FormInputType).DATE}" class="form-group"
 							th:with="month=${(currentFollowupData != null and currentFollowupData.value != null and #lists.size(currentFollowupData.value) > 0 and currentFollowupData.value[0] != null and !currentFollowupData.value[0].isEmpty()) ? currentFollowupData.value[0] : ''}, date=${(currentFollowupData != null and currentFollowupData.value != null and #lists.size(currentFollowupData.value) > 1 and currentFollowupData.value[1] != null and !currentFollowupData.value[1].isEmpty()) ? currentFollowupData.value[1] : ''}, year=${(currentFollowupData != null and currentFollowupData.value != null and #lists.size(currentFollowupData.value) > 2 and currentFollowupData.value[2] != null and !currentFollowupData.value[2].isEmpty()) ? currentFollowupData.value[2] : ''}">
 							<fieldset class="date-input">
 								<p class="text--help">
@@ -63,7 +63,7 @@
 								<input type="text" inputmode="numeric" maxlength="4" class="text-input form-width--4-character dob-input" th:id="${youFollowUp.name + '-year'}" th:name="${currentFollowupFormName}" th:value="${year}" th:placeholder="yyyy"/>
 							</fieldset>
 						</div>
-						<div th:case="${T(org.codeforamerica.shiba.pages.config.FormInputType).CHECKBOX}" class="form-group" th:classappend="${hasFollowUpError} ? 'form-group--error' : ''"
+						<div th:case="${T(org.codeforamerica.shiba.pages.config.FormInputType).CHECKBOX}" class="form-group"
 							th:with="msgKey=${youFollowUp.options != null and youFollowUp.options.selectableOptions != null and !youFollowUp.options.selectableOptions.isEmpty() ? youFollowUp.options.selectableOptions.get(0).messageKey : 'general.yes'}, cbValues=${currentFollowupData != null ? currentFollowupData.value : null}, noEndChecked=${cbValues != null and cbValues.contains('NO_END_DATE_0')}">
 							<label th:for="no_end_date_checkbox" class="checkbox">
 								<input type="checkbox" th:id="no_end_date_checkbox" th:value="NO_END_DATE_0" th:name="${currentFollowupFormName}" th:checked="${noEndChecked}">
@@ -71,6 +71,9 @@
 								<span th:utext="#{${msgKey}}"></span>
 							</label>
 						</div>
+					</th:block>
+					<th:block th:with="inputData=${data.get(youFollowUp.name)}">
+						<div th:replace="~{fragments/inputErrorFragment :: validationError(${data}, ${youFollowUp})}"></div>
 					</th:block>
 				</th:block>
 			</div>
@@ -95,24 +98,24 @@
 					</div>
 				</div>
 				<div class="question-with-follow-up__follow-up" th:id="|${input.name}${iterationStat.index}-follow-up|">
-					<th:block th:each="followUp: ${input.followUps != null ? input.followUps : T(java.util.Collections).emptyList()}" th:with="currentFollowupData=${data.get(followUp.name)}, currentFollowupFormName=${T(org.codeforamerica.shiba.pages.PageUtils).getFormInputName(followUp.name)}, hasFollowUpError=${data.get(followUp.name) != null and !data.isValid() and !data.get(followUp.name).valid(data)}">
-						<div class="form-group" th:classappend="${hasFollowUpError} ? 'form-group--error' : ''">
+					<th:block th:each="followUp: ${input.followUps != null ? input.followUps : T(java.util.Collections).emptyList()}" th:with="currentFollowupData=${data.get(followUp.name)}, currentFollowupFormName=${T(org.codeforamerica.shiba.pages.PageUtils).getFormInputName(followUp.name)}">
+						<div class="form-group">
 							<div th:replace="~{fragments/form-question-prompt :: formQuestionPrompt(${followUp})}"></div>
 							<p class="text--help" th:id="${followUp.name + iterationStat.index + '-help-message'}" th:if="${followUp.helpMessageKey != null}"
 								th:utext="#{${followUp.helpMessageKey}}"></p>
 							<th:block th:switch="${followUp.type}">
-								<div class="form-group" th:case="${T(org.codeforamerica.shiba.pages.config.FormInputType).MONEY}" th:classappend="${hasFollowUpError} ? 'form-group--error' : ''">
+								<div class="form-group" th:case="${T(org.codeforamerica.shiba.pages.config.FormInputType).MONEY}">
 									<div class="text-input-group">
 										<div class="text-input-group__prefix" style="background-color: #FFFFFF">$</div>
-										<input type="text" class="text-input" th:attr="aria-describedby=${followUp.helpMessageKey != null ? followUp.name + iterationStat.index + '-help-message' : ''}, aria-labelledby=${needsAriaLabel ? followUp.name + '-label' : ''}, aria-invalid=${hasFollowUpError}" th:id="|${followUp.name}${iterationStat.index}|" th:name="${currentFollowupFormName}"
+										<input type="text" class="text-input" th:attr="aria-describedby=${followUp.helpMessageKey != null ? followUp.name + iterationStat.index + '-help-message' : ''}, aria-labelledby=${needsAriaLabel ? followUp.name + '-label' : ''}" th:id="|${followUp.name}${iterationStat.index}|" th:name="${currentFollowupFormName}"
 											th:value="${(currentFollowupData != null and currentFollowupData.value != null and iterationStat.count < currentFollowupData.value.size() and currentFollowupData.value[iterationStat.count] != null and !currentFollowupData.value[iterationStat.count].isEmpty()) ? currentFollowupData.value[iterationStat.count] : ''}">
 										<div class="text-input-group__postfix" style="white-space: nowrap; background-color: #FFFFFF"
 											th:if="${followUp.inputPostfix != null}" th:text="#{${followUp.inputPostfix}}"></div>
 									</div>
 								</div>
-								<div th:case="${T(org.codeforamerica.shiba.pages.config.FormInputType).SELECT}" class="form-group" th:classappend="${hasFollowUpError} ? 'form-group--error' : ''">
+								<div th:case="${T(org.codeforamerica.shiba.pages.config.FormInputType).SELECT}" class="form-group">
 									<div class="select">
-										<select th:id="|${followUp.name}${iterationStat.index}|" class="select__element" th:name="${currentFollowupFormName}" th:attr="aria-invalid=${hasFollowUpError}">
+										<select th:id="|${followUp.name}${iterationStat.index}|" class="select__element" th:name="${currentFollowupFormName}">
 											<th:block th:each="option: ${followUp.options != null and followUp.options.selectableOptions != null ? followUp.options.selectableOptions : T(java.util.Collections).emptyList()}">
 												<option th:value="${option.value}" th:text="#{${option.messageKey}}"
 													th:selected="${currentFollowupData != null and currentFollowupData.value != null and iterationStat.count < currentFollowupData.value.size() and currentFollowupData.value[iterationStat.count] == option.value}"></option>
@@ -120,7 +123,7 @@
 										</select>
 									</div>
 								</div>
-								<div th:case="${T(org.codeforamerica.shiba.pages.config.FormInputType).DATE}" class="form-group" th:classappend="${hasFollowUpError} ? 'form-group--error' : ''"
+								<div th:case="${T(org.codeforamerica.shiba.pages.config.FormInputType).DATE}" class="form-group"
 									th:with="month=${(currentFollowupData != null and currentFollowupData.value != null and #lists.size(currentFollowupData.value) > (iterationStat.count * 3) and currentFollowupData.value[iterationStat.count * 3] != null and !currentFollowupData.value[iterationStat.count * 3].isEmpty()) ? currentFollowupData.value[iterationStat.count * 3] : ''}, date=${(currentFollowupData != null and currentFollowupData.value != null and #lists.size(currentFollowupData.value) > (iterationStat.count * 3 + 1) and currentFollowupData.value[iterationStat.count * 3 + 1] != null and !currentFollowupData.value[iterationStat.count * 3 + 1].isEmpty()) ? currentFollowupData.value[iterationStat.count * 3 + 1] : ''}, year=${(currentFollowupData != null and currentFollowupData.value != null and #lists.size(currentFollowupData.value) > (iterationStat.count * 3 + 2) and currentFollowupData.value[iterationStat.count * 3 + 2] != null and !currentFollowupData.value[iterationStat.count * 3 + 2].isEmpty()) ? currentFollowupData.value[iterationStat.count * 3 + 2] : ''}">
 									<fieldset class="date-input">
 										<p class="text--help">
@@ -133,7 +136,7 @@
 										<input type="text" inputmode="numeric" maxlength="4" class="text-input form-width--4-character dob-input" th:id="|${followUp.name}${iterationStat.index}-year|" th:name="${currentFollowupFormName}" th:value="${year}" th:placeholder="yyyy"/>
 									</fieldset>
 								</div>
-								<div th:case="${T(org.codeforamerica.shiba.pages.config.FormInputType).CHECKBOX}" class="form-group" th:classappend="${hasFollowUpError} ? 'form-group--error' : ''"
+								<div th:case="${T(org.codeforamerica.shiba.pages.config.FormInputType).CHECKBOX}" class="form-group"
 									th:with="noEndMsgKey=${followUp.options != null and followUp.options.selectableOptions != null and !followUp.options.selectableOptions.isEmpty() ? followUp.options.selectableOptions.get(0).messageKey : 'general.yes'}, noEndVal=${'NO_END_DATE_' + iterationStat.count}, noEndChecked=${currentFollowupData != null and currentFollowupData.value != null and currentFollowupData.value.contains(noEndVal)}">
 									<label th:for="no_end_date_checkbox" class="checkbox">
 										<input type="checkbox" th:id="|${followUp.name}${iterationStat.count}|" th:value="${noEndVal}" th:name="${currentFollowupFormName}" th:checked="${noEndChecked}">
@@ -142,14 +145,13 @@
 									</label>
 								</div>
 							</th:block>
+							<th:block th:with="inputData=${data.get(followUp.name)}">
+								<div th:replace="~{fragments/inputErrorFragment :: validationError(${data}, ${followUp})}"></div>
+							</th:block>
 						</div>
 					</th:block>
 				</div>
 			</div>
-		</th:block>
-		<!-- Follow-up errors: show once per follow-up type (e.g. amount, frequency) -->
-		<th:block th:each="followUpForError: ${input.followUps != null ? input.followUps : T(java.util.Collections).emptyList()}" th:with="inputData=${data.get(followUpForError.name)}">
-			<div th:replace="~{fragments/inputErrorFragment :: validationError(${data}, ${followUpForError})}"></div>
 		</th:block>
 		<!-- Main input error (e.g. "select at least one") -->
 		<th:block th:with="inputData=${data.get(input.name)}">
