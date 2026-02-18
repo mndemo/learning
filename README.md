@@ -1,187 +1,210 @@
-package org.codeforamerica.shiba.configurations;
+package org.codeforamerica.shiba.output;
 
-import static jakarta.servlet.DispatcherType.ERROR;
-import static jakarta.servlet.DispatcherType.FORWARD;
+import static org.codeforamerica.shiba.application.FlowType.LATER_DOCS;
+import static org.codeforamerica.shiba.output.Document.CAF;
+import static org.codeforamerica.shiba.output.Document.CCAP;
+import static org.codeforamerica.shiba.output.Recipient.CASEWORKER;
+import static org.codeforamerica.shiba.output.Recipient.CLIENT;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-
-import org.apache.commons.text.StringEscapeUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.Customizer;
-import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.session.InvalidSessionStrategy;
-import org.springframework.security.web.session.SessionInformationExpiredEvent;
-import org.springframework.security.web.session.SessionInformationExpiredStrategy;
-import org.springframework.security.web.session.SimpleRedirectInvalidSessionStrategy;
-import org.springframework.security.web.util.matcher.AnyRequestMatcher;
-import org.springframework.stereotype.Component;
-import jakarta.servlet.RequestDispatcher;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import java.net.URI;
+import java.time.ZonedDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 import lombok.extern.slf4j.Slf4j;
+import org.codeforamerica.shiba.application.Application;
+import org.codeforamerica.shiba.application.ApplicationRepository;
+import org.codeforamerica.shiba.output.pdf.PdfGenerator;
+import org.codeforamerica.shiba.output.xml.XmlGenerator;
+import org.codeforamerica.shiba.pages.data.ApplicationData;
+import org.slf4j.MDC;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.server.ResponseStatusException;
 
+import jakarta.servlet.http.HttpSession;
+
+@Controller
 @Slf4j
-@Configuration
-@EnableWebSecurity
-public class SecurityConfiguration {
+public class FileDownloadController {
 
-	//TODO: JMB remove commented lines after code review
-	//private static int environmentUrlLength;
-	
-	//public SecurityConfiguration(@Value("${mnbenefits_env_url}") String environmentUrl) {
-	//	environmentUrlLength = environmentUrl.length();
-	//}
-	public SecurityConfiguration() {
-	}
+  private static final String NOT_FOUND_MESSAGE = "Could not find any application with this ID for download";
+  private static final String UNSUBMITTED_APPLICATION_MESSAGE = "Submitted time was not set for this application. It is either still in progress or the submitted time was cleared for some reason.";
+  private static final String DOWNLOAD_DOCUMENT_ZIP = "Download zip file for application ID %s";
+  private static final String NO_DOWNLOAD_DOCUMENT_ZIP = "No documents to download in zip file for application ID %s";
+  private static final String OLD_LATER_DOCS = "Later Docs application %s is older than 60 days, supporting documents have been deleted.";
+  private final XmlGenerator xmlGenerator;
+  private final PdfGenerator pdfGenerator;
+  private final ApplicationData applicationData;
+  private final ApplicationRepository applicationRepository;
+  private final UploadedDocsPreparer uploadedDocsPreparer;
 
-	@Autowired
-	private ShibaInvalidSessionStrategy shibaInvalidSessionStrategy;
-	
+  public FileDownloadController(
+      XmlGenerator xmlGenerator,
+      PdfGenerator pdfGenerator,
+      ApplicationData applicationData,
+      ApplicationRepository applicationRepository,
+      UploadedDocsPreparer uploadedDocsPreparer) {
+    this.xmlGenerator = xmlGenerator;
+    this.pdfGenerator = pdfGenerator;
+    this.applicationData = applicationData;
+    this.applicationRepository = applicationRepository;
+    this.uploadedDocsPreparer = uploadedDocsPreparer;
+  }
 
-	public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfiguration) throws Exception {
-		return authConfiguration.getAuthenticationManager();
-	}
-	 
-	@Bean
-	@Order(1)
-	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		EmailAuthorizationManager eam = new EmailAuthorizationManager();
+  @GetMapping("/download")
+  ResponseEntity<byte[]> downloadPdf(HttpSession httpSession) throws IOException {
+    if (applicationData == null || applicationData.getId() == null) {
+      log.info(
+          "Application is empty or the applicationId is null when client attempts to download pdfs.");
+      return createRootPageResponse();
+    }
+    String applicationId = applicationData.getId();
 
-		http.authorizeHttpRequests(r -> {
-			// Allow FORWARD/ERROR dispatches for Spring MVC views and Boot error pages (Spring Boot 4 / Security 7)
-			r.dispatcherTypeMatchers(FORWARD, ERROR).permitAll();
-			// Application flow (session-based; no OAuth required)
-			r.requestMatchers("/pages/*",
-					"/groups/*",
-					"/document-upload",
-					"/remove-upload/*",
-					"/submit",
-					"/submit-feedback",
-					"/submit-documents")
-					.permitAll();
-			// Client download: session-scoped (controller validates applicationData.getId() from session)
-			r.requestMatchers("/download", "/download-xml").permitAll();
-			try {
-				// Admin-only: download by applicationId and resend-email require OAuth2 + allowlisted email
-				r.requestMatchers("/download/*", "/resend-confirmation-email/*").access(eam);
-				r.anyRequest().permitAll();
-				http.oauth2Login(Customizer.withDefaults());
-			} catch (Exception e) {
-				log.error("OAuth2 Error", e);
-			}
-		});
+    MDC.put("applicationId", applicationId);
+    MDC.put("sessionId", httpSession.getId());
+    log.info("Client with session: " + httpSession.getId() + " Downloading application with id: "
+        + applicationId);
 
-		http
-		.headers(headersConfigurer -> headersConfigurer
-			.httpStrictTransportSecurity(hstsConfig -> hstsConfig
-				.requestMatcher(AnyRequestMatcher.INSTANCE)
-				.includeSubDomains(true)
-				.maxAgeInSeconds(31536000)
-				.preload(true)));
+    Application application = applicationRepository.find(applicationId);
 
-		http.sessionManagement(session -> session.invalidSessionStrategy(this.shibaInvalidSessionStrategy));
-		http.sessionManagement(management -> management.sessionConcurrency(
-				concurrency -> concurrency.expiredSessionStrategy(this.shibaInvalidSessionStrategy)));
-		return http.build();
-	}
+    if (application.getCompletedAt() != null && application.getCompletedAt()
+        .isBefore(ZonedDateTime.now().minusDays(60))
+        && application.getFlow() == LATER_DOCS) {
+      return ResponseEntity.ok().body(String.format(OLD_LATER_DOCS, applicationId).getBytes());
+    }
 
-	@Component
-	public static class ShibaInvalidSessionStrategy
-			implements InvalidSessionStrategy, SessionInformationExpiredStrategy {
-		final private SimpleRedirectInvalidSessionStrategy errorRedirectInvalidSessionStrategy;
+    List<ApplicationFile> applicationFiles = getApplicationDocuments(applicationId, application,
+        CLIENT);
 
-		public ShibaInvalidSessionStrategy(@Value("${server.servlet.session.timeout-url}") String timeoutUrl) {
-			errorRedirectInvalidSessionStrategy = new SimpleRedirectInvalidSessionStrategy(timeoutUrl);
-		}
+    return createZipFileFromApplications(applicationFiles, applicationId);
+  }
 
-		/**
-		 * Ignore session expiration on the landing page.
-		 */
-		@Override
-		public void onInvalidSessionDetected(HttpServletRequest request, HttpServletResponse response)
-				throws IOException {
-			// TODO: JMB Remove these after code review
-			//String pageNameFromRequest = request.getRequestURL().toString();
-			//String pageName = pageNameFromRequest.substring(environmentUrlLength);
-			String pageName = request.getRequestURI();
-			log.info(StringEscapeUtils.escapeJava("User session invalid on page: " + pageName));
-			if (pageName.equalsIgnoreCase("/pages/landing/navigation")) {
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/pages/identifyCountyBeforeApplying");
-				try {
-					dispatcher.forward(request, response);
-				} catch (ServletException | IOException e) {
-					log.error("Invalid Session Redirect for " + pageName, e);
-				}
+  /** Safe pattern for applicationId (no path traversal or injection). */
+  private static final java.util.regex.Pattern SAFE_APPLICATION_ID = java.util.regex.Pattern.compile("^[a-zA-Z0-9_-]{1,64}$");
 
-			} else if (pageName.equalsIgnoreCase("/pages/landing")) {
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/pages/identifyCountyBeforeApplying");
-				try {
-					dispatcher.forward(request, response);
-				} catch (ServletException | IOException e) {
-					log.error("Invalid Session Redirect for " + pageName, e);
-				}
+  @GetMapping("/download/{applicationId}")
+  ResponseEntity<byte[]> downloadAllDocumentsWithApplicationId(@PathVariable String applicationId,
+      HttpSession httpSession)
+      throws Exception {
+    if (applicationId == null || !SAFE_APPLICATION_ID.matcher(applicationId).matches()) {
+      log.warn("Rejected /download request with invalid applicationId");
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid application ID");
+    }
+    Application application;
+    try {
+      application = applicationRepository.find(applicationId);
+      if (application.getCompletedAt() == null) {
+        // The submitted time was not set - The application is still in progress or the time was
+        // cleared somehow
+        log.info(UNSUBMITTED_APPLICATION_MESSAGE + " for application id " + applicationId);
+        return ResponseEntity.ok().body(UNSUBMITTED_APPLICATION_MESSAGE.getBytes());
+      }
+      MDC.put("applicationId", application.getApplicationData().getId());
+      MDC.put("sessionId", httpSession.getId());
+      log.info("Client with session: " + httpSession.getId() + " Downloading application with id: "
+          + applicationId);
 
-			} else if (pageName.equalsIgnoreCase("/pages/healthcareRenewalUpload")) {
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/pages/healthcareRenewalUpload");
-				try {
-					dispatcher.forward(request, response);
-				} catch (ServletException | IOException e) {
-					log.error("Invalid Session Redirect for " + pageName, e);
-				}
+      List<ApplicationFile> applicationFiles = getApplicationDocuments(applicationId,
+          application, CASEWORKER);
 
-			} else if (pageName.equalsIgnoreCase("/")) {
-				// language was changed on landing page so stay there
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/pages/landing");
-				try {
-					dispatcher.forward(request, response);
-				} catch (ServletException | IOException e) {
-					log.error("Invalid Session Redirect for " + pageName, e);
-				}
+      return createZipFileFromApplications(applicationFiles, applicationId);
+    } catch (EmptyResultDataAccessException e) {
+      log.info(NOT_FOUND_MESSAGE);
+      return ResponseEntity.ok().body(NOT_FOUND_MESSAGE.getBytes());
+    }
+  }
 
-			} else if (pageName.contains("faq")) {
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/faq");
-				try {
-					dispatcher.forward(request, response);
-				} catch (ServletException | IOException e) {
-					log.error("Invalid Session Redirect for " + pageName, e);
-				}
+  private List<ApplicationFile> getApplicationDocuments(String applicationId,
+      Application application,
+      Recipient recipient) {
+    List<ApplicationFile> applicationFiles = new ArrayList<>();
+    if (application.getApplicationData().isCAFApplication()) {
+      ApplicationFile applicationFileCAF = pdfGenerator.generate(applicationId, CAF, recipient);
+      if (null != applicationFileCAF && applicationFileCAF.getFileBytes().length > 0) {
+        applicationFiles.add(applicationFileCAF);
+      }
+    }
+    if (application.getApplicationData().isCCAPApplication()) {
+      ApplicationFile applicationFileCCAP = pdfGenerator.generate(applicationId, CCAP, recipient);
+      if (null != applicationFileCCAP && applicationFileCCAP.getFileBytes().length > 0) {
+        applicationFiles.add(applicationFileCCAP);
+      }
+    }
+    applicationFiles.addAll(uploadedDocsPreparer.prepare(
+        application.getApplicationData().getUploadedDocs(), application));
 
-			} else if (pageName.contains("snapNDS")) {
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/snapNDS");
-				try {
-					dispatcher.forward(request, response);
-				} catch (ServletException | IOException e) {
-					log.error("Invalid Session Redirect for " + pageName, e);
-				}
+    return applicationFiles;
+  }
 
-			} else if (pageName.contains("privacy")) {
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/privacy");
-				try {
-					dispatcher.forward(request, response);
-				} catch (ServletException | IOException e) {
-					log.error("Invalid Session Redirect for " + pageName, e);
-				}
+  @GetMapping("/download-xml")
+  ResponseEntity<byte[]> downloadXml() {
+    if (applicationData.getId() == null) {
+      return createRootPageResponse();
+    }
+    ApplicationFile applicationFile = xmlGenerator.generate(applicationData.getId(), CAF, CLIENT);
+    return createResponse(applicationFile);
+  }
 
-			} else {
-				//normal redirect to session expired page
-				errorRedirectInvalidSessionStrategy.onInvalidSessionDetected(request, response);
-			}
-		}
+  private ResponseEntity<byte[]> createZipFileFromApplications(
+      List<ApplicationFile> applicationFiles,
+      String applicationId) throws IOException {
+    try (ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ZipOutputStream zos = new ZipOutputStream(baos)) {
 
-		@Override
-		public void onExpiredSessionDetected(SessionInformationExpiredEvent event) throws IOException {
-			log.info("User session timed out on page: " + event.getRequest().getRequestURL());
-			errorRedirectInvalidSessionStrategy.onInvalidSessionDetected(event.getRequest(), event.getResponse());
-		}
-	}
-	
+      applicationFiles.forEach(file -> {
+        ZipEntry entry = new ZipEntry(file.getFileName());
+        entry.setSize(file.getFileBytes().length);
+        try {
+          zos.putNextEntry(entry);
+          zos.write(file.getFileBytes());
+          zos.closeEntry();
+        } catch (IOException e) {
+          log.error("Unable to write file, " + file.getFileName(), e);
+        }
+      });
+
+      zos.close();
+      baos.close();
+
+      // The minimum size of a .ZIP file is 22 bytes even when empty because of metadata
+      if (baos.size() > 22) {
+        String msg = String.format(DOWNLOAD_DOCUMENT_ZIP, applicationId);
+        log.info(msg);
+        return createResponse(baos.toByteArray(), "MNB_application_" + applicationId + ".zip");
+      } else {
+        // Applicant should not have been able to "submit" documents without uploading any.
+        String msg = String.format(NO_DOWNLOAD_DOCUMENT_ZIP, applicationId);
+        log.warn(msg);
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+      }
+    }
+  }
+
+  private ResponseEntity<byte[]> createResponse(ApplicationFile applicationFile) {
+    return createResponse(applicationFile.getFileBytes(), applicationFile.getFileName());
+  }
+
+  private ResponseEntity<byte[]> createResponse(byte[] fileBytes, String fileName) {
+    return ResponseEntity.ok()
+        .contentType(MediaType.APPLICATION_OCTET_STREAM)
+        .header(HttpHeaders.CONTENT_DISPOSITION, String.format("filename=\"%s\"", fileName))
+        .body(fileBytes);
+  }
+
+  /**
+   * Builds & returns a response that will cause a redirect to the landing page.
+   */
+  private ResponseEntity<byte[]> createRootPageResponse() {
+    return ResponseEntity.status(HttpStatus.FOUND).location(URI.create("/")).build();
+  }
 }
