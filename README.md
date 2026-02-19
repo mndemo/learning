@@ -1,21 +1,197 @@
-Here’s a short way to verify both under Spring Boot 4.
-1. Security
-Your security is in SecurityConfiguration.java (lambda style, compatible with Spring Boot 4 / Security 7).
-Run the existing security test:
-  ./gradlew test --tests "org.codeforamerica.shiba.SecurityConfigurationTest"
-It already checks:
-/download/{applicationId} without auth → unauthenticated
-With OAuth2 but non-allowlisted email → 4xx
-With OAuth2 and allowlisted admin email → 2xx and correct download header
-If this test passes, your security setup is verified for Spring Boot 4.
-2. Download endpoints
-Controller behavior (no security):
-  ./gradlew test --tests "org.codeforamerica.shiba.output.FileDownloadControllerTest"
-Security + download (admin by applicationId):
-Same as above: SecurityConfigurationTest already hits GET /download/{applicationId} with OAuth2 and checks status and Content-Disposition.
-Full stack (session download + security):
-Tests like PdfMockMvcTest and JourneyTest use MockMvc with the security filter and hit /download in a session; run them if you want full integration coverage.
-3. One command for both
-./gradlew test --tests "org.codeforamerica.shiba.SecurityConfigurationTest" --tests "org.codeforamerica.shiba.output.FileDownloadControllerTest"
-If both test classes pass, security and download endpoints are verified under Spring Boot 4.
-A short guide with these steps (and a bit more detail) is in docs/verification-spring-boot-4-security-and-downloads.md. You don’t need to change production code; the existing tests are enough for this verification.
+package org.codeforamerica.shiba.pages.config;
+
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.Collection;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+
+import org.apache.commons.lang3.EnumUtils;
+import org.apache.commons.validator.GenericValidator;
+
+import org.codeforamerica.shiba.County;
+import org.codeforamerica.shiba.TribalNation;
+
+/* Validation on an input field */
+public enum Validation {
+  NONE(strings -> true),
+  SHOULD_BE_BLANK(strings -> String.join("", strings).isBlank()),
+  NOT_BLANK(strings -> !String.join("", strings).isBlank()),
+  NONE_BLANK(strings -> strings.stream().noneMatch(String::isBlank)),
+  ALL_NON_BLANK(strings -> strings != null && !strings.isEmpty() && strings.stream().allMatch(s -> s != null && !s.isBlank())),
+  SELECT_AT_LEAST_ONE(strings -> strings.size() > 0),
+  SELECTED(strings -> strings.size() == 0),
+  SSN(strings -> String.join("", strings).replace("-", "").matches("\\d{9}")),
+  DATE(strings -> {
+    return String.join("", strings).matches("^[0-9]*$") &&
+        (GenericValidator.isDate(String.join("/", strings), "MM/dd/yyyy", true)
+            || GenericValidator.isDate(String.join("/", strings), "M/dd/yyyy", true)
+            || GenericValidator.isDate(String.join("/", strings), "M/d/yyyy", true)
+            || GenericValidator.isDate(String.join("/", strings), "MM/d/yyyy", true));
+  }),
+  MULTIPLE_DATES(strings -> {return validateMultipleDates(strings); }),
+  SCHOOL_START_DATES(strings -> {return checkSchoolStartDateRange(strings); }),
+  DOB_VALID(strings -> {
+    String dobString = String.join("/", strings);
+    SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+    try {
+      Integer inputYear = Integer.parseInt(strings.get(2));
+      Date dobDate = sdf.parse(dobString);
+      boolean notFutureDate = dobDate.getTime() < new Date().getTime();
+      boolean notBefore1900 = inputYear >= 1900;
+      return notFutureDate && notBefore1900;
+    } catch (NumberFormatException e) {
+      return false;
+    } catch (ParseException e) {
+      return false;
+    } catch (IndexOutOfBoundsException e) {
+      return false;
+    }
+  }),
+  ZIPCODE(strings -> String.join("", strings).matches("\\d{5}")),
+  CASE_NUMBER(strings -> String.join("", strings).matches("\\d{4,7}")),
+  CASE_NUMBER_HC(strings -> String.join("", strings).matches("\\d{4,8}")),
+  COUNTY(strings -> EnumUtils.isValidEnumIgnoreCase(County.class, strings.get(0).replaceAll(" ",""))),
+  TRIBAL_NATION(strings -> EnumUtils.isValidEnumIgnoreCase(TribalNation.class, strings.get(0).replaceAll(" ",""))),
+  STATE(strings -> Set
+      .of("AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA", "HI", "ID", "IL", "IN", "IA",
+          "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ",
+          "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT",
+          "VA", "WA", "WV", "WI", "WY", "AS", "DC", "FM", "GU", "MH", "MP", "PR", "VI", "AB", "BC",
+          "MB", "NB", "NF", "NS", "ON", "PE", "PQ", "SK")
+      .contains(strings.get(0).toUpperCase())),
+  PHONE(strings -> String.join("", strings).replaceAll("[^\\d]", "").matches("\\d{10}")),
+  PHONE_STARTS_WITH_ONE(
+      strings -> !String.join("", strings).replaceAll("[^\\d]", "").startsWith("1")),
+  PHONE_STARTS_WITH_ZERO(
+	      strings -> !String.join("", strings).replaceAll("[^\\d]", "").startsWith("0")),
+  MONEY(strings -> String.join("", strings)
+      .matches("^(\\d{1,3},(\\d{3},)*\\d{3}|\\d+)(\\.\\d{1,2})?")),
+  NUMBER(strings -> strings.get(0).trim().matches("\\d*")),
+  EMAIL(strings -> String.join("", strings).trim().matches(
+      "[a-zA-Z0-9!#$%&'*+=?^_`{|}~-]+(?:\\.[a-zA-Z0-9!#$%&'*+=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?")),
+  //Email con will check the that the final string of characters does contain con
+  EMAIL_DOES_NOT_END_WITH_CON(strings -> !String.join("", strings).endsWith(".con")),
+  SELECT_ATLEAST_ONE_IF_YES(strings -> {
+		  /**If the primary Yes/No question is unanswered,
+		     skip conditional validation entirely.
+		     Running follow-up validation with no answer
+		     causes session invalidation when household context exists.*/
+		    if (strings == null || strings.isEmpty()) {
+		        return true;
+		    }
+
+		    // Single applicant case 
+		    if (strings.contains("true") && strings.contains("applicant")) {
+		        return true;
+		    }
+
+		    // Multi-household case
+		    if (strings.contains("true")) {
+		        return strings.size() > 1;
+		    }
+		    // No selected or "No"
+		    return true;
+		});
+
+  private final Predicate<List<String>> rule;
+
+  Validation(Predicate<List<String>> rule) {
+    this.rule = rule;
+  }
+
+	public Boolean apply(List<String> value) {
+		return this.rule.test(value);
+	}
+
+
+	public static boolean validateMultipleDates(List<String> strings) {
+		return strings.stream()
+				.map(s -> {return partitionDateList(strings);})
+				.allMatch(list -> {	return areAllDatesValid(list);});
+	}
+	
+	/**
+	 * Separate list of Strings into a collection of Lists of three Strings.
+	 * @param <T>
+	 * @param inputList
+	 * @return
+	 */
+	private static <T> Collection<List<T>> partitionDateList(List<T> inputList) {
+		final AtomicInteger counter = new AtomicInteger(0);
+		return inputList.stream().collect(Collectors.groupingBy(s -> counter.getAndIncrement() / 3)).values();
+	}
+	
+	private static boolean areAllDatesValid(Collection<List<String>> stringList) {
+		Iterator<List<String>> iterator = stringList.iterator();
+		boolean retVal = false;
+		while(iterator.hasNext()) {
+			List<String> date = iterator.next();
+			boolean isEmpty = date.stream().allMatch(string -> string.isEmpty());
+			if(isEmpty) {
+				retVal = true;
+				continue;
+			}
+			
+			if (DATE.apply(date) == false) {
+				return false;
+			}else {
+				retVal = true;
+			}
+		}
+		return retVal;
+	}
+	private static boolean checkSchoolStartDateRange(List<String> stringList) {
+		//Collection<List<String>> stringList
+		Collection<List<String>> stringLists = partitionDateList(stringList);;
+		Iterator<List<String>> iterator = stringLists.iterator();
+	    boolean retVal = false;
+
+	    LocalDate today = LocalDate.now();
+	    LocalDate maxDate = today.plusYears(4);
+	    LocalDate minDate = today.minusYears(4);
+
+	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
+
+	    while (iterator.hasNext()) {
+	        List<String> date = iterator.next();
+
+	        boolean isEmpty = date.stream().allMatch(String::isEmpty);
+	        if (isEmpty) {
+	            retVal = true;
+	            continue;
+	        }
+
+	        if (!DATE.apply(date)) {
+	            return false;
+	        }
+
+	        if (date.size() >= 3) {
+	            String dateStr = String.join("/", date); 
+	            try {
+	                LocalDate parsedDate = LocalDate.parse(dateStr, formatter);
+	                if (parsedDate.isBefore(minDate) || parsedDate.isAfter(maxDate)) {
+	                    return false;
+	                }
+	            } catch (DateTimeParseException e) {
+	                return false;
+	            }
+	        } else {
+	            return false;
+	        }
+
+	        retVal = true;
+	    }
+
+	    return retVal;
+	}
+}
