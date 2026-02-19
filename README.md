@@ -20,6 +20,7 @@ import org.apache.commons.validator.GenericValidator;
 
 import org.codeforamerica.shiba.County;
 import org.codeforamerica.shiba.TribalNation;
+import org.codeforamerica.shiba.pages.data.PageData;
 
 /* Validation on an input field */
 public enum Validation {
@@ -101,7 +102,9 @@ public enum Validation {
 		    }
 		    // No selected or "No"
 		    return true;
-		});
+		}),
+  /** End date must not be before start date. Use on the end-date input and set compareToInputName to the start-date input name. */
+  END_DATE_NOT_BEFORE_START(strings -> true);
 
   private final Predicate<List<String>> rule;
 
@@ -111,6 +114,48 @@ public enum Validation {
 
 	public Boolean apply(List<String> value) {
 		return this.rule.test(value);
+	}
+
+	/**
+	 * Cross-field validation: for END_DATE_NOT_BEFORE_START, ensures end date is not before start date.
+	 * When compareToInputName is null or pageData is null, falls back to apply(value).
+	 */
+	public boolean apply(List<String> value, PageData pageData, String compareToInputName) {
+		if (this == END_DATE_NOT_BEFORE_START && compareToInputName != null && pageData != null) {
+			return checkEndDateNotBeforeStart(value, pageData, compareToInputName);
+		}
+		return apply(value);
+	}
+
+	private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("M/d/yyyy");
+
+	private static boolean checkEndDateNotBeforeStart(List<String> endDateValue, PageData pageData, String startDateInputName) {
+		if (endDateValue == null || endDateValue.size() < 3) {
+			return true;
+		}
+		if (String.join("", endDateValue).isBlank()) {
+			return true;
+		}
+		if (!DATE.apply(endDateValue)) {
+			return true; // let DATE validation report the error
+		}
+		var startInput = pageData.get(startDateInputName);
+		if (startInput == null || startInput.getValue() == null || startInput.getValue().size() < 3) {
+			return true;
+		}
+		if (String.join("", startInput.getValue()).isBlank()) {
+			return true;
+		}
+		if (!DATE.apply(startInput.getValue())) {
+			return true; // let start date validation report the error
+		}
+		try {
+			LocalDate start = LocalDate.parse(String.join("/", startInput.getValue()), DATE_FORMATTER);
+			LocalDate end = LocalDate.parse(String.join("/", endDateValue), DATE_FORMATTER);
+			return !end.isBefore(start);
+		} catch (DateTimeParseException e) {
+			return true;
+		}
 	}
 
 
