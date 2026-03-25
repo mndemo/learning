@@ -1,105 +1,105 @@
-general.go-back=Regresar
-general.continue=Continuar
-general.cancel=Cancelar
-general.delete=Borrar
-general.remove=Eliminar
-general.optional=Opcional
-general.validation.invalid.select.option.value=
-general.validation.make-sure-you-answer-this-question=Por favor conteste esta pregunta.
-general.validation.make-sure-to-answer-this-question=Por favor conteste esta pregunta.
-general.validation.make-sure-to-agree-to-the-terms=Asegúrese de aceptar los términos.
-general.validation.make-sure-to-make-selection=Asegúrese de seleccionar una opción.
-general.validation.make-sure-to-enter-a-zip-code-with-5-digits=Por favor incluya un código postal de 5 dígitos.
-general.validation.make-sure-your-case-number-has-4-to-7-digits=Asegúrese de que el numero de su caso tenga de 4-7 números.
-general.validation.make-sure-your-case-number-has-4-to-8-digits=Asegúrese de que el numero de su caso tenga de 4-8 números.
-general.validation.make-sure-to-provide-a-first-name=Por favor incluya el primer nombre.
-general.validation.make-sure-to-provide-a-last-name=Por favor incluya el apellido.
-general.validation.make-sure-to-provide-a-phone-number=Por favor incluya el número de teléfono
-general.validation.please-enter-your-birthday-in-this-format=Por favor ingrese su fecha de nacimiento en este formato: mm/dd/aaaa
-general.validation.please-enter-the-date-in-this-format=Favor de ingresar una fecha válida para el mes, día y año siguiendo este ejemplo en inglés: mm/dd/yyyy
-general.validation.please-enter-valid-school-start-date=Ingrese una fecha de inicio de jardín de infantes válida en este formato: mm/dd/aaaa, dentro de un plazo no mayor a 4 años a partir de la fecha actual.
-general.validation.make-sure-to-provide-a-dob-between-1900-and-present=Asegúrese de proporcionar una fecha de nacimiento entre 1900 y el presente.
-general.validation.make-sure-your-SSN-has-9-digits=Asegúrese que su número de seguro social tenga 9 dígitos.
-general.validation.make-sure-to-choose-Yes-or-No=Asegúrese de seleccionar Sí o No.
-general.validation.make-sure-to-enter-a-phone-number-with-10-digits=Por favor incluya un número de teléfono con 10 dígitos.
-general.validation.area-codes-can-not-begin-with-0=Los códigos de área no pueden comenzar con 0. Asegúrese de ingresar un número de teléfono válido.
-general.validation.area-codes-can-not-begin-with-1=Los códigos de área no pueden empezar con el número 1. Por favor incluya un número de teléfono válido.
-general.validation.make-sure-to-provide-a-valid-2-letter-state-code=Por favor incluya un código de estado válido de 2 letras.
-general.validation.make-sure-you-enter-a-dollar-amount=Asegúrese de introducir una cantidad en dólares.
-general.validation.make-sure-you-enter-a-number=Asegúrese de introducir un número.
-general.validation.make-sure-to-enter-a-number-between-zero-and-twenty=Por favor incluya un número entre 0 y 20.
-general.validation.make-sure-you-choose-none-of-the-above-or-another-option=Por favor escoja 'Ninguno de los anteriores' o otra opción.
-general.validation.make-sure-to-provide-a-home-address-or-select-no-use-a-different-address-for-mail=Por favor incluya la dirección de su domicilio, o seleccione, 'No, usar una dirección diferente para el correo.'
-general.validation.make-sure-to-select-a-county=Asegúrese de seleccionar un condado.
-general.validation.make-sure-to-select-a-tribe=Asegúrese de seleccionar una tribu
-general.validation.make-sure-to-make-a-selection=Asegúrese de seleccionar una opción.
-general.validation.select-county-tribe=Elija su condado O White Earth Nation, pero no ambos.
+general.go-back=Go Back
+general.continue=Continue
+general.cancel=Cancel
+general.delete=Delete
+general.remove=Remove
+general.optional=Optional
+general.validation.invalid.select.option.value= 
+general.validation.make-sure-you-answer-this-question=Make sure you answer this question.
+general.validation.make-sure-to-answer-this-question=Make sure to answer this question.
+general.validation.make-sure-to-agree-to-the-terms=Make sure to agree to the terms.
+general.validation.make-sure-to-make-selection=Make sure to make a selection.
+general.validation.make-sure-to-enter-a-zip-code-with-5-digits=Make sure to enter a zip code with 5 digits.
+general.validation.make-sure-your-case-number-has-4-to-7-digits=Make sure your case number has 4-7 digits.
+general.validation.make-sure-your-case-number-has-4-to-8-digits=Make sure your case number has 4-8 digits.
+general.validation.make-sure-to-provide-a-first-name=Make sure to provide a first name.
+general.validation.make-sure-to-provide-a-last-name=Make sure to provide a last name.
+general.validation.make-sure-to-provide-a-phone-number=Make sure to provide a phone number
+general.validation.please-enter-your-birthday-in-this-format=Please enter your birthday in this format: mm/dd/yyyy
+general.validation.please-enter-the-date-in-this-format=Please enter a valid date in this format: mm/dd/yyyy
+general.validation.please-enter-valid-school-start-date=Please enter a valid Kindergarten start date in this format: mm/dd/yyyy not more than 4 years from now.
+general.validation.make-sure-to-provide-a-dob-between-1900-and-present=Make sure to provide a date of birth between 1900 and the present.
+general.validation.make-sure-your-SSN-has-9-digits=Make sure your SSN has 9 digits.
+general.validation.make-sure-to-choose-Yes-or-No=Make sure to choose Yes or No.
+general.validation.make-sure-to-enter-a-phone-number-with-10-digits=Make sure to enter a phone number with 10 digits.
+general.validation.area-codes-can-not-begin-with-0=Area codes can not begin with 0. Make sure to enter a valid phone number.
+general.validation.area-codes-can-not-begin-with-1=Area codes can not begin with 1. Make sure to enter a valid phone number.
+general.validation.make-sure-to-provide-a-valid-2-letter-state-code=Make sure to provide a valid 2 letter state code.
+general.validation.make-sure-you-enter-a-dollar-amount=Make sure you enter a dollar amount.
+general.validation.make-sure-you-enter-a-number=Make sure you enter a number.
+general.validation.make-sure-to-enter-a-number-between-zero-and-twenty=Make sure to enter a number between 0 and 20.
+general.validation.make-sure-you-choose-none-of-the-above-or-another-option=Make sure you choose 'None of the above' or another option.
+general.validation.make-sure-to-provide-a-home-address-or-select-no-use-a-different-address-for-mail=Make sure to provide a home address or select 'No, use a different address for mail'.
+general.validation.make-sure-to-select-a-county=Make sure to select a county.
+general.validation.make-sure-to-select-a-tribe=Make sure to select a tribe
+general.validation.make-sure-to-make-a-selection=Make sure to make a selection.
+general.validation.select-county-tribe=Choose EITHER your county OR White Earth Nation, but not both.
 general.validation.blank=
-general.validation.email=Asegúrese que escribió su correo electrónico correctamente.
-general.validation.make-sure-to-select-a-person=Asegúrese de seleccionar una persona.
-general.validation.email-con-instead-of-com=Su dirección de correo electrónico utiliza .con - por favor, utilice .com
-general.input.postfix.per-month=/por mes
-general.input.postfix.hours-per-week=/horas por semana
-general.inputs.yes=Sí
+general.validation.email=Make sure you entered your email address correctly.
+general.validation.make-sure-to-select-a-person=Make sure to select a person.
+general.validation.email-con-instead-of-com=Your email address uses .con — please use .com
+general.input.postfix.per-month=/per month
+general.input.postfix.hours-per-week=/hours per week
+general.inputs.yes=Yes
 general.inputs.no=No
-general.inputs.none-of-the-above=Ninguno de los anteriores
-general.inputs.optional=Esto es opcional.
-general.inputs.not-sure=No estoy seguro
-general.step=Paso {0} de {1}
-general.well-ask-about=Le preguntaremos acerca de
-general.check-all-that-apply=Marque todo lo que corresponda
-general.privacy-policy=política de privacidad
-general.female=Sexo femenino
-general.male=Sexo masculino
-general.rather-not-say=Prefiero no decirlo
-general.never-married=Soltero/a
-general.married-living-with-spouse=Casado/a, viviendo con cónyuge
-general.married-not-living-with-spouse=Casado/a, no viviendo con cónyuge
-general.legally-separated=Legalmente separado/a
-general.divorced=Divorciado/a
-general.widowed=Viudo/a
-generic.footer=MNbenefits se ha desarrollado en nombre de la población de Minnesota en asociación entre las agencias estatales que administran los programas, Minnesota IT Services y los condados y naciones tribales de Minnesota.
-generic.footer.mn-official-website=Sitio web oficial del estado de Minnesota
-generic.footer.about=Acerca de
-generic.footer.help-and-resources=Ayuda y recursos
-general.you=(tu)
-general.this-person-can=Esta persona puede:
-general.month=Mes
-general.day=Día
-general.year=Año
-general.and=y
-general.monthly-amount=Cantidad mensual
-general.finish-application=Terminar solicitud
-general.county-and-phone={0} Condado ({1})
-general.county=Condado {0}
-general.delayed-processing-time-notice=Padres y madres de Minnesota
-general.delayed-processing-time-message=No pierda el Crédito Tributario por Hijos de $1,750 por cada hijo menor de 18 años. <a href ="https://www.revenue.state.mn.us/child-tax-credit" target="_blank" class="link--alert-banner">Más detalles en el Departamento de Ingresos.<span class="material-icons"></span></a>. Puede obtener un <a href ="https://www.revenue.state.mn.us/sites/default/files/2024-02/minnesota-child-tax-credit-2024-english.pdf" target="_blank" class="link--alert-banner">resumen aquí.<i class="material-icons"></i></a>.
-general.if-you-dont-have=Si actualmente no tiene esta información, ponga un estimado o déjelo en blanco.
+general.inputs.none-of-the-above=None of the above
+general.inputs.optional=This is optional.
+general.inputs.not-sure=I'm not sure
+general.step=Step {0} of {1}
+general.well-ask-about=We'll ask about
+general.check-all-that-apply=Check all that apply.
+general.privacy-policy=privacy policy
+general.female=Female
+general.male=Male
+general.rather-not-say=Rather not say
+general.never-married=Never married
+general.married-living-with-spouse=Married, living with spouse
+general.married-not-living-with-spouse=Married, not living with spouse
+general.legally-separated=Legally separated
+general.divorced=Divorced
+general.widowed=Widowed
+generic.footer=MNbenefits is developed on behalf of the people of Minnesota in partnership between the state agencies that administer the programs, Minnesota IT Services, and Minnesota counties and Tribal Nations.
+generic.footer.mn-official-website=State of Minnesota Official Website
+generic.footer.about=About
+generic.footer.help-and-resources=Help & Resources
+general.you=(you)
+general.this-person-can=This person can:
+general.month=Month
+general.day=Day
+general.year=Year
+general.and=and
+general.monthly-amount=Monthly amount
+general.finish-application=Finish application
+general.county-and-phone={0} County ({1})
+general.county={0} County
+general.delayed-processing-time-notice=Minnesota Parents: 
+general.delayed-processing-time-message=Do not miss the  Child Tax Credit of $1,750 for each child under 18. More details at <a href ="https://www.revenue.state.mn.us/child-tax-credit" target="_blank" class="link--alert-banner">Department of Revenue<span class="material-icons">&#xe89e;</span></a>.      You can <a href ="https://www.revenue.state.mn.us/sites/default/files/2024-02/minnesota-child-tax-credit-2024-english.pdf" target="_blank" class="link--alert-banner">get a summary here<i class="material-icons">&#xe89e;</i></a>.
+general.if-you-dont-have=If you don't have this information right now, estimate or leave it blank. 
 general.mn-gov-portal=https://mn.gov/portal/
 
-toolbar.healthcare-renewal-icon-description=Renovar mi cobertura de atención médica de MN
-toolbar.healthcare-nenewal-icon-url=https://mn.gov/dhs/renewmycoverage-es/
+toolbar.healthcare-renewal-icon-description=Renew my MN health care coverage
+toolbar.healthcare-nenewal-icon-url=https://mn.gov/dhs/renewmycoverage/
 
-ready-to-upload-documents.title=Listo para cargar documentos
-ready-to-upload-documents.header=¿Listo para cargar y enviar sus documentos?
-ready-to-upload-documents.first-we'll-ask-you=<b>¡Empecemos ya!</b><br><br>En primer lugar, le haremos algunas preguntas que nos ayudarán a asociar sus documentos con su solicitud y a asegurarnos de que enviamos sus documentos al condado o nación tribal correctos.<br><br>
+ready-to-upload-documents.title=Ready to upload documents
+ready-to-upload-documents.header=Ready to upload and submit your documents?
+ready-to-upload-documents.first-we'll-ask-you=<b>Let's get started!</b><br><br>First, we'll ask you a few questions to help us match your documents to your application and to make sure we send your documents to the correct county or Tribal Nation.<br><br>
 
-identify-county.title=Identificar Condado
-identify-county-or-tribal-nation.title=Identifique el condado o Nación Tribal
-identify-county.select-your-county=Seleccione su condado
-identify-county.select-a-county=Seleccione un condado
-healthcare-Renewal-Upload.title=Pasos para cargar el documento de renovación de atención médica
-identify-county.select-a-tribal-nation=Seleccione una nación tribal
-identify-county.this-is-the-county=Elija el condado donde vive. .<br\\><br\\>Para ser elegible para recibir los beneficios en esta solicitud, debe vivir en el estado de Minnesota.
-identify-county.select-your-county-without-mn=Enviaremos su solicitud a este condado.
-identify-county.where-would-you-like-to-send-documents=¿A dónde le gustaría enviar sus documentos hoy?
-healthcare-Renewal-Upload.where-would-you-like-to-send-documents=¿A dónde le gustaría enviar hoy sus documentos de renovación de atención médica?
-identify-county.choose-a-location=Elija una ubicación de acuerdo con el lugar a donde envió su solicitud cuando aplicó. <br></br>Puede seleccionar un condado, una Nación Tribal o ambos.
+identify-county.title=Identify County
+identify-county-or-tribal-nation.title=Identify county or Tribal Nation
+identify-county.select-your-county=Select your county
+identify-county.select-a-county=Select a county
+healthcare-Renewal-Upload.title=Health Care Renewal Document Upload 
+identify-county.select-a-tribal-nation=Select a Tribal Nation
+identify-county.this-is-the-county=Choose the county where you live.<br\><br\>To be eligible for the benefits in this application you must live in the state of Minnesota.
+identify-county.select-your-county-without-mn=Choose the county where you live.
+identify-county.where-would-you-like-to-send-documents=Where would you like to send your documents today?
+healthcare-Renewal-Upload.where-would-you-like-to-send-documents=Where would you like to send your health care renewal documents today?
+identify-county.choose-a-location=Choose a location based on where your application was sent when you applied.<br></br>You can select a county, a Tribal Nation, or both.
 
-healthcare-Renewal-Upload.choose-a-location=Elija el condado <b>O</b> la nación tribal que está gestionando su caso de atención médica.
-identify-county.you-can-see-where-your-application=<p><b>Puede consultar a dónde se envió su solicitud en sus correos electrónicos de confirmación, en la primera página de la solicitud diligenciada o en las cartas que su condado o Nación Tribal le haya enviado. </b></p> <p>Si no está seguro o no cuenta con esta información, elija el condado en donde vive y elija su Nación Tribal, si tiene alguna.</p>
-healthcare-Renewal-Upload.you-can-see-where-your-application=<p><b>En su notificación de Renovación de los programas de atención médica de Minnesota, puede encontrar qué condado o nación tribal está gestionando su caso. También lo puede encontrar en otras cartas relacionadas a su caso de atención médica.</b></p><p>Si no está seguro o no tiene esta información:<ul class="left-justified-list"><li>Elija el condado donde vive, o</li><li>Elija White Earth Nation si es la entidad encargada de prestarle los servicios.</li></ul></p>
-healthcare-Renewal-Upload.OR=<b>-O-</b>
+healthcare-Renewal-Upload.choose-a-location=Choose the county <b>OR</b> Tribal Nation that is managing your health care case.
+identify-county.you-can-see-where-your-application=<p><b>You can see where your application was sent in your confirmation emails, on the first page of your completed application, or  in letters your county or Tribal Nation has mailed to you.</b></p>\n<p>If you\u2019re not sure or don\u2019t have this information, choose the county where you live, and choose your Tribal Nation, if you have one.</p>
+healthcare-Renewal-Upload.you-can-see-where-your-application=<p><b>You can find what county or Tribal Nation is managing your health care case on your Minnesota Health Care Programs Renewal notice, or in other letters about your health care case.</b></p><p>If you\u2019re not sure or don\u2019t have this information:<ul class="left-justified-list"><li>Choose the county where you  live; or</li><li>Choose White Earth Nation if they provide your services.</li></ul></p>
+healthcare-Renewal-Upload.OR=<b>-OR-</b> 
 
 identify-county-aitkin=Aitkin
 identify-county-anoka=Anoka
@@ -189,172 +189,172 @@ identify-county-winona=Winona
 identify-county-wright=Wright
 identify-county-yellow-medicine=Yellow Medicine
 
-match-info.title=Igualar la información
-match-info.match-docs-to-app=Cuéntenos sobre usted
-match-info.fill-in-as-much-as-you-can=Rellene todo lo que pueda.  Esta información ayudará a su condado o nación tribal a asociar sus documentos con su solicitud.
-match-info.whats-your-first-name=¿Cuál es su primer nombre?
-match-info.legally-as-it-appears-on-your-id=Legalmente como aparece en su identificación.
-match-info.whats-your-last-name=¿Cómo se apellida?
-match-info.when-were-you-born=¿Cuándo nació?
-match-info.whats-your-social-security-number=¿Cuál es su número de seguro social?
-match-info.recommended-but-not-required=Se recomienda, pero no se requiere.
-match-info.whats-your-phone-number=¿Cuál es su número de teléfono?
-match-info.phone-number-recommended=Se recomienda, pero no es obligatorio. Sirve para que su condado o nación tribal pueda contactarlo en caso de tener preguntas.
-match-info.county-can-contact-you-if-questions=Se recomienda, pero no es obligatorio. Sirve para que su condado o nación tribal pueda contactarlo en caso de tener preguntas.
-match-info.case-number-if-you-have-it=¿Cuál es el número de su caso, si es que tiene uno?
+match-info.title=Match Info
+match-info.match-docs-to-app=Tell us about yourself
+match-info.fill-in-as-much-as-you-can=Fill in as much as you can. This information will help your county or Tribal Nation match your documents to your application.
+match-info.whats-your-first-name=What's your first name?
+match-info.legally-as-it-appears-on-your-id=Legally as it appears on your ID.
+match-info.whats-your-last-name=What's your last name?
+match-info.when-were-you-born=When were you born?
+match-info.whats-your-social-security-number=What's your social security number?
+match-info.recommended-but-not-required=Recommended, but not required.
+match-info.whats-your-phone-number=What’s your phone number?
+match-info.phone-number-recommended=Recommended, but not required. This is so your county or Tribal Nation can contact you if they have questions.
+match-info.county-can-contact-you-if-questions=Recommended, but not required. This is so your county or Tribal Nation can contact you if they have questions.
+match-info.case-number-if-you-have-it=If you have it, what’s your case number?
 
-match-info-hc.match-docs-to-case=Antes de empezar, tenemos que cotejar que sus documentos son los que aparecen en su caso de atención médica
-match-info-hc.fill-in-as-much-as-you-can=Proporcione toda la información que pueda. Esto ayudará a su condado o a su nación tribal a cotejar sus documentos con los de su caso y asegurar que se correspondan.
+match-info-hc.match-docs-to-case=Before you start, we need to match your documents to your health care case
+match-info-hc.fill-in-as-much-as-you-can=Fill in as much as you can. This will help your county or Tribal Nation match your documents to your health care case.
 
 
-landing.title=MNBenefits
-landing.header=Solicitar beneficios fácilmente en línea.
-landing.subheader=Presente su solicitud para recibir beneficios de Minnesota en 20 minutos o menos.
-landing.apply-now=Aplica hoy
-landing.apply-now-espanol=Apply now
-landing.apply-to-these-programs=Solicite estos programas
-landing.food-assistance-SNAP=Asistencia para Comida (SNAP)
-landing.SNAP-helps-low-income-Minnesotans-get-the-food-they-need=SNAP ayuda a la gente de Minnesota a recibir la comida que necesitan. Usted recibirá una tarjeta EBT que puede usar como una tarjeta de debito para comprar alimentos en la mayoría de supermercados y mercados de agricultores.
-landing.cash-programs=Programas de Asistencia en Efectivo
-landing.cash-assistance-helps-people-meet-their-basic-needs-until-they-are-able=La asistencia en efectivo ayuda a las personas a cubrir sus necesidades básicas hasta que puedan mantenerse a sí mismas. Obtendrá una tarjeta EBT que puede usar como tarjeta de débito. Estos son los programas de efectivo más comunes:
-landing.general-assistance=Asistencia General (GA)
-landing.mn-family-investment-program-mfip=Programa de Inversión Familiar de Minnesota (MFIP)
-landing.mn-supplemental-aid-msa=Ayuda Suplementaria de Minnesota (MSA)
-landing.refugee-cash-assistance-rca=Asistencia en Efectivo para Refugiados (RCA)
-landing.tribal-tanf=TANF Tribal
-landing.emergency-assistance=Asistencia de Emergencia
-landing.emergency-assistance-provides-something-to-people-this-is-a-description=Asistencia de Emergencia ayuda con los pagos de vivienda, como los pagos de renta atrasados, para prevenir los desalojos o ejecuciones hipotecarias. También se puede utilizar para servicios públicos cuando existe una amenaza de desconexión.
-landing.child-care-assistance=Asistencia para el Cuidado de Niños
-landing.CCAP-more-link=<a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-3551-SPA" target="_blank" rel="noopener noreferrer">Más recursos sobre el cuidado infantil.</a>
-landing.child-care-assistance-provides-financial-assistance-to-help-families=El Programa de ayuda para el cuidado de niños (Child Care Assistance Program) ayuda a pagar el cuidado de niños para que los cuidadores puedan trabajar, estudiar, buscar empleo, atender sus necesidades de salud mental o participar en actividades incluidas en su plan de empleo.
-landing.housing-support=Programa de Apoyo a la Vivienda (GRH)
-landing.the-housing-support-program=El Programa de ayuda para la vivienda (Housing Support Program) paga a un proveedor aprobado los costos de vivienda y los artículos que las personas necesitan para mantenerse alojadas en ciertos entornos grupales o en la comunidad, para personas de 65 años o más o adultos con discapacidades y bajos ingresos.  Esto ayuda a prevenir la institucionalización o la falta de vivienda. Este programa se llamaba anteriormente Hogar de residencia en grupo (Group Residential Housing, GRH).
-landing.submit-documents-to-county=¿Ya tiene un trámite en el condado? Suba los documentos aquí.
-landing.submit-documents-for-counties=Puede mandar sus documentos sobre MNbenefits si vive en uno de los siguientes condados: Anoka, Carver, Clay, Cook, Dodge, Hennepin, Morrison, Olmsted, Otter Tail, Sherburne, Steele, St. Louis, Wabasha, Waseca, Wadena, y Wright .
-landing.upload-documents=Cargar documentos
-landing.upload-documents-caps=Cargar documentos
-landing.alread-applied=¿Ya presentó una solicitud?
-landing.page-description=MNbenefits es una aplicación de prestaciones en línea por medio de la cual los habitantes de Minnesota pueden solicitar varias prestaciones de la red de seguridad, incluyendo asistencia alimentaria y monetaria, en menos de 20 minutos.
-landing.send-documents-to-your-county-tribal-nation=Enviar documentos a su condado o nación tribal.
-landing.waiting-to-here-back=¿Está esperando la respuesta?
-landing.learn-how-you-can-follow-up-on-your-application=Entérese de cómo puede obtener una actualización sobre su solicitud
+landing.title=MNbenefits
+landing.header=Apply for benefits easily online.
+landing.subheader=Submit your application for Minnesota benefits in 20 minutes or less.
+landing.apply-now=Apply now
+landing.apply-now-espanol=Aplica ahora
+landing.apply-to-these-programs=Apply to these programs
+landing.food-assistance-SNAP=Food assistance (SNAP)
+landing.SNAP-helps-low-income-Minnesotans-get-the-food-they-need=SNAP helps Minnesotans get the food they need. You'll get an EBT card that you can use like a debit card to buy groceries at most stores and farmer's markets.
+landing.cash-programs=Cash programs
+landing.cash-assistance-helps-people-meet-their-basic-needs-until-they-are-able=Cash assistance helps people meet their basic needs until they are able to support themselves. You will get an EBT card that you can use like a debit card. Here are the most common cash programs:
+landing.general-assistance=General Assistance (GA)
+landing.mn-family-investment-program-mfip=MN Family Investment Program (MFIP)
+landing.mn-supplemental-aid-msa=MN Supplemental Aid (MSA)
+landing.refugee-cash-assistance-rca=Refugee Cash Assistance (RCA)
+landing.tribal-tanf=Tribal TANF
+landing.emergency-assistance=Emergency Assistance
+landing.emergency-assistance-provides-something-to-people-this-is-a-description=Emergency Assistance helps with shelter payments, such as past due rent, to stop evictions or foreclosure. It can also be used for utilities when there is a threat of disconnection.
+landing.child-care-assistance=Child Care Assistance
+landing.CCAP-more-link=<a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-3551-ENG" target="_blank" rel="noopener noreferrer">More child care resources.</a>
+landing.child-care-assistance-provides-financial-assistance-to-help-families=Child Care Assistance Program helps pay for child care so caregivers can work, go to school, look for a job, support mental health needs, and/or engage in activities in their employment plan.
+landing.housing-support=Housing Support Program (GRH)
+landing.the-housing-support-program=The Housing Support Program pays an approved provider for housing costs and things people need to stay housed in certain group setting or in the community for persons aged 65 or older or adults with disabilities with low income. This helps prevent institutional living or homelessness. This program was formerly called Group Residential Housing (GRH).
+landing.submit-documents-to-county=Already applied?<br> Upload documents here.
+landing.submit-documents-for-counties=You can submit documents on MNbenefits if you live in: Anoka, Carver, Clay, Cook, Dodge, Hennepin, Morrison, Olmsted, Otter Tail, Sherburne, Steele, St. Louis, Wabasha, Waseca, Wadena, and Wright Counties.
+landing.upload-documents=Upload documents
+landing.upload-documents-caps=Upload Documents
+landing.alread-applied=Already applied?
+landing.page-description=MNbenefits is an online benefits application where Minnesotans can apply for several safety net benefits, including food and cash assistance, in less than 20 minutes.
+landing.send-documents-to-your-county-tribal-nation=Send documents to your county or Tribal Nation.
+landing.waiting-to-here-back=Waiting to hear back?
+landing.learn-how-you-can-follow-up-on-your-application=Learn how you can get an update on your application
 
-landing.application-process=Pasos para presentar la solicitud.
-landing.apply-online=Paso 1: Aplique una vez
-landing.submit-an-application=Puede solicitar varios programas de beneficios para usted y otros miembros de su grupo familiar en una sola solicitud.
-landing.upload-documents-your=Paso 2: Cargue sus documentos
-landing.upload-your-documents=Cargue los documentos que se solicitan, tales como recibos de pago de nómina, recibos de alquiler y estados bancarios como parte de su solicitud. También puede volver a nuestra página principal para agregar documentos después.
-landing.application-review=Paso 3: Permita tiempo para que un trabajador revise su solicitud
-landing.your-application-will-be-reviewed=Su solicitud y sus documentos serán revisados por los empleados de elegibilidad de su condado o nación tribal.
-landing.interview=Paso 4: Complete una entrevista
-landing.most-programs-require-an-interview=La mayoría de los programas de esta solicitud requieren una entrevista para recibir beneficios. Puede tener su entrevista por teléfono o en persona. Su condado o nación tribal se pondrá en contacto con usted por teléfono o correo para concertar una cita. En algunos casos, es posible que sea necesario realizar más seguimientos después de su entrevista.
-landing.learn-about-programs=Informarse sobre los programas
-landing.SNAP-link=<a href="https://dcyf.mn.gov/programs-directory/supplemental-nutrition-assistance-program-snap " target="_blank" rel="noopener noreferrer">Infórmese más sobre el programa SNAP, los requerimientos de elegibilidad y otros recursos de ayuda alimentaria.</a>
-landing.CASH-link=<a href="https://mn.gov/dhs/income/spanish" target="_blank" rel="noopener noreferrer"> Infórmese más sobre los programas de asistencia en efectivo y los requerimientos de elegibilidad.</a>
-landing.Emergency-link=Infórmese más sobre la <a href="https://dcyf.mn.gov/programs-directory/emergency-assistance " target="_blank" rel="noopener noreferrer"> Asistencia de Emergencia (para familias con niños)</a> y la <a href="https://mn.gov/dhs/people-we-serve/adults/economic-assistance/emergency-help/ " target="_blank" rel="noopener noreferrer"> Asistencia General de Emergencia (para adultos sin niños en el hogar)</a>
-landing.housing-link=Obtenga más información sobre el <a href="https://mn.gov/dhs/people-we-serve/adults/economic-assistance/housing/programs-and-services/housing-support.jsp" target="_blank" rel="noopener noreferrer">Programa de ayuda para la vivienda o Housing Supports Program.</a>
-landing.other-housing-link=Encuentre más recursos para recibir ayuda con <a href="https://mn.gov/dhs/housing/spanish/" target="_blank" rel="noopener noreferrer">otras necesidades de vivienda.</a>
-landing.CCAP-link= Este programa está dirigido a niños de hasta 12 años, y a niños de 13 y 14 años con necesidades especiales.<p><a href="https://dcyf.mn.gov/programs-directory/child-care-assistance-program/" target="_blank" rel="noopener noreferrer"> Requisitos para el Programa de ayuda para el cuidado de niños </a></p>
+landing.application-process=Steps for Applying
+landing.apply-online=Step 1: Apply once
+landing.submit-an-application=You can apply for multiple benefit programs for yourself and other members of your household in just one application.
+landing.upload-documents-your=Step 2: Upload your documents
+landing.upload-your-documents=Upload required documents like pay stubs, rent receipts, and bank statements as part of your application. You can also return to our homepage to add documents later.
+landing.application-review=Step 3: Allow time for a worker to review
+landing.your-application-will-be-reviewed=Your application and documents will be reviewed by eligibility workers from your county or Tribal Nation. 
+landing.interview=Step 4: Complete an interview
+landing.most-programs-require-an-interview=Most programs on this application require an interview to receive benefits. You can have your interview by phone or face-to-face. Your county or Tribal Nation will contact you by phone or mail to schedule.  In some cases, more follow-ups may be needed after your interview.
+landing.learn-about-programs=Learn about programs
+landing.SNAP-link=<a href="https://dcyf.mn.gov/programs-directory/supplemental-nutrition-assistance-program-snap" target="_blank" rel="noopener noreferrer">Learn more about the SNAP program, eligibility requirements, and other food assistance resources.</a>
+landing.CASH-link=<a href="https://mn.gov/dhs/income/" target="_blank" rel="noopener noreferrer">Learn more about cash assistance programs and eligibility requirements.</a>
+landing.Emergency-link=Learn more about <a href="https://dcyf.mn.gov/programs-directory/emergency-assistance" target="_blank" rel="noopener noreferrer">Emergency Assistance (for families with children)</a> and <a href="https://mn.gov/dhs/people-we-serve/adults/economic-assistance/emergency-help/" target="_blank" rel="noopener noreferrer">Emergency General Assistance (for adults without children in the household)</a>
+landing.housing-link=Learn more about the <a href="https://mn.gov/dhs/people-we-serve/adults/economic-assistance/housing/programs-and-services/housing-support.jsp" target="_blank" rel="noopener noreferrer">Housing Support Program</a> 
+landing.other-housing-link=Find more resources to help with <a href="https://mn.gov/dhs/housing/" target="_blank" rel="noopener noreferrer">other housing needs.</a>
+landing.CCAP-link= This program is for children ages 12 and younger, and children ages 13 and 14 with special needs. <p><a href="https://dcyf.mn.gov/programs-directory/child-care-assistance-program/" target="_blank" rel="noopener noreferrer">Child Care Assistance Program requirements.</a></p>
 
 snap-nds.title=SNAP NDS
-snap-nds.header=SNAP Declaración de No Discriminación
-snap-nds.p1=De acuerdo con la ley federal de derechos civiles y las normas y políticas de derechos civiles del Departamento de Agricultura de los Estados Unidos (USDA), esta entidad está prohibida de discriminar por motivos de raza, color, origen nacional, sexo (incluyendo identidad de género y orientación sexual), credo religioso, discapacidad, edad, creencias políticas, o represalia o retorsión por actividades previas de derechos civiles.
-snap-nds.p2=La información sobre el programa puede estar disponible en otros idiomas que no sean el inglés. Personas con discapacidad que requieran medios alternos de comunicación para obtener información sobre el programa (por ejemplo, Braille, letra grande, cinta de audio, Lenguaje de Señas Americano), debe ponerse en contacto con la agencia (estatal o local) donde solicitaron los beneficios. Las personas sordas, con dificultades auditivas o con discapacidades del habla pueden comunicarse con el USDA a través del Servicio Federal de Retransmisión al (800) 877- 8339.
-snap-nds.p3=Para presentar una queja por discriminación en el programa, el reclamante debe llenar un formulario AD-3027, formulario de queja por discriminación en el programa del USDA que puede obtenerse en línea en: https://www.usda.gov/sites/default/files/documents/ad-3027s.pdf, en cualquier oficina del USDA, llamando al (833) 620-1071, o escribiendo una carta dirigida al USDA. La carta debe contener el nombre del demandante, la dirección, el número de teléfono y una descripción escrita de la acción discriminatoria alegada con suficiente detalle para informar al Subsecretario de Derechos Civiles (ASCR) sobre la naturaleza y fecha de una presunta violación de derechos civiles. El formulario AD-3027 completado o la carta debe presentarse por:
-snap-nds.mail=<strong>correo:</strong><br>Food and Nutrition Service, USDA<br>1320 Braddock Place, Room 334<br>Alexandria, VA 22314; o
-snap-nds.fax=<strong>fax:</strong> (833)-256-1665 , o (202)-690-7442; o
-snap-nds.email=<strong>correo electrónico:</strong><a class="long-file-name" href="mailto:FNSCIVILRIGHTSCOMPLAINTS@usda.gov" title="Email FNS Civil Rights Complaints" target="_blank"> FNSCIVILRIGHTSCOMPLAINTS@usda.gov</a>
-snap-nds.eop=Esta institución es un proveedor que brinda igualdad de oportunidades.
-snap-nds.do-not-send-applications-here=No envíe la solicitud aquí.
+snap-nds.header=SNAP non-discrimination statement
+snap-nds.p1=In accordance with federal civil rights law and U.S. Department of Agriculture (USDA) civil rights regulations and policies, this institution is prohibited from discriminating on the basis of race, color, national origin, sex (including gender identity and sexual orientation), religious creed, disability, age, political beliefs, or reprisal or retaliation for prior civil rights activity.
+snap-nds.p2=Program information may be made available in languages other than English. Persons with disabilities who require alternative means of communication to obtain program information (e.g., Braille, large print, audiotape, American Sign Language), should contact the agency (state or local) where they applied for benefits. Individuals who are deaf, hard of hearing or have speech disabilities may contact USDA through the Federal Relay Service at (800) 877-8339.
+snap-nds.p3=To file a program discrimination complaint, a Complainant should complete a Form AD-3027, USDA Program Discrimination Complaint Form (PDF) which can be obtained online at https://www.usda.gov/sites/default/files/documents/ad-3207.pdf, from any USDA office, by calling (833) 620-1071, or by writing a letter addressed to USDA. The letter must contain the complainant's name, address, telephone number, and a written description of the alleged discriminatory action in sufficient detail to inform the Assistant Secretary for Civil Rights (ASCR) about the nature and date of an alleged civil rights violation. The completed AD-3027 form or letter must be submitted to:
+snap-nds.mail=<strong>mail:</strong><br\>Food and Nutrition Service, USDA<br\>1320 Braddock Place, Room 334<br\>Alexandria, VA 22314; or
+snap-nds.fax=<strong>fax:</strong> (833) 256-1665 or (202) 690-7442; or
+snap-nds.email=<strong>email: </strong><a class="long-file-name" href="mailto:FNSCIVILRIGHTSCOMPLAINTS@usda.gov" title="Email FNS Civil Rights Complaints" target="_blank">FNSCIVILRIGHTSCOMPLAINTS@usda.gov</a>
+snap-nds.eop=This institution is an equal opportunity provider.
+snap-nds.do-not-send-applications-here=Do Not Send Applications Here
 
-prepare-to-apply.title=Preparase para su solicitud
-prepare-to-apply.how-this-works=Como funciona
-prepare-to-apply.we-will-ask-you-about=Le preguntaremos acerca de
-prepare-to-apply.personal-information=Su información personal
-prepare-to-apply.people-who-live-with-you=Las personas que viven con usted
-prepare-to-apply.income=Su ingreso
-prepare-to-apply.expenses=Sus gastos
-prepare-to-apply.assets=Sus bienes
-prepare-to-apply.this-application-form-should-take-about=Esta solicitud debe tomar
-prepare-to-apply.minutes=minutos
-prepare-to-apply.to-complete=para completar
-prepare-to-apply.your-information-is-secure-and-will-be-handled-in-accordance-with-our=Su información es segura y sera tratada de acuerdo con nuestra
-prepare-to-apply.Submitting-an-incomplete-app-SNAP=Presentar una solicitud incompleta (sólo SNAP)
-prepare-to-apply.If-you-are-applying-for-food-assistance=Si desea solicitar asistencia alimentaria (SNAP), tendrá la opción de presentar una solicitud incompleta con sólo su nombre, dirección y firma.
-prepare-to-apply.by-choosing-to-submit-an-incomplete-application=Al optar enviar una solicitud incompleta, es posible que experimente un tiempo de procesamiento más prolongado y mayor comunicación con su condado o nación tribal.
-prepare-to-apply.after-you-submit=Después de enviar su solicitud
-prepare-to-apply.your-application-submission-date=La fecha en la que presenta su solicitud es la fecha más temprana en la que pueden comenzar sus prestaciones. 
-prepare-to-apply.most-programs-on-this-application=La mayoría de los programas que figuran en esta solicitud, incluidas las prestaciones alimentarias y económicas, requieren una entrevista después de presentar la solicitud. La entrevista puede realizarse por teléfono o en persona. Espere a recibir una carta por correo o una llamada telefónica de su condado o nación tribal para concertar la cita.
-prepare-to-apply.adding-documents=Agregar Documentos
-prepare-to-apply.at-the-end-of-this-application=Al final de esta solicitud, tendrá la opción de agregar documentos, como talones de pago, recibos de la renta, o facturas médicas. Puede usar su teléfono para tomar fotos de documentos en papel o seleccionar fotos de su teléfono o computadora. También puede volver a nuestra página de inicio después de aplicar para agregar documentos más tarde.
-prepare-to-apply.you-can-use-your-phone=Puede utilizar su teléfono para tomar fotos de documentos en papel o seleccionar fotos de su dispositivo.
-prepare-to-apply.you-can-always-return-to-our-homepage=También siempre puede volver a nuestra página de inicio para añadir documentos más tarde.
+prepare-to-apply.title=Prepare To Apply
+prepare-to-apply.how-this-works=How this works
+prepare-to-apply.we-will-ask-you-about=We will ask you about
+prepare-to-apply.personal-information=Personal information
+prepare-to-apply.people-who-live-with-you=People who live with you
+prepare-to-apply.income=Income
+prepare-to-apply.expenses=Expenses
+prepare-to-apply.assets=Assets
+prepare-to-apply.this-application-form-should-take-about=This application form should take about
+prepare-to-apply.minutes=minutes
+prepare-to-apply.to-complete=to complete
+prepare-to-apply.your-information-is-secure-and-will-be-handled-in-accordance-with-our=Your information is secure and will be handled in accordance with our
+prepare-to-apply.Submitting-an-incomplete-app-SNAP=Submitting an incomplete application (SNAP only)
+prepare-to-apply.If-you-are-applying-for-food-assistance=If you are applying for food assistance (SNAP), you will have the choice to submit an incomplete application with only your name, address, and signature.
+prepare-to-apply.by-choosing-to-submit-an-incomplete-application=By choosing to submit an incomplete application, you may experience longer processing time and more communication with your county or Tribal Nation.
+prepare-to-apply.after-you-submit=After you apply
+prepare-to-apply.your-application-submission-date=The date you submit your application is the earliest date your benefits can begin.
+prepare-to-apply.most-programs-on-this-application=Most programs on this application, including food and cash benefits, require an interview after you apply. Your interview can be held over the phone or face-to-face. Watch for a letter in the mail or phone call from your county or Tribal Nation to schedule.
+prepare-to-apply.adding-documents=Adding documents
+prepare-to-apply.at-the-end-of-this-application=At the end of this application, you will have the option to add documents, like pay stubs, rent receipts, or medical bills.
+prepare-to-apply.you-can-use-your-phone=You can use your phone to take photos of paper documents or select photos from your device.
+prepare-to-apply.you-can-always-return-to-our-homepage=You can always return to our homepage to add documents later, too.
 
-program-documents.title=Documentos Adicionales del Programa
-program-documents.header=Documentos adicionales del programa
-program-documents.help-message=Antes de terminar, tómese unos minutos para leer los documentos a continuación.
-program-documents.docs-message=Haga clic en cada enlace para abrirlo en una nueva pestaña del navegador. Una vez abierto, puede guardar o marcar estos documentos en favoritos para consultarlos más tarde.
-program-documents.all-applicants-header=<strong>Recursos para todos los solicitantes</strong>
-program-documents.all-applicants-doc-1=<a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-3477-ENG  " target="_blank" rel="noopener noreferrer">Información sobre violencia doméstica</a>
-program-documents.all-applicants-doc-2=<a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-4133-SPA" target="_blank" rel="noopener noreferrer">¿Tiene alguna discapacidad?</a>
-program-documents.all-applicants-doc-3=<a href=" https://edocs.dhs.state.mn.us/lfserver/Public/DHS-2920-SPA" target="_blank" rel="noopener noreferrer">Información sobre programas de dinero en efectivo, alimentos y cuidado infantil</a>
-program-documents.all-applicants-doc-4=<a href=" https://edocs.dhs.state.mn.us/lfserver/Public/DHS-3315A-SPA" target="_blank" rel="noopener noreferrer">Cómo usar su tarjeta Minnesota EBT</a>
-program-documents.all-applicants-doc-5=<a href=" https://edocs.dhs.state.mn.us/lfserver/Public/DHS-2759-SPA" target="_blank" rel="noopener noreferrer">Sistema de Verificación de Ingresos y Elegibilidad e Informes de Trabajo </a>
-program-documents.all-applicants-doc-6=<a href=" https://edocs.dhs.state.mn.us/lfserver/Public/DHS-3353-SPA" target="_blank" rel="noopener noreferrer">Sus derechos de apelación</a>
-program-documents.snap-applicants-header=<strong>Información sobre el programa SNAP</strong>
-program-documents.snap-applicants-doc-1=<a href=" https://edocs.dhs.state.mn.us/lfserver/Public/DHS-2814-SPA" target="_blank" rel="noopener noreferrer">Hoja informativa del programa SNAP</a>
-program-documents.snap-applicants-doc-2=<a href=" https://edocs.dhs.state.mn.us/lfserver/Public/DHS-2625-SPA" target="_blank" rel="noopener noreferrer">Responsabilidades de los informes de SNAP</a>
-program-documents.snap-applicants-doc-3=<a href=" https://edocs.dhs.state.mn.us/lfserver/Public/DHS-2707-ENG" target="_blank" rel="noopener noreferrer">Información sobre cómo renunciar voluntariamente a su trabajo si recibe SNAP</a>
+program-documents.title=Additional Program Documents
+program-documents.header=Additional program documents
+program-documents.help-message=Before we finish up, take a few moments to read through the documents below.
+program-documents.docs-message=Click on each link to open it in a new browser tab.  Once opened, you can save or bookmark these documents to return to them later.
+program-documents.all-applicants-header=<strong>Resources for all applicants</strong>
+program-documents.all-applicants-doc-1=<a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-3477-ENG" target="_blank" rel="noopener noreferrer">Domestic violence information</a>
+program-documents.all-applicants-doc-2=<a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-4133-ENG" target="_blank" rel="noopener noreferrer">Do you have a disability?</a>
+program-documents.all-applicants-doc-3=<a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-2920-ENG" target="_blank" rel="noopener noreferrer">Program information for cash, food, and child care programs</a>
+program-documents.all-applicants-doc-4=<a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-3315A-ENG" target="_blank" rel="noopener noreferrer">How to use your Minnesota EBT card</a>
+program-documents.all-applicants-doc-5=<a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-2759-ENG" target="_blank" rel="noopener noreferrer">Income and Eligibility Verification and Work Reporting System</a>
+program-documents.all-applicants-doc-6=<a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-3353-ENG" target="_blank" rel="noopener noreferrer">Your appeal rights</a>
+program-documents.snap-applicants-header=<strong>SNAP program information</strong>
+program-documents.snap-applicants-doc-1=<a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-2814-ENG" target="_blank" rel="noopener noreferrer">SNAP program infosheet</a>
+program-documents.snap-applicants-doc-2=<a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-2625-ENG" target="_blank" rel="noopener noreferrer">SNAP reporting responsibilities</a>
+program-documents.snap-applicants-doc-3=<a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-2707-ENG" target="_blank" rel="noopener noreferrer">Facts on voluntarily quitting your job if you are on SNAP</a>
 
-timeout-notice.title=Aviso de tiempo de espera
-timeout-notice.header=Después de una hora de inactividad, se borrarán sus datos
-timeout-notice.protect=Para proteger su información, su sesión terminará si abandona la solicitud por una hora o más.
-timeout-notice.cant-save=No puede guardar la solicitud y volver después.
+timeout-notice.title=Timeout notice
+timeout-notice.header=After an hour of inactivity, your data will be deleted
+timeout-notice.protect=To protect your information, your session will timeout if you leave the application for 1 hour or more.
+timeout-notice.cant-save=You cannot save your application and return later.
 
-language-preferences.title=Preferencias de idioma
+language-preferences.title=Language Preferences
 language-preferences.english=English
 language-preferences.spanish=Español
-language-preferences.language-preferences=¿En qué idioma prefiere <i>leer o escribir</i>? 
-language-preferences.what-language-do-you-prefer-to-speak=¿En qué idioma prefiere <i>hablar</i>?
-language-preferences.the-county-will-do-their-best-to-connect-you-with-someone-who-speaks-your=Su condado o nación tribal hará todo lo posible para que pueda comunicarse con alguien que hable su idioma.
-language-preferences.what-language-do-you-prefer-to-read-or-write=¿Qué idioma prefiere leer o escribir?
-language-preferences.the-county-will-do-their-best-to-provide-documents-in-your-preferred-language=Su condado o nación tribal hará todo lo posible para proporcionarle los documentos en su idioma preferido.
-language-preferences.do-you-need-an-interpreter=¿Necesita que su condado le proporcione un intérprete en su idioma? Esto no afecta su solicitud.
-language-preferences.English=English<span class="lang-translate"> — Inglés</span>
-language-preferences.Spanish=Español
-language-preferences.soomaali=Af Soomaali<span class="lang-translate"> — Somalí</span>
-language-preferences.vietnamese=Tiếng Việt<span class="lang-translate"> — Vietnamita</span>
-language-preferences.russian=Pусский<span class="lang-translate"> — Ruso</span>
+language-preferences.language-preferences=What language do you prefer to <i>read or write</i>?
+language-preferences.what-language-do-you-prefer-to-speak=What language do you prefer to <i>speak</i>?
+language-preferences.the-county-will-do-their-best-to-connect-you-with-someone-who-speaks-your=Your county or Tribal Nation will do their best to connect you with someone who speaks your language.
+language-preferences.what-language-do-you-prefer-to-read-or-write=What language do you prefer to read or write?
+language-preferences.the-county-will-do-their-best-to-provide-documents-in-your-preferred-language=Your county or Tribal Nation will do their best to provide documents in your preferred language.
+language-preferences.do-you-need-an-interpreter=Do you need an interpreter?
+language-preferences.English=English<span class="lang-translate"></span>
+language-preferences.Spanish=Español<span class="lang-translate"> — Spanish</span>
+language-preferences.soomaali=Af Soomaali<span class="lang-translate"> — Somali</span>
+language-preferences.vietnamese=Tiếng Việt<span class="lang-translate"> — Vietnamese</span>
+language-preferences.russian=Pусский<span class="lang-translate"> — Russian</span>
 language-preferences.hmoob=Lus Hmoob<span class="lang-translate"> — Hmong</span>
 language-preferences.Oromo=Afaan Oromoo<span class="lang-translate"> — Oromo</span>
-language-preferences.Amharic=አማርኛ<span class="lang-translate"> — Amárico</span>
+language-preferences.Amharic=አማርኛ<span class="lang-translate"> — Amharic</span>
 language-preferences.Lao=ລາວ<span class="lang-translate"> — Lao</span>
-language-preferences.Korean=한국어<span class="lang-translate"> — Coreano</span>
+language-preferences.Korean=한국어<span class="lang-translate"> — Korean</span>
 language-preferences.Karen=ကညီ<span class="lang-translate"> — Karen</span>
-language-preferences.Nepali=नेपाली<span class="lang-translate"> — Nepalí </span>
-language-preferences.French=Français<span class="lang-translate"> — Francés</span>
-language-preferences.Burmese=ဓြန်မာ<span class="lang-translate"> — Birmano</span>
-language-preferences.Arabic=اللغة العربية<span class="lang-translate"> — Árabe </span>
-language-preferences.Ukrainian=українська мова<span class="lang-translate"> — Ucraniano </span>
-language-preferences.different-language=Leo o escribo en otro idioma. 
-language-preferences.American-sign-language=Lenguaje de Señas Americano (ASL, por sus siglas en inglés)
-language-preferences.Cantonese=繁體中文<span class="lang-translate"> — Cantonés</span>
-language-preferences.Khmer=ខ្មែរ<span class="lang-translate"> — Jemer</span>
+language-preferences.Nepali=नेपाली<span class="lang-translate"> — Nepali</span>
+language-preferences.French=Français<span class="lang-translate"> — French</span>
+language-preferences.Burmese=ဓြန်မာ<span class="lang-translate"> — Burmese</span>
+language-preferences.Arabic=اللغة العربية<span class="lang-translate"> — Arabic</span>
+language-preferences.Ukrainian=українська мова<span class="lang-translate"> — Ukranian</span> 
+language-preferences.different-language=I read or write in some other language
+language-preferences.American-sign-language=American Sign Language (ASL)
+language-preferences.Cantonese=繁體中文<span class="lang-translate"> — Cantonese</span>
+language-preferences.Khmer=ខ្មែរ<span class="lang-translate"> — Khmer</span>
 
-language-preferences.preferred.language=Ingrese su idioma preferido
+language-preferences.preferred.language=Enter your preferred language
 
-speak-language-preferences.different-language=Hablo en otro idioma
-same-language-preferences.to-read-or-write=El mismo idioma que leo o escribo
-written-language.title=Preferencia de idioma – Escrito
-spoken-language.title=Preferencia de idioma – Hablado
+speak-language-preferences.different-language=I speak in some other language
+same-language-preferences.to-read-or-write=Same as the language I read or write
+written-language.title=Language Preferences - Written
+spoken-language.title=Language Preferences - Spoken
 
 
-help-resources.table.of.contents=Tabla de Contenidos
+help-resources.table.of.contents=Table of Contents
 
-language-and-accessibility.title=Idioma y accesibilidad
-language-and-accessibility.language-and-accessibility=Idioma y accesibilidad
-language-and-accessibility.english=English — Inglés
-language-and-accessibility.content.english=If you have difficulty understanding English or have a disability, free language assistance or other aids and services are available upon request. Please call: 651-539-7700 or TTY: 7-1-1.
+language-and-accessibility.title=Language and Accessibility
+language-and-accessibility.language-and-accessibility=Language and Accessibility
+language-and-accessibility.english=English
+language-and-accessibility.content.english=The English language and accessibility content will go here.
 language-and-accessibility.content.english=If you have difficulty understanding English or have a disability, free language assistance or other aids and services are available upon request. Please call: 651-539-7700 or TTY: 7-1-1.
 language-and-accessibility.content.amharic=እንግሊዘኛ ቋንቋን መረዳት የሚቸገሩ ከሆነ ወይም የአካል ጉዳት ካለብዎ፣ ነፃ የቋንቋ እገዛ ወይም ሌሎችእርዳታዎች እና አገልግሎቶች በሚጠይቁበት ወቅት ይገኛሉ። እባክዎን ይደውሉ፦ 651-539-7700 or TTY: 7-1-1.
 language-and-accessibility.content.arabic= إذا كنت تواجه صعوبة في فهم اللغة الإنجليزية أو كنت تعاني من إعاقة ما، تتوفر المساعدات اللغوية أو غيرها من المساعدات والخدمات مجانًا عند الطلب. يرجى الاتصال على الرقم
@@ -366,8 +366,8 @@ language-and-accessibility.content.hmoob=Yog tias koj tsis nkag siab Lus Askiv l
 language-and-accessibility.content.karen=နမ့ၢ်အိၣ်ဒီးတၢ်ကီတၢ်ခဲလၢတၢ်နၢ်ပၢၢ်အဲကလံးကျိာ် မ့တမ့ၢ် အိၣ်ဒီးတၢ်က့ၢ်ဂီၤတလၢတပှဲၤန့ၣ်, ကျိာ် တၢ်တိစၢၤမၤစၢၤအကလီ မ့တမ့ၢ် တၢ်ဟ့ၣ်မၤစၢၤအဂၤတဖၣ်ဒီးတၢ်မၤစၢၤတၢ်ဖံးတၢ်မၤတဖၣ်အိၣ် လၢနမၤန့ၢ်အီၤသ့ဖဲနမ့ၢ်ဃ့ထီၣ်အီၤအခါန့ၣ်လီၤ. ဝံသးစူၤကိး- 651-539-7700 or TTY: 7-1-1.
 language-and-accessibility.content.khmer=ប្រសិនបើអ្នកមានការលំបាកក្នុងការយល់ភាសាអង់គ្លេស ឬមានពិការភាព ជំនួយផ្នែកភាសាដោយឥតគិតថ្លៃ ឬជំនួយនិងសេវាកម្មផ្សេងទៀតអាចរកបានពេលមានការស្នើសុំ។ សូមទូរសព្ទទៅលេខ៖ 651-539-7700 or TTY: 7-1-1.
 language-and-accessibility.content.korean=영어를 이해하시는 데 어려움이 있거나 장애가 있는 경우, 요청하시면 무료 언어 지원 또는 기타 지원 및 서비스를 이용하실 수 있습니다. 전화해 주십시오: 651-539-7700 or TTY: 7-1-1.
-language-and-accessibility.content.lao=ຖ້າທ່ານມີຄວາມຫຍຸ້ງຍາກໃນການເຂົ້າໃຈພາສາອັງກິດ ຫຼື ມີຄວາມພິການ, ພວກເຮົາມີການຊ່ວຍເຫຼືອດ້ານພາສາ ຫຼື ການຊ່ວຍເຫຼືອ ແລະ ການບໍລິການອື່ນໆ ໃຫ້ໂດຍບໍ່ເສຍຄ່າ. ກະລຸນາໂທໄປທີ່: 651-539-7700 or TTY 7-1-1.
-language-and-accessibility.content.oromo=Afaan Ingiliffaa hubachuuf yoo rakkattan ykn qaama miidhamummaa yoo qabaattan, gargaarsi afaanii bilisaa ykn deeggarsaa fi tajaajilli biroon akkaataa gaaffii keessaniin ni jiru. Maaloo: 651-539-7700 ykn TTY 7-1-1 irratti bilbilaa
+language-and-accessibility.content.lao=ຖ້າທ່ານມີຄວາມຫຍຸ້ງຍາກໃນການເຂົ້າໃຈພາສາອັງກິດ ຫຼື ມີຄວາມພິການ, ພວກເຮົາມີການຊ່ວຍເຫຼືອດ້ານພາສາ ຫຼື ການຊ່ວຍເຫຼືອ ແລະ ການບໍລິການອື່ນໆ ໃຫ້ໂດຍບໍ່ເສຍຄ່າ. ກະລຸນາໂທໄປທີ່: 651-539-7700 or TTY 7-1-1. 
+language-and-accessibility.content.oromo=Afaan Ingiliffaa hubachuuf yoo rakkattan ykn qaama miidhamummaa yoo qabaattan, gargaarsi afaanii bilisaa ykn deeggarsaa fi tajaajilli biroon akkaataa gaaffii keessaniin ni jiru. Maaloo: 651-539-7700 ykn TTY 7-1-1 irratti bilbilaa 
 language-and-accessibility.content.russian=Если у вас есть трудности с пониманием английского языка или у вас инвалидность, по запросу предоставляется бесплатная языковая помощь или другие вспомогательные средства и услуги. Пожалуйста позвоните по телефону: 651-539-7700 or TTY: 7-1-1.
 language-and-accessibility.content.soomaali=Hadii aad dhibaato ku qabto fahmida ingiriisiga ama curyaan aad tahay, waxaa la heli karaa taagerida luuqada iyo adeegyada kale ee garkgaarka goorta la codsado. Fadlan wac: 651-539-7700 or TTY: 7-1-1.
 language-and-accessibility.content.spanish=Si tiene dificultades para entender la lengua inglesa o presenta una discapacidad, puede solicitar asistencia lingüística y otros tipos de ayuda y servicios sin coste alguno. Llame al siguiente número de teléfono: 651-539-7700 or TTY 7-1-1.
@@ -391,1254 +391,1254 @@ language-and-accessibility.ukrainian=Україна
 language-and-accessibility.cantonese= 繁體中文
 language-and-accessibility.khmer= ខ្មែរ
 
-language-and-accessibility-content.spanish=Español
-language-and-accessibility-content.soomaali= Af Soomaali — Somalí
-language-and-accessibility-content.vietnamese= Tiếng Việt — Vietnamita
-language-and-accessibility-content.russian=Pусский — Ruso
+language-and-accessibility-content.spanish=Español — Spanish
+language-and-accessibility-content.soomaali= Af Soomaali — Somali
+language-and-accessibility-content.vietnamese= Tiếng Việt — Vietnamese
+language-and-accessibility-content.russian=Pусский — Russian
 language-and-accessibility-content.hmoob= Lus Hmoob — Hmong
 language-and-accessibility-content.oromo=Afaan Oromo — Oromo
-language-and-accessibility-content.amharic=አማርኛ — Amárico
+language-and-accessibility-content.amharic=አማርኛ — Amharic
 language-and-accessibility-content.lao= ລາວ — Lao
-language-and-accessibility-content.korean=한국어 — Coreano
+language-and-accessibility-content.korean=한국어 — Korean
 language-and-accessibility-content.karen=ကညီ — Karen
 language-and-accessibility-content.nepali=नेपाली
-language-and-accessibility-content.french= Français — Francés
-language-and-accessibility-content.burmese= ဓြန်မာ — Birmano
-language-and-accessibility-content.arabic=اللغة العربية — Árabe
+language-and-accessibility-content.french= Français — French
+language-and-accessibility-content.burmese= ဓြန်မာ — Burmese
+language-and-accessibility-content.arabic=اللغة العربية — Arabic
 language-and-accessibility-content.ukrainian=Україна
-language-and-accessibility-content.cantonese= 繁體中文 — Cantonés
-language-and-accessibility-content.khmer= ខ្មែរ — Jemer
+language-and-accessibility-content.cantonese= 繁體中文 — Cantonese
+language-and-accessibility-content.khmer= ខ្មែរ — Khmer
 
-choose-programs.title=Escoge programas
-choose-programs.what-type-of-assistance-would-you-like-to-apply-for=¿Qué tipo de beneficios desea solicitar?
-choose-programs.food-snap=Comida (SNAP)
-choose-programs.food-snap-help=Dinero para comprar comida para usted y su familia
-choose-programs.cash-programs=Programas de Asistencia en Efectivo
-choose-programs.cash-programs-help=Programas como Asistencia General/GA y el Programa de Inversión Familiar de Minnesota/MFIP ayudan a las familias y adultos solteros a cubrir las necesidades básicas.
-choose-programs.emergency-assistance=Asistencia de Emergencia
-choose-programs.emergency-assistance-help=Ayuda con los pagos de renta y servicios públicos para prevenir el desalojo
-choose-programs.housing-support-group-residential-housing=Vivienda Colectiva
+choose-programs.title=Choose Programs
+choose-programs.what-type-of-assistance-would-you-like-to-apply-for=What type of assistance would you like to apply for?
+choose-programs.food-snap=Food (SNAP)
+choose-programs.food-snap-help=Money to buy food for you and your family
+choose-programs.cash-programs=Cash programs
+choose-programs.cash-programs-help=Programs like GA and MFIP that help families and single adults meet basic needs
+choose-programs.emergency-assistance=Emergency Assistance
+choose-programs.emergency-assistance-help=Helps with rent and utility payments to stop eviction
+choose-programs.housing-support-group-residential-housing=Group Housing
 choose-programs.housing-grh-help=The Housing Support Program (GRH) pays an approved provider for housing costs and things people need to stay housed in certain group setting or in the community for persons aged 65 or older or adults with disabilities with low income.
-choose-programs.child-care-assistance=Asistencia para el Cuidado de Niños
-choose-programs.child-care-assistance-help=Ayuda a pagar el cuidado de niños para que los cuidadores puedan trabajar, estudiar, buscar empleo, atender sus necesidades de salud mental o participar en actividades incluidas en su plan de empleo.
-choose-programs.none-of-the-above=Nada de lo anterior porque sólo lo solicito para otras personas de mi hogar
-choose-programs.you-will-be-asked=Se le pedirá que comparta alguna información sobre usted aunque sólo solicite otros.
+choose-programs.child-care-assistance=Child Care Assistance
+choose-programs.child-care-assistance-help=Helps pay for child care so caregivers can work, go to school, look for a job, support mental health needs, and/or engage in activities in their employment plan.
+choose-programs.none-of-the-above=None of the above because I am only applying for others in my household
+choose-programs.you-will-be-asked=You will be asked to share some information about yourself even though you're only applying for others.
 
-penalty-warning.title=Advertencia de penalización
-penalty-warning-header-key=Advertencia sobre sanciones y preguntas de calificación
-penalty-warning-header-help-message-key=Por favor, amplíe el cuadro a continuación y lea la información cuidadosamente.
-penalty-warning.has-court-or-any-other=¿Un tribunal o cualquier otro proceso civil o administrativo en Minnesota o en cualquier otro estado ha determinado que un miembro de su hogar es culpable, o alguien ha sido descalificado de recibir asistencia pública por incumplir con las reglas antes mencionadas?
-penalty-warning.has-anyone-in-the-household=¿Alguna persona del hogar ha sido condenada por hacer declaraciones fraudulentas acerca de su lugar de residencia para obtener beneficios monetarios o de SNAP en más de un estado?
-penalty-warning.is-anyone-in-your-household-hiding=¿Hay alguien en su hogar ocultándose o huyendo de la ley para evitar un proceso judicial, ser detenido, o para evitar ir a la cárcel por un delito mayor?
-penalty-warning.has-anyone-in-your-household-convicted= ¿Ha sido algún miembro de su hogar condenado por un delito relacionado con drogas durante los últimos 10 años? 
-penalty-warning.has-anyone-in-your-household-convicted-if-yes=Si la respuesta es afirmativa, puede seguir recibiendo prestaciones. Es posible que se le pida que se someta a pruebas de detección de drogas al azar.
-penalty-warning.is-anyone-in-your-household-violating=¿Hay algún miembro de su hogar que actualmente esté violando su condición de libertad bajo palabra, libertad condicional o su puesta en libertad bajo supervisión?
-penalty-warning.which-household-member-applies=	¿A qué miembro del hogar se aplica esto?
-penalty-warning.select-all-that-apply=Seleccione todo lo que corresponda
-penalty-warning.validation.select-household-member=Por favor, seleccione al menos un miembro del hogar
+penalty-warning.title=Penalty Warnings
+penalty-warning-header-key=Penalty warnings and qualification questions
+penalty-warning-header-help-message-key=Please expand the box below and read the information carefully.
+penalty-warning.has-court-or-any-other=Has a court or any other civil or administrative process in Minnesota or any other state found anyone in the household guilty or has anyone been disqualified from receiving public assistance for breaking any of the rules above?
+penalty-warning.has-anyone-in-the-household=Has anyone in the household been convicted of making fraudulent statements about their place of residence to get cash or SNAP benefits from more than one state?
+penalty-warning.is-anyone-in-your-household-hiding=Is anyone in your household hiding or running from the law to avoid prosecution, being taken into custody, or to avoid going to jail for a felony?
+penalty-warning.has-anyone-in-your-household-convicted=Has anyone in your household been convicted of a drug felony in the past 10 years?
+penalty-warning.has-anyone-in-your-household-convicted-if-yes=If yes, you can still get benefits. You may be asked to take random drug tests.
+penalty-warning.is-anyone-in-your-household-violating=Is anyone in your household currently violating a condition of parole, probation or supervised release?
+penalty-warning.which-household-member-applies=	Which household member does this apply to?
+penalty-warning.select-all-that-apply=Select all that apply
+penalty-warning.validation.select-household-member=Please select at least one household member
 
-expedited-notice.title=Notificación acelerada
-expedited-notice.we-will-check-to-see=<h3 style="font-size: 19px; line-height: 25px; font-weight: bold; border-bottom: 2px solid #5f5854; padding-bottom: 2px; color: #5f5854">Asistencia alimentaria (SNAP)</h3><h2>Vamos a averiguar si puede obtener asistencia alimentaria acelerada (SNAP) en 7 días o menos.
-expedited-notice.what-is-expedited-SNAP=¿Qué es el SNAP acelerado?
-expedited-notice.expedited-SNAP-means=SNAP acelerado significa que usted puede obtener sus beneficios de alimentos más rápidamente. Las personas que califican para el SNAP acelerado pueden recibir su tarjeta EBT en 7 días o menos.
-expedited-notice.who-qualifies-for-snap=¿Quién califica para el SNAP acelerado?
-expedited-notice.you-may-qualify-for-expedited-SNAP=Usted puede tener derecho a un SNAP acelerado si <strong>algunas de estas situaciones</strong> aplican a usted:
-expedited-notice.your-monthly-income-is-less-than-150=Sus ingresos mensuales son de menos de 150 dólares <strong>y</strong> tiene 100 dólares o menos en ahorros.
-expedited-notice.the-amount-you-pay-for-rent=La cantidad que paga por el alojamiento, la hipoteca y los servicios públicos es <strong>más que</strong> sus ingresos y ahorros.
-expedited-notice.you-are-a-migrant=Es un trabajador del campo migrante o de temporada que no está trabajando en este momento <strong>y</strong> tiene 100 dólares o menos en ahorros.
-expedited-notice.at-the-end-of-this-application=Al final de esta solicitud, le diremos si ha sido recomendado para el servicio acelerado.
+expedited-notice.title=Expedited Notice
+expedited-notice.we-will-check-to-see=<h3 style="font-size: 19px; line-height: 25px; font-weight: bold; border-bottom: 2px solid #5f5854; padding-bottom: 2px; color: #5f5854"> Food assistance (SNAP) </h3> <h2> We will check to see if you can get expedited food assistance (SNAP) in 7 days or less.
+expedited-notice.what-is-expedited-SNAP=What is expedited SNAP?
+expedited-notice.expedited-SNAP-means=Expedited SNAP means you can get your food benefits more quickly. People who qualify for expedited SNAP can get their EBT card delivered in 7 days or less.
+expedited-notice.who-qualifies-for-snap=Who qualifies for expedited SNAP?
+expedited-notice.you-may-qualify-for-expedited-SNAP=You may qualify for expedited SNAP if <strong>any of these situations</strong> are true:
+expedited-notice.your-monthly-income-is-less-than-150=Your monthly income is less than $150 <strong>and</strong> you have $100 or less in savings.
+expedited-notice.the-amount-you-pay-for-rent=The amount you pay for rent, mortgage, and utilities is <strong>more than</strong> your income and savings.
+expedited-notice.you-are-a-migrant=You are a migrant or seasonal farmworker who is not working right now <strong>and</strong> has $100 or less in savings.
+expedited-notice.at-the-end-of-this-application=At the end of this application, we will tell you if you\u2019ve been recommended for expedited service.
 
-basic-criteria.title=Criterio básico
-basic-criteria.do-any-of-these-situations-apply=¿Se aplica a usted alguna de estas situaciones?
-basic-criteria.to-apply-for-healthcare-at-least-one-should-be-true=Para solicitar el programa de asistencia sanitaria que ha seleccionado, debe darse al menos una de estas situaciones.
-basic-criteria.i-am-65-or-older=Tengo 65 años o más
-basic-criteria.i-am-blind=Soy invidente/ciego
-basic-criteria.i-receive-ssi-or-rsdi=Actualmente recibo SSI o RSDI por una discapacidad
-basic-criteria.i-have-a-disability-ssa=Tengo una discapacidad que ha sido certificada por la Administración del Seguro Social (SSA)
-basic-criteria.i-have-a-disability-smrt=Tengo una discapacidad que ha sido certificada por el Equipo Estatal de Revisión Médica (SMRT)
-basic-criteria.i-want-to-apply-for-medical-assistance=Deseo solicitar la Asistencia Médica para Empleados con Discapacidad (MA-EDP)
-basic-criteria.i-want-help-with-my-medicare-costs=Tengo Medicare y necesito ayuda con mis gastos
+basic-criteria.title=Basic Criteria
+basic-criteria.do-any-of-these-situations-apply=Do any of these situations apply to you?
+basic-criteria.to-apply-for-healthcare-at-least-one-should-be-true=To apply for the healthcare program you selected, at least one of these situations should be true.
+basic-criteria.i-am-65-or-older=I am 65 years old or older
+basic-criteria.i-am-blind=I am blind
+basic-criteria.i-receive-ssi-or-rsdi=I currently receive SSI or RSDI for a disability
+basic-criteria.i-have-a-disability-ssa=I have a disability that has been certified by the Social Security Administration (SSA)
+basic-criteria.i-have-a-disability-smrt=I have a disability that has been certified by the State Medical Review Team (SMRT)
+basic-criteria.i-want-to-apply-for-medical-assistance=I want to apply for Medical Assistance for Employed Persons with Disabilities (MA-EPD)
+basic-criteria.i-want-help-with-my-medicare-costs=I have Medicare and need help with my costs
 
-add-other-programs.title=Agregar otros programas
-add-other-programs.would-you-like-to=¿Desea solicitar algún otro programa?
-add-other-programs.yes=Sí, solicitaré otros
-add-other-programs.no=No, abandonar la solicitud
+add-other-programs.title=Add other programs
+add-other-programs.would-you-like-to=Would you like to apply to any other programs?
+add-other-programs.yes=Yes, I’ll apply for others
+add-other-programs.no=No, quit application
 
-intro-basic-info.title=Introducción: Información Básica
-intro-basic-info.getting-to-know-you=Empezando a conocerlo/a
-intro-basic-info.basic-info=Su información básica
-intro-basic-info.contact-info=Su información de contacto
-intro-basic-info.living-situation=Su situación de vivienda
+intro-basic-info.title=Intro: Basic Info
+intro-basic-info.getting-to-know-you=Getting to know you
+intro-basic-info.basic-info=Basic info
+intro-basic-info.contact-info=Contact info
+intro-basic-info.living-situation=Living situation
 
-living-situation.title=Situación de vivienda
-living-situation.what-is-your-current-living-situation=¿Cuál es su situación de vivienda actual?
-living-situation.paying-for-my-own-housing-with-rent-lease-or-mortgage-payments=Vivo en una casa con pagos de renta/alquiler, arrendamiento o hipoteca
-living-situation.living-outside-in-a-vehicle-or-another-place-not-meant-for-housing=Viviendo afuera, en un vehículo u otro lugar no destinado para ser hogar
-living-situation.temporarily-staying-with-friends-or-family-due-to-economic-hardship=Temporalmente me quedo con amigos o con familiares porque perdí mi casa o porque ya no puedo pagar mis propios gastos vivienda
-living-situation.temporarily-staying-with-friends-or-family-for-other-reasons=Temporalmente me quedo con amigos o con familiares por otras razones
-living-situation.staying-in-a-hotel-or-motel=Viviendo en un hotel o motel
-living-situation.staying-in-an-emergency-shelter=Hospedado/a en un refugio de emergencia
-living-situation.living-in-foster-care-or-a-group-home=Hospedado/a en un hogar de crianza, o â€œfoster careâ€ o un hogar grupal, o â€œgroup homeâ€
-living-situation.staying-in-a-hospital-treatment-facility-detox-center-or-nursing-home=Hospedado/a en un hospital, centro de tratamiento, centro de desintoxicación o hogar de ancianos o tercera edad
-living-situation.in-jail-prison-or-juvenile-detention=Viviendo en la cárcel, prisión o centro de detención de menores
-living-situation.none-of-these=Ninguno de estos
-living-situation.i-prefer-not-to-say=Prefiero no decir
+living-situation.title=Living situation
+living-situation.what-is-your-current-living-situation=What is your current living situation?
+living-situation.paying-for-my-own-housing-with-rent-lease-or-mortgage-payments=Living in housing with rent, lease, or mortgage payments
+living-situation.living-outside-in-a-vehicle-or-another-place-not-meant-for-housing=Living outside, in a vehicle, or another place not meant for housing
+living-situation.temporarily-staying-with-friends-or-family-due-to-economic-hardship=Temporarily staying with friends or family because I lost my housing or can no longer afford my own housing
+living-situation.temporarily-staying-with-friends-or-family-for-other-reasons=Temporarily staying with friends or family for other reasons
+living-situation.staying-in-a-hotel-or-motel=Staying in a hotel or motel
+living-situation.staying-in-an-emergency-shelter=Staying in an emergency shelter
+living-situation.living-in-foster-care-or-a-group-home=Living in foster care or a group home
+living-situation.staying-in-a-hospital-treatment-facility-detox-center-or-nursing-home=Staying in a hospital, treatment facility, detox center or nursing home
+living-situation.in-jail-prison-or-juvenile-detention=In jail, prison, or juvenile detention
+living-situation.none-of-these=None of these
+living-situation.i-prefer-not-to-say=I prefer not to say
 
-housing-provider.title=Proveedor de vivienda
-housing-provider.is-your-household-working-with-a-provider=<h3 style="font-size: 19px; line-height: 25px; font-weight: bold; border-bottom: 2px solid #5f5854; padding-bottom: 2px; color: #5f5854">Programa de ayuda para la vivienda</h3><h2> ¿Su hogar trabaja con un proveedor de vivienda grupal?</h2>
-housing-provider.are-you-working-with-a-provider=<h3 style="font-size: 19px; line-height: 25px; font-weight: bold; border-bottom: 2px solid #5f5854; padding-bottom: 2px; color: #5f5854">Programa de ayuda para la vivienda</h3><h2> ¿Está trabajando con un proveedor de vivienda grupal?</h2>
-housing-provider.we-will-use-this-information=Usaremos esta información para su solicitud al Programa de ayuda para la vivienda. Si no tiene un proveedor, un trabajador de elegibilidad se comunicará con usted.
+housing-provider.title=Housing Provider
+housing-provider.is-your-household-working-with-a-provider=<h3 style="font-size: 19px; line-height: 25px; font-weight: bold; border-bottom: 2px solid #5f5854; padding-bottom: 2px; color: #5f5854"> Housing Support Program </h3> <h2> Is your household working with a group housing provider?</h2>
+housing-provider.are-you-working-with-a-provider=<h3 style="font-size: 19px; line-height: 25px; font-weight: bold; border-bottom: 2px solid #5f5854; padding-bottom: 2px; color: #5f5854"> Housing Support Program </h3> <h2> Are you working with a group housing provider?</h2>
+housing-provider.we-will-use-this-information=We'll use this information for your Housing Support Program application. If you don't have a provider, an eligibility worker will contact you.
 
-housing-provider-info.title=Información del proveedor de Vivienda
-housing-provider-info.tell-us-about-your-housing-provider=<h3 style="font-size: 19px; line-height: 25px; font-weight: bold; border-bottom: 2px solid #5f5854; padding-bottom: 2px; color: #5f5854">Programa de ayuda para la vivienda</h3><h2> Cuéntenos sobre su proveedor de vivienda</h2>
-housing-provider-info.include-any-information=Incluya toda la información posible sobre su proveedor.
-housing-provider-info.what-is-the-providers-name=¿Cómo se llama el proveedor?
-housing-provider-info.providers-vendor-number=Número de proveedor
-housing-provider-info.if-you-are-not-sure=Si no está seguro, deje este campo en blanco.
+housing-provider-info.title=Housing Provider Info
+housing-provider-info.tell-us-about-your-housing-provider=<h3 style="font-size: 19px; line-height: 25px; font-weight: bold; border-bottom: 2px solid #5f5854; padding-bottom: 2px; color: #5f5854"> Housing Support Program </h3> <h2> Tell us about your housing provider</h2>
+housing-provider-info.include-any-information=Include any information about your provider that you can.
+housing-provider-info.what-is-the-providers-name=What is the provider's name?
+housing-provider-info.providers-vendor-number=Provider's vendor number
+housing-provider-info.if-you-are-not-sure=If you're not sure, leave this blank
 
-personal-info.title=Su información personal
-personal-info.tell-us-about-yourself=Cuéntenos sobre usted
-personal-info.whats-your-first-name=¿Cuál es su primer nombre?
-personal-info.legally-as-it-appears-on-your-id=Legalmente como aparece en su identificación.
-personal-info.whats-your-last-name=¿Cuál es su apellido?
-personal-info.whats-your-middle-name=¿Cuál es su segundo nombre?
-personal-info.list-any-names-that-you-have-gone-by-in-the-past=Haga una lista de los nombres que haya usado en el pasado.
-personal-info.when-were-you-born=¿Cuál es su fecha de nacimiento?
-personal-info.whats-your-social-security-number=¿Cuál es su número de seguro social?
-personal-info.if-you-have-one-we-strongly-recommend-including-it-here=Si lo tiene, le recomendamos mucho que lo incluya aquí. El SSN, o Número de Seguro Social, no es necesario para los no ciudadanos o los miembros de la familia que no solicitan prestaciones. <a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-3979-SPA" target="_blank" rel="noopener noreferrer">Lea la Ley de Privacidad</a>.
-personal-info.include-maiden-names-or-legal-changes=Incluya apellidos de soltera o cambios legales.
-personal-info.whats-your-marital-status=¿Cuál es su estado civil?
-personal-info.whats-your-sex=¿Cuál es su sexo?
-personal-info.legally-as-it-appears-on-your-id-we-regret-that-this-question-is-limited=Legalmente como aparece en su identificación. Lamentamos que esta pregunta es limitada.
-personal-info.have-you-lived-in-minnesota-your-whole-life=¿Usted se mudó a Minnesota durante el último año?
-personal-info.when-did-you-move-to-minnesota=¿Cuándo se mudó a Minnesota?
-personal-info.what-state-did-you-move-from=¿De qué estado se mudó?
+personal-info.title=Personal Info
+personal-info.tell-us-about-yourself=Tell us about yourself
+personal-info.whats-your-first-name=What's your first name?
+personal-info.legally-as-it-appears-on-your-id=Legally as it appears on your ID.
+personal-info.whats-your-last-name=What's your last name?
+personal-info.whats-your-middle-name=What's your middle name?
+personal-info.list-any-names-that-you-have-gone-by-in-the-past=Other names you use or have used.
+personal-info.when-were-you-born=When were you born?
+personal-info.whats-your-social-security-number=What's your social security number?
+personal-info.if-you-have-one-we-strongly-recommend-including-it-here=If you have one, we strongly recommend including it here. A SSN is not required for noncitizens or household members who are not applying for benefits. <a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-3979-ENG" target="_blank" rel="noopener noreferrer">Read the Privacy Act</a>.
+personal-info.include-maiden-names-or-legal-changes=List maiden names, legal name changes, and gender preferred names.
+personal-info.whats-your-marital-status=What's your marital status?
+personal-info.whats-your-sex=What's your sex?
+personal-info.legally-as-it-appears-on-your-id-we-regret-that-this-question-is-limited=Legally as it appears on your ID. We regret that this question is limited.
+personal-info.have-you-lived-in-minnesota-your-whole-life=Did you move to Minnesota within the last year?
+personal-info.when-did-you-move-to-minnesota=When did you move to Minnesota?
+personal-info.what-state-did-you-move-from=What state did you move from?
 
-contact-info.title=Su información de contacto
-contact-info.how-can-we-stay-in-touch-with-you=¿Cómo podemos enviarle mensajes y recordatorios sobre su caso en el futuro?
-contact-info.the-department-of-human-services=Puede ser que el departamento de Servicios Humanos le envíe un mensaje de texto y/o un correo electrónico para comunicarse con usted sobre su solicitud. El Departamento sólo le enviará mensajes de texto si así lo elige y si pone una palomita en la casilla de la parte superior. Usted será responsable de cualquier cargo por mensajes o datos de su proveedor de servicios asociados con los mensajes de texto. Usted puede optar por dejar de recibir mensajes de texto en cualquier momento respondiendo con "STOP" a un mensaje de texto, o siguiendo el enlace para cancelar la suscripción en el mensaje de correo electrónico.
-contact-info.whats-your-phone-number=¿Cuál es su número de teléfono?
-contact-info.whats-your-email-address=¿Cuál es su correo electrónico?
-contact-info.text-me=Está bien que me manden mensajes de texto
-contact-info.email-me=Está bien que me manden correos electrónicos
-contact-info.how-can-we-send-you-updates-and-reminders-about-your-case-in-the-future=¿Cómo podemos enviarle actualizaciones y recordatorios sobre su caso en el futuro?
-contact-info.phone-number-helper=Un trabajador del su condado puede usar este número para comunicarse con usted directamente. Si no agrega un número de teléfono, el servicio puede ser más lento.
+contact-info.title=Contact Info
+contact-info.how-can-we-stay-in-touch-with-you=How can we send you updates and reminders about your case in the future?
+contact-info.the-department-of-human-services=The Department of Human Services may send you text and/or email message to communicate with you about your application. The Department will only text and/or email if a box is checked above. You will be responsible for any message or data charges from your service provider associated with text messaging. You may opt out of and stop receiving text messages at any time by replying with “STOP” to a text message, or following the unsubscribe link on the email message.
+contact-info.whats-your-phone-number=What's your phone number?
+contact-info.whats-your-email-address=What's your email address?
+contact-info.text-me=It's okay to text me
+contact-info.email-me=It's okay to email me
+contact-info.how-can-we-send-you-updates-and-reminders-about-your-case-in-the-future=How can we send you updates and reminders about your case in the future?
+contact-info.phone-number-helper=A caseworker may use this number to contact you directly.  If you don't add a phone number, service may be slower.
 
-no-phone.are-you-sure=¿Está seguro de que quiere dejar su número de teléfono en blanco?
-no-phone.title=No hay confirmación de número de teléfono
-no-phone.a-caseworker-will-need-to-contact-you-by-phone=Es posible que un trabajador social tenga que ponerse en contacto con usted para tratar su caso. Si añade un número de teléfono, el trabajador podrá ponerse en contacto con usted con mayor rapidez.
-no-phone.if-you-don't-have-a-phone-number= Si no tiene número de teléfono, puede introducir el de un amigo o familiar.
-no-phone.add-a-phone-number=Agregar un número de teléfono
-no-phone.continue-without-it=Continuar sin el número
+no-phone.are-you-sure=Are you sure you want to leave your phone number blank?
+no-phone.title=No phone number confirmation
+no-phone.a-caseworker-will-need-to-contact-you-by-phone=An eligibility worker may need to contact you about your case. Adding a phone number can help your worker contact you faster.
+no-phone.if-you-don't-have-a-phone-number= If you don't have a phone number, you can enter a friend or family member's phone number instead. 
+no-phone.add-a-phone-number=Add a phone number
+no-phone.continue-without-it=Continue without it
 
-no-child.since-you-are-applying-for-child-care=Dado que está solicitando la ayuda para el cuidado de niños, asegúrese de añadir a los niños a su hogar.
-no-child.add-my-children=Agregar a mis hijos
-no-child.continue-without-it=Continuar sin él
-no-child.title=Agregar la confirmación de los niños
+no-child.since-you-are-applying-for-child-care=Since you are applying for Child Care Assistance, make sure to add children to your household.
+no-child.add-my-children=Add my children
+no-child.continue-without-it=Continue without it
+no-child.title=Add Children confirmation
 
-submission-confirmation.title=Confirmación de envío
-submission-confirmation.header=¡Su solicitud ha sido enviada! Le recomendamos añadir los documentos ahora.
-submission-confirmation.header-no-recs=¡Su solicitud ha sido enviada! Ahora tiene la opción de añadir documentos.
-submission-confirmation.you-have-30-days=Tiene 30 días para presentar los documentos de verificación. Sin embargo, presentarlos ahora le ayudará a obtener los beneficios más rápidamente.
+submission-confirmation.title=Submission Confirmation
+submission-confirmation.header=Your application has been submitted! We recommend that you add documents now.
+submission-confirmation.header-no-recs=Your application has been submitted! You have the option to add documents now.
+submission-confirmation.you-have-30-days=You have 30 days to submit verification documents. However, submitting them now helps you get benefits faster.
 
-adding-documents.title=Agregando Documentos
-adding-documents.adding-documents=Agregando Documentos
-adding-documents.we-will-tell-you=Nosotros le informaremos
-adding-documents.how-to-add-docs=Cómo agregar documentos
-adding-documents.which-docs-you-can-add=Qué documentos puede agregar
-adding-documents.how-to-submit-docs-now-or-later=Cómo entregar, ahora o después
+adding-documents.title=Adding Documents
+adding-documents.adding-documents=Adding documents
+adding-documents.we-will-tell-you=We will tell you
+adding-documents.how-to-add-docs=How to add docs
+adding-documents.which-docs-you-can-add=What docs to add
+adding-documents.how-to-submit-docs-now-or-later=How to submit docs now or later
 
-how-to-add-documents.title=Cómo agregar documentos
-how-to-add-documents.how-to-add-documents=Cómo agregar documentos a su solicitud
-how-to-add-documents.take-photos=Tomar fotos con su teléfono
-how-to-add-documents.select-files=Seleccionar archivos guardados en su dispositivo
-how-to-add-documents.take-a-screenshot=Tomar una foto de su pantalla en su teléfono
-how-to-add-documents.adding-documents=Agregar documentos a esta solicitud es opcional
+how-to-add-documents.title=How to add documents
+how-to-add-documents.how-to-add-documents=How to add documents to your application
+how-to-add-documents.take-photos=Take photos on your phone
+how-to-add-documents.select-files=Select files stored on your device
+how-to-add-documents.take-a-screenshot=Take a screenshot on your device
+how-to-add-documents.adding-documents=Adding documents to this application is optional.
 
-document-recommendation.title=Recomendaciones para los documentos
-document-recommendation.submit-any-documents-you-have=Presente los documentos recomendados que tenga disponibles.
-document-recommendation.caseworker-may-ask-you=Su condado o nación tribal podría solicitarle que presente documentos para poder obtener los beneficios.
-document-recommendation.caseworker-give-more-guidance=Un trabajador social le ayudará a determinar qué documentos tendrá que presentar cuando hable con usted sobre su solicitud. También es posible que le envíen un aviso por correo.
-document-recommendation.caseworkers-most-commonly-request=Los condados o naciones tribales generalmente solicitan los siguientes documentos:
-document-recommendation.id=Identificación (ID)
-document-recommendation.pay-stubs=Talones de pago de su trabajo
-document-recommendation.rent-receipts=Prueba de alquiler/renta o refugio
-document-recommendation.sooner-you-submit=Mientras más rápidamente presente los documentos, más pronto obtendrá los beneficios.
-document-recommendation.you-have-30-days=Si no tiene los documentos en este momento, un trabajador social de elegibilidad le ayudará posteriormente. Tiene 30 días para presentarlos.
-document-recommendation.proof-of-income=Comprobante de ingresos
-document-recommendation.proof-of-income-explanation=Los talones de pago de los últimos 30 días con el total de sus ingresos, o sus horas trabajadas y su salario.
-document-recommendation.proof-of-income-example=Ejemplo: Cheques de pago
-document-recommendation.proof-of-housing-costs=Comprobante de los Costos de Vivienda
-document-recommendation.proof-of-housing-costs-explanation=Recibos de arrendamiento, contratos de arrendamiento o facturas de hipotecas que muestren la cantidad total pagada por la vivienda.
-document-recommendation.proof-of-housing-costs-example=Ejemplos: recibos de renta, arrendamiento, o estados de cuenta de hipoteca
-document-recommendation.proof-of-job-loss=Prueba de pérdida del trabajo
-document-recommendation.proof-of-job-loss-explanation=Una carta o correo electrónico de su antiguo empleador. Debe incluir su nombre y su firma, así como la fecha de su último día de trabajo y la cantidad de su último pago.
-document-recommendation.proof-of-job-loss-example=Ejemplo: Carta de despido
-document-recommendation.proof-of-medical-expenses=Comprobante de Gastos Médicos
-document-recommendation.proof-of-medical-expenses-explanation=Recibos, talones de cheques, facturas de seguros o primas que muestren los gastos médicos que usted pagó.
-document-recommendation.proof-of-medical-expenses-example=Ejemplos: Talones de cheques, comprobantes de prestaciones o comprobantes de primas.
-document-recommendation.upload-documents-now=Agregar documentos ahora
-document-recommendation.skip-this-for-now=Lo haré más tarde
-document-recommendation.completed-healthcare-renewal=Una copia de su formulario de renovación de atención médica completado
-document-recommendation.bank-acc-statements=Estados de cuenta del banco (si se le pidió que los presentara anteriormente)
-document-recommendation.any-other-doc-asked-for=Cualquier otro documento que su condado o nación tribal le haya pedido
+document-recommendation.title=Document Recommendation
+document-recommendation.submit-any-documents-you-have=Submit any recommended documents you have available.
+document-recommendation.caseworker-may-ask-you=Your county or Tribal Nation may ask you to submit documents in order to get benefits.
+document-recommendation.caseworker-give-more-guidance=An eligibility worker will help you determine what documents you will need to submit when they talk with you about your application. They may also send you a notice in the mail.
+document-recommendation.caseworkers-most-commonly-request=Counties and Tribal Nations most commonly request these documents:
+document-recommendation.id=Identification (ID)
+document-recommendation.pay-stubs=Pay stubs from your job
+document-recommendation.rent-receipts=Proof of rent or shelter
+document-recommendation.sooner-you-submit=However, submitting them now will help you get benefits faster.
+document-recommendation.you-have-30-days=If you don't have these documents now, an eligibility worker will help you later. You have 30 days to submit.
+document-recommendation.proof-of-income=Proof of Income
+document-recommendation.proof-of-income-explanation=Paystubs from the last 30 days with your total income, or your hours worked and rate of pay.
+document-recommendation.proof-of-income-example=Example: Paystubs
+document-recommendation.proof-of-housing-costs=Proof of Housing Costs
+document-recommendation.proof-of-housing-costs-explanation=Rent receipts, lease, or mortgage statements showing total amount paid for housing. 
+document-recommendation.proof-of-housing-costs-example=Examples: Rent receipts, lease, or mortgage statements
+document-recommendation.proof-of-job-loss=Proof of Job Loss
+document-recommendation.proof-of-job-loss-explanation=A letter or email from your former employer. It should include their name and signature, as well as the date of your final day at work and amount of your final paycheck. 
+document-recommendation.proof-of-job-loss-example=Example: Pink slip
+document-recommendation.proof-of-medical-expenses=Proof of Medical Expenses
+document-recommendation.proof-of-medical-expenses-explanation=Receipts, check stubs, insurance or premium statements showing medical expenses that you paid for.
+document-recommendation.proof-of-medical-expenses-example=Examples: Check stubs, benefit statements or premium statements.
+document-recommendation.upload-documents-now=Add documents now
+document-recommendation.skip-this-for-now=I'll do this later
+document-recommendation.completed-healthcare-renewal=A copy of your completed health care renewal form
+document-recommendation.bank-acc-statements=Bank account statements (if you were asked to submit them in the past)
+document-recommendation.any-other-doc-asked-for=Any other documents your county or Tribal Nation asked for
 
-upload-documents.title=Cargar documentos
-upload-documents.add-your-files=Agregue sus archivos
-upload-documents.view-document-list=Ver la lista de documentos
-upload-documents.recommended-documents=Documentos recomendados
-upload-documents.based-on-your-answers=En base a las respuestas a las preguntas de esta solicitud, debe presentar:
-upload-documents.proof-of-income=Prueba de ingresos
-upload-documents.a-document-with-employer-and-employee-names=Un documento con los nombres del empleador y del empleado y su ingreso total antes de impuestos de los últimos 30 días (o total de horas trabajadas y salario). Ejemplo: Cheques de pago
-upload-documents.proof-of-housing-costs=Comprobante de los Costos de Vivienda
-upload-documents.a-document-showing-total-amount-paid-for-housing=Un documento que muestra la cantidad total pagada por la vivienda. Ejemplos: recibos de renta, arrendamiento o estados de cuenta hipotecarias
-upload-documents.proof-of-job-loss=Prueba de pérdida del trabajo
-upload-documents.a-document-with-your-former-employers-name-and-signature=Un documento con el nombre y la firma de su antiguo empleador, el último día que trabajó y la fecha y el monto de su cheque de pago final. Ejemplo: Carta de despido
-upload-documents.proof-of-medical-expenses=Comprobante de gastos médicos
-upload-documents.documents-showing-medical-expenses-that-you-paid-for=Documentos que muestren los gastos médicos que usted pagó.
-upload-documents.im-finished-uploading=Ya terminé de subir los documentos
-upload-documents.submit-my-documents=Enviar mis documentos
-upload-documents.wait-for-upload-warning=Asegúrese de que sus documentos hayan terminado de cargarse antes de terminar.
-upload-documents.maximum-number-of-files=Ha subido el número máximo de archivos (20). Tendrá la oportunidad de compartir más con un trabajador del condado más adelante.
-upload-documents.maximum-number-of-files-fifty=Ha subido el número máximo de archivos (50). Tendrá la oportunidad de compartir más con un trabajador del condado más adelante.
-upload-documents.this-file-is-too-large=Este archivo es demasiado grande y no se puede cargar (el tamaño máximo es de: {0} MB)
-upload-documents.this-pdf-is-password-protected=Este PDF está protegido por contraseña. Intente eliminar la contraseña o de subir una captura/foto de pantalla en cambio.
-upload-documents.this-pdf-is-in-an-old-format=No podemos cargar este archivo PDF. Intente guardar este archivo en otro formato o tomar capturas de pantalla de las páginas.
-upload-documents.there-was-an-issue-on-our-end=Tuvimos un problema  al procesar este archivo. Le pedimos disculpas. Favor de volver a intentar con otro archivo, o si no, suba en cambio una captura de pantalla.
-upload-documents.there-is-a-problem-with-the-image=Esta imagen no puede ser añadida a su solicitud. Por favor, intente con otro archivo o suba una captura de pantalla en su lugar.
-upload-documents.this-file-appears-to-be-empty=Este archivo parece estar vacío. Por favor, pruebe con otro archivo o suba una captura de pantalla en su lugar.
-upload-documents.heic-files-not-accepted=No se aceptan archivos HEIC, un tipo de archivo del iPhone.
-upload-documents.MS-word-files-not-accepted=No se aceptan documentos en formato de Word MS (.doc o .docx).
-upload-documents.virus-detected=No se pudo cargar su archivo debido a que se detectó un virus. Intente cargar una copia diferente del archivo.
-upload-documents.clammit-server-error=No es posible cargar su archivo en este momento debido a un problema técnico. Vuelva a intentarlo más tarde visitando la página principal de MNbenefits y haciendo clic en Cargar documentos.
-upload-documents.maximum-total-file-size=El total de documentos cargados ha superado el límite máximo de tamaño de archivo (250 MB). Más adelante podrá compartir más documentos con un empleado.
-upload-documents.maximum-total-file-size-error=No puede cargar más archivos.
+upload-documents.title=Upload documents
+upload-documents.add-your-files=Add your files
+upload-documents.view-document-list=View document list
+upload-documents.recommended-documents=Recommended documents
+upload-documents.based-on-your-answers=Based on your answers to the questions on this application, you should submit:
+upload-documents.proof-of-income=Proof of Income
+upload-documents.a-document-with-employer-and-employee-names=A document with employer and employee names and your total pre-tax income from the last 30 days (or total hours worked and rate of pay). Example: Paystubs
+upload-documents.proof-of-housing-costs=Proof of Housing Costs
+upload-documents.a-document-showing-total-amount-paid-for-housing=A document showing total amount paid for housing. Examples: Rent receipts, lease, or mortgage statements
+upload-documents.proof-of-job-loss=Proof of Job Loss
+upload-documents.a-document-with-your-former-employers-name-and-signature=A document with your former employer’s name and signature, the last day you worked, and date and amount of your final paycheck. Example: Pink slip
+upload-documents.proof-of-medical-expenses=Proof of Medical Expenses
+upload-documents.documents-showing-medical-expenses-that-you-paid-for=Documents showing medical expenses that you paid for.
+upload-documents.im-finished-uploading=I'm finished uploading
+upload-documents.submit-my-documents=Submit my documents
+upload-documents.wait-for-upload-warning=Make sure your documents are done uploading before you finish.
+upload-documents.maximum-number-of-files=You have uploaded the maximum number of files (20). You will have the opportunity to share more with a caseworker later.
+upload-documents.maximum-number-of-files-fifty=You have uploaded the maximum number of files (50). You will have the opportunity to share more with a caseworker later.
+upload-documents.this-file-is-too-large=This file is too large and cannot be uploaded (max size: {0} MB)
+upload-documents.this-pdf-is-password-protected=This PDF is password protected. Try removing the password or uploading a screenshot instead.
+upload-documents.this-pdf-is-in-an-old-format=We are not able to upload this PDF file. Try saving this file in another format or taking screenshots of the pages.
+upload-documents.there-was-an-issue-on-our-end=There was an issue processing this file on our end. Sorry about that! Please try another file or upload a screenshot instead.
+upload-documents.there-is-a-problem-with-the-image=This image cannot be uploaded to your application.  Please try another file or upload a screenshot instead.
+upload-documents.this-file-appears-to-be-empty=This file appears to be empty. Please try another file or upload a screenshot instead.
+upload-documents.heic-files-not-accepted=HEIC files, an iPhone file type, are not accepted.
+upload-documents.MS-word-files-not-accepted=MS Word files (doc,docx) are not accepted.
+upload-documents.virus-detected=Your file cannot be uploaded because a virus was detected. Try uploading a different copy of the file.
+upload-documents.clammit-server-error=We are temporarily unable to upload your file due to a technical issue. Please return later and try again by visiting the MNbenefits homepage and clicking on \u2018Upload Documents.\u2019
+upload-documents.maximum-total-file-size=Your total uploaded documents have exceeded the maximum file size limit (250MB). You will be able to share more documents with a worker later.
+upload-documents.maximum-total-file-size-error=You cannot upload any more files.
 
-upload-documents-delete-warning.title=Eliminar un archivo.
-upload-documents-delete-warning.you-are-about-to-delete=Está a punto de eliminar su archivo llamado {0}.
-upload-documents-delete-warning.yes-delete-the-file=Sí, borre el archivo.
-upload-documents-delete-warning.no-lets-keep-the-file=No, conservemos este archivo.
+upload-documents-delete-warning.title=Delete a file
+upload-documents-delete-warning.you-are-about-to-delete=You are about to delete your file called {0}.
+upload-documents-delete-warning.yes-delete-the-file=Yes, delete the file
+upload-documents-delete-warning.no-lets-keep-the-file=No, lets keep the file
 
-document-submit-confirmation.title=Confirmación de la entrega de documento/s
-document-submit-confirmation.ready-to-submit-your-documents=¿Está listo para presentar sus documentos y terminar su solicitud?
-document-submit-confirmation.yes-submit-and-finish=Sí, presentar y terminar
-document-submit-confirmation.no-add-more-documents=No, agregar más documentos
+document-submit-confirmation.title=Doc submit confirmation
+document-submit-confirmation.ready-to-submit-your-documents=Ready to submit your documents and finish your application?
+document-submit-confirmation.yes-submit-and-finish=Yes, submit and finish
+document-submit-confirmation.no-add-more-documents=No, add more documents
 
-healthcare-Renewal-Document-Submit-Confirmation.ready-to-submit=¿Listo para presentar sus documentos?
+healthcare-Renewal-Document-Submit-Confirmation.ready-to-submit=Ready to submit your documents?
 
-document-offboarding.title=Descarga de documentos
-document-offboarding.finish-your-application-and-add-documents-on-MNbenefits-later=Termine su solicitud y añada los documentos en MNbenefits más tarde.
-document-offboarding.you-can-return-to-our-home-page--to-submit-documents=Puede volver a nuestra página de inicio para presentar los documentos después de terminar esta solicitud.
-document-offboarding.if-you-dont-remember-which-documents=Si no recuerda qué documentos tiene que presentar, puede preguntarle a un trabajador social.
+document-offboarding.title=Document offboarding
+document-offboarding.finish-your-application-and-add-documents-on-MNbenefits-later=Finish your application and add documents on MNbenefits later.
+document-offboarding.you-can-return-to-our-home-page--to-submit-documents=You can return to our home page to submit documents after you finish this application.
+document-offboarding.if-you-dont-remember-which-documents=If you don't remember which documents you need to submit, you can ask an eligibility worker.
 
-later-docs.confirmation-email-subject=Hemos recibido sus documentos
-later-docs.confirmation-email-we-received=Hemos recibido los documentos para su solicitud de Minnesota Benefits.
-later-docs.confirmation-email-body=Hemos recibido los documentos para su solicitud de beneficios de Minnesota. Esté pendiente de lo que reciba por correo sobre su caso. Es posible que necesite completar pasos adicionales.
-later-docs.confirmation-email-number=Número de confirmación del documento: #{0}
-later-docs.comfirmation-email-look-out-for=Esté atento a correos con más información sobre su caso. Es posible que necesite completar pasos adicionales.
-later-docs.comfirmation-email-update=Si desea una actualización de su caso, por favor llame al condado o nación tribal mencionado anteriormente.
+later-docs.confirmation-email-subject=We received documents for your MNbenefits Application
+later-docs.confirmation-email-we-received=We received your documents for your Minnesota Benefits application.
+later-docs.confirmation-email-body=Your documents were submitted to {0} on {1}.
+later-docs.confirmation-email-number=Document confirmation number: #{0}
+later-docs.comfirmation-email-look-out-for=Look out for mail containing more information about your case. You may need to complete additional steps.
+later-docs.comfirmation-email-update=If you would like an update on your case, please call the county or Tribal Nation listed above.
 
-health-care-renewal.confirmation-email-subject=Hemos recibido sus documentos para su renovación de atención médica
-health-care-renewal.confirmation-email-we-received=Hemos recibido sus documentos para su renovación de los programas de atención médica de Minnesota.
-health-care-renewal.confirmation-email-body=Sus documentos fueron enviados a {0} el {1}.
-health-care-renewal.confirmation-email-number=Número de confirmación del documento: <b>#{0}</b>
-health-care-renewal.comfirmation-email-look-out-for=Esté atento a correspondencia que contenga más información sobre su caso. Pudiera ser necesario que complete algunos pasos adicionales.
-health-care-renewal.comfirmation-email-update=Si desea una actualización de su caso, por favor llame al condado o nación tribal mencionado anteriormente.
+health-care-renewal.confirmation-email-subject=We received documents for your Health Care Renewal
+health-care-renewal.confirmation-email-we-received=We received documents for your Minnesota Health Care Programs Renewal.
+health-care-renewal.confirmation-email-body=Your documents were submitted to {0} on {1}.
+health-care-renewal.confirmation-email-number=Document confirmation number: <b>#{0}</b>
+health-care-renewal.comfirmation-email-look-out-for=Watch for mail containing more information about your case. You may need to complete additional steps.
+health-care-renewal.comfirmation-email-update=If you would like an update on your case, please call the county or Tribal Nation listed above.
 
-next-steps.title=Sus siguientes pasos a seguir
-next-steps.your-next-steps-have-been-emailed-to=Le hemos enviado los siguientes pasos por correo electrónico a {0}.
-next-steps.open-each-step=Amplíe cada paso para conocer lo que puede esperar a continuación en el proceso de inscripción de beneficios.
-next-steps.step-1=Paso 1: 
-next-steps.step-1-apply-once=Aplique una vez
-next-steps.step-1-completed=¡Terminado!
-next-steps.step-2=Paso 2:
-next-steps.step-2-upload-your-documents=Cargue sus documentos
-next-steps.allow-time-for-review=Paso 3: <br>Permita tiempo para que un trabajador revise su solicitud
-next-steps.step-4=Paso 4: <br>Complete una entrevista
-next-steps.allow-time-for-review-expedited-snap=Dentro de los próximos 5 días, espere una llamada telefónica de un trabajador de elegibilidad con información sobre sus próximos pasos.
-next-steps.allow-time-for-review-header=Su solicitud y documentos serán revisados por su condado o nación tribal.
-next-steps.allow-time-for-review-expedited-ccap=Dentro de los próximos 5 días, espere una llamada telefónica o una carta por correo de un trabajador de elegibilidad con información sobre sus próximos pasos.
-next-steps.allow-time-for-review-not-expedited=Espere que un trabajador de elegibilidad se comunique con usted por teléfono o correo con información sobre sus próximos pasos. <br/><br/>El tiempo que lleva revisar las solicitudes puede variar.
-next-steps.complete-an-interview-1=El (Los) programa(s) en su solicitud pueden requerir que hable con un trabajador sobre su solicitud.
-next-steps.complete-an-interview-2=Un trabajador de su condado o Nación Tribal se pondrá en contacto con usted para concertar una entrevista. La entrevista puede realizarse por teléfono o en persona.
-next-steps.no-document-upload-message-1=No cargó documentos con su solicitud hoy.
-next-steps.no-document-upload-message-2=Para cargar documentos más tarde, puede volver a nuestra página de inicio y hacer clic en "Cargar documentos" para comenzar.
-next-steps.document-upload-message-1=Recibimos los documentos que cargó con su solicitud.
-next-steps.document-upload-message-2=Si necesita cargar más documentos más tarde, puede volver a nuestra página de inicio y hacer clic en "Cargar documentos" para comenzar.
+next-steps.title=Your next steps
+next-steps.your-next-steps-have-been-emailed-to=Your next steps have been emailed to {0}.
+next-steps.open-each-step=Expand each step to learn about what you can expect next in the benefits enrollment process.
+next-steps.step-1=Step 1:
+next-steps.step-1-apply-once=Apply once
+next-steps.step-1-completed=Completed!
+next-steps.step-2=Step 2:
+next-steps.step-2-upload-your-documents=Upload your documents
+next-steps.allow-time-for-review=Step 3: <br>Allow time for a worker to review
+next-steps.step-4=Step 4: <br>Complete an interview
+next-steps.allow-time-for-review-expedited-snap=Within the next 5 days, <b>expect a phone call</b> from an eligibility worker with information about your next steps.
+next-steps.allow-time-for-review-header=Your application and documents will be reviewed by your county or Tribal Nation.
+next-steps.allow-time-for-review-expedited-ccap=Within the next 5 days, <b>expect a phone call</b> or letter in the mail from an eligibility worker with information about your next steps.
+next-steps.allow-time-for-review-not-expedited=Expect an eligibility worker to contact you by phone or mail with information about your next steps. <br/><br/>The time it takes to review applications can vary.
+next-steps.complete-an-interview-1=Program(s) on your application may require you to talk with a worker about your application.
+next-steps.complete-an-interview-2=A worker from your county or Tribal Nation will contact you to schedule an interview. Your interview can be held over the phone or face-to-face.
+next-steps.no-document-upload-message-1=You did not upload documents with your application today.
+next-steps.no-document-upload-message-2=To upload documents later, you can return to our homepage and click on \u2018Upload documents\u2019 to get started.
+next-steps.document-upload-message-1=We received the documents you uploaded with your application.
+next-steps.document-upload-message-2=If you need to upload more documents later, you can return to our homepage and click on \u2018Upload documents\u2019 to get started.
 
-success.title=Éxito
-success.done-your-application-has-been-submitted=¡Hecho! Su solicitud ha sido enviada.
-success.done-your-application-and-docs-have-been-submitted=¡Ha terminado! Su solicitud y documentos han sido enviados.
-success.helpful-resources=Información de ayuda
-success.hc-renewal-whats-next=¿Ahora que?
-sucesss.hc-renewal-county-process=Su condado o nacion tribal tramitara su renovacion y documentos en el orden en que se recibieron.
-sucesss.hc-renewal-watch-mail=Este atento a la correspondencia que contiene mas informacion sobre su caso. Es posible que deba completar pasos adicionales.
-sucesss.hc-renewal-learn-more=Mas informacion
-sucesss.hc-renewal-faq=Visite la <a href="https://mn.gov/dhs/people-we-serve/adults/health-care/health-care-programs/programs-and-services/renewal-reporting-changes.jsp" target="_blank" rel="noopener noreferrer">pagina de preguntas frecuentes sobre renovaciones de atencion medica</a> para obtener mas informacion sobre el proceso de renovacion.
-sucesss.hc-renewal-update-on-your-case=Si desea obtener informacion actualizada sobre su caso, llame al condado o nacion tribal que se indica arriba.
-success.download-my-application=Descargue una copia de su solicitud para sus registros:
-success.download-your-application=Descargue su solicitud
-success.apply-for-healthcare-coverage=¡Solicite cobertura de salud médica!
-success.additional-documents=Regrese a <a href="/#later-docs-upload" style="text-decoration:none;" target="_blank" rel="noopener noreferrer">MNbenefits.mn.gov </a>para presentar los documentos que le solicite su condado.
-success.of-your-situation-within-30-days=de su situación dentro de los 30 días.
-success.your-county-will-call-you=Un/a trabajador/a de su condado le llamará
-success.a-county-worker-may-ask-you-to-send-them-additional-proof=un trabajador social de elegibilidad podría pedirle que le envíe pruebas adicionales
-success.submit-feedback=Enviar comentarios
-success.give-us-feedback=Denos su opinión
-success.you-may-be-able-to-apply=Es probable que usted sea elegible para beneficios adicionales.
-success.learn-more-about-programs=Puede solicitar programas y recursos adicionales. Podemos ayudarle a empezar.
-success.view-more-programs=Ver más programas
-success.finish=Finalizar
-success.do-you-have-any-feedback-for-us=¿Tiene algún comentario para nosotros?
-success.confirmation-number=Número de Confirmación
-success.application-submitted-generic=Su solicitud fue enviada a {0} el {1}.
-success.hc-renewal-submitted-generic=Sus documentos de renovacion de atencion medica se enviaron al {0} el {1}.
-success.feedback-success=¡Gracias por sus comentarios!
-success.feedback-rating-success=¡Gracias por calificar su experiencia!
-success.feedback-failure=Lo sentimos, no vemos ningún comentario.
-feedback.how-was-your-experience=¿Cómo fue su experiencia al llenar esta solicitud?
-feedback.title=Comentarios
-success.not-good=Mala
-success.ok=Más o menos
-success.great=¡Muy buena!
-success.expedited-snap-timing=Dentro de las siguientes 24 horas <strong>espere una llamada</strong> de su condado o nación tribal sobre su solicitud de asistencia alimenticia.
-success.expedited-snap-timing-header=Usted puede ser elegible para el SNAP acelerado
-success.expedited-ccap-timing=Dentro de los siguientes 5 dí­as, su condado o nación tribal determinará su caso de asistencia para el cuidado de niños y <strong>le enviará una carta por correo</strong>.
-success.expedited-ccap-timing-header=Usted puede ser elegible para el CCAP acelerado, Programa de ayuda para el cuidado de niños
-success.expedited-snap-suggested-action=Si no recibe noticias de parte de su condado o nación tribal dentro de los siguientes 7 días o si desea una actualización sobre su caso, por favor <a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-5207-ENG" target="_blank" rel="noopener noreferrer">llame a su condado o nación tribal.</a>
-success.standard-suggested-action=<a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-5207-ENG" target="_blank" rel="noopener noreferrer">Llame a la agencia de servicios de su condado o tribu</a> si no recibe noticias de ellos en el periodo de tiempo que le hemos indicado.
-success.suggested-action-header=Cuándo comunicarse
-success.contact-promise=En los próximos 7-10 dí­as, <strong>espere recibir una carta por correo</strong> de parte de su condado o nación tribal sobre su {0} solicitud. La carta le explicará los siguientes pasos a seguir.
-success.contact-promise-header=Cuándo le responderán
-success.food-support=apoyo alimentario
-success.childcare=cuidado de niños
-success.housing=vivienda
-success.cash-support=apoyo en efectivo
-success.emergency-assistance=asistencia de emergencia
-success.healthcare=<p>El seguro médico aún no está incluido en nuestra solicitud, pero podemos ayudarle a iniciar el proceso. </p><p>Puede solicitarlo por su cuenta o con la ayuda de un navegador experto. <a href="/faq#how-to-apply-for-healthcare" target="_blank" rel="noopener noreferrer">Aprenda más</a></p>
-success.You-were-recommended-for-expedited-snap=Se le ha recomendado la ayuda alimentaria acelerada (SNAP).
+success.title=Success
+success.done-your-application-has-been-submitted=Done! Your application has been submitted.
+success.done-your-application-and-docs-have-been-submitted=Done! Your documents have been submitted.
+success.helpful-resources=Helpful resources
+success.hc-renewal-whats-next=What's next
+sucesss.hc-renewal-county-process=Your county or Tribal Nation will process your renewal and documents in the order they were received.
+sucesss.hc-renewal-watch-mail=Watch for mail containing more information about your case. You may need to complete additional steps.
+sucesss.hc-renewal-learn-more=Learn more
+sucesss.hc-renewal-faq=Visit the <a href="https://mn.gov/dhs/people-we-serve/adults/health-care/health-care-programs/programs-and-services/renewal-reporting-changes.jsp" target="_blank" rel="noopener noreferrer">Health care renewals FAQ</a> page for more information about the renewal process.
+sucesss.hc-renewal-update-on-your-case=If you would like an update on your case, please call the county or Tribal Nation listed above.
+success.download-my-application=Save a copy of your application for your records:
+success.download-your-application=Download your application
+success.apply-for-healthcare-coverage=Apply for healthcare coverage!
+success.additional-documents=Return to <a href="/#later-docs-upload" style="text-decoration:none;" target="_blank" rel="noopener noreferrer">MNbenefits.mn.gov</a> to submit any documents requested by your county or Tribal Nation.
+success.of-your-situation-within-30-days=of your situation within 30 days.
+success.your-county-will-call-you=Your county will call you
+success.a-county-worker-may-ask-you-to-send-them-additional-proof=an eligibility worker may ask you to send them additional proof
+success.submit-feedback=Submit feedback
+success.give-us-feedback=Give us feedback
+success.you-may-be-able-to-apply=You are likely eligible for additional benefits
+success.learn-more-about-programs=You can apply for additional programs and resources. We can help you get started.
+success.view-more-programs=View more programs
+success.finish=Finish
+success.do-you-have-any-feedback-for-us=Do you have any feedback for us?
+success.confirmation-number=Confirmation #
+success.application-submitted-generic=Your application was submitted to {0} on {1}.
+success.hc-renewal-submitted-generic=Your health care renewal documents were submitted to {0} on {1}.
+success.feedback-success=Thank you for your feedback!
+success.feedback-rating-success=Thank you for rating your experience!
+success.feedback-failure=Sorry, we didn't see any feedback.
+feedback.how-was-your-experience=How was your experience filling out this application?
+feedback.title=Feedback
+success.not-good=Not Good
+success.ok=OK
+success.great=Great!
+success.expedited-snap-timing=Within 24 hours, <strong>expect a call</strong> from your county or Tribal Nation about your food assistance application.
+success.expedited-snap-timing-header=You May Be Eligible for Expedited SNAP
+success.expedited-ccap-timing=Within 5 days, your county or Tribal Nation will determine your childcare assistance case and <strong>send you a letter in the mail</strong>.
+success.expedited-ccap-timing-header=You May Be Eligible for Expedited CCAP
+success.expedited-snap-suggested-action=If you don't hear from your county or Tribal Nation within 7 days or want an update on your case, please <a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-5207-ENG" target="_blank" rel="noopener noreferrer">call your county or Tribal Nation.</a>
+success.standard-suggested-action=<a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-5207-ENG" target="_blank" rel="noopener noreferrer">Call your county or Tribal Nation</a> if you don’t hear from them in the time period we’ve noted.
+success.suggested-action-header=When to Reach Out
+success.contact-promise=In the next 7-10 days, <strong>expect to get a letter in the mail</strong> from your county or Tribal Nation about your {0} application. The letter will explain your next steps.
+success.contact-promise-header=Time to Hear Back
+success.food-support=food support
+success.childcare=childcare
+success.housing=housing
+success.cash-support=cash support
+success.emergency-assistance=emergency assistance
+success.healthcare=<p>Health insurance is not included on our application yet, but we can help you get started.</p><p>You can apply on your own or with the help of an expert navigator.  <a href="/faq#how-to-apply-for-healthcare" target="_blank" rel="noopener noreferrer">Learn more</a></p>
+success.You-were-recommended-for-expedited-snap=You were recommended for expedited food assistance (SNAP).
 
-success.childcare-coverage=<p>Consulte y descargue más <a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-3551-SPA" target="_blank" rel="noopener noreferrer">recursos para familias con niños pequeños.</a></p>
-success.childcare-explore-coverage=¡Consiga ayuda para pagar el cuidado infantil!
+success.childcare-coverage=<p>View and download more <a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-3551-ENG" target="_blank" rel="noopener noreferrer">resources for families with young children.</a></p>
+success.childcare-explore-coverage=Get help paying for child care!
 
-recommendations.title=Recomendaciones
-recommendations.header=Puede solicitar beneficios adicionales.
-recommendations.header-2=Es probable que usted sea elegible para estos programas y recursos.
-recommendations.help-message=Basado en su solicitud de hoy, le recomendamos los siguientes programas y recursos.
-recommendations.apply-for-food=Solicite el Programa de Women, Infant, and Children (WIC).
-recommendations.wic-1=Debido a que su hogar incluye niños pequeños, o está esperando un bebé, le sugerimos solicitar el Programa de Women, Infant, and Children (WIC).
-recommendations.wic-2=WIC es un programa de nutrición y lactancia materna que ayuda a las familias a alimentarse bien y mantenerse saludables. 
-recommendations.who-can=¿Quién puede solicitar el programa WIC?
-recommendations.pregnant=Mujeres embarazadas
-recommendations.breastfeeding=Mujeres que amamantan
-recommendations.non-breastfeeding=Mujeres que no amamantan y que se encuentran en etapa posparto
-recommendations.individuals-who=Mujeres que hayan estado embarazadas en los últimos 6 meses
-recommendations.mothers-and=Hogares que tengan un bebé, un niño pequeño o cualquier niño de hasta 5 años
-recommendations.you-do-not=No es necesario ser ciudadano estadounidense.
-recommendations.learn-about=<a href="https://www.health.state.mn.us/people/wic/ppthome.html" target="_blank" rel="noopener noreferrer">Obtenga más información sobre el programa WIC</a>
-recommendations.apply-for-wic=Solicite el programa WIC
-recommendations.apply-for-health=Solicite cobertura de atención médica
-recommendations.healthcare-1=Si no tiene seguro médico, le recomendamos que solicite uno de los programas de atención médica del estado de Minnesota.
-recommendations.healthcare-2=Puede presentar la solicitud por su cuenta o con la ayuda de un trabajador social con experiencia. <a href="/faq#how-to-apply-for-healthcare" target="_blank" rel="noopener noreferrer">Obtenga información sobre cómo presentar la solicitud.</a>
-recommendations.get-help-paying=Obtenga ayuda para pagar el cuidado infantil
-recommendations.view-and-download=Vea y descargue más <a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-3551-SPA" target="_blank" rel="noopener noreferrer">recursos para familias con niños pequeños.</a>
-recommendations.give-us-feedback=Déjenos su opinion
-recommendations.how-was-your-experience=¿Cómo fue su experiencia?
+recommendations.title=Recommendations
+recommendations.header=You can apply for additional benefits.
+recommendations.header-2=You are likely eligible for these programs and resources.
+recommendations.help-message=Based on your application today, we recommend these programs and resources for you.
+recommendations.apply-for-food=Apply for the Women, Infants, and Children (WIC) program
+recommendations.wic-1=Because your household includes young children, or has a baby on the way, we suggest applying for the Women, Infants, and Children (WIC) Program.
+recommendations.wic-2=WIC is a nutrition and breastfeeding program that helps families eat well and stay healthy.
+recommendations.who-can=Who can apply for WIC?
+recommendations.pregnant=Pregnant individuals
+recommendations.breastfeeding=Breastfeeding individuals
+recommendations.non-breastfeeding=Non-breastfeeding postpartum individuals
+recommendations.individuals-who=Individuals who have been pregnant within the past 6 months
+recommendations.mothers-and=Households that have an infant, toddler, or any children up to age 5
+recommendations.you-do-not=You do not need to be a U.S. citizen.
+recommendations.learn-about=<a href="https://www.health.state.mn.us/people/wic/ppthome.html" target="_blank" rel="noopener noreferrer">Learn about the WIC program</a>
+recommendations.apply-for-wic=Apply for WIC
+recommendations.apply-for-health=Apply for healthcare coverage
+recommendations.healthcare-1=If you do not have health insurance, we recommend applying for one of the MN healthcare programs.
+recommendations.healthcare-2=You can apply on your own or with the help of an expert navigator. <a href="/faq#how-to-apply-for-healthcare" target="_blank" rel="noopener noreferrer">Learn how to apply.</a>
+recommendations.get-help-paying=Get help paying for child care
+recommendations.view-and-download=View and download more <a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-3551-ENG" target="_blank" rel="noopener noreferrer">resources for families with young children.</a>
+recommendations.give-us-feedback=Give us feedback 
+recommendations.how-was-your-experience=How was your experience?
 
-documentsSent.title=Documentos Enviados
-documentsSent.great-your-documents-are-being-sent=¡Magnífico! ¡Sus documentos están en camino!
-documentsSent.it-may-take-up-to=El condado o la nación tribal pueden tardar hasta 10 dí­as para revisar sus documentos.
-documentsSent.call-your-county=Llame a su condado o nación tribal si tiene alguna pregunta sobre el estado de su solicitud o de sus documentos.
-documentsSent.find-your-countys-phone=Podrá encontrar el número de teléfono de su condado o nación tribal aquí­.
+documentsSent.title=Documents Sent
+documentsSent.great-your-documents-are-being-sent=Great! Your documents are on their way!
+documentsSent.it-may-take-up-to=It may take up to 10 days for your county or Tribal Nation to review your documents.
+documentsSent.call-your-county=Call your county or Tribal Nation if you have any questions about your application status or documents.
+documentsSent.find-your-countys-phone=Find your county or Tribal Nation's phone number here.
 
-hc-documentsSent.call-your-county=Llame a su condado o nación tribal si tiene alguna pregunta sobre su renovación de atención médica o sobre los documentos.
-hc-documentsSent.great-weve-received-your-docs=¡Excelente! Hemos recibido sus documentos.
+hc-documentsSent.call-your-county=Call your county or Tribal Nation if you have any questions about your health care renewal or documents.
+hc-documentsSent.great-weve-received-your-docs=Great! We've received your documents.
 
-home-address.title=Dirección de casa
-home-address.where-are-you-currently-living=¿Dónde está viviendo actualmente?
-home-address.what-is-the-zip-code=¿Cuál es el código postal?
-home-address.what-is-the-city=¿Cuál es la ciudad?
-home-address.what-is-the-state=¿Cuál es el estado?
-home-address.what-is-the-state-helper=Debe vivir en el estado de Minnesota para ser elegible para beneficios.
-home-address.what-is-the-street-address=¿Cuál es la dirección de la calle?
-home-address.apartment-number=Número de apartamento
-home-address.i-dont-have-a-permanent-address=Yo no tengo una dirección permanente
+home-address.title=Home Address
+home-address.where-are-you-currently-living=Where are you currently living?
+home-address.what-is-the-zip-code=What is the zip code?
+home-address.what-is-the-city=What is the city?
+home-address.what-is-the-state=What is the state?
+home-address.what-is-the-state-helper=You must live in the state of Minnesota to be eligible for benefits.
+home-address.what-is-the-street-address=What is the street address?
+home-address.apartment-number=Apartment #
+home-address.i-dont-have-a-permanent-address=I don't have a permanent address
 
-out-of-state-address-notice.header=Parece que usted está viviendo fuera de Minnesota.
-out-of-state-address-notice.would-you-still-like-to-apply=¿Todavía le gustaría solicitar beneficios en <u>Minnesota</u>?
-out-of-state-address-notice.title=Aviso de dirección fuera del estado
-out-of-state-address-notice.address-you-entered=Dirección que escribió
-out-of-state-address-notice.no-quit-application=No, salga de la aplicación
-out-of-state-address-notice.edit-my-address=Corregir mi dirección
-out-of-state-address-notice.yes-continue=Si, continuar
+out-of-state-address-notice.header=It looks like you are living outside of Minnesota.
+out-of-state-address-notice.would-you-still-like-to-apply=Would you still like to apply for benefits in <u>Minnesota</u>?
+out-of-state-address-notice.title=Out of State Address Notice
+out-of-state-address-notice.address-you-entered=Address You Entered
+out-of-state-address-notice.no-quit-application=No, quit application
+out-of-state-address-notice.edit-my-address=Edit my address
+out-of-state-address-notice.yes-continue=Yes, continue
 
-out-of-state-quit-verify.are-you-sure=Salir ahora terminará su solicitud y borrará sus datos.
-out-of-state-quit-verify.title=Confirmación de salida
-out-of-state-quit-verify.no-take-me-back=Regresar
-out-of-state-quit-verify.yes-quit-application=Salir de la solicitud
-out-of-state-quit-verify.quitting-means-that=Salir ahora terminará su solicitud y borrará sus datos.
-out-of-state-quit-verify.what-next=¿Le parece bien? 
+out-of-state-quit-verify.are-you-sure=Quitting now will end your application and delete your data.
+out-of-state-quit-verify.title=Quit confirmation
+out-of-state-quit-verify.no-take-me-back=Go back
+out-of-state-quit-verify.yes-quit-application=Quit application
+out-of-state-quit-verify.quitting-means-that=Quitting now will end your application and delete your data. 
+out-of-state-quit-verify.what-next=Is that okay?
 
-where-to-send-mail.title=Dónde enviar el correo
-where-to-send-mail.the-county-will-need-a-place-to-send-you-mail=El condado o nación tribal necesitará una dirección para el envío de correspondencia durante los próximos 3 meses.
-where-to-send-mail.this-could-be-a-friend-or-family-address=Puede ser la dirección de un amigo o familiar o un apartado postal. Si no tiene uno, seleccionaremos una oficina de correos en su zona donde pueda recoger el correo.
-where-to-send-mail.I-have-a-place-to-get-mail=Tengo un lugar donde puedo recibir correo
-where-to-send-mail.I-will-pick-up-my-mail-at-a-post-office=Recogeré el correo en una oficina de correos con Entrega General cercana.
+where-to-send-mail.title=Where to send mail
+where-to-send-mail.the-county-will-need-a-place-to-send-you-mail=Your county or Tribal Nation will need a place to send you mail over the next 3 months.
+where-to-send-mail.this-could-be-a-friend-or-family-address=This could be a friend or family member’s address or a PO Box. If you don’t have one, we will select a post office in your area where you can pick up mail.
+where-to-send-mail.I-have-a-place-to-get-mail=I have a place to get mail
+where-to-send-mail.I-will-pick-up-my-mail-at-a-post-office=I will pick up mail at a General Delivery post office near me.
 
-city-for-general-delivery.title=Ciudad de la oficina de correos de Entrega General
-city-for-general-delivery.help-us-route-your-mail=Ayúdenos a encaminar su correo a una oficina de Entrega General cerca de usted.
-city-for-general-delivery.make-sure-to-provide-a-city=Asegúrese de indicar una ciudad
-city-for-general-delivery.select-your-city=Seleccione su ciudad / pueblo
+city-for-general-delivery.title=City for General Delivery
+city-for-general-delivery.help-us-route-your-mail=Help us route your mail to a General Delivery location near you.
+city-for-general-delivery.make-sure-to-provide-a-city=Make sure to provide a city
+city-for-general-delivery.select-your-city=Select your city / town
 
-general-delivery-address.title=Dirección General de entrega
-general-delivery-address.the-county-will-send-all-mail-about-this-application-to=El condado o nación tribal enviará todo la correspondencia sobre esta solicitud a:
-general-delivery-address.call-your-county-to-get-the-exact-street-address=Llame a su condado para obtener la dirección exacta de esta oficina de correos.
-general-delivery-address.tell-the-county-worker-you-submitted-an-application-on-MNbenefits=Infórmele al trabajador social de elegibilidad que presentó una solicitud en MNbenefits y que utilizó la dirección de correspondencia general en su ciudad. Ellos le dirán dónde podrá recoger su correspondencia y qué puede esperar.
+general-delivery-address.title=General Delivery address
+general-delivery-address.the-county-will-send-all-mail-about-this-application-to=Your county or Tribal Nation will send all mail about this application to:
+general-delivery-address.call-your-county-to-get-the-exact-street-address=Call your county to get the exact street address of this Post Office location.
+general-delivery-address.tell-the-county-worker-you-submitted-an-application-on-MNbenefits=Tell an eligibility worker you submitted an application on MNbenefits and used the General Delivery address in your city. They will tell you where to pick up your mail and what to expect.
 
-mailing-address.title=Dirección para correo postal
-mailing-address.where-can-the-county-send-your-mail=¿A qué dirección puede enviarle el condado o nación tribal su correspondencia?
-mailing-address.what-is-the-zip-code=¿Cuál es el código postal?
-mailing-address.what-is-the-city=¿Cuál es la ciudad?
-mailing-address.what-is-the-state=¿Cuál es el estado?
-mailing-address.what-is-the-street-address=¿Cuál es la dirección de la calle?
-mailing-address.apartment-number=Número de apartamento
-mailing-address.same-as-my-current-living-address=Es la misma que mi dirección actual
+mailing-address.title=Mailing address
+mailing-address.where-can-the-county-send-your-mail=Where can your county or Tribal Nation send your mail?
+mailing-address.what-is-the-zip-code=What is the zip code?
+mailing-address.what-is-the-city=What is the city?
+mailing-address.what-is-the-state=What is the state?
+mailing-address.what-is-the-street-address=What is the street address?
+mailing-address.apartment-number=Apartment #
+mailing-address.same-as-my-current-living-address=Same as my current living address
 
-sign-this-application.title=Firme esta solicitud
-sign-this-application.type-your-full-legal-name-here-to-sign-this-application=Escriba su nombre legal completo aquí para firmar esta solicitud.
-sign-this-application.by-signing-this-application-you-agree-that-you-want-to=Al firmar esta solicitud está de acuerdo que desea solicitar sus beneficios, que usted a sido honesto en esta solicitud, y que usted a leído y aceptado los términos en la página anterior.
-sign-this-application.make-sure-to-sign-the-application=Asegúrese de firmar la solicitud.
+sign-this-application.title=Sign this application
+sign-this-application.type-your-full-legal-name-here-to-sign-this-application=Type your full legal name here to sign this application.
+sign-this-application.by-signing-this-application-you-agree-that-you-want-to=By signing this application you agree that you want to apply for benefits, that you have been honest on this application, and that you have read and agreed to the terms on the previous page.
+sign-this-application.make-sure-to-sign-the-application=Make sure to sign the application.
 
-second-signature-notification.title=Notificación de firma
-second-signature-notification.next-we-will-ask=Si hay un adulto adicional en su hogar, es posible que también deba firmar la solicitud. 
-second-signature-notification.header-help-message=Puede firmar ahora o un trabajador solicitará su firma más tarde.<br/><br/>Si usted es el único adulto en su hogar, puede continuar sin agregar una firma adicional.
-second-signature-notification.if-you-are-only-adult=Si usted es el único adulto en su hogar, puede continuar sin agregar una firma adicional.
-second-signature-notification.yes-add-another-signaure=Añadir otra firma
-second-signature-notification.submit-application-now=Continuar sin firma
-second-signature-notification.who-should-sign=¿Quién debería firmar?
-second-signature-notification.reveal-content=Si hay un adulto adicional en su hogar, como su cónyuge o pareja, es posible que deba firmar la solicitud antes de que su hogar pueda recibir beneficios.</br></br><strong>Si no puede firmar ahora, es aceptable. Aún puede enviar la solicitud sin su firma. </strong>Su condado o nación tribal se comunicará con usted posteriormente para obtener su firma. </br></br>La mayoría de las solicitudes requieren una firma adicional. Si hay más adultos en su hogar, su trabajador social puede comunicarse con usted más tarde para obtener firmas adicionales.
-second-signature.title=Firma del adulto adicional
-second-signature.great=<div class="text-with-line">Firma del adulto adicional</div><h2>Escriba su nombre legal completo aquí para firmar esta solicitud.</h2>
+second-signature-notification.title=Signature notification
+second-signature-notification.next-we-will-ask=If there is an additional adult in your household, they may need to sign the application, too.
+second-signature-notification.header-help-message=They can sign now, or a worker will request their signature later.<br/><br/>If you are the only adult in your household you can continue without adding an additional signature
+second-signature-notification.if-you-are-only-adult=If you are the only adult in your household you can continue without adding a second signature.
+second-signature-notification.yes-add-another-signaure=Add another signature
+second-signature-notification.submit-application-now=Continue without it
+second-signature-notification.who-should-sign=Who should sign?
+second-signature-notification.reveal-content=If there is an additional adult in your household, like your spouse or partner, they may need to sign the application before your household can receive benefits.</br></br><strong>If they can't sign right now, that's okay. You can still submit your application without their signature.</strong>  Your county or Tribal Nation will contact you later to get their signature.</br></br>Most appplications require one additional signature.  If there are more adults in your household, your eligibility worker may contact you later for additional signatures.
+second-signature.title=Additional Adult Signature
+second-signature.great=<div class="text-with-line">Additional adult signature</div><h2>Type your full legal name here to sign this application.</h2>
 
-submit.title=Enviar solicitud
-submit.submit=Enviar solicitud
-submit.header-text=¡Listo! Su solicitud está firmada y lista para enviarse.
+submit.title=Submit application
+submit.submit=Submit application
+submit.header-text=All set! Your application is signed and ready to submit.
 
-do-you-need-help-immediately.title=¿Necesita ayuda inmediata?
-do-you-need-help-immediately.header=¿Necesita ayuda inmediata?
-do-you-need-help-immediately.we-encourage-you-to-answer-a-few-more-questions-that-will-help-us-figure-out-if-you-qualify-for-faster-service=Le sugerimos a responder a algunas preguntas adicionales que nos ayudarán a determinar si usted califica para un servicio más rápido.
-do-you-need-help-immediately.yes-I-want-to-see-if-I-qualify=Sí, quiero saber si califico.
-do-you-need-help-immediately.finish-application-now=Finalizar la solicitud.
+do-you-need-help-immediately.title=Do you need help immediately?
+do-you-need-help-immediately.header=Do you need help immediately?
+do-you-need-help-immediately.we-encourage-you-to-answer-a-few-more-questions-that-will-help-us-figure-out-if-you-qualify-for-faster-service=We encourage you to answer a few more questions that will help us figure out if you qualify for faster service.
+do-you-need-help-immediately.yes-I-want-to-see-if-I-qualify=Yes, I want to see if I qualify
+do-you-need-help-immediately.finish-application-now=Finish application now
 
-add-household-members.title=¿Desea agregar miembros de su hogar?
-add-household-members.do-you-want-to-add-household-members=¿Vive con alguna de estas personas?
-add-household-members.your-spouse=Su cónyuge
-add-household-members.your-children=Sus hijos
-add-household-members.other-family-members=Otros miembros de la familia
-add-household-members.unmarried-partner=Una pareja de hecho/de unión libre con la que comparte hijos
-add-household-members.roommates=Compañeros con los que compra y prepara la comida
+add-household-members.title=Do you want to add household members?
+add-household-members.do-you-want-to-add-household-members=Do you live with any of these people?
+add-household-members.your-spouse=Your spouse
+add-household-members.your-children=Your children
+add-household-members.other-family-members=Other family members
+add-household-members.unmarried-partner=An unmarried partner that you share children with
+add-household-members.roommates=Roommates that you buy and prepare food with
 
-thirty-day-income.title-household=Ingreso de 30 días, Hogar
-thirty-day-income.title-one-person=Ingreso de 30 días, 1 persona
-thirty-day-income.how-much-money-have-you-made-in-the-last-30-days=¿Cuánto dinero has ganado en los últimos 30 días?
-thirty-day-income.how-much-money-has-your-household-made-in-the-last-30-days=¿Cuánto dinero han ganado las personas en su hogar en los últimos 30 días?
-thirty-day-income.if-you-dont-know-the-exact-amount=Si no sabe la cantidad exacta, puede estimar la cantidad o dejarla en blanco.
-thirty-day-income.how-much-money-do-you-have-available=¿Cuánto dinero tiene disponible?
-thirty-day-income.how-much-money-do-you-have-available-in-these=¿Cuánto dinero tiene disponible?
-thirty-day-income.how-much-money-is-available=¿Cuánto dinero tiene disponible su hogar?
-thirty-day-income.how-much-money-is-available-in-these=¿Cuánto dinero tiene disponible su hogar?
+thirty-day-income.title-household=Thirty Day Income, Household
+thirty-day-income.title-one-person=Thirty Day Income, 1 person
+thirty-day-income.how-much-money-have-you-made-in-the-last-30-days=How much money have you made in the last 30 days?
+thirty-day-income.how-much-money-has-your-household-made-in-the-last-30-days=How much money has your household made in the last 30 days?
+thirty-day-income.if-you-dont-know-the-exact-amount=If you don't know the exact amount, you can estimate or leave it blank.
+thirty-day-income.how-much-money-do-you-have-available=How much money do you have available?
+thirty-day-income.how-much-money-do-you-have-available-in-these=How much money do you have available?
+thirty-day-income.how-much-money-is-available=How much money does your household have available?
+thirty-day-income.how-much-money-is-available-in-these=How much money does your household have available?
 
-thirty-day-job-income.title=Ingreso Laboral de 30 días
-thirty-day-job-income.how-much-money-have-you-made-at-this-job-in-the-last-30-days=¡Esta bien! ¿Cuánto dinero ha ganado en este trabajo en los últimos 30 días?
-thirty-day-job-income.how-much-money-have-they-made-at-this-job-in-the-last-30-days=¡Esta bien! ¿Cuánto dinero han ganado en este trabajo en los últimos 30 días?
+thirty-day-job-income.title=Thirty Day Job Income
+thirty-day-job-income.how-much-money-have-you-made-at-this-job-in-the-last-30-days=That’s okay! How much money have you made at this job in the last 30 days?
+thirty-day-job-income.how-much-money-have-they-made-at-this-job-in-the-last-30-days=That’s okay! How much money have they made at this job in the last 30 days?
 
-liquid-assets-prompt.title-one-person=Dinero disponible
-liquid-assets-prompt.title-household=Dinero disponible
-liquid-assets-prompt.this-includes=A continuación, incluya cualquiera de estos recursos que tenga en su total:
-liquid-assets-prompt.please-include-all=Considere todas las siguientes:
-liquid-assets-prompt.checking-accounts=Cuentas de cheque, o
-liquid-assets-prompt.savings=Cuentas de ahorro
-liquid-assets-prompt.cash=Efectivo
-liquid-assets-prompt.savings-accounts=Cuentas de ahorro
+liquid-assets-prompt.title-one-person=Available money
+liquid-assets-prompt.title-household=Available money
+liquid-assets-prompt.this-includes=Please include any of these assets that you have in your total below.
+liquid-assets-prompt.please-include-all=Please include all:
+liquid-assets-prompt.checking-accounts=Checking accounts, and/or
+liquid-assets-prompt.savings=Savings
+liquid-assets-prompt.cash=Cash
+liquid-assets-prompt.savings-accounts=Savings accounts
 
-liquid-assets-source.title=Efectivo disponible
-liquid-assets-source.who-does-money-belong-to=¿A quién le pertenece el dinero?
-liquid-assets-source.this-helps-us-determine=Esto nos ayuda a determinar para qué programas son elegibles usted y los otros miembros de su hogar.
-liquid-assets-source.how-much-money-available=¿Cuanto dinero esta disponible?
+liquid-assets-source.title=Cash Available
+liquid-assets-source.who-does-money-belong-to=Who does the money belong to?
+liquid-assets-source.this-helps-us-determine=This helps us determine which programs you and other household members are eligible for.
+liquid-assets-source.how-much-money-available=How much money is available?
 
-cash-amount-prompt.please-include=Incluya lo siguiente:
-cash-amount-prompt.cash-you-have-with-you=Efectivo que lleva consigo
-cash-amount-prompt.cash-in-a-safety-deposit-box=Efectivo en una caja de seguridad
-cash-amount-prompt.cash-available-at-home=Efectivo disponible en su casa o el lugar donde vive.
-cash-amount-prompt.type-0-if-you-do-not-have-any=Ingrese "0" si no tiene nada.
-cash-amount-prompt.type-0-if-your-household-does-not-have-any=Ingrese "0" si su hogar no tiene nada.
-cash-amount.how-much-cash-do-you-have-on-hand=¿Cuánto efectivo tiene disponible usted?
+cash-amount-prompt.please-include=Please include:
+cash-amount-prompt.cash-you-have-with-you=Cash you have with you
+cash-amount-prompt.cash-in-a-safety-deposit-box=Cash in a safety deposit box
+cash-amount-prompt.cash-available-at-home=Cash available at home, or the facility where you live.
+cash-amount-prompt.type-0-if-you-do-not-have-any=Type "0" if you do not have any.
+cash-amount-prompt.type-0-if-your-household-does-not-have-any=Type "0" if your household does not have any.
+cash-amount.how-much-cash-do-you-have-on-hand=How much cash do you have available?
 
+ 
+expedited-expenses.title-one-person=Expedited Expense, 1 person
+expedited-expenses.title-household=Expedited Expense, Household
+expedited-expenses.header-one-person=Do you pay rent, mortgage or room and board?
+expedited-expenses.header-household=Do you or anyone in your household pay for rent, mortgage or room and board?
 
-expedited-expenses.title-one-person=Gastos Acelerados, 1 persona
-expedited-expenses.title-household=Gastos Acelerados, Hogar
-expedited-expenses.header-one-person=¿Paga usted renta/alquiler, hipoteca o alojamiento y comida?
-expedited-expenses.header-household=¿Usted o alguien de su familia paga el alquiler/arrendamiento, la hipoteca o el alojamiento y comida?
+expedited-expenses-amount.title-one-person=Expedited Expenses Amount, 1 person
+expedited-expenses-amount.title-household=Expedited Expenses Amount, Household
+expedited-expenses-amount.how-much-do-you-pay-for-rent-or-mortgage-every-month=How much do you pay for rent or mortgage every month?
+expedited-expenses-amount.how-much-is-paid-for-rent-or-mortgage-every-month=How much is paid for rent or mortgage every month?
 
-expedited-expenses-amount.title-one-person=Cantidad de Gastos Acelerados, 1 persona
-expedited-expenses-amount.title-household=Cantidad de Gastos Acelerados, Hogar
-expedited-expenses-amount.how-much-do-you-pay-for-rent-or-mortgage-every-month=¿Cuánto paga por la renta o la hipoteca cada mes?
-expedited-expenses-amount.how-much-is-paid-for-rent-or-mortgage-every-month=¿Cuánto se paga por la renta o la hipoteca cada mes?
+utility-payments.title-one-person=Expedited Utility Payments, 1 person
+utility-payments.title-household=Expedited Utility Payments, Household
+utility-payments.do-you-pay-for-any-utilities=Do you pay for any utilities?
+utility-payments.does-anyone-in-your-household-pay-for-these-utilities=Does anyone in your household pay for utilities?
+utility-payments.select-all-that-you-are-billed-for-even-if-you-havent-paid-it-this-month=Select all that you are billed for, even if you haven't paid it this month.
+utility-payments.household-billed=Select all that your house is billed for, even if they haven’t been paid this month.
+utility-payments.heating=Heating
+utility-payments.cooling=Cooling
+utility-payments.electricity=Electricity
+utility-payments.phone=Phone/Cell Phone
+utility-payments.water=Water
+utility-payments.sewer=Sewer
+utility-payments.garbage-removal=Garbage Removal
+utility-payments.cooking-fuel=Cooking Fuel
 
-utility-payments.title-one-person=Pagos de Servicios Públicos Acelerados, 1 persona
-utility-payments.title-household=Pagos de Servicios Públicos Acelerados, Hogar
-utility-payments.do-you-pay-for-any-utilities=¿Usted paga algunos de los servicios públicos?
-utility-payments.does-anyone-in-your-household-pay-for-these-utilities=¿Alguien en su hogar paga los servicios públicos?
-utility-payments.select-all-that-you-are-billed-for-even-if-you-havent-paid-it-this-month=Seleccione todo lo que le cobran, incluso si usted no lo ha pagado este mes.
-utility-payments.household-billed=Seleccione todo lo que se cobra a su hogar, incluso si no lo han pagado este mes.
-utility-payments.heating=Calefacción
-utility-payments.cooling=Aire Acondicionado
-utility-payments.electricity=Electricidad
-utility-payments.phone=Teléfono/Teléfono Celular
-utility-payments.water=Agua
-utility-payments.sewer=Drenaje
-utility-payments.garbage-removal=Eliminación de Basura
-utility-payments.cooking-fuel=Combustible de Cocina
+expedited-migrant-farm-worker.title-one-person=Expedited Migrant Farm Worker, 1 person
+expedited-migrant-farm-worker.title-household=Expedited Migrant Farm Worker, Household
+expedited-migrant-farm-worker.header-one-person=Are you a migrant or seasonal farm worker?
+expedited-migrant-farm-worker.header-household=Is anyone in your household a migrant or seasonal farm worker?
 
-expedited-migrant-farm-worker.title-one-person=Trabajador Agricultor Migrante Acelerado, 1 persona
-expedited-migrant-farm-worker.title-household=Trabajador Agricultor Migrante Acelerado, Hogar
-expedited-migrant-farm-worker.header-one-person=¿Usted es un/a trabajador/a agricultor migrante o de temporada?
-expedited-migrant-farm-worker.header-household=¿Alguien en su hogar es un/a trabajador/a agricultor migrante o de temporada?
+transition-household-person-details.title=Transition: household person details
+transition-household-person-details.thanks=Thanks!
+transition-household-person-details.header=Next we’ll ask for some personal information to understand the needs of everyone in your house.
+transition-household-person-details.up-next=Up next:
+transition-household-person-details.citizen-disabilities=Citizenship, Disabilities, Preparing Meals, Ability to Work
 
-transition-household-person-details.title=Transición: detalles sobre la personas en el hogar
-transition-household-person-details.thanks=¡Gracias!
-transition-household-person-details.header=A continuación, le vamos a preguntar por algunos datos personales para saber más sobre las necesidades de todos en su hogar.
-transition-household-person-details.up-next=A continuación:
-transition-household-person-details.citizen-disabilities=Ciudadanía, Discapacidades, Preparando Comidas, Capacidad para Trabajar
+snap-expedited-determination.qualified-title=Qualify for Expedited Service
+snap-expedited-determination.denied-title=Denied for Expedited Service
+snap-expedited-determination.qualified-header=It looks like you qualify for faster service.
+snap-expedited-determination.denied-header=Thank you for giving us that information.
+snap-expedited-determination.your-county-should-reach-out=Your county or Tribal Nation should reach out to you to discuss your application within 24 hours.
+snap-expedited-determination.if-you-do-not-hear=If you do not hear from them within 3 days, please <a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-5207-ENG" target="_blank" rel="noopener noreferrer">contact your county or Tribal Nation</a> for your interview.
+snap-expedited-determination.denied-detail=An eligibility worker will contact you within 5-7 days to review your application.
 
-snap-expedited-determination.qualified-title=Calificado para el servicio acelerado
-snap-expedited-determination.denied-title=Denegado para el servicio acelerado
-snap-expedited-determination.qualified-header=Al parecer califica para un servicio más rápido.
-snap-expedited-determination.denied-header=Gracias por brindarnos esa información.
-snap-expedited-determination.your-county-should-reach-out=Su condado o nación tribal debería ponerse en contacto con usted para hablar de su solicitud en un plazo de 24 horas.
-snap-expedited-determination.if-you-do-not-hear=Si no recibe noticias suyas en un plazo de 3 dí­as, <a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-5207-ENG" target="_blank" rel="noopener noreferrer">por favor comuníquese</a> con su condado o nación tribal para su entrevista.
-snap-expedited-determination.denied-detail=Un trabajador social de elegibilidad se comunicará con usted en un plazo de 5 a 7 días para revisar su solicitud.
+legal-stuff-second-signature.title=Legal stuff - Additional adult
+legal-stuff-second-signature.header-text=<div class="text-with-line">Additional adult signature</div><h2 class="spacing-below-35">The next two pages are for an additional adult to review and sign.</h2><div style=" color: #5F5854; border-bottom: 2px solid #AAAAAA;  padding-bottom: 0.5rem;  font-style: normal;  font-weight: bold;"></div><h2>The legal stuff.</h2>
+legal-stuff-second-signature.copies-of-the-full-agreements=Copies of the full agreements and terms will be included in your household's confirmation email.
+legal-stuff-second-signature.continue-without-another-signature=Continue without another signature
 
-legal-stuff-second-signature.title=Asuntos legales – Adulto adicional
-legal-stuff-second-signature.header-text=<div class="text-with-line">Firma del adulto adicional </div><h2 class="spacing-below-35">Las siguientes dos páginas son para que un adulto adicional las revise y las firme.</h2><div style=" color: #5F5854; border-bottom: 2px solid #AAAAAA;  padding-bottom: 0.5rem;  font-style: normal;  font-weight: bold;"></div><h2>Asuntos legales </h2>
-legal-stuff-second-signature.copies-of-the-full-agreements=Se incluirán copias de los acuerdos y términos completos en el correo electrónico de confirmación de su hogar.
-legal-stuff-second-signature.continue-without-another-signature=Continuar sin otra firma
-
-legal-stuff.title=Asuntos Legales
-legal-stuff.the-legal-stuff=Los asuntos legales
-legal-stuff.scroll-down-to-agree-to-the-terms=Amplíe las casillas para revisar los términos. Firmará en la siguiente página.
-legal-stuff.i-agree=Yo acepto los términos
-legal-stuff.copies-of-the-full-agreements=Se incluirán copias de los acuerdos y términos completos en su correo electrónico de confirmación.
-legal-stuff.summary=Resumen
-legal-stuff.you-have-been-honest-on-this-application=Ha sido honesto con esta solicitud.
-legal-stuff.you-agree-to-the-benefit-rules=Acepta las reglas de los beneficios.
-legal-stuff.you-can=Puede
-legal-stuff.register-to-vote-online=registrarse para votar en línea
-legal-stuff.or-ask-your-county-worker=o pedirle al trabajador del condado que le ayude a registrarse.
-legal-stuff.details=Detalles
-legal-stuff.employment-services-registration=Registro de Servicios de Empleo
-legal-stuff.i-understand-that-signing-this-application-registers-me-for-employment-services=Entiendo que al firmar esta solicitud, me inscribo en los servicios de empleo. También entiendo que al hacerlo, registra automáticamente a todos en mi hogar a quienes la agencia aprueba para recibir ayuda conmigo para los servicios de empleo. Entiendo que yo u otras personas en mi hogar podrían tener que participar en los servicios de empleo para recibir asistencia en efectivo o beneficios de SNAP.
-legal-stuff.assignments=Asignaciones
-legal-stuff.i-understand-that-when-I-get-MFIP=Entiendo que cuando obtengo MFIP debo ceder mis derechos a la manutención y manutención de menores al estado de Minnesota.
-legal-stuff.snap-penalty-warnings=Reglas de Advertencia de Penalización
-legal-stuff.if-you-get-cash-or-SNAP-benefits=Si recibe beneficios de SNAP o en efectivo, debe seguir las reglas que se enumeran a continuación.
-legal-stuff.do-not-give-false-information=No brinde información falsa
-legal-stuff.or-hide-information-to-get-or-continue-to-get-benefits=ni oculte información para obtener o continuar recibiendo beneficios. Si recibe beneficios en efectivo o SNAP y proporciona información falsa u oculta información sobre su identidad y residencia para obtener múltiples beneficios durante el mismo período de tiempo, puede ser excluido por 10 años.
-legal-stuff.do-not-trade-or-sell-snap-benefits=No intercambie ni venda beneficios de SNAP
-legal-stuff.or-electronic-benefit-transfer=o tarjetas de acceso de Transferencia Electrónica de Beneficios (EBT). El intercambio o venta de beneficios valorados en más de $500 puede resultar en una inelegibilidad permanente.
-legal-stuff.do-not-use-cash-or-snap-benefits-to-buy-ineligible-items=No use dinero en efectivo o beneficios de SNAP para comprar artículos no elegibles,
-legal-stuff.such-as-alcohol-and-tobacco=como alcohol y tabaco.
-legal-stuff.do-not-use-someone-elses-ebt-access-card=No use la(s) tarjeta(s) de acceso EBT de otra persona
-legal-stuff.to-get-cash-or-snap-benefits=para obtener dinero en efectivo o beneficios de SNAP para su hogar.
-legal-stuff.the-state-may-bar-household-members-who-break=El estado puede excluir a los miembros del hogar que quebranten cualquiera de estas reglas. La exclusión dura un año por el primer fraude, dos años por el segundo fraude y es permanente por el tercer fraude. Los meses en que estará excluido de MFIP por no cumplir las reglas pueden contar hacia su límite de por vida de 60 meses.
-legal-stuff.you-can-also-be-prosecuted-for-fraud=También puede ser enjuiciado por fraude si no cumple con las reglas y se podrían aplicar multas y sanciones adicionales. La pena máxima es una multa de $250,000 o un período de cárcel de 20 años, o ambos.
-legal-stuff.special-snap-penalty-warning=Advertencia de sanción especial de SNAP:
-legal-stuff.if-a-federal-state-or-local-court-finds=si un tribunal federal, estatal o local lo declara a usted o a cualquier miembro de su hogar culpable de dar o recibir beneficios de SNAP a cambio de:
-legal-stuff.controlled-substances=Sustancias controladas,
-legal-stuff.that-household-member-will-be-barred=ese miembro de su hogar no podrá recibir SNAP durante 24 meses por la primera infracción y permanentemente por la segunda infracción.
-legal-stuff.firearms-ammunition-or-explosives=Armas de fuego, municiones o explosivos,
-legal-stuff.that-household-member-will-be-barred-from-getting-snap=ese miembro del hogar no podrá recibir SNAP de forma permanente.
-legal-stuff.perjury-and-general-declarations=Perjurio y declaraciones generales
-legal-stuff.authorization-to-share-information-for-fraud-investigation-and-audits=Autorización para compartir información para investigaciones y auditorías de fraude
-legal-stuff.i-agree-that-third-parties-may-share-information=Acepto que terceros pueden compartir información sobre mí con personas que investiguen el fraude y realicen auditorías federales o estatales.
-legal-stuff.this-may-include-but-is-not-limited-to=Esto puede incluir, pero no se limita a:
-legal-stuff.employers-and-schools=Empleadores y escuelas,
-legal-stuff.landlords-and-utility-companies=Propietarios y empresas de servicios públicos,
-legal-stuff.financial-and-insurance-agencies=Agencias financieras y de seguros, y
-legal-stuff.other-government-offices=Otras oficinas gubernamentales.
-legal-stuff.i-understand-this-consent-is-good-for-six-months-after-my-benefits-stop=Entiendo que este consentimiento es válido por seis meses después de que finalicen mis beneficios.
-legal-stuff.by-signing=Al firmar:
-legal-stuff.i-understand-cash-assistance-is-provided-to-help-eligible-families-meet-their-basic-needs=Entiendo que la asistencia en efectivo se proporciona para ayudar a las familias elegibles a cubrir sus necesidades básicas.
-legal-stuff.i-understand-if-i-give-incorrect-information-or-misuse-an-electronic-benefit=Entiendo que si doy información incorrecta o uso indebidamente una tarjeta de transferencia electrónica de beneficios (EBT), puedo ser investigado y descalificado o procesado por fraude. [Estatuto de Minnesota, secciones 256.98 y 609.821]
-legal-stuff.i-acknowledge-that-since-my-last-application-or-recertification=Reconozco que desde mi última solicitud o recertificación, yo he recibido el efectivo y/o beneficios de SNAP directamente o he usado la tarjeta EBT para recibir el efectivo o mis beneficios de SNAP.
-legal-stuff.i-acknowledge-that-i-have-read-and-understand-the-snaps-penalty-warning=Reconozco que he leído y entiendo la sección "Advertencias de sanciones de SNAP".
-legal-stuff.i-acknowledge-that-i-received-the-attached=Reconozco que he recibido lo siguiente adjunto
-legal-stuff.notices-of-privacy-practices="Avisas de Prácticas de Privacidad" (DHS-3979)
-legal-stuff.client-responsibilties-and-rights="Responsabilidades y Derechos del Cliente" (DHS-4163)
-legal-stuff.client-responsibilties-and-rights-no-quotes=Responsabilidades y Derechos del Cliente (DHS-4163)
-legal-stuff.notices-of-privacy-practices-no-quotes=Avisas de Prácticas de Privacidad (DHS-3979)
-legal-stuff.i-agree-to-assign-my-child-support-as-stated-above=Estoy de acuerdo en asignar la manutención de mis hijos como se indicó anteriormente.
-legal-stuff.i-agree-to-the-sharing-of-information-as-stated-on-the-fraud-release-information=Estoy de acuerdo en compartir información como se indica en la sección de información sobre divulgación de fraude anterior.
-legal-stuff.i-agree-to-the-sharing-of-information-as-stated-in-the-social-security-numbers-section=Estoy de acuerdo en compartir información como se indica en la sección de números de Seguro Social en la segunda página del
-legal-stuff.combined-application-form=Formulario de Solicitud Combinada (CAF).
-legal-stuff.child-care-application=Solicitud de Cuidado Infantil
-legal-stuff.if-i-get-child-care-assistance=Si obtengo asistencia para el cuidado de niños, entiendo que:
-legal-stuff.i-may-be-required-to-pay-a-co-payment-fee=Es posible que deba pagar una tarifa de copago, o pago compartido.
-legal-stuff.if-my-child-care-provider-charges-more-than-the-maximum-rate-paid-in-my-county=Si mi proveedor de cuidado infantil cobra más que la tarifa máxima pagada en mi condado, pagaré los costos adicionales, así como mi tarifa de copago.
-legal-stuff.i-must-report-changes-to-the-information-I-have-given=Debo informar los cambios a la información que he proporcionado dentro de los 10 días de calendario a partir de la fecha en que ocurrió el cambio. Estos incluyen cambios en el estado y horarios de empleo y actividad, estado familiar, cambios significativos de ingresos, dirección o residencia, o cualquier persona que se mude dentro o fuera de mi hogar. Consulte
-legal-stuff.reporting-responsibilties-for-ccap-families=Responsabilidades de Informar para Familias CCAP (DHS-6953)
-legal-stuff.for-specific-requirements=para conocer los requisitos específicos.
-legal-stuff.i-must-give-the-county-agency-and-my-child-care-provider-15-calendar-days=Debo avisar a la agencia del condado ya mi proveedor de cuidado infantil con 15 días de anticipación antes de cambiar de proveedor(es) de cuidado infantil. Este aviso no es necesario en los casos en los que:
-legal-stuff.a-providers-Minnesota-child-care-license-has-been-temporarily-immediately-suspended-or=La licencia de cuidado infantil de Minnesota de un proveedor se ha suspendido temporalmente de inmediato o
-legal-stuff.there-is-an-imminent-risk-of-harm-to-the-health-safety-or-rights-of-a-child=Existe un riesgo inminente de daño a la salud, seguridad o derechos de un niño al cuidado de un proveedor no licenciado por Minnesota.
-legal-stuff.my-eligibility-for-child-care-assistance-will-be-redetermined-every-12-months=Mi elegibilidad para la asistencia de cuidado infantil se volverá a determinar cada 12 meses.
-legal-stuff.i-have-the-right-to-choose-any-legal-child-care-provider=Tengo derecho a elegir cualquier proveedor de cuidado infantil legal, inclusos los centros de cuidado infantil con licencia certificados, los proveedores de cuidado infantil familiar con licencia y los proveedores de cuidado infantil sin licencia legal que cumplan con los requisitos del programa.
-legal-stuff.if-i-choose-a-provider-to-provide-child-care-in-my-home-I-am-considered-the-employer-of-the-provider=Si elijo un proveedor que brinde cuidado infantil en mi hogar, yo soy considerado el empleador del proveedor y tengo responsabilidades legales y fiscales. Este cuidado debe ser aprobado por el DHS antes de que se pueda pagar la asistencia para el cuidado de niños.
-legal-stuff.i-must-cooperate-with-child-support-enforcement-and-assign-my-child-care-support-portion=Debo cooperar con el cumplimiento de la manutención de menores y asignar mi porción de manutención de niños al Departamento de Servicios Humanos de Minnesota. Tengo derecho a reclamar "causa justificada" para no cooperar con la aplicación de la manutención de menores.
-legal-stuff.i-agree-that-authorized-investigators-may-share-information-about-me-during-investigations=Acepto que los investigadores autorizados puedan compartir información sobre mí durante las investigaciones por fraude, prevención de fraude y falsa declaración, y para auditorías federales o estatales.
-legal-stuff.provider-release=Divulgación del proveedor
-legal-stuff.state-and-federal-privacy-laws-protect-my-information=Las leyes de privacidad estatales y federales protegen mi información. Si cumplo con los requisitos para recibir asistencia para el cuidado infantil, el personal de CCAP puede compartir información sobre las horas y la cantidad de asistencia para el cuidado infantil que recibo con mi(s) proveedor(es) de cuidado infantil. Se notificará a mi proveedor cuando mi determinación esta prevista. Entiendo:
-legal-stuff.this-information-must-be-shared-so-that-my-child-care-provider=Esta información debe ser compartida para que mi proveedor de cuidado infantil sepa cuánto pagará CCAP por el cuidado infantil proporcionado.
-legal-stuff.this-information-can-be-shared-only-if-I-give-my-written-permission=Esta información se puede compartir solo si doy mi permiso por escrito o si la ley lo permite.
-legal-stuff.i-can-refuse-to-sign-or-cancel-this-release=Puedo negarme a firmar o cancelar esta autorización, pero si lo hago, es posible que CCAP no pueda pagarle a mi proveedor por el cuidado infantil proporcionado.
-legal-stuff.i-may-cancel-this-authorization-with-written-notice-anytime=Puedo cancelar esta autorización con notificación por escrito en cualquier momento. Este aviso escrito no afectará la información ya divulgada.
-legal-stuff.the-person-or-agency-who-gets-my-information-may-be-able-to-pass-it-on-to-others=La persona o agencia que obtiene mi información puede transmitirla a otras personas.
-legal-stuff.if-my-information-is-passed-on-to-others-by-dhs=Si el DHS transmite mi información a otras personas, es posible que esta autorización ya no la proteja. Esta autorización terminará un año después de la fecha en que la firme. Ley de Privacidad de Datos de Minnesota (Minn. Stat., Cap. 13).
-legal-stuff.penalty-warning=Advertencia de Penalización
-legal-stuff.if-you-get-child-care-assistance-benefits=Si recibe beneficios de asistencia para el cuidado infantil, no dé información falsa ni oculte información:
-legal-stuff.to-get-or-continue-to-get-child-care-assistance-benefits=Para obtener o continuar recibiendo beneficios de asistencia para el cuidado infantil
-legal-stuff.to-help-someone-else-to-get-or-to-continue-to-get-child-care-assistance-payments=Para ayudar a otra persona a obtener o continuar recibiendo pagos de asistencia para el cuidado infantil.
-legal-stuff.the-state-may-bar-a-family-with-a-member-who-breaks-either-of-these-rules=El estado puede prohibir a una familia con un miembro que infrinja cualquiera de estas reglas del Programa de Asistencia para el Cuidado de Niños. La barra dura un año para el primer fraude, dos años para el segundo fraude y es permanente para el tercer fraude. Una persona que proporcione información falsa para que ellos u otra persona reciba Asistencia para el cuidado de niños también puede ser procesada penalmente.
-legal-stuff.i-have-received-a-copy-of-the=He recibido una copia de
-legal-stuff.and=y
+legal-stuff.title=Legal Stuff
+legal-stuff.the-legal-stuff=The legal stuff.
+legal-stuff.scroll-down-to-agree-to-the-terms=Expand the boxes below to review the terms. You will sign on the next page.
+legal-stuff.i-agree=I agree to the terms
+legal-stuff.copies-of-the-full-agreements=Copies of the full agreements and terms will be included in your confirmation email.
+legal-stuff.summary=Summary
+legal-stuff.you-have-been-honest-on-this-application=You have been honest on this application.
+legal-stuff.you-agree-to-the-benefit-rules=You agree to the benefit rules.
+legal-stuff.you-can=You can
+legal-stuff.register-to-vote-online=register to vote online
+legal-stuff.or-ask-your-county-worker=or ask your caseworker to help you register.
+legal-stuff.details=Details
+legal-stuff.employment-services-registration=Employment services registration
+legal-stuff.i-understand-that-signing-this-application-registers-me-for-employment-services=I understand that signing this application registers me for employment services. I also understand that doing so automatically registers everyone in my home whom the agency approves to receive assistance with me for employment services. I understand that I or others in my home might have to take part in employment services to receive cash assistance or SNAP benefits.
+legal-stuff.assignments=Assignments
+legal-stuff.i-understand-that-when-I-get-MFIP=I understand that when I get MFIP I must assign my rights to child support and maintenance to the state of Minnesota.
+legal-stuff.snap-penalty-warnings=Penalty Warning Rules
+legal-stuff.if-you-get-cash-or-SNAP-benefits=If you get cash or SNAP benefits, you must follow the rules listed below.
+legal-stuff.do-not-give-false-information=Do not give false information
+legal-stuff.or-hide-information-to-get-or-continue-to-get-benefits=or hide information to get or continue to get benefits. If you get cash or SNAP benefits and give false information or hide information about your identity and residency to get multiple benefits for the same period of time, you may be barred for 10 years.
+legal-stuff.do-not-trade-or-sell-snap-benefits=Do not trade or sell SNAP benefits       
+legal-stuff.or-electronic-benefit-transfer=or Electronic Benefit Transfer (EBT) access cards. The trade or sale of benefits valued at over $500 may result in permanent ineligibility.
+legal-stuff.do-not-use-cash-or-snap-benefits-to-buy-ineligible-items=Do not use cash or SNAP benefits to buy ineligible items,
+legal-stuff.such-as-alcohol-and-tobacco=such as alcohol and tobacco.
+legal-stuff.do-not-use-someone-elses-ebt-access-card=Do not use someone else's EBT access card(s)
+legal-stuff.to-get-cash-or-snap-benefits=to get cash or SNAP benefits for your household.
+legal-stuff.the-state-may-bar-household-members-who-break=The state may bar household members who break any of these rules. The bar lasts one year for the first fraud, two years for the second fraud and is permanent for the third fraud. The months you are barred from MFIP for breaking the rules may count toward your 60-month lifetime limit.
+legal-stuff.you-can-also-be-prosecuted-for-fraud=You can also be prosecuted for fraud if you break the rules and additional fines and penalties may apply.The maximum penalty is a fine of $250,000 or a jail term of 20 years, or both.
+legal-stuff.special-snap-penalty-warning=Special SNAP penalty warning:
+legal-stuff.if-a-federal-state-or-local-court-finds=If a federal, state or local court finds you or any household member guilty of giving or receiving SNAP benefits in exchange for:
+legal-stuff.controlled-substances=Controlled substances,
+legal-stuff.that-household-member-will-be-barred=that household member will be barred from getting SNAP for 24 months for the first offense and permanently for the second offense.
+legal-stuff.firearms-ammunition-or-explosives=Firearms, ammunition or explosives,
+legal-stuff.that-household-member-will-be-barred-from-getting-snap=that household member will be barred from getting SNAP permanently.
+legal-stuff.perjury-and-general-declarations=Perjury and general declarations
+legal-stuff.authorization-to-share-information-for-fraud-investigation-and-audits=Authorization to share information for fraud investigation and audits
+legal-stuff.i-agree-that-third-parties-may-share-information=I agree that third parties may share information about me with persons investigating fraud and conducting Federal or state audits.
+legal-stuff.this-may-include-but-is-not-limited-to=This may include, but is not limited to:
+legal-stuff.employers-and-schools=Employers and schools,
+legal-stuff.landlords-and-utility-companies=Landlords and utility companies,
+legal-stuff.financial-and-insurance-agencies=Financial and insurance agencies, and
+legal-stuff.other-government-offices=Other government offices.
+legal-stuff.i-understand-this-consent-is-good-for-six-months-after-my-benefits-stop=I understand this consent is good for six months after my benefits stop.
+legal-stuff.by-signing=By signing:
+legal-stuff.i-understand-cash-assistance-is-provided-to-help-eligible-families-meet-their-basic-needs=I understand cash assistance is provided to help eligible families meet their basic needs.
+legal-stuff.i-understand-if-i-give-incorrect-information-or-misuse-an-electronic-benefit=I understand if I give incorrect information or misuse an electronic benefit transfer (EBT) card, I may be investigated and disqualified or prosecuted for fraud. [Minnesota Statute, sections 256.98 and 609.821]
+legal-stuff.i-acknowledge-that-since-my-last-application-or-recertification=I acknowledge that since my last application or recertification, I have received my cash and/or SNAP benefits directly or used my EBT card to get my cash and/or SNAP benefits.
+legal-stuff.i-acknowledge-that-i-have-read-and-understand-the-snaps-penalty-warning=I acknowledge that I have read and understand the "SNAP Penalty warnings" section
+legal-stuff.i-acknowledge-that-i-received-the-attached=I acknowledge that I have received the attached
+legal-stuff.notices-of-privacy-practices="Notice of Privacy Practices" (DHS-3979)"
+legal-stuff.client-responsibilties-and-rights="Client Responsibilities and Rights" (DHS-4163)
+legal-stuff.client-responsibilties-and-rights-no-quotes=Client Responsibilities and Rights (DHS-4163)
+legal-stuff.notices-of-privacy-practices-no-quotes=Notice of Privacy Practices" (DHS-3979)
+legal-stuff.i-agree-to-assign-my-child-support-as-stated-above=I agree to assign my child support as stated above.
+legal-stuff.i-agree-to-the-sharing-of-information-as-stated-on-the-fraud-release-information=I agree to the sharing of information as stated on the fraud release information section above.
+legal-stuff.i-agree-to-the-sharing-of-information-as-stated-in-the-social-security-numbers-section=I agree to the sharing of information as stated in the Social Security numbers section of the second page of the
+legal-stuff.combined-application-form=Combined Application Form (CAF).
+legal-stuff.child-care-application=Child Care Application
+legal-stuff.if-i-get-child-care-assistance=If I get child care assistance I understand:
+legal-stuff.i-may-be-required-to-pay-a-co-payment-fee=I may be required to pay a co-payment fee.
+legal-stuff.if-my-child-care-provider-charges-more-than-the-maximum-rate-paid-in-my-county=If my child care provider charges more than the maximum rate paid in my county, I will pay the additional costs, as well as my co-payment fee.
+legal-stuff.i-must-report-changes-to-the-information-I-have-given=I must report changes to the information I have given within 10 calendar days from the date the change occurred. These include changes in employment and activity status and schedules, family status, significant income changes, address or residence, or anyone moving in or out of my household. Refer to
+legal-stuff.reporting-responsibilties-for-ccap-families=Reporting Responsibilities for CCAP families (DHS-6953)
+legal-stuff.for-specific-requirements=for specific requirements.
+legal-stuff.i-must-give-the-county-agency-and-my-child-care-provider-15-calendar-days=I must give the county agency and my child care provider 15 calendar days' notice before changing my child care provider(s). This notice is not needed in cases when:
+legal-stuff.a-providers-Minnesota-child-care-license-has-been-temporarily-immediately-suspended-or=A provider's Minnesota child care license has been temporarily immediately suspended or
+legal-stuff.there-is-an-imminent-risk-of-harm-to-the-health-safety-or-rights-of-a-child=There is an imminent risk of harm to the health, safety, or rights of a child in the care of a provider not licensed by Minnesota.
+legal-stuff.my-eligibility-for-child-care-assistance-will-be-redetermined-every-12-months=My eligibility for child care assistance will be redetermined every 12 months.
+legal-stuff.i-have-the-right-to-choose-any-legal-child-care-provider=I have the right to choose any legal child care provider, including certified licensed child care centers, licensed family child care providers and legally non-licensed child care providers that meet program requirements.
+legal-stuff.if-i-choose-a-provider-to-provide-child-care-in-my-home-I-am-considered-the-employer-of-the-provider=If I choose a provider to provide child care in my home, I am considered the employer of the provider and have legal and tax responsibilities. This care must be approved by DHS before child care assistance can be paid.
+legal-stuff.i-must-cooperate-with-child-support-enforcement-and-assign-my-child-care-support-portion=I must cooperate with child support enforcement and assign my child care support portion to the Minnesota Department of Human Services. I have the right to claim "good cause" for not cooperating with child support enforcement.
+legal-stuff.i-agree-that-authorized-investigators-may-share-information-about-me-during-investigations=I agree that authorized investigators may share information about me during investigations for fraud, fraud prevention and misrepresentation, and for federal or state audits.
+legal-stuff.provider-release=Provider release
+legal-stuff.state-and-federal-privacy-laws-protect-my-information=State and federal privacy laws protect my information. If I am eligible for child care assistance, CCAP staff can share information about the hours and amount of child care assistance I get with my child care provider(s). My provider will be notified when my redetermination is due. I understand:
+legal-stuff.this-information-must-be-shared-so-that-my-child-care-provider=This information must be shared so that my child care provider knows how much CCAP will pay for the child care provided.
+legal-stuff.this-information-can-be-shared-only-if-I-give-my-written-permission=This information can be shared only if I give my written permission or if the law allows it.
+legal-stuff.i-can-refuse-to-sign-or-cancel-this-release=I can refuse to sign or cancel this release, but if I do, CCAP may not be able to pay my provider for the child care provided.
+legal-stuff.i-may-cancel-this-authorization-with-written-notice-anytime=I may cancel this authorization with written notice anytime. This written notice will not affect information already released.
+legal-stuff.the-person-or-agency-who-gets-my-information-may-be-able-to-pass-it-on-to-others=The person or agency who gets my information may be able to pass it on to others.
+legal-stuff.if-my-information-is-passed-on-to-others-by-dhs=If my information is passed on to others by DHS, it may no longer be protected by this authorization. This authorization will end one year from the date I sign it. Minnesota Data Privacy Act (Minn. Stat., Ch. 13).
+legal-stuff.penalty-warning=Penalty Warning
+legal-stuff.if-you-get-child-care-assistance-benefits=If you get child care assistance benefits, do not give false information or hide information:
+legal-stuff.to-get-or-continue-to-get-child-care-assistance-benefits=To get or continue to get child care assistance benefits
+legal-stuff.to-help-someone-else-to-get-or-to-continue-to-get-child-care-assistance-payments=To help someone else to get or to continue to get child care assistance payments.
+legal-stuff.the-state-may-bar-a-family-with-a-member-who-breaks-either-of-these-rules=The state may bar a family with a member who breaks either of these rules from the Child Care Assistance Program. The bar lasts one year for the first fraud, two years for the second fraud, and is permanent for the third fraud. A person who supplies false information in order for them or someone else to receive Child Care Assistance may also be prosecuted criminally.
+legal-stuff.i-have-received-a-copy-of-the=I have received a copy of the
+legal-stuff.and=and
 legal-stuff.comma=,
-legal-stuff.the-child-care-assistance-program-and-fraud=El Programa de Asistencia para el Cuidado Infantil y Fraude - Preguntas y Respuestas para Familias (DHS-3943B)
-legal-stuff.i-have-read-and-understand-this-information=He leído y entiendo esta información. Si tengo preguntas sobre esta información, le pediré a un trabajador que me las explique.
-legal-stuff.i-understand-that-if-someone=Reconozco que si alguien en mi hogar ha sido condenado por un delito de drogas en los últimos 10 años, se le podrá pedir que se haga pruebas de drogas al azar. La primera vez que no pase una prueba de drogas, la agencia reducirá los beneficios MFIP o SNAP de su hogar el 30 por ciento. Si falla la prueba por segunda vez, será descalificado permanentemente.
-legal-stuff.i-agree-to-continue-to-assign-my-child-care-support-to-the-state-of-minnesota=Acepto continuar asignando la manutención de mi cuidado infantil al estado de Minnesota. Entiendo que tengo derecho a reclamar una buena causa para no cooperar con la aplicación de la manutención de menores.
-legal-stuff.i-agree-to-the-sharing-of-information-as-stated-in-the-provider-release-and-fraud-investigation-authorization-information-above=Estoy de acuerdo en compartir la información como se indica en la información de autorización de investigación de fraude y divulgación del proveedor anterior.
-legal-stuff.i-have-received-and-reviewed=He recibido y leído lo siguiente:
-legal-stuff.authorization-of-sharing=Autorización para Compartir - <a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-5959A-ENG" target="_blank" rel="noopener noreferrer">DHS 5959A-ENG</a>
-legal-stuff.notice-about-ies=Aviso sobre los informes de trabajo del IES - <a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-2759-ENG" target="_blank" rel="noopener noreferrer">DHS 2759-ENG</a>
-legal-stuff.important-information=Información Importante - <a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-3353-ENG" target="_blank" rel="noopener noreferrer">DHS 3353</a>
-legal-stuff.additional-important-information=Información importante adicional - <a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-5223B-ENG" target="_blank" rel="noopener noreferrer">DHS 5223B</a>
-legal-stuff.penalty-warnings=Advertencias de penalización - <a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-5959B-ENG" target="_blank" rel="noopener noreferrer">DHS 5959B</a>
-legal-stuff.has-anyone-been-convicted-of-drug-felony=¿Alguien en el hogar ha sido condenado por delito grave de drogas en los últimos 10 años?
-legal-stuff.if-yes-you-can-still-get-benefits=Esto es opcional. Si la respuesta es afirmativa, puede seguir recibiendo prestaciones. Es posible que se le pida que se someta a pruebas de detección de drogas al azar.
-legal-stuff.application-terms=Términos de la solicitud
-legal-stuff.child-care-assistance-program-application=Solicitud al Programa de Asistencia para el Cuidado Infantil
+legal-stuff.the-child-care-assistance-program-and-fraud=The Child Care Assistance Program and Fraud - Questions and Answerers for Families (DHS-3943B)
+legal-stuff.i-have-read-and-understand-this-information=I have read, and understand this information. If I have questions about this information, I will ask a worker to explain them to me.
+legal-stuff.i-understand-that-if-someone=I understand that if someone in my household has been convicted of a drug felony in the past 10 years, they may be asked to take random drug tests. The first time they fail a drug test, the agency will reduce your household's MFIP or SNAP benefits by 30 percent. If they fail the test a second time, you will be permanently disqualified.
+legal-stuff.i-agree-to-continue-to-assign-my-child-care-support-to-the-state-of-minnesota=I agree to continue to assign my child care support to the state of Minnesota. I understand that I have the right to claim good cause for not cooperating with child support enforcement.
+legal-stuff.i-agree-to-the-sharing-of-information-as-stated-in-the-provider-release-and-fraud-investigation-authorization-information-above=I agree to the sharing of information as stated in the provider release and fraud investigation authorization information above.
+legal-stuff.i-have-received-and-reviewed=I have received and reviewed the following:
+legal-stuff.authorization-of-sharing=Authorization of Sharing - <a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-5959A-ENG" target="_blank" rel="noopener noreferrer">DHS 5959A-ENG</a>
+legal-stuff.notice-about-ies=Notice about IES work reporting - <a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-2759-ENG" target="_blank" rel="noopener noreferrer">DHS 2759-ENG</a>
+legal-stuff.important-information=Important Information - <a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-3353-ENG" target="_blank" rel="noopener noreferrer">DHS 3353</a>
+legal-stuff.additional-important-information=Additional Important Information - <a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-5223B-ENG" target="_blank" rel="noopener noreferrer">DHS 5223B</a>
+legal-stuff.penalty-warnings=Penalty Warnings - <a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-5959B-ENG" target="_blank" rel="noopener noreferrer">DHS 5959B</a>
+legal-stuff.has-anyone-been-convicted-of-drug-felony=Has anyone in the household been convicted of a drug felony in the past 10 years?
+legal-stuff.if-yes-you-can-still-get-benefits=This is optional. If yes, you can still get benefits. You may be asked to take random drug tests.
+legal-stuff.application-terms=Application Terms
+legal-stuff.child-care-assistance-program-application=Child Care Assistance Program Application
 
-legal-stuff.crr=Notificación de derechos y responsabilidades
-legal-stuff.crr-effective=Efectivo Marzo de 2025
-legal-stuff.crr-note=<strong>Nota: Se proporciona dinero con una tarjeta EBT - Electronic Benefits Transfer (transferencia electrónica de servicios) para ayudar a las familias a cubrir sus necesidades básicas, incluyendo: </strong>alimentos, alojamiento, ropa, servicios públicos y transporte. Estos fondos se entregan hasta que las familias puedan sostenerse por sí mismas. Si usted compra o intenta comprar productos de tabaco o alcohol con la tarjeta EBT, incurre en un acto ilegal. Si lo hace, el hecho constituye un fraude y usted será eliminado del programa EBT. Las tarjetas EBT no pueden usarse en un establecimiento de juego por dinero ni comercial que proporciona entretenimiento orientado a adultos donde los artistas se desnudan o actúan sin ropa.
+legal-stuff.crr=Notice of Rights and Responsibilities
+legal-stuff.crr-effective=Effective March 2025 
+legal-stuff.crr-note=<strong>Note: Cash on an Electronic Benefit Transfer (EBT) card is provided to help families meet their basic needs, including:</strong> food, shelter, clothing, utilities and transportation. These funds are provided until families can support themselves. It is illegal for you to buy or attempt to buy tobacco products or alcohol with your EBT card. If you do, it is fraud and you will be removed from the EBT program. EBT cards also cannot be used at gambling or retail establishments that provide adult-orientated entertainment in which performers disrobe or perform in an unclothed state for entertainment.
 
-legal-stuff.crr-yourResponsibilites=Sus responsabilidades
-legal-stuff.crr-yourResponsibilites1=<strong>Si usted recibe asistencia para cuidado de menores,</strong> tiene la obligación de reportar a la agencia de su condado o nación tribal los cambios que puedan afectar sus beneficios dentro de los 10 días a partir de ocurrido el cambio. 
-legal-stuff.crr-yourResponsibilites2=<strong>Si usted obtiene beneficios del Supplemental Nutrition Assistance Program (Programa de Asistencia Nutricional Suplementaria) y/o beneficios de asistencia en efectivo, reporte los cambios, a más tardar, el día 10 del siguiente mes.</strong> Cada programa de beneficios puede tener requisitos diferentes para reportar cambios. Consulte al trabajador de su caso sobre lo que usted debe reportar.
+legal-stuff.crr-yourResponsibilites=Your responsibilities 
+legal-stuff.crr-yourResponsibilites1=<strong>If you receive child care assistance</strong> you must report any changes that may affect your benefits to your county or Tribal Nation agency within 10 days after the change has occurred.
+legal-stuff.crr-yourResponsibilites2=<strong>If you receive Supplemental Nutrition Assistance Program benefits and/or cash assistance benefits, report changes by the 10th of the following month.</strong> Each benefits program may have different requirements for reporting changes. Talk to your caseworker about what you must report.
 
-legal-stuff.crr-ReportChanges=Puede que le exijan reportar cambios en:
-legal-stuff.crr-employment=<strong>Empleo</strong> - Comenzar o terminar un empleo o negocio; cambio en las horas, las ganancias o los gastos
-legal-stuff.crr-income=<strong>Ingresos</strong> - recibo o cambio de manutención de menores, Social Security, beneficios de veteranos, seguro de desempleo, herencia, beneficios de seguros.
-legal-stuff.crr-property=<strong>Propiedad</strong> - compra, venta o traspaso de una casa, automóvil u otros artículos de valor, o si recibe una herencia o acuerdo legal.
-legal-stuff.crr-household=<strong>Miembros del hogar</strong> - cuando una persona fallece o queda discapacitada, se muda de o al hogar, o se va temporalmente; embarazo; nacimiento de un hijo.
-legal-stuff.crr-citizenship=<strong>Ciudadanía o estado migratorio</strong>
-legal-stuff.crr-address=<strong>Dirección</strong>
-legal-stuff.crr-housing=<strong>Subsidio de los costos y/o el alquiler de la vivienda </strong>
-legal-stuff.crr-utility=<strong>Costo de los servicios públicos</strong>
-legal-stuff.crr-custody=<strong>Custodia de los padres o derechos de visita </strong>
-legal-stuff.crr-marital=<strong>Estado civil </strong>
-legal-stuff.crr-school=<strong>Asistencia a la escuela </strong>
-legal-stuff.crr-insurance=<strong>Cobertura y primas del seguro médico </strong>
-legal-stuff.crr-lottery=<strong>Usted o un miembro de su grupo familiar gana 4,500 dólares o más en la lotería o el juego por dinero. </strong>
-legal-stuff.crr-lawsuit=También es posible que deba informar si usted es parte de una demanda iniciada recientemente o si ha sido condenado por un delito mayor relacionado con las drogas.
+legal-stuff.crr-ReportChanges=You may be required to report changes in: 
+legal-stuff.crr-employment=<strong>Employment</strong> - starting or stopping a job or business; a change in hours, earnings or expenses 
+legal-stuff.crr-income=<strong>Income</strong> - receipt or change in child support, Social Security, veteran benefits, unemployment insurance, inheritance or insurance benefits 
+legal-stuff.crr-property=<strong>Property</strong> - purchase, sale or transfer of a house, car or other items of value, or if you receive an inheritance or settlement 
+legal-stuff.crr-household=<strong>Household status</strong> - When a person dies or becomes disabled, moves in or out of your home or temporarily leaves; pregnancy; birth of a child 
+legal-stuff.crr-citizenship=<strong>Citizenship or immigration status </strong>
+legal-stuff.crr-address=<strong>Address</strong> 
+legal-stuff.crr-housing=<strong>Housing costs and/or rent subsidy </strong>
+legal-stuff.crr-utility=<strong>Utility costs </strong>
+legal-stuff.crr-custody=<strong>Parental custody or visitation rights </strong>
+legal-stuff.crr-marital=<strong>Marital status </strong>
+legal-stuff.crr-school=<strong>School attendance </strong> 
+legal-stuff.crr-insurance=<strong>Health insurance coverage and premiums. </strong>
+legal-stuff.crr-lottery=<strong>You or someone in your household wins $4,500 or more from the lottery or gambling. </strong> 
+legal-stuff.crr-lawsuit=You may also be required to report if you are party to a newly filed lawsuit, or if you have been convicted of a drug-related felony.
 
-legal-stuff.crr-ccaNote=<strong>Nota:</strong> Si está inscrito en el Programa de Asistencia para el Cuidado de menores y cambia de proveedor de cuidado de menores, debe notificarlo a su asistente social y al proveedor al menos 15 días antes de que entre en vigencia el cambio.
-legal-stuff.crr-questions=<strong>Si tiene preguntas o no está seguro</strong> de las reglas para reportar información, comuníquese con el trabajador de su caso. Si el trabajador de su caso no está disponible, déjele un mensaje para que luego se comunique con usted.
-legal-stuff.crr-consent=<strong>Su condado, nación tribal, estado o agencia federal</strong> puede verificar cualquier información que usted proporcione. Es posible que se requiera su consentimiento firmado para obtener algunos tipos de información. Si no lo da, es posible que no reciba asistencia.
-legal-stuff.crr-untrue=Si usted proporciona información que sabe que es falsa, si oculta información o si no la reporta como se exige, o luego se descubre que su información es falsa, puede que lo investiguen por fraude. Como consecuencia, puede que sea descalificado para recibir beneficios, que sea acusado de cometer un delito penal, o ambas cosas.
-legal-stuff.crr-qc=La Agencia de Control de Calidad Estatal o Federal podrá seleccionar su caso al azar para revisarlo. Ellos examinarán las declaraciones que usted entregó y comprobarán si se determinó correctamente su elegibilidad. También revisará para saber si hemos determinado su elegibilidad correctamente. La agencia estatal podrá buscar información de otras fuentes y le informará de cualquier contacto que trate de hacer. <strong>Si usted no colabora, sus beneficios pueden cesar.</strong>
+legal-stuff.crr-ccaNote=<strong>Note:</strong> If you are enrolled in Child Care Assistance and change child care providers, you must notify your child care worker and provider at least 15 days before the change goes into effect.  
+legal-stuff.crr-questions=<strong>If you have questions or are unsure</strong> about any reporting rules, contact your case worker. If your case worker is not available, leave a message so they can get back to you. 
+legal-stuff.crr-consent=<strong>Your county, Tribal Nation, state or federal agency</strong> may check any of the information you provide. Your signed consent may be needed to obtain some forms of information. If you don't give your signed consent, you might not receive assistance. 
+legal-stuff.crr-untrue=If you provide information you know is untrue, withhold information or do not report as required, or it's later discovered that your information is untrue, you may be investigated for fraud. This may result in you being disqualified from receiving benefits, charged with a criminal offense, or both. 
+legal-stuff.crr-qc=The state or federal quality control agency may randomly choose your case for review. They will review statements you provided and will check to see if your eligibility was determined correctly. The state may seek information from other sources and will inform you about any contact they intend to make. <strong>If you do not cooperate, your benefits may stop.</strong> 
 
-legal-stuff.crr-coopReq=Requisitos de cooperación:
-legal-stuff.crr-coopEmp=Si la agencia de su condado o nación tribal lo aprueba para el Minnesota Family Investment Program (Inversión Familiar de Minnesota) o el Diversionary Work Program (Asistencia para Trabajo Inmediato), usted deberá cooperar con todos los servicios de empleo obligatorios, a menos que esté exento de ello. Debe desarrollar y firmar un plan de empleo con el trabajador de su caso o se denegará su solicitud del Diversionary Work Program.
-legal-stuff.crr-coopChild=Debe cooperar con la manutención de menores a fin de recibir los beneficios del Minnesota Family Investment Program, del Diversionary Work Program y/o el Programa de Asistencia para Cuidado de Menores.
-legal-stuff.crr-nonCust=Si usted recibe manutención de menores directamente del padre sin custodia física, deberá reportarlo al trabajador de su caso.
+legal-stuff.crr-coopReq=Cooperation requirements: 
+legal-stuff.crr-coopEmp=If your county or Tribal Nation agency approves you for the Minnesota Family Investment Program or the Diversionary Work Program, you must cooperate with all required employment services, unless you are exempt. You must develop and sign an employment plan with your case worker or your Diversionary Work Program application will be denied. 
+legal-stuff.crr-coopChild=You must cooperate with child support to receive Minnesota Family Investment Program benefits, Diversionary Work Program benefits and/or Child Care Assistance Program. 
+legal-stuff.crr-nonCust=If you receive child support directly from a noncustodial parent, you must report it to your case worker. 
 
-legal-stuff.crr-SNAP=Para beneficios monetarios y del Supplemental Nutrition Assistance Program - SNAP (Programa de Asistencia Nutricional Suplementaria):
-legal-stuff.crr-EBTsign=<strong>Cada vez que utilice su tarjeta EBT o firme su cheque,</strong> declara que ha informado a su agencia del condado o de la nación tribal sobre cualquier cambio en su situación que pueda afectar a sus beneficios.
-legal-stuff.crr-EBTused=<strong>Cada vez que se utiliza su tarjeta EBT,</strong> se supone que ha recibido sus beneficios en efectivo o SNAP, a menos que haya informado de la pérdida o robo de su tarjeta a su agencia del condado o de la nación tribal.
+legal-stuff.crr-SNAP=For Cash and Supplemental Nutrition Assistance Program (SNAP) benefits: 
+legal-stuff.crr-EBTsign=<strong>Each time you use your EBT card or sign your check,</strong> you state that you have informed your county or Tribal Nation agency about any changes in your situation that may affect your benefits. 
+legal-stuff.crr-EBTused=<strong>Each time your EBT card is used,</strong> it's assumed you have received your cash or SNAP benefits, unless you reported your card lost or stolen to your county or Tribal Nation agency. 
 
-legal-stuff.crr-CCA=Para asistencia para cuidado de menores:
-legal-stuff.crr-cofee=<strong>Puede que le exijan entregar un pago compartido</strong> a su proveedor de cuidado de menores. Si no paga el cargo, se cancelará su asistencia para el cuidado de menores hasta que se paguen totalmente los cargos o se hayan hecho acuerdos de pago satisfactorios con el condado o la tribu y su proveedor de cuidado de menores.
-legal-stuff.crr-adCost=<strong>Es posible que deba pagar costos adicionales</strong> cuando su proveedor de cuidado menores cobra una tarifa superior a la tarifa máxima vigente en su condado o tribu.
-legal-stuff.crr-doc=<strong>Debe documentar</strong> la condición de inmigración o ciudadanía de los niños de su familia para los que está solicitando asistencia para cuidado de menores.
-legal-stuff.crr-authRepNote=<strong>NOTA:</strong> Si firma esta solicitud como representante autorizado de una persona que está solicitando o recibiendo asistencia, <strong>usted conviene en asumir todas las responsabilidades indicadas arriba en nombre de dicha persona.</strong>
+legal-stuff.crr-CCA=For child care assistance: 
+legal-stuff.crr-cofee=<strong>You may be required to pay a co-payment fee</strong> to your child care provider. If you do not pay the fee, your child care assistance will be terminated until fees are paid in full or satisfactory payment agreements have been made with your county or tribe and your child care provider. 
+legal-stuff.crr-adCost=<strong>You may be required to pay additional costs</strong> when your child care provider charges a rate that is more than the maximum rate in your county or tribe. 
+legal-stuff.crr-doc=<strong>You must document</strong> the immigration or citizenship status of the children in your family for whom you are applying for child care assistance.   
+legal-stuff.crr-authRepNote=<strong>Note:</strong> If you sign the application as an authorized representative of a person who is requesting or receiving assistance,<strong> you are agreeing to assume all of the responsibilities listed above on behalf of that person.</strong> 
 
-legal-stuff.crr-yourRights=Sus derechos
-legal-stuff.crr-rightsPrivacy=<strong>Usted tiene derecho a la privacidad.</strong> Su información privada, incluida su información de salud, está protegida por las leyes estatales y federales. Su asistente social le ha entregado una hoja informativa de Aviso de prácticas de privacidad (DHS-3979) que explica estos derechos. Usted tiene derecho a volver a solicitar en cualquier momento si sus beneficios cesan.
-legal-stuff.crr-rightsReapply=<strong>Usted tiene derecho a volver a solicitar</strong> en cualquier momento si sus beneficios cesan
-legal-stuff.crr-rightsCopy=<strong>Tiene derecho a recibir una copia</strong> impresa o electrónica de su solicitud del programa SNAP. Informe a su trabajador social si desea recibir una copia.
-legal-stuff.crr-rightsWhy=<strong>Si no hemos procesado su solicitud con prontitud,</strong> usted tiene el derecho de saber por qué:
-legal-stuff.crr-seven=Siete días para SNAP agilizado
-legal-stuff.crr-thirty=Treinta días para asistencia monetaria, SNAP y asistencia para cuidado de menores
-legal-stuff.crr-sixty=Sesenta días para asistencia monetaria asociada con discapacidad.
+legal-stuff.crr-yourRights=Your rights 
+legal-stuff.crr-rightsPrivacy=<strong>You have the right to privacy.</strong> Your private information, including your health information, is protected by state and federal laws. Your case worker has given you a Notice of Privacy Practices (DHS-3979) information sheet explaining these rights. 
+legal-stuff.crr-rightsReapply=<strong>You have the right to reapply</strong> at any time if your benefits stop. 
+legal-stuff.crr-rightsCopy=<strong>You have the right to receive</strong> a paper or electronic copy of your SNAP application. Let your case worker know if you would like to receive a copy. 
+legal-stuff.crr-rightsWhy=<strong>You have the right to know why,</strong> if we have not processed your application within: 
+legal-stuff.crr-seven=Seven days for Expedited SNAP 
+legal-stuff.crr-thirty=Thirty days for cash, SNAP and child care assistance 
+legal-stuff.crr-sixty=Sixty days for cash related to disability. 
 
-legal-stuff.crr-SNAPonly=<strong>Solo SNAP:</strong> Los límites de tiempo y otros requisitos que se aplican a la recepción de beneficios en efectivo no se aplican a la recepción de beneficios SNAP. Si los beneficios en efectivo terminan, aún puede calificar para los beneficios SNAP.
-legal-stuff.crr-rules=<strong>Usted tiene el derecho a conocer las reglas</strong> del programa en que se inscribe y que la agencia le diga cómo se calculó el monto de sus beneficios.
-legal-stuff.crr-choose=<strong>Tiene derecho a elegir</strong> dónde y con quién vivir.
-legal-stuff.crr-report=<strong>Tiene derecho a informar gastos</strong> como vivienda, luz, cuidado de menores, manutención de menores o gastos médicos. Estos gastos pueden afectar la cantidad de beneficios SNAP que recibe. No informar o verificar ciertos gastos indicados se considerará que su hogar no desea una deducción por los gastos no informados.
-legal-stuff.crr-legal=<strong>Acceso a servicios legales gratuitos.</strong> Para obtener servicios legales gratuitos, comuníquese con el trabajador de su caso.
-legal-stuff.crr-appeal=<strong>Derechos de apelación.</strong> Usted puede apelar si no está satisfecho con la medida tomada o cree que la agencia no actuó en su solicitud de asistencia. En casos de asistencia monetaria, para cuidado de menores y atención médica, puede presentar una apelación <strong>dentro del plazo de 30 días</strong> a partir de la fecha en que recibe la notificación; para ello, escriba a la agencia de su condado o nación tribal, o escriba directamente a la (Oficina Estatal de Apelaciones, Departamento de Servicios Humanos de Minnesota) State Appeals Office, Minnesota Department of Human Services, P.O. Box 64941, St. Paul, MN 55164-0941. (Si muestra causa suficiente por la que no puede apelar su cuidado de menores <strong>dentro de los 30 días,</strong> la agencia puede aceptar su apelación <strong>hasta 90 días</strong> después de la fecha en que reciba la notificación).
-legal-stuff.crr-stateAppeals=Para SNAP, puede apelar <strong>dentro de los 90 días</strong> escribiendo o llamando a la Oficina de Apelaciones del condado o del estado. Puede representarse a sí mismo en la audiencia o puede hacer que alguien (un abogado, pariente, amigo u otra persona) hable por usted.
-legal-stuff.crr-hearing=<strong>Si desea que su asistencia continúe hasta la audiencia,</strong> debe apelar antes de la fecha de la acción propuesta o dentro de los 10 días posteriores a la fecha en que se envió por correo la notificación de la agencia, lo que sea posterior. Pídale al asistente social de su condado o nación tribal que le explique cómo el momento de su apelación podría afectar su asistencia actual o futura
-
-legal-stuff.client-responsibilities-and-rights=Derechos y Responsabilidades del Cliente
-legal-stuff.changes=Cambios
-legal-stuff.if-you-have-ma-you-must-report=Si recibe asistencia médica, debe informar el cambio dentro de los diez días posteriores al cambio. Llame a su agencia tribal o a su condado para informar el cambio.Si recibe asistencia médica, debe informar el cambio dentro de los diez días posteriores al cambio. Llame a su agencia tribal o a su condado para informar el cambio. Si no lo informa, es posible que deba restituir al gobierno estatal o federal el dinero que haya recibido por beneficios cuando no cumplía los requisitos para recibirlos. Si no está seguro de si debe informar un cambio, llame y explique lo que le ocurre. Algunos ejemplos de los cambios que deben informarse son los siguientes:
-legal-stuff.start-to-get-or-receive-changes=Empezar a recibir o recibir cambios en las cantidades de otros ingresos, como el seguro social, otros ingresos de jubilación y de desempleo.
-legal-stuff.reviews=Revisiones
-legal-stuff.the-state-or-federal-agencys-health-care=Los auditores del programa de cuidado de salud de la agencia estatal o federal pueden evaluar su caso. Revisarán la información que usted nos dio y se asegurarán de que procesamos su caso correctamente. Le informarán si necesitan hacerle preguntas.
-legal-stuff.consent-for-sharing-of-medical-information=Consentimiento para divulgación de información médica
-legal-stuff.in-your-application-for-minnesota-health-care-program=En su solicitud de cobertura del Programa de Cuidado de Salud de Minnesota, usted ha dado su consentimiento escrito y firmado para que las siguientes agencias y personas compartan entre ellas su información médica solamente para los fines limitados que se detallan a continuación:
-legal-stuff.health-providers-including-health-plans=Proveedores de cuidado de salud, que incluyen los planes médicos, las compañías de seguros, los programas de salud de Minnesota, los defensores de los condados, los distritos escolares, los trabajadores de casos del condado o del estado y sus contratistas y subcontratistas para los siguientes fines:
-legal-stuff.to-determine-who-should-pay-for-your-health-care=determinar quién debe pagar por su cuidado de salud;
-legal-stuff.to-provide,-manage-and-coordinate-health-care-services=proporcionar, administrar y coordinar los servicios de cuidado de salud.
-legal-stuff.all-other-agencies-or-people-listed-on-this-notice-of-privacy=Todas las demás agencias o personas que aparecen en esta Notificación de prácticas de privacidad y en la Notificación de derechos y responsabilidades para este propósito:
-legal-stuff.to-administer-minnesota-health-care-programs=administrar los Programas de Cuidado de Salud de Minnesota, pagar por los servicios y llevar a cabo estudios e investigaciones.
-legal-stuff.this-consent-applies-to-medical-information=Este consentimiento se aplica a la información médica de sus hijos menores incluidos en esta solicitud. Puede suspender este consentimiento en cualquier momento si lo solicita por escrito. La notificación por escrito para suspender este consentimiento no afectará la información que la agencia ya ha proporcionado a otros.Este consentimiento es válido mientras usted esté inscrito en los Programas de Cuidado de Salud de Minnesota hasta por un año o durante más tiempo si la ley lo permite.
-legal-stuff.however-it-does-not-end-after-one-year=No obstante, no termina al cabo de un año para los expedientes que se proporcionen a los proveedores consultores o para el pago de sus facturas, las investigaciones de fraude o las evaluaciones y los estudios de la calidad del cuidado de la salud. La agencia o la persona que obtenga su información por medio de este consentimiento puede darle la información a otros. Si da por terminado este consentimiento, no puede inscribirse o seguir inscrito en los Programas de Cuidado de Salud de Minnesota.
-legal-stuff.other-health-care=Otro tipo de cuidado de salud
-legal-stuff.you-and-your-household-members-enrolled-in-ma-must=Usted y los miembros de su hogar inscritos en asistencia médica deben informarnos sobre todo otro seguro médico que tengan o que esté disponible para ustedes, incluso la cobertura patrocinada por empleadores, seguros médicos privados, seguros para cuidado médico a largo plazo y toda cobertura limitada de salud como la cobertura dental o de accidentes. Debe informarnos si su empleador le ofrece un seguro y si usted lo aceptó.
-legal-stuff.you-and-your-household-members-enrolled-in-ma-may=Es posible que usted y los miembros de su familia inscritos en asistencia médica deban aceptar y mantener una póliza de seguro médico cuando se determine que pueden pagar la póliza. Si tiene una buena razón para no hacerlo, puede pedir al estado que la apruebe. Si no nos proporciona información sobre su póliza de salud, podría no obtener cobertura.<br><br> También debe informarnos cuando cumple los requisitos para Medicare. La asistencia médica paga las primas de Medicare de algunas personas de bajos ingresos. Una vez que usted reúna los requisitos para Medicare Parte B y Parte D, la asistencia médica dejará de pagar los servicios que podrían ser cubiertos por un programa de Medicare.
-legal-stuff.ma-medical-support=Manutención médica de la asistencia médica
-legal-stuff.if-you-are-applying-for-yourself-and-your-children=Si está solicitando beneficios para usted y sus hijos y si usted no vive con el otro progenitor, la ley ordena que usted debe dar información al personal de manutención infantil si tanto usted como sus hijos reúnen los requisitos para recibir la asistencia médica. Esto incluye ayudar al estado a probar quién es el padre de sus hijos y hacer que el otro padre ayude a pagar los gastos médicos de sus hijos. Si no colabora con el personal de manutención infantil, sus hijos podrán continuar recibiendo cobertura, pero cesará su cobertura, a menos que esté embarazada.
-legal-stuff.you-have-the-right-to-speak-with-a-legal-aid=Tiene derecho a hablar con un grupo de asistencia jurídica o con un abogado privado si tiene preguntas concretas sobre cómo la recuperación de bienes y los embargos de MA pueden afectar a su circunstancias y a la planificación de su patrimonio. El Departamento de Servicios Humanos de Minnesota no puede proporcionarle asesoramiento jurídico. Para obtener más información, visite la página MA Estate Recovery en nuestro sitio web. 
-legal-stuff.http-mn.gov-dhs-ma-estate-recovery=Página de Recuperación de patrimonio de MA
-legal-stuff.on-our-website=en nuestro sitio web.
-legal-stuff.you-have-the-right-to-ask-for-a-hearing=Usted tiene el derecho de solicitar una audiencia
-legal-stuff.if-you-feel-your-health-care-eligibility-or-benefits=Si considera que su cumplimiento de los requisitos para recibir cuidado de salud o los beneficios son incorrectos o que su solicitud no ha sido procesada de manera correcta, podrá solicitar una audiencia de apelación. Al solicitar una audiencia de apelación, usted solicitará una evaluación imparcial de su caso. Puede representarse así¬ mismo o utilizar los servicios de un abogado, defensor, representante autorizado, pariente, amigo u otra persona. Encontrará instrucciones específicas sobre las apelaciones de todas las notificaciones de cumplimiento de los requisitos que usted reciba. Obtenga más información sobre el proceso de apelación y cómo solicitar una audiencia en
-legal-stuff.www-dhs-state-mn-us-appeals-faqs=PÃ¡gina de Appeals FAQ
-legal-stuff.you-can-complete-and-submit-an-appeal-request=En nuestra página web. Usted puede completar y enviar una solicitud de apelación en línea completando el 
-legal-stuff.https-edocs-dhs-state-mn-us-lfserver-Public-DHS-0033-ENG=el formulario Appeal to State Agency (DHS-0033).
-legal-stuff.you-can-also-print-the-form-that=También puede imprimir el formulario que está disponible en la dirección mencionada y enviar el formulario completado por fax al 651-431-7523 o por correo a esta dirección:
-legal-stuff.minnesota-department-of-human-services=Minnesota Department of Human Services
-legal-stuff.appeals-division=Appeals Division
-legal-stuff.po-box-64941=PO Box 64941
+legal-stuff.crr-SNAPonly=<strong>SNAP only:</strong> Time limits and other requirements that apply to the receipt of cash benefits do not apply to the receipt of SNAP benefits. If cash benefits end, you may still qualify for SNAP benefits. 
+legal-stuff.crr-rules=<strong>You have the right to know the rules</strong> of the program you are applying for and for the agency to tell you how your benefit amount was figured. 
+legal-stuff.crr-choose=<strong>You have the right to choose</strong> where and with whom you live. 
+legal-stuff.crr-report=<strong>You have the right to report expenses</strong> such as shelter, utilities, child care, child support or medical costs. These expenses may affect the amount of SNAP benefits that you receive. Failure to report or verify certain expenses listed will be a statement by your household that you do not want a deduction for the unreported expenses. 
+legal-stuff.crr-legal=<strong>You have the right to access free legal services.</strong> Contact your case worker for information on free legal services. 
+legal-stuff.crr-appeal=<strong>You have the right to appeal.</strong> If you are unhappy with the action taken or feel the agency did not act on your request for assistance, you may appeal. For cash, child care assistance and health care, you may appeal <strong>within 30 days</strong> from the date you receive the notice by writing to the county or Tribal Nation agency, or directly to the State Appeals Office at the Minnesota Department of Human Services, PO Box 64941, St. Paul, MN 55164-0941. (If you show good cause for not appealing your cash and health care <strong>within 30 days,</strong> the agency can accept your appeal <strong>for up to 90 days</strong> from the date you receive the notice.)  
+legal-stuff.crr-stateAppeals=For SNAP, you may appeal <strong>within 90 days</strong> by writing or calling the county or the State Appeals Office. You may represent yourself at the hearing, or you may have someone (an attorney, relative, friend or another person) speak for you.  
+legal-stuff.crr-hearing=<strong>If you wish for your assistance to continue until the hearing,</strong> you must appeal before the date of the proposed action or within 10 days after the date the agency notice was mailed, whichever is later. Ask your county or Tribal Nation case worker to explain how the timing of your appeal could affect your present or future assistance. 
+  
+legal-stuff.client-responsibilities-and-rights=Client responsibilities and rights
+legal-stuff.changes=Changes
+legal-stuff.if-you-have-ma-you-must-report=If you have MA, you must report a change within 10 days of the change happening. Call your county or tribal agency to report the change. If you do not report changes, you may have to pay money back to the state or federal government for benefits that you received but were not eligible for. If you are not sure whether to report a change, call and explain what is happening. Examples of changes you need to report include the following: 
+legal-stuff.start-to-get-or-receive-changes=Start to get, or receive changes in the amount of, other income like Social Security, other retirement income and unemployment 
+legal-stuff.reviews=Reviews
+legal-stuff.the-state-or-federal-agencys-health-care=The state or federal agency's health care program auditors may look at your case. They will review the information you gave us and check to make sure we processed your case correctly. They will let you know if they need to ask you questions. 
+legal-stuff.consent-for-sharing-of-medical-information=Consent for Sharing of Medical Information 
+legal-stuff.in-your-application-for-minnesota-health-care-program=In your application for Minnesota Health Care Program coverage, you have given your written and signed consent to the following agencies and people to share between them medical information about you only for the limited purposes indicated: 
+legal-stuff.health-providers-including-health-plans=Health providers, including health plans, insurance agencies, Minnesota Health Care Programs, county advocates, school districts, your county or state case workers, and their contractors and subcontractors, for these purposes: 
+legal-stuff.to-determine-who-should-pay-for-your-health-care=To determine who should pay for your health care 
+legal-stuff.to-provide,-manage-and-coordinate-health-care-services=To provide, manage and coordinate health care services 
+legal-stuff.all-other-agencies-or-people-listed-on-this-notice-of-privacy=All other agencies or people listed on this Notice of Privacy Practices and Notice of Rights and Responsibilities, for this purpose: 
+legal-stuff.to-administer-minnesota-health-care-programs=To administer Minnesota Health Care Programs, pay for services, and conduct research and investigations 
+legal-stuff.this-consent-applies-to-medical-information=This consent applies to medical information about your minor children you applied for on this application. You can stop this consent at any time by asking in writing for it to end. The written notice to stop this consent will not affect information the agency has already given to others. This consent is good while you are enrolled in Minnesota Health Care Programs, up to one year or longer if the law permits. 
+legal-stuff.however-it-does-not-end-after-one-year=However, it does not end after one year for records given to consulting providers or for payment of your bills, fraud investigations or quality-of-care review and studies. An agency or person who gets your information through this consent could give the information to others. If you end this consent, you cannot enroll or stay enrolled in Minnesota Health Care Programs. 
+legal-stuff.other-health-care=Other Health Care 
+legal-stuff.you-and-your-household-members-enrolled-in-ma-must=You and your household members enrolled in MA must tell us about any other health insurance that you have or that is available to you, including employer-sponsored coverage, private health insurance, long-term-care insurance, and any limited health coverage, such as dental or accident coverage. You must tell us whether your employer offers insurance and whether you accepted it. 
+legal-stuff.you-and-your-household-members-enrolled-in-ma-may=You and your household members enrolled in MA may need to accept and keep a health insurance policy when the policy is found to be cost effective. If you have a good reason for not doing that, you may ask the state to approve the reason. If you do not give us information about your health insurance policy, you may not get coverage. You must also tell us when you become eligible for Medicare. MA pays for the Medicare premiums of some low income people. Once you are eligible for Medicare Part B and Part D, MA will no longer pay for services that could be covered by a Medicare program. 
+legal-stuff.ma-medical-support=MA Medical Support 
+legal-stuff.if-you-are-applying-for-yourself-and-your-children=If you are applying for yourself and your children and you do not live with the other parent, the law says you may have to give information to child support staff if both you and your child are eligible for MA. This includes helping the state prove who the father of your children is and helping the state to get the other parent to help pay the children's medical expenses. If you do not help child support staff, your children will still get coverage, but your coverage will end, unless you are pregnant. If you are afraid the other parent may cause harm to you or your child, you can give your county or tribal agency proof to support your fears. The agency will review your proof and tell you whether you still must give information to child support staff. 
+legal-stuff.you-have-the-right-to-speak-with-a-legal-aid=You have the right to speak with a legal-aid group or a private attorney if you have specific questions about how MA estate recovery and liens may affect your circumstance and estate planning. The Minnesota Department of Human Services cannot provide you with legal advice. For more information, visit the 
+legal-stuff.http-mn.gov-dhs-ma-estate-recovery=MA Estate Recovery page 
+legal-stuff.on-our-website=on our website.
+legal-stuff.you-have-the-right-to-ask-for-a-hearing=You Have the Right to Ask for a Hearing 
+legal-stuff.if-you-feel-your-health-care-eligibility-or-benefits=If you feel your health care eligibility or benefits are wrong or your application was not processed correctly, you may ask for an appeal hearing. By requesting an appeal hearing, you are requesting a fair review of your case. You can represent yourself or use an attorney, advocate, authorized representative, relative, friend or other person. You will find specific appeal instructions on all eligibility notices that you receive. Learn more about the appeals process and how to ask for a hearing on the  
+legal-stuff.www-dhs-state-mn-us-appeals-faqs=Appeals FAQ page 
+legal-stuff.you-can-complete-and-submit-an-appeal-request=on our website. You can complete and submit an appeal request online by filling out the 
+legal-stuff.https-edocs-dhs-state-mn-us-lfserver-Public-DHS-0033-ENG=Appeal to State Agency Form (DHS-0033).  
+legal-stuff.you-can-also-print-the-form-that=You can also print the form that is available at the address above and submit the completed form by fax to 651-431-7523 or by mail to this address: 
+legal-stuff.minnesota-department-of-human-services=Minnesota Department of Human Services 
+legal-stuff.appeals-division=Appeals Division 
+legal-stuff.po-box-64941=PO Box 64941 
 legal-stuff.st-paul-mn-55164-0941=St. Paul, MN 55164-0941
-legal-stuff.immigration=Inmigración
-legal-stuff.immigration-information-you-give-to-us-is-private=Toda la información de inmigración que usted nos proporciona es confidencial. La usamos para ver si puede recibir la cobertura. Compartimos su información solo cuando la ley lo permite o lo requiere, como cuando se debe verificar la identidad. En la mayoría de los casos, su condición de inmigración no se verá afectada por solicitar cobertura, a menos que solicite el pago de servicios de cuidado médico a largo plazo. Usted no tiene que darnos su información de inmigración si es una mujer embarazada que vive en los Estados Unidos sin el conocimiento ni la aprobación de los Estados Unidos de los Servicios de Ciudadanía e Inmigración (USCIS, por sus siglas en inglés). Tampoco tiene que darnos su información de inmigración si usted:
-legal-stuff.applying-for-emergency-medical-care-only=está solicitando cuidado médico de emergencia solamente;
-legal-stuff.helping-someone-else-apply=está ayudando a otra persona con su solicitud;
-legal-stuff.not-applying-for-yourself=no solicita la cobertura para sí mismo.
-legal-stuff.genetic-information=Información genética
-legal-stuff.dhs-does-not-collect-maintain-or-use-genetic=El Departamento de Servicios Humanos (DHS, por sus siglas en inglés) no recopila, conserva ni usa la información genética para fines del cumplimiento de los requisitos.
-legal-stuff.record-retention=Conservación de registros
-legal-stuff.information-provided-in-an-application-for-coverage=La información proporcionada en una solicitud de cobertura a través de DHS está sujeta a la Ley de Reclamos Falsos y puede conservarse hasta 10 años. DHS sigue los programas de conservación de registros para las agencias del estado y para el Departamento de Servicios Humanos y mantiene los datos de acuerdo con las leyes estatales y federales. Después del período de tiempo pertinente, DHS destruye los datos de una forma que impide la identificación del contenido; esto incluye la destrucción de documentos en papel y la eliminación permanente de los datos electrónicos para impedir totalmente su recuperación.
-legal-stuff.notice-of-privacy-practices=Aviso de Prácticas de Privacidad
-legal-stuff.changes-citizenship-or-lawful-presence-status=cambia su condición de ciudadanía o presencia legal;
+legal-stuff.immigration=Immigration
+legal-stuff.immigration-information-you-give-to-us-is-private=Immigration information you give to us is private. We use it to see whether you can get coverage. We share it only when the law allows it or requires it, such as to verify identity. In most cases, applying will not affect your immigration status unless you are applying for payment of long-term-care services. You do not have to give us your immigration information if you are a pregnant woman living in the United States without the knowledge or approval of the United States Citizenship and Immigration Services (USCIS). You also do not have to give us your immigration information if you are: 
+legal-stuff.applying-for-emergency-medical-care-only=Applying for emergency medical care only 
+legal-stuff.helping-someone-else-apply=Helping someone else apply 
+legal-stuff.not-applying-for-yourself=Not applying for yourself
+legal-stuff.genetic-information=Genetic Information 
+legal-stuff.dhs-does-not-collect-maintain-or-use-genetic=DHS does not collect, maintain or use genetic information for purposes of eligibility. 
+legal-stuff.record-retention=Record Retention 
+legal-stuff.information-provided-in-an-application-for-coverage=Information provided in an application for coverage through DHS is subject to the False Claims Act and may be kept for up to 10 years. DHS follows the general records retention schedules for state agencies and for the Department of Human Services and maintains data according to state and federal law. After the appropriate time period, DHS destroys the data in a way that prevents their contents from being determined, including by shredding paper files and permanently removing electronic data so as to prevent recovery. 
+legal-stuff.notice-of-privacy-practices=Notice of Privacy Practices
+legal-stuff.changes-citizenship-or-lawful-presence-status=Changes citizenship or lawful presence status
 
-legal-stuff.notice-of-privacy-practices=Aviso de Prácticas de Privacidad
-legal-stuff.nopp-date=(Fecha de vigencia: noviembre de 2016)
-legal-stuff.nopp-how-private=<strong>Esta notificación describe cómo la información privada acerca de usted puede usarse y revelarse y cómo usted puede obtener esta información. Por favor examínela atentamente.</strong>
-legal-stuff.nopp-why-ask=¿Por qué pedimos esta información?
-legal-stuff.nopp-to-determine=A fin de determinar si podemos ayudarlo y cómo hacerlo, recogemos información:
-legal-stuff.nopp-similar-name=Para distinguirlo de otras personas con el mismo nombre o un nombre similar
-legal-stuff.nopp-to-decide= Para decidir para qué servicios califica
-legal-stuff.nopp-medical=Para ayudarle a obtener servicios médicos, de salud mental, financieros o sociales, y decidir si usted puede pagar algunos servicios
-legal-stuff.nopp-protective=Para decidir si usted o su familia necesita servicios de protección
-legal-stuff.nopp-homecare=Para decidir si usted o sus hijos necesitan cuidado fuera del hogar o en el hogar
-legal-stuff.nopp-accuracy=Para investigar la exactitud de la información en su solicitud
-legal-stuff.nopp-additional= Después de que comencemos a prestarle servicios o apoyo, es posible que recojamos información adicional:
-legal-stuff.nopp-reports=Para preparar informes, llevar a cabo investigaciones, realizar auditorías y evaluar nuestros programas
-legal-stuff.nopp-lie=Para investigar informes de personas que pueden mentir sobre la ayuda que necesitan
-legal-stuff.nopp-insurance=Para cobrar dinero de otras agencias, como compañías de seguros, si estas deben pagar por su cuidado
-legal-stuff.nopp-state=Para cobrar dinero del gobierno estatal o federal por la ayuda que le brindemos a usted
-legal-stuff.nopp-circumstances=Cuando cambian las circunstancias suyas o de su familia, y usted tiene la obligación de informar el cambio (consulte <a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-4163-SPA" target="\\_blank">los Derechos y Responsabilidades del Cliente – DHS-4163</a>)
+legal-stuff.notice-of-privacy-practices=Notice of Privacy Practices
+legal-stuff.nopp-date=(Effective Date: November 2016)
+legal-stuff.nopp-how-private=<strong>This notice tells how private information about you may be used and disclosed and how you can get this information. Please review it carefully.</strong>
+legal-stuff.nopp-why-ask=Why do we ask for this information?
+legal-stuff.nopp-to-determine=In order to determine whether and how we can help you, we collect information:
+legal-stuff.nopp-similar-name=To tell you apart from other people with the same or similar name
+legal-stuff.nopp-to-decide=To decide what you are eligible for
+legal-stuff.nopp-medical=To help you get medical, mental health, financial or social services and decide if you can pay for some services
+legal-stuff.nopp-protective=To decide if you or your family need protective services
+legal-stuff.nopp-homecare=To decide about out-of-home care and in-home care for you or your children
+legal-stuff.nopp-accuracy=To investigate the accuracy of the information in your application
+legal-stuff.nopp-additional=After we have begun to provide services or support to you, we may collect additional information:
+legal-stuff.nopp-reports=To make reports, do research, do audits, and evaluate our programs
+legal-stuff.nopp-lie=To investigate reports of people who may lie about the help they need
+legal-stuff.nopp-insurance=To collect money from other agencies, like insurance companies, if they should pay for your care
+legal-stuff.nopp-state=To collect money from the state or federal government for help we give you.
+legal-stuff.nopp-circumstances=When your or your family's circumstances change and you are required to report the change (see <a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-4163-ENG" target="_blank">Client Responsibilities and Rights DHS-4163</a>)
 
-legal-stuff.nopp-ask-ssn=¿Por qué le pedimos su número de Social Security (Seguro Social)?
-legal-stuff.nopp-ssn-need=Necesitamos su número de Seguro Social para proporcionarle asistencia médica, algunos tipos de asistencia financiera o servicios de cumplimiento de manutención de menores (42 CFR 435.910 [2006]; Minn. Stat. 256D.03, subd.3(h); Minn. Stat. 256L.04, subd. 1a; 45 CFR 205.52 [2001]; 42 USC 666; 45 CFR 303.30 [2001]). También necesitamos su número de Número de Seguro Social para verificar su identidad y prevenir la duplicación de beneficios estatales y federales. Además, su número de Número de Seguro Social se usa para comparar datos por computadora con agencias colaborativas, no lucrativas y privadas a fin de verificar los ingresos, recursos y otra información que puedan afectar su elegibilidad y/o sus beneficios.
-legal-stuff.nopp-give-ssn=Usted no tiene que darnos el número de Seguro Social:
-legal-stuff.nopp-ssn-coverage=De las personas en su casa que no están solicitando cobertura
-legal-stuff.nopp-ssn-religious=Si tiene objeciones religiosas
-legal-stuff.nopp-ssn-citizen=Si no es ciudadano de los Estados Unidos y sólo está solicitando Emergency Medical Assistance (Asistencia Médica de Emergencia)
-legal-stuff.nopp-ssn-country=Si usted es de otro país, está en los Estados Unidos temporalmente y no tiene permiso de los Servicios de Ciudadanía e Inmigración de los Estados Unidos (U.S. Citizenship and Immigration Services) para residir en los Estados Unidos permanentemente.
-legal-stuff.nopp-ssn-immigration=Si vive en los Estados Unidos sin el conocimiento o la aprobación de los Servicios de Ciudadanía e Inmigración de los Estados Unidos (U.S. Citizenship and Immigration Services).
+legal-stuff.nopp-ask-ssn=Why do we ask you for your Social Security number?
+legal-stuff.nopp-ssn-need=We need your Social Security number to give you medical assistance, some kinds of financial help, or child support enforcement services (42 CFR 435.910 [2006]; Minn. Stat. 256D.03, subd.3(h); Minn. Stat.256L.04, subd. 1a; 45 CFR 205.52 [2001]; 42 USC 666; 45 CFR 303.30 [2001]). We also need your Social Security Number to verify identity and prevent duplication of state and federal benefits. Additionally, your Social Security Number is used to conduct computer data matches with collaborative, nonprofit and private agencies to verify income, resources, or other information that may affect your eligibility and/or benefits.
+legal-stuff.nopp-give-ssn=You do not have to give us the Social Security Number:
+legal-stuff.nopp-ssn-coverage=For persons in your home who are not applying for coverage
+legal-stuff.nopp-ssn-religious=If you have religious objections
+legal-stuff.nopp-ssn-citizen=If you are not a United States citizen and are applying for Emergency Medical Assistance only
+legal-stuff.nopp-ssn-country=If you are from another country, in the United States on a temporary basis and do not have permission from the United States Citizenship and Immigration Services to live in the United States permanently
+legal-stuff.nopp-ssn-immigration=If you are living in the United States without the knowledge or approval of the U.S. Citizenship and Immigration Services.
 
-legal-stuff.nopp-answer=¿Tiene que responder las preguntas que le hacemos?
-legal-stuff.nopp-personalInfo=Usted no tiene que darnos su información personal. Sin la información, es posible que no podamos ayudarle. Si nos da información incorrecta a propósito, podrá ser investigado y acusado de fraude.
+legal-stuff.nopp-answer=Do you have to answer the questions we ask?
+legal-stuff.nopp-personalInfo=You do not have to give us your personal information. Without the information, we may not be able to help you. If you give us wrong information on purpose, you can be investigated and charged with fraud.
 
-legal-stuff.nopp-share-with=¿Con quiénes podemos compartir la información?
-legal-stuff.nopp-share-law=Sólo compartiremos su información según se necesite y se nos permita o se requiera por ley. Podemos compartir su información con las siguientes agencias o personas que necesitan la información para llevar a cabo su trabajo:
-legal-stuff.nopp-share-emp=Empleados o voluntarios de otras agencias estatales, del condado, locales, federales, colaborativas, no lucrativas y privadas
-legal-stuff.nopp-share-audit=Investigadores, auditores, analistas y otros que realizan evaluaciones y estudios sobre la calidad del cuidado de la salud, o inician enjuiciamientos o acciones legales con respecto a la administración de los programas de servicios humanos
-legal-stuff.nopp-share-court=Funcionarios judiciales, fiscal del condado, fiscal general, otros funcionarios del orden público, funcionarios encargados de la manutención de menores, e investigadores de protección de menores y de fraude
-legal-stuff.nopp-share-human=Oficinas de servicios humanos, incluyendo las oficinas para cumplimiento de manutención de menores
-legal-stuff.nopp-share-gov=Agencias gubernamentales en otros estados que administran programas de beneficios públicos
-legal-stuff.nopp-share-providers=Proveedores de cuidado de salud, incluyendo agencias de salud mental e instalaciones de tratamiento para drogas y alcohol
-legal-stuff.nopp-share-insurers=Compañías de seguros de cuidado de salud, agencias de cuidado de salud, organizaciones de cuidado administrado y otros que pagan por su cuidado
-legal-stuff.nopp-share-pa=Guardianes, conservadores o personas con poder de representación
-legal-stuff.nopp-share-coroners=Pesquisidores e investigadores médicos, si usted fallece y ellos investigan su fallecimiento
-legal-stuff.nopp-share-credit=Oficinas de crédito, acreedores o agencias para cobros si usted no paga los honorarios que nos adeuda por los servicios
-legal-stuff.nopp-share-anyone-law=Cualquier otro a quien la ley dice que debemos o podemos proporcionar la información.
+legal-stuff.nopp-share-with=With whom may we share information?
+legal-stuff.nopp-share-law=We will only share information about you as needed and as allowed or required by law. We may share your information with the following agencies or persons who need the information to do their jobs:
+legal-stuff.nopp-share-emp=Employees or volunteers with other state, county, local, federal, collaborative, nonprofit and private agencies
+legal-stuff.nopp-share-audit=Researchers, auditors, investigators, and others who do quality of care reviews and studies or commence prosecutions or legal actions related to managing the human services programs.
+legal-stuff.nopp-share-court=Court officials, county attorney, attorney general, other law enforcement officials, child support officials, and child protection and fraud investigators
+legal-stuff.nopp-share-human=Human services offices, including child support enforcement offices
+legal-stuff.nopp-share-gov=Governmental agencies in other states administering public benefits programs
+legal-stuff.nopp-share-providers=Health care providers, including mental health agencies and drug and alcohol treatment facilities
+legal-stuff.nopp-share-insurers=Health care insurers, health care agencies, managed care organizations and others who pay for your care
+legal-stuff.nopp-share-pa=Guardians, conservators or persons with power of attorney
+legal-stuff.nopp-share-coroners=Coroners and medical investigators if you die and they investigate your death
+legal-stuff.nopp-share-credit=Credit bureaus, creditors or collection agencies if you do not pay fees you owe to us for services
+legal-stuff.nopp-share-anyone-law=Anyone else to whom the law says we must or can give the information. 
 
-legal-stuff.nopp-rights=¿Cuáles son sus derechos respecto a la información que tenemos acerca de usted?
-legal-stuff.nopp-permission=Usted y las personas a quienes ha dado permiso pueden ver y copiar la información médica u otra información privada que tenemos acerca de usted. Es posible que usted tenga que pagar las copias.
-legal-stuff.nopp-question=Usted puede cuestionar si la información que tenemos acerca de usted es correcta. Deberá enviar sus preocupaciones por escrito. Díganos por qué la información es incorrecta o incompleta. Envíe su propia explicación de la información con la que no está de acuerdo. Adjuntaremos su explicación cada vez que su información se comparta con otra agencia.
-legal-stuff.nopp-askWriting=Usted tiene el derecho de pedirnos por escrito que compartamos la información médica con usted de cierta manera o en cierto lugar. Por ejemplo, podría pedirnos que enviemos la información médica a su dirección de trabajo en vez de a su dirección de la casa. Si consideramos que su solicitud es razonable, la otorgaremos.
-legal-stuff.nopp-limit=Usted tiene el derecho de pedirnos que limitemos o restrinjamos la manera en que usamos o divulgamos su información, pero no se nos requiere que estemos de acuerdo con esta solicitud.
-legal-stuff.nopp-explain=Si no entiende la información, pida a su trabajador que se la explique. Puede pedir otra copia de esta notificación al Departamento de Servicios Humanos de Minnesota.
+legal-stuff.nopp-rights=What are your rights regarding the information we have about you?
+legal-stuff.nopp-permission=You and people you have given permission to may see and copy private information we have about you. You may have to pay for the copies.
+legal-stuff.nopp-question=You may question if the information we have about you is correct. Send your concerns in writing. Tell us why the information is wrong or not complete. Send your own explanation of the information you do not agree with. We will attach your explanation any time information is shared with another agency.
+legal-stuff.nopp-askWriting=You have the right to ask us in writing to share information with you in a certain way or in a certain place. For example, you may ask us to send health information to your work address instead of your home address. If we find that your request is reasonable, we will grant it.
+legal-stuff.nopp-limit=You have the right to ask us to limit or restrict the way that we use or disclose your information, but we are not required to agree to this request.
+legal-stuff.nopp-explain=If you do not understand the information, ask your worker to explain it to you. You can ask the Minnesota Department of Human Services for another copy of this notice.
 
-legal-stuff.nopp-ourResponsibilities=¿Cuáles son nuestras responsabilidades?
-legal-stuff.nopp-protect=Debemos proteger la privacidad de su información médica y otra información privada de acuerdo con los términos de esta notificación.
-legal-stuff.nopp-notuse=No podemos usar su información por motivos que no sean los que se indican en este formulario, ni compartir su información con personas y agencias que no sean las que se indican en este formulario, a menos que usted nos diga por escrito que podemos hacerlo.
-legal-stuff.nopp-follow=Debemos cumplir con las condiciones de esta notificación, pero podemos cambiar nuestra política sobre la privacidad debido a cambios en las leyes de privacidad. Colocaremos los cambios a nuestras reglas de privacidad en nuestro sitio web en: <a style="overflow-wrap:anywhere" href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-3979-SPA" target="_blank">https://edocs.dhs.state.mn.us/lfserver/Public/DHS-3979-SPA </a>
+legal-stuff.nopp-ourResponsibilities=What are our responsibilities?
+legal-stuff.nopp-protect=We must protect the privacy of your private information according to the terms of this notice.
+legal-stuff.nopp-notuse=We may not use your information for reasons other than the reasons listed on this form or share your information with individuals and agencies other than those listed on this form unless you tell us in writing that we can.
+legal-stuff.nopp-follow=We must follow the terms of this notice, but we may change our privacy policy because privacy laws change. We will put changes to our privacy rules on our website at: <a style="overflow-wrap:anywhere" href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-3979-ENG" target="_blank">https://edocs.dhs.state.mn.us/lfserver/Public/DHS-3979-ENG</a>
 
-legal-stuff.nopp-rightChildren=¿Qué derechos de privacidad tienen los menores?
-legal-stuff.nopp-under18=Si usted es menor de 18 años de edad cuando no se requiere el consentimiento de los padres para tratamiento médico, la información no se mostrará a los padres a menos que el proveedor de cuidado de salud crea que no compartir la información pondría en riesgo su salud. Los padres pueden ver otra información suya y permitir que otros vean esta información, a menos que usted haya pedido que esta información no se comparta con sus padres. Usted debe pedir esto por escrito y decir qué información no desea compartir y por qué. Si la agencia está de acuerdo de que compartir la información no es para su provecho, la información no se compartirá con sus padres. Si la agencia no está de acuerdo, la información puede compartirse con sus padres si ellos la solicitan.
+legal-stuff.nopp-rightChildren=What privacy rights do children have?
+legal-stuff.nopp-under18=If you are under 18, when parental consent for medical treatment is not required, information will not be shown to parents unless the health care provider believes not sharing the information would risk your health. Parents may see other information about you and let others see this information, unless you have asked that this information not be shared with your parents. You must ask for this in writing and say what information you do not want to share and why. If the agency agrees that sharing the information is not in your best interest, the information will not be shared with your parents. If the agency does not agree, the information may be shared with your parents if they ask for it.
 
-legal-stuff.nopp-violated=¿Qué puede hacer si cree que sus derechos de privacidad han sido violados?
-legal-stuff.nopp-dhs=Si usted cree que el Departamento de Servicios Humanos del Estado de Minnesota ha violado sus derechos de privacidad, puede enviar una queja escrita al Departamento de Salud y Servicios Humanos de los EE.UU. a la siguiente dirección: (Departamento de Servicios Humanos de Minnesota) (Atención: Funcionario de Privacidad) Minnesota Department of Human Services Attn: Privacy Official PO Box 64998 St. Paul, MN 55164-0998
+legal-stuff.nopp-violated=What if you believe your privacy rights have been violated?
+legal-stuff.nopp-dhs=If you think that the Minnesota Department of Human Services has violated your privacy rights, you may send a written complaint to the U.S. Department of Health and Human Services to the address below: Minnesota Department of Human Services Attn: Privacy Official PO Box 64998 St. Paul, MN 55164-0998
 
-legal-stuff.effective-date=(Fecha de vigencia: noviembre de 2018)
-legal-stuff.this-part-of-the-notice-describes-how-private=Esta parte de la notificación describe cómo puede utilizarse y divulgarse la información privada o confidencial sobre usted. Revísela cuidadosamente.
-legal-stuff.why-do-we-ask-for-this-information=¿Por qué pedimos esta información?
-legal-stuff.to-tell-you-apart-from-other-people=Para diferenciarlo de otras personas que tienen el mismo nombre o un nombre similar.
-legal-stuff.to-decide-what-you-are-eligible-for=Para decidir para qué servicios califica.
-legal-stuff.to-help-you-get-medical-and-mental-health=Para ayudarlo a obtener servicios médicos y de salud mental y decidir si puede pagar algunos de los servicios.
-legal-stuff.to-decide-whether-you-or-your-family-need=Para decidir si usted o su familia necesitan servicios de protección.
-legal-stuff.to-decide-about-out-of-home-care-and-in-home=Para decidir si usted o sus hijos necesitan cuidado fuera del hogar o en el hogar.
-legal-stuff.to-make-reports-do-research-do-audits=Para preparar informes, realizar investigaciones, efectuar auditorías y evaluar nuestros programas.
-legal-stuff.to-investigate-reports-of-people-that-may-lie=Para investigar las denuncias de personas que pueden mentir sobre la ayuda que necesitan o para obtener asistencia a la cual no tienen derecho.
-legal-stuff.to-collect-money-from-other-agencies=Para cobrar dinero de otras agencias, tales como compañías de seguros, si estas deben pagar por su cuidado.
-legal-stuff.to-collect-money-from-the-state-or-federal-government=Para cobrar dinero del gobierno estatal o federal por la ayuda que le proporcionamos.
-legal-stuff.why-do-we-ask-you-for-your-social-security-number=¿Por qué le pedimos su número de seguro social?
-legal-stuff.we-need-your-social-security-number-to-give-you-medical-assistance=Necesitamos su número de seguro social (SSN, por sus siglas en inglés) para proporcionarle asistencia médica, algunos tipos de asistencia financiera o servicios de cumplimiento de manutención infantil (42 USC 666; Minn. Stat. 256 L.04, subd. 1a; 42 CFR 435.910).
-legal-stuff.we-also-need-your-SSN-to-verify-identity=También necesitamos su número de seguro social para verificar su identidad y prevenir la duplicación de beneficios estatales y federales. Además, su número de seguro social se usa para comparar datos por computadora con agencias colaborativas, no lucrativas y privadas a fin de verificar los ingresos, recursos y otra información que puedan afectar el cumplimiento de los requisitos o sus beneficios.
-legal-stuff.you-do-not-have-to-give-us-the-SSN-for-people=No tiene que informarnos el número de seguro social de las personas de su hogar que no están solicitando la cobertura. Tampoco tiene que darnos su número de seguro social:
-legal-stuff.if-you-have-religious-objections=Si tiene objeciones religiosas
-legal-stuff.if-you-are-not-a-U-S-citizen-and-are-applying=Si no es ciudadano de los Estados Unidos y solo está solicitando asistencia médica de emergencia.
-legal-stuff.if-you-are-from-another-country-are-in-the-U-S=Si es de otro país, está en los Estados Unidos temporalmente y no tiene permiso de los Servicios de Ciudadanía e Inmigración de los EE. UU. (U.S. Citizenship and Immigration Services, USCIS) para vivir permanentemente en los EE. UU.
-legal-stuff.if-you-are-living-in-the-U-S-without-the-knowledge-or-approval-of-the-USCIS=Si vive en los EE. UU. sin el conocimiento o la aprobación de USCIS.
-legal-stuff.why-do-we-ask-you-for-your-financial-information=¿Por qué le pedimos información financiera?
-legal-stuff.we-use-this-information-only-for-the-purposes-authorized-by-law=Utilizamos esta información únicamente para los fines autorizados por la ley, tales como verificar si cumple los requisitos o determinar el importe de una prima. No compartiremos esta información con ninguna otra persona o entidad.
-legal-stuff.do-you-have-to-answer-the-questions-we-ask=¿Tiene que responder las preguntas que hacemos?
-legal-stuff.you-do-not-have-to-give-us-your-personal-information=Usted no tiene que darnos información personal. Sin la información, es posible que no podamos ayudarlo. Si nos da información incorrecta a propósito, podrá ser investigado y acusado de fraude.
-legal-stuff.with-whom-may-we-share-information=¿Con quiénes podemos compartir la información?
-legal-stuff.we-will-share-information-about-you-only-as-needed=Solo compartiremos su información según se necesite y se nos permita o se requiera por ley. Podemos compartir su información con las siguientes agencias o personas que necesitan la información para llevar a cabo su trabajo:
-legal-stuff.employees-or-volunteers-with-other-state=Empleados o voluntarios de otras agencias estatales, del condado, locales, federales y las agencias participantes no lucrativas y privadas.
-legal-stuff.researchers-auditors-investigators-and-others=Los investigadores, auditores y otros que realizan evaluaciones y estudios sobre la calidad del cuidado de la salud o que inician procesos o acciones legales relacionadas con la administración de los programas de servicios humanos.
-legal-stuff.court-officials-county-attorneys-attorneys-general=Funcionarios judiciales, fiscales del condado, fiscales generales, otros funcionarios del orden público, funcionarios encargados de la manutención infantil, investigadores de protección de menores y de fraude e investigadores de prevención de fraude.
-legal-stuff.human-services-offices-including-child-support=Oficinas de servicios humanos, incluso las oficinas para cumplimiento de manutención infantil.
-legal-stuff.governmental-agencies-in-other-states-administering=Agencias gubernamentales de otros estados que administran programas de beneficios públicos.
-legal-stuff.health-care-providers-including-mental-health-agencies=Proveedores de cuidado de salud, incluso las agencias de salud mental y centros de tratamiento para drogas y alcohol.
-legal-stuff.health-care-insurers-health-care-agencies-managed-care-organizations=Compañías de seguros médicos, agencias de cuidado de salud, organizaciones de cuidado administrado de la salud y otros que pagan por su cuidado.
-legal-stuff.guardians-conservators-or-people-with-power=Los tutores, vigilantes o personas con poderes notariales que son representantes autorizados.
-legal-stuff.coroners-and-medical-investigators=Forenses e investigadores médicos, si usted fallece y ellos investigan su fallecimiento.
-legal-stuff.credit-bureaus-creditors-or-collection-agencies=Oficinas de crédito, acreedores o agencias para cobranza si usted no paga los honorarios que nos adeuda por los servicios, en situaciones limitadas.
-legal-stuff.certified-application-counselors-in-person-assisters=Asesores de solicitudes certificados, asistentes en persona y navegadores, y cualquier otra persona para quien la ley establece que debemos o podemos proporcionar la información.
-legal-stuff.what-are-our-responsibilities=¿Cuáles son nuestras responsabilidades?
-legal-stuff.we-must-protect-the-privacy-of-your-personal-health-care=Debemos proteger la privacidad de su información personal, de cuidado de salud y otra información privada de acuerdo con las condiciones de esta notificación.
-legal-stuff.we-may-not-use-your-information-for-reasons-other=No podemos usar su información por motivos que no sean los que se indican en este formulario, ni compartir su información con personas y agencias que no sean las que se indican en este formulario, a menos que usted nos diga por escrito que podemos hacerlo.
-legal-stuff.we-will-not-sell-any-data-collected-created=No venderemos ninguna información recopilada, creada o conservada a partir de esta solicitud.
-legal-stuff.we-must-follow-the-terms-of-this-notice-and-give=Debemos adherirnos a las condiciones de esta notificación y entregarle una copia de la misma, pero podríamos cambiar nuestra polí­tica de privacidad. Dichos cambios aplicarían a toda la información que tenemos sobre usted. La nueva notificación estará disponible cuando usted la solicite, y publicaremos los cambios en nuestro sitio web en:
-legal-stuff.DHS-4839E-ENG=Notificación de Prácticas de Privacidad y Notificación de Derechos y Responsabilidades DHS-4839E-ENG.
-legal-stuff.the-law-requires-us-to-keep-your-private=La ley nos exige mantener de manera confidencial y segura su información privada.
-legal-stuff.if-something-happens-that-causes-your-private-information=Si sucede algo que haga que su información privada pierda su carácter de confidencial y segura, se lo haremos saber enseguida
-legal-stuff.this-part-of-the-notice-describes-how-medical-information=En esta parte de la notificación, se describe cómo puede usarse y divulgarse su información médica y cómo puede usted acceder a ella. Léala cuidadosamente.
-legal-stuff.we-can-use-and-share-your-health-care-information-to=Podemos usar y compartir su información médica para:
-legal-stuff.help-manage-the-health-care-treatment-you-receive=Ayudar a administrar el tratamiento médico que recibe
-legal-stuff.we-can-use-your-health-information-and-share=Podemos usar su información médica y compartirla con los profesionales que lo tratan. Ejemplo: un médico nos envía información sobre su diagnóstico y su plan de tratamiento para que podamos organizar servicios adicionales.
-legal-stuff.we-can-also-share-your-information-with-guardians-conservators=También podemos compartir su información con los tutores, vigilantes o personas con poder notarial que son representantes autorizados.
-legal-stuff.run-our-organization=Hacer funcionar nuestra organización
-legal-stuff.we-can-use-and-share-your-information-to-run=Podemos usar y compartir su información para hacer funcionar nuestra organización y comunicarnos con usted cuando sea necesario. Eso incluye compartir su información con empleados o voluntarios de otras agencias estatales, del condado, locales, federales y de nuestras agencias participantes no lucrativas y privadas, incluidas las oficinas de manutención infantil.
-legal-stuff.we-can-share-your-information-with-these-people-and-groups=Podemos compartir su información con estas personas y grupos:
-legal-stuff.auditors-investigators-and-others-that-do=Los auditores, investigadores y otras personas que realizan evaluaciones y estudios sobre la calidad del cuidado de la salud.
-legal-stuff.credit-bureaus-creditors-or-collection-agencies=Oficinas de crédito, acreedores o agencias para cobranza si usted no paga los honorarios que nos adeuda por los servicios, en situaciones limitadas.
-legal-stuff.certified-application-counselors-in-person-assisters=Asesores de solicitudes certificados, asistentes en persona y navegadores, y cualquier otra persona para quien la ley establece que debemos o podemos proporcionar la información.
-legal-stuff.we-are-not-allowed-to-use-genetic-information-to-decide=No estamos autorizados a utilizar la información genética para decidir si le damos cobertura y el costo de esa cobertura. Esto no se aplica a los planes de cuidados a largo plazo. Ejemplo: podemos utilizar su información médica para desarrollar mejores servicios para usted.
-legal-stuff.pay-for-your-health-services=Pagar los servicios médicos
-legal-stuff.we-can-use-and-share-your-health-information-as-we-pay=Podemos usar y compartir su información médica cuando pagamos sus servicios médicos. Ejemplo: podemos compartir su información con su plan dental para coordinar el pago de los servicios dentales que se le prestan.
-legal-stuff.help-with-public-health-and-safety-issues=Ayudar con temas de salud y seguridad públicas
-legal-stuff.we-can-share-health-information-about=Podemos compartir su información médica con los siguientes fines:
-legal-stuff.preventing-disease=Prevenir enfermedades.
-legal-stuff.helping-with-product-recalls=Ayudar con el retiro de productos.
-legal-stuff.reporting-adverse-reactions-to-medications=Notificar las reacciones adversas de los medicamentos
-legal-stuff.reporting-suspected-abuse-neglect-or-domestic-violence=Informar sospechas de abuso, abandono o violencia doméstica.
-legal-stuff.preventing-or-reducing-a-serious-threat-to-anyones-health-or-safety=Prevenir o reducir una amenaza grave a la salud o a la seguridad de las personas.
-legal-stuff.do-research=Hacer investigaciones
-legal-stuff.we-can-use-or-share-your-information-for-health-research=Podemos usar o compartir su información para investigaciones relacionadas con la salud.
-legal-stuff.comply-with-the-law=Cumplir con las leyes
-legal-stuff.we-will-share-information-about-you-if-state-or-federal-laws=Compartiremos su información si lo exigen las leyes estatales o federales. Esto incluye compartir información con el Departamento de Salud y Servicios Humanos si este desea comprobar que estamos cumpliendo la ley federal de privacidad.
-legal-stuff.respond-to-organ-and-tissue-donation-requests=Responder a solicitudes de donación de órganos y tejidos, y trabajar con los examinadores médicos o los directores de funerarias
-legal-stuff.we-can-share-health-information-about-you-with-organ=Podemos compartir su información médica con organizaciones dedicadas a obtener órganos.
-legal-stuff.we-can-share-health-information-with-a-coroner=Cuando fallece una persona, podemos compartir información médica con un médico forense, examinador médico o el director de una funeraria
-legal-stuff.address-workers-compensation-law-enforcement=Responder a casos de indemnización por accidente de trabajo, asuntos del orden público y otras peticiones gubernamentales
-legal-stuff.for-workers-compensation-claims=Para los reclamos de indemnización por accidentes de trabajo
-legal-stuff.for-law-enforcement-purposes-or-with-a-law-enforcement-official=Para propósitos del orden público o con un funcionario del orden público
-legal-stuff.with-health-oversight-agencies=Con agencias que supervisan los servicios de salud para actividades autorizadas por la ley
-legal-stuff.with-governmental-agencies-in-other-states=Con agencias gubernamentales en otros estados que administran programas de beneficios públicos
-legal-stuff.for-special-government-functions-such-as-military=Para funciones especiales del gobierno, tales como los servicios militares, de seguridad nacional y de protección presidencial
-legal-stuff.respond-to-lawsuits-and-legal-actions=Responder a las demandas y acciones legales
-legal-stuff.we-can-share-health-information-about-you-in-response-to-a-court-order=Podemos compartir su información médica en respuesta a una orden judicial. Podemos compartir la información con funcionarios judiciales, fiscales del condado, procuradores generales, otros funcionarios del orden público, funcionarios de manutención infantil, funcionarios de protección de menores e investigadores de prevención de fraude.
-legal-stuff.what-are-your-rights-regarding-the-information-we-have-about-you=¿Cuáles son sus derechos respecto a la información que tenemos sobre usted?
-legal-stuff.get-a-copy-of-health-and-claims-records=Obtener una copia de los registros médicos y de los reclamos
-legal-stuff.you-and-people-you-have-given-permission-to-may-see=Usted y las personas que han dado permiso pueden ver y copiar la información privada que tenemos sobre usted, como los registros médicos y de los expedientes de reclamos. Es posible que tenga que pagar las copias.
-legal-stuff.you-can-choose-someone-to-act-for-you-with-a-medical-power=Puede optar por que otra persona actúe en su nombre mediante un poder notarial o como su tutor legal. Esa persona puede ejercer sus derechos y tomar decisiones acerca de su información.
-legal-stuff.ask-us-to-correct-health-and-claims-records=Pedirnos que corrijamos historias clínicas o registros de reclamos
-legal-stuff.you-may-question-whether-the-information-we-have-about=Puede cuestionar si la información que tenemos sobre usted es correcta. Deberá enviar sus consultas por escrito. Puede decirnos por qué la información es incorrecta o no está completa. Envíe su propia explicación de la información con la que no está de acuerdo. Adjuntaremos su explicación todas las veces que se comparta la información.
-legal-stuff.request-confidential-communications=Solicitar comunicaciones confidenciales
-legal-stuff.you-have-the-right-to-ask-us-in-writing-to-share=Tiene derecho a pedirnos por escrito que compartamos con usted la información médica de determinada manera o en determinado lugar.
-legal-stuff.we-will-consider-all-reasonable-requests=Consideraremos todas las solicitudes razonables. Debemos satisfacer su solicitud si usted nos dice que estaría en peligro en caso de que no lo hagamos. Por ejemplo, puede pedirnos que enviemos la información médica a su trabajo en lugar de a su casa. Si comprobamos que su pedido es razonable, lo concederemos.
-legal-stuff.ask-us-to-limit-what-we-use-or-share=Pedirnos que limitemos la información que usamos o compartimos
-legal-stuff.you-can-ask-us-not-to-use-or-share-certain-health=Puede pedirnos que no usemos o no compartamos cierta información médica con fines de tratamiento, de pago o de nuestras operaciones. No estamos obligados a aceptar su pedido y podemos negarnos a hacerlo si esto afectaría su cuidado.
-legal-stuff.get-a-list-of-those-with-whom-weve-shared-information=Obtener una lista de aquellas personas con quienes hemos compartido información
-legal-stuff.this-list-will-not-include-disclosures-for-treatment=Esta lista no incluirá las divulgaciones para tratamiento, pagos y propósitos de cuidado de salud. Tampoco se incluyen ciertas divulgaciones, tales como las que usted nos haya pedido hacer.
-legal-stuff.we-ll-provide-one-list-a-year-for-free=Le proporcionaremos una lista por año gratuita, pero cobraremos un cargo razonable basado en los costos si solicita otra lista dentro de los 12 meses.
-legal-stuff.get-a-copy-of-this-privacy-notice=Obtener una copia de esta notificación de privacidad
-legal-stuff.you-can-ask-for-a-paper-copy-of-this-notice-at-any-time=Usted puede solicitar una copia impresa de esta notificación en cualquier momento, incluso aunque haya acordado recibir el aviso en formato electrónico. Le entregaremos una copia impresa sin demora.
-legal-stuff.if-you-do-not-understand-the-information-ask-your-worker=Si no entiende la información, pida a su trabajador que se la explique. Puede pedir otra copia de esta notificación al Departamento de Servicios Humanos de Minnesota.
-legal-stuff.what-are-your-choices=¿Cuáles son sus opciones?
-legal-stuff.for-certain-health-information-you-can-tell=Para cierta información médica, puede darnos las opciones de lo que desea que compartamos.
-legal-stuff.you-have-both-the-right-and-choice-to-tell-us-to=Usted tiene tanto el derecho como la opción de decirnos:
-legal-stuff.share-health-information-with-your-family-close-friends=que compartamos información médica con su familia, amigos cercanos u otras personas que se ocupan del pago de su atención médica;
-legal-stuff.share-information-in-a-disaster-relief-situation=que compartamos información en una situación de ayuda para catástrofes.
-legal-stuff.tell-us-what-you-want-us-to-do-and-we-will-follow=Díganos en qué podemos ayudarlo, y seguiremos sus instrucciones. Si no puede decirnos su preferencia (por ejemplo, si está inconsciente), podemos seguir adelante y compartir su información si creemos que es lo mejor para usted. También podemos compartir su información cuando sea necesario para reducir una amenaza grave e inminente a su salud o a su seguridad.
-legal-stuff.what-privacy-rights-do-children-have=¿Qué derechos de privacidad tienen los menores?
-legal-stuff.if-you-are-under-18-when-parental-consent=Si usted es menor de 18 años, cuando no se exige el consentimiento de los padres para el tratamiento médico, la información solo se mostrará a los padres cuando el proveedor de cuidado de salud crea que no compartir la información pondría en riesgo su salud. Los padres pueden ver otra información suya y permitir que otros vean esta información, a menos que usted haya pedido que esta información no se comparta con sus padres. Debe pedir esto por escrito y decir qué información no desea compartir y por qué. Si la agencia está de acuerdo en que compartir la información no es para su beneficio, esta no se compartirá con sus padres. Si la agencia no está de acuerdo, la información puede compartirse con sus padres si ellos la solicitan.
-legal-stuff.what-if-you-believe-your-privacy-rights-have-been-violated=¿Qué puede hacer si cree que se han infringido sus derechos de privacidad?
-legal-stuff.you-may-complain-if-you-believe-your-privacy-rights=Si cree que se han infringido sus derechos de privacidad, puede presentar una queja. No se le puede negar el servicio ni lo pueden tratar mal por haber presentado una queja. Si cree que su privacidad médica ha sido infringida por su médico o la clínica, una compañía de seguros médicos, un plan médico o una farmacia, puede enviar una queja escrita a la agencia del condado, a la organización o a la oficina federal de derechos civiles a:
-legal-stuff.u-s-department-of-health-and-human-services=U.S. Department of Health and Human Services
-legal-stuff.office-for-civil-rights-region-v=Office for Civil Rights, Region V
-legal-stuff.233-n-michigan-avenue-suite-240=233 N. Michigan Avenue, Suite 240
-legal-stuff.chicago-il-60601=Chicago, IL 60601
-legal-stuff.312-886-2359-voice-800-368-1019=312-886-2359 (voice) 800-368-1019 (toll free) 800-537-7697 (TTY) 312-886-1807 (fax)
-legal-stuff.if-you-believe-the-minnesota-department-of-human-services=Si cree que el Departamento de Servicios Humanos de Minnesota ha violado sus derechos de privacidad, también puede ponerse en contacto con:
-legal-stuff.minnesota-department-of-human-services-attn=Minnesota Department of Human Services
-legal-stuff.attn-data-complaint=Attn: Data Complaint
-legal-stuff.po-box-64998=PO Box 64998
-legal-stuff.st-paul-mn-55164-0998=St. Paul, MN 55164-0998
-legal-stuff.whom-do-you-contact-if-you-need=¿A quién debe contactar si necesita más información sobre las prácticas de privacidad?
-legal-stuff.if-you-need-more-information-about-privacy-practices=Si necesita más información acerca de las prácticas de privacidad, llame al departamento de asistencia a miembros de los Programas de Cuidado Médico de Minnesota (Minnesota Health Care Programs, MHCP) al 800-657-3739 o al 651-431-2670
+legal-stuff.effective-date=(Effective Date: November 2018) 
+legal-stuff.this-part-of-the-notice-describes-how-private=This part of the notice describes how private or confidential information about you may be used and disclosed. Please review it carefully.
+legal-stuff.why-do-we-ask-for-this-information=Why do we ask for this information?
+legal-stuff.to-tell-you-apart-from-other-people=To tell you apart from other people with the same or similar name 
+legal-stuff.to-decide-what-you-are-eligible-for=To decide what you are eligible for 
+legal-stuff.to-help-you-get-medical-and-mental-health=To help you get medical and mental health services and decide whether you can pay for some services 
+legal-stuff.to-decide-whether-you-or-your-family-need=To decide whether you or your family need protective services 
+legal-stuff.to-decide-about-out-of-home-care-and-in-home=To decide about out-of-home care and in-home care for you or your children 
+legal-stuff.to-make-reports-do-research-do-audits=To make reports, do research, do audits, and evaluate our programs
+legal-stuff.to-investigate-reports-of-people-that-may-lie=To investigate reports of people that may lie about the help they need or to get assistance they may not be entitled to receive 
+legal-stuff.to-collect-money-from-other-agencies=To collect money from other agencies, like insurance companies, if they should pay for your care
+legal-stuff.to-collect-money-from-the-state-or-federal-government=To collect money from the state or federal government for help we give you
+legal-stuff.why-do-we-ask-you-for-your-social-security-number=Why do we ask you for your Social Security number?
+legal-stuff.we-need-your-social-security-number-to-give-you-medical-assistance=We need your Social Security number (SSN) to give you Medical Assistance (MA), some kinds of financial help, and child support enforcement services (42 USC 666; Minn. Stat. 256L.04, subd. 1a; 42 CFR 435.910).
+legal-stuff.we-also-need-your-SSN-to-verify-identity=We also need your SSN to verify identity and prevent duplication of state and federal benefits. Additionally, your SSN is used to conduct computer data matches with our partner nonprofit and private agencies to verify income, resources, and other information that may affect your eligibility or benefits.
+legal-stuff.you-do-not-have-to-give-us-the-SSN-for-people=You do not have to give us the SSN for people in your home who are not applying for coverage. You also do not have to give us your SSN:
+legal-stuff.if-you-have-religious-objections=If you have religious objections
+legal-stuff.if-you-are-not-a-U-S-citizen-and-are-applying=If you are not a U.S. citizen and are applying for Emergency Medical Assistance only
+legal-stuff.if-you-are-from-another-country-are-in-the-U-S=If you are from another country, are in the U.S. on a temporary basis, and do not have permission from the U.S. Citizenship and Immigration Services (USCIS) to live in the U.S. permanently
+legal-stuff.if-you-are-living-in-the-U-S-without-the-knowledge-or-approval-of-the-USCIS=If you are living in the U.S. without the knowledge or approval of the USCIS
+legal-stuff.why-do-we-ask-you-for-your-financial-information=Why do we ask you for your financial information? 
+legal-stuff.we-use-this-information-only-for-the-purposes-authorized-by-law=We use this information only for the purposes authorized by law, such as verifying eligibility or determining the amount of a premium. We will not share this information with any other person or entity.
+legal-stuff.do-you-have-to-answer-the-questions-we-ask=Do you have to answer the questions we ask? 
+legal-stuff.you-do-not-have-to-give-us-your-personal-information=You do not have to give us your personal information. Without the information, we may not be able to help you. If you give us wrong information on purpose, you could be investigated and then charged with a crime. 
+legal-stuff.with-whom-may-we-share-information=With whom may we share information? 
+legal-stuff.we-will-share-information-about-you-only-as-needed=We will share information about you only as needed and as allowed or required by law. We may share your information with the following agencies or people who need the information to do their jobs:
+legal-stuff.employees-or-volunteers-with-other-state=Employees or volunteers with other state, county, local, federal, and partner nonprofit and private agencies 
+legal-stuff.researchers-auditors-investigators-and-others=Researchers, auditors, investigators, and others that do quality-of-care reviews and studies or begin prosecutions or legal actions related to managing the human services programs 
+legal-stuff.court-officials-county-attorneys-attorneys-general=Court officials, county attorneys, attorneys general, other law enforcement officials, child support officials, child protection and fraud investigators, and fraud prevention investigators 
+legal-stuff.human-services-offices-including-child-support=Human services offices, including child support enforcement offices 
+legal-stuff.governmental-agencies-in-other-states-administering=Governmental agencies in other states administering public benefits programs 
+legal-stuff.health-care-providers-including-mental-health-agencies=Health care providers, including mental health agencies and drug and alcohol treatment facilities 
+legal-stuff.health-care-insurers-health-care-agencies-managed-care-organizations=Health care insurers, health care agencies, managed care organizations and others that pay for your care 
+legal-stuff.guardians-conservators-or-people-with-power=Guardians, conservators or people with power of attorney who are authorized representatives 
+legal-stuff.coroners-and-medical-investigators=Coroners and medical investigators if you die and they investigate your death 
+legal-stuff.credit-bureaus-creditors-or-collection-agencies=Credit bureaus, creditors or collection agencies if you do not pay fees you owe to us for services, in limited situations 
+legal-stuff.certified-application-counselors-in-person-assisters=Certified application counselors, in-person assisters, and navigators and anyone else the law says we must or can give the information to
+legal-stuff.what-are-our-responsibilities=What are our responsibilities? 
+legal-stuff.we-must-protect-the-privacy-of-your-personal-health-care=We must protect the privacy of your personal, health care and other private information according to the terms of this notice. 
+legal-stuff.we-may-not-use-your-information-for-reasons-other=We may not use your information for reasons other than the reasons listed on this form or share your information with people and agencies other than those listed on this form unless you tell us in writing that we can. 
+legal-stuff.we-will-not-sell-any-data-collected-created=We will not sell any data collected, created, or maintained as part of this application. 
+legal-stuff.we-must-follow-the-terms-of-this-notice-and-give=We must follow the terms of this notice and give you a copy of it, but we may change our privacy policy. Those changes will apply to all information we have about you. The new notice will be available on request, and we will put changes to it on our website:  
+legal-stuff.DHS-4839E-ENG=Notice of Privacy Practices and Notice of Rights and Responsibilities DHS-4839E-ENG.
+legal-stuff.the-law-requires-us-to-keep-your-private=The law requires us to keep your private information private and secure. 
+legal-stuff.if-something-happens-that-causes-your-private-information=If something happens that causes your private information to no longer be private and secure, we will let you know right away.
+legal-stuff.this-part-of-the-notice-describes-how-medical-information=This part of the notice describes how medical information about you may be used and disclosed and how you can get access to this information. Please review it carefully.
+legal-stuff.we-can-use-and-share-your-health-care-information-to=We can use and share your health care information to:
+legal-stuff.help-manage-the-health-care-treatment-you-receive=Help manage the health care treatment you receive 
+legal-stuff.we-can-use-your-health-information-and-share=We can use your health information and share it with professionals who are treating you. Example: A doctor sends us information about your diagnosis and treatment plan so we can arrange additional services. 
+legal-stuff.we-can-also-share-your-information-with-guardians-conservators=We can also share your information with guardians, conservators or people with power of attorney who are authorized representatives
+legal-stuff.run-our-organization=Run our organization
+legal-stuff.we-can-use-and-share-your-information-to-run=We can use and share your information to run our organization and contact you when necessary. This includes sharing your information with employees or volunteers with other state, county, local, federal, and partner nonprofit and private agencies, including child support offices. 
+legal-stuff.we-can-share-your-information-with-these-people-and-groups=We can share your information with these people and groups: 
+legal-stuff.auditors-investigators-and-others-that-do=Auditors, investigators, and others that do quality-of- care reviews and studies 
+legal-stuff.credit-bureaus-creditors-or-collection-agencies=Credit bureaus, creditors or collection agencies if you do not pay fees you owe to us for services, in limited situations 
+legal-stuff.certified-application-counselors-in-person-assisters=Certified application counselors, in-person assisters, and navigators and anyone else the law says we must or can give the information to 
+legal-stuff.we-are-not-allowed-to-use-genetic-information-to-decide=We are not allowed to use genetic information to decide whether we will give you coverage and the price of that coverage. This does not apply to long-term-care plans. Example: We use health information about you to develop better services for you.
+legal-stuff.pay-for-your-health-services=Pay for your health services
+legal-stuff.we-can-use-and-share-your-health-information-as-we-pay=We can use and share your health information as we pay for your health services. Example: We share information about you with your dental plan to coordinate payment for your dental work.     
+legal-stuff.help-with-public-health-and-safety-issues=Help with public health and safety issues
+legal-stuff.we-can-share-health-information-about=We can share health information about you for purposes such as: 
+legal-stuff.preventing-disease=Preventing disease 
+legal-stuff.helping-with-product-recalls=Helping with product recalls 
+legal-stuff.reporting-adverse-reactions-to-medications=Reporting adverse reactions to medications 
+legal-stuff.reporting-suspected-abuse-neglect-or-domestic-violence=Reporting suspected abuse, neglect, or domestic violence 
+legal-stuff.preventing-or-reducing-a-serious-threat-to-anyones-health-or-safety=Preventing or reducing a serious threat to anyone's health or safety
+legal-stuff.do-research=Do research 
+legal-stuff.we-can-use-or-share-your-information-for-health-research=We can use or share your information for health research. 
+legal-stuff.comply-with-the-law=Comply with the law 
+legal-stuff.we-will-share-information-about-you-if-state-or-federal-laws=We will share information about you if state or federal laws require it. This includes sharing information with the Department of Health and Human Services if it wants to see that we're complying with federal privacy law. 
+legal-stuff.respond-to-organ-and-tissue-donation-requests=Respond to organ and tissue donation requests and work with a medical examiner or funeral director 
+legal-stuff.we-can-share-health-information-about-you-with-organ=We can share health information about you with organ procurement organizations. 
+legal-stuff.we-can-share-health-information-with-a-coroner=We can share health information with a coroner, medical examiner, or funeral director when a person dies. 
+legal-stuff.address-workers-compensation-law-enforcement=Address workers' compensation, law enforcement, and other government requests 
+legal-stuff.for-workers-compensation-claims=For workers' compensation claims 
+legal-stuff.for-law-enforcement-purposes-or-with-a-law-enforcement-official=For law enforcement purposes or with a law enforcement official 
+legal-stuff.with-health-oversight-agencies=With health oversight agencies for activities authorized by law 
+legal-stuff.with-governmental-agencies-in-other-states=With governmental agencies in other states administering public benefits programs 
+legal-stuff.for-special-government-functions-such-as-military=For special government functions, such as military, national security, and presidential protective services 
+legal-stuff.respond-to-lawsuits-and-legal-actions=Respond to lawsuits and legal actions
+legal-stuff.we-can-share-health-information-about-you-in-response-to-a-court-order=We can share health information about you in response to a court order. We may share the information with court officials, county attorneys, attorneys general, other law enforcement officials, child support officials, child protection and fraud investigators, and fraud prevention investigators.
+legal-stuff.what-are-your-rights-regarding-the-information-we-have-about-you=What are your rights regarding the information we have about you?  
+legal-stuff.get-a-copy-of-health-and-claims-records=Get a copy of health and claims records 
+legal-stuff.you-and-people-you-have-given-permission-to-may-see=You and people you have given permission to may see and copy private information we have about you, such as health and claims records. You may have to pay for the copies. 
+legal-stuff.you-can-choose-someone-to-act-for-you-with-a-medical-power=You can choose someone to act for you with a medical power of attorney or as a legal guardian. That person can exercise your rights and make choices about your information. 
+legal-stuff.ask-us-to-correct-health-and-claims-records=Ask us to correct health and claims records 
+legal-stuff.you-may-question-whether-the-information-we-have-about=You may question whether the information we have about you is correct. Send your concerns in writing. Tell us why the information is wrong or incomplete. Send your own explanation of the information you do not agree with. We will attach your explanation anytime information is shared. 
+legal-stuff.request-confidential-communications=Request confidential communications 
+legal-stuff.you-have-the-right-to-ask-us-in-writing-to-share=You have the right to ask us in writing to share health information with you in a certain way or in a certain place. 
+legal-stuff.we-will-consider-all-reasonable-requests=We will consider all reasonable requests. We must say yes if you tell us you would be in danger if we did not. For example, you may ask us to send health information to your work address instead of your home address. If we find that your request is reasonable, we will grant it. 
+legal-stuff.ask-us-to-limit-what-we-use-or-share=Ask us to limit what we use or share 
+legal-stuff.you-can-ask-us-not-to-use-or-share-certain-health=You can ask us not to use or share certain health information for treatment, payment, or our operations. We are not required to agree to your request and we may say no if it would affect your care. 
+legal-stuff.get-a-list-of-those-with-whom-weve-shared-information=Get a list of those with whom we've shared information 
+legal-stuff.this-list-will-not-include-disclosures-for-treatment=This list will not include disclosures for treatment, payment, and health care operations. It will also not include certain other disclosures, such as any you asked us to make. 
+legal-stuff.we-ll-provide-one-list-a-year-for-free=We'll provide one list a year for free but will charge a reasonable, cost-based fee if you ask for another one within 12 months. 
+legal-stuff.get-a-copy-of-this-privacy-notice=Get a copy of this privacy notice 
+legal-stuff.you-can-ask-for-a-paper-copy-of-this-notice-at-any-time=You can ask for a paper copy of this notice at any time, even if you have agreed to receive the notice electronically. We will provide you with a paper copy promptly. 
+legal-stuff.if-you-do-not-understand-the-information-ask-your-worker=If you do not understand the information, ask your worker to explain it to you. You may ask the Minnesota Department of Human Services for another copy of this notice.
+legal-stuff.what-are-your-choices=What are your choices?
+legal-stuff.for-certain-health-information-you-can-tell=For certain health information, you can tell us your choices about what we share. 
+legal-stuff.you-have-both-the-right-and-choice-to-tell-us-to=You have both the right and choice to tell us to: 
+legal-stuff.share-health-information-with-your-family-close-friends=Share health information with your family, close friends, or others involved in payment for your care 
+legal-stuff.share-information-in-a-disaster-relief-situation=Share information in a disaster relief situation 
+legal-stuff.tell-us-what-you-want-us-to-do-and-we-will-follow=Tell us what you want us to do, and we will follow your instructions. If you are not able to tell us your preference, for example, if you are unconscious, we may go ahead and share your information if we believe it is in your best interest. We may also share your information when needed to lessen a serious and imminent threat to health or safety. 
+legal-stuff.what-privacy-rights-do-children-have=What privacy rights do children have? 
+legal-stuff.if-you-are-under-18-when-parental-consent=If you are under 18, when parental consent for medical treatment is not required, information will be provided to parents only when the medical provider believes that your health is at risk if the information is not shared. Parents may see other information about you and let others see this information, unless you have asked that this information not be shared with your parents. You must ask for this in writing and say what information you do not want to share and why. If the agency agrees that sharing the information is not in your best interest, the information will not be shared with your parents. If the agency does not agree, the information may be shared with your parents if they ask for it. 
+legal-stuff.what-if-you-believe-your-privacy-rights-have-been-violated=What if you believe your privacy rights have been violated? 
+legal-stuff.you-may-complain-if-you-believe-your-privacy-rights=You may complain if you believe your privacy rights have been violated. You cannot be denied service or treated badly because you have made a complaint. If you believe that your medical privacy was violated by your doctor or clinic, a health insurer, a health plan, or a pharmacy, you may send a written complaint to either the county agency, the organization or the federal civil rights office at: 
+legal-stuff.u-s-department-of-health-and-human-services=U.S. Department of Health and Human Services 
+legal-stuff.office-for-civil-rights-region-v=Office for Civil Rights, Region V 
+legal-stuff.233-n-michigan-avenue-suite-240=233 N. Michigan Avenue, Suite 240 
+legal-stuff.chicago-il-60601=Chicago, IL 60601 
+legal-stuff.312-886-2359-voice-800-368-1019=312-886-2359 (voice) 800-368-1019 (toll free) 800-537-7697 (TTY) 312-886-1807 (fax) 
+legal-stuff.if-you-believe-the-minnesota-department-of-human-services=If you believe the Minnesota Department of Human Services violated your privacy rights, you may also contact: 
+legal-stuff.minnesota-department-of-human-services-attn=Minnesota Department of Human Services 
+legal-stuff.attn-data-complaint=Attn: Data Complaint 
+legal-stuff.po-box-64998=PO Box 64998 
+legal-stuff.st-paul-mn-55164-0998=St. Paul, MN 55164-0998 
+legal-stuff.whom-do-you-contact-if-you-need=Whom do you contact if you need more information about privacy practices? 
+legal-stuff.if-you-need-more-information-about-privacy-practices=If you need more information about privacy practices, call the Minnesota Health Care Programs (MHCP) Member Help Desk at 800-657-3739 or 651-431-2670.  
 
-review-info.title=Revisar la información
-review-info.submit-application-now-with-only-the-above-information=Envíe ahora una solicitud incompleta con sólo la información anterior.
-review-info.lets-review-your-info=Revise su información
-review-info.this-looks-correct=Esto parece correcto
-review-info.name=Nombre
-review-info.home-address=Domicilio
-review-info.mailing-address=Dirección Postal
-review-info.county=Condado
-review-info.contact-info=Información de Contacto
-review-info.edit=Editar
-review-info.no-permanent-address=Sin dirección permanente
-review-info.same-as-home-address=La misma de la dirección de casa
+review-info.title=Review info
+review-info.submit-application-now-with-only-the-above-information=Submit an incomplete application now with only the above information.
+review-info.lets-review-your-info=Let's review your info
+review-info.this-looks-correct=This looks correct
+review-info.name=Name
+review-info.home-address=Home Address
+review-info.mailing-address=Mailing Address
+review-info.county=County
+review-info.contact-info=Contact Info
+review-info.edit=Edit
+review-info.no-permanent-address=No permanent address
+review-info.same-as-home-address=Same as home address
 
-intro-personal-details.title=Introducción: Detalles personales
-intro-personal-details.special-situations=Situaciones especiales
-intro-personal-details.citizenship=Ciudadanía
-intro-personal-details.ability-to-work=Capacidad para trabajar
-intro-personal-details.personal-details=Detalles personales
+intro-personal-details.title=Intro: Personal Details
+intro-personal-details.special-situations=Special situations
+intro-personal-details.citizenship=Citizenship
+intro-personal-details.ability-to-work=Ability to work
+intro-personal-details.personal-details=Personal details
 
-start-household.your-household=Su Hogar
-start-household.title=Empezar Hogar
-start-household.everyone-you-live-with=Todas las personas que viven con usted
-start-household.preparing-meals=Si preparan la comida juntos
-start-household.special-situations=Situaciones especiales
-start-household.citizenship=Ciudadanía
-start-household.ability-to-work=Capacidad para trabajar
+start-household.your-household=Your Household
+start-household.title=Start Household
+start-household.everyone-you-live-with=Everyone you live with
+start-household.preparing-meals=Preparing meals
+start-household.special-situations=Special Situations
+start-household.citizenship=Citizenship
+start-household.ability-to-work=Ability to work
 
-household-list.title=Miembros del hogar
-household-list.is-this-everyone-that-lives-with-you=¿Son todos los que viven con usted?
-household-list.include-children-and-everyone-who-lives-with-you=Incluya a su cónyuge o pareja, a sus hijos y a todas las personas que viven con usted, incluso si no están allí todo el tiempo.
-household-list.your-household=Su hogar
-household-list.add-a-person=Agregar a la siguiente persona
-household-list.thats-you=(¡es usted!)
-household-list.yes-thats-everyone=Sí, son todos
+household-list.title=Household members
+household-list.is-this-everyone-that-lives-with-you=Is this everyone that lives with you?
+household-list.include-children-and-everyone-who-lives-with-you=Include your spouse or partner, children and everyone who lives with you, even if they aren\u2019t there all the time.
+household-list.your-household=Your household
+household-list.add-a-person=Add a person
+household-list.thats-you=(you)
+household-list.yes-thats-everyone=Yes, that's everyone
 
-children-under-19.title=Niños en su hogar
-children-under-19.header=¿Hay menores de 19 años en su hogar?
+children-under-19.title=Children in your household
+children-under-19.header=Are there any children in your household under the age of 19?
 
-parent-not-at-home-19.title=Padre o madre ausente
-parent-not-at-home-19.header=¿Alguno de los menores de 19 años en su hogar tiene un padre o madre que no vive en casa?
+parent-not-at-home-19.title=Parent not at home
+parent-not-at-home-19.header=Do any of the children under 19 in your household have a parent that lives outside your home?
 
-temporary-absence.title=Miembros del hogar que no viven en casa
-temporary-absence.header=¿Alguien que vive habitualmente con usted lleva tiempo sin vivir en casa?
-temporary-absence.header.household=¿Alguien de su hogar lleva tiempo sin vivir en casa?
-temporary-absence.body=Esto incluye a personas que están fuera por estudio, trabajo o viajes.
+temporary-absence.title=Household members not living at home
+temporary-absence.header=Is anyone who usually lives with you not living at home for a while?
+temporary-absence.header.household=Is anyone in your household not living at home for a while?
+temporary-absence.body=This includes people who are away for school, work, or travel.
 
-housingSituation.title=Situación de vivienda
-housingSituation.header=¿Te consideras una persona sin hogar?
+housingSituation.title=Housing situation
+housingSituation.header=Do you consider yourself homeless?
 
-no-programs-selected.title=No se seleccionó ningún programa
-no-programs-selected.you-did-not-select-any-programs=No ha seleccionado ninguno de los programas para las personas que solicita.
-no-programs-selected.go-back-and-make-sure=Regrésese y asegúrese de que nos haya dicho con qué necesitan ayuda a las personas de su hogar.
+no-programs-selected.title=No programs selected
+no-programs-selected.you-did-not-select-any-programs=You did not select any programs for the people you’re applying for.
+no-programs-selected.go-back-and-make-sure=Go back and make sure you’ve told us what the people in your household need help with.
 
-children-in-need-of-care.title=¿Quiénes son los niños que necesitan cuidado?
-children-in-need-of-care.who-are-the-children-in-need-of-childcare=¿Quiénes son los niños que necesitan cuidado infantil?
+children-in-need-of-care.title=Who are the children in need of care?
+children-in-need-of-care.who-are-the-children-in-need-of-childcare=Who are the children in need of childcare?
 children-in-need-of-care.you=(you)
 
-parent-not-at-home.title=¿Quién tiene un padre o madre que no vive en casa?
-parent-not-at-home.who-are-the-children-that-have-a-parent-not-living-at-home=¿Alguno de los niños para los que solicita cuidado infantil tiene un padre o madre que no vive en casa?
-parent-not-at-home.none-of-the-children-have-parents-living-outside-the-home=Ninguno de estos niños tiene padres que vivan fuera de casa. 
-parent-not-at-home.help-text=Marque todo lo que corresponda.  A continuación, le pediremos los nombres del padre o madre.
-parent-not-at-home-names.title=Nombre del padre que vive fuera del hogar.
-parent-not-at-home-names.what-are-the-parents-names=Denos el nombre de cualquier padre que viva fuera del hogar.
-parent-not-at-home-names.make-sure-to-provide-a-name=Asegúrese de proporcionarnos el nombre.
-parent-not-at-home-names.what-is-the-parents-name=¿Cómo se llama el padre que vive fuera del hogar?
+parent-not-at-home.title=Who has a parent not at home?
+parent-not-at-home.who-are-the-children-that-have-a-parent-not-living-at-home=Do any of the children that you're requesting childcare for have a parent not living at home?
+parent-not-at-home.none-of-the-children-have-parents-living-outside-the-home=None of these children have parents living outside the home
+parent-not-at-home.help-text=Select all that apply. We'll ask for their parent's name next.
+parent-not-at-home-names.title=Name of parent outside home
+parent-not-at-home-names.what-are-the-parents-names=Tell us the name of any parent living outside the home.
+parent-not-at-home-names.make-sure-to-provide-a-name=Make sure to provide a name.
+parent-not-at-home-names.what-is-the-parents-name=What is the name of their parent that lives outside the home?
 
-child-care-child-support.title=Pagos de manutención infantil
-child-care-child-support.who-does-your-household-receive-child-support=¿Para cuál menor de su hogar son destinados los pagos de manutención infantil?
-child-care-child-support.select-all-that-apply=Marque todo lo que corresponda. Le preguntaremos sobre el monto del pago más adelante.
-child-care-child-support.none-receive-child-support=No se reciben pagos de manutención infantil por ninguno de estos niños.
+child-care-child-support.title=Child support payments
+child-care-child-support.who-does-your-household-receive-child-support=Who does your household receive child support payments for?
+child-care-child-support.select-all-that-apply=Select all that apply. We'll ask you about the payment amount later.
+child-care-child-support.none-receive-child-support=None of these children receive child support payments.
 
-child-care-intro.title=¿Tiene un proveedor de servicios de cuidado infantil?
-child-care-intro.do-you-have-provider=¿Cuenta ya su hogar con un proveedor de servicios de cuidado infantil?
-child-care-intro.this-may-include=Puede tratarse de un proveedor que ya esté atendiendo a su hijo o de un proveedor que usted tenga intención de utilizar.
+child-care-intro.title=Do you have a child care provider?
+child-care-intro.do-you-have-provider=Does your household already have a child care provider?
+child-care-intro.this-may-include=This may include a provider that is already caring for your child, or a provider that you intend to use.
 
-child-care-info.title=Proveedor de servicios de cuidado infantil
-child-care-info.header=Cuéntenos sobre su proveedor de servicios de cuidado infantil.
-child-care-info.provider-name=¿Cómo se llama el proveedor?
-child-care-info.phone-number=¿Cuál es el número de teléfono del proveedor?
-child-care-info.street-address=¿Cuál es la dirección de la calle?
-child-care-info.suite=N.° de oficina
-child-care-info.city=¿Cuál es la ciudad?
-child-care-info.state=¿Cuál es el estado?
-child-care-info.zip=¿Cuál es el código postal?
+child-care-info.title=Child care provider
+child-care-info.header=Tell us about your child care provider.
+child-care-info.provider-name=What is the provider\u2019s name?
+child-care-info.phone-number=What is the provider's phone number?
+child-care-info.street-address=What is the street address?
+child-care-info.suite=Suite #
+child-care-info.city=What is the city?
+child-care-info.state=What is the state?
+child-care-info.zip=What is the zip code?
 
-child-care-mental-health.title=Necesidades de salud mental y cuidado infantil
-child-care-mental-health.do-any-caregivers-need-help=¿Algún cuidador en su hogar necesita ayuda para pagar el cuidado infantil con el fin de atender sus necesidades de salud mental?
-child-care-mental-health.do-you-need-help=¿Es usted un cuidador que necesita ayuda para pagar el cuidado infantil con el fin de atender sus necesidades de salud mental?
-child-care-mental-health.adults-and-caregivers=Los adultos y cuidadores con un diagnóstico de salud mental pueden recibir ayuda para pagar el cuidado infantil. Un trabajador de elegibilidad conversará con usted sobre este beneficio después de que presente su solicitud. 
-child-care-mental-health.who-qualifies-for-benefits=Quién califica para este beneficio
-child-care-mental-health.caregivers-can-get-help=Los cuidadores pueden recibir ayuda para pagar el cuidado infantil con el fin de atender sus necesidades de salud mental si:
-child-care-mental-health.provide-proof-of-mental-health=Proporcionan prueba de un diagnóstico de salud mental <i>y </i>cuentan con una recomendación de cuidado infantil de un proveedor de salud mental.
-child-care-mental-health.care-for-child-under-7=Están a cargo de un niño menor de 7 años que recibe, o recibirá, asistencia del Programa de Inversión Familiar de Minnesota (MFIP, por sus siglas en inglés).
+child-care-mental-health.title=Mental health needs & child care
+child-care-mental-health.do-any-caregivers-need-help=Do any caregivers in your household need help paying for child care to support their mental health needs?
+child-care-mental-health.do-you-need-help=Are you a caregiver who needs help paying for child care to support a mental health need?
+child-care-mental-health.adults-and-caregivers=Adults and caregivers with a mental health diagnosis can get help paying for child care. An eligibility worker will ask you more about this after you apply.
+child-care-mental-health.who-qualifies-for-benefits=Who qualifies for this benefit
+child-care-mental-health.caregivers-can-get-help=Caregivers can get help paying for child care to support their mental health needs if they:
+child-care-mental-health.provide-proof-of-mental-health=Can provide proof of a mental health diagnosis <i>and</i> have a child care recommendation from a mental health provider.
+child-care-mental-health.care-for-child-under-7=Care for a child under 7 who receives, or will receive, MFIP.
 
-who-needs-child-care-mental-health.title= Quién necesita cuidado infantil para necesidades de salud mental
-who-needs-child-care-mental-health.who-needs-need-help= ¿Quién necesita ayuda para pagar el cuidado infantil para apoyar sus necesidades de salud mental?
-who-needs-child-care-mental-health.check-all-that-apply=Marque todo lo que corresponda
+who-needs-child-care-mental-health.title=Who needs childcare for mental health needs
+who-needs-child-care-mental-health.who-needs-need-help=Who needs help paying for child care to support their mental health needs?
+who-needs-child-care-mental-health.check-all-that-apply=Check all that apply.
 
-child-care-mental-health-time.title= Tiempo necesario cada semana
-child-care-mental-health-time.tell-us-how-much-time-is-needed=Indique cuánto tiempo se necesita cada semana.
-child-care-mental-health-time.tell-us-how-much-time-you-need=Indique cuánto tiempo necesita cada semana.
-child-care-mental-health-time.you-can-request=Puede solicitar hasta 20 horas de asistencia de cuidado infantil por semana si tiene un diagnóstico de salud mental.
-child-care-mental-health-time.weekly-amount=monto semanal
+child-care-mental-health-time.title=Time needed each week
+child-care-mental-health-time.tell-us-how-much-time-is-needed=Tell us how much time is needed each week.
+child-care-mental-health-time.tell-us-how-much-time-you-need=Tell us how much time you need each week.
+child-care-mental-health-time.you-can-request=You can request up to 20 hours of child care assistance per week to support a mental health diagnosis.
+child-care-mental-health-time.weekly-amount=weekly amount
 
-child-care-who-uses.title=Niños con este proveedor
-child-care-who-uses.header=¿Quién utiliza este proveedor de servicios de cuidado infantil?
-child-care-who-uses.help-text=Seleccione todo lo que corresponda.
-child-care-who-uses.select-at-least-one-child=Asegúrese de seleccionar al menos un niño.
+child-care-who-uses.title=Children with this provider
+child-care-who-uses.header=Who uses this child care provider?
+child-care-who-uses.help-text=Select all that apply.
+child-care-who-uses.select-at-least-one-child=Make sure you select at least one child.
 
-child-care-info.start-date=¿Cuál es su fecha de inicio?
+child-care-info.start-date=What is their start date?
 
-child-care-start-date.title=Fecha de inicio del cuidado infantil
-child-care-start-date.what-is-start-date=¿Cuál es su fecha de inicio en este proveedor?
-child-care-start-date.this-child-start-date=¿Cuál es la fecha de inicio de este niño?
+child-care-start-date.title=Child Care Start Date
+child-care-start-date.what-is-start-date=What is their start date at this provider?
+child-care-start-date.this-child-start-date=What is this child's start date?
 
 
-child-care-provider-list.title=Lista de proveedores de servicios de cuidado infantil
-child-care-provider-list.would-you-like-to-add=¿Le gustaría añadir más proveedores de servicios de cuidado infantil?
-child-care-provider-list.include-all-providers=Incluya todos los proveedores que su hogar ya utiliza, o cualquier proveedor que tenga intención de utilizar.
-child-care-provider-list.your-providers=Sus proveedores de servicios de cuidado infantil
-child-care-provider-list.add-a-provider=Agregar un proveedor
-child-care-provider-list.no-thats-it=No, es todo.
+child-care-provider-list.title=Child Care Provider List
+child-care-provider-list.would-you-like-to-add=Would you like to add more child care providers?
+child-care-provider-list.include-all-providers=Include all the providers that your household is already using, or any provider that you intend to use.
+child-care-provider-list.your-providers=Your child care providers
+child-care-provider-list.add-a-provider=Add a provider
+child-care-provider-list.no-thats-it=No, that's it.
 
-child-care-provider-delete.title=Dar de baja un proveedor de servicios de cuidado infantil
-child-care-provider-delete.warning=Está a punto de dar de baja a {0} como proveedor de servicios de cuidado infantil.
-child-care-provider-delete.is-that-ok=¿Le parece bien?
-child-care-provider-delete.yes-remove-provider=Sí, eliminar proveedor
-child-care-provider-delete.keep-them=No, voy a mantener este proveedor
+child-care-provider-delete.title=Delete child care provider
+child-care-provider-delete.warning=You are about to delete {0} as a child care provider.
+child-care-provider-delete.is-that-ok=Is that okay?
+child-care-provider-delete.yes-remove-provider=Yes, remove provider
+child-care-provider-delete.keep-them=No, I'll keep this provider
 
-child-care-provider-redirect.helper=Si vuelve atrás, regresará al principio de la sección de proveedores de servicios de cuidado infantil, donde tendrá que empezar de nuevo esta sección.<br/><br/>Se borrará toda la información del proveedor que ha introducido hasta el momento.
-child-care-provider-redirect.header=¿Está seguro de que quiere volver?
-child-care-provider-redirect.no-button=No, volver a lista de proveedores
-child-care-provider-redirect.yes-button=Sí, comenzar de nuevo la sección
+child-care-provider-redirect.helper=Going back will take you to the beginning of the provider section, where you will need to start this section over.<br/><br/>All the provider information you\u2019ve  entered so far will be deleted.
+child-care-provider-redirect.header=Are you sure you want to go back?
+child-care-provider-redirect.no-button=No, Return to provider list
+child-care-provider-redirect.yes-button=Yes, Start section over
 
-preparing-meals-together.title=Si preparan la comida juntos
-preparing-meals-together.header=¿Todos en su hogar compran y preparan alimentos con usted?
+preparing-meals-together.title=Preparing meals together
+preparing-meals-together.header=Does everyone in your household buy and prepare food with you?
 
-buy-or-cook-food.title=Comprar y cocinar alimentos
-buy-or-cook-food.header=¿Alguien en su hogar que tenga 60 años o más, o tenga una discapacidad, necesita ayuda para hacer las compras o cocinar?
+buy-or-cook-food.title=Buying and cooking food
+buy-or-cook-food.header=Does anyone in your household who is 60 or older, or has a disability, need help shopping or cooking for themselves?
 
-housing-subsidy.title=Subsidio de vivienda
-housing-subsidy.header-household=¿Recibe su hogar un subsidio de vivienda o de la Sección 8?
-housing-subsidy.header-applicant-only=¿Recibe usted un subsidio de vivienda o de la Sección 8?
+housing-subsidy.title=Housing subsidy
+housing-subsidy.header-household=Does your household get a housing or Section 8 subsidy?
+housing-subsidy.header-applicant-only=Do you get a housing or Section 8 subsidy?
 
-going-to-school.title=Yendo a la escuela
-going-to-school.header=¿Va a la escuela a tiempo completo o parcial?
-going-to-school.header-household=¿Alguien de su hogar va a la escuela en este momento, ya sea a tiempo completo o parcial?
-going-to-school.helper=Incluya todos los niveles escolares, incluidos prekinder, K-12, instituto de educación superior, universidad, y estudios de posgrado.
+going-to-school.title=Going to school
+going-to-school.header=Do you attend school either full or part time?
+going-to-school.header-household=Is anyone in your household going to school right now, either full or part-time?
+going-to-school.helper=Include all levels of school, including pre-K, K-12, college/university, and graduate school.
 
-who-is-going-to-school.title=¿Quién va a la escuela?
-who-is-going-to-school.who-is-going-to-school=¿Quién va a la escuela?
-who-is-going-to-school.check-all-that-apply=Marque todo lo que corresponda. Incluya a cualquier persona que actualmente estudie o que planee comenzar a estudiar en los próximos 12 meses.
+who-is-going-to-school.title=Who is going to school?
+who-is-going-to-school.who-is-going-to-school=Who is going to school?
+who-is-going-to-school.check-all-that-apply=Check all that apply. Include anyone who is in school now or plans to start school in the next 12 months.
 
-school-details.title=Detalles de la escuela
-school-details.header=¿A qué escuela asiste?
-school-details.If-you-dont-have-all-this-information-right-now=Agregue nombre de la escuela para cada niño que figura a continuación.  Si no tiene esta información en este momento, puede dejar el espacio en blanco.
-school-details.school-name=Nombre de la escuela
+school-details.title=School details
+school-details.header=Where do they go to school?
+school-details.If-you-dont-have-all-this-information-right-now=Add a school name for each child listed below. If you don't have this information right now, you can leave it blank.
+school-details.school-name=School Name
 
-school-start-date.title=Fecha de inicio de clases 
-school-start-date.header=Díganos cuándo estos niños comenzaron o comenzarán el jardín de infantes. 
-school-start-date.month=Mes
-school-start-date.day=Dia
-school-start-date.year=Año
+school-start-date.title=School start date
+school-start-date.header=Tell us when these children started, or will start Kindergarten.
+school-start-date.month=Month
+school-start-date.day=Day
+school-start-date.year=Year
 
-last-school-grade.title=Último grado escolar completado
-last-school-grade.applicant-header=¿Cuál es el grado escolar más alto que completó?
-last-school-grade.household-header=¿Cuál es el nivel educativo más alto que cada persona en su hogar ha completado?
-last-school-grade.select-grade=Seleccione el grado escolar
-last-school-grade.select-no-school=No completó ningún grado escolar
-last-school-grade.select-preschool=Preescolar
-last-school-grade.select-kindergarten=Jardín de infantes
-last-school-grade.select-1st-grade=1.er grado
-last-school-grade.select-2nd-grade=2.do grado
-last-school-grade.select-3rd-grade=3.er grado
-last-school-grade.select-4th-grade=4.° grado
-last-school-grade.select-5th-grade=5.° grado
-last-school-grade.select-6th-grade=6.° grado
-last-school-grade.select-7th-grade=7.° grado
-last-school-grade.select-8th-grade=8.° grado
-last-school-grade.select-9th-grade=9.° grado
-last-school-grade.select-10th-grade=10.° grado
-last-school-grade.select-11th-grade=11.° grado
-last-school-grade.select-12th-grade=12.° grado
-last-school-grade.select-ged=GED o equivalente
-last-school-grade.select-some-college=Estudios universitarios incompletos
-last-school-grade.select-college-degree=Título universitario
-last-school-grade.select-graduate-degree=Título de posgrado
-last-school-grade.select-other=Otro
-last-school-grade.highest-school-grade=Grado escolar más alto completado
+last-school-grade.title=Last school grade
+last-school-grade.applicant-header=What's the highest school grade you completed?
+last-school-grade.household-header=What's the highest school grade each person in your household has completed?
+last-school-grade.select-grade=Select school grade
+last-school-grade.select-no-school=No school
+last-school-grade.select-preschool=Preschool
+last-school-grade.select-kindergarten=Kindergarten
+last-school-grade.select-1st-grade=1st grade
+last-school-grade.select-2nd-grade=2nd grade
+last-school-grade.select-3rd-grade=3rd grade
+last-school-grade.select-4th-grade=4th grade
+last-school-grade.select-5th-grade=5th grade
+last-school-grade.select-6th-grade=6th grade
+last-school-grade.select-7th-grade=7th grade
+last-school-grade.select-8th-grade=8th grade
+last-school-grade.select-9th-grade=9th grade
+last-school-grade.select-10th-grade=10th grade
+last-school-grade.select-11th-grade=11th grade
+last-school-grade.select-12th-grade=12th grade
+last-school-grade.select-ged=GED or equivalent
+last-school-grade.select-some-college=Some college
+last-school-grade.select-college-degree=College Degree
+last-school-grade.select-graduate-degree=Graduate Degree
+last-school-grade.select-other=Other
+last-school-grade.highest-school-grade=Highest School Grade
 
-school-grade.title=Nivel académico
-school-grade.header=¿Cuál es su grado académico?
-school-grade.select-their-grade=Seleccione su grado
-school-grade.If-you-dont-have-all-this-information-right-now=Si no tiene esta información en este momento, puede dejar el espacio en blanco.
-school-grade.Head-Start=Inicio Adelantado
-school-grade.Pre-K=Preescolar
-school-grade.Kindergarten=Jardín de infantes
-school-grade.1st-grade=1.er grado
-school-grade.2nd-grade=2.do grado
-school-grade.3rd-grade=3.er grado
-school-grade.4th-grade=4.o grado
-school-grade.5th-grade=5.o grado
-school-grade.6th-grade=6.o grado
-school-grade.7th-grade=7.o grado
-school-grade.8th-grade=8.o grado
-school-grade.9th-grade=9.o grado
-school-grade.10th-grade=10.o grado
-school-grade.11th-grade=11.o grado
-school-grade.12th-grade=12.o grado
-school-grade.Other=Otro
+school-grade.title=School grade level
+school-grade.header=What is their grade level?
+school-grade.select-their-grade=Select their grade
+school-grade.If-you-dont-have-all-this-information-right-now=If you don't have this information right now, you can leave it blank.
+school-grade.Head-Start=Head Start
+school-grade.Pre-K=Pre-K
+school-grade.Kindergarten=Kindergarten
+school-grade.1st-grade=1st grade
+school-grade.2nd-grade=2nd grade
+school-grade.3rd-grade=3rd grade
+school-grade.4th-grade=4th grade
+school-grade.5th-grade=5th grade
+school-grade.6th-grade=6th grade
+school-grade.7th-grade=7th grade
+school-grade.8th-grade=8th grade
+school-grade.9th-grade=9th grade
+school-grade.10th-grade=10th grade
+school-grade.11th-grade=11th grade
+school-grade.12th-grade=12th grade
+school-grade.Other=Other
 
-military-service.title=Servicio military
-military-service.has-anyone-served=¿Alguna persona en su hogar ha servido alguna vez en el U.S. Military?
-military-service.have-you-served=¿Alguna vez ha servido en el U.S. Military?
-military-service.message-key=En el presente o en el pasado, sin importar el tipo de baja.
+military-service.title=Military Service
+military-service.has-anyone-served=Has anyone in your household ever served in the U.S. Military?
+military-service.have-you-served=Have you ever served in the U.S. Military?
+military-service.message-key=Now or in the past, and regardless of discharge status.
 
-who-has-military-service.title=Quién tiene servicio military
-who-has-military-service.header=¿Quién servido en el U.S. Military?
+who-has-military-service.title=Who Has Military Service
+who-has-military-service.header=Who served in the U.S. Military?
 
-pregnant.title=Embarazada
-pregnant.are-you-pregnant=¿Está embarazada?
-pregnant.is-anyone-pregnant=¿Alguien en su hogar está embarazada?
-pregnant.who-is-pregnant=¿Quién está embarazada?
+pregnant.title=Pregnant
+pregnant.are-you-pregnant=Are you pregnant?
+pregnant.is-anyone-pregnant=Is anyone in your household pregnant?
+pregnant.who-is-pregnant=Who is pregnant?
 
-who-is-pregnant.title=Hogar: embarazada
-who-is-pregnant.header=¿Quién está embarazada?
+who-is-pregnant.title=Household: pregnant
+who-is-pregnant.header=Who is pregnant?
 
-direct-deposit.title=Cómo recibir sus beneficios en su cuenta bancaria
-direct-deposit.header=¿Desea saber cómo recibir sus beneficios directamente en su cuenta bancaria?
-direct-deposit.header-help=Es posible que esta opción no esté disponible para todas las personas.  Su trabajador(a) puede brindarle más información.
+direct-deposit.title=Getting benefits sent to your bank account
+direct-deposit.header=Want to find out how to get your benefits sent right to your bank account?
+direct-deposit.header-help=This may not be available for everyone. Your worker can tell you more.
 
-citizenship.title=Ciudadanía
-citizenship.you-may-still-be-eligible-for-food-and-cash-benefits-if-you-are-not-a-us-citizen=Puede ser elegible para alimentos y beneficios en efectivo si no es un ciudadano estadounidense.
-citizenship.birthright-us-citizen-or-us-national=Ciudadano estadounidense por nacimiento o nacional de los EE. UU.
-citizenship.naturalized-us-citizen=Ciudadano estadounidense naturalizado
-citizenship.derived-us-citizen=Ciudadano estadounidense por derivación
-citizenship.not-a-us-citizen=<i>No</i> es ciudadano estadounidense
-citizenship.please-confirm-your-citizenship-status=Confirme su condición de ciudadanía
-citizenship.please-confirm-the-citizenship-status-of-your-househould=Confirme el estado de ciudadanía de su hogar.
-citizenship.members-of-your-household-may-still-be-eligible=Los miembros de su hogar aún pueden ser elegibles para recibir beneficios de alimentos o dinero en efectivo si no son ciudadanos de los Estados Unidos.
+citizenship.title=Citizenship
+citizenship.you-may-still-be-eligible-for-food-and-cash-benefits-if-you-are-not-a-us-citizen=You may still be eligible for food and cash benefits if you are not a U.S. citizen.
+citizenship.birthright-us-citizen-or-us-national=Birthright U.S. citizen or U.S. National
+citizenship.naturalized-us-citizen=Naturalized U.S. citizen
+citizenship.derived-us-citizen=Derived U.S. citizen
+citizenship.not-a-us-citizen=<i>Not</i> a U.S. citizen
+citizenship.please-confirm-your-citizenship-status=Please confirm your citizenship status
+citizenship.please-confirm-the-citizenship-status-of-your-househould=Please confirm the citizenship status of your household
+citizenship.members-of-your-household-may-still-be-eligible=Members of your household may still be eligible for food and cash benefits if they are not a U.S. citizen
 
-citizenship.reveal-types.title=Tipos de ciudadanía estadounidense
-citizenship.reveal.birthright.title=Ciudadano estadounidense por nacimiento
-citizenship.reveal.birthright.description=Obtuvo la ciudadanía estadounidense porque nació en los Estados Unidos (excluyendo Samoa Americana) o porque sus padres son ciudadanos estadounidenses y usted nació fuera del país.
-citizenship.reveal.us-national.title=Nacional de los EE. UU.
-citizenship.reveal.us-national.description=Aunque usted no es ciudadano estadounidense, ha hecho un compromiso de por vida con los Estados Unidos. Esta condición se aplica principalmente a las personas nacidas en territorios de los EE. UU. como Samoa Americana y la Isla Swains.
-citizenship.reveal.naturalized.title=Ciudadano estadounidense naturalizado
-citizenship.reveal.naturalized.description=Como inmigrante legal elegible, solicitó y se le concedió la ciudadanía.
-citizenship.reveal.derived.title=Ciudadano estadounidense por derivación
-citizenship.reveal.derived.description=Obtuvo automáticamente la ciudadanía estadounidense cuando sus padres se convirtieron en ciudadanos naturalizados.
+citizenship.reveal-types.title=U.S. citizenship types
+citizenship.reveal.birthright.title=Birthright U.S. citizen
+citizenship.reveal.birthright.description=You gained U.S. citizenship because you were born in the U.S. (not including American Samoa) or if your parents are U.S. citizens and you were born outside the country.
+citizenship.reveal.us-national.title=U.S. National
+citizenship.reveal.us-national.description=Although you\u2019re not a U.S. citizen, you have made a lifelong commitment to the United States. This status primarily applies to anyone born in U.S. territories like American Samoa and Swains Island.
+citizenship.reveal.naturalized.title=Naturalized U.S. citizen
+citizenship.reveal.naturalized.description=As an eligible legal immigrant, you applied for and were granted citizenship.
+citizenship.reveal.derived.title=Derived U.S. citizen
+citizenship.reveal.derived.description=You automatically gained U.S. citizenship when your parents became naturalized citizens. 
 
-citizenship.reveal.how-we-use-info.title=Cómo usamos y compartimos su información de ciudadanía
-citizenship.reveal.how-we-use-info.description=Necesitamos verificar los datos de su ciudadanía en una base de datos federal para determinar si cumple los requisitos para ciertos programas.
-citizenship.reveal.how-we-use-info.description.for.example=Por ejemplo, debemos proporcionar información al gobierno federal sobre las personas inscritas en programas como el Programa de Asistencia Nutricional Suplementaria (SNAP, por sus siglas en inglés) que reciben fondos federales.
-citizenship.reveal.how-we-use-info.description.additional=Además, compartimos los datos de su ciudadanía si la ley estatal o federal lo permite o lo exige:
-citizenship.reveal.how-we-use-info.description.additional.verify.our.identity= para verificar su identidad.
-citizenship.reveal.how-we-use-info.description.additional.subpoena.response= en respuesta a una citación o una orden judicial.
-citizenship.reveal.how-we-use-info.description.additional.law.enforcement.reasons=por motivos de orden público.
-citizenship.reveal.how-we-use-info.description.additional.federal.government.access.all.information=El gobierno federal puede tener acceso a toda la información de su solicitud de beneficios. Si le preocupa cómo podría afectar su condición migratoria el hecho de presentar la solicitud, consulte con un abogado de inmigración para recibir asesoramiento sobre su situación específica.
+citizenship.reveal.how-we-use-info.title=How we use and share your citizenship information 
+citizenship.reveal.how-we-use-info.description=We need to verify your citizenship details in a federal database to see if you qualify for certain programs.
+citizenship.reveal.how-we-use-info.description.for.example=For example, we must provide information to the federal government about people enrolled in programs like SNAP that receive federal funding.
+citizenship.reveal.how-we-use-info.description.additional=Additionally, we share your citizenship details if allowed or required by state or federal laws: 
+citizenship.reveal.how-we-use-info.description.additional.verify.our.identity= to verify your identity
+citizenship.reveal.how-we-use-info.description.additional.subpoena.response= in response to a subpoena or court order
+citizenship.reveal.how-we-use-info.description.additional.law.enforcement.reasons=for law enforcement reasons. 
+citizenship.reveal.how-we-use-info.description.additional.federal.government.access.all.information=The federal government may be able to access all information on your application for benefits. If you are concerned about how applying might affect your immigration status, talk to an immigration lawyer for advice about your specific situation. 
 
-us-citizen.title=Ciudadano estadounidense
-us-citizen.are-you-a-us-citizen=¿Es usted ciudadano estadounidense?
-us-citizen.is-everyone-us-citizen=¿Todos los miembros de su hogar son ciudadanos estadounidenses?
-us-citizen.most-immigrants-are-still-eligible-for-food-and-cash-benefits=La mayoría de inmigrantes aún son elegibles para recibir alimentos y beneficios en efectivo.
+us-citizen.title=U.S. Citizen
+us-citizen.are-you-a-us-citizen=Are you a U.S. Citizen?
+us-citizen.is-everyone-us-citizen=Is everyone in your household a U.S. Citizen?
+us-citizen.most-immigrants-are-still-eligible-for-food-and-cash-benefits=Most immigrants are still eligible for food and cash benefits.
 
-who-is-non-citizen.title=No ciudadano
-who-is-non-citizen.header=¿Quién no es ciudadano estadounidense?
+who-is-non-citizen.title=Non Citizen
+who-is-non-citizen.header=Who is not a U.S Citizen?
 
-alien-id-number.title=Número de identificación de extranjeros
-what-is-their-alien-id-number.header=¿Cuál es su número de identificación de extranjero?
-what-is-your-alien-id-number.header=¿Cuál es su número de identificación de extranjeros?
-what-is-alien-id-number.this-will-help-caseworker=Esto ayudará al trabajador social a procesar su solicitud más rápidamente. Si no tiene la información en este momento, deje el campo vacío.
+alien-id-number.title=Alien ID Number
+what-is-their-alien-id-number.header=What is their alien ID number?
+what-is-your-alien-id-number.header=What is your alien ID number?
+what-is-alien-id-number.this-will-help-caseworker=This will help the caseworker process your application faster. If you don\u2019t have this information right now, leave it blank.
 
-disability.title=Discapacidad
-disability.do-you-have-a-physical-or-mental-disability-that-limits=¿Tiene una discapacidad física o mental que limita su capacidad para trabajar o realizar actividades diarias?
-disability.does-anyone-in-your-household-have-a-physical-or-mental-disability-that-limits=¿Hay alguien en su hogar que tenga una discapacidad física o mental que limite su capacidad para trabajar o realizar actividades diarias?
+disability.title=Disability
+disability.do-you-have-a-physical-or-mental-disability-that-limits=Do you have a physical or mental disability that limits your ability to work or perform daily activities?
+disability.does-anyone-in-your-household-have-a-physical-or-mental-disability-that-limits=Does anyone in your household have a physical or mental disability that limits their ability to work or perform daily activities?
 
-unable-to-work.title=No puede trabajar
-unable-to-work.are-you-not-able-to-work-for-any-reason=¿Existen otras razones, aparte de tener una discapacidad o enfermedad, que le impidan trabajar?
-unable-to-work.is-anyone-in-your-household-not-able-to-work-for-any-reason=¿Existen otras razones, además de tener una discapacidad o enfermedad, que impidan que alguien en su hogar pueda trabajar?
+unable-to-work.title=Not able to work
+unable-to-work.are-you-not-able-to-work-for-any-reason=Are there any reasons, other than disability or illness, that make you not able to work?
+unable-to-work.is-anyone-in-your-household-not-able-to-work-for-any-reason=Are there any reasons, other than disability or illness, that make anyone in your household not able to work?
 
-who-has-disability.title=Quién tiene alguna discapacidad
-who-has-disability.who-has-a-physical-or-mental-disability-that-limits=¿Quién tiene alguna discapacidad física o mental que limite su capacidad para trabajar o realizar sus actividades cotidianas?
+who-has-disability.title=Who Has Disability
+who-has-disability.who-has-a-physical-or-mental-disability-that-limits=Who has a physical or mental disability that limits their ability to work or perform daily activities?
 
-work-situation.title=Situación Laboral
-work-situation.in-the-last-2-months-did-you-do-any-of-these-things=En los últimos 2 meses, ¿hizo alguna de estas cosas?
-work-situation.in-the-last-2-months-did-anyone-in-your-household-do-any-of-these-things=En los últimos 2 meses, ¿alguien de su hogar hizo alguna de estas cosas?
-work-situation.stop-working=Dejar de trabajar, renunciar a un empleo o finalizó el trabajo por cuenta propia
-work-situation.quit-a-job=Renunció en el trabajo
-work-situation.refuse-a-job-offer=Rechazó una oferta de trabajo
-work-situation.ask-to-work-fewer-hours=Tuvo que reducir sus horas de trabajo
-work-situation.go-on-strike=Participo en una huelga
+work-situation.title=Work situation
+work-situation.in-the-last-2-months-did-you-do-any-of-these-things=In the last 2 months, did you do any of these things?
+work-situation.in-the-last-2-months-did-anyone-in-your-household-do-any-of-these-things=In the last 2 months, did anyone in your household do any of these things?
+work-situation.stop-working=Stop working, quit a job or end self employment
+work-situation.quit-a-job=Quit a job
+work-situation.refuse-a-job-offer=Refuse a job offer
+work-situation.ask-to-work-fewer-hours=Ask to work fewer hours
+work-situation.go-on-strike=Go on strike
 
-work-changes.title=Cambios en el trabajo
-work-changes.in-the-last-60-days-did-you-do-any-of-these-things=¿Ha realizado alguno de estos cambios en su trabajo en los últimos dos meses (60 días)?
-work-changes.in-the-last-60-days-did-anyone-in-your-household-do-any-of-these-things=¿<i>Alguien</i> en su hogar ha realizado alguno de estos cambios en su trabajo en los últimos dos meses (60 días)?
-work-changes.check-all-that-apply=Marque todo lo que corresponda. Puedes compartir más detalles durante tu entrevista.
-work-changes.stop-working=Dejó de trabajar, renunció a un empleo o finalizó un trabajo por cuenta propia
-work-changes.refuse-a-job-offer=Rechazó una oferta de trabajo
-work-changes.ask-to-work-fewer-hours=Solicitó trabajar menos horas
-work-changes.go-on-strike=Se fue a huelga
-work-changes.make-sure-you-choose=Por favor escoja 'Ninguno de los anteriores' o otra opción.
+work-changes.title=Work changes
+work-changes.in-the-last-60-days-did-you-do-any-of-these-things=Have you made any of these changes to your work in the past two months (60 days)?
+work-changes.in-the-last-60-days-did-anyone-in-your-household-do-any-of-these-things=Has <i>anyone</i> in your household made any of these changes to their work in the past two months (60 days)?
+work-changes.check-all-that-apply=Check all that apply. You can share more details during your interview.
+work-changes.stop-working=Stopped working, quit a job or ended self-employment
+work-changes.refuse-a-job-offer=Refused a job offer
+work-changes.ask-to-work-fewer-hours=Asked to work fewer hours
+work-changes.go-on-strike=Went on strike
+work-changes.make-sure-you-choose=Make sure you choose 'None of the above' or another option.
 
-tribal-nation-member.title=Miembro de una Nación Tribal
-tribal-nation-member.is-anyone-in-your-household-a-member-of-a-tribal-nation=¿Hay algún miembro de su hogar que pertenezca a una Nación Tribal?
-tribal-nation-member.are-you-a-member-of-a-tribal-nation=¿Es usted miembro de una nación tribal?
+tribal-nation-member.title=Tribal Nation member
+tribal-nation-member.is-anyone-in-your-household-a-member-of-a-tribal-nation=Is anyone in your household a member of a Tribal Nation?
+tribal-nation-member.are-you-a-member-of-a-tribal-nation=Are you a member of a Tribal Nation?
 
-tribal-tanf-confirmation.title=Confirmación del TANF tribal/en español: Asistencia Temporal Tribal para Familias Necesitadas
-tribal-tanf-confirmation.header=¡Muy bien! Añadiremos el TANF Tribal a su solicitud.
+tribal-tanf-confirmation.title=Tribal TANF Confirmation
+tribal-tanf-confirmation.header=Okay! We will add Tribal TANF to your  application.
 
-apply-for-mfip-confirmation.title=Confirmación del MFIP/en español: Programa de Inversión Familiar de Minnesota
-apply-for-mfip-confirmation.header=¡Muy bien! Añadiremos el MFIP a su solicitud.
+apply-for-mfip-confirmation.title=MFIP Confirmation
+apply-for-mfip-confirmation.header=Okay! We will add MFIP to your application.
 
-nations-boundary.title=Frontera de las Naciones
-nations-boundary.are-any-of-the-tribal-members=¿Alguno de los miembros de la nación tribal en su hogar vive en la frontera de la nación o cerca de ella?
-nations-boundary.are-you-living-nations-boundary=¿Vives dentro de los límites de una nación tribal?
+nations-boundary.title=Nations Boundary
+nations-boundary.are-any-of-the-tribal-members=Are any of the tribal members in your household living in or near the Tribal Nation’s boundaries?
+nations-boundary.are-you-living-nations-boundary=Do you live within the boundaries of a Tribal Nation?
 
-select-the-tribe.title=Seleccione una nación tribal
-select-the-tribe.which-nation-do-they-belong-to=¿A qué nación tribal pertenece?
-select-the-tribe.select-the-tribe=Seleccione una nación tribal
+select-the-tribe.title=Select a Tribal Nation
+select-the-tribe.which-nation-do-they-belong-to=Which Tribal Nation do you belong to?
+select-the-tribe.select-the-tribe=Select a Tribal Nation
 select-the-tribe.bois-forte=Bois Forte
 select-the-tribe.fond-du-lac=Fond Du Lac
 select-the-tribe.grand-portage=Grand Portage
@@ -1650,807 +1650,807 @@ select-the-tribe.red-lake=Red Lake Nation
 select-the-tribe.shakopee-mdewakanton=Shakopee Mdewakanton
 select-the-tribe.upper-sioux=Upper Sioux
 select-the-tribe.white-earth=White Earth Nation
-select-the-tribe.other=Otra tribu reconocida a nivel federal
+select-the-tribe.other=Other federally recognized tribe
 
-nation-of-residence.title=Nación tribal de residencia
-nation-of-residence.header=Indíquenos a qué nación tribal pertenece.
-later-docs-nation-of-residence.header=De ser así, ¿en qué nación vive?
+nation-of-residence.title=Tribal Nation of residence
+nation-of-residence.header=Tell us which Nation you live in.
+later-docs-nation-of-residence.header=Tell us which Tribal Nation you live in.
 
-lineal-descendant-WEN.title=Descendiente lineal de la Nación Tribal
-lineal-descendant-WEN.are-you-a-lineal-descendant=¿Es usted descendiente en línea recta de White Earth Nation?
-lineal-descendant-WEN.is-anyone-a-lineal-descendant=¿Algún miembro de su familia es descendiente en línea recta de White Earth Nation?
-lineal-descendant-WEN.Definition-of-a=¿Quién es un descendiente en línea directa?
-lineal-descendant-WEN.A-lineal-descendant-is=Un descendiente en línea directa es cualquier persona que pueda rastrear su ascendencia directamente hasta un miembro tribal de White Earth Nation.
+lineal-descendant-WEN.title=Tribal Nation Lineal Descendant
+lineal-descendant-WEN.are-you-a-lineal-descendant=Are you a lineal descendant of the White Earth Nation?
+lineal-descendant-WEN.is-anyone-a-lineal-descendant=Is anyone in your household a lineal descendant of the White Earth Nation?
+lineal-descendant-WEN.Definition-of-a=Who is a lineal descendant?
+lineal-descendant-WEN.A-lineal-descendant-is=A lineal descendant is anyone who can trace their ancestry directly to a White Earth Nation tribal member.
 
-apply-for-tribal-TANF.title=Solicitar para TANF Tribal
-apply-for-tribal-TANF.it-looks-like-you-might-be-eligible=Parece ser que usted podría ser elegible para el TANF Tribal. ¿Desea solicitarlo?
-apply-for-tribal-TANF.reveal-title=¿Qué es el TANF tribal?
-apply-for-tribal-TANF.reveal-item-1=El TANF tribal, o Asistencia Temporal para Familias Necesitadas, es un programa que sirve a las personas embarazadas y a las familias que tienen uno o más miembros que pertenecen a una nación tribal.
-apply-for-tribal-TANF.reveal-item-2=El TANF tribal es similar a otros programas de dinero en efectivo como el MFIP, pero las reglas de elegibilidad han sido definidas por las naciones tribales.
-apply-for-tribal-TANF.reveal-item-3=Algunas naciones tribales de Minnesota tramitan el TANF tribal directamente en lugar de enviar la solicitud al condado.
+apply-for-tribal-TANF.title=apply for Tribal TANF
+apply-for-tribal-TANF.it-looks-like-you-might-be-eligible=It looks like you might be eligible for Tribal TANF. Would you like to apply?
+apply-for-tribal-TANF.reveal-title=What is Tribal TANF?
+apply-for-tribal-TANF.reveal-item-1=Tribal TANF, or Temporary Assistance for Needy Families, is a program that serves pregnant individuals and families who have one or more members that belong to a Tribal Nation.
+apply-for-tribal-TANF.reveal-item-2=Tribal TANF is similar to other cash programs like MFIP, but the eligibility rules are defined by the Tribal Nations.
+apply-for-tribal-TANF.reveal-item-3=Some Tribal Nations in Minnesota process Tribal TANF directly, instead of sending the application to the county.
 
-apply-for-MFIP.title=solicitar el MFIP
-apply-for-MFIP.it-looks-like-you-might-be-eligible=Parece que podría ser elegible para el MFIP. ¿Desea solicitarlo?
-apply-for-MFIP.reveal-title=¿Qué es el MFIP?
-apply-for-MFIP.real-item-1=El MFIP, o Programa de Inversión Familiar de Minnesota, es un programa de asistencia en efectivo que ayuda a las familias con niños a cubrir sus necesidades básicas, como la alimentación, la ropa y el alojamiento.
-apply-for-MFIP.real-item-2=Las personas que solicitan el MFIP por primera vez serán inscritas primero en el Programa de Trabajo Diversificado. Este es un programa de cuatro meses que ayuda a los padres a conectarse con un trabajo, para que puedan volver a trabajar.
+apply-for-MFIP.title=apply for MFIP
+apply-for-MFIP.it-looks-like-you-might-be-eligible=It looks like you might be eligible for MFIP. Would you like to apply?
+apply-for-MFIP.reveal-title=What is MFIP?
+apply-for-MFIP.real-item-1=MFIP, or Minnesota Family Investment Program, is a cash assistance program that helps families with children meet their basic needs, like food, clothing, and rent.
+apply-for-MFIP.real-item-2=First time MFIP applicants will be enrolled in the Diversionary Work Program first. This is a four-month program that helps parents get connected to a job, so they can go back to work.
 
-intro-income.title=Introducción: Ingresos
-intro-income.income-and-employment=Ingresos y Empleo
-intro-income.current-jobs=Trabajos Actuales
-intro-income.unearned-income=Ingresos no derivados del trabajo
-intro-income.recent-income-changes=Cambio de Ingresos Reciente
+intro-income.title=Intro: Income
+intro-income.income-and-employment=Income & Employment
+intro-income.current-jobs=Current jobs
+intro-income.unearned-income=Unearned income
+intro-income.recent-income-changes=Recent income change
 
-employment-status.title=Situación Laboral
-employment-status.are-you-making-money-from-a-job-self-employment=¿Recibe ingresos de un empleo o trabajo independiente?
-employment-status.is-anyone-in-your-household-making-money-from-a-job=¿Alguien en su hogar gana dinero como empleado o trabajador independiente?
+employment-status.title=Employment status
+employment-status.are-you-making-money-from-a-job-self-employment=Are you making money from a job or self-employment?
+employment-status.is-anyone-in-your-household-making-money-from-a-job=Is anyone in your household making money from a job or self-employment?
 
-income-by-job.title=Ingresos de trabajo
-income-by-job.lets-add-your-job-information=Agreguemos la información de su trabajo.
-income-by-job.lets-add-all-the-jobs-in-your-household=Agreguemos todos los trabajos de su hogar.
-income-by-job.this-includes-full-time-part-time-contract-self-employment-work=Incluya el trabajo autónomo, trabajo contratado, y trabajo a tiempo completo o parcial.
-income-by-job.add-a-job=Agregue un trabajo
-income-by-job.id-rather-give-an-estimate=Prefiero dar una aproximación de mis ingresos totales en los últimos 30 días.
+income-by-job.title=Income by job
+income-by-job.lets-add-your-job-information=Let’s add your job information.
+income-by-job.lets-add-all-the-jobs-in-your-household=Let’s add all the jobs in your household.
+income-by-job.this-includes-full-time-part-time-contract-self-employment-work=Include self-employment, contract, full and part-time work.
+income-by-job.add-a-job=Add a job
+income-by-job.id-rather-give-an-estimate=I'd rather give an estimate of my total income over the last 30 days.
 
-household-selection-for-income.title=Selección de personas en el hogar para los ingresos
-household-selection-for-income.header=¿Para quién le gustaría agregar un trabajo?
+household-selection-for-income.title=Household selection for income
+household-selection-for-income.header=Who would you like to add a job for?
 
-ccap-job-search.title=Búsqueda de Empleo
-ccap-job-search.are-you-currently-looking-for-a-job=¿Está buscando trabajo actualmente?
-ccap-job-search.is-household-currently-looking-for-a-job=¿Alguien en el hogar está buscando trabajo actualmente?
+ccap-job-search.title=Job Search
+ccap-job-search.are-you-currently-looking-for-a-job=Are you currently looking for a job?
+ccap-job-search.is-household-currently-looking-for-a-job=Is anyone in the household currently looking for a job?
 
-who-is-looking-for-job.title=Quién está buscando trabajo
-who-is-looking-for-job.who-in-your-household-is-looking-for-a-job=¿Quién en su hogar está buscando trabajo?
+who-is-looking-for-job.title=Who is looking for a job
+who-is-looking-for-job.who-in-your-household-is-looking-for-a-job=Who in your household is looking for a job?
 
-income-up-next.title=Ingresos a Continuación
-income-up-next.got-it-youre-almost-done-with-the-income-section=¡Gracias! Casi ha terminado con la sección de ingresos.
+income-up-next.title=Income Up Next
+income-up-next.got-it-youre-almost-done-with-the-income-section=Got it! You're almost done with the income section.
 
-unearned-income.title=Ingresos No Derivados del Trabajo
-unearned-income.do-you-get-income-from-any-of-these-sources=¿Obtiene ingresos de alguna de estas fuentes?
-unearned-income.household-get-income-from-any-of-these-sources=¿Alguien en su hogar obtiene ingresos de estas fuentes?
-unearned-income.check-all-that-apply-you-do-not-need-to-report-income-you-havent-received-yet=Marque todo lo que corresponda. No es necesario que reporte los ingresos que aún no ha recibido.
-unearned-income.social-security=Seguro Social o Discapacidad (RSDI/SSDI) <span style="font-weight:normal;">(Incluye ingresos de jubilación del Seguro Social, beneficios para sobrevivientes y seguro de incapacidad)</span>
-unearned-income.ssi=SSI <span style="font-weight:normal;">(Seguro de Ingreso Suplementario)</span>
-unearned-income.veterans-benefits=​Beneficios para veteranos 
-unearned-income.unemployment=Beneficios para Desempleo
-unearned-income.workers-compensation=​Compensación laboral 
-unearned-income.retirement=Jubilación <span style="font-weight:normal;">(Como Pensiones IRAs u otras cuentas)</span>
-unearned-income.child-or-spousal-support=​Manutención infantil o conyugal 
-unearned-income.tribal-payments=​Pagos tribales
+unearned-income.title=Unearned Income
+unearned-income.do-you-get-income-from-any-of-these-sources=Do you get income from any of these sources?
+unearned-income.household-get-income-from-any-of-these-sources=Does anyone in your household get income from these sources?
+unearned-income.check-all-that-apply-you-do-not-need-to-report-income-you-havent-received-yet=Check all that apply. You do not need to report income you haven't received yet.
+unearned-income.social-security=RSDI / SSDI <span style="font-weight:normal;">(Includes Social Security Retirement income, Survivors benefits, and Disability Insurance)</span>
+unearned-income.ssi=SSI <span style="font-weight:normal;">(Supplemental Security Income)</span>
+unearned-income.veterans-benefits=Veterans benefits
+unearned-income.unemployment=Unemployment
+unearned-income.workers-compensation=Workers' compensation
+unearned-income.retirement=Retirement <span style="font-weight:normal;">(Like Pensions, IRAs or other accounts)</span>
+unearned-income.child-or-spousal-support=Child or spousal support
+unearned-income.tribal-payments=Tribal payments
 
-advanced-child-tax-credit.title=Crédito tributario anticipado por hijos
-advanced-child-tax-credit.single=¿Recibe o espera recibir pagos del crédito tributario por hijos de forma<i> anticipada</i>?
-advanced-child-tax-credit.household= ¿Alguien en su hogar recibe o espera recibir pagos del crédito tributario por hijos de forma<i> anticipada</i>? \n
-advanced-child-tax-credit.body=Estos pagos se envían entre julio y diciembre.
+advanced-child-tax-credit.title=Advance Child Tax Credit
+advanced-child-tax-credit.single=Do you receive or expect to receive Child Tax Credit payments <i>in advance</i>?
+advanced-child-tax-credit.household= Does anyone in your household receive or expect to receive Child Tax Credit payments <i>in advance</i>?
+advanced-child-tax-credit.body=These payments are sent out between July and December.
 
-advanced-child-tax-credit.reveal-types.title=Pagos anticipados del crédito tributario por hijos
-advanced-child-tax-credit.reveal-types.p1=Si solicita el crédito tributario por hijos en su declaración de impuestos, puede optar por recibir parte del crédito del próximo año de forma anticipada. Estos pagos se envían entre julio y diciembre.
-advanced-child-tax-credit.reveal-types.p2=Revisamos estos pagos con su solicitud.
+advanced-child-tax-credit.reveal-types.title=Child Tax Credit advance payments
+advanced-child-tax-credit.reveal-types.p1=If you claim the Child Tax Credit on your income tax return, you can choose to receive part of next year\u2019s credit in advance. These payments are sent out between July and December.\u2028\u2028
+advanced-child-tax-credit.reveal-types.p2=We review these payments with your application.
 
-emergency-type.title=Tipo de Emergencia
-emergency-type.describes-emergency=<h3 style="font-size: 19px; line-height: 25px; font-weight: bold; border-bottom: 2px solid #5f5854; padding-bottom: 2px; color: #5f5854">Asistencia de Emergencia</h3><h2>¿Qué opción describe mejor su emergencia?</h2>
-emergency-type.check-all-that-apply=Marque todas las que correspondan. Usaremos esta información para su solicitud de Asistencia de emergencia.
-emergency-type.eviction-notice=Alquiler vencido o Aviso de Desalojo
-emergency-type.utility-shut-off=Interrupción de servicios públicos
-emergency-type.first-month-rent-rent-or-damage-deposit=Primer mes de alquiler o depósito por daños
-emergency-type.other-emergency=Otra emergencia
+emergency-type.title=Emergency Type
+emergency-type.describes-emergency=<h3 style="font-size: 19px; line-height: 25px; font-weight: bold; border-bottom: 2px solid #5f5854; padding-bottom: 2px; color: #5f5854"> Emergency Assistance </h3> <h2> What best describes your emergency?</h2>
+emergency-type.check-all-that-apply=Check all that apply. We'll use this information for your Emergency Assistance application.
+emergency-type.eviction-notice=Past due rent or Eviction Notice
+emergency-type.utility-shut-off=Utility shut-off
+emergency-type.first-month-rent-rent-or-damage-deposit=First month's rent or damage deposit
+emergency-type.other-emergency=Other emergency
 
-other-emergency-type.title=Otra emergencia
-other-emergency-type.tell-us-your-emergency=<h3 style="font-size: 19px; line-height: 25px; font-weight: bold; border-bottom: 2px solid #5f5854; padding-bottom: 2px; color: #5f5854">Asistencia de Emergencia</h3><h2>Cuéntenos sobre su emergencia</h2>
-other-emergency-type.brief-description=Brindarnos toda la información que pueda nos ayudará a ofrecerle el apoyo adecuado. Solo necesitamos una breve descripción.
+other-emergency-type.title=Other emergency
+other-emergency-type.tell-us-your-emergency=<h3 style="font-size: 19px; line-height: 25px; font-weight: bold; border-bottom: 2px solid #5f5854; padding-bottom: 2px; color: #5f5854"> Emergency Assistance </h3> <h2> Tell us about your emergency?</h2>
+other-emergency-type.brief-description=Sharing what you can will help us get you the right support. A brief description is all we need.
 
 # Common for all unearned income source pages
-unearned-income-source.title=Fuentes de Ingresos No Derivados del Trabajo
-unearned-income-source.you-can-select-more=Puede seleccionar a más de una persona.
-unearned-income-source.how-much-income-monthly=¿Cuál es el ingreso mensual?
+unearned-income-source.title=Unearned Income Source
+unearned-income-source.you-can-select-more=You can select more than one person.
+unearned-income-source.how-much-income-monthly=How much income is received monthly?
 # Messages for page that displays each person in household to assign unearned income for each person and source.
-social-security-income-source.title=Fuentes de Ingresos No Derivados del Trabajo
-social-security-income-source.who-receives=¿Quién recibe ingresos del <i>Seguro Social, Beneficios para Sobrevivientes o Seguro por Incapacidad</i>? <i><span style="font-weight: normal;">(RSDI/SSDI)</span></i>
-supplemental-security-income-source.who-receives=¿Quién recibe ingresos del <i>Ingreso suplementario de seguridad</i>? <i><span style="font-weight: normal;">(SSI)</span></i>
-veterans-benefits-income-source.who-receives=¿Quién recibe ingresos de <i>beneficios para veteranos</i>?
-unemployment-income-source.who-receives=¿Quién recibe ingresos por <i>desempleo</i>?
-workers-comp-income-source.who-receives=¿Quién recibe ingresos de una <i>indemnización por accidente laboral</i>?
-retirement-income-source.who-receives=​¿Quién recibe <i>ingresos por jubilación</i>?
-retirement-income-source.additional-help=​<span><p>Esto puede incluir ingresos de pensiones, cuentas IRA u otras cuentas.</p><p> Puede seleccionar a más de una persona.</p></span>
-child-or-spousal-support-income-source.who-receives=¿Quién recibe ingresos de <i>manutención de hijos o cónyuge</i>?
-tribal-payment-income-source.who-receives=¿Quién recibe ingresos de <i>pagos tribales</i>?
+social-security-income-source.title=Unearned Income Source
+social-security-income-source.who-receives=Who receives income from <i>Social Security, Survivors benefits, or Disability insurance</i>? <i><span style="font-weight: normal;">(RSDI/SSDI)</span></i>
+supplemental-security-income-source.who-receives=Who receives income from <i>Supplemental Security Income</i>? <i><span style="font-weight: normal;">(SSI)</span></i>
+veterans-benefits-income-source.who-receives=Who receives income from <i>veterans benefits</i>?
+unemployment-income-source.who-receives=Who receives income from <i>unemployment</i>?
+workers-comp-income-source.who-receives=Who receives income from <i>workers compensation</i>?
+retirement-income-source.who-receives=Who receives <i>retirement income</i>?
+retirement-income-source.additional-help=<span><p>This could include income from pensions, IRAs or other accounts.</p><p>You can select more than one person.</p></span>
+child-or-spousal-support-income-source.who-receives=Who receives income from <i>child or spousal support</i>?
+tribal-payment-income-source.who-receives=Who receives income from <i>tribal payments</i>?
 
-unearned-income-other.do-you-get-income-from-any-of-these-sources=¿Recibe ingresos de alguna de estas siguientes fuentes?
-unearned-income-other.household-get-income-from-any-of-these-sources=¿Hay alguien en su hogar que recibe ingresos de otras fuentes?
-unearned-income-other.benefits-programs=Otros programas de beneficios del estado de Minnesota <span style="font-weight:normal">(Beneficios como GA, MFIP, Tribal TANF u otros)</span>
-unearned-income-other.insurance-payments=Pagos de seguros
-unearned-income-other.contract-for-deed=Contrato de escritura
-unearned-income-other.money-from-a-trust=Dinero proveniente de un fideicomiso
-unearned-income-other.rental-income=Ingresos por alquiler
-unearned-income-other.health-care-reimbursement=Reembolsos de gastos médicos
-unearned-income-other.interest-dividends=Intereses o dividendos
-unearned-income-other.other-payments=Otros pagos
-unearned-income-other.annuity-payments=Pagos de anualidades
-unearned-income-other.gifts=Regalos
-unearned-income-other.lottery-gambling=Premios de lotería o juegos de azar
-unearned-income-other.day-trading-proceeds=Ganancias por operaciones bursátiles diarias
-unearned-income-benefits-programs.title=Programas de beneficios
-unearned-income-benefits-programs.header=¿Quién recibe ingresos de <i>programas de beneficios</i>?
-unearned-income-insurance-payments.header=¿Quién recibe ingresos de <i>pagos de seguros</i>?
-unearned-income-contract-for-deed.header=¿Quién recibe ingresos por un <i>contrato de propiedad</i>?
-unearned-income-money-from-a-trust.header=¿Quién recibe ingresos provenientes de un <i>fideicomiso</i>?
-unearned-income-health-care-reimbursement.header=¿Quién recibe ingresos en concepto de <i>reembolsos de gastos médicos</i>?
-unearned-income-interest-dividends.header=¿Quién recibe ingresos en concepto de i<i>ntereses o dividendos</i>?
-unearned-income-rental-income.header=¿Quién recibe <i>ingresos por alquiler</i>?
-unearned-income-annuity-payments.header=¿Quién recibe ingresos de<i> una anualidad</i>?
-unearned-income-gifts-income.header=¿Quién recibe ingresos por<i> regalos</i>?
-unearned-income-gifts.other-additional-help=<span><p>Puede seleccionar a más de una persona.</p></span>
-unearned-income-lottery-gambling.title=Premios de lotería o juegos de azar
-unearned-income-lottery-gambling.header=¿Quién recibe ingresos por premios de<i> lotería o juegos de azar</i>?
-unearned-income-lottery-gambling.other-additional-help=<span><p>Puede seleccionar a más de una persona.</p></span>
-unearned-income-day-trading-proceeds.header=¿Quién recibe ingresos por operaciones<i> bursátiles diarias</i>?
-unearned-income-other.other-payments.header=¿Quién recibe ingresos de <i>otros pagos</i>?
-unearned-income-other.other-additional-help=<span><p>Los otros pagos pueden incluir herencias, ganancias de capital o cualquier ingreso que aún no haya compartido. </p><p>Puede seleccionar a más de una persona.</p></span>
+unearned-income-other.do-you-get-income-from-any-of-these-sources=Do you get income from any of these other sources?
+unearned-income-other.household-get-income-from-any-of-these-sources=Does anyone in your household get income from these other sources?
+unearned-income-other.benefits-programs=Other Minnesota benefits programs <span style="font-weight:normal">(Benefits like GA, MFIP, Tribal TANF or others)</span>
+unearned-income-other.insurance-payments=Insurance payments
+unearned-income-other.contract-for-deed=Contract for deed
+unearned-income-other.money-from-a-trust=Money from a trust
+unearned-income-other.rental-income=Rental income
+unearned-income-other.health-care-reimbursement=Health care reimbursement
+unearned-income-other.interest-dividends=Interest or dividends
+unearned-income-other.other-payments=Other payments
+unearned-income-other.annuity-payments=Annuity payments
+unearned-income-other.gifts=Gifts
+unearned-income-other.lottery-gambling=Lottery or gambling winnings
+unearned-income-other.day-trading-proceeds=Day trading proceeds
+unearned-income-benefits-programs.title=Benefits Programs
+unearned-income-benefits-programs.header=Who receives income from <i>benefits programs</i>?
+unearned-income-insurance-payments.header=Who receives income from <i>insurance payments</i>?
+unearned-income-contract-for-deed.header=Who receives income from a <i>contract for deed</i>?
+unearned-income-money-from-a-trust.header=Who receives income from a <i>trust</i>?
+unearned-income-health-care-reimbursement.header=Who receives income from <i>health care reimbursements</i>?
+unearned-income-interest-dividends.header=Who receives income from <i>interest or dividends</i>?
+unearned-income-rental-income.header=Who receives <i>rental income</i>?
+unearned-income-annuity-payments.header=Who receives income from <i>an annuity</i>?
+unearned-income-gifts-income.header=Who receives income from <i>gifts</i>?
+unearned-income-gifts.other-additional-help=<span><p>You can select more than one person.</p></span>
+unearned-income-lottery-gambling.title=Lottery or Gambling winnings
+unearned-income-lottery-gambling.header=Who receives income from <i>lottery or gambling winnings</i>?
+unearned-income-lottery-gambling.other-additional-help=<span><p>You can select more than one person.</p></span>
+unearned-income-day-trading-proceeds.header=Who receives income from <i>day trading</i>?
+unearned-income-other.other-payments.header=Who receives income from <i>other payments</i>?
+unearned-income-other.other-additional-help=<span><p>Other payments could include inheritance, capital gains and/or any income you haven't already shared.</p><p>You can select more than one person.</p></span>
 
-unearned-income-sources.title=Fuentes de Ingresos No Derivados del Trabajo
-unearned-income-sources.tell-us-how-much-money-you-receive=Díganos cuánto dinero recibe.
-unearned-income-sources.tell-us-how-much-money-is-received=Díganos cuánto dinero se recibe.
-unearned-income-sources.if-you-dont-have-all-this-information-on-hand-skip=Si no tiene toda esta información a la mano, puede saltarse esta pregunta por ahora. Un trabajador social de elegibilidad le preguntará sobre esto posteriormente.
+unearned-income-sources.title=Unearned Income Sources
+unearned-income-sources.tell-us-how-much-money-you-receive=Tell us how much money you receive.
+unearned-income-sources.tell-us-how-much-money-is-received=Tell us how much money is received.
+unearned-income-sources.if-you-dont-have-all-this-information-on-hand-skip=If you don't have all this information on hand, skip this question for now. An eligibility worker will ask you about it later.
 
-student-financial-aid.title=Ayuda financiera para estudiantes
-student-financial-aid.household-header=¿Alguien en su hogar tiene o espera recibir préstamos, becas o subvenciones para asistir a una universidad u otro programa de aprendizaje?
-student-financial-aid.header=¿Tiene o espera obtener préstamos, becas o subvenciones para asistir a una universidad u otro programa de aprendizaje?
-student-financial-aid.header-help-message=Esto incluye programas en los que puede inscribirse después de terminar la escuela secundaria o de obtener un GED.
+student-financial-aid.title=Student Financial Aid
+student-financial-aid.household-header=Does anyone in your household have or expect to get any loans, scholarships or grants to attend a college, university, or other learning program?
+student-financial-aid.header=Do you have or do you expect to get any loans, scholarships or grants to attend a college, university, or other learning program?
+student-financial-aid.header-help-message=This includes programs you may enroll in after finishing high school or getting a GED.
 
-future-income.title=Ingresos Futuros
-future-income.do-you-think-youll-earn-less-money-this-month-than-last-month=¿Cree que ganará menos dinero este mes que el mes pasado?
-future-income.do-you-think-household-will-earn-less-money-this-month-than-last-month=¿Cree que su hogar ganará menos dinero este mes que el anterior?
-future-income.if-youre-not-sure-you-can-guess=Si no está seguro/a, puede adivinar.
-future-income.is-there-anything-else-youd-like-to-share-about-your-income=¿Hay algo más que le gustaría compartir sobre sus ingresos?
+future-income.title=Future Income
+future-income.do-you-think-youll-earn-less-money-this-month-than-last-month=Do you think you'll earn less money this month than last month?
+future-income.do-you-think-household-will-earn-less-money-this-month-than-last-month=Do you think your household will earn less money this month than last month?
+future-income.if-youre-not-sure-you-can-guess=If you're not sure, you can guess.
+future-income.is-there-anything-else-youd-like-to-share-about-your-income=Is there anything else you'd like to share about your income?
 
-additional-income-info.title=Información adicional sobre los ingresos
+additional-income-info.title=Additional Income Info
 
-employers-name.title=Nombre del empleador
-employers-name.add-a-job-you-have=Agregar un empleo o trabajo.
-employers-name.add-a-job-they-have=Agregar un empleo o trabajo.
-employers-name.what-is-the-employers-name=¿Cuál es el nombre del empleador?
+employers-name.title=Employer's Name
+employers-name.add-a-job-you-have=Add a job.
+employers-name.add-a-job-they-have=Add a job.
+employers-name.what-is-the-employers-name=What is the employer's name?
 
-self-employment.title=Trabajo por propia cuenta
-self-employment.is-your-work-here=¿Su trabajo aquí se considera autónomo, por contrato o por cuenta propia?
-self-employment.is-their-work-here=¿Su trabajo aquí se considera autónomo, por contrato o por cuenta propia?
-self-employment.reveal-title=Ejemplos de trabajo por propia cuenta
-self-employment.you-do-gig-work-independent-contracting-or-run-your-own-business=Realiza trabajos por encargo, contrataciones independientes o tiene su propio negocio
-self-employment.you-receive-a-1099-misc-tax-form-from-a-company-or-individual-at-the-end-of-the-year=Usted recibe un formulario de impuestos 1099 MISC de una empresa o de un individuo al final del año
-self-employment.you-do-not-get-employment-benefits-or-tax-contributions-from-the-company-or-individual-you-work-for=Usted no recibe beneficios de su trabajo ni contribuciones de impuestos de la empresa o persona para la que trabaja
-self-employment.job-examples=Ejemplos de trabajos:
-self-employment.rideshare-or-food-delivery-driver-hair-dresser-dog-walker-newspaper-delivery-artist=Conductor de automóvil compartido o de entrega de comidas, peluquero, paseador de perros, repartidor de periódicos, artista.
+self-employment.title=Self-employment
+self-employment.is-your-work-here=Is your work here considered freelance, contracting or self-employment?
+self-employment.is-their-work-here=Is their work here considered freelance, contracting or self-employment?
+self-employment.reveal-title=Examples of self-employment
+self-employment.you-do-gig-work-independent-contracting-or-run-your-own-business=You do gig work, independent contracting or run your own business
+self-employment.you-receive-a-1099-misc-tax-form-from-a-company-or-individual-at-the-end-of-the-year=You receive a 1099 MISC tax form from a company or individual at the end of the year
+self-employment.you-do-not-get-employment-benefits-or-tax-contributions-from-the-company-or-individual-you-work-for=You do not get employment benefits or tax contributions from the company or individual you work for
+self-employment.job-examples=Job examples:
+self-employment.rideshare-or-food-delivery-driver-hair-dresser-dog-walker-newspaper-delivery-artist=Rideshare or food delivery driver, hair dresser, dog walker, newspaper delivery, artist.
 
-paid-by-the-hour.title=Pagado por hora
-paid-by-the-hour.do-you-get-paid-by-the-hour=¿Le pagan por hora?
-paid-by-the-hour.do-they-get-paid-by-the-hour=¿Le pagan por hora?
-paid-by-the-hour.i-dont-know-these-details=No sé estos detalles.
+paid-by-the-hour.title=Paid by the hour
+paid-by-the-hour.do-you-get-paid-by-the-hour=Do you get paid by the hour?
+paid-by-the-hour.do-they-get-paid-by-the-hour=Do they get paid by the hour?
+paid-by-the-hour.i-dont-know-these-details=I don't know these details.
 
-hourly-wage.title=Salario por hora
-hourly-wage.what-is-your-hourly-wage=¿Cuál es su salario por hora?
-hourly-wage.what-is-their-hourly-wage=¿Cuál es su salario por hora?
+hourly-wage.title=Hourly wage
+hourly-wage.what-is-your-hourly-wage=What is your hourly wage?
+hourly-wage.what-is-their-hourly-wage=What is their hourly wage?
 
-hours-a-week.title=Horas a la semana
-hours-a-week.how-many-hours-a-week-do-you-work=¿Cuántas horas a la semana trabaja?
-hours-a-week.how-many-hours-a-week-do-they-work=¿Cuántas horas a la semana trabajan?
-hours-a-week.we-know-this-can-be-hard-to-answer-so-just-estimate-based-on=Sabemos que puede ser difícil de responder a esta pregunta, así que haga un cálculo basado en su trabajo durante los últimos 30 días.
-hours-a-week.we-know-this-can-be-hard-to-answer-so-just-estimate-based-on-their=Sabemos que puede ser difícil de responder a esta pregunta, así que haga un cálculo basado en su trabajo durante los últimos 30 días.
+hours-a-week.title=Hours a week
+hours-a-week.how-many-hours-a-week-do-you-work=How many hours a week do you work?
+hours-a-week.how-many-hours-a-week-do-they-work=How many hours a week do they work?
+hours-a-week.we-know-this-can-be-hard-to-answer-so-just-estimate-based-on=We know this can be hard to answer, so just estimate based on your work over the last 30 days.
+hours-a-week.we-know-this-can-be-hard-to-answer-so-just-estimate-based-on-their=We know this can be hard to answer, so just estimate based on their work over the last 30 days.
 
-pay-period.title=Período de pago
-pay-period.how-often-do-you-get-paid=¿Con qué frecuencia le pagan?
-pay-period.how-often-do-they-get-paid=¿Con qué frecuencia le pagan?
-pay-period.every-day=Cada día
-pay-period.every-week=Cada semana
-pay-period.every-two-weeks=Cada dos semanas
-pay-period.twice-a-month=Dos veces al mes
-pay-period.every-month=Cada mes
-pay-period.it-varies=Cambia
+pay-period.title=Pay period
+pay-period.how-often-do-you-get-paid=How often do you get paid?
+pay-period.how-often-do-they-get-paid=How often do they get paid?
+pay-period.every-day=Each Day
+pay-period.every-week=Every week
+pay-period.every-two-weeks=Every two weeks
+pay-period.twice-a-month=Twice a month
+pay-period.every-month=Every month
+pay-period.it-varies=It changes
 
-principal-wage-earner.title=Perceptor Principal de Ingresos
-principal-wage-earner.header=Designemos a un Perceptor Principal de Ingresos (PWE)
-principal-wage-earner.snap-households-must-designate=<p>Los hogares que reciben beneficios del Programa de Asistencia Nutricional Suplementaria (SNAP, por sus siglas en inglés) deben designar a una persona adulta como PWE.</p><p> Hable con su trabajador sobre cómo esta designación podría afectar sus beneficios.</p>
-principal-wage-earner.im-not-sure=No estoy seguro. Quiero hablar primero con mi trabajador
-principal-wage-earner.i-am-the-principal-wage-earner=Soy el Perceptor Principal de Ingresos
-principal-wage-earner.who-is-the-principal-wage-earner=¿Quién es el Perceptor Principal de Ingresos? 
-principal-wage-earner.select-the-adult=Seleccione a la persona adulta a la que esto aplica
+principal-wage-earner.title=Principal Wage Earner
+principal-wage-earner.header=Let's designate a Principal Wage Earner (PWE).
+principal-wage-earner.snap-households-must-designate=<p>SNAP households must designate an adult as the PWE.</p><p>Talk with your worker about how this designation could affect your benefits</p>
+principal-wage-earner.im-not-sure=I'm not sure. I want to talk with my worker first.
+principal-wage-earner.i-am-the-principal-wage-earner=I'm the Principal Wage Earner
+principal-wage-earner.who-is-the-principal-wage-earner=Who is the Principal Wage Earner?
+principal-wage-earner.select-the-adult=Select the adult to whom this applies.
 
-start-expenses.title=Gastos
-start-expenses.expenses-and-deductions=Gastos y Deducciones
-start-expenses.household-payments=Pagos del hogar
-start-expenses.savings=Ahorros
-start-expenses.assets=Sus bienes
+start-expenses.title=Start Expenses
+start-expenses.expenses-and-deductions=Expenses & Deductions
+start-expenses.household-payments=Household payments
+start-expenses.savings=Savings
+start-expenses.assets=Assets
 
-home-expenses.title=Gastos del hogar
-home-expenses.do-you-pay-for-any-of-these=¿Usted esta en cargo de alguno de estos pagos?
-home-expenses.household-pay-for-these=¿Alguien en su hogar esta en cargo de alguno de estos pagos?
-home-expenses.rent=Renta
-home-expenses.mortgage=Hipoteca
-home-expenses.homeowners-insurance=Seguro de Propriedad
-home-expenses.real-estate-taxes=Impuestos sobre Bienes Inmuebles
-home-expenses.association-fees=Cuotas de Asociación
-home-expenses.room-and-board=Alojamiento y alimentos
+home-expenses.title=Home Expenses
+home-expenses.do-you-pay-for-any-of-these=Do you pay for any of these?
+home-expenses.household-pay-for-these=Does anyone in your household pay for any of these?
+home-expenses.rent=Rent
+home-expenses.mortgage=Mortgage
+home-expenses.homeowners-insurance=Homeowners Insurance
+home-expenses.real-estate-taxes=Real Estate Taxes
+home-expenses.association-fees=Association Fees
+home-expenses.room-and-board=Room and Board
 
-home-expenses-amount.title=Monto de los gastos de la casa
-home-expenses-amount.how-much-do-you-pay-for-rent-and-mortgage-every-month=¿Cuánto paga por la renta y/o la hipoteca cada mes?
-home-expenses-amount.how-much-does-household-pay-for-rent-and-mortgage-every-month=¿Cuánto paga su hogar por la renta y/o la hipoteca cada mes?
-home-expenses-amount.how-much-do-you-pay-for-mortgage-every-month=¿Cuánto paga por la hipoteca cada mes?
-home-expenses-amount.household-pay-mortgage-every-month=¿Cuánto paga su hogar por la hipoteca cada mes?
-home-expenses-amount.how-much-do-you-pay-for-rent-every-month=¿Cuánto paga por la renta cada mes?
-home-expenses-amount.household-pay-rent-every-month=¿Cuánto paga su hogar por la renta cada mes?
-home-expenses-amount.how-much-do-you-pay-for-room-and-board-every-month=¿Cuánto paga por su alojamiento y comida cada mes?
-home-expenses-amount.how-much-do-you-pay-for-rent-and-room-and-board-every-month=¿Cuánto paga por su renta/alquiler, alojamiento y comida cada mes?
-home-expenses-amount.how-much-do-you-pay-for-mortgage-and-room-and-board-every-month=¿Cuánto paga por su hipoteca, alojamiento y comida cada mes?
-home-expenses-amount.how-much-do-you-pay-for-rent-mortgage-and-room-and-board-every-month=¿Cuánto paga por su renta/arrendamiento, alojamiento y comida cada mes?
-home-expenses-amount.household-pay-for-room-and-board-every-month=¿Cuánto paga su familia por alojamiento y comida cada mes?
-home-expenses-amount.household-pay-for-rent-and-room-and-board-every-month=¿Cuánto paga su familia por renta/alquiler alojamiento y comida cada mes?
-home-expenses-amount.household-pay-for-mortgage-and-room-and-board-every-month=¿Cuánto paga su hogar por la hipoteca y el alojamiento y la comida cada mes?
-home-expenses-amount.household-pay-for-rent-mortgage-and-room-and-board-every-month=¿Cuánto paga su familia por renta/alquiler alojamiento y comida cada mes?
+home-expenses-amount.title=Home expenses amount
+home-expenses-amount.how-much-do-you-pay-for-rent-and-mortgage-every-month=How much do you pay for your rent and mortgage every month?
+home-expenses-amount.how-much-does-household-pay-for-rent-and-mortgage-every-month=How much does your household pay for your rent and mortgage every month?
+home-expenses-amount.how-much-do-you-pay-for-mortgage-every-month=How much do you pay for your mortgage every month?
+home-expenses-amount.household-pay-mortgage-every-month=How much does your household pay for your mortgage each month?
+home-expenses-amount.how-much-do-you-pay-for-rent-every-month=How much do you pay for your rent every month?
+home-expenses-amount.household-pay-rent-every-month=How much does your household pay for rent every month?
+home-expenses-amount.how-much-do-you-pay-for-room-and-board-every-month=How much do you pay for your room and board every month?
+home-expenses-amount.how-much-do-you-pay-for-rent-and-room-and-board-every-month=How much do you pay for your rent and room and board every month?
+home-expenses-amount.how-much-do-you-pay-for-mortgage-and-room-and-board-every-month=How much do you pay for your mortgage and room and board every month?
+home-expenses-amount.how-much-do-you-pay-for-rent-mortgage-and-room-and-board-every-month=How much do you pay for your rent, mortgage and room and board every month?
+home-expenses-amount.household-pay-for-room-and-board-every-month=How much does your household pay for room and board every month?
+home-expenses-amount.household-pay-for-rent-and-room-and-board-every-month=How much does your household pay for rent and room and board every month?
+home-expenses-amount.household-pay-for-mortgage-and-room-and-board-every-month=How much does your household pay for mortgage and room and board every month?
+home-expenses-amount.household-pay-for-rent-mortgage-and-room-and-board-every-month=How much does your household pay for rent, mortgage and room and board every month?
 
-energy-assistance.title=Asistencia para Gastos de Energía
-energy-assistance.have-you-received-money-for-energy-assistance=¿Ha recibido dinero para asistencia para gastos de energía (LIHEAP) en los últimos 12 meses?
-energy-assistance.household-received-money=¿Alguien en su hogar ha recibido dinero para asistencia para gastos de energía (LIHEAP) en los últimos 12 meses?
+energy-assistance.title=Energy Assistance
+energy-assistance.have-you-received-money-for-energy-assistance=Have you received money for energy assistance (LIHEAP) in the last 12 months?
+energy-assistance.household-received-money=Has your household received money for energy assistance (LIHEAP) in the last 12 months?
 
-energy-assistance-more-than-20.title=Asistencia para Gastos de Energía Más de 20
-energy-assistance-more-than-20.have-you-received-more-than-20-in-energy-assistance=¿Ha recibido más de $20 en asistencia para gastos de energía este año?
-energy-assistance-more-than-20.household-received=¿Su hogar ha recibido más de $20 en asistencia para gastos de energía este año?
+energy-assistance-more-than-20.title=Energy Assistance More Than 20
+energy-assistance-more-than-20.have-you-received-more-than-20-in-energy-assistance=Have you received more than $20 in energy assistance this year?
+energy-assistance-more-than-20.household-received=Has your household received more than $20 in energy assistance this year?
 
-child-care-costs.title=Costos del cuidado infantil
-child-care-costs.header=¿Paga usted por el cuidado de un niño porque trabaja, busca trabajo o estudia?
-child-care-costs-household.header=¿Alguien en su hogar tiene gastos por el cuidado de un niño porque trabaja, busca trabajo o estudia? 
-child-care-costs-household.the-child-care-assistance-program=El Programa de Asistencia para el Cuidado Infantil (Child Care Assistance Program) puede ayudar a pagar los costos del cuidado infantil. Pregúntele a su trabajador(a) cómo solicitar el Programa de Asistencia para el Cuidado Infantil.
+child-care-costs.title=Child care costs
+child-care-costs.header=Do you have child care costs because you are working, looking for work, or going to school?
+child-care-costs-household.header=Does anyone in your household have child care costs because they are working, looking for work, or going to school?
+child-care-costs-household.the-child-care-assistance-program=The Child Care Assistance Program may help pay child care costs. Ask your worker how to apply for the Child Care Assistance Program.
 
-child-care-costs-amount.title=Monto del cuidado infantil
-child-care-costs-amount.header=Cuéntenos cuánto paga su hogar en cuidado infantil.
-child-care-costs-amount.if-you-dont-have-all-this=Si no tiene toda esta información a mano, omita esta pregunta por ahora.  Un trabajador de elegibilidad le preguntará sobre esto más adelante.
+child-care-costs-amount.title=Child care amount
+child-care-costs-amount.header=Tell us how much your household pays for child care.
+child-care-costs-amount.if-you-dont-have-all-this=If you don't have all this information on hand, skip this question for now. An eligibility worker will ask you about it later.
 
-adult-care-costs-amount.title=Monto del cuidado de adultos
-adult-care-costs-amount.header=Díganos cuánto paga su hogar por el cuidado de un adulto enfermo o discapacitado.
-adult-care-costs-amount.if-you-dont-have-all-this=Si no tiene toda esta información a mano, omita esta pregunta por ahora.  Un trabajador de elegibilidad le preguntará sobre esto más adelante.
+adult-care-costs-amount.title=Adult care amount
+adult-care-costs-amount.header=Tell us how much your household pays for ill or disabled adult care.
+adult-care-costs-amount.if-you-dont-have-all-this=If you don't have all this information on hand, skip this question for now. An eligibility worker will ask you about it later.
 
-costs-amount.amount=Monto
-costs-frequency.how-often=¿Con qué frecuencia?
+costs-amount.amount=Amount
+costs-frequency.how-often=How often?
 
-cost-frequency.select-frequency=Seleccione la frecuencia
-cost-frequency.monthly=Mensualmente
-cost-frequency.twice-a-month=Dos veces al mes
-cost-frequency.every-two-weeks=Cada dos semanas
-cost-frequency.weekly=Semanal
-cost-frequency.other=Otro
+cost-frequency.select-frequency=Select frequency
+cost-frequency.monthly=Monthly
+cost-frequency.twice-a-month=Twice a month
+cost-frequency.every-two-weeks=Every two weeks
+cost-frequency.weekly=Weekly
+cost-frequency.other=Other
 
-adult-care-costs.title=Costos de la atención a adultos 
-adult-care-costs.header=¿Paga por la atención de un adulto enfermo o discapacitado porque trabaja, busca trabajo o estudia?
-adult-care-costs-household.header=¿Alguien en su hogar tiene costos de cuidado para una persona adulta enferma o con una discapacidad debido al trabajo, la búsqueda de empleo o la asistencia a la escuela?
+adult-care-costs.title=Adult care costs
+adult-care-costs.header=Do you pay for the care of an ill or disabled adult because you are working, looking for work, or going to school?
+adult-care-costs-household.header=Does anyone in your household have care costs for an ill or disabled adult due to work, looking for work, or going to school?
 
-past-employment.title=Experiencia laboral previa
-past-employment.header=<p>Hablemos sobre sus trabajos anteriores.</p><p> ¿Ha tenido un empleo o ha trabajado por cuenta propia en los últimos 36 meses? (3 años)</p>
-past-employment-household.header=<p>Hablemos sobre sus trabajos anteriores.</p><p> ¿Algún miembro de su hogar ha tenido un empleo o ha trabajado por cuenta propia en los últimos 36 meses? (3 años)</p>
+past-employment.title=Employment in the past
+past-employment.header=<p>Let's talk about past work.</p>  <p>Have you had a job or have you been self-employed in the past 36 months? (3 years)</p>
+past-employment-household.header=<p>Let's talk about past work.</p> <p>Has anyone in the household had a job or been self-employed in the past 36 months? (3 years)</p>
 
-medical-expenses.title=Gastos médicos
-medical-expenses.do-you-pay-for-medical-expenses=¿Paga por seguro de médicos u otros gastos médicos?
-medical-expenses.does-anyone-in-your-household-pay-for-medical-expenses=¿Hay alguien en su casa que paga por seguro médico o por otros gastos médicos?
-medical-expenses.let-us-know=Díganos si está pagando de su bolsillo alguno de estos gastos médicos.
-medical-expenses.medical-insurance-premiums=Pagos de seguro médico
-medical-expenses.dental-insurance-premiums=Pagos de seguro dental
-medical-expenses.vision-insurance-premiums=Pagos de seguro de la vista
-medical-expenses.medical-bills-or-copays=Gastos médicos o copagos
+medical-expenses.title=Medical expenses
+medical-expenses.do-you-pay-for-medical-expenses=Do you pay for health insurance or other medical expenses?
+medical-expenses.does-anyone-in-your-household-pay-for-medical-expenses=Does anyone in your household pay for health insurance or other medical expenses?
+medical-expenses.let-us-know=Let us know if you are paying out-of-pocket for any of these medical expenses.
+medical-expenses.medical-insurance-premiums=Medical insurance premiums
+medical-expenses.dental-insurance-premiums=Dental insurance premiums
+medical-expenses.vision-insurance-premiums=Vision insurance premiums
+medical-expenses.medical-bills-or-copays=Medical bills or copays
 
-medical-expenses-sources.title=Fuentes de gastos médicos
-medical-expenses-sources.tell-us-how-much-money-is-paid=Díganos cuánto dinero se paga.
-medical-expenses-source.if-you-dont-have-this-information-right-now=Si actualmente no tiene esta información, ponga un estimado o déjelo en blanco.
-medical-expenses-sources.medical-insurance-premiums=Prima/Pago de seguro médico
-medical-expenses-sources.dental-insurance-premiums=Prima del seguro dental
-medical-expenses-sources.vision-insurance-premiums=Prima/Pago del Seguro de Vista
+medical-expenses-sources.title=Medical expenses sources
+medical-expenses-sources.tell-us-how-much-money-is-paid=Tell us how much money is paid.
+medical-expenses-source.if-you-dont-have-this-information-right-now=If you don't have this information right now, estimate or leave it blank.
+medical-expenses-sources.medical-insurance-premiums=Medical Insurance Premium
+medical-expenses-sources.dental-insurance-premiums=Dental Insurance Premium
+medical-expenses-sources.vision-insurance-premiums=Vision Insurance Premium
 
-special-care-expenses.title=Costos de cuidados especiales
-special-care-expenses-header=¿Tiene alguno de estos gastos?
-special-care-expenses-household-header=¿Tiene usted o alguien en su hogar alguno de estos gastos?
-special-care-expenses-assets.select-all-that-apply=Marque todo lo que corresponda.
-special-care-expenses-representative=Honorarios de representante de beneficiario <span style="font-weight:normal;">(U honorarios que usted paga para que alguien administre sus ingresos del SSI)</span>
-special-care-expenses-guardian=Honorarios de tutor o curador
-special-care-expenses-special-diet=Dieta especial prescrita por un médico
-special-care-expenses-housing=Altos costos de vivienda
+special-care-expenses.title=Special care costs
+special-care-expenses-header=Do you have any of these expenses?
+special-care-expenses-household-header=Do you or does anyone in your household have any of these expenses?
+special-care-expenses-assets.select-all-that-apply=Select all that apply.
+special-care-expenses-representative=Representative payee fees  <span style="font-weight:normal;">(Or fees you pay to have someone manage your SSI income)</span>
+special-care-expenses-guardian=Guardian or conservator fees
+special-care-expenses-special-diet=A special diet prescribed by a doctor
+special-care-expenses-housing=High housing costs
 
-support-and-care.title=Gastos de Manutención y Cuidado
-support-and-care.do-you-pay-for-court-ordered-child-support-spousal-support=¿Paga usted alguno de estos gastos?
-support-and-care.household-support=¿Alguien en su hogar paga alguno de los siguientes costos?
-support-and-care.help=<ul class="list--bulleted-blue"><li>Manutención infantil ordenada por el tribunal</li><li>Manutención conyugal</li><li>Manutención infantil</li><li>Asistencia médica</li><li>Contribuye a un dependiente fiscal que no vive en su hogar</li></ul>
+support-and-care.title=Support and Care Expenses
+support-and-care.do-you-pay-for-court-ordered-child-support-spousal-support=Do you pay any of these expenses?
+support-and-care.household-support=Does anyone in your household pay for any of the following?
+support-and-care.help=<ul class="list--bulleted-blue"><li>Court-ordered child support</li><li>Spousal support</li><li>Child care support</li><li>Medical support</li><li>Contribute to a tax dependent who does not live in your home</li></ul>
 
-support-and-care-costs-amount.title=Montos de apoyo y cuidado
-support-and-care-costs-amount.header=Díganos cuánto paga su hogar por cualquiera de los siguientes gastos:
-support-and-care-costs-amount.payment-list=<p><ul class="list--bulleted-blue"><li>Manutención infantil ordenada por el tribunal</li><li>Manutención conyugal</li><li>Manutención infantil</li><li>Asistencia médica</li><li>Contribuye a un dependiente fiscal que no vive en su hogar </li></ul></p><p>Si no tiene toda esta información a mano, omita esta pregunta por ahora.  Un trabajador de elegibilidad le preguntará sobre esto más adelante.</p>
+support-and-care-costs-amount.title=Support and Care Amounts
+support-and-care-costs-amount.header=Tell us how much your household pays for any of the following:
+support-and-care-costs-amount.payment-list=<p><ul class="list--bulleted-blue"><li>Court-ordered child support</li><li>Spousal support</li><li>Child care support</li><li>Medical support</li><li>Contribute to a tax dependent who does not live in your home</li></ul></p><p>If you don't have all this information on hand, skip this question for now. An eligibility worker will ask you about it later.</p>
 
-savings.title=Ahorros
-savings.do-you-have-money-in-a-bank-account-or-debit-card=¿Dispone de dinero en una cuenta bancaria, en una tarjeta de débito o en efectivo?
-savings.household-bank-account=¿Hay alguien en su hogar que tenga dinero en efectivo o en una cuenta bancaria?
-savings.please-include=Incluya lo siguiente:
-savings.cash=Dinero en efectivo
-savings.bank=Dinero en cuentas bancarias
-savings.debit=Dinero en cuentas de débito
+savings.title=Savings
+savings.do-you-have-money-in-a-bank-account-or-debit-card=Do you have money in a bank account, debit card or cash?
+savings.household-bank-account=Does anyone in your household have cash or money available in a bank account?
+savings.please-include=Please include:
+savings.cash=Cash
+savings.bank=Money in a bank account
+savings.debit=Money in a debit account
 
-savings-amount.title=Cantidad de ahorros
-savings-amount.how-much-money-do-you-have-available=¿Cuánto dinero tiene disponible?
-savings-amount.this-includes=Esto incluye:
-savings-amount.bank-accounts=Cuentas bancarias
-savings-amount.debit-cards=Tarjetas de débito
+savings-amount.title=Savings amount
+savings-amount.how-much-money-do-you-have-available=How much money do you have available?
+savings-amount.this-includes=This includes:
+savings-amount.bank-accounts=Bank accounts
+savings-amount.debit-cards=Debit cards
 
-investments.title=Inversiones
-investments.do-you-have-any-stocks-bonds-or-a-401k=¿Tiene acciones, bonos o un 401k?
-investments.household-stocks=¿Alguien en su hogar tiene acciones, bonos o un 401k?
+investments.title=Investments
+investments.do-you-have-any-stocks-bonds-or-a-401k=Do you have any stocks, bonds or a 401k?
+investments.household-stocks=Does anyone in the household have stocks, bonds or a 401k?
 
-vehicle.title=Vehículo
-vehicle.do-you-own-a-vehicle=¿Tiene un vehículo?
-vehicle.household-own-vehicle=¿Alguien en el hogar tiene un vehículo?
+vehicle.title=Vehicle
+vehicle.do-you-own-a-vehicle=Do you own a vehicle?
+vehicle.household-own-vehicle=Does anyone in the household own a vehicle?
 
-real-estate.title=Bienes Raíces (Inmuebles)
-real-estate.do-you-own-any-real-estate=¿Posee alguna propiedad inmobiliaria (sin incluir la casa en la que vive actualmente)?
-real-estate.household-own-real-estate=¿Alguien en el hogar posee alguna propiedad inmobiliaria (sin incluir la casa en la que vive actualmente)?
+real-estate.title=Real Estate
+real-estate.do-you-own-any-real-estate=Do you own any real estate (not including the home you currently live in)?
+real-estate.household-own-real-estate=Do anyone in the household own any real estate (not including the home you currently live in)?
 
-million-dollar.title=$1 millón de activos
-million-dollar.does-your-family-have-more-than-1-million=¿Su familia tiene más de 1 millón de dólares en bienes o activos?
-million-dollar.do-not-include=No incluya el valor de su hogar.
+million-dollar.title=$1M assets
+million-dollar.does-your-family-have-more-than-1-million=Does your family have more than $1 million in assets?
+million-dollar.do-not-include=Do not include your home value.
 
-sold-assets.title=Bienes vendidos
-sold-assets.in-the-last-12-months-have-you-given-away-or-sold-any-assets=En los últimos 12 meses, ¿ha regalado o vendido algunos bienes o activos?
-sold-assets.households-given-or-sold=En los últimos 12 meses, ¿alguien en su hogar ha regalado o vendido algunos bienes o activos?
-sold-assets.this-includes=Esto incluye:
-sold-assets.vehicles=Vehículos
-sold-assets.stocks-and-bonds=Acciones o bonos
-sold-assets.household-valuables=Objetos de valor del hogar
+sold-assets.title=Sold assets
+sold-assets.in-the-last-12-months-have-you-given-away-or-sold-any-assets=In the last 12 months, have you given away or sold any assets?
+sold-assets.households-given-or-sold=In the last 12 months, has anyone in the household given away or sold any assets?
+sold-assets.this-includes=This includes:
+sold-assets.vehicles=Vehicles
+sold-assets.stocks-and-bonds=Stocks and bonds
+sold-assets.household-valuables=Household valuables
 
-submitting-application.title=Envío de Solicitud
-submitting-application.submitting-your-application=Enviar su Solicitud
-submitting-application.before-you-submit=Antes de enviar su solicitud,
-submitting-application.well-ask-about=le preguntaremos acerca de
-submitting-application.registering-to-vote=Registrándose para votar
-submitting-application.getting-help-with-benefits=Recibiendo ayuda con los beneficios
-submitting-application.agreeing-to-terms=Aceptando los términos
-register-to-vote.title=Registrándose para votar
-register-to-vote.yes-send-me-more-info=Sí, envíeme más información
-register-to-vote.ive-already-registered=!Ya me he registrado!
-register-to-vote.no-thanks=No, gracias
-register-to-vote.do-you-want-to-register-to-vote=¿Quiere registrarse para votar?
-healthcareCoverage.do-you-currently-have-healthcare-coverage=¿Tiene actualmente cobertura de salud?
-healthcareCoverage.title=Cobertura de Salud
-past-benefit.title=Beneficios anteriores
-past-benefit.header=¿Alguien en su hogar ha recibido antes asistencia en efectivo, productos básicos o beneficios SNAP?
-past-benefit-details.title=Beneficios anteriores
-past-benefit-details.header=Cuéntenos sobre los beneficios anteriores de su hogar.
-past-benefit-details.when.label=¿Cuándo recibió su hogar los beneficios?
-past-benefit-details.when.now=Los recibimos ahora
-past-benefit-details.when.within-last-year=Dentro del último año
-past-benefit-details.when.more-than-year-ago=Hace más de un año
-past-benefit-details.where.label=¿Dónde recibió los beneficios?
-past-benefit-details.which.label=¿Qué beneficios tenía su hogar?
-past-benefit-details.which.cash-assistance=Asistencia en efectivo
+submitting-application.title=Submitting Application
+submitting-application.submitting-your-application=Submitting your Application
+submitting-application.before-you-submit=Before you submit,
+submitting-application.well-ask-about=we'll ask about
+submitting-application.registering-to-vote=Registering to vote
+submitting-application.getting-help-with-benefits=Getting help with benefits
+submitting-application.agreeing-to-terms=Agreeing to terms
+register-to-vote.title=Register to vote
+register-to-vote.yes-send-me-more-info=Yes, send me more info
+register-to-vote.ive-already-registered=I've already registered!
+register-to-vote.no-thanks=No thanks
+register-to-vote.do-you-want-to-register-to-vote=Do you want to register to vote?
+healthcareCoverage.do-you-currently-have-healthcare-coverage=Do you currently have healthcare coverage?
+healthcareCoverage.title=Healthcare Coverage
+past-benefit.title=Past benefits
+past-benefit.header=Has anyone in your household ever received cash assistance, commodities or SNAP benefits before?
+past-benefit-details.title=Past benefits
+past-benefit-details.header=Tell us about your household's past benefits.
+past-benefit-details.when.label=When did your household get benefits?
+past-benefit-details.when.now=We get benefits now
+past-benefit-details.when.within-last-year=Within the last year
+past-benefit-details.when.more-than-year-ago=More than a year ago
+past-benefit-details.where.label=Where did you receive the benefits?
+past-benefit-details.which.label=Which benefits did your household have?
+past-benefit-details.which.cash-assistance=Cash assistance
 past-benefit-details.which.snap=SNAP
-past-benefit-details.which.tribal-commodities=Productos básicos a través de una Nación tribal
-past-benefit-details.state.select-placeholder=Seleccione un estado o territorio
+past-benefit-details.which.tribal-commodities=Food commodities through a Tribal Nation
+past-benefit-details.state.select-placeholder=Select a state/territory
 past-benefit-details.state.separator=\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
 past-benefit-details.state.AL=Alabama
 past-benefit-details.state.AK=Alaska
-past-benefit-details.state.AS=Samoa Americana
+past-benefit-details.state.AS=American Samoa
 past-benefit-details.state.AZ=Arizona
 past-benefit-details.state.AR=Arkansas
 past-benefit-details.state.CA=California
 past-benefit-details.state.CO=Colorado
 past-benefit-details.state.CT=Connecticut
 past-benefit-details.state.DE=Delaware
-past-benefit-details.state.DC=Distrito de Columbia
+past-benefit-details.state.DC=District of Columbia
 past-benefit-details.state.FL=Florida
 past-benefit-details.state.GA=Georgia
 past-benefit-details.state.GU=Guam
-past-benefit-details.state.HI=Hawái
+past-benefit-details.state.HI=Hawaii
 past-benefit-details.state.ID=Idaho
 past-benefit-details.state.IL=Illinois
 past-benefit-details.state.IN=Indiana
 past-benefit-details.state.IA=Iowa
 past-benefit-details.state.KS=Kansas
 past-benefit-details.state.KY=Kentucky
-past-benefit-details.state.LA=Luisiana
+past-benefit-details.state.LA=Louisiana
 past-benefit-details.state.ME=Maine
 past-benefit-details.state.MD=Maryland
 past-benefit-details.state.MA=Massachusetts
-past-benefit-details.state.MI=Míchigan
+past-benefit-details.state.MI=Michigan
 past-benefit-details.state.MN=Minnesota
-past-benefit-details.state.MS=Misisipi
-past-benefit-details.state.MO=Misuri
+past-benefit-details.state.MS=Mississippi
+past-benefit-details.state.MO=Missouri
 past-benefit-details.state.MT=Montana
 past-benefit-details.state.NE=Nebraska
 past-benefit-details.state.NV=Nevada
-past-benefit-details.state.NH=Nuevo Hampshire
-past-benefit-details.state.NJ=Nueva Jersey
-past-benefit-details.state.NM=Nuevo México
-past-benefit-details.state.NY=Nueva York
-past-benefit-details.state.NC=Carolina del Norte
-past-benefit-details.state.ND=Dakota del Norte
-past-benefit-details.state.MP=Islas Marianas del Norte
+past-benefit-details.state.NH=New Hampshire
+past-benefit-details.state.NJ=New Jersey
+past-benefit-details.state.NM=New Mexico
+past-benefit-details.state.NY=New York
+past-benefit-details.state.NC=North Carolina
+past-benefit-details.state.ND=North Dakota
+past-benefit-details.state.MP=Northern Mariana Islands
 past-benefit-details.state.OH=Ohio
 past-benefit-details.state.OK=Oklahoma
-past-benefit-details.state.OR=Oregón
-past-benefit-details.state.PA=Pensilvania
+past-benefit-details.state.OR=Oregon
+past-benefit-details.state.PA=Pennsylvania
 past-benefit-details.state.PR=Puerto Rico
 past-benefit-details.state.RI=Rhode Island
-past-benefit-details.state.SC=Carolina del Sur
-past-benefit-details.state.SD=Dakota del Sur
+past-benefit-details.state.SC=South Carolina
+past-benefit-details.state.SD=South Dakota
 past-benefit-details.state.TN=Tennessee
 past-benefit-details.state.TX=Texas
 past-benefit-details.state.UT=Utah
 past-benefit-details.state.VT=Vermont
-past-benefit-details.state.VI=Islas Vírgenes de EE. UU.
+past-benefit-details.state.VI=U.S. Virgin Islands
 past-benefit-details.state.VA=Virginia
 past-benefit-details.state.WA=Washington
-past-benefit-details.state.WV=Virginia Occidental
+past-benefit-details.state.WV=West Virginia
 past-benefit-details.state.WI=Wisconsin
 past-benefit-details.state.WY=Wyoming
-past-benefit-details.state.OTHER=Otro
-ebt-in-past.title=Tarjeta EBT anterior
-ebt-in-past.header=¿Ha tenido una tarjeta de Transferencia Electrónica de Beneficios (EBT, por sus siglas en inglés) anteriormente?
-social-worker.title=Ayuda de un trabajador social
-social-worker.header=¿Está recibiendo ayuda de un trabajador social o una agencia de servicios sociales?
-referrals.title=Ayuda con los servicios
-referrals.header=¿Le gustaría obtener ayuda para conectarse con otros servicios en su área?
-referrals.body=Su trabajador puede ayudarle a encontrar puestos de alimentos, alojamiento y transporte.
-legalGuardian.title=Tutor legal
-legalGuardian.header=¿Tiene un tutor legal o curador, o hay un poder notarial?
-authorized-rep.do-you-want-to=¿Desea asignar a alguien para que sea su representante autorizado?
-authorized-rep.this-person-can-help=Esta persona puede ayudarle con sus prestaciones o actuar en su nombre.
-authorized-rep.title=Representante Autorizado
+past-benefit-details.state.OTHER=Other
+ebt-in-past.title=Previous EBT Card
+ebt-in-past.header=Have you had an Electronic Benefit Transfer (EBT) card in the past?
+social-worker.title=Help from a social worker
+social-worker.header=Are you getting help from a social worker or social services agency?
+referrals.title=Help with services
+referrals.header=Would you like help getting connected to other services in your area?
+referrals.body=Your worker can help you find food shelves, housing, and transit.
+legalGuardian.title=Legal Guardian
+legalGuardian.header=Do you have a legal guardian or conservator, or is there a power of attorney?
+authorized-rep.do-you-want-to=Do you want to assign someone to be your authorized representative?
+authorized-rep.this-person-can-help=This person can help you with your benefits or act on your behalf.
+authorized-rep.title=Authorized Rep
 
-additional-info.is-there-anything-else-you-want-to-share=¿Hay algo más que quisiera compartir?
-additional-info.this-is-optional=Esto es opcional.
-additional-info.title=Información Adicional
-additional-info.whats-your-case-number=Si la tiene, ¿cuál es su número de caso?
-additional-info.case-number-is-optional=Este dato es opcional. Este número es útil para procesar las renovaciones.
-additional-info.you-can-find-your-case-number=Puede encontrar el número de su caso en las cartas que le ha enviado su condado o nación tribal:
+additional-info.is-there-anything-else-you-want-to-share=Is there anything else you want to share?
+additional-info.this-is-optional=This is optional.
+additional-info.title=Additional Info
+additional-info.whats-your-case-number=If you have it, what is your case number?
+additional-info.case-number-is-optional=This is optional. This number is helpful for processing renewals.
+additional-info.you-can-find-your-case-number=You can find your case number on letters your county or Tribal Nation has mailed to you:
 
-can-we-ask.title=¿Nos permite preguntar?
-can-we-ask.can-we-ask-about-your-race-and-ethnicity=¿Nos permite preguntarle acerca de su raza y origen étnico?
-race-and-ethnicity.providing-your-race-and-ethnicity-is-optional=Indicar su raza y origen étnico es opcional y no afectará su solicitud individual.
-race-and-ethnicity.we-will-use-this-information-to-evaluate-the-fairness-of-mnbenefits=Utilizaremos esta información para evaluar que se estén proporcionando MNbenefits justamente, y le pedimos que nos la proporcione para asegurarnos de que Ud. ha sido representado con exactitud.
-can-we-ask.yes-continue=Sí, continúe
-can-we-ask.no-skip-this-question=No. Deseo saltar esta pregunta
+can-we-ask.title=Can we ask
+can-we-ask.can-we-ask-about-your-race-and-ethnicity=Can we ask about your race and ethnicity?
+race-and-ethnicity.providing-your-race-and-ethnicity-is-optional=Providing your race and ethnicity is optional and will not affect your individual application. 
+race-and-ethnicity.we-will-use-this-information-to-evaluate-the-fairness-of-mnbenefits=We will use this information to evaluate the fairness of MNbenefits, and we ask you to provide it to ensure that you are accurately represented.
+can-we-ask.yes-continue=Yes, continue
+can-we-ask.no-skip-this-question=No, skip this question
 
-race-and-ethnicity.title=Raza y origen étnico
-race-and-ethnicity.what-races-or-ethnicities-do-you-identify-with=¿Con qué razas o grupos étnicos se identifica?
-race-and-ethnicity.select-all-that-apply=Seleccione todo lo que corresponda.
-race-and-ethnicity.native-american-or-alaska-native=Nativo americano o nativo de Alaska
-race-and-ethnicity.asian=Asiático
-race-and-ethnicity.black-or-african-american=Negro o afroamericano
-race-and-ethnicity.hispanic-latino-or-spanish=Hispano, latino o español
-race-and-ethnicity.middle-eastern-or-north-african=De Oriente Medio o África del Norte
-race-and-ethnicity.native-hawaiian-or-pacific-islander=Nativo de Hawaii o de las Islas del Pacífico
-race-and-ethnicity.white=Blanco
-race-and-ethnicity.some-other-race=Alguna otra raza o etnia
-race-and-ethnicity.write-your-race-or-ethnicity=Escriba su raza o etnia
+race-and-ethnicity.title=Race and Ethnicity
+race-and-ethnicity.what-races-or-ethnicities-do-you-identify-with=What races or ethnicities do you identify with?
+race-and-ethnicity.select-all-that-apply=Select all that apply.
+race-and-ethnicity.native-american-or-alaska-native=Native American or Alaska Native
+race-and-ethnicity.asian=Asian
+race-and-ethnicity.black-or-african-american=Black or African American
+race-and-ethnicity.hispanic-latino-or-spanish=Hispanic, Latino or Spanish
+race-and-ethnicity.middle-eastern-or-north-african=Middle Eastern or North African
+race-and-ethnicity.native-hawaiian-or-pacific-islander=Native Hawaiian or Pacific Islander
+race-and-ethnicity.white=White
+race-and-ethnicity.some-other-race=Some other race or ethnicity
+race-and-ethnicity.write-your-race-or-ethnicity=Write your race or ethnicity
 
-authorized-rep-communicate.do-you-want-your-helper-to-communicate-with-the-county-on-your-behalf=¿Prefiere que su representante autorizado se comunique con el condado o nación tribal en su nombre?
-authorized-rep-communicate.title=Representante Autorizado Comunicar
-authorized-rep-communicate.speak-for-you-in-an-interview=Que su representante hable por usted durante una entrevista
-authorized-rep-communicate.help-you-complete-forms=Ayudarlo a llenar un formulario
-authorized-rep-communicate.talk-to-a-service-provider=Hablar con un proveedor de servicios
-authorized-rep-speak-to-county.title=Representante autorizado para correspondencia y notificaciones
-authorized-rep-speak-to-county.do-you-want-your-helper-to-get-mail-and-notices-for-you=¿Desea que su representante autorizado reciba el correo y las notificaciones por usted?
-authorized-rep-speak-to-county.get-mail-about-your-benefits=Reciba correo sobre sus prestaciones
-authorized-rep-speak-to-county.receive-notices-by-mail-or-phone=Que su representante hable por usted durante una entrevista
-authorized-rep-spend-on-your-behalf.title=Que su representante autorizado gaste en su nombre
-authorized-rep-spend-on-your-behalf.do-you-want-your-authorized-rep-to-spend-your-benefits-on-your-behalf=¿Desea que su representante autorizado gaste sus beneficios en su nombre?
-authorized-rep-spend-on-your-behalf.get-their-own-EBT-card-that-is-connected-to-your-benefits=Que obtengan su propia tarjeta EBT que esté conectada a sus beneficios
-authorized-rep-spend-on-your-behalf.buy-things-for-you-with-their-card=Que le hagan compras con la tarjeta de usted
-authorized-rep-contact-info.title=Información de contacto del Representante Autorizado
-authorized-rep-contact-info.lets-get-your-authorized-reps-contact-information=Obtengamos la información de contacto de su representante autorizado
-authorized-rep-contact-info.we-need-to-send-this-information-to-your-county=Debemos enviar esta información a su condado o nación tribal.
-authorized-rep-contact-info.whats-their-name=¿Cómo se llama?
-authorized-rep-contact-info.whats-their-street-address=¿En qué calle vive?
-authorized-rep-contact-info.what-city-do-they-live-in=¿En qué ciudad vive?
-authorized-rep-contact-info.what-is-their-zip-code=¿Cuál es el código postal?
-authorized-rep-contact-info.what-is-their-phone-number=¿Cuál es su número de teléfono?
+authorized-rep-communicate.do-you-want-your-helper-to-communicate-with-the-county-on-your-behalf=Do you want your authorized rep to communicate with your county or Tribal Nation on your behalf?
+authorized-rep-communicate.title=Authorized Rep Communicate
+authorized-rep-communicate.speak-for-you-in-an-interview=Speak for you in an interview
+authorized-rep-communicate.help-you-complete-forms=Help you complete forms
+authorized-rep-communicate.talk-to-a-service-provider=Talk to a service provider
+authorized-rep-speak-to-county.title=Authorized Rep mail and notices
+authorized-rep-speak-to-county.do-you-want-your-helper-to-get-mail-and-notices-for-you=Do you want your authorized rep to get mail and notices for you?
+authorized-rep-speak-to-county.get-mail-about-your-benefits=Get mail about your benefits
+authorized-rep-speak-to-county.receive-notices-by-mail-or-phone=Receive notices by mail or phone
+authorized-rep-spend-on-your-behalf.title=Authorized Rep spend on your behalf
+authorized-rep-spend-on-your-behalf.do-you-want-your-authorized-rep-to-spend-your-benefits-on-your-behalf=Do you want your authorized rep to spend your benefits on your behalf?
+authorized-rep-spend-on-your-behalf.get-their-own-EBT-card-that-is-connected-to-your-benefits=Get their own EBT card that is connected to your benefits
+authorized-rep-spend-on-your-behalf.buy-things-for-you-with-their-card=Buy things for you with their card
+authorized-rep-contact-info.title=Authorized Rep contact info
+authorized-rep-contact-info.lets-get-your-authorized-reps-contact-information=Let's get your authorized representative's contact information
+authorized-rep-contact-info.we-need-to-send-this-information-to-your-county=We need to send this information to your county or Tribal Nation.
+authorized-rep-contact-info.whats-their-name=What's their name?
+authorized-rep-contact-info.whats-their-street-address=What's their street address?
+authorized-rep-contact-info.what-city-do-they-live-in=What city do they live in?
+authorized-rep-contact-info.what-is-their-zip-code=What is their zip code?
+authorized-rep-contact-info.what-is-their-phone-number=What is their phone number?
 
-job-builder.would-you-like-to-add-more-jobs=¿Le gustaría agregar más trabajos?
-job-builder.your-jobs=Sus trabajos
-job-builder.your-household-jobs=Sus trabajos de hogar
-job-builder.no-thats-it=No, es todo.
-job-builder.delete=eliminar
-job-builder.add-a-job=Agregar un trabajo
-job-builder.title=Trabajo/s
+job-builder.would-you-like-to-add-more-jobs=Would you like to add more jobs?
+job-builder.your-jobs=Your jobs
+job-builder.your-household-jobs=Your household jobs
+job-builder.no-thats-it=No, that's it.
+job-builder.delete=delete
+job-builder.add-a-job=Add a job
+job-builder.title=Job Builder
 
-warning-page.go-back-title=Advertencia de Regresar
-warning-page.no-data-title=Advertencia de Eliminar Todos Los Trabajos
-warning-page.going-back-will-take-you-to-the-beginning-of-the-jobs-section-where-you-will-start-over=Si hace clic en regresar, lo llevará al principio de la sección de trabajos, donde tendrá que empezar de nuevo.
-warning-page.is-that-ok=¿Está bien?
-warning-page.no-keep-id-rather-keep-going=No, prefiero continuar
-warning-page.nevermind-ill-keep-the-job=No, deje el trabajo.
-warning-page.yes-remove-the-job=Sí, elimine el trabajo
-warning-page.yes-go-back-to-the-start=Sí, regresar al principio
-warning-page.you-are-about-to-delete-your-job=Va a eliminar su trabajo en {0}.
-warning-page.you-are-about-to-delete-member-job=Va a eliminar el trabajo de {1} en {0}.
-warning-page.you-are-about-to-delete-household-member=Va a eliminar {0} como miembro del hogar.
-warning-page.nevermind-lets-keep-them=No, déjenlos.
-warning-page.yes-remove-them=Sí, eliminalos.
-warning-page.delete-household-member-warning=Advertencia de Eliminar Miembro del Hogar
-race-and-ethnicity.prefer-not-to-say=Prefiero no decirlo
+warning-page.go-back-title=Go Back Warning
+warning-page.no-data-title=Delete All Jobs Warning
+warning-page.going-back-will-take-you-to-the-beginning-of-the-jobs-section-where-you-will-start-over=Going back will take you to the beginning of the jobs section, where you will start over.
+warning-page.is-that-ok=Is that okay?
+warning-page.no-keep-id-rather-keep-going=No, I'd rather keep going
+warning-page.nevermind-ill-keep-the-job=Nevermind, I'll keep the job
+warning-page.yes-remove-the-job=Yes, remove the job
+warning-page.yes-go-back-to-the-start=Yes, go back to the start
+warning-page.you-are-about-to-delete-your-job=You are about to delete your job at {0}.
+warning-page.you-are-about-to-delete-member-job=You are about to delete {1}’s job at {0}.
+warning-page.you-are-about-to-delete-household-member=You are about to delete {0} as a household member.
+warning-page.nevermind-lets-keep-them=Nevermind, let's keep them
+warning-page.yes-remove-them=Yes, remove them
+warning-page.delete-household-member-warning=Delete Household Member Warning
+race-and-ethnicity.prefer-not-to-say=Rather not say
 
-income-per-pay-period.title=Ingresos por período de pago
-income-per-pay-period.every-day=¿Cuánto dinero ha pagado este trabajo en los últimos 30 días?
-income-per-pay-period.every-week=¿Cuánto dinero paga este trabajo cada semana?
-income-per-pay-period.every-two-weeks=¿Cuánto dinero paga este trabajo cada dos semanas?
-income-per-pay-period.twice-a-month=¿Cuánto dinero paga este trabajo dos veces al mes?
-income-per-pay-period.every-month=¿Cuánto dinero paga este trabajo mensualmente?
-income-per-pay-period.it-varies=¿Cuánto dinero ha pagado este trabajo en los últimos 30 días?
-income-per-pay-period.provide-income-before-taxes-we-know-this-can-be-hard-to=Proporcionar ingresos antes de impuestos. Sabemos que esto puede ser difÃ­cil de calcular. Si no sabe la cantidad exacta, puede estimarla.
+income-per-pay-period.title=Income per pay period
+income-per-pay-period.every-day=How much money has this job paid in the last 30 days?
+income-per-pay-period.every-week=How much does this job pay every week?
+income-per-pay-period.every-two-weeks=How much money does this job pay every two weeks?
+income-per-pay-period.twice-a-month=How much money does this job pay twice a month?
+income-per-pay-period.every-month=How much money does this job pay every month?
+income-per-pay-period.it-varies=How much money has this job paid in the last 30 days?
+income-per-pay-period.provide-income-before-taxes-we-know-this-can-be-hard-to=Provide income before taxes. We know this can be hard to calculate. If you don't know the exact amount, just estimate.
 
-privacy-policy.title=Política de Privacidad
-privacy-policy.privacy-policy=Política de Privacidad
-privacy-policy.minnesota-privacy-policy=<a class="h2 spacing-below-35" href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-3979-SPA">Política de privacidad de Minnesota</a>
-privacy-policy.subheader=Cómo usamos, compartimos, y protegemos su información
-privacy-policy.overviewp2=Solo usaremos su información personal para:
-privacy-policy.overviewp3=1. Ayudarle a obtener y mantener los beneficios en Minnesota que usted solicite en versiones futuras del Sitio ("Beneficios de Minnesota" en este documento se refiere a todos estos programas).
-privacy-policy.overviewp4=2. Sugerir otros servicios o programas de asistencia que puedan ser útiles. Solo usaremos su información personal para presentarle esos servicios o programas como una opción, pero nunca enviaremos su información personal a ningún otro servicio o programa sin su permiso.
-privacy-policy.overviewp5=No divulgaremos ni venderemos a su información personal a ningún tercero a propósito, excepto según lo dispuesto en esta política de privacidad.
-privacy-policy.overviewp6=Tomaremos todas las medidas razonables para proteger su información personal.
-privacy-policy.overview=Resumen General
-privacy-policy.info-we-collect=Información que recopilamos
-privacy-polcy.info-we-collect-0=Recopilamos y guardamos
-privacy-policy.info-we-collect1=Toda la información que proporcione a través del Sitio, incluido su nombre, dirección, información de contacto, número de seguro social, información financiera y la información similar de otras personas que incluya en su solicitud de beneficios de Minnesota
-privacy-policy.info-we-collect2=Copias de cualquier documento que cargue, como fotografías de su licencia de manejar, talones de pago, certificaciones de nacimiento, recibos de renta, etc.
-privacy-policy.info-we-collect3=Cualquier mensaje que nos envíe a través de SMS, correo electrónico, o chat en vivo
-privacy-policy.info-we-collect4=Cualquier respuesta o comentario que usted proporcione en respuesta a una encuesta que le enviamos
-privacy-policy.info-we-collect5=Además de la información que proporciona, automáticamente recopilamos y guardamos información sobre su visita al Sitio:
-privacy-policy.info-we-collect6=Dispositivo desde el cuál se conecta a la Internet
-privacy-policy.info-we-collect7=Dirección IP (una dirección IP o de protocolo de Internet es un número que se le da automáticamente a una computadora conectada a la Web)
-privacy-policy.info-we-collect8=Sistema operativo en su computadora e información sobre el navegador que utilizó cuando visitó el sitio
-privacy-policy.info-we-collect9=Fecha y hora de su visita.
-privacy-policy.info-we-collect10=Páginas que visitó
-privacy-policy.info-we-collect11=Dirección del sitio web que lo conectó con el Sitio (como google.com o bing.com)
-privacy-policy.info-we-collect12=Usamos esta información para comprender cómo se usa el Sitio, para mejorar el Sitio, y para monitorear el uso con fines de seguridad. Estos datos se guardan separadamente de la información personal que usted envía en la solicitud de Beneficios de Minnesota.
-privacy-policy.info-we-collect13=No recopilaremos información personal suya sin su conocimiento y consentimiento, excepto en algunas circunstancias limitadas como se describe en esta política.
-privacy-policy.info-we-collect14=Actualmente, conservamos todos los datos de forma indefinida, a menos que solicite específicamente que los eliminemos. Puede solicitar que sus datos sean eliminados por enviarnos un correo electrónico a <a href="mailto:help@mnbenefits.org">eliminemoshelp@mnbenefits.org.</a>
-privacy-policy.how-we-use-info=Cómo usamos su información
-privacy-policy.how-we-use-info1=Solo usamos su información personal para ayudarle a obtener y mantener los beneficios en Minnesota. Por ejemplo:
-privacy-policy.how-we-use-info2=Enviaremos su solicitud de Beneficios de Minnesota y los documentos al departamento correspondiente de su condado.
-privacy-policy.how-we-use-info3=Podemos recordarle que complete su entrevista telefónica y envíe documentos, según sus preferencias de contacto.
-privacy-policy.how-we-use-info4=Podemos brindarle apoyo continuo para ayudarle a mantener sus beneficios recordándole cuándo debe enviar cambios en los ingresos, completar su Informe Semestral, o completar su Aprobación Anual.
-privacy-policy.how-we-use-info5=Para proporcionar estos servicios, podemos acceder a una cuenta conectada a su caso en el sistema de su condado en línea.
-privacy-policy.how-we-use-info6=Le enviaremos un mensaje de confirmación cuando hayamos enviado correctamente su información a su condado. También podemos enviarle un mensaje si hay algún problema en enviar su información a su condado y se necesita información adicional. Fuera de esos casos:
-privacy-policy.how-we-use-info7=No le enviaremos un correo electrónico a menos que nosotros recibamos su consentimiento para comunicarnos con usted por correo electrónico en la aplicación o nos envíe un correo electrónico primero.
-privacy-policy.how-we-use-info8=No le enviaremos un mensaje de texto a menos que nosotros recibamos su consentimiento para recibir comunicación por mensaje de texto en la aplicación.
-privacy-policy.how-we-share-info=Cómo compartimos su información
-privacy-policy.how-we-share-info1=Una vez que envíe su solicitud de Beneficios de Minnesota en el Sitio, compartiremos esta información con la Agencia de Servicios Humanos (HSA) del condado donde vive. Cada condado de Minnesota tiene su propia HSA, que procesa las solicitudes de beneficios de Minnesota y administra sus beneficios. Una vez que la HSA recibe su información personal, está sujeta a sus respectivas políticas de privacidad.
-privacy-policy.how-we-share-info2=También divulgamos su información personal a los contratistas y organizaciones afiliadas que necesitan conocer la información para poder proporcionar los servicios del Sitio.
-privacy-policy.how-we-share-info3=Aprendemos y compartimos los comentarios que tiene en la aplicación, chat en vivo (Live Chat), SMS, correo electrónico y encuestas para mejor comprender la inscripción en los Beneficios de Minnesota a fin de reducir las barreras en el sistema de protección social. Esto puede incluir compartir su información con su condado para ayudarlo a brindarle un mejor servicio y mejorar los servicios que brindan. También puede incluir compartir citas anónimas en el curso de nuestro trabajo con nuestro socios.
-privacy-policy.how-we-share-info4=No compartimos su información personal con ninguna otra persona u organización, excepto en la medida mínima requerida por la ley.
-privacy-policy.how-we-protect-information=Cómo protegemos su información
-privacy-policy.how-we-protect-info1=La protección de su información personal es muy importante para nosotros y tomamos todas las medidas razonables para hacerlo. A continuación, presentamos algunas prácticas de seguridad específicas que utilizamos:
-privacy-policy.how-we-protect-info2=Cuando ingresa su información en nuestro sitio, encriptamos la transmisión de esa información utilizando la seguridad de la capa de transporte (TLS).
-privacy-policy.how-we-protect-info3=Aunque hacemos todo lo posible para proteger la privacidad de su información personal, no podemos garantizar una seguridad completa. La transmisión de información a través de Internet no es completamente segura. La entrada o el uso no autorizado, las fallas de hardware o software, y otros factores pueden comprometer la seguridad de la información del usuario en cualquier momento.
-privacy-policy.changes=Cambios
-privacy-policy.changes1=Podemos cambiar esta Política De Privacidad de vez en cuando. Consulte esta página frecuentemente para obtener actualizaciones, ya que su uso continuo del Sitio después de cualquier cambio en esta Política De Privacidad constituirá su aceptación de los cambios.
-privacy-policy.effective-date=Fecha Efectiva
-privacy-policy.effective-date1=Esta versión de la política es efectiva a partir del 1 de Agosto, 2020.
-privacy-policy.questions=Preguntas
-privacy-policy.questions1=Si tiene alguna pregunta, comentario, duda o queja sobre el Sitio, por favor contáctenos por correo electrónico: <a href="mailto:help@mnbenefits.org">help@mnbenefits.org</a>
-privacy-policy.questions6=Haremos todo lo posible para resolver este problema.
+privacy-policy.title=Privacy Policy
+privacy-policy.privacy-policy=Privacy Policy
+privacy-policy.minnesota-privacy-policy=<a class="h2 spacing-below-35" href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-3979-ENG">Minnesota Privacy Policy</a>
+privacy-policy.subheader=How we use, share, and protect your information
+privacy-policy.overviewp2=We will only use your personal information to:
+privacy-policy.overviewp3=1. Help you get and keep benefits in Minnesota that you apply for on future versions of the Site ("Minnesota Benefits" herein refers to all such programs).
+privacy-policy.overviewp4=2. Suggest other services or assistance programs that may be useful to you. We will only use your personal information in order to present those services or programs to you as an option, but will never send your personal information to any other services or programs without your permission.
+privacy-policy.overviewp5=We will not knowingly disclose or sell your personal information to any third party, except as provided in this privacy policy.
+privacy-policy.overviewp6=We will take all reasonable measures to protect your personal information.
+privacy-policy.overview=Overview
+privacy-policy.info-we-collect=Information we collect
+privacy-polcy.info-we-collect-0=We collect and store
+privacy-policy.info-we-collect1=All information that you provide through the Site, including your name, address, contact information, social security number, financial information, and similar information for other individuals that you include on your Minnesota Benefits application
+privacy-policy.info-we-collect2=Copies of any documents you upload, like pictures of your driver's license, pay stubs, birth certifications, rent receipts, etc.
+privacy-policy.info-we-collect3=Any messages you send us through SMS, email, or live chat
+privacy-policy.info-we-collect4=Any answers or comments you provide in response to a survey we send you
+privacy-policy.info-we-collect5=In addition to the information you provide, we automatically collect and store information about your visit to the Site:
+privacy-policy.info-we-collect6=Device from which you access the Internet
+privacy-policy.info-we-collect7=IP address (an IP or internet protocol address is a number that is automatically given to a computer connected to the Web)
+privacy-policy.info-we-collect8=Operating system on your computer and information about the browser you used when visiting the site
+privacy-policy.info-we-collect9=Date and time of your visit.
+privacy-policy.info-we-collect10=Pages you visited
+privacy-policy.info-we-collect11=Address of the website that connected you to the Site (such as google.com or bing.com)
+privacy-policy.info-we-collect12=We use this information to understand how the Site is used, improve the Site, and monitor usage for security purposes. This data is stored separately from the personal information you submit in the Minnesota Benefits application.
+privacy-policy.info-we-collect13=We will not collect personal information from you without your knowledge and consent, except in a few limited circumstances as described in this policy.
+privacy-policy.info-we-collect14=We currently retain all data indefinitely unless you specifically request that we delete it. You can request that we delete your data by emailing us at <a href="mailto:help@mnbenefits.org">help@mnbenefits.org</a>.
+privacy-policy.how-we-use-info=How we use your information
+privacy-policy.how-we-use-info1=We only use your personal information to help you get and keep benefits in Minnesota. For example:
+privacy-policy.how-we-use-info2=We submit your Minnesota Benefits application and documents to the appropriate department in your County.
+privacy-policy.how-we-use-info3=We may remind you to complete your phone interview and submit documents, depending on your contact preferences.
+privacy-policy.how-we-use-info4=We may provide ongoing support to help you keep your benefits by reminding you when you have to submit income changes, complete your Semi-Annual Report, or complete your annual Recertification.
+privacy-policy.how-we-use-info5=To provide these services, we may access an account linked to your case in your county's online system.
+privacy-policy.how-we-use-info6=We will send you a confirmation message when we have successfully submitted your information to your county. We may also send you a message if there is a problem submitting your information to your county and additional information is needed. Outside of those cases:
+privacy-policy.how-we-use-info7=We will not send you an email unless you consent to email communication in the application or you email us first.
+privacy-policy.how-we-use-info8=We will not send you a text message unless you consent to text message communication in the application.
+privacy-policy.how-we-share-info=How we share your information
+privacy-policy.how-we-share-info1=Once you submit your Minnesota Benefits application on the Site, we share this information with the Human Services Agency (HSA) in the County where you live. Each Minnesota county has their own HSA, which processes Minnesota Benefits applications and administers your benefits. Once your personal information is received by the HSA it is then subject to their respective privacy policies.
+privacy-policy.how-we-share-info2=We also disclose your personal information to contractors, and affiliated organizations that need to know the information in order to provide the services of the Site.
+privacy-policy.how-we-share-info3=We learn from and share comments that you have in the application, Live Chat, SMS, email, and surveys to better understand Minnesota Benefits enrollment in order to reduce barriers in the safety net system. This may include sharing your information with your county to help them provide better service to you and improve the services they provide. It may also include sharing anonymized quotes in the course of our work with partners.
+privacy-policy.how-we-share-info4=We do not share your personal information with any other individuals or organizations, except to the minimal extent required by law.
+privacy-policy.how-we-protect-information=How we protect your information
+privacy-policy.how-we-protect-info1=Protecting your personal information is extremely important to us and we take all reasonable measures to do so. Here are some specific security practices we use:
+privacy-policy.how-we-protect-info2=When you enter your information on our site, we encrypt the transmission of that information using transport layer security (TLS).
+privacy-policy.how-we-protect-info3=Although we try our best to protect the privacy of your personal information, we cannot guarantee complete security. The transmission of information via the Internet is not completely secure. Unauthorized entry or use, hardware or software failure, and other factors, may compromise the security of user information at any time.
+privacy-policy.changes=Changes
+privacy-policy.changes1=We may change this Privacy Policy from time to time. Please check this page frequently for updates as your continued use of the Site after any changes in this Privacy Policy will constitute your acceptance of the changes.
+privacy-policy.effective-date=Effective Date
+privacy-policy.effective-date1=This version of the policy is effective August 1, 2020.
+privacy-policy.questions=Questions
+privacy-policy.questions1=If you have any questions, comments, concerns, or complaints with the Site, please contact us by email at <a href="mailto:help@mnbenefits.org">help@mnbenefits.org</a>
+privacy-policy.questions6=We will do our best to resolve the issue.
 
-faq.frequently-asked-questions=Preguntas Frecuentes
-faq.faq=Preguntas y Respuestas Frecuentes (en inglés: FAQ)
-faq.what-is-mnbenefits=¿Qué es MNbenefits.mn.gov y puedo utilizarlo?
-faq.what-is-mnbenefits-1=MNbenefits es una nueva aplicación de beneficios compatible con dispositivos móviles para los habitantes de Minnestota. Está disponible para todos los condados y naciones tribales del estado.
-faq.what-is-mnbenefits-2=En MNbenefits, puede solicitar:<ul class="list--bulleted"><li> Cupones para Alimentos (SNAP),</li><li> Programas de Asistencia en Efectivo como el Programa de Inversión Familiar de Minnesota (por sus siglas en inglés: MFIP), y Asistencia General,</li><li> Asistencia de Emergencia,</li><li> Programa de Asistencia de Cuidado Infantil,</li><li> Apoyo para Vivienda/Vivienda en Grupos (por sus siglas en inglés: GRH)</li></ul>
-faq.i-need-help-now=Necesito ayuda ahora mismo. ¿Qué puedo hacer?
-faq.i-need-help-now-1=Para obtener asistencia alimenticia inmediata, <a href="https://www.hungersolutions.org/find-help/" target="_blank" rel="noopener noreferrer">encuentre su banco de alimentos local</a>. También puede llamar al 2-1-1 o <a href="https://www.211unitedway.org/" target="_blank" rel="noopener noreferrer">visitar el 2-1-1 en lí­nea</a>, una lí­nea de ayuda de recursos para obtener remisiones para el cuidado de niños, viviendas o refugios a precios accesibles, asistencia en efectivo, atención médica y más.
-faq.i-need-help-now-2=Las personas embarazadas y las familias con niños pequeños (de 0 a 8 años) pueden utilizar <a href="https://helpmeconnect.web.health.state.mn.us/HelpMeConnect/" target="_blank" rel="noopener noreferrer">Help Me Connect</a> para encontrar servicios en sus comunidades locales que permitan a las familias estar sanas y seguras.
-faq.how-do-i-contact-my-county=No he tenido noticias con relación a mi solicitud. ¿Cómo puedo contactar a mi condado o nación tribal para obtener una actualización?
-faq.sometimes-there-can-be-delays=A veces, puede haber demoras. Si no ha tenido noticias sobre su solicitud, sepa que todavía el trabajo está en marcha. Contacte a su condado o nación tribal antes de presentar otra solicitud.
-faq.you-can-find-a-full-list-of-county=Aquí puede encontrar <a href="https://mn.gov/dhs/general-public/about-dhs/contact-us/county-and-tribal-nation-offices/" target="_blank" rel="noopener noreferrer"> una lista completa de los números telefónicos del condado y de la nación tribal</a>. Mnbenefits.mn.gov no tiene acceso al estado de su caso.
-faq.i-submitted-my-application=Ya envié mi solicitud en línea. ¿Cuáles son los siguientes pasos que debo seguir?
-faq.i-submitted-my-application-1=Tendrá que<strong> realizar una entrevista </strong>con un trabajador si ha solicitado alguno de estos programas: <ul class="list--bulleted"><li>Cupones de alimentos (SNAP)</li><li>Programas de dinero en efectivo</li><li>Asistencia de Emergencia</li><li>Ayuda para vivienda (GRH)</li></ul>La entrevista puede realizarse por teléfono o en persona.
-faq.i-submitted-my-application-2=Si <strong>sólo</strong> solicitó el Programa de Asistencia para el Cuidado de Niños (CCAP), <strong>no</strong> necesitará tener una entrevista. Es posible que necesite proporcionar documentos adicionales.
-faq.i-submitted-my-application-3=Revise su correspondencia regularmente y conteste todas las llamadas de teléfono que reciba, incluso llamadas de números desconocidos o bloqueados. Su condado o nación tribal se comunicará con usted para indicarle los próximos pasos para finalizar su solicitud.
-faq.i-submitted-my-application-4=También lo invitamos a llamar directamente a su condado o nación tribal para consultar por el estado de su caso. Aquí puede encontrar <a href="https://mn.gov/dhs/general-public/about-dhs/contact-us/county-and-tribal-nation-offices/" target="_blank" rel="noopener noreferrer">una lista completa de los números telefónicos del condado y de la nación tribal</a>.
-faq.i-submitted-my-application-5=Puede enviar los documentos de verificación directamente a su condado o nación tribal. Para hacerlo, haga clic en el botón ‘Dargar documentos’ en nuestra página principal o <a href="pages/readyToUploadDocuments" target="_blank" rel="noopener noreferrer">cargue los documentos aquí.</a> <a href="documents/send-documents-to-your-county.pdf" target="_blank" rel="noopener noreferrer">Encontrar más maneras de enviar documentos a su condado o nación tribal.</a>
-faq.how-quickly-will=¿Qué tan pronto podré obtener los beneficios?
-faq.how-quickly-will-1=<strong>Cupones de alimentos (SNAP)</strong>: Su condado o nación tribal tiene 30 días para aprobar o rechazar su caso. Algunas personas con ingresos muy bajos pueden obtener servicios acelerados, y sus casos deberán ser procesados en 7 días. Debido a la pandemia, los condados están recibiendo un volumen de solicitudes mayor de lo normal. Es posible que la respuesta tarde más de lo habitual. Si ya han pasado más de dos semanas y no ha recibido ninguna correspondencia o llamada telefónica de parte su condado o nación tribal, o desea comunicarse con ellos directamente, <a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-5207-ENG" target="_blank" rel="noopener noreferrer">podrá encontrar su número de teléfono aquí­</a>.
-faq.how-can-i-apply-for-healthcare=¿Cómo puedo solicitar cobertura de seguro médico?
-faq.how-can-i-apply-for-healthcare-1=<strong><i>Solicite con la ayuda de un navegador</i></strong>
-faq.how-can-i-apply-for-healthcare-2=Solicitar cobertura de seguro médico puede ser difícil.
-faq.how-can-i-apply-for-healthcare-3=Los navegadores son expertos que pueden ayudarle a entender sus opciones, completar su solicitud e inscribirse en la cobertura del seguro médico. <a href="https://www.mnsure.org/help/find-assister/find-navigator.jsp" id="assistor-directory" target="_blank" rel="noopener noreferrer">Busque en el Directorio de Asistentes</a> para encontrar un navegador en su área. Los servicios de los navegadores certificados por MNsure son siempre gratuitos.
-faq.how-can-i-apply-for-healthcare-4=<strong><i>Solicite por su cuenta</i></strong>
-faq.how-can-i-apply-for-healthcare-5=Dependiendo de su situación, puede solicitar en línea o llenar una solicitud en papel.
-faq.how-can-i-apply-for-healthcare-6=<strong>Solicite en línea en MNsure.org:</strong> La mayoría de las personas pueden solicitar cobertura de salud directamente en MNsure.org. Tendrá que <a href="https://auth.mnsure.org/RIDP/?account_type=Individual" id="create-account" target="_blank" rel="noopener noreferrer">crear una cuenta </a>o <a href="https://auth.mnsure.org/login/Login.jsp" id="existing-account" target="_blank" rel="noopener noreferrer">iniciar sesión en una cuenta existente</a> para comenzar una solicitud.
-faq.how-can-i-apply-for-healthcare-7=<strong>Solicite la solicitud en papel para determinadas poblaciones:</strong> Algunas personas tendrán que rellenar una solicitud <a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-3876-ENG" id="paper-application" target="_blank" rel="noopener noreferrer">en papel</a> y enviarla por correo a su condado. Utilice la solicitud en papel si todas las personas que solicitan cobertura seguro de salud cumplen al menos uno de estos requisitos:
-faq.how-can-i-apply-for-healthcare-8=<ul class="list--bulleted"><li>Mayor de 65 años de edad</li><li> Únicamente solicita asistencia para los costos de Medicare</li><li>Niños en hogares de crianza temporal</li><li>Persona de 21 años de edad o mayor sin dependientes y con cobertura de Medicare</li>Solicitud para Asistencia Médica para una Persona con Empleo con Incapacidades<li></ul>
-faq.what-benefits-programs=¿Para qué programas de beneficios califico?
-faq.what-benefits-programs-1=Puede utilizar la herramienta de selección <a href="http://bridgetobenefits.org/Home2" target="_blank" rel="noopener noreferrer">Bridge to Benefits</a> para ver a qué programas de prestaciones puede ser elegible. Se le harán 12 preguntas, entre las que se incluyen sus ingresos estimados antes de impuestos. Si vive con otros miembros del hogar, tendrá que incluir también sus ingresos estimados.
-faq.what-benefits-programs-2=Puede calificar para:
-faq.what-benefits-programs-3=<ul class="list--bulleted"><li>Asistencia de electricidad: Ayuda a pagar los gastos de electricidad y recursos adicionales.</li><li>Comidas escolares: Proporciona comidas escolares gratuitas para los niños. Su familia puede calificar automáticamente si recibe SNAP, MFIP u otros programas. </li><li>Programa para Mujeres, Bebés y Niños (WIC): Ayuda a las mujeres embarazadas, a las nuevas madres, a los bebés y a los niños pequeños a comer bien y a mantenerse sanos. Usted puede calificar automáticamente si recibe Asistencia Médica, SNAP, MFIP, Comidas Escolares u otros beneficios.</li><li>Becas de Aprendizaje Temprano: Ayuda a cubrir el costo de los servicios preescolares para niños de 4 años o menos. Usted puede calificar automáticamente si recibe SNAP, MFIP, Head Start, Comidas Escolares, u otros beneficios. </li><li>Créditos fiscales: El crédito fiscal por ingresos ganados y el crédito para familias trabajadoras proporcionan créditos fiscales a las familias con bajos ingresos. Puede reclamarlos para años anteriores si aún no lo ha hecho. Obtenga más información en <a href="https://www.getyourrefund.org/" target="_blank" rel="noopener noreferrer">GetYourRefund.org</a>. Algunas familias con hijos menores de 17 años también pueden recibir nuevos pagos de Crédito Fiscal por Hijos. Puede obtener más información sobre cómo reclamar esta nueva prestación <a href="https://www.getctc.org" target="_blank" rel="noopener noreferrer">aquí</a>.</li><li>Cobertura de seguro de salud: Consulte <a href="#how-to-apply-for-healthcare">la respuesta sobre asistencia de seguro de salud.</a></li></ul>
-faq.do-i-qualify-for-food=¿Califico para Cupones para Alimentos (SNAP)?
-faq.do-i-qualify-for-food-1=La elegibilidad de SNAP se basa en sus ingresos y en los detalles de su hogar. <a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-3529-ENG" target="_blank" rel="noopener noreferrer">Consulte aquí los niveles de ingresos para varios tamaños de hogares</a>.
-faq.i-need-to-submit-a-form=Necesito enviar un formulario, pero no encuentro el correcto. ¿Dónde puedo conseguirlo?
-faq.i-need-to-submit-a-form-1=<a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-2952-ENG" target="_blank" rel="noopener noreferrer">Formulario de verificación de vivienda del DHS</a>: Utilice este formulario para informar de cuánto gasta en gastos de vivienda.
-faq.i-need-to-submit-a-form-2=<a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-2146-ENG" target="_blank" rel="noopener noreferrer">Autorización del DHS para la divulgación de información sobre el empleo</a>: Utilice este formulario para informar sobre sus ingresos. También puede utilizar este formulario para conceder permiso a su condado para ponerse en contacto con su empleador a nombre suyo.
-faq.i-need-to-submit-a-form-3=<a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-3336-ENG " target="_blank" rel="noopener noreferrer">Formulario de declaración de trabajo por cuenta propia del DHS:</a> Utilice este formulario para informar de cualquier ingreso que obtenga de un trabajo por cuenta propia (es decir, un trabajo por encargo como, por ejemplo, conducir para Uber).
-faq.i-need-to-submit-a-form-4=<a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-2402-ENG" target="_blank" rel="noopener noreferrer">Formulario de notificación de cambios del DHS</a>: Utilice este formulario para informar a su condado o nación tribal sobre cambios en su situación.
-faq.i-need-to-send-verification-docs=Tengo que enviar los documentos de verificación (comprobantes) a mi condado o nación tribal. ¿A dónde los enví­o?
-faq.i-need-to-send-verification-docs-1=Puede enviar los documentos de verificación directamente a su condado o nación tribal. Para hacerlo, haga clic en el botón ‘Dargar documentos’ en nuestra página principal o <a href="pages/readyToUploadDocuments" target="_blank" rel="noopener noreferrer">cargue los documentos aquí.</a> <a href="documents/send-documents-to-your-county.pdf" target="_blank" rel="noopener noreferrer">Encontrar más maneras de enviar documentos a su condado o nación tribal.</a>
-faq.can-I-use-mnbenefits-in-my-county=¿Puedo utilizar MNbenefits en mi condado o nación tribal?
-faq.the-application-is-available-for-minnesotans=¡Sí! La solicitud de MNbenefits está disponible para los habitantes de Minnesota que viven en todas las naciones tribales y condados.
+faq.frequently-asked-questions=Frequently Asked Questions
+faq.faq=Frequently Asked Questions (FAQ)
+faq.what-is-mnbenefits=What is MNbenefits.mn.gov and can I use it?
+faq.what-is-mnbenefits-1=MNbenefits is a new, mobile-friendly benefits application for Minnesotans. It is available for all counties and Tribal Nations across the state.
+faq.what-is-mnbenefits-2=On MNbenefits, you can apply for: <ul class="list--bulleted"><li>Food Stamps (SNAP)</li><li>Cash assistance programs like MFIP and General Assistance</li><li>Emergency Assistance</li><li>Child Care Assistance Program</li><li>Housing Support (GRH)</li></ul>
+faq.i-need-help-now=I need help now. What can I do?
+faq.i-need-help-now-1=For immediate food support, <a href="https://www.hungersolutions.org/find-help/" target="_blank" rel="noopener noreferrer">find your local food bank</a>. You can also call 2-1-1 or <a href="https://www.211unitedway.org/" target="_blank" rel="noopener noreferrer">visit 2-1-1 online</a>, a resource helpline for referrals for childcare, affordable housing or shelter, cash assistance, healthcare, and more.
+faq.i-need-help-now-2=Pregnant individuals and families with young children (0 to 8 years old) can use <a href="https://helpmeconnect.web.health.state.mn.us/HelpMeConnect/" target="_blank" rel="noopener noreferrer">Help Me Connect</a> to find services in their local communities that empower families to be healthy and safe.
+faq.how-do-i-contact-my-county=I haven\u2019t heard back on my application. How do I contact my county or Tribal Nation to get an update?
+faq.sometimes-there-can-be-delays=Sometimes there can be delays. If you haven\u2019t heard back about your application, please know that work is still in progress. Contact your county or Tribal Nation before submitting another application.
+faq.you-can-find-a-full-list-of-county=You can find <a href="https://mn.gov/dhs/general-public/about-dhs/contact-us/county-and-tribal-nation-offices/" target="_blank" rel="noopener noreferrer">a full list of county and Tribal Nation phone numbers here</a>. MNbenefits.mn.gov does not have access to your case status.
+faq.i-submitted-my-application=I submitted my application online. What are my next steps?
+faq.i-submitted-my-application-1=You will need to <strong>complete an interview</strong> with a worker if you applied for any of these programs: <ul class="list--bulleted"><li>Food Stamps (SNAP) </li><li>Cash programs</li><li>Emergency Assistance</li><li>Housing Support (GRH)</li></ul>Your interview can be held over the phone, or face-to-face. 
+faq.i-submitted-my-application-2=If you <strong>only</strong> applied for the Child Care Assistance Program (CCAP), you will <strong>not</strong> need to have an interview. You may need to provide additional documents.
+faq.i-submitted-my-application-3=Please check your mail regularly and pick up the phone for all calls you receive, even calls from “unknown” or blocked numbers. Your county or Tribal Nation will contact you with next steps for completing your application.
+faq.i-submitted-my-application-4=You are also welcome to call your county or Tribal Nation directly to check on the status of your case. You can find <a href="https://mn.gov/dhs/general-public/about-dhs/contact-us/county-and-tribal-nation-offices/" target="_blank" rel="noopener noreferrer">a full list of county and Tribal Nation phone numbers here</a>.
+faq.i-submitted-my-application-5=You can send verification documents directly to your county or Tribal Nation by clicking on the 'Upload documents' button on our homepage, or <a href="pages/readyToUploadDocuments" target="_blank" rel="noopener noreferrer">upload your documents here</a>. <a href="documents/send-documents-to-your-county.pdf" target="_blank" rel="noopener noreferrer">Find more ways to send documents to your county or Tribal Nation</a>.
+faq.how-quickly-will=How quickly will I get benefits?
+faq.how-quickly-will-1=<strong>Food Stamps (SNAP)</strong>: Your county or Tribal Nation has 30 days to approve or deny your case. Some people with very low income can get expedited services, and their cases should be processed in 7 days. Because of the pandemic, counties and Tribal Nations are receiving a higher volume of applications than normal. It may take longer than usual to hear back. If it’s been more than two weeks and you haven’t gotten any mail or phone calls from your county or Tribal Nation, or you want to contact them directly, you can <a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-5207-ENG" target="_blank" rel="noopener noreferrer">find their phone number here</a>.
+faq.how-can-i-apply-for-healthcare=How can I apply for Healthcare coverage?
+faq.how-can-i-apply-for-healthcare-1=<strong><i>Apply with help from a navigator</i></strong>
+faq.how-can-i-apply-for-healthcare-2=Applying for healthcare coverage can be difficult.
+faq.how-can-i-apply-for-healthcare-3=Navigators are experts who can help you understand your options, complete your application, and enroll in health insurance coverage. <a href="https://www.mnsure.org/help/find-assister/find-navigator.jsp" id="assistor-directory" target="_blank" rel="noopener noreferrer">Search the Assistor Directory</a> to find a navigator in your area. Services from MNsure-certified navigators are always free.
+faq.how-can-i-apply-for-healthcare-4=<strong><i>Apply on your own</i></strong>
+faq.how-can-i-apply-for-healthcare-5=Depending on your situation, you can either apply online or fill out a paper application.
+faq.how-can-i-apply-for-healthcare-6=<strong>Apply online at MNsure.org:</strong> Most people can apply for healthcare coverage directly on MNsure.org. You will need to <a href="https://auth.mnsure.org/RIDP/?account_type=Individual" id="create-account" target="_blank" rel="noopener noreferrer">create an account</a> or <a href="https://auth.mnsure.org/login/Login.jsp" id="existing-account" target="_blank" rel="noopener noreferrer">log in to an existing account</a> to start an application.
+faq.how-can-i-apply-for-healthcare-7=<strong>Apply using the Certain Populations paper application:</strong> Some people will need to fill out a <a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-3876-ENG" id="paper-application" target="_blank" rel="noopener noreferrer">paper application</a> and mail it to your county. Use the paper application if everyone applying for healthcare coverage meets at least one of these criteria:
+faq.how-can-i-apply-for-healthcare-8=<ul class="list--bulleted"><li>Age 65 or older</li><li>Only requesting assistance for Medicare costs</li><li>Children in foster care</li><li>Age 21 or older with no dependents and have Medicare coverage</li><li>Applying for Medical Assistance for Employed Person with Disabilities</li></ul>
+faq.what-benefits-programs=What benefits programs do I qualify for?
+faq.what-benefits-programs-1=You can use the <a href="http://bridgetobenefits.org/Home2" target="_blank" rel="noopener noreferrer">Bridge to Benefits screening tool</a> to see what benefit programs you might be eligible for. You’ll be asked 12 questions, including your estimated income before taxes. If you live with other household members, you will need to include their estimated income too.
+faq.what-benefits-programs-2=You may qualify for:
+faq.what-benefits-programs-3=<ul class="list--bulleted"><li>Energy Assistance: Helps pay for your energy bills and additional resources.</li><li>School Meals: Provides free school meals for children. Your family may automatically qualify if you receive SNAP, MFIP, or other programs. </li><li>Women, Infants, and Children (WIC) Program: Helps pregnant women, new mothers, babies, and young children eat well and stay healthy. You may automatically qualify if you receive Medical Assistance, SNAP, MFIP, School Meals, or other benefits.</li><li>Early Learning Scholarships: Helps cover the cost for preschool services for children 4 and under. You may automatically qualify if you receive SNAP, MFIP, Head Start, School Meals, or other benefits. </li><li>Tax Credits: The Earned Income Tax Credit and the Working Family Credit provide tax credit for low-income families. You can claim these for previous years if you haven\u2019t yet. Learn more at <a href="https://www.getyourrefund.org/" target="_blank" rel="noopener noreferrer">GetYourRefund.org</a>. Some families with children under age 17 may also receive new Child Tax Credit payments. You can learn more about how to claim this new benefit <a href="https://www.getctc.org" target="_blank" rel="noopener noreferrer">here</a>.</li><li>Healthcare coverage: See the <a href="#how-to-apply-for-healthcare">healthcare answer below.</a></li></ul>
+faq.do-i-qualify-for-food=Do I qualify for Food Stamps (SNAP)?
+faq.do-i-qualify-for-food-1=SNAP eligibility is based on your income and household details. <a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-3529-ENG" target="_blank" rel="noopener noreferrer">Check the income levels for various household sizes here</a>.
+faq.i-need-to-submit-a-form=I need to submit a form, but I can’t find the right one. Where can I get it?
+faq.i-need-to-submit-a-form-1=<a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-2952-ENG" target="_blank" rel="noopener noreferrer">DHS Shelter Verification Form</a>: Use this form to report how much you spend on housing costs.
+faq.i-need-to-submit-a-form-2=<a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-2146-ENG" target="_blank" rel="noopener noreferrer">DHS Authorization for Release of Employment Information</a>: Use this form to report your income. You can also use this form to grant permission to your county to reach out to your employer on your behalf.
+faq.i-need-to-submit-a-form-3=<a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-3336-ENG" target="_blank" rel="noopener noreferrer">DHS Self-Employment Report Form</a>: Use this form to report any income you get from self-employment (i.e. gig work like driving for Uber).
+faq.i-need-to-submit-a-form-4=<a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-2402-ENG" target="_blank" rel="noopener noreferrer">DHS Change Report Form</a>: Use this form to report changes in your situation to your county or Tribal Nation.
+faq.i-need-to-send-verification-docs=I need to send verification documents (proofs) to my county or Tribal Nation. Where do I send them?
+faq.i-need-to-send-verification-docs-1=You can send verification documents directly to your county or Tribal Nation by clicking on the \u2018Upload documents\u2019 button on our homepage, or <a href="pages/readyToUploadDocuments" target="_blank" rel="noopener noreferrer">upload your documents here</a>. <a href="documents/send-documents-to-your-county.pdf" target="_blank" rel="noopener noreferrer">Find more ways to send documents to your county or Tribal Nation.</a>
+faq.can-I-use-mnbenefits-in-my-county=Can I use MNbenefits in my county or Tribal Nation?
+faq.the-application-is-available-for-minnesotans=Yes! The MNbenefits application is available for Minnesotans living in every Tribal Nation and county.
 
-support-services.title=Servicios de Apoyo
-support-services.mental-health=Ayuda en caso de crisis de salud mental
-support-services.housing-assistance=Asistencia para vivienda, atención médica u otro tipo de ayuda
-support-services.food-support=Apoyo Alimentario
-support-services.child-care-assistance=Asistencia para el cuidado infantil
-support-services.alcohol-and-substance=Recursos sobre el consumo de alcohol y sustancias
-support-services.get-help=Obtenga ayuda ahora
-support-services.mental-health-1=Ayuda en caso de crisis de salud mental
-support-services.mental-health-2=Llame o envíe un mensaje de texto al 988.
-support-services.looking-for-help-1=¿Necesita ayuda ahora mismo?
-support-services.looking-for-help-2=Llame al 211, envíe un mensaje de texto con su código postal al 898-211, o visite el sitio web del <a href="https://www.es.211.org/">211</a> para obtener referidos sobre el cuidado infantil, vivienda asequible o refugio, asistencia en efectivo, atención médica y más.
-support-services.find-food-1=Encontrar alimentos
-support-services.find-food-2=Para obtener alimentos, comuníquese con Minnesota Food HelpLine al 888-711-1151 o visite <a href="https://www.hungersolutions.org/programs/mn-food-helpline/en-espanol/">Hunger Solutions</a> para obtener más recursos.
-support-services.find-food-3=Para apoyo alimentario inmediato, <a href="https://www.hungersolutions.org/find-help/">busque su banco de alimentos local.</a>
-support-services.find-food-4=Las personas embarazadas y las familias con niños pequeños (de 0 a 8 años) pueden usar <a href="https://helpmeconnect.web.health.state.mn.us/HelpMeConnect/" hreflang="es">Help Me Connect</a> para encontrar servicios en sus comunidades locales que ayuden a las familias a mantenerse saludables y ahorrar.
-support-services.child-care-assistance-1=Asistencia para el cuidado infantil
-support-services.child-care-assistance-2=Para cuidado infantil, llame a Child Care Aware al 888-291-9811, o visite <a href="https://www.parentaware.org/" hreflang="es">Parent Aware</a> para obtener más información.
-support-services.alcohol-and-substance-1=Recursos sobre el consumo de alcohol y sustancias
-support-services.alcohol-and-substance-2=Visite la página <a href="https://mn.gov/dhs/people-we-serve/adults/health-care/alcohol-drugs-addictions/programs-and-services/">Alcohol, drugs and addictions: programs and services</a> del Departamento de Servicios Humanos de Minnesota (Minnesota Department of Human Services, DHS) para conocer los próximos pasos para recibir tratamiento y las opciones de financiamiento para el tratamiento del trastorno por consumo de sustancias.
-support-services.alcohol-and-substance-3=Visite <a href="https://fasttrackermn.org/">FastTrackerMN</a> y <a href="https://licensinglookup.dhs.state.mn.us/">Licensing Lookup</a> para encontrar centros de tratamiento que se ajusten a sus necesidades.
-support-services.immigration-1=¿Busca ayuda legal o de inmigración?
-support-services.immigration-2=Visite el sitio web <a href="https://www.lawhelpmn.org/es">LawHelpMN.org</a> para encontrar más recursos sobre cómo obtener ayuda con sus necesidades legales o de inmigración.
+support-services.title=Support Services
+support-services.mental-health=Mental health crisis help
+support-services.housing-assistance=Housing assistance, medical or other help
+support-services.food-support=Food support
+support-services.child-care-assistance=Child care assistance
+support-services.alcohol-and-substance=Alcohol and substance use resources
+support-services.get-help=Get help now
+support-services.mental-health-1=Mental health crisis help
+support-services.mental-health-2=Call or text 988.
+support-services.looking-for-help-1=Looking for help right now?
+support-services.looking-for-help-2=Call 211, or text your zip code to 898-211, or visit <a href="https://211.org/">211</a>'s site for for referrals for childcare, affordable housing or shelter, cash assistance, healthcare, and more.
+support-services.find-food-1=Find food
+support-services.find-food-2=To get food, contact Minnesota Food HelpLine at 888-711-1151 or visit <a href="https://www.hungersolutions.org/.">Hunger Solutions</a> for more resources.
+support-services.find-food-3=For immediate food support, <a href="https://www.hungersolutions.org/find-help/">find your local food bank.</a>
+support-services.find-food-4=Pregnant individuals and families with young children, (0 to 8 years old) can use  <a href="https://helpmeconnect.web.health.state.mn.us/HelpMeConnect/">Help Me Connect</a> to find services in their local communities that empower families to be healthy and save.
+support-services.child-care-assistance-1=Child care assistance
+support-services.child-care-assistance-2=For child care, call Child Care Aware at 888-291-9811, or visit <a href="https://www.parentaware.org/">Parent Aware</a> for more info.
+support-services.alcohol-and-substance-1=Alcohol and substance use resources
+support-services.alcohol-and-substance-2=Visit the <a href="https://mn.gov/dhs/people-we-serve/adults/health-care/alcohol-drugs-addictions/programs-and-services/">Alcohol, drugs and addictions: programs and services</a> page from Minnesota DHS (Department of Human Services) to learn next steps in getting treatment and funding options for substance use disorder treatment.
+support-services.alcohol-and-substance-3=Visit <a href="https://fasttrackermn.org/">FastTrackerMN</a> and <a href="https://licensinglookup.dhs.state.mn.us/">Licensing Lookup</a> to find treatment facilities to meet your needs.
+support-services.immigration-1=Looking for legal or immigration help?
+support-services.immigration-2=Visit the <a href="https://www.lawhelpmn.org/">LawHelpMN.org</a> site to find more resources on how to get help with your legal or immigration needs.
 
-household-member-info.title=Compañero/a de casa: Información Personal
-household-member-info.add-a-person-who-lives-with-you=Agregue la primera persona en su familia
-household-member-info.whats-their-first-name=¿Cuál es su primer nombre?
-household-member-info.legally-as-it-appears-on-their-id=Legalmente como aparece en su identificación.
-household-member-info.whats-their-last-name=¿Cuál es su apellido?
-household-member-info.whats-their-middle-name=¿Cuál es el segundo nombre de esta persona?
-household-member-info.list-any-other-names-they-have-gone-by-in-the-past=Enumere todos los nombres que hayan utilizado en el pasado.
-household-member-info.when-were-they-born=Fecha de nacimiento
-household-member-info.whats-their-martial-status=¿Cuál es su estado civil?
-household-member-info.whats-their-sex=¿Cuál es su sexo?
-household-member-info.legally-as-it-appears-on-their-id-we-regret-that-this-question-is-limited=Legalmente como aparece en su identificación. Lamentamos que esta pregunta es limitada.
-household-member-info.have-they-lived-in-minnesota-their-whole-life=¿Se mudaron a Minnesota dentro del año pasado?
-household-member-info.when-did-they-move-to-minnesota=¿Cuando se mudaron a Minnesota?
-household-member-info.what-state-did-they-move-from=¿De que estado se mudaron?
-household-member-info.whats-their-relationship-to-you=¿Cuál es su relación a usted?
-household-member-info.select-relationship=Seleccione su relación con las siguientes personas
-household-member-info.spouse=Mi cónyuge (por ejemplo, esposa, marido)
-household-member-info.partner=Mi pareja (por ejemplo, novia, novio)
-household-member-info.child=Mi hijo
-household-member-info.step-child=Mi hijastro
-household-member-info.brother-or-sister=Mi hermano o hermana
-household-member-info.step-brother-or-sister=Mi hermanastro o hermanastra
-household-member-info.half-brother-or-sister=Mi medio hermano o media hermana
-household-member-info.parent-or-guardian=Mi padre o guardián
-household-member-info.grandparent=Mi abuelo o abuela
-household-member-info.childs-parent=El padre o madre de mi hijo/a
-household-member-info.aunt-or-uncle=Mi tía o tío
-household-member-info.niece-or-nephew=Mi sobrina o sobrino
-household-member-info.roommate=Mi compañero de cuarto
-household-member-info.friend=Mi amigo/a
-household-member-info.grandchild=Mi nieto/a
-household-member-info.other=Otros
-household-member-info.what-type-of-assistance-would-they-like-to-apply-for=¿Qué tipo de beneficios desea solicitar?
-household-member-info.whats-their-social-security-number=¿Cuál es su número de seguro social?
-household-member-info.if-they-have-one-we-strongly-recommend-including-it-here=Si lo tienen, recomendamos mucho que lo incluyan aquí. El SSN no es necesario para los no ciudadanos o los miembros de la familia que no solicitan prestaciones. <a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-3979-SPA" target="_blank" rel="noopener noreferrer">Lea la Ley de Privacidad</a>.
+household-member-info.title=Housemate: Personal Info
+household-member-info.add-a-person-who-lives-with-you=Add a person who lives with you
+household-member-info.whats-their-first-name=What's their first name?
+household-member-info.legally-as-it-appears-on-their-id=Legally as it appears on their ID.
+household-member-info.whats-their-last-name=What's their last name?
+household-member-info.whats-their-middle-name=What's their middle name?
+household-member-info.list-any-other-names-they-have-gone-by-in-the-past=List any other names they have gone by in the past.
+household-member-info.when-were-they-born=When were they born?
+household-member-info.whats-their-martial-status=What's their marital status?
+household-member-info.whats-their-sex=What's their sex?
+household-member-info.legally-as-it-appears-on-their-id-we-regret-that-this-question-is-limited=Legally as it appears on their ID. We regret that this question is limited.
+household-member-info.have-they-lived-in-minnesota-their-whole-life=Did they move to Minnesota within the last year?
+household-member-info.when-did-they-move-to-minnesota=When did they move to Minnesota?
+household-member-info.what-state-did-they-move-from=What state did they move from?
+household-member-info.whats-their-relationship-to-you=What's their relationship to you?
+household-member-info.select-relationship=Select Relationship
+household-member-info.spouse=My spouse (e.g. wife, husband)
+household-member-info.partner=My partner (e.g. girlfriend, boyfriend)
+household-member-info.child=My child
+household-member-info.step-child=My step-child
+household-member-info.brother-or-sister=My brother or sister
+household-member-info.step-brother-or-sister=My step brother or sister
+household-member-info.half-brother-or-sister=My half-brother or half-sister
+household-member-info.parent-or-guardian=My parent or guardian
+household-member-info.grandparent=My grandparent
+household-member-info.childs-parent=My child's parent
+household-member-info.aunt-or-uncle=My aunt or uncle
+household-member-info.niece-or-nephew=My niece or nephew
+household-member-info.roommate=My roommate
+household-member-info.friend=My friend
+household-member-info.grandchild=My grandchild
+household-member-info.other=Other
+household-member-info.what-type-of-assistance-would-they-like-to-apply-for=What type of assistance would they like to apply for?
+household-member-info.whats-their-social-security-number=What's their social security number?
+household-member-info.if-they-have-one-we-strongly-recommend-including-it-here=If they have one, we strongly recommend including it here. A SSN is not required for noncitizens or household members who are not applying for benefits. <a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-3979-ENG" target="_blank" rel="noopener noreferrer">Read the Privacy Act</a>.    
 
-household-race-and-ethnicity.title=Raza y etnia del hogar
-household-race-and-ethnicity.header=¿Con qué razas o etnias se identifica {0}?
-household-race-and-ethnicity.prefer-not-to-say=Prefiero no decirlo
+household-race-and-ethnicity.title=Household Race and Ethnicity
+household-race-and-ethnicity.header=What races or ethnicities does {0} identify with?
+household-race-and-ethnicity.prefer-not-to-say=Rather not say
 
-household-redirect-page.header=Volver eliminará a todos los miembros de tu hogar y te llevará de regreso a la sección de hogar donde empezarás de nuevo.
-household-redirect-page.is-that-ok=¿Está bien?
-address-validation.title=Validación de su dirección
-address-validation.suggested-address=Dirección sugerida
-address-validation.address-you-entered=Dirección que escribió
-address-validation.check-your-mailing-address=Revisa su dirección postal
-address-validation.check-your-address=Compruebe su dirección
-address-validation.make-sure-your-mailing-address-is-correct=Asegúrese que su dirección postal es correcta
-address-validation.make-sure-your-address-is-correct=Asegúrese que su dirección es correcta
-address-validation.we-updated-the-address-you-entered=Actualizamos la dirección que usted escribió. Si es correcta, por favor use la dirección sugerida.
-address-validation.we-couldnt-find-your-address=No nos fue posible encontrar su dirección. Para asegurarse de recibir la correspondencia de su condado o nación tribal podrá editar su dirección o continuar.
-address-validation.edit-my-address=Corregir mi dirección
-address-validation.use-this-address=Use esta dirección
+household-redirect-page.header=Going back will delete all your household members, and take you back to the household section where you will start over.
+household-redirect-page.is-that-ok=Is that okay?
+address-validation.title=Address Validation
+address-validation.suggested-address=Suggested Address
+address-validation.address-you-entered=Address You Entered
+address-validation.check-your-mailing-address=Check your mailing address
+address-validation.check-your-address=Check your address
+address-validation.make-sure-your-mailing-address-is-correct=Make sure your mailing address is correct
+address-validation.make-sure-your-address-is-correct=Make sure your address is correct
+address-validation.we-updated-the-address-you-entered=We updated the address you entered. If correct, please use the suggested address.
+address-validation.we-couldnt-find-your-address=We couldn't find your address. To make sure you get mail from your county or Tribal Nation, you may edit your address or keep going.
+address-validation.edit-my-address=Edit my address
+address-validation.use-this-address=Use this address
 
-county-validation.title=Validación de su condado
-county-validation.suggested-county=Condado sugerido
-county-validation.county-you-entered=Condado ingresado por usted
-county-validation.check-your-county=Compruebe su condado
-county-validation.make-sure-your-county-is-correct=Asegúrese de que su condado sea el correcto
-county-validation.we-updated-the-county-you-entered=Con base en la información de la dirección que ingresó, actualizamos el condado que seleccionó. Si es correcto, use el condado sugerido.
-county-validation.we-couldnt-find-your-county=No pudimos encontrar su condado usando la dirección que ingresó. Para asegurar que su solicitud se envíe al condado o a la nación tribal correcta, puede editar su condado o seguir adelante.
-county-validation.edit-my-county=Editar mi condado
-county-validation.use-this-county=Usar este condado
+county-validation.title=County Validation
+county-validation.suggested-county=Suggested County
+county-validation.county-you-entered=County You Entered
+county-validation.check-your-county=Check your county
+county-validation.make-sure-your-county-is-correct=Make sure your county is correct
+county-validation.we-updated-the-county-you-entered=Based on the address information you entered, we updated the county you selected. If correct, please use the suggested county.
+county-validation.we-couldnt-find-your-county=We couldn't find your county based on the address you entered. To make sure your application is sent to the correct county or Tribal Nation, you may edit your county or keep going.
+county-validation.edit-my-county=Edit my county
+county-validation.use-this-county=Use this county
 
-email.you-submitted=Usted envió su solicitud de MNbenefits y {0} la recibió.
-email.whats-next=<strong>Que Sigue?</strong>
-email.your-next-steps=Sus próximos pasos en el proceso de solicitud pueden incluir cargar documentos de verificación y estar disponible para llamadas y comunicaciones de su trabajador.
-email.upload-your-documents=<strong>Cargue sus documentos.</strong>
-email.do-you-want-to-send-in-documents=¿Quiere enviar documentos o pruebas directamente a su condado o nación tribal?  Vaya a <a href="https://mnbenefits.mn.gov/?utm_medium=confirmationemail#later-docs-upload" target="_blank" rel="noopener noreferrer">MNbenefits.mn.gov</a> y haga clic en "Cargar documentos".  Los documentos más solicitados son identificación (ID), recibos de pago de su trabajo o prueba de pérdida reciente de trabajo y prueba de alquiler o costos de alojamiento.
-email.allow-time-for-a-worker=<strong>Permita tiempo para que un trabajador revise su solicitud.</strong>
-email.SNAP-expedited=Su solicitud y documentos serán revisados por su {0}. Dentro de los próximos 5 días, espere una llamada telefónica o una carta por correo de un trabajador de elegibilidad.<br><br>El tiempo que lleva revisar las solicitudes puede variar. Si no ha recibido respuesta sobre su solicitud dentro de 7 días, comuníquese con {1} antes de enviar otra solicitud.
-email.CCAP-expedited=Su solicitud y documentos serán revisados por su {0}. Si sólo solicitó el Programa de Asistencia para el Cuidado de Niños (CCAP), no necesitará tener una entrevista.  Dentro de los próximos 5 días, espere una llamada telefónica o una carta por correo de un trabajador de elegibilidad.<br><br>El tiempo que lleva revisar las solicitudes puede variar. Si no ha recibido respuesta sobre su solicitud dentro de 7 días, comuníquese con {1} antes de enviar otra solicitud.
-email.not-expedited=Su solicitud y documentos serán revisados por su {0}. El tiempo que lleva revisar las solicitudes puede variar.<br><br>Espere que un trabajador de elegibilidad se comunique con usted por teléfono o correo con información sobre sus próximos pasos. Si no ha recibido respuesta sobre su solicitud, sepa que el trabajo aún está en progreso.<br><br>Antes de enviar otra solicitud, comuníquese con {1}.
-email.need-help-now=<strong>¿Necesita ayuda ahora?</strong>
-email.mental-health-crisis=Si se encuentra en una crisis de salud mental, llame o envíe un mensaje de texto al 988.<br><br>Para recibir ayuda de alimentos, vivienda, ayuda médica y de otro tipo, puede llamar al 211, o enviar un mensaje de texto con su código postal al 898-211, o visitar <a href="https://www.211.org/" target="_blank" rel="noopener noreferrer">https://www.211.org/</a>.  <br><br>Si necesita ayuda adicional para acceder a los alimentos, comuníquese con la Línea de Ayuda Alimentaria de Minnesota al 888-711-1151 o <a href="https://www.hungersolutions.org/" target="_blank" rel="noopener noreferrer">Hungersolutions.org</a>.
-email.need-help-now=<strong>¿Necesita ayuda ahora?</strong>
-email.have-other-questions=<strong>¿Tienes preguntas?</strong>
-email.visit-faqs=Visite a <a href="https://mnbenefits.mn.gov/faq" target="_blank" rel="noopener noreferrer">MNbenefits en las preguntas frecuentes</a>.
+email.you-submitted=You submitted your MNbenefits application and {0} received it.
+email.whats-next=<strong>What's Next?</strong>
+email.your-next-steps=Your next steps in the application process may include uploading verification documents and being available for calls and communications from your worker.
+email.upload-your-documents=<strong>Upload your documents.</strong>
+email.do-you-want-to-send-in-documents=Do you want to send in documents or proof to your county or Tribal Nation directly? Go to <a href="https://mnbenefits.mn.gov/?utm_medium=confirmationemail#later-docs-upload" target="_blank" rel="noopener noreferrer">MNbenefits.mn.gov</a> and click on \u2018Upload Documents\u2019. The most requested documents are identification (ID), paystubs from your job or proof of recent loss of job and proof of rent or shelter costs. 
+email.allow-time-for-a-worker=<strong>Allow time for a worker to review.</strong>
+email.SNAP-expedited=Your application and documents will be reviewed by {0}. Within the next 5 days expect a phone call from an eligibility worker. <br><br>The time it takes to review your application can vary. If you haven\u2019t heard back about your application within 7 days, contact {1} before you submit another application. 
+email.CCAP-expedited=Your application and documents will be reviewed by {0}. Your Child Care Assistance application does not need an interview. Within the next 5 days expect a phone call from an eligibility worker. <br><br>The time it takes to review your application can vary. If you haven\u2019t heard back about your application within 7 days, contact {1} before you submit another application.
+email.not-expedited=Your application and documents will be reviewed by {0}.  The time it takes to review your application can vary. <br><br>Expect an eligibility worker to contact you by phone or mail with information about your next steps. If you haven\u2019t heard back about your application, know that work is still in progress. <br><br>Before you submit another application, contact {1}.
+email.need-help-now=<strong>Need help now?</strong>
+email.mental-health-crisis=If you are in a mental health crisis, call or text 988. <br><br>To connect with food, housing, medical or other help, you can call 211, or text your zip code to 898-211, or visit <a href="https://www.211.org/" target="_blank" rel="noopener noreferrer"> 211.org</a>. <br><br>If you need additional assistance to access food, contact Minnesota Food HelpLine at 888-711-1151 or <a href="https://www.hungersolutions.org/" target="_blank" rel="noopener noreferrer">hungersolutions.org</a>.
+email.need-help-now=<strong>Need help now?</strong>  
+email.have-other-questions=<strong>Have other questions?</strong>
+email.visit-faqs=Visit <a href="https://mnbenefits.mn.gov/faq" target="_blank" rel="noopener noreferrer">MNbenefits frequently asked questions</a>. 
 
-email.subject=Hemos recibido su solicitud de MNbenefits
-email.next-steps-subject=Proximos pasos: Su solicitud de MNbenefits
-email.client-body=Hemos recibido su solicitud de Minnesota Benefits.<br><br>Su solicitud fue enviada a {3} en {4}.<br><br>Número de confirmación: <strong>#{0}</strong><br>Estado de la solicitud: <strong>En revision</strong>{1}<br><br>{2}
-email.if-you-want-an-update-call-your-county=Si desea una actualizaciÃ³n de su caso, por favor llame al condado o naciÃ³n tribal mencionado anteriormente.
-email.confirmation-email-doc-recs=<strong>Documentos de verificación:</strong><br>Si necesita presentar documentos de verificación para su caso, puede <a href="https://mnbenefits.mn.gov/?utm_medium=confirmationemail#later-docs-upload" target="_blank" rel="noopener noreferrer">volver a MNbenefits.mn.gov</a> para subir los documentos en cualquier momento.<br>Es posible que tenga que compartir los siguientes documentos:<br><ul>{0}</ul>
-email.document-recommendation-email=Recuerde subir los documentos en <a href="https://mnbenefits.mn.gov/?utm_medium=confirmationemail#later-docs-upload" target="_blank" rel="noopener noreferrer">MNbenefits.mn.gov</a> para respaldar su solicitud de MN Benefits. Puede usar su teléfono para tomar o subir fotos, o usar su computadora para subir documentos.<br>Si los tiene, debe subir los siguientes documentos:<br><ul>{0}</ul>Si ya ha subido estos documentos, puede ignorar este recordatorio.
-email.document-recommendation-email-subject=[Acción requerida] Cargue documentos a su solicitud de MNbenefits.
-email.resubmit-email=Debido a un problema técnico, este archivo MNbenefits no se envió a la bandeja de entrada de MNIT. En cambio, lo compartimos aquí. Es {0}.
+email.subject=We received your MNbenefits application
+email.next-steps-subject=Next Steps: Your MNbenefits Application
+email.client-body=We received your Minnesota Benefits application.<br><br>Your application was submitted to {3} on {4}.<br><br>Confirmation number: <strong>#{0}</strong><br>Application status: <strong>In review</strong>{1}<br><br>{2}
+email.if-you-want-an-update-call-your-county=If you would like an update on your case, please call the county or Tribal Nation listed above.
+email.confirmation-email-doc-recs=<strong>Verification Docs:</strong><br>If you need to submit verification documents for your case, you can <a href="https://mnbenefits.mn.gov/?utm_medium=confirmationemail#later-docs-upload" target="_blank" rel="noopener noreferrer">return to MNbenefits.mn.gov</a> to upload documents at any time.<br>You may need to share the following documents:<br><ul>{0}</ul>
+email.document-recommendation-email=Remember to upload documents on <a href="https://mnbenefits.mn.gov/?utm_medium=confirmationemail#later-docs-upload" target="_blank" rel="noopener noreferrer">MNbenefits.mn.gov</a> to support your MN Benefits application. You can use your phone to take or upload pictures, or use your computer to upload documents.<br>If you have them, you should upload the following documents:<br><ul>{0}</ul>If you have already uploaded these documents, you can ignore this reminder.
+email.document-recommendation-email-subject=[Action Required] Upload Documents To Your MNbenefits Application
+email.resubmit-email=Due to a technical issue, this MNbenefits file did not submit to the MNIT inbox. We are sharing it here instead. It is {0}
 
-county-to-instructions.generic-client=Esta solicitud ha sido enviada a {0} con la información que usted ha proporcionado. Algunas partes de esta solicitud estarán en blanco. Un trabajador del condado se pondrá en contacto con usted si se necesita información adicional.\n\nPara obtener más ayuda, puede llamar al {1}.
-county-to-instructions.generic-caseworker=This application was submitted by a resident at MNbenefits.mn.gov. MNbenefits sent this application to {0}. This PDF contains a completed Combined Application Form (CAF) or Child Care Assistance Program Application (CCAP), ready for processing. If you have any questions, please contact your supervisor. If you have any feedback on the MNbenefits application, please email the MNbenefits product team at mnbenefits@state.mn.us.
+county-to-instructions.generic-client=This application was submitted to {0} with the information that you provided. Some parts of this application will be blank. A caseworker will follow up with you if additional information is needed.\n\nFor more support, you can call {1}.
+county-to-instructions.generic-caseworker=This application was submitted by a resident at MNbenefits.mn.gov. MNbenefits sent this application to {0}.\n This PDF contains a completed Combined Application Form (CAF) or Child Care Assistance Program Application (CCAP), ready for processing. If you have any questions, please contact your supervisor. If you have any feedback on the MNbenefits application, please email the MNbenefits product team at mnbenefits@state.mn.us.
 
 error.title=Error
-error.something-went-wrong=¡Algo no funcionó!
-error.something-went-wrong-on-our-end=Disculpe. Algo no funcionó de nuestra parte. Intente regresar a la página anterior o a la página de inicio.
-error.return-home=Vuelva a la página de inicio
+error.something-went-wrong=Something went wrong!
+error.something-went-wrong-on-our-end=Something went wrong on our end. Sorry about that. Try going back or return to the home page.
+error.return-home=Return to home
 
-error-session-timeout.title=Tiempo de espera
-error-session-timeout.your-session-ended=Lo sentimos, su sesión ha terminado.
-error-session-timeout.expired=Su sesión ha terminado porque estuvo inactiva durante una hora. Esto se hace para proteger su información.
-error-session-timeout.next=Tendrá que volver a ingresar para presentar su solicitud.
-error-session-timeout.return-home=Vuelva a la página principal (Home)
+error-session-timeout.title=Timeout
+error-session-timeout.your-session-ended=Sorry, your session timed out.
+error-session-timeout.expired=Your session has timed out because you were inactive for 1 hour. This is to protect your information.
+error-session-timeout.next=You will need to start again to submit an application.
+error-session-timeout.return-home=Return to home
 
 error-upload-timeout.title=Doc Upload Timeout
-error-upload-timeout.your-session-ended=Tiempo de espera para cargar el documento (Doc Upload Timeout)
-error-upload-timeout.expired=Su sesión para cargar el documento ha terminado. No se preocupe, no tiene que volver a presentar la solicitud. ¡Su solicitud ya ha sido enviada!
-error-upload-timeout.next=Para enviar sus documentos, vuelva a la página principal y haga clic sobre el botón de "cargar documentos" ("upload documents").
-error-upload-timeout.submit-documents=Enviar documentos
+error-upload-timeout.your-session-ended=Your document upload session timed out.
+error-upload-timeout.expired=<strong>Don't worry, you <u>do not</u> need to reapply</strong>. Your application has already been submitted!
+error-upload-timeout.next=To submit your documents, return to our homepage and click the "upload documents" button.
+error-upload-timeout.submit-documents=Submit Documents
 
-hc-error-upload-timeout.expired=Su sesión ha terminado porque estuvo inactiva durante una hora. Esto se hace para proteger su información.
-hc-error-upload-timeout.next=Tendrá que empezar de nuevo para presentar sus documentos de renovación.
+hc-error-upload-timeout.expired=Your session has timed out because you were inactive for 1 hour. This is to protect your information.
+hc-error-upload-timeout.next=You will need to start again to submit your renewal documents.
 
-assets.title=Sus bienes
-assets.does-any-one-in-your=¿Alguien en su hogar cuenta con alguno de los siguientes?
-assets.do-you-have-any=¿Tiene alguno de estos recursos?
-assets.select-all-that-apply=Seleccione todo lo que corresponda.
-assets.cash=Efectivo
-assets.bank-account=Cuentas bancarias<span style="font-weight: normal;"> (como cuenta de ahorros o de cheques, etc.)</span>
-assets.electronic-payment=Tarjetas de pago electrónico <span style="font-weight: normal;">(tarjetas de débito como Reliacard, tarjetas de Direct Express, etc.)</span>
-assets.a-vehicle=Un vehículo
-assets.stocks-bonds-401k=Acciones, bonos o cuentas de jubilación
-assets.real-estate=Bienes raíces (sin contar su propia casa)
-assets.more-than-1-million-in-family-assets=Más de $1 millón en bienes familiares
-assets.none-of-the-above=Ninguno de los anteriores
-assets.assets-include-cash-bank-accounts=Los bienes incluyen efectivo, cuentas bancarias, vehículos, inversiones y bienes raíces (además de su casa) de su familia.<br><br><b> No incluyen</b> el valor de su vivienda, sus pertenencias personales o bienes relacionados con su trabajo independiente que solo se emplean para fines empresariales.
+assets.title=Assets
+assets.does-any-one-in-your=Does anyone in your household have any of these?
+assets.do-you-have-any=Do you have any of these assets?
+assets.select-all-that-apply=Select all that apply.
+assets.cash=Cash
+assets.bank-account=Bank Accounts <span style="font-weight: normal;">(Like a savings or checking account, etc.)</span>
+assets.electronic-payment=Electronic Payment cards <span style="font-weight: normal;">(debit cards like Reliacard, Direct Express cards, etc.)</span>
+assets.a-vehicle=A vehicle
+assets.stocks-bonds-401k=Stocks, bonds, retirement accounts
+assets.real-estate=Real estate (not including your own home)
+assets.more-than-1-million-in-family-assets=More than $1 million in family assets
+assets.none-of-the-above=None of the above
+assets.assets-include-cash-bank-accounts=Assets include your family's cash, bank accounts, vehicles, investments, and real estate (other than your home).<br><br><b> Do not include</b> your home value, personal belongings, or self-employment assets that are only used for business purposes.
 
-business-ownership-asset-source.title = Quién tiene participación en una empresa
-business-ownership-asset-source.who-has=Quién tiene participación en una empresa
-business-ownership-asset-source.choose-whoever-is-listed=Seleccione a la persona que aparece en documentos legales. Si se trata de un bien en copropiedad, seleccione a ambas personas.
+business-ownership-asset-source.title = Who has ownership in a business
+business-ownership-asset-source.who-has=Who has ownership in a business?
+business-ownership-asset-source.choose-whoever-is-listed=Choose whoever is listed on the legal paperwork. If something is co-owned, select both people. 
 
-investments.title=Inversiones
-investments.do-you-have-any-stocks-bonds-or-a-401k=¿Tiene acciones, bonos o un 401k?
-investments.household-stocks=¿Alguien en su hogar tiene acciones, bonos o un 401k?
-investments.tell-us-which-you-have=¿Qué tipo de cuentas de inversión tiene?
-investments.tell-us-which-types-there-are=Díganos de qué tipo de cuentas se trata.
-investments.select-all-that-apply=Seleccione todo lo que corresponda.
+investments.title=Investments
+investments.do-you-have-any-stocks-bonds-or-a-401k=Do you have any stocks, bonds or a 401k?
+investments.household-stocks=Does anyone in the household have stocks, bonds or a 401k?
+investments.tell-us-which-you-have=Which types of investment accounts do you have?
+investments.tell-us-which-types-there-are=Tell us which types of accounts there are.
+investments.select-all-that-apply=Select all that apply.
 
-investments.stocks=Acciones
-investments.bonds=Bonos
-investments.rsa=Cuentas de jubilación
+investments.stocks=Stocks
+investments.bonds=Bonds
+investments.rsa=Retirement accounts
 
-ebt.scam.alert=<strong>ALERTA DE FRAUDE DE SNAP:</strong> Proteja su tarjeta EBT y beneficios SNAP de los fraudes. MNbenefits no lo contactará en relación con su tarjeta EBT por mensaje de texto.  <a class="link--alert-banner" href="https://dcyf.mn.gov/ebt-card " target="_blank">Obtenga más información aquí.</a>
+ebt.scam.alert=<strong>SNAP SCAM ALERT:</strong> Protect your EBT card and SNAP benefits from scams. MNbenefits will not contact you about your EBT card by text. <a class="link--alert-banner" href="https://dcyf.mn.gov/ebt-card" target="_blank">Learn more here.</a>
 
-hc-privacy-notices.privacy-notices=Notificaciones de privacidad
-hc-privacy-notices.please-review-the-privacy-notices-below-before-you-continue=Por favor, revise la notificaciones de privacidad siguientes antes de continuar.
-hc-privacy-notices.collection-of-your-private-data=Recopilación de sus datos privados
-hc-privacy-notices.the-minnesota-department-of-human-services-DHS-collects=El Departamento de Servicios Humanos (DHS) de Minnesota recopila su información privada en esta solicitud para verificar si es elegible para nuestros programas y por las razones que se mencionan en la <a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-4839E-ENG" target="_blank" rel="noopener noreferrer">Notificación de prácticas de privacidad del DHS (DHS Notice of Privacy Practices)</a>.
-hc-privacy-notices.additionally-your-information-may-be-released=Además, su información puede ser divulgada a las autoridades policiales, a personas que la necesitan para cumplir con su trabajo o que están autorizadas por la ley estatal o federal, en cumplimiento de una orden de tribunal o con el consentimiento de usted por escrito. 
-hc-privacy-notices.you-can-refuse-to-provide-this-information=Usted puede negarse a dar esa información, pero, sin ella, el DHS no puede determinar si es elegible para nuestros programas y no podrá recibir los servicios.  Si nos da información errónea intencionalmente, puede ser investigado y acusado de fraude.
-hc-privacy-notices.the-DHS-notice-of-privacy-practices-contains-more=El enlace <a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-4839E-ENG" target="_blank" rel="noopener noreferrer">Notificación de prácticas de privacidad del DHS (DHS Notice of Privacy Practices)</a> da más detalles sobre la manera en la que el DHS usa y divulga su información privada.
+hc-privacy-notices.privacy-notices=Privacy Notices
+hc-privacy-notices.please-review-the-privacy-notices-below-before-you-continue=Please review the Privacy Notices below before you continue.
+hc-privacy-notices.collection-of-your-private-data=Collection of Your Private Data
+hc-privacy-notices.the-minnesota-department-of-human-services-DHS-collects=The Minnesota Department of Human Services (DHS) collects your private information in this application to check for eligibility with our programs and for reasons listed in the <a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-4839E-ENG" target="_blank" rel="noopener noreferrer">DHS Notice of Privacy Practices</a>.
+hc-privacy-notices.additionally-your-information-may-be-released=Additionally, your information may be released to law enforcement, individuals whose work assignment requires access, persons authorized by state or federal law or pursuant to a court order, or by your written consent.
+hc-privacy-notices.you-can-refuse-to-provide-this-information=You can refuse to provide this information, but without it, DHS cannot determine your eligibility for our programs, and you will not be able to receive services. Additionally, if you give us wrong information on purpose, you could be investigated and charged with fraud.
+hc-privacy-notices.the-DHS-notice-of-privacy-practices-contains-more=The <a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-4839E-ENG" target="_blank" rel="noopener noreferrer">DHS Notice of Privacy Practices</a> contains more details on how DHS uses and discloses your private information.
 
-hc-privacy-notices.collection-of-your-social-security-number=Recopilación de su número de seguro social
-hc-privacy-notices.DHS-is-required-by-law-to-collect-your-social-security-number=Por ley, el DHS tiene que solicitar su número del seguro social (SSN) para ayudarlo a obtener asistencia médica, ciertos tipos de ayuda financiera o servicios de cumplimiento con la manutención para menores. (42 C.F.R. § 435.910, Minn. Stat. § 256L.04, 42 U.S.C. § 666).
-hc-privacy-notices.DHS-also-needs-your-SSN-to-verify-your-identity=El DHS también necesita su SSN para verificar su identidad, evitar la duplicación de beneficios estatales y federales y cotejar los datos de la computadora con los de otras agencias para verificar su ingreso, recursos y otra información que puede afectar su elegibilidad o beneficios. 
-hc-privacy-notices.more-details-including-a-list-of-circumstances=Puede ver más detalles, inclusive una lista de circunstancias en las que no necesita dar su número de seguro social (SSN), en la <a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-4839E-ENG" target="_blank" rel="noopener noreferrer">Notificación de prácticas de privacidad del DHS (DHS Notice of Privacy Practices)</a>.
-hc-privacy-notices.what-are-your-rights-regarding-the-information=¿Cuáles son sus derechos con respecto a la información que tenemos sobre usted?  Ingrese a <a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-4839E-ENG" target="_blank" rel="noopener noreferrer">Notificación de prácticas de privacidad del DHS (DHS Notice of Privacy Practices)</a>.
-hd-privacy-notices.what-are-our-responsibilities=¿Cuáles son nuestras responsabilidades? Ingrese a <a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-4839E-ENG" target="_blank" rel="noopener noreferrer">Notificación de prácticas de privacidad del DHS (DHS Notice of Privacy Practices)</a>.
+hc-privacy-notices.collection-of-your-social-security-number=Collection of Your Social Security Number
+hc-privacy-notices.DHS-is-required-by-law-to-collect-your-social-security-number=DHS is required by law to collect your Social Security Number (SSN) to help you get medical assistance, some kinds of financial help, or child support enforcement services. (42 C.F.R. § 435.910, Minn. Stat. § 256L.04, 42 U.S.C. § 666).
+hc-privacy-notices.DHS-also-needs-your-SSN-to-verify-your-identity=DHS also needs your SSN to verify your identity, prevent duplication of state and federal benefits, and conduct computer data matches with other agencies to verify income, resources, or other information that may affect your eligibility or benefits. 
+hc-privacy-notices.more-details-including-a-list-of-circumstances=More details, including a list of circumstances when you do not need to provide your SSN, are in the <a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-4839E-ENG" target="_blank" rel="noopener noreferrer">DHS Notice of Privacy Practices</a>.
+hc-privacy-notices.what-are-your-rights-regarding-the-information=What are your rights regarding the information we have about you?  See the <a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-4839E-ENG" target="_blank" rel="noopener noreferrer">DHS Notice of Privacy Practices</a>.
+hd-privacy-notices.what-are-our-responsibilities=What are our responsibilities? See in the <a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-4839E-ENG" target="_blank" rel="noopener noreferrer">DHS Notice of Privacy Practices</a>. 
 
-document-submit-confirmation.yes-submit-and-wait=Enviando... espere por favor.
+document-submit-confirmation.yes-submit-and-wait=Submitting... please wait.
