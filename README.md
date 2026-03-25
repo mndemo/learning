@@ -1,8348 +1,2456 @@
-# see @ApplicationConfiguration for how to maintain this file
-conditionDefinitions:
-  - &minimumFlow?
-    pageName: doYouNeedHelpImmediately
-    name: minimumFlow
-    input: needHelpImmediately
-    value: "false"
-  - &laterDocsFlow?
-    name: laterDocsFlow
-    pageName: matchInfo
-    input: lastName
-    matcher: NOT_EMPTY
-  - &expeditedFlow?
-    pageName: doYouNeedHelpImmediately
-    name: expeditedFlow
-    input: needHelpImmediately
-    value: "true"
-  - &onlyApplyingForOthers?
-    pageName: choosePrograms
-    name: onlyApplyingForOthers
-    input: programs
-    value: NONE
-  - &livesAlone?
-    pageName: addHouseholdMembers
-    name: livesAlone
-    input: addHouseholdMembers
-    value: "false"
-  - &isUrbanTribalNationMember?
-    pageName: selectTheTribe
-    name: isUrbanTribalNationMember
-    input: selectedTribe
-    matcher: IS_URBAN_TRIBAL_NATION_MEMBER
-  - &doesNotLiveAlone?
-    name: doesNotLiveAlone
-    logicalOperator: OR
-    conditions:
-      - *onlyApplyingForOthers?
-      - pageName: addHouseholdMembers
-        name: addHouseholdMembersTrue
-        input: addHouseholdMembers
-        value: "true"
-  - &isHomeless?
-    pageName: homeAddress
-    name: isHomeless
-    input: isHomeless
-    matcher: DOES_NOT_CONTAIN
-    value: "true"
-  - &continueWithoutSecondSignature?
-    pageName: secondSignatureLegalStuff
-    name: continueWithoutSecondSignature
-    input: secondSignatureOption
-    matcher: CONTAINS
-    value: CONTINUE_WITHOUT_SECOND_SIGNATURE
-  - &selectedCountyDoesNotMatchEnrichedCountyHome?
-    pageName: homeAddressValidation
-    name: selectedCountyDoesNotMatchEnrichedCountyHome
-    input: enrichedCountyDifferentFromSelected
-    matcher: CONTAINS
-    value: "false"
-  - &selectedCountyDoesNotMatchEnrichedCountyMailing?
-    pageName: mailingAddressValidation
-    name: selectedCountyDoesNotMatchEnrichedCountyMailing
-    input: enrichedCountyDifferentFromSelected
-    matcher: CONTAINS
-    value: "false"
-  - &isSomeonePregnant?
-    pageName: pregnant
-    name: isSomeonePregnant
-    input: isPregnant
-    matcher: CONTAINS
-    value: "true"
-  - &isApplicantsJob?
-    pageName: householdSelectionForIncome
-    name: isApplicantsJob
-    input: whoseJobIsIt
-    value: applicant
-    matcher: CONTAINS_SUBSTRING
-  - &selectedOtherUnearnedIncome?
-    pageName: otherUnearnedIncome
-    name: selectedOtherUnearnedIncome
-    input: otherUnearnedIncome
-    value: NO_OTHER_UNEARNED_INCOME_SELECTED
-    matcher: DOES_NOT_CONTAIN
-  - &selectedUnearnedIncome?
-    pageName: unearnedIncome
-    name: selectedUnearnedIncome
-    input: unearnedIncome
-    value: NO_UNEARNED_INCOME_SELECTED
-    matcher: DOES_NOT_CONTAIN
-  - &noUnearnedIncomeSelected?
-    pageName: unearnedIncome
-    name: noUnearnedIncomeSelected
-    input: unearnedIncome
-    value: NO_UNEARNED_INCOME_SELECTED
-  - &noOtherUnearnedIncomeSelected?
-    pageName: otherUnearnedIncome
-    name: noOtherUnearnedIncomeSelected
-    input: otherUnearnedIncome
-    value: NO_OTHER_UNEARNED_INCOME_SELECTED
-  - &doesNotHaveMortgage?
-    pageName: homeExpenses
-    name: doesNotHaveMortgage
-    input: homeExpenses
-    value: MORTGAGE
-    matcher: DOES_NOT_CONTAIN
-  - &doesNotHaveRent?
-    pageName: homeExpenses
-    name: doesNotHaveRent
-    input: homeExpenses
-    value: RENT
-    matcher: DOES_NOT_CONTAIN
-  - &doesNotHaveRoomAndBoard?
-    pageName: homeExpenses
-    name: doesNotHaveRoomAndBoard
-    input: homeExpenses
-    value: ROOM_AND_BOARD
-    matcher: DOES_NOT_CONTAIN
-  - &hasMortgage?
-    pageName: homeExpenses
-    name: hasMortgage
-    input: homeExpenses
-    value: MORTGAGE
-  - &hasRent?
-    pageName: homeExpenses
-    name: hasRent
-    input: homeExpenses
-    value: RENT
-  - &hasRoomAndBoard?
-    pageName: homeExpenses
-    name: hasRoomAndBoard
-    input: homeExpenses
-    value: ROOM_AND_BOARD
-  - &applicantChoseSNAP?
-    pageName: choosePrograms
-    name: applicantChoseSNAP
-    value: SNAP
-    input: programs
-  - &applicantChoseCASH?
-    pageName: choosePrograms
-    name: applicantChoseCASH
-    value: CASH
-    input: programs
-  - &applicantChoseGRH?
-    pageName: choosePrograms
-    name: applicantChoseGRH
-    value: GRH
-    input: programs
-  - &someoneChoseCASH?
-    name: someoneChoseCASH
-    logicalOperator: OR
-    conditions:
-      - pageName: choosePrograms
-        input: programs
-        value: CASH
-      - pageName: householdMemberInfo
-        input: programs
-        value: CASH
-  - &someoneChoseCCAP?
-    name: someoneChoseCCAP
-    logicalOperator: OR
-    conditions:
-      - pageName: choosePrograms
-        name: applicantChooseCCAP
-        input: programs
-        value: CCAP
-      - pageName: householdMemberInfo
-        input: programs
-        value: CCAP
-  - &applicantOnlyChoseCCAP?
-    pageName: choosePrograms
-    name: applicantOnlyChoseCCAP
-    value: CCAP
-    input: programs
-    matcher: CONTAINS_ONLY
-  - &householdOnlyChoseCCAP?
-    pageName: householdMemberInfo
-    name: householdOnlyChoseCCAP
-    input: programs
-    value: CCAP
-    matcher: CONTAINS_ONLY
-  - &applicantDidNotChooseProgram?
-    pageName: choosePrograms
-    name: applicantDidNotChooseProgram
-    input: programs
-    matcher: DOES_NOT_CONTAIN
-  - &applicantChoseAtLeastOneProgram?
-    pageName: choosePrograms
-    name: applicantChoseAtLeastOneProgram
-    value: NONE
-    input: programs
-    matcher: DOES_NOT_CONTAIN
-  - &applicantDidNotChooseCCAPOnly?
-    pageName: choosePrograms
-    name: applicantDidNotChooseCCAPOnly
-    value: CCAP
-    input: programs
-    matcher: DOES_NOT_EQUAL
-  - &applicantDidNotChooseCCAP?
-    name: applicantDidNotChooseCCAP
-    <<: *applicantDidNotChooseProgram?
-    value: CCAP
-  - &applicantDidNotChooseGRH?
-    name: applicantDidNotChooseGRH
-    <<: *applicantDidNotChooseProgram?
-    value: GRH
-  - &householdMemberDidNotChooseProgram?
-    pageName: householdMemberInfo
-    name: householdMemberDidNotChooseProgram
-    input: programs
-    matcher: DOES_NOT_CONTAIN
-  - &householdMemberChoseAtLeastOneProgram?
-    pageName: householdMemberInfo
-    name: householdMemberChoseAtLeastOneProgram
-    input: programs
-    matcher: CONTAINS_STRING_OTHER_THAN
-    value: NONE
-  - &householdMemberDidNotChooseCCAP?
-    name: householdMemberDidNotChooseCCAP
-    <<: *householdMemberDidNotChooseProgram?
-    value: CCAP
-  - &noOneChoseCCAP?
-    name: noOneChoseCCAP
-    logicalOperator: AND
-    conditions:
-      - *applicantDidNotChooseCCAP?
-      - logicalOperator: OR
-        conditions:
-          - *householdMemberDidNotChooseCCAP?
-          - *livesAlone?
-  - &noOneChoseSNAP?
-    name: noOneChoseSNAP
-    logicalOperator: AND
-    conditions:
-      - <<: *applicantDidNotChooseProgram?
-        value: SNAP
-      - logicalOperator: OR
-        conditions:
-          - <<: *householdMemberDidNotChooseProgram?
-            value: SNAP
-          - *livesAlone?
-  - &someoneChoseSNAP?
-    name: someoneChoseSnap
-    logicalOperator: OR
-    conditions:
-      - pageName: choosePrograms
-        name: applicantChooseSNAP
-        input: programs
-        matcher: CONTAINS
-        value: SNAP
-      - pageName: householdMemberInfo
-        name: hhMemberChooseSNAP
-        input: programs
-        matcher: CONTAINS
-        value: SNAP
-  - &someoneChoseEA?
-    name: someoneChoseEA
-    logicalOperator: OR
-    conditions:
-      - pageName: choosePrograms
-        name: applicantChooseEA
-        input: programs
-        matcher: CONTAINS
-        value: EA
-      - pageName: householdMemberInfo
-        name: hhMemberChooseEA
-        input: programs
-        matcher: CONTAINS
-        value: EA
-  - &someoneChoseCAFProgram?
-    name: someoneChoseCAFProgram
-    logicalOperator: OR
-    conditions:
-      - *someoneChoseSNAP?
-      - *someoneChoseEA?
-      - *someoneChoseCASH?
-      - *applicantChoseGRH?
+general.go-back=Regresar
+general.continue=Continuar
+general.cancel=Cancelar
+general.delete=Borrar
+general.remove=Eliminar
+general.optional=Opcional
+general.validation.invalid.select.option.value=
+general.validation.make-sure-you-answer-this-question=Por favor conteste esta pregunta.
+general.validation.make-sure-to-answer-this-question=Por favor conteste esta pregunta.
+general.validation.make-sure-to-agree-to-the-terms=Asegúrese de aceptar los términos.
+general.validation.make-sure-to-make-selection=Asegúrese de seleccionar una opción.
+general.validation.make-sure-to-enter-a-zip-code-with-5-digits=Por favor incluya un código postal de 5 dígitos.
+general.validation.make-sure-your-case-number-has-4-to-7-digits=Asegúrese de que el numero de su caso tenga de 4-7 números.
+general.validation.make-sure-your-case-number-has-4-to-8-digits=Asegúrese de que el numero de su caso tenga de 4-8 números.
+general.validation.make-sure-to-provide-a-first-name=Por favor incluya el primer nombre.
+general.validation.make-sure-to-provide-a-last-name=Por favor incluya el apellido.
+general.validation.make-sure-to-provide-a-phone-number=Por favor incluya el número de teléfono
+general.validation.please-enter-your-birthday-in-this-format=Por favor ingrese su fecha de nacimiento en este formato: mm/dd/aaaa
+general.validation.please-enter-the-date-in-this-format=Favor de ingresar una fecha válida para el mes, día y año siguiendo este ejemplo en inglés: mm/dd/yyyy
+general.validation.please-enter-valid-school-start-date=Ingrese una fecha de inicio de jardín de infantes válida en este formato: mm/dd/aaaa, dentro de un plazo no mayor a 4 años a partir de la fecha actual.
+general.validation.make-sure-to-provide-a-dob-between-1900-and-present=Asegúrese de proporcionar una fecha de nacimiento entre 1900 y el presente.
+general.validation.make-sure-your-SSN-has-9-digits=Asegúrese que su número de seguro social tenga 9 dígitos.
+general.validation.make-sure-to-choose-Yes-or-No=Asegúrese de seleccionar Sí o No.
+general.validation.make-sure-to-enter-a-phone-number-with-10-digits=Por favor incluya un número de teléfono con 10 dígitos.
+general.validation.area-codes-can-not-begin-with-0=Los códigos de área no pueden comenzar con 0. Asegúrese de ingresar un número de teléfono válido.
+general.validation.area-codes-can-not-begin-with-1=Los códigos de área no pueden empezar con el número 1. Por favor incluya un número de teléfono válido.
+general.validation.make-sure-to-provide-a-valid-2-letter-state-code=Por favor incluya un código de estado válido de 2 letras.
+general.validation.make-sure-you-enter-a-dollar-amount=Asegúrese de introducir una cantidad en dólares.
+general.validation.make-sure-you-enter-a-number=Asegúrese de introducir un número.
+general.validation.make-sure-to-enter-a-number-between-zero-and-twenty=Por favor incluya un número entre 0 y 20.
+general.validation.make-sure-you-choose-none-of-the-above-or-another-option=Por favor escoja 'Ninguno de los anteriores' o otra opción.
+general.validation.make-sure-to-provide-a-home-address-or-select-no-use-a-different-address-for-mail=Por favor incluya la dirección de su domicilio, o seleccione, 'No, usar una dirección diferente para el correo.'
+general.validation.make-sure-to-select-a-county=Asegúrese de seleccionar un condado.
+general.validation.make-sure-to-select-a-tribe=Asegúrese de seleccionar una tribu
+general.validation.make-sure-to-make-a-selection=Asegúrese de seleccionar una opción.
+general.validation.select-county-tribe=Elija su condado O White Earth Nation, pero no ambos.
+general.validation.blank=
+general.validation.email=Asegúrese que escribió su correo electrónico correctamente.
+general.validation.make-sure-to-select-a-person=Asegúrese de seleccionar una persona.
+general.validation.email-con-instead-of-com=Su dirección de correo electrónico utiliza .con - por favor, utilice .com
+general.input.postfix.per-month=/por mes
+general.input.postfix.hours-per-week=/horas por semana
+general.inputs.yes=Sí
+general.inputs.no=No
+general.inputs.none-of-the-above=Ninguno de los anteriores
+general.inputs.optional=Esto es opcional.
+general.inputs.not-sure=No estoy seguro
+general.step=Paso {0} de {1}
+general.well-ask-about=Le preguntaremos acerca de
+general.check-all-that-apply=Marque todo lo que corresponda
+general.privacy-policy=política de privacidad
+general.female=Sexo femenino
+general.male=Sexo masculino
+general.rather-not-say=Prefiero no decirlo
+general.never-married=Soltero/a
+general.married-living-with-spouse=Casado/a, viviendo con cónyuge
+general.married-not-living-with-spouse=Casado/a, no viviendo con cónyuge
+general.legally-separated=Legalmente separado/a
+general.divorced=Divorciado/a
+general.widowed=Viudo/a
+generic.footer=MNbenefits se ha desarrollado en nombre de la población de Minnesota en asociación entre las agencias estatales que administran los programas, Minnesota IT Services y los condados y naciones tribales de Minnesota.
+generic.footer.mn-official-website=Sitio web oficial del estado de Minnesota
+generic.footer.about=Acerca de
+generic.footer.help-and-resources=Ayuda y recursos
+general.you=(tu)
+general.this-person-can=Esta persona puede:
+general.month=Mes
+general.day=Día
+general.year=Año
+general.and=y
+general.monthly-amount=Cantidad mensual
+general.finish-application=Terminar solicitud
+general.county-and-phone={0} Condado ({1})
+general.county=Condado {0}
+general.delayed-processing-time-notice=Padres y madres de Minnesota
+general.delayed-processing-time-message=No pierda el Crédito Tributario por Hijos de $1,750 por cada hijo menor de 18 años. <a href ="https://www.revenue.state.mn.us/child-tax-credit" target="_blank" class="link--alert-banner">Más detalles en el Departamento de Ingresos.<span class="material-icons"></span></a>. Puede obtener un <a href ="https://www.revenue.state.mn.us/sites/default/files/2024-02/minnesota-child-tax-credit-2024-english.pdf" target="_blank" class="link--alert-banner">resumen aquí.<i class="material-icons"></i></a>.
+general.if-you-dont-have=Si actualmente no tiene esta información, ponga un estimado o déjelo en blanco.
+general.mn-gov-portal=https://mn.gov/portal/
 
-  - &pastBenefitHouseholdHasPastBenefits?
-    name: pastBenefitHouseholdHasPastBenefits
-    pageName: pastBenefit
-    input: hasHouseholdPastBenefits
-    value: "true"
+toolbar.healthcare-renewal-icon-description=Renovar mi cobertura de atención médica de MN
+toolbar.healthcare-nenewal-icon-url=https://mn.gov/dhs/renewmycoverage-es/
 
-  - &noOneChoseCAF?
-    name: noOneChoseCAF
-    logicalOperator: AND
-    conditions:
-      # Applicant did not choose any CAF program (SNAP, EA, CASH, GRH)
-      - logicalOperator: AND
-        conditions:
-          - <<: *applicantDidNotChooseProgram?
-            value: SNAP
-          - <<: *applicantDidNotChooseProgram?
-            value: EA
-          - <<: *applicantDidNotChooseProgram?
-            value: CASH
-          - <<: *applicantDidNotChooseProgram?
-            value: GRH
-      # Either no household member chose them OR applicant lives alone
-      - logicalOperator: OR
-        conditions:
-          - logicalOperator: AND
-            conditions:
-              - <<: *householdMemberDidNotChooseProgram?
-                value: SNAP
-              - <<: *householdMemberDidNotChooseProgram?
-                value: EA
-              - <<: *householdMemberDidNotChooseProgram?
-                value: CASH
-              - <<: *householdMemberDidNotChooseProgram?
-                value: GRH
-          - *livesAlone?
-  - &noOneChoseCASH?
-    name: noOneChoseCASH
-    logicalOperator: AND
-    conditions:
-      - <<: *applicantDidNotChooseProgram?
-        value: CASH
-      - logicalOperator: OR
-        conditions:
-          - <<: *householdMemberDidNotChooseProgram?
-            value: CASH
-          - *livesAlone?
-  - &noOneChoseEA?
-    name: noOneChoseEA
-    logicalOperator: AND
-    conditions:
-      - <<: *applicantDidNotChooseProgram?
-        value: EA
-      - logicalOperator: OR
-        conditions:
-          - <<: *householdMemberDidNotChooseProgram?
-            value: EA
-          - *livesAlone?
-  - &noOneChoseGRH?
-    name: noOneChoseGRH
-    logicalOperator: AND
-    conditions:
-      - *applicantDidNotChooseGRH?
-      - logicalOperator: OR
-        conditions:
-          - <<: *householdMemberDidNotChooseProgram?
-            value: GRH
-          - *livesAlone?
-  - &livesAloneOrIsApplicantsJob?
-    name: livesAloneOrIsApplicantsJob
-    logicalOperator: OR
-    conditions:
-      - *isApplicantsJob?
-      - *livesAlone?
-  - &isNoSSN?
-    pageName: personalInfo
-    name: isNoSSN
-    input: ssn
-    matcher: NOT_EMPTY
-  - &applicantChoseCCAPProgram?
-    pageName: choosePrograms
-    name: applicantChoseCCAPProgram
-    value: CCAP
-    input: programs
-    matcher: CONTAINS
-  - &WENCountySelected?
-    name: WENCountySelected
-    logicalOperator: OR
-    conditions:
-      - pageName: identifyCounty
-        input: county
-        value: "Becker"
-      - pageName: identifyCounty
-        input: county
-        value: "Mahnomen"
-      - pageName: identifyCounty
-        input: county
-        value: "Clearwater"
-  - &doesNotHaveHealthcare?
-    name: doesNotHaveHealthcare
-    logicalOperator: OR
-    conditions:
-      - pageName: healthcareCoverage
-        input: healthcareCoverage
-        matcher: CONTAINS
-        value: NOT_SURE
-      - pageName: healthcareCoverage
-        input: healthcareCoverage
-        matcher: CONTAINS
-        value: NO
-      - pageName: healthcareCoverage
-        input: healthcareCoverage
-        matcher: NONE_SELECTED
-  - &householdMemberLessThanAge5?
-    pageName: householdMemberInfo
-    name: householdMemberLessThanAge5
-    input: dobAsDate
-    matcher: HH_MEMBER_AGE_LESS_THAN_5
-  - &householdMemberLessThanAge18?
-    pageName: householdMemberInfo
-    name: householdMemberLessThanAge18
-    input: dobAsDate
-    matcher: HH_MEMBER_AGE_LESS_THAN_18
-  - &isMilleLacsBandMemberInMilleLacsBandCounty?    
-    name: isMilleLacsBandMemberInMilleLacsBandCounty
-    logicalOperator: AND
-    conditions:
-      - pageName: selectTheTribe
-        name: selectedTribeMilleLacsBand
-        input: selectedTribe
-        value: Mille Lacs Band of Ojibwe
-      - pageName: identifyCounty
-        name: selectedCountyMilleLacsBandRuralCounty
-        input: county
-        matcher: IS_MILLE_LACS_RURAL_COUNTY
-  - &isTribalMemberLivingInUrbanTribalNationCounty?    
-    name: isTribalMemberLivingInUrbanTribalNationCounty
-    logicalOperator: AND
-    conditions:
-      - *isUrbanTribalNationMember?
-      - pageName: identifyCounty
-        name: isUrbanTribalNationCounty
-        input: county
-        matcher: IS_URBAN_TRIBAL_NATION_COUNTY
-  - &isTribalMemberNotLeechLakeLivingInBeltramiCounty?    
-    name: isTribalMemberNotLeechLakeLivingInBeltramiCounty
-    logicalOperator: AND
-    conditions:
-      - pageName: tribalNationMember
-        name: isTribalNationMemberTrue
-        input: isTribalNationMember
-        value: "true"
-      - pageName: selectTheTribe
-        name: notInLeechLakeTribe
-        input: selectedTribe
-        matcher: DOES_NOT_EQUAL        
-        value: "Leech Lake"
-      - pageName: identifyCounty
-        name: livesInBeltramiCounty
-        input: county
-        value: "Beltrami"
-  - &isTribalMemberNotWhiteEarthNationLivingInClearwaterCounty?    
-    name: isTribalMemberNotWhiteEarthNationLivingInClearwaterCounty
-    logicalOperator: AND
-    conditions:
-      - pageName: identifyCounty
-        name: livesInClearwaterCounty
-        input: county
-        value: "Clearwater"
-      - pageName: tribalNationMember
-        name: isTribalNationMemberTrue
-        input: isTribalNationMember
-        value: "true"
-      - pageName: selectTheTribe
-        name: notInLeechLakeTribe
-        input: selectedTribe
-        matcher: DOES_NOT_EQUAL        
-        value: "White Earth Nation"
-  - &isLivingInRedLakeNationAndBeltramiOrClearwaterCounty?    
-    name: isLivingOnRedLakeNationAndBeltramiOrClearwaterCounty
-    logicalOperator: AND
-    conditions:
-      - pageName: nationOfResidence
-        name: nationOfResidenceIsRedLakeNation
-        input: selectedNationOfResidence
-        value: "Red Lake Nation"
-      - logicalOperator: OR
-        name: livingInBeltramiOrClearwaterCounty
-        conditions:
-          - pageName: identifyCounty
-            input: county
-            value: "Beltrami"
-          - pageName: identifyCounty
-            input: county
-            value: "Clearwater"
-  - &isEligibleForTribalTANFonNationsBoundaryPage?
-    name: isEligibleForTribalTANFonNationsBoundaryPage
-    logicalOperator: AND
-    conditions:
-      - logicalOperator: OR
-        name: isPregnantOrHouseHoldMemberLessThan18
-        conditions:
-          - *isSomeonePregnant?
-          - *householdMemberLessThanAge18?
-      - logicalOperator: OR
-        name: threeOrConditionsInIsEligibleForTribalTANFonNationsBoundaryPage
-        conditions:
-          - *isMilleLacsBandMemberInMilleLacsBandCounty?
-          - *isTribalMemberLivingInUrbanTribalNationCounty?
-          - *isTribalMemberNotLeechLakeLivingInBeltramiCounty?
-  - &isEligibleForTribalTANFonNationOfResidencePage?
-    name: isEligibleForTribalTANFonNationOfResidencePage
-    logicalOperator: AND
-    conditions:
-      - logicalOperator: OR
-        name: someOneIsPregnantOrHHmemberLessThan18
-        conditions:
-          - *isSomeonePregnant?
-          - *householdMemberLessThanAge18?
-      - logicalOperator: OR
-        name: fourOrConditionsInIsEligibleForTribalTANFonNationOfResidencePage
-        conditions:
-          - *isMilleLacsBandMemberInMilleLacsBandCounty?
-          - *isTribalMemberLivingInUrbanTribalNationCounty?
-          - *isTribalMemberNotLeechLakeLivingInBeltramiCounty?
-          - *isLivingInRedLakeNationAndBeltramiOrClearwaterCounty?
-pageConfigurations:
-  - &landing
-    name: landing
-    pageTitle: landing.title
-    usingPageTemplateFragment: false
-  - &prepareToApply
-    name: prepareToApply
-    pageTitle: prepare-to-apply.title
-    headerKey: prepare-to-apply.how-this-works
-    contextFragment: prepareToApplyContextFragment
-    hasPrimaryButton: false
-  - &timeoutNotice
-    name: timeoutNotice
-    pageTitle: timeout-notice.title
-    headerKey: timeout-notice.header
-    contextFragment: timeoutNoticeContextFragment
-    hasPrimaryButton: false
-  - &readyToUploadDocuments
-    name: readyToUploadDocuments
-    pageTitle: ready-to-upload-documents.title
-    headerKey: ready-to-upload-documents.header
-    headerHelpMessageKey: ready-to-upload-documents.first-we'll-ask-you
-    contextFragment: readyToUploadContextFragment
-  - &languagePreferences
-    name: languagePreferences
-    pageTitle: language-preferences.title
-    headerKey: language-preferences.language-preferences
-    contextFragment: languagePreferencesContextFragment
-    inputs:
-      - name: writtenLanguage
-        type: SELECT
-        promptMessage:
-          promptMessageKey: language-preferences.what-language-do-you-prefer-to-read-or-write
-        helpMessageKey: language-preferences.the-county-will-do-their-best-to-provide-documents-in-your-preferred-language
-        options:
-          selectableOptions:
-            - value: ENGLISH
-              messageKey: language-preferences.english
-            - value: SPANISH
-              messageKey: language-preferences.spanish
-            - value: SOOMAALI
-              messageKey: language-preferences.soomaali
-            - value: VIETNAMESE
-              messageKey: language-preferences.vietnamese
-            - value: RUSSIAN
-              messageKey: language-preferences.russian
-            - value: HMOOB
-              messageKey: language-preferences.hmoob
-      - name: spokenLanguage
-        type: SELECT
-        promptMessage:
-          promptMessageKey: language-preferences.what-language-do-you-prefer-to-speak
-        helpMessageKey: language-preferences.the-county-will-do-their-best-to-connect-you-with-someone-who-speaks-your
-        options:
-          selectableOptions:
-            - value: ENGLISH
-              messageKey: language-preferences.english
-            - value: SPANISH
-              messageKey: language-preferences.spanish
-            - value: SOOMAALI
-              messageKey: language-preferences.soomaali
-            - value: VIETNAMESE
-              messageKey: language-preferences.vietnamese
-            - value: RUSSIAN
-              messageKey: language-preferences.russian
-            - value: HMOOB
-              messageKey: language-preferences.hmoob
-      - name: needInterpreter
-        type: RADIO
-        promptMessage:
-          promptMessageKey: language-preferences.do-you-need-an-interpreter
-        options:
-          selectableOptions:
-            - value: "true"
-              messageKey: general.inputs.yes
-            - value: "false"
-              messageKey: general.inputs.no
-  - &writtenLanguage
-    name: writtenLanguage
-    pageTitle: written-language.title
-    headerKey: language-preferences.language-preferences
-    contextFragment: languagePreferencesContextFragment
-    inputs:
-      - name: writtenLanguage
-        type: RADIO
-        helpMessageKey: language-preferences.the-county-will-do-their-best-to-provide-documents-in-your-preferred-language
-        validators:
-           - validation: SELECT_AT_LEAST_ONE
-             errorMessageKey: general.validation.make-sure-you-answer-this-question
-        options:
-           selectableOptions:
-              - value: ARABIC
-                messageKey: language-preferences.Arabic
-                lang: ar
-              - value: AMHARIC
-                messageKey: language-preferences.Amharic
-                lang: am
-              - value: ENGLISH
-                messageKey: language-preferences.English
-                lang: en
-              - value: SPANISH
-                messageKey: language-preferences.Spanish
-                lang: es
-              - value: HMONG
-                messageKey: language-preferences.hmoob
-                lang: hmn
-              - value: KAREN
-                messageKey: language-preferences.Karen
-                lang: ksw
-              - value: NEPALI
-                messageKey: language-preferences.Nepali
-                lang: ne
-              - value: OROMO
-                messageKey: language-preferences.Oromo
-                lang: om
-              - value: SOMALI
-                messageKey: language-preferences.soomaali
-                lang: so
-              - value: RUSSIAN
-                messageKey: language-preferences.russian
-                lang: ru
-              - value: UKRAINIAN
-                messageKey: language-preferences.Ukrainian
-                lang: uk
-              - value: VIETNAMESE
-                messageKey: language-preferences.vietnamese
-                lang: vi
-              - value: OTHER
-                messageKey: language-preferences.different-language
-        followUpValues:
-          - "OTHER"
-        followUps:
-          - name: otherWrittenLanguage
-            type: TEXT
-            maxlength: 50
-            promptMessage:
-              promptMessageKey: language-preferences.preferred.language
-        datasources:
-          - pageName: writtenLanguage				
-  - &spokenLanguage
-    name: spokenLanguage
-    pageTitle: spoken-language.title
-    headerKey: language-preferences.what-language-do-you-prefer-to-speak
-    contextFragment: languagePreferencesContextFragment
-    inputs:
-      - name: spokenSameAsWritten
-        type: CUSTOM
-        customInputFragment: languagePreferenceInputFragment
-        helpMessageKey: language-preferences.the-county-will-do-their-best-to-connect-you-with-someone-who-speaks-your
-        options:
-          selectableOptions:
-             - value: "true"
-               messageKey: same-language-preferences.to-read-or-write
-          datasources:
-             - pageName: writtenLanguage  
-      - name: spokenLanguage
-        type: RADIO
-        ariaDescribedbyInput: spokenSameAsWritten
-        validators:
-           - validation: SELECT_AT_LEAST_ONE
-             errorMessageKey: general.validation.make-sure-you-answer-this-question
-             condition:
-                input: spokenSameAsWritten
-                matcher: DOES_NOT_EQUAL
-                value: "true"
-        options:
-          selectableOptions:
-            - value: AMERICAN SIGN LANGUAGE
-              messageKey: language-preferences.American-sign-language
-              lang: ase
-            - value: ARABIC
-              messageKey: language-preferences.Arabic
-              lang: ar
-            - value: AMHARIC
-              messageKey: language-preferences.Amharic
-              lang: am				  
-            - value: ENGLISH
-              messageKey: language-preferences.English
-              lang: en
-            - value: SPANISH
-              messageKey: language-preferences.Spanish
-              lang: es
-            - value: HMONG
-              messageKey: language-preferences.hmoob
-              lang: hmn
-            - value: KAREN
-              messageKey: language-preferences.Karen
-              lang: ksw
-            - value: NEPALI
-              messageKey: language-preferences.Nepali
-              lang: ne
-            - value: OROMO
-              messageKey: language-preferences.Oromo
-              lang: om
-            - value: SOMALI
-              messageKey: language-preferences.soomaali
-              lang: so
-            - value: RUSSIAN
-              messageKey: language-preferences.russian
-              lang: ru
-            - value: UKRAINIAN
-              messageKey: language-preferences.Ukrainian
-              lang: uk
-            - value: VIETNAMESE
-              messageKey: language-preferences.vietnamese
-              lang: vi
-            - value: OTHER
-              messageKey: speak-language-preferences.different-language
-        followUpValues:
-          - "OTHER"
-        followUps:
-          - name: otherSpokenLanguage
-            type: TEXT
-            maxlength: 50
-            promptMessage:
-              promptMessageKey: language-preferences.preferred.language
-        datasources:
-          - pageName: writtenLanguage	
-      - name: needInterpreter
-        type: RADIO
-        promptMessage:
-           promptMessageKey: language-preferences.do-you-need-an-interpreter
-        options:
-           selectableOptions:
-              - value: "true"
-                messageKey: general.inputs.yes
-              - value: "false"
-                messageKey: general.inputs.no
-  - &choosePrograms
-    name: choosePrograms
-    pageTitle: choose-programs.title
-    headerKey: choose-programs.what-type-of-assistance-would-you-like-to-apply-for
-    headerHelpMessageKey: general.check-all-that-apply
-    contextFragment: chooseProgramsContextFragment
-    inputs:
-      - name: programs
-        type: CHECKBOX
-        validators:
-          - validation: SELECT_AT_LEAST_ONE
-            errorMessageKey: general.validation.make-sure-you-answer-this-question
-        options:
-          selectableOptions:
-            - value: SNAP
-              messageKey: choose-programs.food-snap
-              helpMessageKey: choose-programs.food-snap-help
-              helpIcon: icon-apple
-            - value: CASH
-              messageKey: choose-programs.cash-programs
-              helpMessageKey: choose-programs.cash-programs-help
-              helpIcon: icon-dollar-circle
-            - value: CCAP
-              messageKey: choose-programs.child-care-assistance
-              helpMessageKey: choose-programs.child-care-assistance-help
-              helpIcon: icon-child-care
-            - value: EA
-              messageKey: choose-programs.emergency-assistance
-              helpMessageKey: choose-programs.emergency-assistance-help
-              helpIcon: icon-home
-            - value: GRH
-              messageKey: choose-programs.housing-support-group-residential-housing
-              helpMessageKey: choose-programs.housing-grh-help
-              helpIcon: icon-apartment
-            - value: NONE
-              messageKey: choose-programs.none-of-the-above
-              helpIcon: icon-people
-              isNone: true
-          datasources:
-            - pageName: identifyCounty
-    alertBox:
-      type: CHOOSE_NONE_WARNING
-      message: choose-programs.you-will-be-asked
-  - &expeditedNotice
-    name: expeditedNotice
-    pageTitle: expedited-notice.title
-    headerKey: expedited-notice.we-will-check-to-see
-    contextFragment: expeditedNoticeContextFragment
-    hasPrimaryButton: false
-  - &basicCriteria
-    name: basicCriteria
-    pageTitle: basic-criteria.title
-    headerKey: basic-criteria.do-any-of-these-situations-apply
-    headerHelpMessageKey: basic-criteria.to-apply-for-healthcare-at-least-one-should-be-true
-    contextFragment: healthcareCoverageFragment
-    inputs:
-      - name: basicCriteria
-        type: CHECKBOX
-        validators:
-          - validation: SELECT_AT_LEAST_ONE
-            errorMessageKey: general.validation.make-sure-you-answer-this-question
-        options:
-          selectableOptions:
-            - value: SIXTY_FIVE_OR_OLDER
-              messageKey: basic-criteria.i-am-65-or-older
-            - value: BLIND
-              messageKey: basic-criteria.i-am-blind
-            - value: SSI_OR_RSDI
-              messageKey: basic-criteria.i-receive-ssi-or-rsdi
-            - value: HAVE_DISABILITY_SSA
-              messageKey: basic-criteria.i-have-a-disability-ssa
-            - value: HAVE_DISABILITY_SMRT
-              messageKey: basic-criteria.i-have-a-disability-smrt
-            - value: MEDICAL_ASSISTANCE
-              messageKey: basic-criteria.i-want-to-apply-for-medical-assistance
-            - value: HELP_WITH_MEDICARE
-              messageKey: basic-criteria.i-want-help-with-my-medicare-costs
-            - value: NONE
-              messageKey: general.inputs.none-of-the-above
-              isNone: true
-  - &addOtherPrograms
-    name: addOtherPrograms
-    pageTitle: add-other-programs.title
-    hasPrimaryButton: false
-  - &introBasicInfo
-    name: introBasicInfo
-    pageTitle: intro-basic-info.title
-    hasPrimaryButton: false
-  - &personalInfo
-    name: personalInfo
-    pageTitle: personal-info.title
-    headerKey: personal-info.tell-us-about-yourself
-    contextFragment: personContextFragment
-    inputs:
-      - name: firstName
-        type: TEXT
-        promptMessage:
-          promptMessageKey: personal-info.whats-your-first-name
-        helpMessageKey: personal-info.legally-as-it-appears-on-your-id
-        validators:
-          - validation: NOT_BLANK
-            errorMessageKey: general.validation.make-sure-to-provide-a-first-name
-      - name: middleName
-        type: TEXT
-        promptMessage:
-          promptMessageKey: personal-info.whats-your-middle-name
-        helpMessageKey: personal-info.legally-as-it-appears-on-your-id				
-      - name: lastName
-        type: TEXT
-        promptMessage:
-          promptMessageKey: personal-info.whats-your-last-name
-        helpMessageKey: personal-info.legally-as-it-appears-on-your-id
-        validators:
-          - validation: NOT_BLANK
-            errorMessageKey: general.validation.make-sure-to-provide-a-last-name
-      - name: otherName
-        type: TEXT
-        promptMessage:
-          promptMessageKey: personal-info.list-any-names-that-you-have-gone-by-in-the-past
-        helpMessageKey: personal-info.include-maiden-names-or-legal-changes
-      - name: dateOfBirth
-        type: DATE
-        validators:
-          - validation: DATE
-            errorMessageKey: general.validation.please-enter-your-birthday-in-this-format
-            condition:
-              input: dateOfBirth
-              matcher: NOT_EMPTY
-          - validation: DOB_VALID
-            condition:
-              input: dateOfBirth
-              matcher: NOT_EMPTY
-            errorMessageKey: general.validation.make-sure-to-provide-a-dob-between-1900-and-present
-        promptMessage:
-          promptMessageKey: personal-info.when-were-you-born
-      - name: ssn
-        type: SSN
-        validators:
-          - validation: SSN
-            errorMessageKey: general.validation.make-sure-your-SSN-has-9-digits
-            condition:
-              input: ssn
-              matcher: NOT_EMPTY
-        promptMessage:
-          promptMessageKey: personal-info.whats-your-social-security-number
-        helpMessageKey: personal-info.if-you-have-one-we-strongly-recommend-including-it-here
-      - name: maritalStatus
-        type: RADIO
-        promptMessage:
-          promptMessageKey: personal-info.whats-your-marital-status
-        options:
-          selectableOptions:
-            - value: NEVER_MARRIED
-              messageKey: general.never-married
-            - value: MARRIED_LIVING_WITH_SPOUSE
-              messageKey: general.married-living-with-spouse
-            - value: MARRIED_NOT_LIVING_WITH_SPOUSE
-              messageKey: general.married-not-living-with-spouse
-            - value: LEGALLY_SEPARATED
-              messageKey: general.legally-separated
-            - value: DIVORCED
-              messageKey: general.divorced
-            - value: WIDOWED
-              messageKey: general.widowed
-      - name: sex
-        type: RADIO
-        promptMessage:
-          promptMessageKey: personal-info.whats-your-sex
-        helpMessageKey: personal-info.legally-as-it-appears-on-your-id-we-regret-that-this-question-is-limited
-        options:
-          selectableOptions:
-            - value: FEMALE
-              messageKey: general.female
-            - value: MALE
-              messageKey: general.male
-            - value: RATHER_NOT_SAY
-              messageKey: general.rather-not-say
-      - name: livedInMnWholeLife
-        type: RADIO
-        promptMessage:
-          promptMessageKey: personal-info.have-you-lived-in-minnesota-your-whole-life
-        options:
-          selectableOptions:
-            - value: "false"
-              messageKey: general.inputs.no
-            - value: "true"
-              messageKey: general.inputs.yes
-        followUpValues:
-          - "true"
-        followUps:
-          - name: moveToMnDate
-            type: DATE
-            validators:
-              - validation: DATE
-                errorMessageKey: general.validation.please-enter-the-date-in-this-format
-                condition:
-                  input: moveToMnDate
-                  matcher: NOT_EMPTY
-            promptMessage:
-              promptMessageKey: personal-info.when-did-you-move-to-minnesota
-          - name: moveToMnPreviousCity
-            type: TEXT
-            promptMessage:
-              promptMessageKey: personal-info.what-state-did-you-move-from		  
-  - &penaltyWarnings
-    name: penaltyWarnings
-    pageTitle: penalty-warning.title
-    headerKey: penalty-warning-header-key
-    headerHelpMessageKey: penalty-warning-header-help-message-key
-    contextFragment: legalReview1ContextFragment
-    preFormContentFragment: penaltyWarningsAccordions
-    inputs:
-      - name: disqualifiedPublicAssistance
-        type: CUSTOM
-        customInputFragment: yesNoRadioWithHouseholdFollowup
-        validators:
-          - validation: NOT_BLANK
-            errorMessageKey: general.validation.make-sure-you-answer-this-question
-          - validation: SELECT_ATLEAST_ONE_IF_YES
-            errorMessageKey: penalty-warning.validation.select-household-member
-        promptMessage:
-          promptMessageKey: penalty-warning.has-court-or-any-other
-        options:
-          datasources:
-            - pageName: personalInfo
-            - groupName: household
-              pageName: householdMemberInfo
-              optional: "true" 
-      - name: fraudulentStatements
-        type: CUSTOM
-        customInputFragment: yesNoRadioWithHouseholdFollowup
-        validators:
-          - validation: NOT_BLANK
-            errorMessageKey: general.validation.make-sure-you-answer-this-question
-          - validation: SELECT_ATLEAST_ONE_IF_YES
-            errorMessageKey: penalty-warning.validation.select-household-member
-        promptMessage:
-          promptMessageKey: penalty-warning.has-anyone-in-the-household
-        options:
-          datasources:
-            - pageName: personalInfo
-            - groupName: household
-              pageName: householdMemberInfo
-              optional: "true"
-      - name: hidingFromLaw
-        type: CUSTOM
-        customInputFragment: yesNoRadioWithHouseholdFollowup
-        validators:
-          - validation: NOT_BLANK
-            errorMessageKey: general.validation.make-sure-you-answer-this-question
-          - validation: SELECT_ATLEAST_ONE_IF_YES
-            errorMessageKey: penalty-warning.validation.select-household-member
-        promptMessage:
-          promptMessageKey: penalty-warning.is-anyone-in-your-household-hiding
-        options:
-          datasources:
-            - pageName: personalInfo
-            - groupName: household
-              pageName: householdMemberInfo
-              optional: "true"
-      - name: drugFelonyConviction
-        type: CUSTOM
-        customInputFragment: yesNoRadioWithHouseholdFollowup
-        validators:
-          - validation: NOT_BLANK
-            errorMessageKey: general.validation.make-sure-you-answer-this-question
-          - validation: SELECT_ATLEAST_ONE_IF_YES
-            errorMessageKey: penalty-warning.validation.select-household-member
-        promptMessage:
-          promptMessageKey: penalty-warning.has-anyone-in-your-household-convicted
-        helpMessageKey: penalty-warning.has-anyone-in-your-household-convicted-if-yes
-        options:
-          datasources:
-            - pageName: personalInfo
-            - groupName: household
-              pageName: householdMemberInfo
-              optional: "true"
-      - name: violatingParole
-        type: CUSTOM
-        customInputFragment: yesNoRadioWithHouseholdFollowup
-        validators:
-          - validation: NOT_BLANK
-            errorMessageKey: general.validation.make-sure-you-answer-this-question
-          - validation: SELECT_ATLEAST_ONE_IF_YES
-            errorMessageKey: penalty-warning.validation.select-household-member
-        promptMessage:
-          promptMessageKey: penalty-warning.is-anyone-in-your-household-violating
-        options:
-          datasources:
-            - pageName: personalInfo
-            - groupName: household
-              pageName: householdMemberInfo
-              optional: "true"
-  - &contactInfo
-    name: contactInfo
-    pageTitle: contact-info.title
-    headerKey: contact-info.how-can-we-stay-in-touch-with-you
-    contextFragment: contactInfoContextFragment
-    inputs:
-      - name: phoneNumber
-        type: PHONE
-        promptMessage:
-          promptMessageKey: contact-info.whats-your-phone-number
-        helpMessageKey: contact-info.phone-number-helper
-        validators:
-          - validation: PHONE_STARTS_WITH_ZERO
-            errorMessageKey: general.validation.area-codes-can-not-begin-with-0
-            condition:
-              input: phoneNumber
-              matcher: NOT_EMPTY
-          - validation: PHONE_STARTS_WITH_ONE
-            errorMessageKey: general.validation.area-codes-can-not-begin-with-1
-            condition:
-              input: phoneNumber
-              matcher: NOT_EMPTY
-          - validation: PHONE
-            errorMessageKey: general.validation.make-sure-to-enter-a-phone-number-with-10-digits
-            condition:
-              input: phoneNumber
-              matcher: NOT_EMPTY
-      - name: email
-        type: TEXT
-        promptMessage:
-          promptMessageKey: contact-info.whats-your-email-address
-        validators:
-          - validation: NOT_BLANK
-            errorMessageKey: general.validation.email
-            condition:
-              input: phoneOrEmail
-              value: EMAIL
-          - validation: EMAIL
-            errorMessageKey: general.validation.email
-            condition:
-              input: email
-              matcher: NOT_EMPTY
-          - validation: EMAIL_DOES_NOT_END_WITH_CON
-            errorMessageKey: general.validation.email-con-instead-of-com
-            condition:
-              input: email
-              matcher: NOT_EMPTY
-      - name: phoneOrEmail
-        type: CHECKBOX
-        promptMessage:
-          promptMessageKey: contact-info.how-can-we-send-you-updates-and-reminders-about-your-case-in-the-future
-        options:
-          selectableOptions:
-            - value: TEXT
-              messageKey: contact-info.text-me
-            - value: EMAIL
-              messageKey: contact-info.email-me
-    cardFooterTextKey: contact-info.the-department-of-human-services
-  - &noPhoneNumberConfirmation
-    name: noPhoneNumberConfirmation
-    headerKey: no-phone.are-you-sure
-    pageTitle: no-phone.title
-    contextFragment: contactInfoContextFragment
-    hasPrimaryButton: false
-  - &homeAddress
-    name: homeAddress
-    headerKey: home-address.where-are-you-currently-living
-    pageTitle: home-address.title
-    contextFragment: addressContextFragment
-    inputs:
-      - name: isHomeless
-        type: CUSTOM
-        customInputFragment: addressInputFragment
-        options:
-          selectableOptions:
-            - value: "true"
-              messageKey: home-address.i-dont-have-a-permanent-address
-        followUps:
-          - name: streetAddress
-            type: TEXT
-            promptMessage:
-              promptMessageKey: home-address.what-is-the-street-address
-            validators:
-              - validation: NOT_BLANK
-                errorMessageKey: general.validation.make-sure-you-answer-this-question
-                condition: *isHomeless?
-          - name: apartmentNumber
-            type: TEXT
-            promptMessage:
-              promptMessageKey: home-address.apartment-number
-          - name: city
-            type: TEXT
-            promptMessage:
-              promptMessageKey: home-address.what-is-the-city
-            validators:
-              - validation: NOT_BLANK
-                errorMessageKey: general.validation.make-sure-you-answer-this-question
-                condition: *isHomeless?
-          - name: state
-            type: TEXT
-            promptMessage:
-              promptMessageKey: home-address.what-is-the-state
-            helpMessageKey: home-address.what-is-the-state-helper
-            readOnly: false
-            defaultValue: MN
-            validators:
-              - validation: STATE
-                errorMessageKey: general.validation.make-sure-to-provide-a-valid-2-letter-state-code
-                condition:
-                  input: isHomeless
-                  matcher: DOES_NOT_CONTAIN
-                  value: "true"
-          - name: zipCode
-            type: TEXT
-            promptMessage:
-              promptMessageKey: home-address.what-is-the-zip-code
-            validators:
-              - validation: ZIPCODE
-                errorMessageKey: general.validation.make-sure-to-enter-a-zip-code-with-5-digits
-                condition: *isHomeless?
-  - &whereToSendMail
-    name: whereToSendMail
-    headerKey: where-to-send-mail.the-county-will-need-a-place-to-send-you-mail
-    headerHelpMessageKey: where-to-send-mail.this-could-be-a-friend-or-family-address
-    pageTitle: where-to-send-mail.title
-    contextFragment: mailContextFragment
-    primaryButtonTextKey: where-to-send-mail.I-have-a-place-to-get-mail
-    subtleLinkTextKey: where-to-send-mail.I-will-pick-up-my-mail-at-a-post-office
-  - &cityForGeneralDelivery
-    name: cityForGeneralDelivery
-    headerKey: city-for-general-delivery.help-us-route-your-mail
-    pageTitle: city-for-general-delivery.title
-    contextFragment: mailContextFragment
-    inputs:
-      - name: whatIsTheCity
-        type: CUSTOM
-        customInputFragment: selectCityCustomInput
-        validators:
-          - validation: NOT_BLANK
-            errorMessageKey: city-for-general-delivery.make-sure-to-provide-a-city
-  - &generalDeliveryAddress
-    name: generalDeliveryAddress
-    pageTitle: general-delivery-address.title
-    headerKey: general-delivery-address.the-county-will-send-all-mail-about-this-application-to
-    contextFragment: mailContextFragment
-  - &mailingAddress
-    name: mailingAddress
-    headerKey: mailing-address.where-can-the-county-send-your-mail
-    pageTitle: mailing-address.title
-    contextFragment: mailContextFragment
-    inputs:
-      - name: sameMailingAddress
-        type: CUSTOM
-        customInputFragment: addressInputFragment
-        options:
-          selectableOptions:
-            - value: "true"
-              messageKey: mailing-address.same-as-my-current-living-address
-        followUps:
-          - name: streetAddress
-            type: TEXT
-            promptMessage:
-              promptMessageKey: mailing-address.what-is-the-street-address
-            validators:
-              - validation: NOT_BLANK
-                errorMessageKey: general.validation.make-sure-you-answer-this-question
-                condition:
-                  input: sameMailingAddress
-                  matcher: DOES_NOT_CONTAIN
-                  value: "true"
-          - name: apartmentNumber
-            type: TEXT
-            promptMessage:
-              promptMessageKey: mailing-address.apartment-number
-          - name: city
-            type: TEXT
-            promptMessage:
-              promptMessageKey: mailing-address.what-is-the-city
-            validators:
-              - validation: NOT_BLANK
-                errorMessageKey: general.validation.make-sure-you-answer-this-question
-                condition:
-                  input: sameMailingAddress
-                  matcher: DOES_NOT_CONTAIN
-                  value: "true"
-          - name: state
-            type: TEXT
-            promptMessage:
-              promptMessageKey: mailing-address.what-is-the-state
-            validators:
-              - validation: STATE
-                errorMessageKey: general.validation.make-sure-to-provide-a-valid-2-letter-state-code
-                condition:
-                  input: sameMailingAddress
-                  matcher: DOES_NOT_CONTAIN
-                  value: "true"
-            defaultValue: MN
-          - name: zipCode
-            type: TEXT
-            promptMessage:
-              promptMessageKey: mailing-address.what-is-the-zip-code
-            validators:
-              - validation: ZIPCODE
-                errorMessageKey: general.validation.make-sure-to-enter-a-zip-code-with-5-digits
-                condition:
-                  input: sameMailingAddress
-                  matcher: DOES_NOT_CONTAIN
-                  value: "true"
-  - &reviewInfo
-    name: reviewInfo
-    pageTitle: review-info.title
-    headerKey: review-info.lets-review-your-info
-    contextFragment: docWithMagnifyingGlassContextFragment
-    primaryButtonTextKey: review-info.this-looks-correct
-    subtleLinkTextKey:
-      conditionalValues:
-        - value: review-info.submit-application-now-with-only-the-above-information
-          condition: *applicantChoseSNAP?
-  - &addHouseholdMembers
-    name: addHouseholdMembers
-    headerKey: add-household-members.do-you-want-to-add-household-members
-    contextFragment: householdMemberFragment
-    pageTitle: add-household-members.title
-    hasPrimaryButton: false
-    inputs:
-      - name: addHouseholdMembers
-        type: YES_NO
-        promptMessage:
-          promptMessageFragmentName: addHouseholdMembersPrompt
-  - &addChildrenConfirmation
-    name: addChildrenConfirmation
-    headerKey: no-child.since-you-are-applying-for-child-care
-    pageTitle: no-child.title
-    contextFragment: householdContextFragment
-    hasPrimaryButton: false
-  - &startHousehold
-    name: startHousehold
-    pageTitle: start-household.title
-    hasPrimaryButton: false
-  - &householdMemberInfo
-    name: householdMemberInfo
-    pageTitle: household-member-info.title
-    headerKey: household-member-info.add-a-person-who-lives-with-you
-    contextFragment: personContextFragment
-    inputs:
-      - name: firstName
-        type: TEXT
-        promptMessage:
-          promptMessageKey: household-member-info.whats-their-first-name
-        helpMessageKey: household-member-info.legally-as-it-appears-on-their-id
-        validators:
-          - validation: NOT_BLANK
-            errorMessageKey: general.validation.make-sure-to-provide-a-first-name
-      - name: middleName
-        type: TEXT
-        promptMessage:
-          promptMessageKey: household-member-info.whats-their-middle-name
-        helpMessageKey: household-member-info.legally-as-it-appears-on-their-id		  			
-      - name: lastName
-        type: TEXT
-        promptMessage:
-          promptMessageKey: household-member-info.whats-their-last-name
-        helpMessageKey: household-member-info.legally-as-it-appears-on-their-id
-        validators:
-          - validation: NOT_BLANK
-            errorMessageKey: general.validation.make-sure-to-provide-a-last-name
-      - name: otherName
-        type: TEXT
-        promptMessage:
-          promptMessageKey: household-member-info.list-any-other-names-they-have-gone-by-in-the-past
-        helpMessageKey: personal-info.include-maiden-names-or-legal-changes
-      - name: dateOfBirth
-        type: DATE
-        promptMessage:
-          promptMessageKey: household-member-info.when-were-they-born
-        validators:
-          - validation: DATE
-            condition:
-              input: dateOfBirth
-              matcher: NOT_EMPTY
-            errorMessageKey: general.validation.please-enter-your-birthday-in-this-format
-          - validation: DOB_VALID
-            condition:
-              input: dateOfBirth
-              matcher: NOT_EMPTY
-            errorMessageKey: general.validation.make-sure-to-provide-a-dob-between-1900-and-present
-      - name: maritalStatus
-        type: RADIO
-        promptMessage:
-          promptMessageKey: household-member-info.whats-their-martial-status
-        options:
-          selectableOptions:
-            - value: NEVER_MARRIED
-              messageKey: general.never-married
-            - value: MARRIED_LIVING_WITH_SPOUSE
-              messageKey: general.married-living-with-spouse
-            - value: MARRIED_NOT_LIVING_WITH_SPOUSE
-              messageKey: general.married-not-living-with-spouse
-            - value: LEGALLY_SEPARATED
-              messageKey: general.legally-separated
-            - value: DIVORCED
-              messageKey: general.divorced
-            - value: WIDOWED
-              messageKey: general.widowed
-      - name: sex
-        type: RADIO
-        promptMessage:
-          promptMessageKey: household-member-info.whats-their-sex
-        helpMessageKey: household-member-info.legally-as-it-appears-on-their-id-we-regret-that-this-question-is-limited
-        options:
-          selectableOptions:
-            - value: FEMALE
-              messageKey: general.female
-            - value: MALE
-              messageKey: general.male
-            - value: RATHER_NOT_SAY
-              messageKey: general.rather-not-say
-      - name: livedInMnWholeLife
-        type: RADIO
-        promptMessage:
-          promptMessageKey: household-member-info.have-they-lived-in-minnesota-their-whole-life
-        options:
-          selectableOptions:
-            - value: "false"
-              messageKey: general.inputs.no
-            - value: "true"
-              messageKey: general.inputs.yes
-        followUpValues:
-          - "true"
-        followUps:
-          - name: moveToMnDate
-            type: DATE
-            validators:
-              - validation: DATE
-                condition:
-                  input: moveToMnDate
-                  matcher: NOT_EMPTY
-                errorMessageKey: general.validation.make-sure-you-answer-this-question
-            promptMessage:
-              promptMessageKey: household-member-info.when-did-they-move-to-minnesota
-          - name: moveToMnPreviousState
-            type: TEXT
-            promptMessage:
-              promptMessageKey: household-member-info.what-state-did-they-move-from
-      - name: relationship
-        type: SELECT
-        options:
-          selectableOptions:
-            - value: ''
-              messageKey: household-member-info.select-relationship
-            - value: child
-              messageKey: household-member-info.child
-            - value: step-child
-              messageKey: household-member-info.step-child
-            - value: spouse
-              messageKey: household-member-info.spouse
-              limitSelection: true
-            - value: partner
-              messageKey: household-member-info.partner
-            - value: brother or sister
-              messageKey: household-member-info.brother-or-sister
-            - value: step brother or sister
-              messageKey: household-member-info.step-brother-or-sister
-            - value: half-brother or half-sister
-              messageKey: household-member-info.half-brother-or-sister
-            - value: parent or guardian
-              messageKey: household-member-info.parent-or-guardian
-            - value: grandparent
-              messageKey: household-member-info.grandparent
-            - value: child's parent
-              messageKey: household-member-info.childs-parent
-            - value: aunt or uncle
-              messageKey: household-member-info.aunt-or-uncle
-            - value: niece or nephew
-              messageKey: household-member-info.niece-or-nephew
-            - value: roommate
-              messageKey: household-member-info.roommate
-            - value: friend
-              messageKey: household-member-info.friend
-            - value: grandchild
-              messageKey: household-member-info.grandchild
-            - value: other
-              messageKey: household-member-info.other
-        promptMessage:
-          promptMessageKey: household-member-info.whats-their-relationship-to-you
-      - name: programs
-        type: CHECKBOX
-        promptMessage:
-          promptMessageKey: household-member-info.what-type-of-assistance-would-they-like-to-apply-for
-        helpMessageKey: general.check-all-that-apply
-        followUpValues:
-          - SNAP
-          - CASH
-          - EA
-          - CCAP
-        followUps:
-          - name: ssn
-            type: SSN
-            validators:
-              - validation: SSN
-                errorMessageKey: general.validation.make-sure-your-SSN-has-9-digits
-                condition:
-                  input: ssn
-                  matcher: NOT_EMPTY
-            promptMessage:
-              promptMessageKey: household-member-info.whats-their-social-security-number
-            helpMessageKey: household-member-info.if-they-have-one-we-strongly-recommend-including-it-here
-        validators:
-          - validation: SELECT_AT_LEAST_ONE
-            errorMessageKey: general.validation.make-sure-you-answer-this-question
-        options:
-          selectableOptions:
-            - value: SNAP
-              messageKey: choose-programs.food-snap
-            - value: CASH
-              messageKey: choose-programs.cash-programs
-            - value: EA
-              messageKey: choose-programs.emergency-assistance
-            - value: CCAP
-              messageKey: choose-programs.child-care-assistance
-            - value: NONE
-              messageKey: general.inputs.none-of-the-above
-              isNone: true
-          datasources:
-            - pageName: choosePrograms
-  - &householdRaceAndEthnicity
-    name: householdRaceAndEthnicity
-    pageTitle: household-race-and-ethnicity.title
-    headerHelpMessageKey: race-and-ethnicity.select-all-that-apply
-    contextFragment: householdRaceAndEthnicityFragment
-    inputs:
-      - name: preferNotToSay
-        type: CUSTOM
-        customInputFragment: preferNotToSayFragment
-        options:
-          selectableOptions:
-            - value: "true"
-              messageKey: household-race-and-ethnicity.prefer-not-to-say
-      - name: householdRaceAndEthnicity
-        type: CHECKBOX
-        options:
-          selectableOptions:
-            - value: AMERICAN_INDIAN_OR_ALASKA_NATIVE
-              messageKey: race-and-ethnicity.native-american-or-alaska-native
-            - value: ASIAN
-              messageKey: race-and-ethnicity.asian
-            - value: BLACK_OR_AFRICAN_AMERICAN
-              messageKey: race-and-ethnicity.black-or-african-american
-            - value: HISPANIC_LATINO_OR_SPANISH
-              messageKey: race-and-ethnicity.hispanic-latino-or-spanish
-            - value: MIDDLE_EASTERN_OR_NORTH_AFRICAN
-              messageKey: race-and-ethnicity.middle-eastern-or-north-african
-            - value: NATIVE_HAWAIIAN_OR_PACIFIC_ISLANDER
-              messageKey: race-and-ethnicity.native-hawaiian-or-pacific-islander
-            - value: WHITE
-              messageKey: race-and-ethnicity.white
-            - value: SOME_OTHER_RACE_OR_ETHNICITY
-              messageKey: race-and-ethnicity.some-other-race
-        followUpValues:
-          - SOME_OTHER_RACE_OR_ETHNICITY
-        followUps:
-          - name: otherRaceOrEthnicity
-            type: TEXT
-            promptMessage:
-              promptMessageKey: race-and-ethnicity.write-your-race-or-ethnicity
-  - &householdRedirectPage
-    name: householdRedirectPage
-    headerKey: household-redirect-page.header
-    pageTitle: warning-page.go-back-title
-    usingPageTemplateFragment: false
-  - &raceAndEthnicity
-    name: raceAndEthnicity
-    pageTitle: race-and-ethnicity.title
-    contextFragment: raceAndEthnicityFragment
-    preFormContentFragment: raceAndEthnicity
-    inputs:
-      - name: preferNotToSay
-        type: CUSTOM
-        customInputFragment: applicantPreferNotToSayFragment
-        options:
-          selectableOptions:
-            - value: "true"
-              messageKey: race-and-ethnicity.prefer-not-to-say
-      - name: raceAndEthnicity
-        type: CHECKBOX
-        options:
-          selectableOptions:
-            - value: AMERICAN_INDIAN_OR_ALASKA_NATIVE
-              messageKey: race-and-ethnicity.native-american-or-alaska-native
-            - value: ASIAN
-              messageKey: race-and-ethnicity.asian
-            - value: BLACK_OR_AFRICAN_AMERICAN
-              messageKey: race-and-ethnicity.black-or-african-american
-            - value: HISPANIC_LATINO_OR_SPANISH
-              messageKey: race-and-ethnicity.hispanic-latino-or-spanish
-            - value: MIDDLE_EASTERN_OR_NORTH_AFRICAN
-              messageKey: race-and-ethnicity.middle-eastern-or-north-african
-            - value: NATIVE_HAWAIIAN_OR_PACIFIC_ISLANDER
-              messageKey: race-and-ethnicity.native-hawaiian-or-pacific-islander
-            - value: WHITE
-              messageKey: race-and-ethnicity.white
-            - value: SOME_OTHER_RACE_OR_ETHNICITY
-              messageKey: race-and-ethnicity.some-other-race
-        followUpValues:
-          - SOME_OTHER_RACE_OR_ETHNICITY
-        followUps:
-          - name: otherRaceOrEthnicity
-            type: TEXT
-            promptMessage:
-              promptMessageKey: race-and-ethnicity.write-your-race-or-ethnicity
-  - &householdList
-    name: householdList
-    pageTitle: household-list.title
-    primaryButtonTextKey: household-list.yes-thats-everyone
-    contextFragment: householdContextFragment
-  - &childrenUnder19
-    name: childrenUnder19
-    pageTitle: children-under-19.title
-    headerKey: children-under-19.header
-    hasPrimaryButton: false
-    contextFragment: LiveWithChildrenFragment
-    inputs:
-      - name: hasChildrenUnder19
-        type: YES_NO
-  - &parentNotAtHome
-    name: parentNotAtHome
-    pageTitle: parent-not-at-home-19.title
-    headerKey: parent-not-at-home-19.header
-    hasPrimaryButton: false
-    inputs:
-      - name: hasParentNotAtHome
-        type: YES_NO
-  - &temporaryAbsence
-    name: temporaryAbsence
-    pageTitle: temporary-absence.title
-    headerKey:
-      defaultValue: temporary-absence.header.household
-      conditionalValues:
-        - value: temporary-absence.header
-          condition: *livesAlone?
-    headerHelpMessageKey: temporary-absence.body
-    hasPrimaryButton: false
-    contextFragment: houseFragment
-    inputs:
-      - name: hasTemporaryAbsence
-        type: YES_NO
-  - &noProgramsSelected
-    name: noProgramsSelected
-    pageTitle: no-programs-selected.title
-    usingPageTemplateFragment: false
-  - &childrenInNeedOfCare
-    name: childrenInNeedOfCare
-    pageTitle: children-in-need-of-care.title
-    headerKey: children-in-need-of-care.who-are-the-children-in-need-of-childcare
-    inputs:
-      - type: CUSTOM
-        name: whoNeedsChildCare
-        customInputFragment: householdOptionsCheckboxes
-        options:
-          datasources:
-            - pageName: personalInfo
-            - groupName: household
-              pageName: householdMemberInfo
-  - &doYouHaveChildCareProvider
-    name: doYouHaveChildCareProvider
-    headerKey: child-care-intro.do-you-have-provider
-    headerHelpMessageKey: child-care-intro.this-may-include
-    pageTitle: child-care-intro.title
-    hasPrimaryButton: false
-    inputs:
-      - name: hasChildCareProvider
-        type: YES_NO
-  - &childCareProviderInfo
-    name: childCareProviderInfo
-    headerKey: child-care-info.header
-    pageTitle: child-care-info.title
-    inputs:
-      - name: childCareProviderName
-        type: TEXT
-        promptMessage:
-          promptMessageKey: child-care-info.provider-name
-        validators:
-          - validation: NOT_BLANK
-            errorMessageKey: general.validation.make-sure-you-answer-this-question          
-      - name: phoneNumber
-        type: PHONE
-        promptMessage:
-          promptMessageKey: child-care-info.phone-number
-        validators:
-          - validation: PHONE_STARTS_WITH_ZERO
-            errorMessageKey: general.validation.area-codes-can-not-begin-with-0
-            condition:
-              input: phoneNumber
-              matcher: NOT_EMPTY
-          - validation: PHONE_STARTS_WITH_ONE
-            errorMessageKey: general.validation.area-codes-can-not-begin-with-1
-            condition:
-              input: phoneNumber
-              matcher: NOT_EMPTY
-          - validation: PHONE
-            errorMessageKey: general.validation.make-sure-to-enter-a-phone-number-with-10-digits
-            condition:
-              input: phoneNumber
-              matcher: NOT_EMPTY
-      - name: streetAddress
-        type: TEXT
-        promptMessage:
-          promptMessageKey: child-care-info.street-address
-      - name: suiteNumber
-        type: TEXT
-        promptMessage:
-          promptMessageKey: child-care-info.suite
-      - name: city
-        type: TEXT
-        promptMessage:
-          promptMessageKey: child-care-info.city
-        validators:
-          - validation: NOT_BLANK
-            errorMessageKey: general.validation.make-sure-you-answer-this-question
-      - name: state
-        type: TEXT
-        promptMessage:
-          promptMessageKey: child-care-info.state
-        validators:
-          - validation: STATE
-            errorMessageKey: general.validation.make-sure-to-provide-a-valid-2-letter-state-code
-            condition:
-              input: state
-              matcher: NOT_EMPTY
-      - name: zipCode
-        type: NUMBER
-        promptMessage:
-          promptMessageKey: child-care-info.zip
-        validators:
-          - validation: ZIPCODE
-            errorMessageKey: general.validation.make-sure-to-enter-a-zip-code-with-5-digits
-            condition:
-              input: zipCode
-              matcher: NOT_EMPTY
-  - &childrenAtThisProvider
-    name: childrenAtThisProvider
-    pageTitle: child-care-who-uses.title
-    headerKey: child-care-who-uses.header
-    headerHelpMessageKey: child-care-who-uses.help-text
-    inputs:
-      - name: childrenNames
-        type: PEOPLE_CHECKBOX
-        validators:
-          - validation: SELECT_AT_LEAST_ONE
-            errorMessageKey: child-care-who-uses.select-at-least-one-child
-        datasources:
-          - pageName: childrenInNeedOfCare
-            inputName: whoNeedsChildCare
-          - pageName: choosePrograms   
-  - &childCareProviderList
-    name: childCareProviderList
-    pageTitle: child-care-provider-list.title
-    primaryButtonTextKey: child-care-provider-list.no-thats-it
-    contextFragment: householdContextFragment 
-    headerKey: child-care-provider-list.would-you-like-to-add
-    usingPageTemplateFragment: false
-  - &childCareProviderDeleteWarningPage
-    name: childCareProviderDeleteWarningPage
-    pageTitle: child-care-provider-delete.title
-    usingPageTemplateFragment: false
-  - &childCareProviderRedirectPage
-    name: childCareProviderRedirectPage
-    headerKey: child-care-provider-redirect.header
-    headerHelpMessageKey: child-care-provider-redirect.helper
-    pageTitle: warning-page.go-back-title
-    usingPageTemplateFragment: false
-  - &whoHasParentNotAtHome
-    name: whoHasParentNotAtHome
-    pageTitle: parent-not-at-home.title
-    headerKey: parent-not-at-home.who-are-the-children-that-have-a-parent-not-living-at-home
-    headerHelpMessageKey: parent-not-at-home.help-text
-    inputs:
-      - type: PEOPLE_CHECKBOX_WITH_NONE
-        noneCheckboxText: parent-not-at-home.none-of-the-children-have-parents-living-outside-the-home
-        name: whoHasAParentNotLivingAtHome
-        validators:
-          - validation: SELECT_AT_LEAST_ONE
-            errorMessageKey: general.validation.make-sure-you-choose-none-of-the-above-or-another-option
-        datasources:
-          - pageName: childrenInNeedOfCare
-            inputName: whoNeedsChildCare
-  - &parentNotAtHomeNames
-    name: parentNotAtHomeNames
-    pageTitle: parent-not-at-home-names.title
-    headerKey: parent-not-at-home-names.what-are-the-parents-names
-    inputs:
-      - type: CUSTOM
-        name: whatAreTheParentsNames
-        customInputFragment: parentNotAtHomeNameInput
-        promptMessage:
-          promptMessageKey: parent-not-at-home-names.what-is-the-parents-name
-        helpMessageKey: parent-not-at-home-names.what-is-the-parents-name
-        options:
-          datasources:
-            - pageName: whoHasParentNotAtHome
-      - type: HIDDEN
-        name: childIdMap # This input is controlled by whatAreTheParentsNames
-  - &childCareChildSupport
-    name: childCareChildSupport
-    pageTitle: child-care-child-support.title
-    headerKey: child-care-child-support.who-does-your-household-receive-child-support
-    headerHelpMessageKey: child-care-child-support.select-all-that-apply
-    inputs:
-      - type: PEOPLE_CHECKBOX_WITH_NONE
-        noneCheckboxText: child-care-child-support.none-receive-child-support
-        name: whoReceivesChildSupportPayments
-        validators:
-          - validation: SELECT_AT_LEAST_ONE
-            errorMessageKey: general.validation.make-sure-you-choose-none-of-the-above-or-another-option
-        datasources:
-          - pageName: whoHasParentNotAtHome
-            inputName: whoHasAParentNotLivingAtHome
-  - &childCareMentalHealth
-    name: childCareMentalHealth
-    pageTitle: child-care-mental-health.title
-    headerKey: 
-      defaultValue: child-care-mental-health.do-any-caregivers-need-help
-      conditionalValues:
-        - value: child-care-mental-health.do-you-need-help
-          customCondition: APPLICANT_IS_ONLY_ADULT
-    hasPrimaryButton: false
-    headerHelpMessageKey: child-care-mental-health.adults-and-caregivers
-    inputs:
-      - name: childCareMentalHealth
-        type: YES_NO
-        promptMessage:
-          promptMessageFragmentName: childCareMentalHealthPrompt
-  - &whoNeedsChildCareForMentalHealth
-    name: whoNeedsChildCareForMentalHealth
-    pageTitle: who-needs-child-care-mental-health.title
-    headerKey: who-needs-child-care-mental-health.who-needs-need-help
-    headerHelpMessageKey: who-needs-child-care-mental-health.check-all-that-apply
-    inputs:
-      - type: CUSTOM
-        name: whoNeedsChildCareMentalHealth
-        customInputFragment: mentalHealthCheckboxes
-        validators:
-          - validation: NOT_BLANK
-            errorMessageKey: general.validation.make-sure-to-select-a-person
-        options:
-          datasources:
-            - pageName: personalInfo
-            - groupName: household
-              pageName: householdMemberInfo
-            - pageName: childrenInNeedOfCare
-  - &childCareMentalHealthTimes
-    name: childCareMentalHealthTimes
-    pageTitle: child-care-mental-health-time.title
-    headerKey: 
-      defaultValue: child-care-mental-health-time.tell-us-how-much-time-is-needed
-      conditionalValues:
-        - value: child-care-mental-health-time.tell-us-how-much-time-you-need
-          customCondition: APPLICANT_IS_ONLY_ADULT
-    headerHelpMessageKey: child-care-mental-health-time.you-can-request
-    inputs:
-      - type: CUSTOM
-        name: childCareMentalHealthHours
-        inputPostfix: general.input.postfix.hours-per-week
-        customInputFragment: childCareMentalHealthTimeInput
-        promptMessage:
-          promptMessageKey: child-care-mental-health-time.weekly-amount
-        options:
-          datasources:
-            - pageName: personalInfo
-            - groupName: household
-              pageName: householdMemberInfo
-              optional: "true"
-            - pageName: whoNeedsChildCareForMentalHealth
-      - type: HIDDEN
-        name: childCareMentalHealthPersonIdMap
-  - &householdDeleteWarningPage
-    name: householdDeleteWarningPage
-    pageTitle: warning-page.delete-household-member-warning
-    usingPageTemplateFragment: false
-  - &introPersonalDetails
-    name: introPersonalDetails
-    pageTitle: intro-personal-details.title
-    hasPrimaryButton: false
-  - &preparingMealsTogether
-    name: preparingMealsTogether
-    pageTitle: preparing-meals-together.title
-    headerKey: preparing-meals-together.header
-    hasPrimaryButton: false
-    contextFragment: groceriesContextFragment
-    inputs:
-      - name: isPreparingMealsTogether
-        type: YES_NO
-  - &buyOrCookFood
-    name: buyOrCookFood
-    pageTitle: buy-or-cook-food.title
-    headerKey: buy-or-cook-food.header
-    hasPrimaryButton: false
-    contextFragment: groceriesContextFragment
-    inputs:
-      - name: isDisabledToBuyOrCookFood
-        type: YES_NO
-  - &goingToSchool
-    name: goingToSchool
-    pageTitle: going-to-school.title
-    headerKey:
-      defaultValue: going-to-school.header-household
-      conditionalValues:
-        - value: going-to-school.header
-          condition: *livesAlone?
-    headerHelpMessageKey: going-to-school.helper
-    hasPrimaryButton: false
-    contextFragment: schoolContextFragment
-    inputs:
-      - name: goingToSchool
-        type: YES_NO
-  - &whoIsGoingToSchool
-    name: whoIsGoingToSchool
-    pageTitle: who-is-going-to-school.title
-    headerKey: who-is-going-to-school.who-is-going-to-school
-    contextFragment: schoolContextFragment
-    headerHelpMessageKey: who-is-going-to-school.check-all-that-apply
-    inputs:
-      - type: CUSTOM
-        name: whoIsGoingToSchool
-        customInputFragment: householdOptionsCheckboxes
-        options:
-          datasources:
-            - pageName: personalInfo
-            - groupName: household
-  - &schoolDetails
-    name: schoolDetails
-    pageTitle: school-details.title
-    headerKey: school-details.header
-    headerHelpMessageKey: school-details.If-you-dont-have-all-this-information-right-now
-    contextFragment: schoolContextFragment
-    inputs:
-      - type: CUSTOM
-        name: schoolName
-        customInputFragment: schoolDetailsNameInput
-        promptMessage:
-          promptMessageKey: school-details.school-name
-        options:
-          datasources:
-            - pageName: whoIsGoingToSchool
-            - pageName: childrenInNeedOfCare
-      - type: HIDDEN
-        name: personIdMap
-  - &schoolGrade
-    name: schoolGrade 
-    pageTitle: school-grade.title
-    headerKey: school-grade.header
-    headerHelpMessageKey: school-grade.If-you-dont-have-all-this-information-right-now
-    contextFragment: schoolContextFragment
-    inputs:
-      - name: schoolGrade
-        type: CUSTOM
-        customInputFragment: schoolGradeInput
-        options:
-          selectableOptions:
-            - value: ''
-              messageKey: school-grade.select-their-grade
-            - value: Hd Strt
-              messageKey: school-grade.Head-Start
-            - value: Pre-K
-              messageKey: school-grade.Pre-K
-            - value: K
-              messageKey: school-grade.Kindergarten
-            - value: 1
-              messageKey: school-grade.1st-grade
-            - value: 2
-              messageKey: school-grade.2nd-grade
-            - value: 3
-              messageKey: school-grade.3rd-grade
-            - value: 4
-              messageKey: school-grade.4th-grade
-            - value: 5
-              messageKey: school-grade.5th-grade
-            - value: 6
-              messageKey: school-grade.6th-grade
-            - value: 7
-              messageKey: school-grade.7th-grade
-            - value: 8
-              messageKey: school-grade.8th-grade
-            - value: 9
-              messageKey: school-grade.9th-grade
-            - value: 10
-              messageKey: school-grade.10th-grade
-            - value: 11
-              messageKey: school-grade.11th-grade
-            - value: 12
-              messageKey: school-grade.12th-grade
-            - value: Other 
-              messageKey: school-grade.Other                     
-          datasources:
-            - pageName: schoolDetails
-            - groupName: household
-      - type: HIDDEN
-        name: schoolGradePersonIdMap
-  - &schoolStartDate
-    name: schoolStartDate
-    pageTitle: school-start-date.title
-    headerKey: school-start-date.header
-    contextFragment: schoolContextFragment
-    inputs:
-      - type: CUSTOM
-        name: schoolStartDate
-        customInputFragment: schoolStartDateInput
-        validators:
-          - validation: SCHOOL_START_DATES
-            errorMessageKey: general.validation.please-enter-valid-school-start-date
-        options:
-          datasources:
-            - pageName: schoolGrade
-            - groupName: household
-      - type: HIDDEN
-        name: schoolStartDatePersonIdMap
-  - &lastSchoolGrade
-    name: lastSchoolGrade
-    pageTitle: last-school-grade.title
-    headerKey:
-      defaultValue: last-school-grade.household-header
-      conditionalValues:
-        - value: last-school-grade.applicant-header
-          condition: *livesAlone?
-    contextFragment: schoolContextFragment
-    inputs:
-      - name: lastSchoolGrade
-        type: CUSTOM
-        customInputFragment: lastSchoolGradeInput
-        options:
-          selectableOptions:
-            - value: ''
-              messageKey: last-school-grade.select-grade
-            - value: NoSchool
-              messageKey: last-school-grade.select-no-school
-            - value: Preschool
-              messageKey: last-school-grade.select-preschool
-            - value: Kindergarten
-              messageKey: last-school-grade.select-kindergarten
-            - value: 1stGrade
-              messageKey: last-school-grade.select-1st-grade
-            - value: 2ndGrade
-              messageKey: last-school-grade.select-2nd-grade
-            - value: 3rdGrade
-              messageKey: last-school-grade.select-3rd-grade
-            - value: 4thGrade
-              messageKey: last-school-grade.select-4th-grade
-            - value: 5thGrade
-              messageKey: last-school-grade.select-5th-grade
-            - value: 6thGrade
-              messageKey: last-school-grade.select-6th-grade
-            - value: 7thGrade
-              messageKey: last-school-grade.select-7th-grade
-            - value: 8thGrade
-              messageKey: last-school-grade.select-8th-grade
-            - value: 9thGrade
-              messageKey: last-school-grade.select-9th-grade
-            - value: 10thGrade
-              messageKey: last-school-grade.select-10th-grade
-            - value: 11thGrade
-              messageKey: last-school-grade.select-11th-grade
-            - value: 12thGrade
-              messageKey: last-school-grade.select-12th-grade
-            - value: GED
-              messageKey: last-school-grade.select-ged
-            - value: SomeCollege
-              messageKey: last-school-grade.select-some-college
-            - value: CollegeDegree
-              messageKey: last-school-grade.select-college-degree
-            - value: GraduateDegree
-              messageKey: last-school-grade.select-graduate-degree
-            - value: OtherEducation
-              messageKey: last-school-grade.select-other
-          datasources:
-            - pageName: personalInfo
-            - pageName: addHouseholdMembers
-            - groupName: household
-              optional: "true"
-      - type: HIDDEN
-        name: lastSchoolGradePersonIdMap
-  - &housingSubsidy
-    name: housingSubsidy
-    pageTitle: housing-subsidy.title
-    headerKey:
-      defaultValue: housing-subsidy.header-household
-      conditionalValues:
-        - value: housing-subsidy.header-applicant-only
-          condition: *livesAlone?
-    hasPrimaryButton: false
-    contextFragment: housingSubsidyContextFragment
-    inputs:
-      - name: hasHousingSubsidy
-        type: YES_NO
-  - &housingSituation
-    name: housingSituation
-    pageTitle: housingSituation.title
-    headerKey: housingSituation.header
-    hasPrimaryButton: false
-    contextFragment: houseFragment
-    inputs:
-      - name: isHomeless
-        type: YES_NO  
-  - &pregnant
-    name: pregnant
-    pageTitle: pregnant.title
-    headerKey:
-      defaultValue: pregnant.is-anyone-pregnant
-      conditionalValues:
-        - value: pregnant.are-you-pregnant
-          condition: *livesAlone?
-    hasPrimaryButton: false
-    contextFragment: pregnantContextFragment
-    inputs:
-      - name: isPregnant
-        type: YES_NO
-  - &whoIsPregnant
-    name: whoIsPregnant
-    pageTitle: who-is-pregnant.title
-    headerKey: who-is-pregnant.header
-    headerHelpMessageKey: general.check-all-that-apply
-    contextFragment: pregnantContextFragment
-    inputs:
-      - type: CUSTOM
-        name: whoIsPregnant
-        customInputFragment: householdOptionsCheckboxes
-        options:
-          datasources:
-            - pageName: personalInfo
-            - groupName: household
-  - &militaryService
-    name: militaryService
-    pageTitle: military-service.title
-    headerKey:
-      defaultValue: military-service.has-anyone-served
-      conditionalValues:
-        - value: military-service.have-you-served
-          condition: *livesAlone?
-    headerHelpMessageKey: military-service.message-key
-    hasPrimaryButton: false
-    contextFragment: militaryContextFragment
-    inputs:   
-      - name: hasMilitaryService
-        type: YES_NO
-  - &whoHasMilitaryService
-    name: whoHasMilitaryService
-    pageTitle: who-has-military-service.title
-    headerKey: who-has-military-service.header
-    headerHelpMessageKey: general.check-all-that-apply
-    contextFragment: militaryContextFragment
-    inputs:
-      - type: CUSTOM
-        name: whoHasMilitaryService
-        customInputFragment: householdOptionsCheckboxes
-        options:
-          datasources:
-            - pageName: personalInfo
-            - groupName: household			
-  - &citizenship
-    name: citizenship
-    pageTitle: citizenship.title
-    headerKey:
-      defaultValue: citizenship.please-confirm-the-citizenship-status-of-your-househould
-      conditionalValues:
-        - value: citizenship.please-confirm-your-citizenship-status
-          condition: *livesAlone?  
-    headerHelpMessageKey: 
-      defaultValue: citizenship.members-of-your-household-may-still-be-eligible
-      conditionalValues:
-        - value: citizenship.you-may-still-be-eligible-for-food-and-cash-benefits-if-you-are-not-a-us-citizen
-          condition: *livesAlone? 
-    hasPrimaryButton: true
-    contextFragment: passportContextFragment
-    additionalContentFragment: citizenshipAccordions
-    inputs:
-      - name: citizenshipStatus
-        type: CUSTOM
-        customInputFragment: citizenshipStatusInput
-        validators:
-          - validation: ALL_NON_BLANK
-            errorMessageKey: general.validation.make-sure-you-answer-this-question
-        options:
-          selectableOptions:
-            - value: BIRTH_RIGHT
-              messageKey: citizenship.birthright-us-citizen-or-us-national
-            - value: NATURALIZED
-              messageKey: citizenship.naturalized-us-citizen
-            - value: DERIVED
-              messageKey: citizenship.derived-us-citizen
-            - value: NOT_CITIZEN
-              messageKey: citizenship.not-a-us-citizen
-          datasources:
-            - pageName: personalInfo
-            - pageName: householdMemberInfo
-              groupName: household
-              optional: "true"
-      - type: HIDDEN
-        name: citizenshipIdMap	
-  - &usCitizen
-    name: usCitizen
-    pageTitle: us-citizen.title
-    headerKey:
-      defaultValue: us-citizen.is-everyone-us-citizen
-      conditionalValues:
-        - value: us-citizen.are-you-a-us-citizen
-          condition: *livesAlone?
-    headerHelpMessageKey: us-citizen.most-immigrants-are-still-eligible-for-food-and-cash-benefits
-    hasPrimaryButton: false
-    contextFragment: passportContextFragment
-    inputs:
-      - name: isUsCitizen
-        type: YES_NO		
-  - &whoIsNonCitizen
-    name: whoIsNonCitizen
-    pageTitle: who-is-non-citizen.title
-    headerKey: who-is-non-citizen.header
-    headerHelpMessageKey: general.check-all-that-apply
-    contextFragment: passportContextFragment
-    inputs:
-      - type: CUSTOM
-        name: whoIsNonCitizen
-        customInputFragment: householdOptionsCheckboxes
-        validators:
-          - validation: NOT_BLANK
-            errorMessageKey: general.validation.make-sure-you-answer-this-question
-        options:
-          datasources:
-            - pageName: personalInfo
-            - groupName: household
-  - &alienIdNumber
-    name: alienIdNumber
-    pageTitle: alien-id-number.title
-    headerKey: what-is-your-alien-id-number.header
-    headerHelpMessageKey: what-is-alien-id-number.this-will-help-caseworker
-    contextFragment: passportContextFragment
-    inputs:
-      - type: TEXT
-        name: alienIdNumber
-        placeholder: general.optional
-        options:
-          datasources:
-            - pageName: whoIsNonCitizen
-      - type: HIDDEN
-        name: alienIdMap # This input is controlled by whoIsNonCitizen
-  - &alienIdNumbers
-   name: alienIdNumbers
-   pageTitle: alien-id-number.title
-   headerKey: what-is-their-alien-id-number.header
-   headerHelpMessageKey: what-is-alien-id-number.this-will-help-caseworker
-   contextFragment: passportContextFragment
-   inputs:
-     - type: CUSTOM
-       name: alienIdNumber
-       customInputFragment: alienIdInput
-       helpMessageKey: general.inputs.optional
-       placeholder: general.optional
-       options:
-         datasources:
-           - pageName: whoIsNonCitizen
-     - type: HIDDEN
-       name: alienIdMap # This input is controlled by whoIsNonCitizen
-  - &doYouNeedHelpImmediately
-    name: doYouNeedHelpImmediately
-    pageTitle: do-you-need-help-immediately.title
-    headerKey: do-you-need-help-immediately.header
-    headerHelpMessageKey: do-you-need-help-immediately.we-encourage-you-to-answer-a-few-more-questions-that-will-help-us-figure-out-if-you-qualify-for-faster-service
-    hasPrimaryButton: false
-    inputs:
-      - name: needHelpImmediately
-        type: CUSTOM
-        customInputFragment: needHelpImmediatelyInput
-        options:
-          selectableOptions:
-            - value: true
-              messageKey: do-you-need-help-immediately.yes-I-want-to-see-if-I-qualify
-              cssClass: "button button--primary"
-            - value: false
-              messageKey: do-you-need-help-immediately.finish-application-now
-              cssClass: "button button--secondary"
-  - &thirtyDayIncome
-    headerKey:
-      defaultValue: thirty-day-income.how-much-money-has-your-household-made-in-the-last-30-days
-      conditionalValues:
-        - value: thirty-day-income.how-much-money-have-you-made-in-the-last-30-days
-          condition: *livesAloneOrIsApplicantsJob?
-    headerHelpMessageKey: thirty-day-income.if-you-dont-know-the-exact-amount
-    name: thirtyDayIncome
-    pageTitle:
-      defaultValue: thirty-day-income.title-household
-      conditionalValues:
-        - value: thirty-day-income.title-one-person
-          condition: *livesAlone?
-    inputs:
-      - name: moneyMadeLast30Days
-        type: MONEY
-        validators:
-          - validation: MONEY
-            errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
-            condition:
-              input: moneyMadeLast30Days
-              matcher: NOT_EMPTY
-  - &lastThirtyDaysJobIncome
-    headerKey:
-      conditionalValues:
-        - value: thirty-day-job-income.how-much-money-have-you-made-at-this-job-in-the-last-30-days
-          condition: *livesAloneOrIsApplicantsJob?
-        - value: thirty-day-job-income.how-much-money-have-they-made-at-this-job-in-the-last-30-days
-          condition:
-            pageName: householdSelectionForIncome
-            input: whoseJobIsIt
-            value: "applicant"
-            matcher: DOES_NOT_CONTAIN_SUBSTRING
-    headerHelpMessageKey: thirty-day-income.if-you-dont-know-the-exact-amount
-    name: lastThirtyDaysJobIncome
-    pageTitle: thirty-day-job-income.title
-    inputs:
-      - name: lastThirtyDaysJobIncome
-        type: MONEY
-        validators:
-          - validation: MONEY
-            errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
-            condition:
-              input: lastThirtyDaysJobIncome
-              matcher: NOT_EMPTY
-    contextFragment: jobContextFragment
-  - &liquidAssetsSingle
-    name: liquidAssetsSingle
-    pageTitle:
-      defaultValue: liquid-assets-prompt.title-household
-      conditionalValues:
-        - value: liquid-assets-prompt.title-one-person
-          condition: *livesAlone?
-    contextFragment: liquidAssetsSingleContextFragment
-    headerKey:
-      defaultValue: thirty-day-income.how-much-money-is-available
-      conditionalValues:
-        - value: thirty-day-income.how-much-money-do-you-have-available
-          condition: *livesAlone?
-        - value: thirty-day-income.how-much-money-do-you-have-available-in-these
-          condition: *livesAlone?
-        - value: thirty-day-income.how-much-money-is-available-in-these
-          condition: *livesAlone?
-    inputs:
-      - name: liquidAssets
-        type: MONEY
-        promptMessage:
-          promptMessageFragmentName: liquidAssetsPrompt
-        validators:
-          - validation: MONEY
-            errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
-            condition:
-              input: liquidAssets
-              matcher: NOT_EMPTY
-  - &expeditedExpenses
-    name: expeditedExpenses
-    pageTitle:
-      defaultValue: expedited-expenses.title-household
-      conditionalValues:
-        - value: expedited-expenses.title-one-person
-          condition: *livesAlone?
-    headerKey:
-      defaultValue: expedited-expenses.header-household
-      conditionalValues:
-        - value: expedited-expenses.header-one-person
-          condition: *livesAlone?
-    hasPrimaryButton: false
-    inputs:
-      - name: payRentOrMortgage
-        type: YES_NO
-  - &expeditedExpensesAmount
-    name: homeExpensesAmount
-    pageTitle:
-      defaultValue: expedited-expenses-amount.title-household
-      conditionalValues:
-        - value: expedited-expenses-amount.title-one-person
-          condition: *livesAlone?
-    headerKey:
-      defaultValue: expedited-expenses-amount.how-much-is-paid-for-rent-or-mortgage-every-month
-      conditionalValues:
-        - value: expedited-expenses-amount.how-much-do-you-pay-for-rent-or-mortgage-every-month
-          condition: *livesAlone?
-    inputs:
-      - name: homeExpensesAmount
-        type: MONEY
-        validators:
-          - validation: MONEY
-            errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
-            condition:
-              input: homeExpensesAmount
-              matcher: NOT_EMPTY
-  - &utilityPayments
-    name: utilityPayments
-    pageTitle:
-      defaultValue: utility-payments.title-household
-      conditionalValues:
-        - value: utility-payments.title-one-person
-          condition: *livesAlone?
-    headerKey:
-      defaultValue: utility-payments.does-anyone-in-your-household-pay-for-these-utilities
-      conditionalValues:
-        - value: utility-payments.do-you-pay-for-any-utilities
-          condition: *livesAlone?
-    headerHelpMessageKey:
-      defaultValue: utility-payments.household-billed
-      conditionalValues:
-        - value: utility-payments.select-all-that-you-are-billed-for-even-if-you-havent-paid-it-this-month
-          condition: *livesAlone?
-    inputs:
-      - name: payForUtilities
-        type: CHECKBOX
-        validators:
-          - validation: SELECT_AT_LEAST_ONE
-            errorMessageKey: general.validation.make-sure-you-choose-none-of-the-above-or-another-option
-        options:
-          selectableOptions:
-            - value: HEATING
-              messageKey: utility-payments.heating
-            - value: COOLING
-              messageKey: utility-payments.cooling
-            - value: ELECTRICITY
-              messageKey: utility-payments.electricity
-            - value: PHONE
-              messageKey: utility-payments.phone
-            - value: WATER
-              messageKey: utility-payments.water
-            - value: SEWER
-              messageKey: utility-payments.sewer
-            - value: GARBAGE_REMOVAL
-              messageKey: utility-payments.garbage-removal
-            - value: NONE_OF_THE_ABOVE
-              messageKey: general.inputs.none-of-the-above
-              isNone: true
-  - &energyAssistance
-    name: energyAssistance
-    pageTitle: energy-assistance.title
-    headerKey:
-      defaultValue: energy-assistance.household-received-money
-      conditionalValues:
-        - value: energy-assistance.have-you-received-money-for-energy-assistance
-          condition: *livesAlone?
-    hasPrimaryButton: false
-    inputs:
-      - name: energyAssistance
-        type: YES_NO
-  - &energyAssistanceMoreThan20
-    name: energyAssistanceMoreThan20
-    pageTitle: energy-assistance-more-than-20.title
-    headerKey:
-      defaultValue: energy-assistance-more-than-20.household-received
-      conditionalValues:
-        - value: energy-assistance-more-than-20.have-you-received-more-than-20-in-energy-assistance
-          condition: *livesAlone?
-    hasPrimaryButton: false
-    inputs:
-      - name: energyAssistanceMoreThan20
-        type: YES_NO
-  - &medicalExpenses
-    name: medicalExpenses
-    pageTitle: medical-expenses.title
-    headerKey:
-      defaultValue: medical-expenses.does-anyone-in-your-household-pay-for-medical-expenses
-      conditionalValues:
-        - value: medical-expenses.do-you-pay-for-medical-expenses
-          condition: *livesAlone?
-    headerHelpMessageKey: medical-expenses.let-us-know
-    inputs:
-      - name: medicalExpenses
-        type: CHECKBOX
-        validators:
-          - validation: SELECT_AT_LEAST_ONE
-            errorMessageKey: general.validation.make-sure-you-choose-none-of-the-above-or-another-option
-        options:
-          selectableOptions:
-            - value: MEDICAL_INSURANCE_PREMIUMS
-              messageKey: medical-expenses.medical-insurance-premiums
-            - value: DENTAL_INSURANCE_PREMIUMS
-              messageKey: medical-expenses.dental-insurance-premiums
-            - value: VISION_INSURANCE_PREMIUMS
-              messageKey: medical-expenses.vision-insurance-premiums
-            - value: MEDICAL_BILLS_OR_COPAYS
-              messageKey: medical-expenses.medical-bills-or-copays
-            - value: NONE_OF_THE_ABOVE
-              messageKey: general.inputs.none-of-the-above
-              isNone: true
-  - &childCareCosts
-    name: childCareCosts
-    pageTitle: child-care-costs.title
-    contextFragment: careExpensesFragment
-    headerHelpMessageKey: child-care-costs-household.the-child-care-assistance-program
-    headerKey:
-      defaultValue: child-care-costs-household.header
-      conditionalValues:
-        - value: child-care-costs.header
-          condition: *livesAlone?
-    hasPrimaryButton: false
-    inputs:
-      - name: childCareCosts
-        type: YES_NO
-  - &childCareCostsAmount
-    name: childCareCostsAmount
-    pageTitle: child-care-costs-amount.title
-    headerKey: child-care-costs-amount.header
-    headerHelpMessageKey: child-care-costs-amount.if-you-dont-have-all-this
-    inputs:
-      - name: childCareCostsAmount
-        type: MONEY
-        promptMessage:
-          promptMessageKey: costs-amount.amount
-        validators:
-          - validation: MONEY
-            errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
-            condition:
-              input: childCareCostsAmount
-              matcher: NOT_EMPTY
-      - name: childCareCostsFrequency
-        promptMessage:
-          promptMessageKey: costs-frequency.how-often
-        type: SELECT
-        options:
-          selectableOptions:
-            - value: ''
-              messageKey: cost-frequency.select-frequency
-            - value: MONTHLY
-              messageKey: cost-frequency.monthly
-            - value: TWICE_A_MONTH
-              messageKey: cost-frequency.twice-a-month
-            - value: EVERY_TWO_WEEKS
-              messageKey: cost-frequency.every-two-weeks
-            - value: WEEKLY
-              messageKey: cost-frequency.weekly
-            - value: OTHER
-              messageKey: cost-frequency.other
-  - &adultCareCosts
-    name: adultCareCosts
-    pageTitle: adult-care-costs.title
-    contextFragment: careExpensesFragment
-    headerKey:
-      defaultValue: adult-care-costs-household.header
-      conditionalValues:
-        - value: adult-care-costs.header
-          condition: *livesAlone?
-    hasPrimaryButton: false
-    inputs:
-      - name: adultCareCosts
-        type: YES_NO
-  - &adultCareCostsAmount
-    name: adultCareCostsAmount
-    pageTitle: adult-care-costs-amount.title
-    headerKey: adult-care-costs-amount.header
-    headerHelpMessageKey: adult-care-costs-amount.if-you-dont-have-all-this
-    inputs:
-      - name: adultCareCostsAmount
-        type: MONEY
-        promptMessage:
-          promptMessageKey: costs-amount.amount
-        validators:
-          - validation: MONEY
-            errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
-            condition:
-              input: adultCareCostsAmount
-              matcher: NOT_EMPTY
-      - name: adultCareCostsFrequency
-        promptMessage:
-          promptMessageKey: costs-frequency.how-often
-        type: SELECT
-        options:
-          selectableOptions:
-            - value: ''
-              messageKey: cost-frequency.select-frequency
-            - value: MONTHLY
-              messageKey: cost-frequency.monthly
-            - value: TWICE_A_MONTH
-              messageKey: cost-frequency.twice-a-month
-            - value: EVERY_TWO_WEEKS
-              messageKey: cost-frequency.every-two-weeks
-            - value: WEEKLY
-              messageKey: cost-frequency.weekly
-            - value: OTHER
-              messageKey: cost-frequency.other
-  - &supportAndCare
-    name: supportAndCare
-    pageTitle: support-and-care.title
-    contextFragment: careExpensesFragment
-    headerHelpMessageKey: support-and-care.help
-    headerKey:
-      defaultValue: support-and-care.household-support
-      conditionalValues:
-        - value: support-and-care.do-you-pay-for-court-ordered-child-support-spousal-support
-          condition: *livesAlone?
-    hasPrimaryButton: false
-    inputs:
-      - name: supportAndCare
-        type: YES_NO
-  - &supportAndCareCostsAmount
-    name: supportAndCareCostsAmount
-    pageTitle: support-and-care-costs-amount.title
-    headerKey: support-and-care-costs-amount.header
-    headerHelpMessageKey: support-and-care-costs-amount.payment-list
-    inputs:
-      - name: supportAndCareCostsAmount
-        type: MONEY
-        promptMessage:
-          promptMessageKey: costs-amount.amount
-        validators:
-          - validation: MONEY
-            errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
-            condition:
-              input: supportAndCareCostsAmount
-              matcher: NOT_EMPTY
-      - name: supportAndCareCostsFrequency
-        promptMessage:
-          promptMessageKey: costs-frequency.how-often
-        type: SELECT
-        options:
-          selectableOptions:
-            - value: ''
-              messageKey: cost-frequency.select-frequency
-            - value: MONTHLY
-              messageKey: cost-frequency.monthly
-            - value: TWICE_A_MONTH
-              messageKey: cost-frequency.twice-a-month
-            - value: EVERY_TWO_WEEKS
-              messageKey: cost-frequency.every-two-weeks
-            - value: WEEKLY
-              messageKey: cost-frequency.weekly
-            - value: OTHER
-              messageKey: cost-frequency.other
-  - &pastEmployment
-    name: pastEmployment
-    pageTitle: past-employment.title
-    headerKey:
-      defaultValue: past-employment-household.header
-      conditionalValues:
-        - value: past-employment.header
-          condition: *livesAlone?
-    hasPrimaryButton: false
-    inputs:
-      - name: wereYouEmployed
-        type: YES_NO
-  - &medicalExpensesSources
-    name: medicalExpensesSources
-    pageTitle: medical-expenses-sources.title
-    headerKey:
-      defaultValue: medical-expenses-sources.tell-us-how-much-money-is-paid
-    headerHelpMessageKey: medical-expenses-source.if-you-dont-have-this-information-right-now
-    inputs:
-      - name: medicalInsurancePremiumAmount
-        type: MONEY
-        promptMessage:
-          promptMessageKey: medical-expenses-sources.medical-insurance-premiums
-        helpMessageKey: general.monthly-amount
-        validators:
-          - validation: MONEY
-            errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
-            condition:
-              input: medicalInsurancePremiumAmount
-              matcher: NOT_EMPTY
-        condition:
-          pageName: medicalExpenses
-          input: medicalExpenses
-          value: MEDICAL_INSURANCE_PREMIUMS
-      - name: dentalInsurancePremiumAmount
-        type: MONEY
-        promptMessage:
-          promptMessageKey: medical-expenses-sources.dental-insurance-premiums
-        helpMessageKey: general.monthly-amount
-        validators:
-          - validation: MONEY
-            errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
-            condition:
-              input: dentalInsurancePremiumAmount
-              matcher: NOT_EMPTY
-        condition:
-          pageName: medicalExpenses
-          input: medicalExpenses
-          value: DENTAL_INSURANCE_PREMIUMS
-      - name: visionInsurancePremiumAmount
-        type: MONEY
-        promptMessage:
-          promptMessageKey: medical-expenses-sources.vision-insurance-premiums
-        helpMessageKey: general.monthly-amount
-        validators:
-          - validation: MONEY
-            errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
-            condition:
-              input: visionInsurancePremiumAmount
-              matcher: NOT_EMPTY
-        condition:
-          pageName: medicalExpenses
-          input: medicalExpenses
-          value: VISION_INSURANCE_PREMIUMS
-  - &migrantFarmWorker
-    name: migrantFarmWorker
-    pageTitle:
-      defaultValue: expedited-migrant-farm-worker.title-household
-      conditionalValues:
-        - value: expedited-migrant-farm-worker.title-one-person
-          condition: *livesAlone?
-    headerKey:
-      defaultValue: expedited-migrant-farm-worker.header-household
-      conditionalValues:
-        - value: expedited-migrant-farm-worker.header-one-person
-          condition: *livesAlone?
-    hasPrimaryButton: false
-    contextFragment: wheatContextFragment
-    inputs:
-      - name: migrantOrSeasonalFarmWorker
-        type: YES_NO
-  - &snapExpeditedDetermination
-    name: snapExpeditedDetermination
-    usingPageTemplateFragment: false
-  - &legalStuff
-    name: legalStuff
-    pageTitle: legal-stuff.title
-    headerKey: legal-stuff.the-legal-stuff
-    contextFragment: legalReview1ContextFragment
-    headerHelpMessageKey: legal-stuff.scroll-down-to-agree-to-the-terms
-    inputs:
-      - name: agreeToTerms
-        type: CHECKBOX
-        promptMessage:
-          promptMessageFragmentName: legal-terms-prompt
-        validators:
-          - validation: SELECT_AT_LEAST_ONE
-            errorMessageKey: general.validation.make-sure-to-agree-to-the-terms
-        options:
-          selectableOptions:
-            - value: "true"
-              messageKey: legal-stuff.i-agree
-        helpMessageKeyBelow: legal-stuff.copies-of-the-full-agreements
-      - name: drugFelony
-        type: RADIO
-        options:
-          selectableOptions:
-            - value: "true"
-              messageKey: general.inputs.yes
-            - value: "false"
-              messageKey: general.inputs.no
-# This condition is intended to prevent the input from ever being displayed on the page.
-# It allows us to keep the input defined on the page for data-pipelines backward compatibility.
-        condition:
-          pageName: legalStuff
-          input: showInput
-          value: never
-  - &secondSignatureLegalStuff
-    name: secondSignatureLegalStuff
-    pageTitle: legal-stuff-second-signature.title
-    headerKey: legal-stuff-second-signature.header-text
-    headerHelpMessageKey: legal-stuff.scroll-down-to-agree-to-the-terms
-    hasPrimaryButton: false
-    usingPageTemplateFragment: true
-    inputs:
-      - name: agreeToTerms
-        type: CHECKBOX
-        promptMessage:
-          promptMessageFragmentName: legal-terms-prompt
-        validators:
-          - validation: SELECT_AT_LEAST_ONE
-            errorMessageKey: general.validation.make-sure-to-agree-to-the-terms
-        options:
-          selectableOptions:
-            - value: "true"
-              messageKey: legal-stuff.i-agree
-        helpMessageKeyBelow: legal-stuff-second-signature.copies-of-the-full-agreements
-      - name: secondSignatureOption
-        type: CUSTOM
-        customInputFragment: secondSignatureOption
-        options:
-          selectableOptions:
-            - value: "CONTINUE_TO_SECOND_SIGNATURE"
-              messageKey: general.continue
-    subtleLinkTextKey: legal-stuff-second-signature.continue-without-another-signature
-  - &signThisApplication
-    name: signThisApplication
-    pageTitle: sign-this-application.title
-    headerKey: sign-this-application.type-your-full-legal-name-here-to-sign-this-application
-    headerHelpMessageKey: sign-this-application.by-signing-this-application-you-agree-that-you-want-to
-    primaryButtonTextKey: general.continue
-    inputs:
-      - name: applicantSignature
-        type: TEXT
-        validators:
-          - validation: NOT_BLANK
-            errorMessageKey: sign-this-application.make-sure-to-sign-the-application
-  - &secondSignatureNotification
-    name: secondSignatureNotification
-    pageTitle: second-signature-notification.title
-    headerKey: second-signature-notification.next-we-will-ask
-    headerHelpMessageKey: second-signature-notification.header-help-message
-    contextFragment: legalReview2ContextFragment
-    hasPrimaryButton: false
-  - &secondSignature
-    name: secondSignature
-    pageTitle: second-signature.title
-    headerKey: second-signature.great
-    headerHelpMessageKey: sign-this-application.by-signing-this-application-you-agree-that-you-want-to
-    hasPrimaryButton: false
-    usingPageTemplateFragment: true
-    inputs:
-      - name: secondSignature
-        type: TEXT
-      - name: secondSignatureOption
-        type: CUSTOM
-        customInputFragment: secondSignatureOption
-        options:
-          selectableOptions:
-            - value: "CONTINUE_TO_SECOND_SIGNATURE"
-              messageKey: general.continue
-    subtleLinkTextKey: legal-stuff-second-signature.continue-without-another-signature
-  - &submit
-    name: submit
-    pageTitle: submit.submit
-    headerKey: submit.header-text
-    usingPageTemplateFragment: false
-  - &submissionConfirmation
-    name: submissionConfirmation
-    pageTitle: submission-confirmation.title
-    contextFragment: icon-documents-sent
-    hasPrimaryButton: true
-    excludeGoBack: true
-  - &addingDocuments
-    name: addingDocuments
-    pageTitle: adding-documents.title
-    hasPrimaryButton: false
-  - &howToAddDocuments
-    name: howToAddDocuments
-    pageTitle: how-to-add-documents.title
-  - &documentRecommendation
-    name: documentRecommendation
-    pageTitle: document-recommendation.title
-    usingPageTemplateFragment: false
-  - &documentOffboarding
-    name: documentOffboarding
-    pageTitle: document-offboarding.title
-    headerKey: document-offboarding.finish-your-application-and-add-documents-on-MNbenefits-later
-    contextFragment: computerWithCheckContextFragment
-    hasPrimaryButton: false
-  - &uploadDocuments
-    name: uploadDocuments
-    pageTitle: upload-documents.title
-    usingPageTemplateFragment: false
-  - &uploadDocumentsDeleteWarningPage
-    name: uploadDocumentsDeleteWarningPage
-    headerKey: upload-documents-delete-warning.you-are-about-to-delete
-    pageTitle: upload-documents-delete-warning.title
-    usingPageTemplateFragment: false
-  - &documentSubmitConfirmation
-    name: documentSubmitConfirmation
-    pageTitle: document-submit-confirmation.title
-    headerKey: document-submit-confirmation.ready-to-submit-your-documents
-    contextFragment: documentsSuccessContextFragment
-    hasPrimaryButton: false
-  - &programDocuments
-    name: programDocuments
-    pageTitle: program-documents.title
-    headerKey: program-documents.header
-    hasPrimaryButton: true
-    excludeGoBack: true
-  - &identifyCounty
-    name: identifyCounty
-    pageTitle: identify-county.title
-    headerKey: identify-county.select-your-county
-    headerHelpMessageKey: 
-      defaultValue: identify-county.this-is-the-county
-      conditionalValues:
-        - value: identify-county.select-your-county-without-mn
-          condition: *laterDocsFlow?
-        - value: identify-county.select-your-county-without-mn
-          condition:
-            logicalOperator: OR
-            conditions:
-              - <<: *selectedCountyDoesNotMatchEnrichedCountyHome?
-                value: "true"
-              - <<: *selectedCountyDoesNotMatchEnrichedCountyMailing?
-                value: "true"
-    contextFragment: countyContextFragment
-    inputs:
-      - name: county
-        type: SELECT
-        validators:
-          - validation: NOT_BLANK
-            errorMessageKey: general.validation.make-sure-to-select-a-county
-          - validation: COUNTY
-            errorMessageKey: general.validation.invalid.select.option.value
-            condition: 
-              input: county
-              matcher: NOT_EMPTY
-        options:
-          selectableOptions:
-            - value: ''
-              messageKey: identify-county.select-your-county
-            - value: Aitkin
-              messageKey: identify-county-aitkin
-            - value: Anoka
-              messageKey: identify-county-anoka
-            - value: Becker
-              messageKey: identify-county-becker
-            - value: Beltrami
-              messageKey: identify-county-beltrami
-            - value: Benton
-              messageKey: identify-county-benton
-            - value: BigStone
-              messageKey: identify-county-big-stone
-            - value: BlueEarth
-              messageKey: identify-county-blue-earth
-            - value: Brown
-              messageKey: identify-county-brown
-            - value: Carlton
-              messageKey: identify-county-carlton
-            - value: Carver
-              messageKey: identify-county-carver
-            - value: Cass
-              messageKey: identify-county-cass
-            - value: Chippewa
-              messageKey: identify-county-chippewa
-            - value: Chisago
-              messageKey: identify-county-chisago
-            - value: Clay
-              messageKey: identify-county-clay
-            - value: Clearwater
-              messageKey: identify-county-clearwater
-            - value: Cook
-              messageKey: identify-county-cook
-            - value: Cottonwood
-              messageKey: identify-county-cottonwood
-            - value: CrowWing
-              messageKey: identify-county-crow-wing
-            - value: Dakota
-              messageKey: identify-county-dakota
-            - value: Dodge
-              messageKey: identify-county-dodge
-            - value: Douglas
-              messageKey: identify-county-douglas
-            - value: Faribault
-              messageKey: identify-county-faribault
-            - value: Fillmore
-              messageKey: identify-county-fillmore
-            - value: Freeborn
-              messageKey: identify-county-freeborn
-            - value: Goodhue
-              messageKey: identify-county-goodhue
-            - value: Grant
-              messageKey: identify-county-grant
-            - value: Hennepin
-              messageKey: identify-county-hennepin
-            - value: Houston
-              messageKey: identify-county-houston
-            - value: Hubbard
-              messageKey: identify-county-hubbard
-            - value: Isanti
-              messageKey: identify-county-isanti
-            - value: Itasca
-              messageKey: identify-county-itasca
-            - value: Jackson
-              messageKey: identify-county-jackson
-            - value: Kanabec
-              messageKey: identify-county-kanabec
-            - value: Kandiyohi
-              messageKey: identify-county-kandiyohi
-            - value: Kittson
-              messageKey: identify-county-kittson
-            - value: Koochiching
-              messageKey: identify-county-koochiching
-            - value: LacQuiParle
-              messageKey: identify-county-lac-qui-parle
-            - value: Lake
-              messageKey: identify-county-lake
-            - value: LakeOfTheWoods
-              messageKey: identify-county-lake-of-the-woods
-            - value: LeSueur
-              messageKey: identify-county-le-sueur
-            - value: Lincoln
-              messageKey: identify-county-lincoln
-            - value: Lyon
-              messageKey: identify-county-lyon
-            - value: McLeod
-              messageKey: identify-county-mcleod
-            - value: Mahnomen
-              messageKey: identify-county-mahnomen
-            - value: Marshall
-              messageKey: identify-county-marshall
-            - value: Meeker
-              messageKey: identify-county-meeker
-            - value: Martin
-              messageKey: identify-county-martin
-            - value: MilleLacs
-              messageKey: identify-county-mille-lacs
-            - value: Morrison
-              messageKey: identify-county-morrison
-            - value: Mower
-              messageKey: identify-county-mower
-            - value: Murray
-              messageKey: identify-county-murray
-            - value: Nicollet
-              messageKey: identify-county-nicollet
-            - value: Nobles
-              messageKey: identify-county-nobles
-            - value: Norman
-              messageKey: identify-county-norman
-            - value: Olmsted
-              messageKey: identify-county-olmsted
-            - value: OtterTail
-              messageKey: identify-county-otter-tail
-            - value: Pennington
-              messageKey: identify-county-pennington
-            - value: Pine
-              messageKey: identify-county-pine
-            - value: Pipestone
-              messageKey: identify-county-pipestone
-            - value: Polk
-              messageKey: identify-county-polk
-            - value: Pope
-              messageKey: identify-county-pope
-            - value: Ramsey
-              messageKey: identify-county-ramsey
-            - value: RedLake
-              messageKey: identify-county-red-lake
-            - value: Redwood
-              messageKey: identify-county-redwood
-            - value: Renville
-              messageKey: identify-county-renville
-            - value: Rice
-              messageKey: identify-county-rice
-            - value: Rock
-              messageKey: identify-county-rock
-            - value: Roseau
-              messageKey: identify-county-roseau
-            - value: StLouis
-              messageKey: identify-county-saint-louis
-            - value: Scott
-              messageKey: identify-county-scott
-            - value: Sherburne
-              messageKey: identify-county-sherburne
-            - value: Sibley
-              messageKey: identify-county-sibley
-            - value: Stearns
-              messageKey: identify-county-stearns
-            - value: Steele
-              messageKey: identify-county-steele
-            - value: Stevens
-              messageKey: identify-county-stevens
-            - value: Swift
-              messageKey: identify-county-swift
-            - value: Todd
-              messageKey: identify-county-todd
-            - value: Traverse
-              messageKey: identify-county-traverse
-            - value: Wabasha
-              messageKey: identify-county-wabasha
-            - value: Wadena
-              messageKey: identify-county-wadena
-            - value: Waseca
-              messageKey: identify-county-waseca
-            - value: Washington
-              messageKey: identify-county-washington
-            - value: Watonwan
-              messageKey: identify-county-watonwan
-            - value: Wilkin
-              messageKey: identify-county-wilkin
-            - value: Winona
-              messageKey: identify-county-winona
-            - value: Wright
-              messageKey: identify-county-wright
-            - value: YellowMedicine
-              messageKey: identify-county-yellow-medicine
-  - &matchInfo
-    name: matchInfo
-    headerKey: match-info.match-docs-to-app
-    headerHelpMessageKey: match-info.fill-in-as-much-as-you-can
-    pageTitle: match-info.title
-    contextFragment: matchInfoContextFragment
-    inputs:
-      - name: firstName
-        type: TEXT
-        promptMessage:
-          promptMessageKey: match-info.whats-your-first-name
-        helpMessageKey: match-info.legally-as-it-appears-on-your-id
-        validators:
-          - validation: NOT_BLANK
-            errorMessageKey: general.validation.make-sure-to-provide-a-first-name
-      - name: lastName
-        type: TEXT
-        promptMessage:
-          promptMessageKey: match-info.whats-your-last-name
-        helpMessageKey: match-info.legally-as-it-appears-on-your-id
-        validators:
-          - validation: NOT_BLANK
-            errorMessageKey: general.validation.make-sure-to-provide-a-last-name
-      - name: dateOfBirth
-        type: DATE
-        validators:
-          - validation: DATE
-            errorMessageKey: general.validation.please-enter-your-birthday-in-this-format
-            condition:
-              input: dateOfBirth
-              matcher: NOT_EMPTY
-          - validation: DOB_VALID
-            condition:
-              input: dateOfBirth
-              matcher: NOT_EMPTY
-            errorMessageKey: general.validation.make-sure-to-provide-a-dob-between-1900-and-present
-        promptMessage:
-          promptMessageKey: match-info.when-were-you-born
-      - name: ssn
-        type: SSN
-        validators:
-          - validation: SSN
-            errorMessageKey: general.validation.make-sure-your-SSN-has-9-digits
-            condition:
-              input: ssn
-              matcher: NOT_EMPTY
-        promptMessage:
-          promptMessageKey: match-info.whats-your-social-security-number
-        helpMessageKey: match-info.recommended-but-not-required
-      - name: phoneNumber
-        type: PHONE
-        promptMessage:
-          promptMessageKey: contact-info.whats-your-phone-number
-        validators:
-          - validation: PHONE_STARTS_WITH_ZERO
-            errorMessageKey: general.validation.area-codes-can-not-begin-with-0
-            condition:
-              input: phoneNumber
-              matcher: NOT_EMPTY
-          - validation: PHONE_STARTS_WITH_ONE
-            errorMessageKey: general.validation.area-codes-can-not-begin-with-1
-            condition:
-              input: phoneNumber
-              matcher: NOT_EMPTY
-          - validation: PHONE
-            errorMessageKey: general.validation.make-sure-to-enter-a-phone-number-with-10-digits
-            condition:
-              input: phoneNumber
-              matcher: NOT_EMPTY
-        helpMessageKey: match-info.county-can-contact-you-if-questions
-      - name: email
-        type: TEXT
-        validators:
-          - validation: EMAIL
-            errorMessageKey: general.validation.email
-            condition:
-              input: email
-              matcher: NOT_EMPTY
-        promptMessage:
-          promptMessageKey: contact-info.whats-your-email-address
-        helpMessageKey: match-info.county-can-contact-you-if-questions
-      - name: caseNumber
-        type: TEXT
-        validators:
-          - validation: CASE_NUMBER
-            errorMessageKey: general.validation.make-sure-your-case-number-has-4-to-7-digits
-            condition:
-              input: caseNumber
-              matcher: NOT_EMPTY
-        promptMessage:
-          promptMessageKey: match-info.case-number-if-you-have-it
-        helpMessageKey: match-info.recommended-but-not-required
-  - &nextSteps
-    name: nextSteps
-    pageTitle: next-steps.title
-    hasPrimaryButton: false
-  - &success
-    name: success
-    pageTitle: success.title
-    usingPageTemplateFragment: false
-  - &recommendations
-    name: recommendations
-    pageTitle: recommendations.title
-    usingPageTemplateFragment: false
-  - &feedback
-    name: feedback
-    pageTitle: feedback.title
-    usingPageTemplateFragment: false
-  - &documentsSent
-    name: documentsSent
-    pageTitle: documentsSent.title
-    contextFragment: icon-documents-sent
-    headerKey: documentsSent.great-your-documents-are-being-sent
-    hasPrimaryButton: false
-    excludeGoBack: true
-  - &disability
-    name: disability
-    pageTitle: disability.title
-    contextFragment: disabilityContextFragment
-    headerKey:
-      defaultValue: disability.does-anyone-in-your-household-have-a-physical-or-mental-disability-that-limits
-      conditionalValues:
-        - value: disability.do-you-have-a-physical-or-mental-disability-that-limits
-          condition: *livesAlone?
-    hasPrimaryButton: false
-    inputs:
-      - name: hasDisability
-        type: YES_NO	
-  - &unableToWork
-    name: unableToWork
-    pageTitle: unable-to-work.title
-    contextFragment: briefcaseContextFragment
-    headerKey:
-      defaultValue: unable-to-work.is-anyone-in-your-household-not-able-to-work-for-any-reason
-      conditionalValues:
-        - value: unable-to-work.are-you-not-able-to-work-for-any-reason
-          condition: *livesAlone?
-    hasPrimaryButton: false
-    inputs:
-      - name: unableToWork
-        type: YES_NO		
-# workSituation page is no longer used. However, we keep def. for data-pipelines compatibility
-  - &workSituation
-    name: workSituation
-    pageTitle: work-situation.title
-    headerKey:
-      defaultValue: work-situation.in-the-last-2-months-did-anyone-in-your-household-do-any-of-these-things
-      conditionalValues:
-        - value: work-situation.in-the-last-2-months-did-you-do-any-of-these-things
-          condition: *livesAlone?
-    hasPrimaryButton: false
-    contextFragment: briefcaseContextFragment
-    inputs:
-      - name: hasWorkSituation
-        type: YES_NO
-        promptMessage:
-          promptMessageFragmentName: workSituationPrompt
-  - &workChanges
-    name: workChanges
-    pageTitle: work-changes.title
-    headerKey:
-      defaultValue: work-changes.in-the-last-60-days-did-anyone-in-your-household-do-any-of-these-things
-      conditionalValues:
-        - value: work-changes.in-the-last-60-days-did-you-do-any-of-these-things
-          condition: *livesAlone?
-    headerHelpMessageKey: work-changes.check-all-that-apply
-    #hasPrimaryButton: true
-    contextFragment: briefcaseContextFragment
-    inputs:
-      - name: workChanges
-        type: CHECKBOX
-        validators:
-          - validation: SELECT_AT_LEAST_ONE
-            errorMessageKey: work-changes.make-sure-you-choose		
-        options:
-          selectableOptions:
-            - value: STOP_WORK
-              messageKey: work-changes.stop-working
-            - value: REFUSE_JOB
-              messageKey: work-changes.refuse-a-job-offer
-            - value: FEWER_HOURS
-              messageKey: work-changes.ask-to-work-fewer-hours
-            - value: ON_STRIKE
-              messageKey: work-changes.go-on-strike
-            - value: NONE_OF_THE_ABOVE
-              messageKey: general.inputs.none-of-the-above
-              isNone: true			  
-  - &tribalNationMember
-    name: tribalNationMember
-    pageTitle: tribal-nation-member.title
-    headerKey:
-      defaultValue: tribal-nation-member.is-anyone-in-your-household-a-member-of-a-tribal-nation
-      conditionalValues:
-        - value: tribal-nation-member.are-you-a-member-of-a-tribal-nation
-          condition: *livesAlone?
-    hasPrimaryButton: false
-    inputs:
-      - name: isTribalNationMember
-        type: YES_NO
-  - &selectTheTribe
-    name: selectTheTribe
-    pageTitle: select-the-tribe.title
-    headerKey: select-the-tribe.which-nation-do-they-belong-to
-    hasPrimaryButton: true
-    inputs:
-      - name: selectedTribe
-        type: SELECT
-        validators:
-          - validation: NOT_BLANK
-            errorMessageKey: general.validation.make-sure-to-select-a-tribe
-        options:
-          selectableOptions:
-            - value: ''
-              messageKey: select-the-tribe.select-the-tribe
-            - value: Bois Forte
-              messageKey: select-the-tribe.bois-forte
-            - value: Fond Du Lac
-              messageKey: select-the-tribe.fond-du-lac
-            - value: Grand Portage
-              messageKey: select-the-tribe.grand-portage
-            - value: Leech Lake
-              messageKey: select-the-tribe.leech-lake
-            - value: Lower Sioux
-              messageKey: select-the-tribe.lower-sioux
-            - value: Mille Lacs Band of Ojibwe
-              messageKey: select-the-tribe.mille-lacs
-            - value: Prairie Island
-              messageKey: select-the-tribe.prairie-island
-            - value: Red Lake Nation
-              messageKey: select-the-tribe.red-lake
-            - value: Shakopee Mdewakanton
-              messageKey: select-the-tribe.shakopee-mdewakanton
-            - value: Upper Sioux
-              messageKey: select-the-tribe.upper-sioux
-            - value: White Earth Nation
-              messageKey: select-the-tribe.white-earth
-            - value: Federally recognized tribe outside of MN
-              messageKey: select-the-tribe.other
-  - &nationOfResidence
-    name: nationOfResidence
-    pageTitle: nation-of-residence.title
-    headerKey:
-      defaultValue: nation-of-residence.header
-      conditionalValues:
-        - value: later-docs-nation-of-residence.header
-          condition: *laterDocsFlow?
-    hasPrimaryButton: true
-    inputs:
-      - name: selectedNationOfResidence
-        type: SELECT
-        validators:
-          - validation: NOT_BLANK
-            errorMessageKey: general.validation.make-sure-to-select-a-tribe
-        options:
-          selectableOptions:
-            - value: ''
-              messageKey: select-the-tribe.select-the-tribe
-            - value: Bois Forte
-              messageKey: select-the-tribe.bois-forte
-            - value: Fond Du Lac
-              messageKey: select-the-tribe.fond-du-lac
-            - value: Grand Portage
-              messageKey: select-the-tribe.grand-portage
-            - value: Leech Lake
-              messageKey: select-the-tribe.leech-lake
-            - value: Lower Sioux
-              messageKey: select-the-tribe.lower-sioux
-            - value: Mille Lacs Band of Ojibwe
-              messageKey: select-the-tribe.mille-lacs
-            - value: Prairie Island
-              messageKey: select-the-tribe.prairie-island
-            - value: Red Lake Nation
-              messageKey: select-the-tribe.red-lake
-            - value: Shakopee Mdewakanton
-              messageKey: select-the-tribe.shakopee-mdewakanton
-            - value: Upper Sioux
-              messageKey: select-the-tribe.upper-sioux
-            - value: White Earth Nation
-              messageKey: select-the-tribe.white-earth
-  - &linealDescendantWEN
-    name: linealDescendantWhiteEarthNation
-    pageTitle: lineal-descendant-WEN.title
-    headerKey:
-      defaultValue: lineal-descendant-WEN.is-anyone-a-lineal-descendant
-      conditionalValues:
-        - value: lineal-descendant-WEN.are-you-a-lineal-descendant
-          condition: *livesAlone?
-    hasPrimaryButton: false
-    inputs:
-      - name: linealDescendantWEN
-        promptMessage:
-          promptMessageFragmentName: linealDescendantWENPrompt
-        type: YES_NO
-  - &nationsBoundary
-    name: nationsBoundary
-    pageTitle: nations-boundary.title
-    headerKey:
-      defaultValue: nations-boundary.are-you-living-nations-boundary
-      conditionalValues:
-        - value: nations-boundary.are-you-living-nations-boundary
-          condition: *livesAlone?
-    hasPrimaryButton: false
-    inputs:
-      - name: livingInNationBoundary
-        type: YES_NO
-  - &applyForTribalTANF
-    name: applyForTribalTANF
-    pageTitle: apply-for-tribal-TANF.title
-    headerKey: apply-for-tribal-TANF.it-looks-like-you-might-be-eligible
-    hasPrimaryButton: false
-    inputs:
-      - name: applyForTribalTANF
-        promptMessage:
-          promptMessageFragmentName: applyForTribalTANFPrompt
-        type: YES_NO
-  - &tribalTANFConfirmation
-    name: tribalTANFConfirmation
-    pageTitle: tribal-tanf-confirmation.title
-    hasPrimaryButton: false
-  - &introIncome
-    name: introIncome
-    pageTitle: intro-income.title
-    hasPrimaryButton: false
-  - &employmentStatus
-    name: employmentStatus
-    pageTitle: employment-status.title
-    headerKey:
-      defaultValue: employment-status.is-anyone-in-your-household-making-money-from-a-job
-      conditionalValues:
-        - value: employment-status.are-you-making-money-from-a-job-self-employment
-          condition: *livesAlone?
-    hasPrimaryButton: false
-    inputs:
-      - name: areYouWorking
-        type: YES_NO
-  - &incomeByJob
-    name: incomeByJob
-    pageTitle: income-by-job.title
-    headerKey:
-      defaultValue: income-by-job.lets-add-all-the-jobs-in-your-household
-      conditionalValues:
-        - value: income-by-job.lets-add-your-job-information
-          condition: *livesAlone?
-    subtleLinkTextKey: income-by-job.id-rather-give-an-estimate
-    hasPrimaryButton: false
-  - &householdSelectionForIncome
-    name: householdSelectionForIncome
-    pageTitle: household-selection-for-income.title
-    headerKey: household-selection-for-income.header
-    inputs:
-      - type: CUSTOM
-        name: whoseJobIsIt
-        customInputFragment: householdOptionsRadios
-        validators:
-          - validation: NOT_BLANK
-            errorMessageKey: general.validation.make-sure-you-answer-this-question
-        options:
-          datasources:
-            - pageName: personalInfo
-            - groupName: household
-  - &incomeUpNext
-    name: incomeUpNext
-    pageTitle: income-up-next.title
-    hasPrimaryButton: false
-  - &jobSearch
-    name: jobSearch
-    pageTitle: ccap-job-search.title
-    headerKey:
-      defaultValue: ccap-job-search.is-household-currently-looking-for-a-job
-      conditionalValues:
-        - value: ccap-job-search.are-you-currently-looking-for-a-job
-          condition: *livesAlone?
-    hasPrimaryButton: false
-    inputs:
-      - name: currentlyLookingForJob
-        type: YES_NO
-  - &whoIsLookingForAJob
-    name: whoIsLookingForAJob
-    pageTitle: who-is-looking-for-job.title
-    headerKey: who-is-looking-for-job.who-in-your-household-is-looking-for-a-job
-    inputs:
-      - type: CUSTOM
-        name: whoIsLookingForAJob
-        customInputFragment: householdOptionsCheckboxes
-        options:
-          datasources:
-            - pageName: personalInfo
-            - groupName: household
-  - &specialCareExpenses
-    name: specialCareExpenses
-    pageTitle: special-care-expenses.title
-    headerKey:
-      defaultValue: special-care-expenses-household-header
-      conditionalValues:
-        - value: special-care-expenses-header
-          condition: *livesAlone?
-    headerHelpMessageKey: special-care-expenses-assets.select-all-that-apply
-    inputs:
-      - name: specialCareExpenses
-        type: CHECKBOX
-        validators:
-          - validation: SELECT_AT_LEAST_ONE
-            errorMessageKey: general.validation.make-sure-you-choose-none-of-the-above-or-another-option
-        options:
-          selectableOptions:
-            - value: REPRESENTATIVE_PAYEE_FEES
-              messageKey: special-care-expenses-representative
-            - value: GUARDIAN_AND_CONSERVATOR_FEES
-              messageKey: special-care-expenses-guardian
-            - value: SPECIAL_DIET_PRESCRIBED_BY_DOCTOR
-              messageKey: special-care-expenses-special-diet
-            - value: HIGH_HOUSING_COSTS
-              messageKey: special-care-expenses-housing
-            - value: NONE
-              messageKey: general.inputs.none-of-the-above
-              isNone: true
+ready-to-upload-documents.title=Listo para cargar documentos
+ready-to-upload-documents.header=¿Listo para cargar y enviar sus documentos?
+ready-to-upload-documents.first-we'll-ask-you=<b>¡Empecemos ya!</b><br><br>En primer lugar, le haremos algunas preguntas que nos ayudarán a asociar sus documentos con su solicitud y a asegurarnos de que enviamos sus documentos al condado o nación tribal correctos.<br><br>
 
-  - &unearnedIncome
-    name: unearnedIncome
-    pageTitle: unearned-income.title
-    contextFragment: unearnedIncomeContextFragment
-    headerKey:
-      defaultValue: unearned-income.household-get-income-from-any-of-these-sources
-      conditionalValues:
-        - value: unearned-income.do-you-get-income-from-any-of-these-sources
-          condition: *livesAlone?
-    headerHelpMessageKey: unearned-income.check-all-that-apply-you-do-not-need-to-report-income-you-havent-received-yet
-    inputs:
-      - name: unearnedIncome
-        type: CHECKBOX
-        validators:
-          - validation: SELECT_AT_LEAST_ONE
-            errorMessageKey: general.validation.make-sure-you-choose-none-of-the-above-or-another-option
-        options:
-          selectableOptions:
-            - value: SOCIAL_SECURITY
-              messageKey: unearned-income.social-security
-            - value: SSI
-              messageKey: unearned-income.ssi
-            - value: VETERANS_BENEFITS
-              messageKey: unearned-income.veterans-benefits
-            - value: UNEMPLOYMENT
-              messageKey: unearned-income.unemployment
-            - value: WORKERS_COMPENSATION
-              messageKey: unearned-income.workers-compensation
-            - value: RETIREMENT
-              messageKey: unearned-income.retirement
-            - value: CHILD_OR_SPOUSAL_SUPPORT
-              messageKey: unearned-income.child-or-spousal-support
-            - value: TRIBAL_PAYMENTS
-              messageKey: unearned-income.tribal-payments
-            - value: NO_UNEARNED_INCOME_SELECTED
-              messageKey: general.inputs.none-of-the-above
-              isNone: true		  
-  - &emergencyType
-    name: emergencyType
-    pageTitle: emergency-type.title
-    headerKey: emergency-type.describes-emergency
-    contextFragment: emergencyTypeContextFragment
-    headerHelpMessageKey: emergency-type.check-all-that-apply
-    inputs:
-      - name: emergencyType
-        type: CHECKBOX
-        options:
-          selectableOptions:
-            - value: EVICTION_NOTICE
-              messageKey: emergency-type.eviction-notice
-            - value: UTILITY_SHUT_OFF
-              messageKey: emergency-type.utility-shut-off
-            - value: FIRST_MONTH_RENT_OR_DAMAGE
-              messageKey: emergency-type.first-month-rent-rent-or-damage-deposit
-            - value: OTHER_EMERGENCY
-              messageKey: emergency-type.other-emergency
-  - &otherEmergency
-    name: otherEmergency
-    pageTitle: other-emergency-type.title
-    headerKey: other-emergency-type.tell-us-your-emergency
-    headerHelpMessageKey: other-emergency-type.brief-description
-    inputs:
-      - name: otherEmergency
-        type: TEXTAREA
-        helpMessageKey: general.inputs.optional
-  - &unearnedIncomeSources
-    name: unearnedIncomeSources
-    pageTitle: unearned-income-sources.title
-    headerKey:
-      defaultValue: unearned-income-sources.tell-us-how-much-money-is-received
-      conditionalValues:
-        - value: unearned-income-sources.tell-us-how-much-money-you-receive
-          condition: *livesAlone?
-    headerHelpMessageKey: unearned-income-sources.if-you-dont-have-all-this-information-on-hand-skip
-    inputs:
-      - name: socialSecurityAmount
-        type: MONEY
-        inputPostfix: general.input.postfix.per-month
-        promptMessage:
-          promptMessageKey: unearned-income.social-security
-        helpMessageKey: general.monthly-amount
-        validators:
-          - validation: MONEY
-            errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
-            condition:
-              input: socialSecurityAmount
-              matcher: NOT_EMPTY
-        condition:
-          pageName: unearnedIncome
-          input: unearnedIncome
-          value: SOCIAL_SECURITY
-      - name: supplementalSecurityIncomeAmount
-        type: MONEY
-        inputPostfix: general.input.postfix.per-month
-        promptMessage:
-          promptMessageKey: unearned-income.ssi
-        helpMessageKey: general.monthly-amount
-        validators:
-          - validation: MONEY
-            errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
-            condition:
-              input: supplementalSecurityIncomeAmount
-              matcher: NOT_EMPTY
-        condition:
-          pageName: unearnedIncome
-          input: unearnedIncome
-          value: SSI
-      - name: veteransBenefitsAmount
-        type: MONEY
-        inputPostfix: general.input.postfix.per-month
-        promptMessage:
-          promptMessageKey: unearned-income.veterans-benefits
-        helpMessageKey: general.monthly-amount
-        validators:
-          - validation: MONEY
-            errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
-            condition:
-              input: veteransBenefitsAmount
-              matcher: NOT_EMPTY
-        condition:
-          pageName: unearnedIncome
-          input: unearnedIncome
-          value: VETERANS_BENEFITS
-      - name: unemploymentAmount
-        type: MONEY
-        inputPostfix: general.input.postfix.per-month
-        promptMessage:
-          promptMessageKey: unearned-income.unemployment
-        helpMessageKey: general.monthly-amount
-        validators:
-          - validation: MONEY
-            errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
-            condition:
-              input: unemploymentAmount
-              matcher: NOT_EMPTY
-        condition:
-          pageName: unearnedIncome
-          input: unearnedIncome
-          value: UNEMPLOYMENT
-      - name: workersCompensationAmount
-        type: MONEY
-        inputPostfix: general.input.postfix.per-month
-        promptMessage:
-          promptMessageKey: unearned-income.workers-compensation
-        helpMessageKey: general.monthly-amount
-        validators:
-          - validation: MONEY
-            errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
-            condition:
-              input: workersCompensationAmount
-              matcher: NOT_EMPTY
-        condition:
-          pageName: unearnedIncome
-          input: unearnedIncome
-          value: WORKERS_COMPENSATION
-      - name: retirementAmount
-        type: MONEY
-        inputPostfix: general.input.postfix.per-month
-        promptMessage:
-          promptMessageKey: unearned-income.retirement
-        helpMessageKey: general.monthly-amount
-        validators:
-          - validation: MONEY
-            errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
-            condition:
-              input: retirementAmount
-              matcher: NOT_EMPTY
-        condition:
-          pageName: unearnedIncome
-          input: unearnedIncome
-          value: RETIREMENT
-      - name: childOrSpousalSupportAmount
-        type: MONEY
-        inputPostfix: general.input.postfix.per-month
-        promptMessage:
-          promptMessageKey: unearned-income.child-or-spousal-support
-        helpMessageKey: general.monthly-amount
-        validators:
-          - validation: MONEY
-            errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
-            condition:
-              input: childOrSpousalSupportAmount
-              matcher: NOT_EMPTY
-        condition:
-          pageName: unearnedIncome
-          input: unearnedIncome
-          value: CHILD_OR_SPOUSAL_SUPPORT
-      - name: tribalPaymentsAmount
-        type: MONEY
-        inputPostfix: general.input.postfix.per-month
-        promptMessage:
-          promptMessageKey: unearned-income.tribal-payments
-        helpMessageKey: general.monthly-amount
-        validators:
-          - validation: MONEY
-            errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
-            condition:
-              input: tribalPaymentsAmount
-              matcher: NOT_EMPTY
-        condition:
-          pageName: unearnedIncome
-          input: unearnedIncome
-          value: TRIBAL_PAYMENTS
-  - &socialSecurityIncomeSource
-    name: socialSecurityIncomeSource
-    pageTitle: unearned-income-source.title
-    headerKey: social-security-income-source.who-receives
-    headerHelpMessageKey: unearned-income-source.you-can-select-more
-    contextFragment: personIncomeContextFragment
-    inputs:
-      - type: CUSTOM
-        name: monthlyIncomeSSorRSDI
-        helpMessageKey: general.if-you-dont-have
-        customInputFragment: householdOptionsCheckboxesWithFollowup
-        customFollowUps: 'true'
-        validators:
-          - validation: NOT_BLANK
-            errorMessageKey: general.validation.make-sure-to-select-a-person
-        options:
-          datasources:
-            - pageName: personalInfo
-            - groupName: household
-        followUps:
-          - name: socialSecurityAmount
-            type: MONEY
-            inputPostfix: general.input.postfix.per-month
-            validators:
-              - validation: MONEY
-                errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
-                condition:
-                  input: socialSecurityAmount
-                  matcher: NOT_EMPTY
-            promptMessage:
-              promptMessageKey: unearned-income-source.how-much-income-monthly
-            helpMessageKey: general.if-you-dont-have
-  - &supplementalSecurityIncomeSource
-    name: supplementalSecurityIncomeSource
-    pageTitle: unearned-income-source.title
-    headerKey: supplemental-security-income-source.who-receives
-    headerHelpMessageKey: unearned-income-source.you-can-select-more
-    contextFragment: personIncomeContextFragment
-    inputs:
-      - type: CUSTOM
-        name: monthlyIncomeSSI
-        helpMessageKey: general.if-you-dont-have
-        customInputFragment: householdOptionsCheckboxesWithFollowup
-        customFollowUps: 'true'
-        validators:
-          - validation: NOT_BLANK
-            errorMessageKey: general.validation.make-sure-to-select-a-person
-        options:
-          datasources:
-            - pageName: personalInfo
-            - groupName: household
-        followUps:
-          - name: supplementalSecurityIncomeAmount
-            type: MONEY
-            inputPostfix: general.input.postfix.per-month
-            validators:
-              - validation: MONEY
-                errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
-                condition:
-                  input: supplementalSecurityIncomeAmount
-                  matcher: NOT_EMPTY
-            promptMessage:
-              promptMessageKey: unearned-income-source.how-much-income-monthly
-            helpMessageKey: general.if-you-dont-have
-  - &veteransBenefitsIncomeSource
-    name: veteransBenefitsIncomeSource
-    pageTitle: unearned-income-source.title
-    headerKey: veterans-benefits-income-source.who-receives
-    headerHelpMessageKey: unearned-income-source.you-can-select-more
-    contextFragment: personIncomeContextFragment
-    inputs:
-      - type: CUSTOM
-        name: monthlyIncomeVeteransBenefits
-        helpMessageKey: general.if-you-dont-have
-        customInputFragment: householdOptionsCheckboxesWithFollowup
-        customFollowUps: 'true'
-        validators:
-          - validation: NOT_BLANK
-            errorMessageKey: general.validation.make-sure-to-select-a-person
-        options:
-          datasources:
-            - pageName: personalInfo
-            - groupName: household
-        followUps:
-          - name: veteransBenefitsAmount
-            type: MONEY
-            inputPostfix: general.input.postfix.per-month
-            validators:
-              - validation: MONEY
-                errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
-                condition:
-                  input: veteransBenefitsAmount
-                  matcher: NOT_EMPTY
-            promptMessage:
-              promptMessageKey: unearned-income-source.how-much-income-monthly
-            helpMessageKey: general.if-you-dont-have
-  - &unemploymentIncomeSource
-    name: unemploymentIncomeSource
-    pageTitle: unearned-income-source.title
-    headerKey: unemployment-income-source.who-receives
-    headerHelpMessageKey: unearned-income-source.you-can-select-more
-    contextFragment: personIncomeContextFragment
-    inputs:
-      - type: CUSTOM
-        name: monthlyIncomeUnemployment
-        helpMessageKey: general.if-you-dont-have
-        customInputFragment: householdOptionsCheckboxesWithFollowup
-        customFollowUps: 'true'
-        validators:
-          - validation: NOT_BLANK
-            errorMessageKey: general.validation.make-sure-to-select-a-person
-        options:
-          datasources:
-            - pageName: personalInfo
-            - groupName: household
-        followUps:
-          - name: unemploymentAmount
-            type: MONEY
-            inputPostfix: general.input.postfix.per-month
-            validators:
-              - validation: MONEY
-                errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
-                condition:
-                  input: unemploymentAmount
-                  matcher: NOT_EMPTY
-            promptMessage:
-              promptMessageKey: unearned-income-source.how-much-income-monthly
-            helpMessageKey: general.if-you-dont-have
-  - &workersCompIncomeSource
-    name: workersCompIncomeSource
-    pageTitle: unearned-income-source.title
-    headerKey: workers-comp-income-source.who-receives
-    headerHelpMessageKey: unearned-income-source.you-can-select-more
-    contextFragment: personIncomeContextFragment
-    inputs:
-      - type: CUSTOM
-        name: monthlyIncomeWorkersComp
-        helpMessageKey: general.if-you-dont-have
-        customInputFragment: householdOptionsCheckboxesWithFollowup
-        customFollowUps: 'true'
-        validators:
-          - validation: NOT_BLANK
-            errorMessageKey: general.validation.make-sure-to-select-a-person
-        options:
-          datasources:
-            - pageName: personalInfo
-            - groupName: household
-        followUps:
-          - name: workersCompensationAmount
-            type: MONEY
-            inputPostfix: general.input.postfix.per-month
-            validators:
-              - validation: MONEY
-                errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
-                condition:
-                  input: workersCompensationAmount
-                  matcher: NOT_EMPTY
-            promptMessage:
-              promptMessageKey: unearned-income-source.how-much-income-monthly
-            helpMessageKey: general.if-you-dont-have
-  - &retirementIncomeSource
-    name: retirementIncomeSource
-    pageTitle: unearned-income-source.title
-    headerKey: retirement-income-source.who-receives
-    headerHelpMessageKey: retirement-income-source.additional-help
-    contextFragment: personIncomeContextFragment
-    inputs:
-      - type: CUSTOM
-        name: monthlyIncomeRetirement
-        helpMessageKey: general.if-you-dont-have
-        customInputFragment: householdOptionsCheckboxesWithFollowup
-        customFollowUps: 'true'
-        validators:
-          - validation: NOT_BLANK
-            errorMessageKey: general.validation.make-sure-to-select-a-person
-        options:
-          datasources:
-            - pageName: personalInfo
-            - groupName: household
-        followUps:
-          - name: retirementAmount
-            type: MONEY
-            inputPostfix: general.input.postfix.per-month
-            validators:
-              - validation: MONEY
-                errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
-                condition:
-                  input: retirementAmount
-                  matcher: NOT_EMPTY
-            promptMessage:
-              promptMessageKey: unearned-income-source.how-much-income-monthly
-            helpMessageKey: general.if-you-dont-have
-  - &childOrSpousalSupportIncomeSource
-    name: childOrSpousalSupportIncomeSource
-    pageTitle: unearned-income-source.title
-    headerKey: child-or-spousal-support-income-source.who-receives
-    headerHelpMessageKey: unearned-income-source.you-can-select-more
-    contextFragment: personIncomeContextFragment
-    inputs:
-      - type: CUSTOM
-        name: monthlyIncomeChildOrSpousalSupport
-        helpMessageKey: general.if-you-dont-have
-        customInputFragment: householdOptionsCheckboxesWithFollowup
-        customFollowUps: 'true'
-        validators:
-          - validation: NOT_BLANK
-            errorMessageKey: general.validation.make-sure-to-select-a-person
-        options:
-          datasources:
-            - pageName: personalInfo
-            - groupName: household
-        followUps:
-          - name: childOrSpousalSupportAmount
-            type: MONEY
-            inputPostfix: general.input.postfix.per-month
-            validators:
-              - validation: MONEY
-                errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
-                condition:
-                  input: childOrSpousalSupportAmount
-                  matcher: NOT_EMPTY
-            promptMessage:
-              promptMessageKey: unearned-income-source.how-much-income-monthly
-            helpMessageKey: general.if-you-dont-have
-  - &tribalPaymentIncomeSource
-    name: tribalPaymentIncomeSource
-    pageTitle: unearned-income-source.title
-    headerKey: tribal-payment-income-source.who-receives
-    headerHelpMessageKey: unearned-income-source.you-can-select-more
-    contextFragment: personIncomeContextFragment
-    inputs:
-      - type: CUSTOM
-        name: monthlyIncomeTribalPayment
-        helpMessageKey: general.if-you-dont-have
-        customInputFragment: householdOptionsCheckboxesWithFollowup
-        customFollowUps: 'true'
-        validators:
-          - validation: NOT_BLANK
-            errorMessageKey: general.validation.make-sure-to-select-a-person
-        options:
-          datasources:
-            - pageName: personalInfo
-            - groupName: household
-        followUps:
-          - name: tribalPaymentsAmount
-            type: MONEY
-            inputPostfix: general.input.postfix.per-month
-            validators:
-              - validation: MONEY
-                errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
-                condition:
-                  input: tribalPaymentsAmount
-                  matcher: NOT_EMPTY
-            promptMessage:
-              promptMessageKey: unearned-income-source.how-much-income-monthly
-            helpMessageKey: general.if-you-dont-have
-  - &otherUnearnedIncome
-    name: otherUnearnedIncome
-    pageTitle: unearned-income.title
-    contextFragment: unearnedIncomeContextFragment
-    headerKey:
-      defaultValue: unearned-income-other.household-get-income-from-any-of-these-sources
-      conditionalValues:
-        - value: unearned-income-other.do-you-get-income-from-any-of-these-sources
-          condition: *livesAlone?
-    headerHelpMessageKey: unearned-income.check-all-that-apply-you-do-not-need-to-report-income-you-havent-received-yet
-    inputs:
-      - name: otherUnearnedIncome
-        type: CHECKBOX
-        validators:
-          - validation: SELECT_AT_LEAST_ONE
-            errorMessageKey: general.validation.make-sure-you-choose-none-of-the-above-or-another-option
-        options:
-          selectableOptions:
-            - value: INSURANCE_PAYMENTS
-              messageKey: unearned-income-other.insurance-payments
-            - value: TRUST_MONEY
-              messageKey: unearned-income-other.money-from-a-trust
-            - value: RENTAL_INCOME
-              messageKey: unearned-income-other.rental-income
-            - value: INTEREST_DIVIDENDS
-              messageKey: unearned-income-other.interest-dividends
-            - value: HEALTH_CARE_REIMBURSEMENT
-              messageKey: unearned-income-other.health-care-reimbursement
-            - value: CONTRACT_FOR_DEED
-              messageKey: unearned-income-other.contract-for-deed
-            - value: BENEFITS
-              messageKey: unearned-income-other.benefits-programs
-            - value: ANNUITY_PAYMENTS
-              messageKey: unearned-income-other.annuity-payments
-            - value: GIFTS
-              messageKey: unearned-income-other.gifts
-            - value: LOTTERY_GAMBLING
-              messageKey: unearned-income-other.lottery-gambling
-            - value: DAY_TRADING
-              messageKey: unearned-income-other.day-trading-proceeds
-            - value: OTHER_PAYMENTS
-              messageKey: unearned-income-other.other-payments
-            - value: NO_OTHER_UNEARNED_INCOME_SELECTED
-              messageKey: general.inputs.none-of-the-above
-              isNone: true
-          datasources:
-            - pageName: choosePrograms
-  - &otherUnearnedIncomeSources
-    name: otherUnearnedIncomeSources
-    pageTitle: unearned-income-sources.title
-    headerKey:
-      defaultValue: unearned-income-sources.tell-us-how-much-money-is-received
-      conditionalValues:
-        - value: unearned-income-sources.tell-us-how-much-money-you-receive
-          condition: *livesAlone?
-    headerHelpMessageKey: unearned-income-sources.if-you-dont-have-all-this-information-on-hand-skip
-    inputs:
-      - name: insurancePaymentsAmount
-        type: MONEY
-        inputPostfix: general.input.postfix.per-month
-        promptMessage:
-          promptMessageKey: unearned-income-other.insurance-payments
-        helpMessageKey: general.monthly-amount
-        validators:
-          - validation: MONEY
-            errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
-            condition:
-              input: insurancePaymentsAmount
-              matcher: NOT_EMPTY
-        condition:
-          pageName: otherUnearnedIncome
-          input: otherUnearnedIncome
-          value: INSURANCE_PAYMENTS
-      - name: trustMoneyAmount
-        type: MONEY
-        inputPostfix: general.input.postfix.per-month
-        promptMessage:
-          promptMessageKey: unearned-income-other.money-from-a-trust
-        helpMessageKey: general.monthly-amount
-        validators:
-          - validation: MONEY
-            errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
-            condition:
-              input: trustMoneyAmount
-              matcher: NOT_EMPTY
-        condition:
-          pageName: otherUnearnedIncome
-          input: otherUnearnedIncome
-          value: TRUST_MONEY
-      - name: rentalIncomeAmount
-        type: MONEY
-        inputPostfix: general.input.postfix.per-month
-        promptMessage:
-          promptMessageKey: unearned-income-other.rental-income
-        helpMessageKey: general.monthly-amount
-        validators:
-          - validation: MONEY
-            errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
-            condition:
-              input: rentalIncomeAmount
-              matcher: NOT_EMPTY
-        condition:
-          pageName: otherUnearnedIncome
-          input: otherUnearnedIncome
-          value: RENTAL_INCOME
-      - name: interestDividendsAmount
-        type: MONEY
-        inputPostfix: general.input.postfix.per-month
-        promptMessage:
-          promptMessageKey: unearned-income-other.interest-dividends
-        helpMessageKey: general.monthly-amount
-        validators:
-          - validation: MONEY
-            errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
-            condition:
-              input: interestDividendsAmount
-              matcher: NOT_EMPTY
-        condition:
-          pageName: otherUnearnedIncome
-          input: otherUnearnedIncome
-          value: INTEREST_DIVIDENDS
-      - name: healthCareReimbursementAmount
-        type: MONEY
-        inputPostfix: general.input.postfix.per-month
-        promptMessage:
-          promptMessageKey: unearned-income-other.health-care-reimbursement
-        helpMessageKey: general.monthly-amount
-        validators:
-          - validation: MONEY
-            errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
-            condition:
-              input: healthCareReimbursementAmount
-              matcher: NOT_EMPTY
-        condition:
-          pageName: otherUnearnedIncome
-          input: otherUnearnedIncome
-          value: HEALTH_CARE_REIMBURSEMENT
-      - name: contractForDeedAmount
-        type: MONEY
-        inputPostfix: general.input.postfix.per-month
-        promptMessage:
-          promptMessageKey: unearned-income-other.contract-for-deed
-        helpMessageKey: general.monthly-amount
-        validators:
-          - validation: MONEY
-            errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
-            condition:
-              input: contractForDeedAmount
-              matcher: NOT_EMPTY
-        condition:
-          pageName: otherUnearnedIncome
-          input: otherUnearnedIncome
-          value: CONTRACT_FOR_DEED
-      - name: benefitsAmount
-        type: MONEY
-        inputPostfix: general.input.postfix.per-month
-        promptMessage:
-          promptMessageKey: unearned-income-other.benefits-programs
-        helpMessageKey: general.monthly-amount
-        validators:
-          - validation: MONEY
-            errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
-            condition:
-              input: benefitsAmount
-              matcher: NOT_EMPTY
-        condition:
-          pageName: otherUnearnedIncome
-          input: otherUnearnedIncome
-          value: BENEFITS
-      - name: annuityPaymentsAmount
-        type: MONEY
-        inputPostfix: general.input.postfix.per-month
-        promptMessage:
-          promptMessageKey: unearned-income-other.annuity-payments
-        helpMessageKey: general.monthly-amount
-        validators:
-          - validation: MONEY
-            errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
-            condition:
-              input: annuityPaymentsAmount
-              matcher: NOT_EMPTY
-        condition:
-          pageName: otherUnearnedIncome
-          input: otherUnearnedIncome
-          value: ANNUITY_PAYMENTS 
-      - name: giftsAmount
-        type: MONEY
-        inputPostfix: general.input.postfix.per-month
-        promptMessage:
-          promptMessageKey: unearned-income-other.gifts
-        helpMessageKey: general.monthly-amount
-        validators:
-          - validation: MONEY
-            errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
-            condition:
-              input: giftsAmount
-              matcher: NOT_EMPTY
-        condition:
-          pageName: otherUnearnedIncome
-          input: otherUnearnedIncome
-          value: GIFTS  
-      - name: lotteryGamblingAmount
-        type: MONEY
-        inputPostfix: general.input.postfix.per-month
-        promptMessage:
-          promptMessageKey: unearned-income-other.lottery-gambling
-        helpMessageKey: general.monthly-amount
-        validators:
-          - validation: MONEY
-            errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
-            condition:
-              input: lotteryGamblingAmount
-              matcher: NOT_EMPTY
-        condition:
-          pageName: otherUnearnedIncome
-          input: otherUnearnedIncome
-          value: LOTTERY_GAMBLING
-      - name: dayTradingProceedsAmount
-        type: MONEY
-        inputPostfix: general.input.postfix.per-month
-        promptMessage:
-          promptMessageKey: unearned-income-other.day-trading-proceeds
-        helpMessageKey: general.monthly-amount
-        validators:
-          - validation: MONEY
-            errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
-            condition:
-              input: dayTradingProceedsAmount
-              matcher: NOT_EMPTY
-        condition:
-          pageName: otherUnearnedIncome
-          input: otherUnearnedIncome
-          value: DAY_TRADING		  	  			  	  	  
-      - name: otherPaymentsAmount
-        type: MONEY
-        inputPostfix: general.input.postfix.per-month
-        promptMessage:
-          promptMessageKey: unearned-income-other.other-payments
-        helpMessageKey: general.monthly-amount
-        validators:
-          - validation: MONEY
-            errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
-            condition:
-              input: otherPaymentsAmount
-              matcher: NOT_EMPTY
-        condition:
-          pageName: otherUnearnedIncome
-          input: otherUnearnedIncome
-          value: OTHER_PAYMENTS
-  - &advancedChildTaxCredit
-    name: advancedChildTaxCredit
-    pageTitle: advanced-child-tax-credit.title
-    headerKey:
-      defaultValue:  advanced-child-tax-credit.single
-      conditionalValues:
-        - value: advanced-child-tax-credit.household
-          condition: *doesNotLiveAlone?
-    headerHelpMessageKey: advanced-child-tax-credit.body
-    contextFragment: cashBenefitsContextFragment 
-    additionalContentFragment: childTaxCreditInfo
-    hasPrimaryButton: false
-    inputs:
-      - name: hasAdvancedChildTaxCredit
-        type: YES_NO
-  - &benefitsProgramsIncomeSource
-    name: benefitsProgramsIncomeSource
-    pageTitle: unearned-income-benefits-programs.title
-    headerKey: unearned-income-benefits-programs.header
-    headerHelpMessageKey: unearned-income-source.you-can-select-more
-    contextFragment: personIncomeContextFragment
-    inputs:
-      - type: CUSTOM
-        name: monthlyIncomeBenefitsPrograms
-        helpMessageKey: general.if-you-dont-have
-        customInputFragment: householdOptionsCheckboxesWithFollowup
-        customFollowUps: 'true'
-        validators:
-          - validation: NOT_BLANK
-            errorMessageKey: general.validation.make-sure-to-select-a-person
-        options:
-          datasources:
-            - pageName: personalInfo
-            - groupName: household
-        followUps:
-          - name: benefitsAmount
-            type: MONEY
-            inputPostfix: general.input.postfix.per-month
-            validators:
-              - validation: MONEY
-                errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
-                condition:
-                  input: benefitsAmount
-                  matcher: NOT_EMPTY
-            promptMessage:
-              promptMessageKey: unearned-income-source.how-much-income-monthly
-            helpMessageKey: general.if-you-dont-have
-  - &insurancePaymentsIncomeSource
-    name: insurancePaymentsIncomeSource
-    pageTitle: unearned-income-other.insurance-payments
-    headerKey: unearned-income-insurance-payments.header
-    headerHelpMessageKey: unearned-income-source.you-can-select-more
-    contextFragment: personIncomeContextFragment
-    inputs:
-      - type: CUSTOM
-        name: monthlyIncomeInsurancePayments
-        helpMessageKey: general.if-you-dont-have
-        customInputFragment: householdOptionsCheckboxesWithFollowup
-        customFollowUps: 'true'
-        validators:
-          - validation: NOT_BLANK
-            errorMessageKey: general.validation.make-sure-to-select-a-person
-        options:
-          datasources:
-            - pageName: personalInfo
-            - groupName: household
-        followUps:
-          - name: insurancePaymentsAmount
-            type: MONEY
-            inputPostfix: general.input.postfix.per-month
-            validators:
-              - validation: MONEY
-                errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
-                condition:
-                  input: insurancePaymentsAmount
-                  matcher: NOT_EMPTY
-            promptMessage:
-              promptMessageKey: unearned-income-source.how-much-income-monthly
-            helpMessageKey: general.if-you-dont-have
-  - &contractForDeedIncomeSource
-    name: contractForDeedIncomeSource
-    pageTitle: unearned-income-other.contract-for-deed
-    headerKey: unearned-income-contract-for-deed.header
-    headerHelpMessageKey: unearned-income-source.you-can-select-more
-    contextFragment: personIncomeContextFragment
-    inputs:
-      - type: CUSTOM
-        name: monthlyIncomeContractForDeed
-        helpMessageKey: general.if-you-dont-have
-        customInputFragment: householdOptionsCheckboxesWithFollowup
-        customFollowUps: 'true'
-        validators:
-          - validation: NOT_BLANK
-            errorMessageKey: general.validation.make-sure-to-select-a-person
-        options:
-          datasources:
-            - pageName: personalInfo
-            - groupName: household
-        followUps:
-          - name: contractForDeedAmount
-            type: MONEY
-            inputPostfix: general.input.postfix.per-month
-            validators:
-              - validation: MONEY
-                errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
-                condition:
-                  input: contractForDeedAmount
-                  matcher: NOT_EMPTY
-            promptMessage:
-              promptMessageKey: unearned-income-source.how-much-income-monthly
-            helpMessageKey: general.if-you-dont-have
-  - &trustMoneyIncomeSource
-    name: trustMoneyIncomeSource
-    pageTitle: unearned-income-other.money-from-a-trust
-    headerKey: unearned-income-money-from-a-trust.header
-    headerHelpMessageKey: unearned-income-source.you-can-select-more
-    contextFragment: personIncomeContextFragment
-    inputs:
-      - type: CUSTOM
-        name: monthlyIncomeTrustMoney
-        helpMessageKey: general.if-you-dont-have
-        customInputFragment: householdOptionsCheckboxesWithFollowup
-        customFollowUps: 'true'
-        validators:
-          - validation: NOT_BLANK
-            errorMessageKey: general.validation.make-sure-to-select-a-person
-        options:
-          datasources:
-            - pageName: personalInfo
-            - groupName: household
-        followUps:
-          - name: trustMoneyAmount
-            type: MONEY
-            inputPostfix: general.input.postfix.per-month
-            validators:
-              - validation: MONEY
-                errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
-                condition:
-                  input: trustMoneyAmount
-                  matcher: NOT_EMPTY
-            promptMessage:
-              promptMessageKey: unearned-income-source.how-much-income-monthly
-            helpMessageKey: general.if-you-dont-have
-  - &healthcareReimbursementIncomeSource
-    name: healthcareReimbursementIncomeSource
-    pageTitle: unearned-income-other.health-care-reimbursement
-    headerKey: unearned-income-health-care-reimbursement.header
-    headerHelpMessageKey: unearned-income-source.you-can-select-more
-    contextFragment: personIncomeContextFragment
-    inputs:
-      - type: CUSTOM
-        name: monthlyIncomeHealthcareReimbursement
-        helpMessageKey: general.if-you-dont-have
-        customInputFragment: householdOptionsCheckboxesWithFollowup
-        customFollowUps: 'true'
-        validators:
-          - validation: NOT_BLANK
-            errorMessageKey: general.validation.make-sure-to-select-a-person
-        options:
-          datasources:
-            - pageName: personalInfo
-            - groupName: household
-        followUps:
-          - name: healthCareReimbursementAmount
-            type: MONEY
-            inputPostfix: general.input.postfix.per-month
-            validators:
-              - validation: MONEY
-                errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
-                condition:
-                  input: healthCareReimbursementAmount
-                  matcher: NOT_EMPTY
-            promptMessage:
-              promptMessageKey: unearned-income-source.how-much-income-monthly
-            helpMessageKey: general.if-you-dont-have
-  - &interestDividendsIncomeSource
-    name: interestDividendsIncomeSource
-    pageTitle: unearned-income-other.interest-dividends
-    headerKey: unearned-income-interest-dividends.header
-    headerHelpMessageKey: unearned-income-source.you-can-select-more
-    contextFragment: personIncomeContextFragment
-    inputs:
-      - type: CUSTOM
-        name: monthlyIncomeInterestDividends
-        helpMessageKey: general.if-you-dont-have
-        customInputFragment: householdOptionsCheckboxesWithFollowup
-        customFollowUps: 'true'
-        validators:
-          - validation: NOT_BLANK
-            errorMessageKey: general.validation.make-sure-to-select-a-person
-        options:
-          datasources:
-            - pageName: personalInfo
-            - groupName: household
-        followUps:
-          - name: interestDividendsAmount
-            type: MONEY
-            inputPostfix: general.input.postfix.per-month
-            validators:
-              - validation: MONEY
-                errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
-                condition:
-                  input: interestDividendsAmount
-                  matcher: NOT_EMPTY
-            promptMessage:
-              promptMessageKey: unearned-income-source.how-much-income-monthly
-            helpMessageKey: general.if-you-dont-have
-  - &rentalIncomeSource
-    name: rentalIncomeSource
-    pageTitle: unearned-income-other.rental-income
-    headerKey: unearned-income-rental-income.header
-    headerHelpMessageKey: unearned-income-source.you-can-select-more
-    contextFragment: personIncomeContextFragment
-    inputs:
-      - type: CUSTOM
-        name: monthlyIncomeRental
-        helpMessageKey: general.if-you-dont-have
-        customInputFragment: householdOptionsCheckboxesWithFollowup
-        customFollowUps: 'true'
-        validators:
-          - validation: NOT_BLANK
-            errorMessageKey: general.validation.make-sure-to-select-a-person
-        options:
-          datasources:
-            - pageName: personalInfo
-            - groupName: household
-        followUps:
-          - name: rentalIncomeAmount
-            type: MONEY
-            inputPostfix: general.input.postfix.per-month
-            validators:
-              - validation: MONEY
-                errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
-                condition:
-                  input: rentalIncomeAmount
-                  matcher: NOT_EMPTY
-            promptMessage:
-              promptMessageKey: unearned-income-source.how-much-income-monthly
-            helpMessageKey: general.if-you-dont-have
-  - &annuityIncomeSource
-    name: annuityIncomeSource
-    pageTitle: unearned-income-other.annuity-payments
-    headerKey: unearned-income-annuity-payments.header
-    headerHelpMessageKey: unearned-income-source.you-can-select-more
-    contextFragment: personIncomeContextFragment
-    inputs:
-      - type: CUSTOM
-        name: monthlyIncomeAnnuityPayments
-        helpMessageKey: general.if-you-dont-have
-        customInputFragment: householdOptionsCheckboxesWithFollowup
-        customFollowUps: 'true'
-        validators:
-          - validation: NOT_BLANK
-            errorMessageKey: general.validation.make-sure-to-select-a-person
-        options:
-          datasources:
-            - pageName: personalInfo
-            - groupName: household
-        followUps:
-          - name: annuityPaymentsAmount
-            type: MONEY
-            inputPostfix: general.input.postfix.per-month
-            validators:
-              - validation: MONEY
-                errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
-                condition:
-                  input: annuityPaymentsAmount
-                  matcher: NOT_EMPTY
-            promptMessage:
-              promptMessageKey: unearned-income-source.how-much-income-monthly
-            helpMessageKey: general.if-you-dont-have
-  - &giftsIncomeSource
-    name: giftsIncomeSource
-    pageTitle: unearned-income-other.gifts
-    headerKey: unearned-income-gifts-income.header
-    headerHelpMessageKey: unearned-income-gifts.other-additional-help
-    contextFragment: personIncomeContextFragment
-    inputs:
-      - type: CUSTOM
-        name: monthlyIncomeGifts
-        helpMessageKey: general.if-you-dont-have
-        customInputFragment: householdOptionsCheckboxesWithFollowup
-        customFollowUps: 'true'
-        validators:
-          - validation: NOT_BLANK
-            errorMessageKey: general.validation.make-sure-to-select-a-person
-        options:
-          datasources:
-            - pageName: personalInfo
-            - groupName: household
-        followUps:
-          - name: giftsAmount
-            type: MONEY
-            inputPostfix: general.input.postfix.per-month
-            validators:
-              - validation: MONEY
-                errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
-                condition:
-                  input:  giftsAmount
-                  matcher: NOT_EMPTY
-            promptMessage:
-              promptMessageKey: unearned-income-source.how-much-income-monthly
-            helpMessageKey: general.if-you-dont-have
-  - &lotteryIncomeSource
-    name: lotteryIncomeSource
-    pageTitle: unearned-income-lottery-gambling.title
-    headerKey: unearned-income-lottery-gambling.header
-    headerHelpMessageKey: unearned-income-lottery-gambling.other-additional-help
-    contextFragment: personIncomeContextFragment
-    inputs:
-      - type: CUSTOM
-        name: monthlyIncomeLotteryGambling
-        helpMessageKey: general.if-you-dont-have
-        customInputFragment: householdOptionsCheckboxesWithFollowup
-        customFollowUps: 'true'
-        validators:
-          - validation: NOT_BLANK
-            errorMessageKey: general.validation.make-sure-to-select-a-person
-        options:
-          datasources:
-            - pageName: personalInfo
-            - groupName: household
-        followUps:
-          - name: lotteryGamblingAmount
-            type: MONEY
-            inputPostfix: general.input.postfix.per-month
-            validators:
-              - validation: MONEY
-                errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
-                condition:
-                  input: lotteryGamblingAmount
-                  matcher: NOT_EMPTY
-            promptMessage:
-              promptMessageKey: unearned-income-source.how-much-income-monthly
-            helpMessageKey: general.if-you-dont-have
-  - &dayTradingIncomeSource
-    name: dayTradingIncomeSource
-    pageTitle: unearned-income-other.day-trading-proceeds
-    headerKey: unearned-income-day-trading-proceeds.header
-    headerHelpMessageKey: unearned-income-source.you-can-select-more
-    contextFragment: personIncomeContextFragment
-    inputs:
-      - type: CUSTOM
-        name: monthlyIncomeDayTradingProceeds
-        helpMessageKey: general.if-you-dont-have
-        customInputFragment: householdOptionsCheckboxesWithFollowup
-        customFollowUps: 'true'
-        validators:
-          - validation: NOT_BLANK
-            errorMessageKey: general.validation.make-sure-to-select-a-person
-        options:
-          datasources:
-            - pageName: personalInfo
-            - groupName: household
-        followUps:
-          - name: dayTradingProceedsAmount
-            type: MONEY
-            inputPostfix: general.input.postfix.per-month
-            validators:
-              - validation: MONEY
-                errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
-                condition:
-                  input: dayTradingProceedsAmount
-                  matcher: NOT_EMPTY
-            promptMessage:
-              promptMessageKey: unearned-income-source.how-much-income-monthly
-            helpMessageKey: general.if-you-dont-have										
-  - &otherPaymentsIncomeSource
-    name: otherPaymentsIncomeSource
-    pageTitle: unearned-income-other.other-payments
-    headerKey: unearned-income-other.other-payments.header
-    headerHelpMessageKey: unearned-income-other.other-additional-help
-    inputs:
-      - type: CUSTOM
-        name: monthlyIncomeOtherPayments
-        helpMessageKey: general.if-you-dont-have
-        customInputFragment: householdOptionsCheckboxesWithFollowup
-        customFollowUps: 'true'
-        validators:
-          - validation: NOT_BLANK
-            errorMessageKey: general.validation.make-sure-to-select-a-person
-        options:
-          datasources:
-            - pageName: personalInfo
-            - groupName: household
-        followUps:
-          - name: otherPaymentsAmount
-            type: MONEY
-            inputPostfix: general.input.postfix.per-month
-            validators:
-              - validation: MONEY
-                errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
-                condition:
-                  input: otherPaymentsAmount
-                  matcher: NOT_EMPTY
-            promptMessage:
-              promptMessageKey: unearned-income-source.how-much-income-monthly
-            helpMessageKey: general.if-you-dont-have
-  - &livingSituation
-    name: livingSituation
-    pageTitle: living-situation.title
-    headerKey: living-situation.what-is-your-current-living-situation
-    inputs:
-      - name: livingSituation
-        type: RADIO
-        options:
-          selectableOptions:
-            - value: PAYING_FOR_HOUSING_WITH_RENT_LEASE_OR_MORTGAGE
-              messageKey: living-situation.paying-for-my-own-housing-with-rent-lease-or-mortgage-payments
-            - value: LIVING_IN_A_PLACE_NOT_MEANT_FOR_HOUSING
-              messageKey: living-situation.living-outside-in-a-vehicle-or-another-place-not-meant-for-housing
-            - value: TEMPORARILY_WITH_FRIENDS_OR_FAMILY_DUE_TO_ECONOMIC_HARDSHIP
-              messageKey: living-situation.temporarily-staying-with-friends-or-family-due-to-economic-hardship
-            - value: TEMPORARILY_WITH_FRIENDS_OR_FAMILY_OTHER_REASONS
-              messageKey: living-situation.temporarily-staying-with-friends-or-family-for-other-reasons
-            - value: HOTEL_OR_MOTEL
-              messageKey: living-situation.staying-in-a-hotel-or-motel
-            - value: EMERGENCY_SHELTER
-              messageKey: living-situation.staying-in-an-emergency-shelter
-            - value: FOSTER_CARE_OR_GROUP_HOME
-              messageKey: living-situation.living-in-foster-care-or-a-group-home
-            - value: HOSPITAL_OR_OTHER_TREATMENT_FACILITY
-              messageKey: living-situation.staying-in-a-hospital-treatment-facility-detox-center-or-nursing-home
-            - value: JAIL_OR_JUVENILE_DETENTION_FACILITY
-              messageKey: living-situation.in-jail-prison-or-juvenile-detention
-            - value: UNKNOWN
-              messageKey: living-situation.none-of-these
-            - value: PREFER_NOT_TO_SAY
-              messageKey: living-situation.i-prefer-not-to-say
-  - &studentFinancialAid
-    name: studentFinancialAid
-    pageTitle: student-financial-aid.title
-    headerKey:
-      defaultValue: student-financial-aid.household-header
-      conditionalValues:
-        - value: student-financial-aid.header
-          condition: *livesAlone?
-    headerHelpMessageKey: student-financial-aid.header-help-message
-    contextFragment: schoolContextFragment
-    hasPrimaryButton: false
-    inputs:
-      - name: studentFinancialAid
-        type: YES_NO
-  - &housingProvider
-    name: housingProvider
-    pageTitle: housing-provider.title
-    headerKey:
-      defaultValue: housing-provider.is-your-household-working-with-a-provider
-      conditionalValues:
-      - value: housing-provider.are-you-working-with-a-provider
-        condition: *livesAlone?
-    headerHelpMessageKey: housing-provider.we-will-use-this-information
-    hasPrimaryButton: false
-    contextFragment: housingSupportsFragment
-    inputs:
-      - name: housingProvider
-        type: YES_NO
-  - &housingProviderInfo
-    name: housingProviderInfo
-    pageTitle: housing-provider-info.title
-    headerKey: housing-provider-info.tell-us-about-your-housing-provider
-    headerHelpMessageKey: housing-provider-info.include-any-information
-    inputs:
-      - name: housingProviderName
-        type: LONG_TEXT
-        promptMessage:
-          promptMessageKey: housing-provider-info.what-is-the-providers-name
-        helpMessageKey: 
-      - name: housingProviderVendorNumber
-        type: LONG_TEXT
-        promptMessage:
-          promptMessageKey: housing-provider-info.providers-vendor-number
-        helpMessageKey: housing-provider-info.if-you-are-not-sure
-  - &futureIncome
-    name: futureIncome
-    pageTitle: future-income.title
-    headerKey:
-      defaultValue: future-income.do-you-think-household-will-earn-less-money-this-month-than-last-month
-      conditionalValues:
-        - value: future-income.do-you-think-youll-earn-less-money-this-month-than-last-month
-          condition: *livesAlone?
-    headerHelpMessageKey: future-income.if-youre-not-sure-you-can-guess
-    inputs:
-      - name: earnLessMoneyThisMonth
-        type: RADIO
-        options:
-          selectableOptions:
-            - value: "true"
-              messageKey: general.inputs.yes
-            - value: "false"
-              messageKey: general.inputs.no
-      - name: additionalIncomeInfo
-        type: TEXTAREA
-        promptMessage:
-          promptMessageKey: future-income.is-there-anything-else-youd-like-to-share-about-your-income
-        helpMessageKey: general.inputs.optional
-  - &employersName
-    name: employersName
-    pageTitle: employers-name.title
-    headerKey:
-      defaultValue: employers-name.add-a-job-they-have
-      conditionalValues:
-        - value: employers-name.add-a-job-you-have
-          condition: *livesAloneOrIsApplicantsJob?
-    inputs:
-      - name: employersName
-        type: LONG_TEXT
-        validators:
-          - validation: NOT_BLANK
-            errorMessageKey: general.validation.make-sure-you-answer-this-question
-        promptMessage:
-          promptMessageKey: employers-name.what-is-the-employers-name
-  - &selfEmployment
-    name: selfEmployment
-    pageTitle: self-employment.title
-    headerKey:
-      defaultValue: self-employment.is-their-work-here
-      conditionalValues:
-        - value: self-employment.is-your-work-here
-          condition: *livesAloneOrIsApplicantsJob?
-    hasPrimaryButton: false
-    inputs:
-      - name: selfEmployment
-        promptMessage:
-          promptMessageFragmentName: selfEmploymentPrompt
-        type: YES_NO
-    contextFragment: jobContextFragment
-  - &paidByTheHour
-    name: paidByTheHour
-    pageTitle: paid-by-the-hour.title
-    headerKey:
-      defaultValue: paid-by-the-hour.do-they-get-paid-by-the-hour
-      conditionalValues:
-        - value: paid-by-the-hour.do-you-get-paid-by-the-hour
-          condition: *livesAloneOrIsApplicantsJob?
-    hasPrimaryButton: false
-    inputs:
-      - name: paidByTheHour
-        type: YES_NO
-    subtleLinkTextKey: paid-by-the-hour.i-dont-know-these-details
-    contextFragment: jobContextFragment
-  - &hourlyWage
-    name: hourlyWage
-    pageTitle: hourly-wage.title
-    headerKey:
-      defaultValue: hourly-wage.what-is-their-hourly-wage
-      conditionalValues:
-        - value: hourly-wage.what-is-your-hourly-wage
-          condition: *livesAloneOrIsApplicantsJob?
-    inputs:
-      - name: hourlyWage
-        type: HOURLY_WAGE
-        validators:
-          - validation: MONEY
-            errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
-            condition:
-              input: hourlyWage
-              matcher: NOT_EMPTY
-    contextFragment: jobContextFragment
-  - &hoursAWeek
-    name: hoursAWeek
-    pageTitle: hours-a-week.title
-    headerKey:
-      defaultValue: hours-a-week.how-many-hours-a-week-do-they-work
-      conditionalValues:
-        - value: hours-a-week.how-many-hours-a-week-do-you-work
-          condition: *livesAloneOrIsApplicantsJob?
-    headerHelpMessageKey:
-      defaultValue: hours-a-week.we-know-this-can-be-hard-to-answer-so-just-estimate-based-on-their
-      conditionalValues:
-        - value: hours-a-week.we-know-this-can-be-hard-to-answer-so-just-estimate-based-on
-          condition: *livesAloneOrIsApplicantsJob?
-    inputs:
-      - name: hoursAWeek
-        type: NUMBER
-        validators:
-          - validation: NUMBER
-            errorMessageKey: general.validation.make-sure-you-enter-a-number
-    contextFragment: jobContextFragment
-  - &payPeriod
-    name: payPeriod
-    pageTitle: pay-period.title
-    headerKey:
-      defaultValue: pay-period.how-often-do-they-get-paid
-      conditionalValues:
-        - value: pay-period.how-often-do-you-get-paid
-          condition: *livesAloneOrIsApplicantsJob?
-    inputs:
-      - name: payPeriod
-        type: RADIO
-        validators:
-          - validation: NOT_BLANK
-            errorMessageKey: general.validation.make-sure-you-answer-this-question
-        options:
-          selectableOptions:
-            - value: EVERY_DAY
-              messageKey: pay-period.every-day 
-            - value: EVERY_WEEK
-              messageKey: pay-period.every-week
-            - value: EVERY_TWO_WEEKS
-              messageKey: pay-period.every-two-weeks
-            - value: TWICE_A_MONTH
-              messageKey: pay-period.twice-a-month
-            - value: EVERY_MONTH
-              messageKey: pay-period.every-month
-            - value: IT_VARIES
-              messageKey: pay-period.it-varies
-    contextFragment: jobContextFragment
-  - &incomePerPayPeriod
-    name: incomePerPayPeriod
-    pageTitle: income-per-pay-period.title
-    headerKey:
-      conditionalValues:
-        - value: income-per-pay-period.every-day
-          condition:
-            pageName: payPeriod
-            input: payPeriod
-            value: EVERY_DAY
-        - value: income-per-pay-period.every-week
-          condition:
-            pageName: payPeriod
-            input: payPeriod
-            value: EVERY_WEEK
-        - value: income-per-pay-period.every-two-weeks
-          condition:
-            pageName: payPeriod
-            input: payPeriod
-            value: EVERY_TWO_WEEKS
-        - value: income-per-pay-period.twice-a-month
-          condition:
-            pageName: payPeriod
-            input: payPeriod
-            value: TWICE_A_MONTH
-        - value: income-per-pay-period.every-month
-          condition:
-            pageName: payPeriod
-            input: payPeriod
-            value: EVERY_MONTH
-        - value: income-per-pay-period.it-varies
-          condition:
-            pageName: payPeriod
-            input: payPeriod
-            value: IT_VARIES
-    headerHelpMessageKey: income-per-pay-period.provide-income-before-taxes-we-know-this-can-be-hard-to
-    inputs:
-      - name: incomePerPayPeriod
-        type: MONEY
-        validators:
-          - validation: MONEY
-            errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
-    contextFragment: jobContextFragment
-  - &jobBuilder
-    name: jobBuilder
-    pageTitle: job-builder.title
-    headerKey:
-      defaultValue: job-builder.your-household-jobs
-      conditionalValues:
-        - value: job-builder.your-jobs
-          condition: *livesAlone?
-    usingPageTemplateFragment: false
-  - &jobRedirectPage
-    name: jobRedirectPage
-    headerKey: warning-page.going-back-will-take-you-to-the-beginning-of-the-jobs-section-where-you-will-start-over
-    pageTitle: warning-page.go-back-title
-    usingPageTemplateFragment: false
-  - &jobDeleteWarningPage
-    name: jobDeleteWarningPage
-    headerKey:
-      conditionalValues:
-        - value: warning-page.you-are-about-to-delete-your-job
-          condition: *livesAloneOrIsApplicantsJob?
-        - value: warning-page.you-are-about-to-delete-member-job
-          condition:
-            pageName: householdSelectionForIncome
-            input: whoseJobIsIt
-            value: "applicant"
-            matcher: DOES_NOT_CONTAIN_SUBSTRING
-    pageTitle: warning-page.no-data-title
-    usingPageTemplateFragment: false
-  - &principalWageEarner
-    name: principalWageEarner
-    pageTitle: principal-wage-earner.title
-    headerKey: principal-wage-earner.header
-    headerHelpMessageKey: principal-wage-earner.snap-households-must-designate
-    contextFragment: personMoneyCoinFragment
-    inputs:
-      - name: principalWageEarner
-        type: CUSTOM
-        customInputFragment: principalWageEarnerInput
-        options:
-          datasources:
-            - pageName: personalInfo
-            - groupName: household
-              pageName: householdMemberInfo
-              optional: "true"
-        validators:
-          - validation: SELECT_AT_LEAST_ONE
-            errorMessageKey: general.validation.make-sure-you-answer-this-question			  
-  - &startExpenses
-    name: startExpenses
-    pageTitle: start-expenses.title
-    hasPrimaryButton: false
-  - &homeExpenses
-    name: homeExpenses
-    pageTitle: home-expenses.title
-    headerKey:
-      defaultValue: home-expenses.household-pay-for-these
-      conditionalValues:
-        - value: home-expenses.do-you-pay-for-any-of-these
-          condition: *livesAlone?
-    headerHelpMessageKey: general.check-all-that-apply
-    inputs:
-      - name: homeExpenses
-        type: CHECKBOX
-        validators:
-          - validation: SELECT_AT_LEAST_ONE
-            errorMessageKey: general.validation.make-sure-you-choose-none-of-the-above-or-another-option
-        options:
-          selectableOptions:
-            - value: RENT
-              messageKey: home-expenses.rent
-            - value: MORTGAGE
-              messageKey: home-expenses.mortgage
-            - value: HOMEOWNERS_INSURANCE
-              messageKey: home-expenses.homeowners-insurance
-            - value: REAL_ESTATE_TAXES
-              messageKey: home-expenses.real-estate-taxes
-            - value: ASSOCIATION_FEES
-              messageKey: home-expenses.association-fees
-            - value: ROOM_AND_BOARD
-              messageKey: home-expenses.room-and-board
-            - value: NONE_OF_THE_ABOVE
-              messageKey: general.inputs.none-of-the-above
-              isNone: true
-  - &homeExpensesAmount
-    name: homeExpensesAmount
-    pageTitle: home-expenses-amount.title
-    headerKey:
-      conditionalValues:
-        - value: home-expenses-amount.how-much-do-you-pay-for-rent-mortgage-and-room-and-board-every-month
-          condition:
-            logicalOperator: AND
-            conditions:
-              - *livesAlone?
-              - *hasMortgage?
-              - *hasRent?
-              - *hasRoomAndBoard?
-        - value: home-expenses-amount.how-much-do-you-pay-for-rent-every-month
-          condition:
-            logicalOperator: AND
-            conditions:
-              - *doesNotHaveMortgage?
-              - *doesNotHaveRoomAndBoard?
-              - *livesAlone?
-        - value: home-expenses-amount.how-much-do-you-pay-for-room-and-board-every-month
-          condition:
-            logicalOperator: AND
-            conditions:
-              - *doesNotHaveMortgage?
-              - *doesNotHaveRent?
-              - *livesAlone?
-        - value: home-expenses-amount.how-much-do-you-pay-for-rent-and-room-and-board-every-month
-          condition:
-            logicalOperator: AND
-            conditions:
-              - *doesNotHaveMortgage?
-              - *livesAlone?
-        - value: home-expenses-amount.how-much-do-you-pay-for-mortgage-every-month
-          condition:
-            logicalOperator: AND
-            conditions:
-              - *doesNotHaveRent?
-              - *doesNotHaveRoomAndBoard?
-              - *livesAlone?
-        - value: home-expenses-amount.how-much-do-you-pay-for-mortgage-and-room-and-board-every-month
-          condition:
-            logicalOperator: AND
-            conditions:
-              - *doesNotHaveRent?
-              - *livesAlone?
-        - value: home-expenses-amount.how-much-do-you-pay-for-rent-and-mortgage-every-month
-          condition:
-            logicalOperator: AND
-            conditions:
-              - *livesAlone?
-              - *hasRent?
-              - *hasMortgage?
-        # This condition needs to come first among the household conditions in order to get evaluated correctly
-        - value: home-expenses-amount.household-pay-for-rent-mortgage-and-room-and-board-every-month
-          condition:
-            logicalOperator: AND
-            conditions:
-              - *doesNotLiveAlone?
-              - *hasRoomAndBoard?
-              - *hasRent?
-              - *hasMortgage?
-        - value: home-expenses-amount.household-pay-rent-every-month
-          condition:
-            logicalOperator: AND
-            conditions:
-              - *doesNotHaveMortgage?
-              - *doesNotHaveRoomAndBoard?
-              - *doesNotLiveAlone?
-        - value: home-expenses-amount.household-pay-for-room-and-board-every-month
-          condition:
-            logicalOperator: AND
-            conditions:
-              - *doesNotHaveMortgage?
-              - *doesNotHaveRent?
-              - *doesNotLiveAlone?
-        - value: home-expenses-amount.household-pay-mortgage-every-month
-          condition:
-            logicalOperator: AND
-            conditions:
-              - *doesNotHaveRent?
-              - *doesNotHaveRoomAndBoard?
-              - *doesNotLiveAlone?
-        - value: home-expenses-amount.how-much-does-household-pay-for-rent-and-mortgage-every-month
-          condition:
-            logicalOperator: AND
-            conditions:
-              - *doesNotLiveAlone?
-              - *hasRent?
-              - *hasMortgage?
-        - value: home-expenses-amount.household-pay-for-mortgage-and-room-and-board-every-month
-          condition:
-            logicalOperator: AND
-            conditions:
-              - *doesNotLiveAlone?
-              - *hasRoomAndBoard?
-              - *hasMortgage?
-        - value: home-expenses-amount.household-pay-for-rent-and-room-and-board-every-month
-          condition:
-            logicalOperator: AND
-            conditions:
-              - *doesNotLiveAlone?
-              - *hasRoomAndBoard?
-              - *hasRent?
-    inputs:
-      - name: homeExpensesAmount
-        type: MONEY
-        validators:
-          - validation: MONEY
-            errorMessageKey: general.validation.make-sure-you-enter-a-dollar-amount
-  - &savings
-    name: savings
-    pageTitle: savings.title
-    headerKey:
-      defaultValue: savings.household-bank-account
-      conditionalValues:
-        - value: savings.do-you-have-money-in-a-bank-account-or-debit-card
-          condition: *livesAlone?
-    contextFragment: savingsContextFragment
-    hasPrimaryButton: false
-    inputs:
-    - name: haveSavings
-      type: YES_NO
-      promptMessage:
-        promptMessageFragmentName: savingsPrompt
-  - &soldAssets
-    name: soldAssets
-    pageTitle: sold-assets.title
-    headerKey:
-      defaultValue: sold-assets.households-given-or-sold
-      conditionalValues:
-        - value: sold-assets.in-the-last-12-months-have-you-given-away-or-sold-any-assets
-          condition: *livesAlone?
-    hasPrimaryButton: false
-    inputs:
-      - name: haveSoldAssets
-        type: YES_NO
-        promptMessage:
-          promptMessageFragmentName: soldAssetsPrompt
-  - &submittingApplication
-    name: submittingApplication
-    pageTitle: submitting-application.title
-    hasPrimaryButton: false
-  - &homeAddressValidation
-    name: homeAddressValidation
-    pageTitle: address-validation.title
-    hasPrimaryButton: false
-    inputs:
-      - name: useEnrichedAddress
-        type: CUSTOM
-        customInputFragment: addressValidationInput
-        options:
-          selectableOptions:
-            - value: "true"
-              messageKey: address-validation.suggested-address
-            - value: "false"
-              messageKey: address-validation.address-you-entered
-      - name: enrichedCountyDifferentFromSelected
-        type: HIDDEN
-  - &outOfStateAddressNotice
-    name: outOfStateAddressNotice
-    pageTitle: out-of-state-address-notice.title
-    hasPrimaryButton: false
-    usingPageTemplateFragment: true
-    inputs:
-      - name: selectedOutOfStateAddressOption
-        type: CUSTOM
-        customInputFragment: outOfStateAddressNoticeInput
-        options:
-          selectableOptions:
-            - value: "CONTINUE"
-              messageKey: out-of-state-address-notice.yes-continue
-            - value: "QUIT"
-              messageKey: out-of-state-address-notice.no-quit-application
-            - value: "EDIT"
-              messageKey: out-of-state-address-notice.edit-my-address
-        datasources:
-          - pageName: homeAddress  
-  - &outOfStateQuitVerify
-    name: outOfStateQuitVerify
-    pageTitle: out-of-state-quit-verify.title
-    contextFragment: StateQuitFragment
-    hasPrimaryButton: false
-  - &mailingAddressValidation
-    name: mailingAddressValidation
-    pageTitle: address-validation.title
-    hasPrimaryButton: false
-    inputs:
-      - name: useEnrichedAddress
-        type: CUSTOM
-        customInputFragment: addressValidationInput
-        options:
-          selectableOptions:
-            - value: "true"
-              messageKey: address-validation.suggested-address
-            - value: "false"
-              messageKey: address-validation.address-you-entered
-      - name: enrichedCountyDifferentFromSelected
-        type: HIDDEN
-  - &countyValidation
-    name: countyValidation
-    pageTitle: county-validation.title
-    hasPrimaryButton: false
-    inputs:
-      - name: useEnrichedCounty
-        type: CUSTOM
-        customInputFragment: countyValidationInput
-        options:
-          selectableOptions:
-            - value: "true"
-              messageKey: county-validation.suggested-county
-            - value: "false"
-              messageKey: county-validation.county-you-entered
-  - &registerToVote
-    name: registerToVote
-    headerKey: register-to-vote.do-you-want-to-register-to-vote
-    inputs:
-      - name: registerToVote
-        type: CUSTOM
-        customInputFragment: registerToVoteInput
-        options:
-          selectableOptions:
-            - value: "YES"
-              messageKey: register-to-vote.yes-send-me-more-info
-            - value: NO_ALREADY_REGISTERED
-              messageKey: register-to-vote.ive-already-registered
-            - value: "NO"
-              messageKey: register-to-vote.no-thanks
-    pageTitle: register-to-vote.title
-    hasPrimaryButton: false
-  - &healthcareCoverage
-    name: healthcareCoverage
-    headerKey: healthcareCoverage.do-you-currently-have-healthcare-coverage
-    contextFragment: healthcareCoverageFragment
-    inputs:
-      - name: healthcareCoverage
-        type: RADIO
-        options:
-          selectableOptions:
-            - value: "YES"
-              messageKey: general.inputs.yes
-            - value: "NO"
-              messageKey: general.inputs.no
-            - value: "NOT_SURE"
-              messageKey: general.inputs.not-sure
-    pageTitle: healthcareCoverage.title
-  - &pastBenefit
-    name: pastBenefit
-    pageTitle: past-benefit.title
-    headerKey: past-benefit.header
-    contextFragment: chooseProgramsContextFragment
-    hasPrimaryButton: false
-    inputs:
-      - name: hasHouseholdPastBenefits
-        type: YES_NO
-  - &pastBenefitDetails
-    name: pastBenefitDetails
-    pageTitle: past-benefit-details.title
-    headerKey: past-benefit-details.header
-    contextFragment: chooseProgramsContextFragment
-    hasPrimaryButton: false
-    inputs:
-      - name: whenPastBenefits
-        type: RADIO
-        promptMessage:
-          promptMessageKey: past-benefit-details.when.label
-        validators:
-          - validation: NOT_BLANK
-            errorMessageKey: general.validation.make-sure-you-answer-this-question
-        options:
-          selectableOptions:
-            - value: NOW
-              messageKey: past-benefit-details.when.now
-            - value: WITHIN_LAST_YEAR
-              messageKey: past-benefit-details.when.within-last-year
-            - value: MORE_THAN_YEAR_AGO
-              messageKey: past-benefit-details.when.more-than-year-ago
-      - name: wherePastBenefitsState
-        type: CUSTOM
-        customInputFragment: pastBenefitsStateSelect
-        promptMessage:
-          promptMessageKey: past-benefit-details.where.label
-        validators:
-          - validation: NOT_BLANK
-            errorMessageKey: general.validation.make-sure-you-answer-this-question
-      - name: whichPastBenefits
-        type: CHECKBOX
-        promptMessage:
-          promptMessageKey: past-benefit-details.which.label
-        helpMessageKey: general.check-all-that-apply
-        validators:
-          - validation: SELECT_AT_LEAST_ONE
-            errorMessageKey: general.validation.make-sure-you-answer-this-question
-        options:
-          selectableOptions:
-            - value: CASH_ASSISTANCE
-              messageKey: past-benefit-details.which.cash-assistance
-            - value: SNAP
-              messageKey: past-benefit-details.which.snap
-            - value: TRIBAL_COMMODITIES
-              messageKey: past-benefit-details.which.tribal-commodities
-  - &directDeposit
-    name: directDeposit
-    pageTitle: direct-deposit.title
-    headerKey: direct-deposit.header
-    headerHelpMessageKey: direct-deposit.header-help
-    contextFragment: directDepositContextFragment
-    hasPrimaryButton: false
-    inputs:
-      - name: hasDirectDeposit
-        type: YES_NO
-  - &ebtInPast
-    name: ebtInPast
-    pageTitle: ebt-in-past.title
-    headerKey: ebt-in-past.header
-    contextFragment: ebtCardContextFragment
-    hasPrimaryButton: false
-    inputs: 
-      - name: hadEBTInPast
-        type: YES_NO
-  - &socialWorker
-    name: socialWorker
-    pageTitle: social-worker.title
-    headerKey: social-worker.header
-    contextFragment: chooseProgramsContextFragment
-    hasPrimaryButton: false
-    inputs:
-      - name: hasSocialWorker
-        type: YES_NO
-  - &referrals
-    name: referrals
-    pageTitle: referrals.title
-    headerKey: referrals.header
-    headerHelpMessageKey: referrals.body
-    contextFragment: chooseProgramsContextFragment
-    hasPrimaryButton: false
-    inputs:
-      - name: needsReferrals
-        type: YES_NO
-  - &legalGuardian
-    name: legalGuardian
-    pageTitle: legalGuardian.title
-    headerKey: legalGuardian.header
-    contextFragment: authorizedRepContextFragment
-    hasPrimaryButton: false
-    inputs:
-      - name: hasLegalGuardian
-        type: YES_NO
-  - &authorizedRep
-    name: authorizedRep
-    headerKey: authorized-rep.do-you-want-to
-    headerHelpMessageKey: authorized-rep.this-person-can-help
-    inputs:
-      - name: helpWithBenefits
-        type: YES_NO
-    pageTitle: authorized-rep.title
-    hasPrimaryButton: false
-    contextFragment: authorizedRepContextFragment
-  - &authorizedRepCommunicate
-    name: authorizedRepCommunicate
-    headerKey: authorized-rep-communicate.do-you-want-your-helper-to-communicate-with-the-county-on-your-behalf
-    inputs:
-      - name: communicateOnYourBehalf
-        type: YES_NO
-        promptMessage:
-          promptMessageFragmentName: authorizedRepCommunicatePrompt
-    pageTitle: authorized-rep-communicate.title
-    hasPrimaryButton: false
-    contextFragment: authorizedRepContextFragment
-  - &authorizedRepMailNotices
-    name: authorizedRepMailNotices
-    headerKey: authorized-rep-speak-to-county.do-you-want-your-helper-to-get-mail-and-notices-for-you
-    inputs:
-      - name: getMailNotices
-        type: YES_NO
-        promptMessage:
-          promptMessageFragmentName: getMailNoticesPrompt
-    pageTitle: authorized-rep-speak-to-county.title
-    hasPrimaryButton: false
-    contextFragment: authorizedRepContextFragment
-  - &authorizedRepSpendOnYourBehalf
-    name: authorizedRepSpendOnYourBehalf
-    headerKey: authorized-rep-spend-on-your-behalf.do-you-want-your-authorized-rep-to-spend-your-benefits-on-your-behalf
-    inputs:
-      - name: authorizedRepSpendOnYourBehalf
-        type: YES_NO
-        promptMessage:
-          promptMessageFragmentName: spendOnYourBehalfPrompt
-    pageTitle: authorized-rep-spend-on-your-behalf.title
-    hasPrimaryButton: false
-    contextFragment: authorizedRepContextFragment
-  - &authorizedRepContactInfo
-    name: authorizedRepContactInfo
-    pageTitle: authorized-rep-contact-info.title
-    headerKey: authorized-rep-contact-info.lets-get-your-authorized-reps-contact-information
-    headerHelpMessageKey: authorized-rep-contact-info.we-need-to-send-this-information-to-your-county
-    inputs:
-      - name: authorizedRepFullName
-        type: TEXT
-        promptMessage:
-          promptMessageKey: authorized-rep-contact-info.whats-their-name
-      - name: authorizedRepStreetAddress
-        type: TEXT
-        promptMessage:
-          promptMessageKey: authorized-rep-contact-info.whats-their-street-address
-      - name: authorizedRepCity
-        type: TEXT
-        promptMessage:
-          promptMessageKey: authorized-rep-contact-info.what-city-do-they-live-in
-      - name: authorizedRepZipCode
-        type: TEXT
-        promptMessage:
-          promptMessageKey: authorized-rep-contact-info.what-is-their-zip-code
-      - name: authorizedRepPhoneNumber
-        type: PHONE
-        promptMessage:
-          promptMessageKey: authorized-rep-contact-info.what-is-their-phone-number
-        validators:
-          - validation: PHONE_STARTS_WITH_ZERO
-            errorMessageKey: general.validation.area-codes-can-not-begin-with-0
-          - validation: PHONE_STARTS_WITH_ONE
-            errorMessageKey: general.validation.area-codes-can-not-begin-with-1
-          - validation: PHONE
-            errorMessageKey: general.validation.make-sure-to-enter-a-phone-number-with-10-digits
-    contextFragment: authorizedRepContextFragment
-  - &additionalInfo
-    name: additionalInfo
-    headerKey: additional-info.is-there-anything-else-you-want-to-share
-    headerHelpMessageKey: additional-info.this-is-optional
-    inputs:
-      - name: additionalInfo
-        type: TEXTAREA
-      - name: caseNumber
-        type: TEXT
-        placeholder: general.optional
-        validators:
-          - validation: CASE_NUMBER
-            errorMessageKey: general.validation.make-sure-your-case-number-has-4-to-7-digits
-            condition:
-              input: caseNumber
-              matcher: NOT_EMPTY
-        promptMessage:
-          promptMessageKey: additional-info.whats-your-case-number
-        helpMessageKey: additional-info.case-number-is-optional
-      - name: caseNumberImages
-        type: CUSTOM
-        customInputFragment: caseNumberImages
-    pageTitle: additional-info.title
-  - &assets
-    name: assets
-    pageTitle: assets.title
-    headerKey:
-      defaultValue: assets.does-any-one-in-your
-      conditionalValues:
-        - value: assets.do-you-have-any
-          condition: *livesAlone?
-    headerHelpMessageKey: assets.select-all-that-apply
-    contextFragment: assetsContextFragment
-    inputs:
-    - name: assets
-      type: CHECKBOX
-      validators:
-        - validation: SELECT_AT_LEAST_ONE
-          errorMessageKey: general.validation.make-sure-you-answer-this-question
-      options:
-        selectableOptions:
-          - value: CASH
-            messageKey: assets.cash
-  #          condition: *someoneChoseCAFProgram?
-          - value: BANK_ACCOUNT
-            messageKey: assets.bank-account
-  #          condition: *someoneChoseCAFProgram?
-          - value: ELECTRONIC_PAYMENT_CARD
-            messageKey: assets.electronic-payment
-          - value: VEHICLE
-            messageKey: assets.a-vehicle
-          - value: STOCK_BOND
-            messageKey: assets.stocks-bonds-401k
-          - value: REAL_ESTATE
-            messageKey: assets.real-estate
-            condition:
-              pageName: choosePrograms
-              input: programs
-              matcher: CONTAINS
-              value: CCAP
-          - value: ONE_MILLION_ASSETS
-            messageKey: assets.more-than-1-million-in-family-assets
-            helpMessageKey: assets.assets-include-cash-bank-accounts
-            condition:
-              pageName: choosePrograms
-              input: programs
-              matcher: CONTAINS
-              value: CCAP
-          - value: NONE
-            messageKey: assets.none-of-the-above
-            isNone: true
-        datasources:
-          - pageName: choosePrograms
-  - &investmentTypesIndividual
-    name: investmentTypesIndividual
-    pageTitle: investments.title
-    headerKey: investments.tell-us-which-you-have
-    headerHelpMessageKey: investments.select-all-that-apply
-    contextFragment: cashAccountsContextFragment
-    inputs:
-      - type: CHECKBOX
-        validators:
-        - validation: SELECT_AT_LEAST_ONE
-          errorMessageKey: general.validation.make-sure-you-answer-this-question
-        name: investmentTypes
-        options:
-          selectableOptions:
-          - value: STOCKS
-            messageKey: investments.stocks
-          - value: BONDS
-            messageKey: investments.bonds
-          - value: RETIREMENT_ACCOUNTS
-            messageKey: investments.rsa
-          datasources:
-            - pageName: personalInfo
-            - groupName: household
-#HC renewal pages
-  - &healthcareRenewalUpload
-    name: healthcareRenewalUpload
-    pageTitle: healthcare-Renewal-Upload.title
-    headerKey: healthcare-Renewal-Upload.where-would-you-like-to-send-documents
-    headerHelpMessageKey: healthcare-Renewal-Upload.choose-a-location
-    contextFragment: countyContextFragment
-    inputs:
-      - name: county
-        type: SELECT
-        promptMessage:
-          promptMessageKey: identify-county.select-a-county
-        validators:
-          - validation: NOT_BLANK
-            errorMessageKey: general.validation.blank
-            condition: 
-              input: tribalNation
-              matcher: EMPTY
-          - validation: SHOULD_BE_BLANK
-            errorMessageKey: general.validation.blank
-            condition: 
-              input: tribalNation
-              matcher: NOT_EMPTY
-        validationIcon: false
-        options:
-          selectableOptions:
-            - value: ''
-              messageKey: identify-county.select-your-county
-            - value: Aitkin
-              messageKey: identify-county-aitkin
-            - value: Anoka
-              messageKey: identify-county-anoka
-            - value: Becker
-              messageKey: identify-county-becker
-            - value: Beltrami
-              messageKey: identify-county-beltrami
-            - value: Benton
-              messageKey: identify-county-benton
-            - value: BigStone
-              messageKey: identify-county-big-stone
-            - value: BlueEarth
-              messageKey: identify-county-blue-earth
-            - value: Brown
-              messageKey: identify-county-brown
-            - value: Carlton
-              messageKey: identify-county-carlton
-            - value: Carver
-              messageKey: identify-county-carver
-            - value: Cass
-              messageKey: identify-county-cass
-            - value: Chippewa
-              messageKey: identify-county-chippewa
-            - value: Chisago
-              messageKey: identify-county-chisago
-            - value: Clay
-              messageKey: identify-county-clay
-            - value: Clearwater
-              messageKey: identify-county-clearwater
-            - value: Cook
-              messageKey: identify-county-cook
-            - value: Cottonwood
-              messageKey: identify-county-cottonwood
-            - value: CrowWing
-              messageKey: identify-county-crow-wing
-            - value: Dakota
-              messageKey: identify-county-dakota
-            - value: Dodge
-              messageKey: identify-county-dodge
-            - value: Douglas
-              messageKey: identify-county-douglas
-            - value: Faribault
-              messageKey: identify-county-faribault
-            - value: Fillmore
-              messageKey: identify-county-fillmore
-            - value: Freeborn
-              messageKey: identify-county-freeborn
-            - value: Goodhue
-              messageKey: identify-county-goodhue
-            - value: Grant
-              messageKey: identify-county-grant
-            - value: Hennepin
-              messageKey: identify-county-hennepin
-            - value: Houston
-              messageKey: identify-county-houston
-            - value: Hubbard
-              messageKey: identify-county-hubbard
-            - value: Isanti
-              messageKey: identify-county-isanti
-            - value: Itasca
-              messageKey: identify-county-itasca
-            - value: Jackson
-              messageKey: identify-county-jackson
-            - value: Kanabec
-              messageKey: identify-county-kanabec
-            - value: Kandiyohi
-              messageKey: identify-county-kandiyohi
-            - value: Kittson
-              messageKey: identify-county-kittson
-            - value: Koochiching
-              messageKey: identify-county-koochiching
-            - value: LacQuiParle
-              messageKey: identify-county-lac-qui-parle
-            - value: Lake
-              messageKey: identify-county-lake
-            - value: LakeOfTheWoods
-              messageKey: identify-county-lake-of-the-woods
-            - value: LeSueur
-              messageKey: identify-county-le-sueur
-            - value: Lincoln
-              messageKey: identify-county-lincoln
-            - value: Lyon
-              messageKey: identify-county-lyon
-            - value: McLeod
-              messageKey: identify-county-mcleod
-            - value: Mahnomen
-              messageKey: identify-county-mahnomen
-            - value: Marshall
-              messageKey: identify-county-marshall
-            - value: Meeker
-              messageKey: identify-county-meeker
-            - value: Martin
-              messageKey: identify-county-martin
-            - value: MilleLacs
-              messageKey: identify-county-mille-lacs
-            - value: Morrison
-              messageKey: identify-county-morrison
-            - value: Mower
-              messageKey: identify-county-mower
-            - value: Murray
-              messageKey: identify-county-murray
-            - value: Nicollet
-              messageKey: identify-county-nicollet
-            - value: Nobles
-              messageKey: identify-county-nobles
-            - value: Norman
-              messageKey: identify-county-norman
-            - value: Olmsted
-              messageKey: identify-county-olmsted
-            - value: OtterTail
-              messageKey: identify-county-otter-tail
-            - value: Pennington
-              messageKey: identify-county-pennington
-            - value: Pine
-              messageKey: identify-county-pine
-            - value: Pipestone
-              messageKey: identify-county-pipestone
-            - value: Polk
-              messageKey: identify-county-polk
-            - value: Pope
-              messageKey: identify-county-pope
-            - value: Ramsey
-              messageKey: identify-county-ramsey
-            - value: RedLake
-              messageKey: identify-county-red-lake
-            - value: Redwood
-              messageKey: identify-county-redwood
-            - value: Renville
-              messageKey: identify-county-renville
-            - value: Rice
-              messageKey: identify-county-rice
-            - value: Rock
-              messageKey: identify-county-rock
-            - value: Roseau
-              messageKey: identify-county-roseau
-            - value: StLouis
-              messageKey: identify-county-saint-louis
-            - value: Scott
-              messageKey: identify-county-scott
-            - value: Sherburne
-              messageKey: identify-county-sherburne
-            - value: Sibley
-              messageKey: identify-county-sibley
-            - value: Stearns
-              messageKey: identify-county-stearns
-            - value: Steele
-              messageKey: identify-county-steele
-            - value: Stevens
-              messageKey: identify-county-stevens
-            - value: Swift
-              messageKey: identify-county-swift
-            - value: Todd
-              messageKey: identify-county-todd
-            - value: Traverse
-              messageKey: identify-county-traverse
-            - value: Wabasha
-              messageKey: identify-county-wabasha
-            - value: Wadena
-              messageKey: identify-county-wadena
-            - value: Waseca
-              messageKey: identify-county-waseca
-            - value: Washington
-              messageKey: identify-county-washington
-            - value: Watonwan
-              messageKey: identify-county-watonwan
-            - value: Wilkin
-              messageKey: identify-county-wilkin
-            - value: Winona
-              messageKey: identify-county-winona
-            - value: Wright
-              messageKey: identify-county-wright
-            - value: YellowMedicine
-              messageKey: identify-county-yellow-medicine
-      - name: OR
-        type: CUSTOM
-        customInputFragment: orLabelFragment
-      - name: tribalNation
-        type: SELECT
-        promptMessage:
-          promptMessageKey: identify-county.select-a-tribal-nation
-        validators:
-          - validation: NOT_BLANK
-            errorMessageKey: general.validation.make-sure-to-make-a-selection
-            condition: 
-              input: county
-              matcher: EMPTY
-          - validation: SHOULD_BE_BLANK
-            errorMessageKey: general.validation.select-county-tribe
-            condition: 
-              input: county
-              matcher: NOT_EMPTY
-        options:
-          selectableOptions:
-            - value: ''
-              messageKey: select-the-tribe.select-the-tribe
-            - value: White Earth Nation
-              messageKey: select-the-tribe.white-earth
-      - name: notice
-        type: NOTICE
-        noticeMessage: healthcare-Renewal-Upload.you-can-see-where-your-application
-      - name: privacyNotice
-        type: CUSTOM
-        customInputFragment: privacyNoticesFragment 
-  - &healthcareRenewalMatchInfo
-    name: healthcareRenewalMatchInfo
-    headerKey: match-info-hc.match-docs-to-case
-    headerHelpMessageKey: match-info-hc.fill-in-as-much-as-you-can
-    pageTitle: match-info.title
-    contextFragment: matchInfoContextFragment
-    inputs:
-      - name: firstName
-        type: TEXT
-        promptMessage:
-          promptMessageKey: match-info.whats-your-first-name
-        helpMessageKey: match-info.legally-as-it-appears-on-your-id
-        validators:
-          - validation: NOT_BLANK
-            errorMessageKey: general.validation.make-sure-to-provide-a-first-name
-      - name: lastName
-        type: TEXT
-        promptMessage:
-          promptMessageKey: match-info.whats-your-last-name
-        helpMessageKey: match-info.legally-as-it-appears-on-your-id
-        validators:
-          - validation: NOT_BLANK
-            errorMessageKey: general.validation.make-sure-to-provide-a-last-name
-      - name: dateOfBirth
-        type: DATE
-        validators:
-          - validation: DATE
-            errorMessageKey: general.validation.please-enter-your-birthday-in-this-format
-            condition:
-              input: dateOfBirth
-              matcher: NOT_EMPTY
-          - validation: DOB_VALID
-            condition:
-              input: dateOfBirth
-              matcher: NOT_EMPTY
-            errorMessageKey: general.validation.make-sure-to-provide-a-dob-between-1900-and-present
-        promptMessage:
-          promptMessageKey: match-info.when-were-you-born
-      - name: ssn
-        type: SSN
-        validators:
-          - validation: SSN
-            errorMessageKey: general.validation.make-sure-your-SSN-has-9-digits
-            condition:
-              input: ssn
-              matcher: NOT_EMPTY
-        promptMessage:
-          promptMessageKey: match-info.whats-your-social-security-number
-        helpMessageKey: match-info.recommended-but-not-required
-      - name: phoneNumber
-        type: PHONE
-        promptMessage:
-          promptMessageKey: contact-info.whats-your-phone-number
-        validators:
-          - validation: PHONE_STARTS_WITH_ZERO
-            errorMessageKey: general.validation.area-codes-can-not-begin-with-0
-            condition:
-              input: phoneNumber
-              matcher: NOT_EMPTY
-          - validation: PHONE_STARTS_WITH_ONE
-            errorMessageKey: general.validation.area-codes-can-not-begin-with-1
-            condition:
-              input: phoneNumber
-              matcher: NOT_EMPTY
-          - validation: PHONE
-            errorMessageKey: general.validation.make-sure-to-enter-a-phone-number-with-10-digits
-            condition:
-              input: phoneNumber
-              matcher: NOT_EMPTY
-        helpMessageKey: match-info.county-can-contact-you-if-questions
-      - name: email
-        type: TEXT
-        validators:
-          - validation: EMAIL
-            errorMessageKey: general.validation.email
-            condition:
-              input: email
-              matcher: NOT_EMPTY
-        promptMessage:
-          promptMessageKey: contact-info.whats-your-email-address
-        helpMessageKey: match-info.county-can-contact-you-if-questions
-      - name: caseNumber
-        type: TEXT
-        validators:
-          - validation: CASE_NUMBER_HC
-            errorMessageKey: general.validation.make-sure-your-case-number-has-4-to-8-digits
-            condition:
-              input: caseNumber
-              matcher: NOT_EMPTY
-        promptMessage:
-          promptMessageKey: match-info.case-number-if-you-have-it
-        helpMessageKey: match-info.recommended-but-not-required
-  - &healthcareRenewalHowToAddDocuments
-    name: healthcareRenewalHowToAddDocuments
-    pageTitle: how-to-add-documents.title
-  - &healthcareRenewalUploadDocuments
-    name: healthcareRenewalUploadDocuments
-    pageTitle: upload-documents.title
-    usingPageTemplateFragment: false
-  - &healthcareRenewalUploadDocumentsDeleteWarningPage
-    name: healthcareRenewalUploadDocumentsDeleteWarningPage
-    headerKey: upload-documents-delete-warning.you-are-about-to-delete
-    pageTitle: upload-documents-delete-warning.title
-    usingPageTemplateFragment: false
-  - &healthcareRenewalDocumentSubmitConfirmation
-    name: healthcareRenewalDocumentSubmitConfirmation
-    pageTitle: document-submit-confirmation.title
-    headerKey: healthcare-Renewal-Document-Submit-Confirmation.ready-to-submit
-    contextFragment: documentsSuccessContextFragment
-    hasPrimaryButton: false
-  - &healthcareRenewalDocumentsSent
-    name: healthcareRenewalDocumentsSent
-    pageTitle: documentsSent.title
-    contextFragment: icon-documents-sent
-    headerKey: hc-documentsSent.great-weve-received-your-docs
-    hasPrimaryButton: false
-    excludeGoBack: true
-workflow:
-  landing:
-    pageConfiguration: *landing
-    nextPages:
-      - pageName: identifyCountyBeforeApplying
-  identifyCountyBeforeApplying:
-    pageConfiguration: *identifyCounty
-    nextPages:
-      - pageName: prepareToApply
-  readyToUploadDocuments:
-    pageConfiguration: *readyToUploadDocuments
-    nextPages:
-      - pageName: matchInfo
-        flow: LATER_DOCS
-  identifyCounty:
-    pageConfiguration: *identifyCounty
-    nextPages:
-      - pageName: tribalNationMember
-    datasources:
-      - pageName: matchInfo
-  matchInfo:
-    pageConfiguration: *matchInfo
-    enrichment: matchInfoDateOfBirthEnrichment
-    nextPages:
-      - pageName: identifyCounty
-  prepareToApply:
-    pageConfiguration: *prepareToApply
-    nextPages:
-      - pageName: timeoutNotice
-  timeoutNotice:
-    pageConfiguration: *timeoutNotice
-    nextPages:
-      - pageName: writtenLanguage
-  writtenLanguage:
-    pageConfiguration: *writtenLanguage
-    nextPages:
-      - pageName: spokenLanguage
-  spokenLanguage:
-    pageConfiguration: *spokenLanguage
-    nextPages:
-      - pageName: choosePrograms
-  choosePrograms:
-    pageConfiguration: *choosePrograms
-    nextPages:
-      - pageName: emergencyType
-        condition:
-          pageName: choosePrograms
-          input: programs
-          matcher: CONTAINS
-          value: EA
-      - pageName: expeditedNotice
-        condition:
-          pageName: choosePrograms
-          input: programs
-          matcher: CONTAINS
-          value: SNAP
-      - pageName: introBasicInfo
-  emergencyType:
-    pageConfiguration: *emergencyType
-    nextPages:
-      - pageName: otherEmergency
-        condition:
-          pageName: emergencyType
-          input: emergencyType
-          matcher: CONTAINS
-          value: OTHER_EMERGENCY
-      - pageName: expeditedNotice
-        condition:
-          pageName: choosePrograms
-          input: programs
-          matcher: CONTAINS
-          value: SNAP
-      - pageName: introBasicInfo
-    datasources:
-      - pageName: emergencyType
-      - pageName: choosePrograms
-  otherEmergency:
-    pageConfiguration: *otherEmergency
-    nextPages:
-      - pageName: expeditedNotice
-        condition:
-          pageName: choosePrograms
-          input: programs
-          matcher: CONTAINS
-          value: SNAP
-      - pageName: introBasicInfo
-    datasources:
-      - pageName: emergencyType
-      - pageName: choosePrograms
-  expeditedNotice:
-    pageConfiguration: *expeditedNotice
-    nextPages:
-      - pageName: introBasicInfo
-  addOtherPrograms:
-    pageConfiguration: *addOtherPrograms
-    nextPages:
-      - pageName: choosePrograms
-      - pageName: landing
-  introBasicInfo:
-    pageConfiguration: *introBasicInfo
-    nextPages:
-      - pageName: personalInfo
-  personalInfo:
-    pageConfiguration: *personalInfo
-    enrichment: personalInfoDateOfBirthEnrichment
-    nextPages:
-      - pageName: raceAndEthnicity
-  raceAndEthnicity:
-    pageConfiguration: *raceAndEthnicity
-    nextPages:
-      - pageName: homeAddress
-    datasources:
-      - pageName: choosePrograms
-  contactInfo:
-    pageConfiguration: *contactInfo
-    nextPages:
-      - pageName: noPhoneNumberConfirmation
-        condition:
-          pageName: contactInfo
-          input: phoneNumber
-          matcher: EMPTY
-      - pageName: reviewInfo
-  noPhoneNumberConfirmation:
-    pageConfiguration: *noPhoneNumberConfirmation
-    nextPages:
-      - pageName: contactInfo
-      - pageName: reviewInfo
-  homeAddress:
-    pageConfiguration: *homeAddress
-    enrichment: homeAddressEnrichment
-    nextPages:
-      - pageName: whereToSendMail
-        condition:
-          pageName: homeAddress
-          input: isHomeless
-          value: "true"
-      - pageName: outOfStateAddressNotice
-        condition:
-          pageName: homeAddress
-          input: state
-          matcher: DOES_NOT_EQUAL_IGNORE_CASE
-          value: "MN"
-      - pageName: mailingAddress
-  outOfStateAddressNotice:
-    pageConfiguration: *outOfStateAddressNotice
-    nextPages:
-      - pageName: mailingAddress
-        condition:
-          pageName: outOfStateAddressNotice
-          input: selectedOutOfStateAddressOption
-          value: "CONTINUE"
-      - pageName: homeAddress
-        condition:
-          pageName: outOfStateAddressNotice
-          input: selectedOutOfStateAddressOption
-          value: "EDIT"
-      - pageName: outOfStateQuitVerify
-        condition:
-          pageName: outOfStateAddressNotice
-          input: selectedOutOfStateAddressOption
-          value: "QUIT"     
-  outOfStateQuitVerify:
-    pageConfiguration: *outOfStateQuitVerify
-    nextPages:
-      - pageName: landing
-      - pageName: outOfStateAddressNotice     
-  whereToSendMail:
-    pageConfiguration: *whereToSendMail
-    subtleLinkTargetPage: cityForGeneralDelivery
-    nextPages:
-      - pageName: mailingAddress
-  cityForGeneralDelivery:
-    pageConfiguration: *cityForGeneralDelivery
-    enrichment: generalDeliveryAddressEnrichment
-    nextPages:
-      - pageName: generalDeliveryAddress
-  generalDeliveryAddress:
-    pageConfiguration: *generalDeliveryAddress
-    nextPages:
-      - pageName: contactInfo
-    datasources:
-      - pageName: cityForGeneralDelivery
-  mailingAddress:
-    pageConfiguration: *mailingAddress
-    enrichment: mailingAddressEnrichment
-    nextPages:
-      - pageName: verifyHomeAddress
-    datasources:
-      - pageName: homeAddress
-      - pageName: mailingAddress
-  verifyHomeAddress:
-    pageConfiguration: *homeAddressValidation
-    skipCondition:
-      logicalOperator: OR
-      conditions:
-        - <<: *isHomeless?
-          matcher: CONTAINS
-        - pageName: mailingAddress
-          input: sameMailingAddress
-          matcher: DOES_NOT_CONTAIN
-          value: "true"
-    datasources:
-      - pageName: homeAddress
-      - pageName: mailingAddress
-      - pageName: identifyCounty
-    nextPages:
-      - pageName: verifyMailingAddress
-      - pageName: homeAddress
-  verifyMailingAddress:
-    pageConfiguration: *mailingAddressValidation
-    skipCondition:
-      pageName: mailingAddress
-      input: sameMailingAddress
-      matcher: CONTAINS
-      value: "true"
-    datasources:
-      - pageName: mailingAddress
-      - pageName: homeAddress
-      - pageName: identifyCounty
-    nextPages:
-      - pageName: verifyCounty
-        condition:
-          name: homeStateIsMN
-          pageName: homeAddress
-          input: state
-          matcher: CONTAINS_ONLY
-          value: "MN"
-      - pageName: contactInfo
-      - pageName: homeAddress
-      - pageName: mailingAddress
-  verifyCounty:
-    pageConfiguration: *countyValidation
-    skipCondition: 
-      logicalOperator: OR
-      conditions:
-        - *selectedCountyDoesNotMatchEnrichedCountyHome?
-        - *selectedCountyDoesNotMatchEnrichedCountyMailing?
-        - <<: *isHomeless?
-          matcher: CONTAINS
-    datasources:
-      - pageName: homeAddress
-      - pageName: mailingAddress
-      - pageName: identifyCounty
-      - pageName: verifyHomeAddress
-      - pageName: homeAddressValidation
-      - pageName: mailingAddressValidation
-    nextPages:
-      - pageName: contactInfo
-      - pageName: identifyCountyAgain
-  identifyCountyAgain:
-    pageConfiguration: *identifyCounty
-    nextPages:
-      - pageName: contactInfo
-    datasources:
-      - pageName: homeAddressValidation
-      - pageName: mailingAddressValidation
-  reviewInfo:
-    subtleLinkTargetPage: doYouNeedHelpImmediately
-    pageConfiguration: *reviewInfo
-    nextPages:
-      - pageName: startHousehold
-        flow: FULL
-        condition: *onlyApplyingForOthers?
-      - pageName: addHouseholdMembers
-        flow: FULL
-    datasources:
-      - pageName: identifyCounty
-      - pageName: personalInfo
-      - pageName: homeAddress
-      - pageName: homeAddressValidation
-      - pageName: mailingAddress
-      - pageName: mailingAddressValidation
-      - pageName: cityForGeneralDelivery
-      - pageName: contactInfo
-      - pageName: choosePrograms
-      - pageName: countyValidation
-  addHouseholdMembers:
-    pageConfiguration: *addHouseholdMembers
-    nextPages:
-      - pageName: startHousehold
-        condition: *onlyApplyingForOthers?
-      - pageName: temporaryAbsence
-        condition:
-          logicalOperator: AND
-          conditions:
-            - *applicantDidNotChooseCCAP?
-            - pageName: addHouseholdMembers
-              input: addHouseholdMembers
-              value: "false"
-      - pageName: addChildrenConfirmation
-        condition:
-          logicalOperator: AND
-          conditions:
-            - *applicantChoseCCAPProgram?
-            - pageName: addHouseholdMembers
-              input: addHouseholdMembers
-              value: "false"
-      - pageName: startHousehold
-        condition:
-          pageName: addHouseholdMembers
-          input: addHouseholdMembers
-          value: "true"
-      - pageName: addHouseholdMembers
-    skipCondition: *onlyApplyingForOthers?
-    datasources:
-      - pageName: choosePrograms
-  addChildrenConfirmation:
-    pageConfiguration: *addChildrenConfirmation
-    nextPages:
-      - pageName: startHousehold
-      - pageName: temporaryAbsence
-  startHousehold:
-    pageConfiguration: *startHousehold
-    nextPages:
-      - pageName: householdMemberInfo
-  householdMemberInfo:
-    pageConfiguration: *householdMemberInfo
-    groupName: household
-    enrichment: householdMemberDateOfBirthEnrichment
-    nextPages:
-      - pageName: householdRaceAndEthnicity
-  householdRaceAndEthnicity:
-    pageConfiguration: *householdRaceAndEthnicity
-    groupName: household
-    nextPages:
-      - pageName: householdList
-  householdRedirectPage:
-    pageConfiguration: *householdRedirectPage
-    nextPages:
-      - pageName: householdList
-  householdList:
-    pageConfiguration: *householdList
-    dataMissingRedirect: reviewInfo
-    nextPages:
-      - pageName: noProgramsSelected
-      - pageName: householdMemberInfo
-    datasources:
-      - groupName: household
-      - pageName: personalInfo
-  temporaryAbsence:
-    pageConfiguration: *temporaryAbsence
-    nextPages:
-      ## If CASH and CCAP AND Not living alone 
-      - pageName: parentNotAtHome
-        condition:
-          name: CashAndCCAP
-          logicalOperator: AND
-          conditions:
-            - *someoneChoseCASH?
-            - *someoneChoseCCAP?
-            - *doesNotLiveAlone?
-      ## If CASH and NOT CCAP AND Not living alone 
-      - pageName: childrenUnder19
-        condition:
-          name: CashAndNotCCAP
-          logicalOperator: AND
-          conditions:
-            - *someoneChoseCASH?
-            - *noOneChoseCCAP?
-            - *doesNotLiveAlone?
-      ## If CCAP AND HOUSEHOLD
-      - pageName: childrenInNeedOfCare
-        condition:
-          name: CCAPAndHousehold
-          logicalOperator: AND
-          conditions:
-            - *doesNotLiveAlone?
-            - *someoneChoseCCAP?            
-      ## If SNAP household
-      - pageName: preparingMealsTogether
-        condition:
-          name: SNAPAndHousehold
-          logicalOperator: AND
-          conditions:
-            - *doesNotLiveAlone?
-            - *someoneChoseSNAP? 
-      ## If NOT CCAP and NOT SNAP 
-      - pageName: housingSubsidy
-        condition:
-          name: NotCCAPAndNOTSnap
-          logicalOperator: AND
-          conditions:
-            - *noOneChoseCCAP?
-            - *noOneChoseSNAP? 
-            - *doesNotLiveAlone?
-      ## If  YES OR NO is selected
-      - pageName: introPersonalDetails
-    skipCondition:
-      logicalOperator: AND
-      conditions:
-        - *someoneChoseCCAP?
-        - *noOneChoseCAF?
-    datasources:
-      - pageName: choosePrograms
-      - pageName: addHouseholdMembers
-      - pageName: householdMemberInfo
-        groupName: household
-  householdDeleteWarningPage:
-    pageConfiguration: *householdDeleteWarningPage
-    appliesToGroup: household
-    dataMissingRedirect: reviewInfo
-    nextPages:
-      - pageName: householdList
-    datasources:
-      - groupName: household
-  noProgramsSelected:
-    pageConfiguration: *noProgramsSelected
-    nextPages:
-      - pageName: temporaryAbsence
-        condition: *someoneChoseCAFProgram?
-      - pageName: childrenInNeedOfCare
-    skipCondition:
-      logicalOperator: OR
-      conditions:
-        - *applicantChoseAtLeastOneProgram?
-        - *householdMemberChoseAtLeastOneProgram?
-    datasources:
-      - groupName: household
-        pageName: householdMemberInfo
-      - pageName: choosePrograms
-  childrenUnder19:
-    pageConfiguration: *childrenUnder19
-    nextPages:
-      - pageName: parentNotAtHome
-        condition: 
-          pageName: childrenUnder19
-          name: hasChildrenUnder19
-          input: hasChildrenUnder19
-          value: "true"
-      - pageName: preparingMealsTogether
-        condition:
-          name: isCASHAndSNAPNoCCAP
-          logicalOperator: AND
-          conditions:
-            - *someoneChoseCASH?
-            - *noOneChoseCCAP?
-            - *someoneChoseSNAP?
-      - pageName: housingSubsidy
-    datasources:
-      - groupName: household
-        pageName: householdMemberInfo
-      - pageName: choosePrograms
-  parentNotAtHome:
-    pageConfiguration: *parentNotAtHome
-    nextPages:
-      - pageName: preparingMealsTogether
-        condition:
-          name: isCASHAndSNAP
-          logicalOperator: AND
-          conditions:
-            - *someoneChoseCASH?
-            - *noOneChoseCCAP?
-            - *someoneChoseSNAP?
-      - pageName: childrenInNeedOfCare
-        condition: *someoneChoseCCAP?  
-      - pageName: housingSubsidy
-    datasources:
-      - groupName: household
-        pageName: householdMemberInfo
-      - pageName: choosePrograms
-  childrenInNeedOfCare:
-    pageConfiguration: *childrenInNeedOfCare
-    nextPages:
-      - pageName: doYouHaveChildCareProvider
-        condition:
-          name: childrenSelectedNotEmpty
-          pageName: childrenInNeedOfCare
-          input: whoNeedsChildCare
-          matcher: NOT_EMPTY
-      - pageName: whoHasParentNotAtHome
-    datasources:
-      - pageName: choosePrograms
-      - groupName: household
-        pageName: householdMemberInfo
-    skipCondition: *noOneChoseCCAP?
-  doYouHaveChildCareProvider:
-    pageConfiguration: *doYouHaveChildCareProvider
-    skipCondition: *noOneChoseCCAP?
-    nextPages:
-      - pageName: childCareProviderInfo
-        condition:
-          name: yesHasChildCareProvider
-          pageName: doYouHaveChildCareProvider
-          input: hasChildCareProvider
-          value: "true"
-      - pageName: whoHasParentNotAtHome
-        condition:
-            name: noDoesNotHaveChildCareProvider
-            pageName: doYouHaveChildCareProvider
-            input: hasChildCareProvider
-            value: "false"
-    datasources:
-      - pageName: doYouHaveChildCareProvider
-      - pageName: choosePrograms
-      - groupName: household
-        pageName: householdMemberInfo
-  childCareProviderInfo:
-    pageConfiguration: *childCareProviderInfo
-    skipCondition: *noOneChoseCCAP?
-    groupName: childCareProviders
-    nextPages:
-      - pageName: childrenAtThisProvider
-    datasources:
-      - pageName: childrenInNeedOfCare
-      - pageName: choosePrograms
-      - groupName: household
-        pageName: householdMemberInfo
-  childrenAtThisProvider:
-    pageConfiguration: *childrenAtThisProvider
-    skipCondition: *noOneChoseCCAP?
-    groupName: childCareProviders
-    nextPages:
-      - pageName: childCareProviderList
-    datasources:
-      - pageName: childrenInNeedOfCare
-      - pageName: choosePrograms
-  childCareProviderList:
-    pageConfiguration: *childCareProviderList
-    skipCondition: *noOneChoseCCAP?
-    nextPages:
-      - pageName: childCareProviderInfo
-      - pageName: whoHasParentNotAtHome
-    datasources:
-      - groupName: childCareProviders
-      - pageName: childCareProviderInfo
-  childCareProviderDeleteWarningPage:
-    pageConfiguration: *childCareProviderDeleteWarningPage
-    appliesToGroup: childCareProviders
-    dataMissingRedirect: childCareProviderList
-    nextPages:
-      - pageName: childCareProviderList
-    datasources:
-      - groupName: childCareProviders
-  childCareProviderRedirectPage:
-    pageConfiguration: *childCareProviderRedirectPage
-    dataMissingRedirect: doYouHaveChildCareProvider
-    nextPages:
-      - pageName: childCareProviderList
-    datasources:
-      - groupName: childCareProviders
-  whoHasParentNotAtHome:
-    pageConfiguration: *whoHasParentNotAtHome
-    nextPages:
-      - pageName: parentNotAtHomeNames
-    datasources:
-      - pageName: childrenInNeedOfCare
-      - pageName: choosePrograms
-      - groupName: household
-        pageName: householdMemberInfo
-    skipCondition:
-      logicalOperator: OR
-      conditions:
-        - *noOneChoseCCAP?
-        - pageName: childrenInNeedOfCare
-          input: whoNeedsChildCare
-          matcher: NONE_SELECTED
-  parentNotAtHomeNames:
-    pageConfiguration: *parentNotAtHomeNames
-    nextPages:
-      - pageName: childCareChildSupport
-    datasources:
-      - pageName: choosePrograms
-      - groupName: household
-        pageName: householdMemberInfo
-      - pageName: childrenInNeedOfCare
-      - pageName: whoHasParentNotAtHome
-    skipCondition:
-      logicalOperator: OR
-      conditions:
-        - *noOneChoseCCAP?
-        - pageName: childrenInNeedOfCare
-          input: whoNeedsChildCare
-          matcher: NONE_SELECTED
-        - pageName: whoHasParentNotAtHome
-          input: whoHasAParentNotLivingAtHome
-          value: NONE_OF_THE_ABOVE
-  childCareChildSupport:
-    pageConfiguration: *childCareChildSupport
-    skipCondition:
-      logicalOperator: OR
-      conditions:
-        - *noOneChoseCCAP?
-        - pageName: childrenInNeedOfCare
-          input: whoNeedsChildCare
-          matcher: NONE_SELECTED
-        - pageName: whoHasParentNotAtHome
-          input: whoHasAParentNotLivingAtHome
-          value: NONE_OF_THE_ABOVE
-    nextPages:
-      - pageName: housingSubsidy
-        condition:
-          logicalOperator: AND
-          conditions:
-            - *noOneChoseSNAP?
-            - *noOneChoseCCAP?
-      - pageName: childCareMentalHealth
-    datasources:
-      - pageName: choosePrograms
-      - pageName: whoHasParentNotAtHome
-      - groupName: household
-        pageName: householdMemberInfo
-      - pageName: childrenInNeedOfCare
-  childCareMentalHealth:
-    pageConfiguration: *childCareMentalHealth
-    skipCondition: *noOneChoseCCAP?
-    nextPages:
-      - pageName: whoNeedsChildCareForMentalHealth
-        condition: 
-          pageName: childCareMentalHealth
-          input: childCareMentalHealth
-          value: "true"
-      - pageName: preparingMealsTogether
-        condition:
-          logicalOperator: AND
-          conditions:
-            - *someoneChoseSNAP? 
-            - *doesNotLiveAlone?
-      - pageName: introPersonalDetails
-        condition:
-          logicalOperator: AND
-          conditions:
-            - *applicantChoseCCAPProgram?
-            - *livesAlone?
-      - pageName: housingSubsidy
-    datasources:
-      - pageName: childrenInNeedOfCare
-      - pageName: childCareMentalHealth
-      - pageName: choosePrograms
-      - pageName: addHouseholdMembers
-      - groupName: household
-        pageName: householdMemberInfo
-  whoNeedsChildCareForMentalHealth:
-    pageConfiguration: *whoNeedsChildCareForMentalHealth
-    skipCondition:
-      customCondition: APPLICANT_IS_ONLY_ADULT
-      name: childCareMentalHealthSelectedNo
-    nextPages:
-      - pageName: childCareMentalHealthTimes
-    datasources:
-      - pageName: childCareMentalHealth
-      - pageName: childrenInNeedOfCare
-      - groupName: household
-        pageName: householdMemberInfo
-  childCareMentalHealthTimes:
-    pageConfiguration: *childCareMentalHealthTimes
-    skipCondition:
-      logicalOperator: OR
-      conditions:
-        - *noOneChoseCCAP?
-        - name: childCareMentalHealthSelectedNo
-          pageName: childCareMentalHealth
-          input: childCareMentalHealth
-          matcher: CONTAINS
-          value: "false"
-    nextPages:
-      - pageName: preparingMealsTogether
-        condition:
-          logicalOperator: AND
-          conditions:
-            - *doesNotLiveAlone?
-            - *someoneChoseSNAP?
-      - pageName: introPersonalDetails
-        condition: *livesAlone?
-      - pageName: housingSubsidy
-    datasources:
-      - pageName: childrenInNeedOfCare
-      - pageName: childCareMentalHealth
-      - pageName: whoNeedsChildCareForMentalHealth
-      - pageName: addHouseholdMembers
-      - pageName: choosePrograms
-      - groupName: household
-        pageName: householdMemberInfo
-  introPersonalDetails:
-    pageConfiguration: *introPersonalDetails
-    nextPages:
-      - pageName: housingSubsidy
-  preparingMealsTogether:
-    pageConfiguration: *preparingMealsTogether
-    skipCondition: 
-      logicalOperator: OR
-      conditions:
-        - *noOneChoseSNAP?
-        - *livesAlone?
-    nextPages:
-      - pageName: buyOrCookFood
-        condition:
-          name: hasHouseholdAndSomeoneChooseSNAP
-          logicalOperator: AND
-          conditions:
-            - *doesNotLiveAlone?
-            - *someoneChoseSNAP?
-      - pageName: housingSubsidy 
-    datasources:
-      - pageName: choosePrograms
-      - groupName: household
-        pageName: householdMemberInfo
-      - pageName: addHouseholdMembers
-  buyOrCookFood:
-    pageConfiguration: *buyOrCookFood
-    nextPages:
-      - pageName: housingSubsidy
-  housingSubsidy:
-    pageConfiguration: *housingSubsidy
-    datasources:
-      - pageName: addHouseholdMembers
-      - pageName: choosePrograms
-      - pageName: householdMemberInfo
-        groupName: household
-    nextPages:
-      - pageName: housingSituation
-  housingSituation:
-    pageConfiguration: *housingSituation
-    datasources:
-      - pageName: addHouseholdMembers
-      - pageName: choosePrograms
-      - pageName: householdMemberInfo
-        groupName: household
-    nextPages:
-      - pageName: livingSituation
-    skipCondition: *noOneChoseCAF?
-  livingSituation:
-    pageConfiguration: *livingSituation
-    nextPages:
-      - pageName: housingProvider
-  housingProvider:
-    pageConfiguration: *housingProvider
-    skipCondition: *applicantDidNotChooseGRH?
-    nextPages:
-      - pageName: housingProviderInfo
-    datasources:
-      - pageName: choosePrograms
-      - pageName: addHouseholdMembers
-  housingProviderInfo:
-    pageConfiguration: *housingProviderInfo
-    skipCondition:
-      logicalOperator: OR
-      conditions:
-        - *applicantDidNotChooseGRH?
-        - pageName: housingProvider
-          value: "false"
-          input: housingProvider
-    nextPages:
-      - pageName: goingToSchool
-    datasources:
-      - pageName: choosePrograms
-      - pageName: housingProvider
-  goingToSchool:
-    pageConfiguration: *goingToSchool
-    datasources:
-      - pageName: addHouseholdMembers
-      - pageName: choosePrograms
-      - groupName: household
-        pageName: householdMemberInfo
-    nextPages:
-      - pageName: whoIsGoingToSchool
-        condition: *doesNotLiveAlone?
-      - pageName: lastSchoolGrade
-  whoIsGoingToSchool:
-    pageConfiguration: *whoIsGoingToSchool
-    datasources:
-      - pageName: choosePrograms
-      - pageName: goingToSchool
-      - groupName: household
-        pageName: householdMemberInfo
-    skipCondition:
-      name: applicantDidNotChooseCCAP_AND_householdMemberDidNotChooseCCAP_ORgoingToSchoolIsFalse
-      logicalOperator: OR
-      conditions:
-        - conditions:
-            - *applicantDidNotChooseCCAP?
-            - *householdMemberDidNotChooseCCAP?
-        - pageName: goingToSchool
-          value: "false"
-          input: goingToSchool
-    nextPages:
-      - pageName: schoolDetails
-  schoolDetails:
-    pageConfiguration: *schoolDetails
-    datasources:
-      - pageName: choosePrograms
-      - pageName: childrenInNeedOfCare
-      - pageName: goingToSchool
-      - pageName: whoIsGoingToSchool
-      - groupName: household
-        pageName: householdMemberInfo
-    skipCondition:
-      logicalOperator: OR
-      conditions:
-        - conditions:
-            - *applicantDidNotChooseCCAP?
-            - *householdMemberDidNotChooseCCAP?
-        - pageName: goingToSchool
-          value: "false"
-          input: goingToSchool
-        - customCondition: SKIP_SCHOOL_DETAILS
-    nextPages:
-      - pageName: schoolGrade
-  schoolGrade:
-    pageConfiguration: *schoolGrade
-    datasources:
-      - pageName: personalInfo
-      - pageName: schoolDetails
-      - pageName: choosePrograms
-      - pageName: childrenInNeedOfCare
-      - pageName: goingToSchool
-      - pageName: whoIsGoingToSchool
-      - groupName: household
-        pageName: householdMemberInfo
-    skipCondition:
-      logicalOperator: OR
-      conditions:
-        - conditions:
-            - *applicantDidNotChooseCCAP?
-            - *householdMemberDidNotChooseCCAP?
-        - pageName: goingToSchool
-          value: "false"
-          input: goingToSchool
-        - customCondition: SKIP_SCHOOL_DETAILS
-    nextPages:
-      - pageName: schoolStartDate      
-  schoolStartDate:
-    pageConfiguration: *schoolStartDate
-    enrichment: schoolStartDateEnrichment
-    nextPages:
-      - pageName: lastSchoolGrade
-    datasources:
-      - pageName: schoolGrade
-      - pageName : choosePrograms
-      - groupName: household
-        pageName: householdMemeberInfo
-    skipCondition:
-      conditions:
-        - customCondition: SKIP_SCHOOL_START_DATE
-  lastSchoolGrade:
-    pageConfiguration: *lastSchoolGrade
-    skipCondition: *noOneChoseCAF?
-    nextPages:
-      - pageName: militaryService
-        condition: *someoneChoseCAFProgram?
-      - pageName: pregnant
-    datasources:
-      - pageName: personalInfo
-      - pageName: addHouseholdMembers
-      - pageName: choosePrograms
-      - groupName: household
-        pageName: householdMemberInfo		
-  militaryService:
-    pageConfiguration: *militaryService
-    nextPages:
-      - pageName: whoHasMilitaryService
-        condition: *doesNotLiveAlone?
-      - pageName: pregnant
-    datasources:
-      - pageName : choosePrograms
-      - pageName: addHouseholdMembers
-      - pageName: householdMemeberInfo
-        groupName: household
-    skipCondition: *noOneChoseCAF?
-  whoHasMilitaryService:
-    pageConfiguration: *whoHasMilitaryService
-    nextPages:
-      - pageName: pregnant
-    datasources:
-      - pageName: householdMemeberInfo
-        groupName: household
-      - pageName: addHouseholdMembers
-      - pageName: militaryService
-    skipCondition:
-      name: LivesAlone&MilitaryServiceIsFalse
-      logicalOperator: OR
-      conditions:
-        - conditions:
-            - *livesAlone?
-            - *noOneChoseCAF?
-        - pageName: militaryService
-          input: hasMilitaryService
-          value: "false"
-  pregnant:
-    pageConfiguration: *pregnant
-    nextPages:
-      - pageName: whoIsPregnant
-    datasources:
-      - pageName: addHouseholdMembers
-  whoIsPregnant:
-    pageConfiguration: *whoIsPregnant
-    nextPages:
-      - pageName: migrantFarmWorker
-    datasources:
-      - pageName: addHouseholdMembers
-      - pageName: pregnant
-    skipCondition:
-      logicalOperator: OR
-      conditions:
-        - *livesAlone?
-        - pageName: pregnant
-          input: isPregnant
-          value: "false"
-  migrantFarmWorker:
-    pageConfiguration: *migrantFarmWorker
-    nextPages:
-      - pageName: citizenship
-    datasources:
-      - pageName: addHouseholdMembers
-  citizenship:
-    pageConfiguration: *citizenship
-    nextPages:
-      - pageName: disability
-    datasources:
-      - pageName: addHouseholdMembers
-      - pageName: personalInfo 
-      - groupName: household
-  whoIsNonCitizen:
-    pageConfiguration: *whoIsNonCitizen
-    nextPages:
-      - pageName: alienIdNumber
-    datasources:
-      - pageName: addHouseholdMembers
-      - pageName: citizenship
-    skipCondition: *livesAlone?
-  alienIdNumber:
-    pageConfiguration: *alienIdNumber
-    nextPages:
-      - pageName: alienIdNumbers
-    datasources:
-      - pageName: choosePrograms
-      - pageName: addHouseholdMembers
-    skipCondition: *doesNotLiveAlone? 
-  alienIdNumbers:
-    pageConfiguration: *alienIdNumbers
-    nextPages:
-      - pageName: disability
-    datasources:
-      - pageName: choosePrograms
-      - pageName: addHouseholdMembers
-    skipCondition: *livesAlone?   
-  disability:
-    pageConfiguration: *disability
-    skipCondition:
-        logicalOperator: OR
-        conditions:
-          - logicalOperator: AND
-            conditions:
-              - *applicantOnlyChoseCCAP?
-              - *householdOnlyChoseCCAP?
-          - logicalOperator: AND
-            conditions:
-              - *livesAlone?
-              - *applicantOnlyChoseCCAP?
-    datasources:
-      - pageName: addHouseholdMembers
-      - pageName: householdMemberInfo
-        groupName: household
-      - pageName: choosePrograms			  
-    nextPages:
-      - pageName: unableToWork
-        condition: *someoneChoseCAFProgram?
-      - pageName: workChanges			
-  unableToWork:
-    pageConfiguration: *unableToWork
-    datasources:
-      - pageName: addHouseholdMembers
-    nextPages:
-      - pageName: workChanges			  
-  workChanges:
-    pageConfiguration: *workChanges
-    skipCondition:
-        logicalOperator: OR
-        conditions:
-          - logicalOperator: AND
-            conditions:
-              - *applicantOnlyChoseCCAP?
-              - *householdOnlyChoseCCAP?
-          - logicalOperator: AND
-            conditions:
-              - *livesAlone?
-              - *applicantOnlyChoseCCAP?
-    datasources:
-      - pageName: addHouseholdMembers
-      - pageName: householdMemberInfo
-        groupName: household
-      - pageName: choosePrograms
-    nextPages:
-      - pageName: tribalNationMember
-  tribalNationMember:
-    pageConfiguration: *tribalNationMember
-    nextPages:
-      - pageName: selectTheTribe
-        condition:
-          pageName: tribalNationMember
-          name: isTribalNationMemberTrue
-          input: isTribalNationMember
-          value: "true"
-      - pageName: howToAddDocuments
-        condition: *laterDocsFlow?
-      - pageName: linealDescendantWEN
-        condition:
-          conditions:
-            - *WENCountySelected?
-            - pageName: tribalNationMember
-              name: isTribalNationMemberFalse
-              input: isTribalNationMember
-              value: "false"
-        flag: WEN-lineal-descendant
-      - pageName: introIncome
-    datasources:
-      - pageName: choosePrograms
-      - pageName: addHouseholdMembers
-      - pageName: identifyCounty
-      - pageName: matchInfo
-  selectTheTribe:
-    pageConfiguration: *selectTheTribe
-    nextPages:
-      - pageName: nationsBoundary
-        condition: 
-          logicalOperator: AND
-          conditions:
-            - *laterDocsFlow?
-            - *isTribalMemberNotWhiteEarthNationLivingInClearwaterCounty?
-      - pageName: howToAddDocuments
-        condition: *laterDocsFlow?
-      - pageName: nationsBoundary
-    datasources:
-      - pageName: choosePrograms
-      - pageName: addHouseholdMembers
-      - pageName: matchInfo
-      - pageName: identifyCounty
-      - pageName: tribalNationMember
-      - pageName: selectTheTribe
-  linealDescendantWEN:
-    pageConfiguration: *linealDescendantWEN
-    datasources:
-      - pageName: addHouseholdMembers
-    nextPages:
-      - pageName: introIncome
-  nationsBoundary:
-    pageConfiguration: *nationsBoundary
-    nextPages:
-    # page flow when response is "Yes"
-      - pageName: nationOfResidence
-        condition:
-          pageName: nationsBoundary
-          name: livingInNationBoundaryIsTrue
-          input: livingInNationBoundary
-          value: "true"
-    # page flow when response is "No"
-      - pageName: howToAddDocuments
-        condition: *laterDocsFlow?
-      - pageName: applyForTribalTANF
-        condition: *isEligibleForTribalTANFonNationsBoundaryPage?
-      - pageName: introIncome
-    datasources:
-      - groupName: household
-        pageName: householdMemberInfo
-        optional: "true"
-      - pageName: choosePrograms
-      - pageName: addHouseholdMembers
-      - pageName: selectTheTribe
-      - pageName: identifyCounty
-      - pageName: pregnant
-      - pageName: tribalNationMember
-      - pageName: matchInfo
-  nationOfResidence:
-    pageConfiguration: *nationOfResidence
-    nextPages:
-      - pageName: howToAddDocuments
-        condition: *laterDocsFlow?
-      - pageName: applyForTribalTANF
-        condition: *isEligibleForTribalTANFonNationOfResidencePage?
-      - pageName: introIncome
-    datasources:
-      - groupName: household
-        pageName: householdMemberInfo
-        optional: "true"
-      - pageName: addHouseholdMembers
-      - pageName: tribalNationMember
-      - pageName: selectTheTribe
-      - pageName: identifyCounty
-      - pageName: pregnant
-      - pageName: matchInfo
-  applyForTribalTANF:
-    pageConfiguration: *applyForTribalTANF
-    nextPages:
-      - pageName: tribalTANFConfirmation
-        condition:
-          pageName: applyForTribalTANF
-          input: applyForTribalTANF
-          value: "true"
-      - pageName: introIncome
-    skipCondition:
-      name: livesAloneAndIsNotPregnant
-      logicalOperator: AND
-      conditions:
-        - *livesAlone?
-        - pageName: pregnant
-          name: isNotPregnant
-          input: isPregnant
-          value: "false"
-    datasources:
-      - pageName: choosePrograms
-      - pageName: pregnant
-      - pageName: addHouseholdMembers
-      - pageName: identifyCounty
-  tribalTANFConfirmation:
-    pageConfiguration: *tribalTANFConfirmation
-    nextPages:
-      - pageName: introIncome
-    datasources:
-      - pageName: identifyCounty
-      - pageName: choosePrograms
-  introIncome:
-    pageConfiguration: *introIncome
-    nextPages:
-      - pageName: employmentStatus
-  employmentStatus:
-    pageConfiguration: *employmentStatus
-    datasources:
-      - pageName: addHouseholdMembers
-      - pageName: choosePrograms
-      - pageName: householdMemberInfo
-        groupName: household
-    nextPages:
-      - pageName: pastEmployment
-        condition:
-          name: someoneChoseSNAPandNotWorking
-          logicalOperator: AND
-          conditions:
-            - *someoneChoseSNAP?
-            - pageName: employmentStatus
-              input: areYouWorking
-              value: "false"
-      - pageName: jobSearch
-        condition:
-          name: notWorking
-          pageName: employmentStatus
-          input: areYouWorking
-          value: "false"
-      - pageName: incomeByJob
-  incomeByJob:
-    pageConfiguration: *incomeByJob
-    subtleLinkTargetPage: thirtyDayIncome
-    datasources:
-      - pageName: addHouseholdMembers
-    nextPages:
-      - pageName: householdSelectionForIncome
-  householdSelectionForIncome:
-    pageConfiguration: *householdSelectionForIncome
-    groupName: jobs
-    enrichment: fullNameEnrichment
-    datasources:
-      - pageName: addHouseholdMembers
-    nextPages:
-      - pageName: employersName
-    skipCondition: *livesAlone?
-  employersName:
-    pageConfiguration: *employersName
-    groupName: jobs
-    nextPages:
-      - pageName: selfEmployment
-    datasources:
-      - pageName: householdSelectionForIncome
-      - pageName: addHouseholdMembers
-  selfEmployment:
-    pageConfiguration: *selfEmployment
-    groupName: jobs
-    nextPages:
-      - pageName: paidByTheHour
-    datasources:
-      - pageName: employersName
-      - pageName: householdSelectionForIncome
-      - pageName: addHouseholdMembers
-  paidByTheHour:
-    pageConfiguration: *paidByTheHour
-    groupName: jobs
-    nextPages:
-      - pageName: hourlyWage
-        condition:
-          input: paidByTheHour
-          value: "true"
-      - pageName: payPeriod
-        condition:
-          input: paidByTheHour
-          value: "false"
-    datasources:
-      - pageName: employersName
-      - pageName: householdSelectionForIncome
-      - pageName: addHouseholdMembers
-    subtleLinkTargetPage: lastThirtyDaysJobIncome
-  hourlyWage:
-    pageConfiguration: *hourlyWage
-    groupName: jobs
-    nextPages:
-      - pageName: hoursAWeek
-    datasources:
-      - pageName: employersName
-      - pageName: householdSelectionForIncome
-      - pageName: addHouseholdMembers
-  hoursAWeek:
-    pageConfiguration: *hoursAWeek
-    groupName: jobs
-    nextPages:
-      - pageName: jobBuilder
-    datasources:
-      - pageName: employersName
-      - pageName: householdSelectionForIncome
-      - pageName: addHouseholdMembers
-  payPeriod:
-    pageConfiguration: *payPeriod
-    groupName: jobs
-    nextPages:
-      - pageName: incomePerPayPeriod
-    datasources:
-      - pageName: employersName
-      - pageName: householdSelectionForIncome
-      - pageName: addHouseholdMembers
-  incomePerPayPeriod:
-    pageConfiguration: *incomePerPayPeriod
-    groupName: jobs
-    nextPages:
-      - pageName: jobBuilder
-    datasources:
-      - pageName: employersName
-      - pageName: payPeriod
-  jobBuilder:
-    pageConfiguration: *jobBuilder
-    dataMissingRedirect: introIncome
-    nextPages:
-      - pageName: householdSelectionForIncome
-      - pageName: jobSearch
-    datasources:
-      - groupName: jobs
-      - pageName: addHouseholdMembers
-  jobRedirectPage:
-    pageConfiguration: *jobRedirectPage
-    dataMissingRedirect: workChanges
-    nextPages:
-      - pageName: jobBuilder
-    datasources:
-      - groupName: jobs
-  jobDeleteWarningPage:
-    pageConfiguration: *jobDeleteWarningPage
-    dataMissingRedirect: employmentStatus
-    appliesToGroup: jobs
-    nextPages:
-      - pageName: jobBuilder
-    datasources:
-      - groupName: jobs
-      - pageName: addHouseholdMembers
-      - pageName: householdSelectionForIncome
-  thirtyDayIncome:
-    pageConfiguration: *thirtyDayIncome
-    nextPages:
-      - pageName: principalWageEarner
-        condition: *someoneChoseSNAP?
-      - pageName: incomeUpNext
-    datasources:
-      - pageName: addHouseholdMembers
-      - pageName: householdSelectionForIncome
-  lastThirtyDaysJobIncome:
-    pageConfiguration: *lastThirtyDaysJobIncome
-    nextPages:
-      - pageName: jobBuilder
-    datasources:
-      - pageName: addHouseholdMembers
-      - pageName: householdSelectionForIncome
-      - pageName: employersName
-    groupName: jobs
-  pastEmployment:
-    pageConfiguration: *pastEmployment
-    datasources:
-      - pageName: choosePrograms
-      - pageName: addHouseholdMembers
-      - pageName: householdMemberInfo
-        groupName: household
-    nextPages:
-      - pageName: principalWageEarner
-        condition: *someoneChoseSNAP?
-      - pageName: jobSearch
-        condition: *someoneChoseCCAP?
-      - pageName: incomeUpNext
-  principalWageEarner:
-    pageConfiguration: *principalWageEarner
-    datasources:
-     - pageName: addHouseholdMembers
-     - pageName: householdMemberInfo
-       groupName: household
-       optional: "true"
-     - pageName: choosePrograms
-    nextPages:
-      - pageName: incomeUpNext
-  incomeUpNext:
-    pageConfiguration: *incomeUpNext
-    nextPages:
-      - pageName: unearnedIncome
-  unearnedIncome:
-    pageConfiguration: *unearnedIncome
-    nextPages:
-      - pageName: unearnedIncomeSources 
-        condition: *livesAlone? 
-      - pageName: otherUnearnedIncome
-        condition: 
-          name: doesNotLiveAloneANDnoUnearnedIncomeSelected
-          logicalOperator: AND
-          conditions:
-            - *doesNotLiveAlone?
-            - *noUnearnedIncomeSelected?
-      - pageName: socialSecurityIncomeSource
-        condition:
-          logicalOperator: AND
-          conditions:
-            - pageName: unearnedIncome
-              input: unearnedIncome
-              value: SOCIAL_SECURITY
-            - *doesNotLiveAlone?
-      - pageName: supplementalSecurityIncomeSource
-        condition:
-          logicalOperator: AND
-          conditions:
-            - pageName: unearnedIncome
-              input: unearnedIncome
-              value: SSI
-            - *doesNotLiveAlone?
-      - pageName: veteransBenefitsIncomeSource
-        condition:
-          logicalOperator: AND
-          conditions:
-            - pageName: unearnedIncome
-              input: unearnedIncome
-              value: VETERANS_BENEFITS
-            - *doesNotLiveAlone?
-      - pageName: unemploymentIncomeSource
-        condition:
-          name: selectedUnemploymentANDdoesNotLiveAlone
-          logicalOperator: AND
-          conditions:
-            - pageName: unearnedIncome
-              name: selectedUnemployment
-              input: unearnedIncome
-              value: UNEMPLOYMENT
-            - *doesNotLiveAlone?
-      - pageName: workersCompIncomeSource
-        condition:
-          logicalOperator: AND
-          conditions:
-            - pageName: unearnedIncome
-              input: unearnedIncome
-              value: WORKERS_COMPENSATION
-            - *doesNotLiveAlone?
-      - pageName: retirementIncomeSource
-        condition:
-          logicalOperator: AND
-          conditions:
-            - pageName: unearnedIncome
-              input: unearnedIncome
-              value: RETIREMENT
-            - *doesNotLiveAlone?
-      - pageName: childOrSpousalSupportIncomeSource
-        condition:
-          logicalOperator: AND
-          conditions:
-            - pageName: unearnedIncome
-              input: unearnedIncome
-              value: CHILD_OR_SPOUSAL_SUPPORT
-            - *doesNotLiveAlone?
-      - pageName: tribalPaymentIncomeSource
-        condition:
-          logicalOperator: AND
-          conditions:
-            - pageName: unearnedIncome
-              input: unearnedIncome
-              value: TRIBAL_PAYMENTS
-            - *doesNotLiveAlone?
-      - pageName: unearnedIncomeSources
-    datasources:
-      - pageName: addHouseholdMembers
-      - pageName: choosePrograms
-      - pageName: householdMemberInfo
-        groupName: household
-  unearnedIncomeSources:
-    pageConfiguration: *unearnedIncomeSources
-    nextPages:
-      - pageName: otherUnearnedIncome
-    skipCondition:
-      conditions:
-        - *noUnearnedIncomeSelected?
-    datasources:
-      - pageName: unearnedIncome
-      - pageName: addHouseholdMembers
-  otherUnearnedIncomeSources:
-    pageConfiguration: *otherUnearnedIncomeSources
-    nextPages:
-      - pageName: advancedChildTaxCredit
-        condition: *someoneChoseSNAP?
-      - pageName: studentFinancialAid
-        condition: *someoneChoseCAFProgram?
-      - pageName: futureIncome
-    datasources:
-      - pageName: otherUnearnedIncome
-      - pageName: addHouseholdMembers
-      - pageName: choosePrograms
-      - pageName: householdMemberInfo
-        groupName: household
-  socialSecurityIncomeSource:
-    pageConfiguration: *socialSecurityIncomeSource
-    nextPages:
-      - pageName: supplementalSecurityIncomeSource
-    skipCondition:
-      logicalOperator: OR
-      conditions:
-        - *noUnearnedIncomeSelected?
-        - pageName: unearnedIncome
-          input: unearnedIncome
-          matcher: DOES_NOT_CONTAIN
-          value: SOCIAL_SECURITY
-    datasources:
-      - pageName: unearnedIncome
-        groupName: unearnedIncomeGroup
-      - pageName: addHouseholdMembers
-      - pageName: choosePrograms
-  supplementalSecurityIncomeSource:
-    pageConfiguration: *supplementalSecurityIncomeSource
-    nextPages:
-      - pageName: veteransBenefitsIncomeSource
-    skipCondition:
-      logicalOperator: OR
-      conditions:
-        - *noUnearnedIncomeSelected?
-        - pageName: unearnedIncome
-          input: unearnedIncome
-          matcher: DOES_NOT_CONTAIN
-          value: SSI
-    datasources:
-      - pageName: unearnedIncome
-      - pageName: addHouseholdMembers
-      - pageName: choosePrograms
-  veteransBenefitsIncomeSource:
-    pageConfiguration: *veteransBenefitsIncomeSource
-    nextPages:
-      - pageName: unemploymentIncomeSource
-    skipCondition:
-      logicalOperator: OR
-      conditions:
-        - *noUnearnedIncomeSelected?
-        - pageName: unearnedIncome
-          input: unearnedIncome
-          matcher: DOES_NOT_CONTAIN
-          value: VETERANS_BENEFITS
-    datasources:
-      - pageName: unearnedIncome
-      - pageName: addHouseholdMembers
-      - pageName: choosePrograms
-  unemploymentIncomeSource:
-    pageConfiguration: *unemploymentIncomeSource
-    nextPages:
-      - pageName: workersCompIncomeSource
-    skipCondition:
-      logicalOperator: OR
-      conditions:
-        - *noUnearnedIncomeSelected?
-        - pageName: unearnedIncome
-          input: unearnedIncome
-          matcher: DOES_NOT_CONTAIN
-          value: UNEMPLOYMENT
-    datasources:
-      - pageName: unearnedIncome
-      - pageName: addHouseholdMembers
-      - pageName: choosePrograms
-  workersCompIncomeSource:
-    pageConfiguration: *workersCompIncomeSource
-    nextPages:
-      - pageName: retirementIncomeSource
-    skipCondition:
-      logicalOperator: OR
-      conditions:
-        - *noUnearnedIncomeSelected?
-        - pageName: unearnedIncome
-          input: unearnedIncome
-          matcher: DOES_NOT_CONTAIN
-          value: WORKERS_COMPENSATION
-    datasources:
-      - pageName: unearnedIncome
-      - pageName: addHouseholdMembers
-      - pageName: choosePrograms
-  retirementIncomeSource:
-    pageConfiguration: *retirementIncomeSource
-    nextPages:
-      - pageName: childOrSpousalSupportIncomeSource
-    skipCondition:
-      logicalOperator: OR
-      conditions:
-        - *noUnearnedIncomeSelected?
-        - pageName: unearnedIncome
-          input: unearnedIncome
-          matcher: DOES_NOT_CONTAIN
-          value: RETIREMENT
-    datasources:
-      - pageName: unearnedIncome
-      - pageName: addHouseholdMembers
-      - pageName: choosePrograms
-  childOrSpousalSupportIncomeSource:
-    pageConfiguration: *childOrSpousalSupportIncomeSource
-    nextPages:
-      - pageName: tribalPaymentIncomeSource
-    skipCondition:
-      logicalOperator: OR
-      conditions:
-        - *noUnearnedIncomeSelected?
-        - pageName: unearnedIncome
-          input: unearnedIncome
-          matcher: DOES_NOT_CONTAIN
-          value: CHILD_OR_SPOUSAL_SUPPORT
-    datasources:
-      - pageName: unearnedIncome
-      - pageName: addHouseholdMembers
-      - pageName: choosePrograms
-  tribalPaymentIncomeSource:
-    pageConfiguration: *tribalPaymentIncomeSource
-    nextPages:
-      - pageName: otherUnearnedIncome
-    skipCondition:
-      logicalOperator: OR
-      conditions:
-        - *noUnearnedIncomeSelected?
-        - pageName: unearnedIncome
-          input: unearnedIncome
-          matcher: DOES_NOT_CONTAIN
-          value: TRIBAL_PAYMENTS
-    datasources:
-      - pageName: unearnedIncome
-      - pageName: addHouseholdMembers
-      - pageName: choosePrograms
-  otherUnearnedIncome:
-    pageConfiguration: *otherUnearnedIncome
-    nextPages:
-      - pageName: otherUnearnedIncomeSources
-        condition:
-          logicalOperator: AND
-          conditions:
-            - *selectedOtherUnearnedIncome?
-            - logicalOperator: OR
-              conditions:
-                - *livesAlone?
-      - pageName: insurancePaymentsIncomeSource
-        condition: *selectedOtherUnearnedIncome?
-      - pageName: insurancePaymentsIncomeSource
-        condition:
-          logicalOperator: AND
-          conditions:
-            - pageName: otherUnearnedIncome
-              input: otherUnearnedIncome
-              value: INSURANCE_PAYMENTS
-            - *doesNotLiveAlone?
-      - pageName: advancedChildTaxCredit
-        condition:
-          logicalOperator: AND
-          conditions:
-            - pageName: otherUnearnedIncome
-              input: otherUnearnedIncome
-              value: NO_OTHER_UNEARNED_INCOME_SELECTED
-            - *someoneChoseSNAP?
-      - pageName: studentFinancialAid
-        condition: 
-          logicalOperator: AND
-          conditions: 
-            - pageName: otherUnearnedIncome
-              input: otherUnearnedIncome
-              value: NO_OTHER_UNEARNED_INCOME_SELECTED
-            - *someoneChoseCAFProgram?
-      - pageName: futureIncome
-    datasources:
-      - pageName: choosePrograms
-      - pageName: addHouseholdMembers
-      - pageName: householdMemberInfo
-        groupName: household
-      - pageName: unearnedIncome
-      - pageName: otherUnearnedIncome
-      - pageName: employmentStatus
-  insurancePaymentsIncomeSource:
-    pageConfiguration: *insurancePaymentsIncomeSource
-    skipCondition:
-      pageName: otherUnearnedIncome
-      input: otherUnearnedIncome
-      matcher: DOES_NOT_CONTAIN
-      value: INSURANCE_PAYMENTS
-    nextPages:
-      - pageName: trustMoneyIncomeSource
-    datasources:
-      - pageName: otherUnearnedIncome
-  trustMoneyIncomeSource:
-    pageConfiguration: *trustMoneyIncomeSource
-    skipCondition:
-      pageName: otherUnearnedIncome
-      input: otherUnearnedIncome
-      matcher: DOES_NOT_CONTAIN
-      value: TRUST_MONEY
-    nextPages:
-      - pageName: rentalIncomeSource
-    datasources:
-      - pageName: otherUnearnedIncome
-  rentalIncomeSource:
-    pageConfiguration: *rentalIncomeSource
-    skipCondition:
-      pageName: otherUnearnedIncome
-      input: otherUnearnedIncome
-      matcher: DOES_NOT_CONTAIN
-      value: RENTAL_INCOME
-    nextPages:
-      - pageName: interestDividendsIncomeSource
-    datasources:
-      - pageName: otherUnearnedIncome
-  interestDividendsIncomeSource:
-    pageConfiguration: *interestDividendsIncomeSource
-    skipCondition:
-      pageName: otherUnearnedIncome
-      input: otherUnearnedIncome
-      matcher: DOES_NOT_CONTAIN
-      value: INTEREST_DIVIDENDS
-    nextPages:
-      - pageName: healthcareReimbursementIncomeSource
-    datasources:
-      - pageName: otherUnearnedIncome
-  healthcareReimbursementIncomeSource:
-    pageConfiguration: *healthcareReimbursementIncomeSource
-    skipCondition:
-      pageName: otherUnearnedIncome
-      input: otherUnearnedIncome
-      matcher: DOES_NOT_CONTAIN
-      value: HEALTH_CARE_REIMBURSEMENT
-    nextPages:
-      - pageName: benefitsProgramsIncomeSource
-    datasources:
-      - pageName: otherUnearnedIncome
-  benefitsProgramsIncomeSource:
-    pageConfiguration: *benefitsProgramsIncomeSource
-    skipCondition:
-      pageName: otherUnearnedIncome
-      input: otherUnearnedIncome
-      matcher: DOES_NOT_CONTAIN
-      value: BENEFITS
-    nextPages:
-      - pageName: contractForDeedIncomeSource
-    datasources:
-      - pageName: otherUnearnedIncome
-  contractForDeedIncomeSource:
-    pageConfiguration: *contractForDeedIncomeSource
-    skipCondition:
-      pageName: otherUnearnedIncome
-      input: otherUnearnedIncome
-      matcher: DOES_NOT_CONTAIN
-      value: CONTRACT_FOR_DEED
-    nextPages:
-      - pageName: annuityIncomeSource
-    datasources:
-      - pageName: otherUnearnedIncome
-  annuityIncomeSource:
-    pageConfiguration: *annuityIncomeSource
-    skipCondition:
-      pageName: otherUnearnedIncome
-      input: otherUnearnedIncome
-      matcher: DOES_NOT_CONTAIN
-      value: ANNUITY_PAYMENTS
-    nextPages:
-      - pageName: giftsIncomeSource
-    datasources:
-      - pageName: otherUnearnedIncome
-  giftsIncomeSource:
-    pageConfiguration: *giftsIncomeSource
-    skipCondition:
-      pageName: otherUnearnedIncome
-      input: otherUnearnedIncome
-      matcher: DOES_NOT_CONTAIN
-      value: GIFTS
-    nextPages:
-      - pageName: lotteryIncomeSource
-    datasources:
-      - pageName: otherUnearnedIncome 
-  lotteryIncomeSource:
-    pageConfiguration: *lotteryIncomeSource
-    skipCondition:
-      pageName: otherUnearnedIncome
-      input: otherUnearnedIncome
-      matcher: DOES_NOT_CONTAIN
-      value: LOTTERY_GAMBLING
-    nextPages:
-      - pageName: dayTradingIncomeSource
-    datasources:
-      - pageName: otherUnearnedIncome 
-  dayTradingIncomeSource:
-    pageConfiguration: *dayTradingIncomeSource
-    skipCondition:
-      pageName: otherUnearnedIncome
-      input: otherUnearnedIncome
-      matcher: DOES_NOT_CONTAIN
-      value: DAY_TRADING
-    nextPages:
-      - pageName: otherPaymentsIncomeSource
-    datasources:
-      - pageName: otherUnearnedIncome
-      - pageName: addHouseholdMembers
-      - pageName: choosePrograms
-      - groupName: household
-        pageName: householdMemberInfo		  	  		    	  
-  otherPaymentsIncomeSource:
-    pageConfiguration: *otherPaymentsIncomeSource
-    skipCondition:
-      pageName: otherUnearnedIncome
-      input: otherUnearnedIncome
-      matcher: DOES_NOT_CONTAIN
-      value: OTHER_PAYMENTS
-    nextPages:
-      - pageName: advancedChildTaxCredit
-        condition: *someoneChoseSNAP?
-      - pageName: studentFinancialAid
-        condition: *someoneChoseCAFProgram?
-      - pageName: futureIncome
-    datasources:
-      - pageName: otherUnearnedIncome 
-      - pageName: addHouseholdMembers
-      - pageName: choosePrograms
-      - groupName: household
-        pageName: householdMemberInfo      
-  advancedChildTaxCredit:
-    pageConfiguration: *advancedChildTaxCredit
-    nextPages:
-      - pageName: studentFinancialAid
-    datasources:
-      - pageName: addHouseholdMembers
-  studentFinancialAid:
-    pageConfiguration: *studentFinancialAid
-    nextPages:
-      - pageName: futureIncome
-    datasources:
-      - pageName: addHouseholdMembers
-      - pageName: householdMemberInfo
-        groupName: household
-  futureIncome:
-    pageConfiguration: *futureIncome
-    nextPages:
-      - pageName: startExpenses
-    datasources:
-      - pageName: addHouseholdMembers
-  startExpenses:
-    pageConfiguration: *startExpenses
-    nextPages:
-      - pageName: homeExpenses
-  homeExpenses:
-    pageConfiguration: *homeExpenses
-    skipCondition:
-        logicalOperator: OR
-        conditions:
-          - logicalOperator: AND
-            conditions:
-              - *applicantOnlyChoseCCAP?
-              - *householdOnlyChoseCCAP?
-          - logicalOperator: AND
-            conditions:
-              - *livesAlone?
-              - *applicantOnlyChoseCCAP?
-    nextPages:
-      - pageName: homeExpensesAmount
-        condition:
-          logicalOperator: OR
-          conditions:
-            - pageName: homeExpenses
-              input: homeExpenses
-              value: RENT
-            - pageName: homeExpenses
-              input: homeExpenses
-              value: MORTGAGE
-            - pageName: homeExpenses
-              input: homeExpenses
-              value: ROOM_AND_BOARD
-      - pageName: utilities
-    datasources:
-      - pageName: addHouseholdMembers
-      - pageName: householdMemberInfo
-        groupName: household
-      - pageName: choosePrograms
-  homeExpensesAmount:
-    pageConfiguration: *homeExpensesAmount
-    nextPages:
-      - pageName: utilities
-    datasources:
-      - pageName: homeExpenses
-      - pageName: addHouseholdMembers
-      - pageName: choosePrograms
-  utilities:
-    pageConfiguration: *utilityPayments
-    skipCondition:
-        logicalOperator: OR
-        conditions:
-          - logicalOperator: AND
-            conditions:
-              - *applicantOnlyChoseCCAP?
-              - *householdOnlyChoseCCAP?
-          - logicalOperator: AND
-            conditions:
-              - *livesAlone?
-              - *applicantOnlyChoseCCAP?
-    nextPages:
-      - pageName: energyAssistance
-    datasources:
-      - pageName: addHouseholdMembers
-      - pageName: householdMemberInfo
-        groupName: household
-      - pageName: choosePrograms
-  energyAssistance:
-    pageConfiguration: *energyAssistance
-    skipCondition:
-        logicalOperator: OR
-        conditions:
-          - logicalOperator: AND
-            conditions:
-              - *applicantOnlyChoseCCAP?
-              - *householdOnlyChoseCCAP?
-          - logicalOperator: AND
-            conditions:
-              - *livesAlone?
-              - *applicantOnlyChoseCCAP?
-    nextPages:
-      - pageName: energyAssistanceMoreThan20
-        condition:
-          pageName: energyAssistance
-          input: energyAssistance
-          value: "true"
-      - pageName: medicalExpenses
-    datasources:
-      - pageName: addHouseholdMembers
-      - pageName: householdMemberInfo
-        groupName: household
-      - pageName: choosePrograms
-  energyAssistanceMoreThan20:
-    pageConfiguration: *energyAssistanceMoreThan20
-    skipCondition:
-      pageName: energyAssistance
-      input: energyAssistance
-      value: "false"
-    nextPages:
-      - pageName: medicalExpenses
-    datasources:
-      - pageName: energyAssistance
-      - pageName: addHouseholdMembers
-  medicalExpenses:
-    pageConfiguration: *medicalExpenses
-    skipCondition:
-      logicalOperator: AND
-      conditions:
-        - *noOneChoseCCAP?
-        - *noOneChoseSNAP?
-    nextPages:
-      - pageName: specialCareExpenses
-        condition:
-          name: noMedicalSources
-          logicalOperator: OR
-          conditions:
-            - pageName: medicalExpenses
-              input: medicalExpenses
-              value: NONE_OF_THE_ABOVE
-            - pageName: medicalExpenses
-              input: medicalExpenses
-              value: MEDICAL_BILLS_OR_COPAYS
-              matcher: CONTAINS_ONLY
-      - pageName: medicalExpensesSources
-    datasources:
-      - pageName: choosePrograms
-      - pageName: addHouseholdMembers
-      - pageName: householdMemberInfo
-        groupName: household
-  specialCareExpenses:
-    pageConfiguration: *specialCareExpenses
-    skipCondition: *noOneChoseCASH?
-    datasources:
-     - pageName: addHouseholdMembers
-     - pageName: householdMemberInfo
-       groupName: household
-     - pageName: choosePrograms
-    nextPages:
-      - pageName: childCareCosts
-        condition: *someoneChoseCAFProgram?
-      - pageName: assets
-  childCareCosts:
-    pageConfiguration: *childCareCosts
-    datasources:
-     - pageName: addHouseholdMembers
-    nextPages:
-      - pageName: childCareCostsAmount
-        condition:
-          name: selectedYesForChildCareCosts
-          pageName: childCareCosts
-          input: childCareCosts
-          value: "true"
-      - pageName: adultCareCosts
-  childCareCostsAmount:
-    pageConfiguration: *childCareCostsAmount
-    nextPages:
-      - pageName: adultCareCosts
-  adultCareCosts:
-    pageConfiguration: *adultCareCosts
-    datasources:
-      - pageName: addHouseholdMembers
-    nextPages:
-      - pageName: adultCareCostsAmount
-        condition:
-          name: selectedYesForAdultCareCosts
-          pageName: adultCareCosts
-          input: adultCareCosts
-          value: "true"
-      - pageName: supportAndCare
-  adultCareCostsAmount:
-    pageConfiguration: *adultCareCostsAmount
-    nextPages:
-      - pageName: supportAndCare
-  supportAndCare:
-    pageConfiguration: *supportAndCare
-    nextPages:
-      - pageName: supportAndCareCostsAmount
-        condition:
-          name: selectedYesForSupportAndCareCosts
-          pageName: supportAndCare
-          input: supportAndCare
-          value: "true"
-      - pageName: assets
-    datasources:
-      - pageName: addHouseholdMembers
-      - pageName: householdMemberInfo
-        groupName: household
-      - pageName: choosePrograms
-  supportAndCareCostsAmount:
-    pageConfiguration: *supportAndCareCostsAmount
-    nextPages:
-      - pageName: assets
-  medicalExpensesSources:
-    pageConfiguration: *medicalExpensesSources
-    nextPages:
-      - pageName: specialCareExpenses
-    skipCondition:
-      logicalOperator: AND
-      conditions: 
-        - *noOneChoseCCAP?
-        - *noOneChoseSNAP?
-    datasources:
-      - pageName: medicalExpenses
-      - pageName: addHouseholdMembers
-      - pageName: householdMemberInfo
-        groupName: household
-      - pageName: choosePrograms
-  assets:
-    pageConfiguration: *assets
-    datasources:
-      - pageName: choosePrograms
-      - pageName: addHouseholdMembers
-      - pageName: householdMemberInfo
-        groupName: household
-      - pageName: assets
-    nextPages:
-      # CAF program selected and cash and or bank accounts → liquidAssetsSingle new revised page
-      - pageName: liquidAssetsSingle
-        condition:
-          name: CAFAndcashOrBank
-          logicalOperator: AND
-          conditions:
-            - *someoneChoseCAFProgram? 
-            - logicalOperator: OR
-              name: CashOrBankOrElectronic
-              conditions:
-                - pageName: assets
-                  input: assets
-                  value: "CASH"
-                - pageName: assets
-                  input: assets
-                  value: "BANK_ACCOUNT"
-      # DEFAULT NEXT PAGE
-      - pageName: soldAssets
-  investmentTypesIndividual:
-    pageConfiguration: *investmentTypesIndividual
-    nextPages:
-      - pageName: soldAssets
-    skipCondition:
-      logicalOperator: OR
-      conditions:
-        - pageName: assets
-          input: assets
-          value: STOCK_BOND
-          matcher: DOES_NOT_CONTAIN
-        - *doesNotLiveAlone?
-    datasources:
-      - pageName: addHouseholdMembers
-      - pageName: assets
-      - pageName: choosePrograms
-  liquidAssetsSingle:
-    pageConfiguration: *liquidAssetsSingle
-    nextPages:
-      - pageName: soldAssets
-  soldAssets:
-    pageConfiguration: *soldAssets
-    nextPages:
-      - pageName: submittingApplication
-    datasources:
-      - pageName: addHouseholdMembers
-  submittingApplication:
-    pageConfiguration: *submittingApplication
-    nextPages:
-      - pageName: registerToVote
-  registerToVote:
-    pageConfiguration: *registerToVote
-    nextPages:
-      - pageName: healthcareCoverage
-  healthcareCoverage:
-    pageConfiguration: *healthcareCoverage
-    nextPages:
-      - pageName: pastBenefit
-        condition: *someoneChoseCAFProgram?
-      - pageName: directDeposit
-        condition: *someoneChoseCASH?
-      - pageName: ebtInPast
-        condition: *someoneChoseSNAP?
-      - pageName: socialWorker
-        condition: *someoneChoseCAFProgram?
-      - pageName: authorizedRep
-    datasources:
-      - pageName: choosePrograms
-      - pageName: householdMemberInfo
-        groupName: household
-  pastBenefit:
-    pageConfiguration: *pastBenefit
-    nextPages:
-      - pageName: pastBenefitDetails
-        condition: *pastBenefitHouseholdHasPastBenefits?
-      - pageName: directDeposit
-        condition: *someoneChoseCASH?
-      - pageName: ebtInPast
-        condition: *someoneChoseSNAP?
-      - pageName: socialWorker
-        condition: *someoneChoseCAFProgram?
-    datasources:
-      - pageName: choosePrograms
-      - pageName: householdMemberInfo
-        groupName: household
-    skipCondition: *noOneChoseCAF?
-  pastBenefitDetails:
-    pageConfiguration: *pastBenefitDetails
-    nextPages:
-      - pageName: directDeposit
-        condition: *someoneChoseCASH?
-      - pageName: ebtInPast
-        condition: *someoneChoseSNAP?
-      - pageName: socialWorker
-        condition: *someoneChoseCAFProgram?
-    datasources:
-      - pageName: choosePrograms
-      - pageName: pastBenefit
-      - pageName: householdMemberInfo
-        groupName: household
-    skipCondition:
-      logicalOperator: OR
-      conditions:
-        - *noOneChoseCAF?
-        - pageName: pastBenefit
-          input: hasHouseholdPastBenefits
-          value: "false"
-  directDeposit:
-    pageConfiguration: *directDeposit
-    nextPages:
-      - pageName: ebtInPast
-        condition: *someoneChoseSNAP?
-      - pageName: socialWorker
-    datasources:
-      - pageName: choosePrograms
-      - pageName: addHouseholdMembers
-      - pageName: householdMemberInfo
-        groupName: household
-  ebtInPast:
-    pageConfiguration: *ebtInPast
-    nextPages:
-      - pageName: socialWorker
-  socialWorker:
-    pageConfiguration: *socialWorker
-    nextPages:
-      - pageName: referrals
-  referrals:
-    pageConfiguration: *referrals
-    nextPages:
-      - pageName: legalGuardian
-  legalGuardian:
-    pageConfiguration: *legalGuardian
-    nextPages:
-      - pageName: authorizedRep
-  authorizedRep:
-    pageConfiguration: *authorizedRep
-    nextPages:
-      - pageName: additionalInfo
-        condition:
-          pageName: authorizedRep
-          input: helpWithBenefits
-          value: "false"
-      - pageName: authorizedRepCommunicate
-        condition:
-          pageName: authorizedRep
-          input: helpWithBenefits
-          value: "true"
-  authorizedRepCommunicate:
-    pageConfiguration: *authorizedRepCommunicate
-    nextPages:
-      - pageName: authorizedRepMailNotices
-  authorizedRepMailNotices:
-    pageConfiguration: *authorizedRepMailNotices
-    nextPages:
-      - pageName: authorizedRepSpendOnYourBehalf
-  authorizedRepSpendOnYourBehalf:
-    pageConfiguration: *authorizedRepSpendOnYourBehalf
-    nextPages:
-      - pageName: authorizedRepContactInfo
-  authorizedRepContactInfo:
-    pageConfiguration: *authorizedRepContactInfo
-    nextPages:
-      - pageName: additionalInfo
-    skipCondition:
-      logicalOperator: AND
-      conditions:
-        - pageName: authorizedRep
-          input: communicateOnYourBehalf
-          value: "false"
-        - pageName: authorizedRepMailNotices
-          input: getMailNotices
-          value: "false"
-        - pageName: authorizedRepSpendOnYourBehalf
-          input: spendOnYourBehalf
-          value: "false"
-  jobSearch:
-    pageConfiguration: *jobSearch
-    skipCondition: *noOneChoseCCAP?
-    nextPages:
-      - pageName: whoIsLookingForAJob
-    datasources:
-      - pageName: choosePrograms
-      - pageName: addHouseholdMembers
-      - pageName: householdMemberInfo
-        groupName: household
-  whoIsLookingForAJob:
-    pageConfiguration: *whoIsLookingForAJob
-    nextPages:
-      - pageName: principalWageEarner
-        condition: *someoneChoseSNAP?
-      - pageName: incomeUpNext
-    datasources:
-      - pageName: addHouseholdMembers
-      - pageName: jobSearch
-      - pageName: choosePrograms
-      - pageName: householdMemberInfo
-        groupName: household
-    skipCondition:
-      logicalOperator: OR
-      conditions:
-        - logicalOperator: AND
-          conditions:
-            - *applicantDidNotChooseCCAP?
-            - *householdMemberDidNotChooseCCAP?
-        - logicalOperator: OR
-          conditions:
-            - *livesAlone?
-            - pageName: jobSearch
-              input: currentlyLookingForJob
-              value: "false"
-  doYouNeedHelpImmediately:
-    pageConfiguration: *doYouNeedHelpImmediately
-    nextPages:
-      - pageName: addHouseholdMembersExpedited
-        flow: EXPEDITED
-        condition:
-          pageName: doYouNeedHelpImmediately
-          input: needHelpImmediately
-          value: "true"
-      - pageName: additionalInfo
-        flow: MINIMUM
-        condition:
-          pageName: doYouNeedHelpImmediately
-          input: needHelpImmediately
-          value: "false"
-    datasources:
-      - pageName: doYouNeedHelpImmediately
-  addHouseholdMembersExpedited:
-    pageConfiguration: *addHouseholdMembers
-    nextPages:
-      - pageName: expeditedIncome
-  expeditedIncome:
-    pageConfiguration: *thirtyDayIncome
-    nextPages:
-      - pageName: expeditedHasSavings
-    datasources:
-      - pageName: addHouseholdMembers
-  expeditedHasSavings:
-    pageConfiguration: *savings
-    nextPages:
-      - pageName: liquidAssets
-    datasources:
-      - pageName: addHouseholdMembers
-  liquidAssets:
-    pageConfiguration: *liquidAssetsSingle
-    skipCondition:
-      pageName: savings
-      input: haveSavings
-      value: "false"
-    nextPages:
-      - pageName: expeditedExpenses
-    datasources:
-      - pageName: addHouseholdMembers
-      - pageName: savings
-      - pageName: choosePrograms
-  expeditedExpenses:
-    pageConfiguration: *expeditedExpenses
-    nextPages:
-      - pageName: expeditedExpensesAmount
-    datasources:
-      - pageName: addHouseholdMembers
-      - pageName: choosePrograms
-  expeditedExpensesAmount:
-    pageConfiguration: *expeditedExpensesAmount
-    skipCondition:
-      pageName: expeditedExpenses
-      input: payRentOrMortgage
-      value: "false"
-    nextPages:
-      - pageName: expeditedUtilityPayments
-    datasources:
-      - pageName: addHouseholdMembers
-      - pageName: choosePrograms
-      - pageName: expeditedExpenses
-  expeditedUtilityPayments:
-    pageConfiguration: *utilityPayments
-    nextPages:
-      - pageName: expeditedMigrantFarmWorker
-    datasources:
-      - pageName: addHouseholdMembers
-  expeditedMigrantFarmWorker:
-    pageConfiguration: *migrantFarmWorker
-    nextPages:
-      - pageName: snapExpeditedDetermination
-    datasources:
-      - pageName: addHouseholdMembers
-  snapExpeditedDetermination:
-    pageConfiguration: *snapExpeditedDetermination
-    nextPages:
-      - pageName: penaltyWarnings
-  additionalInfo:
-    pageConfiguration: *additionalInfo
-    nextPages:
-      - pageName: penaltyWarnings
-  penaltyWarnings:
-    pageConfiguration: *penaltyWarnings
-    nextPages:
-      - pageName: legalStuff
-    skipCondition:
-      logicalOperator: AND
-      conditions:
-        - *someoneChoseCCAP?
-        - *noOneChoseCAF?
-    datasources:
-      - pageName: choosePrograms
-      - pageName: addHouseholdMembers
-      - pageName: householdMemberInfo
-        groupName: household
-  legalStuff:
-    pageConfiguration: *legalStuff
-    nextPages:
-      - pageName: signThisApplication
-    datasources:
-      - pageName: choosePrograms
-      - pageName: householdMemberInfo
-        groupName: household
-  secondSignatureLegalStuff:
-    pageConfiguration: *secondSignatureLegalStuff
-    subtleLinkTargetPage: submit
-    nextPages:
-      - pageName: secondSignature
-    datasources:
-      - pageName: choosePrograms
-      - pageName: householdMemberInfo
-        groupName: household
-  signThisApplication:
-    pageConfiguration: *signThisApplication
-    nextPages:
-      - pageName: secondSignatureNotification
-        condition:
-          logicalOperator: AND
-          conditions:
-            - *doesNotLiveAlone?
-            - *someoneChoseCASH?
-      - pageName: submit
-    datasources:
-      - pageName: choosePrograms
-      - pageName: addHouseholdMembers
-      - pageName: householdMemberInfo
-        groupName: household
-  secondSignatureNotification:
-    pageConfiguration: *secondSignatureNotification
-    skipCondition:
-      logicalOperator: OR
-      conditions: 
-        - *livesAlone?
-        - *minimumFlow?
-    nextPages:
-      - pageName: secondSignatureLegalStuff
-      - pageName: submit
-    datasources:
-      - pageName: addHouseholdMembers
-      - pageName: doYouNeedHelpImmediately
-  secondSignature:
-    pageConfiguration: *secondSignature
-    subtleLinkTargetPage: submit
-    skipCondition:
-      logicalOperator: OR
-      conditions: 
-        - *continueWithoutSecondSignature?
-        - *livesAlone?
-        - *minimumFlow?
-    nextPages:
-      - pageName: submit
-    datasources:
-      - pageName: secondSignatureLegalStuff
-      - pageName: addHouseholdMembers
-      - pageName: doYouNeedHelpImmediately
-  submit:
-    pageConfiguration: *submit
-    nextPages:
-      - pageName: submissionConfirmation
-  submissionConfirmation:
-    pageConfiguration: *submissionConfirmation
-    nextPages:
-      - pageName: addingDocuments
-  addingDocuments:
-    pageConfiguration: *addingDocuments
-    nextPages:
-      - pageName: documentRecommendation
-    datasources:
-      - pageName: choosePrograms
-      - pageName: employmentStatus
-      - pageName: homeExpenses
-      - pageName: workChanges
-      - pageName: addHouseholdMembers
-      - groupName: household
-        pageName: householdMemberInfo
-        optional: "true"
-      - pageName: medicalExpenses
+identify-county.title=Identificar Condado
+identify-county-or-tribal-nation.title=Identifique el condado o Nación Tribal
+identify-county.select-your-county=Seleccione su condado
+identify-county.select-a-county=Seleccione un condado
+healthcare-Renewal-Upload.title=Pasos para cargar el documento de renovación de atención médica
+identify-county.select-a-tribal-nation=Seleccione una nación tribal
+identify-county.this-is-the-county=Elija el condado donde vive. .<br\\><br\\>Para ser elegible para recibir los beneficios en esta solicitud, debe vivir en el estado de Minnesota.
+identify-county.select-your-county-without-mn=Enviaremos su solicitud a este condado.
+identify-county.where-would-you-like-to-send-documents=¿A dónde le gustaría enviar sus documentos hoy?
+healthcare-Renewal-Upload.where-would-you-like-to-send-documents=¿A dónde le gustaría enviar hoy sus documentos de renovación de atención médica?
+identify-county.choose-a-location=Elija una ubicación de acuerdo con el lugar a donde envió su solicitud cuando aplicó. <br></br>Puede seleccionar un condado, una Nación Tribal o ambos.
 
-  howToAddDocuments:
-    pageConfiguration: *howToAddDocuments
-    nextPages:
-      - pageName: uploadDocuments
-    datasources:
-      - pageName: choosePrograms
-      - pageName: employmentStatus
-      - pageName: homeExpenses
-      - pageName: workChanges
-      - pageName: addHouseholdMembers
-      - groupName: household
-        pageName: householdMemberInfo
-        optional: "true"
-      - pageName: medicalExpenses
+healthcare-Renewal-Upload.choose-a-location=Elija el condado <b>O</b> la nación tribal que está gestionando su caso de atención médica.
+identify-county.you-can-see-where-your-application=<p><b>Puede consultar a dónde se envió su solicitud en sus correos electrónicos de confirmación, en la primera página de la solicitud diligenciada o en las cartas que su condado o Nación Tribal le haya enviado. </b></p> <p>Si no está seguro o no cuenta con esta información, elija el condado en donde vive y elija su Nación Tribal, si tiene alguna.</p>
+healthcare-Renewal-Upload.you-can-see-where-your-application=<p><b>En su notificación de Renovación de los programas de atención médica de Minnesota, puede encontrar qué condado o nación tribal está gestionando su caso. También lo puede encontrar en otras cartas relacionadas a su caso de atención médica.</b></p><p>Si no está seguro o no tiene esta información:<ul class="left-justified-list"><li>Elija el condado donde vive, o</li><li>Elija White Earth Nation si es la entidad encargada de prestarle los servicios.</li></ul></p>
+healthcare-Renewal-Upload.OR=<b>-O-</b>
 
-  documentRecommendation:
-    pageConfiguration: *documentRecommendation
-    nextPages:
-      - pageName: howToAddDocuments
-      - pageName: documentOffboarding
-    datasources:
-      - pageName: choosePrograms
-      - pageName: employmentStatus
-      - pageName: homeExpenses
-      - pageName: workChanges
-      - pageName: addHouseholdMembers
-      - groupName: household
-        pageName: householdMemberInfo
-        optional: "true"
-      - pageName: medicalExpenses
+identify-county-aitkin=Aitkin
+identify-county-anoka=Anoka
+identify-county-becker=Becker
+identify-county-beltrami=Beltrami
+identify-county-benton=Benton
+identify-county-big-stone=Big Stone
+identify-county-blue-earth=Blue Earth
+identify-county-brown=Brown
+identify-county-carlton=Carlton
+identify-county-carver=Carver
+identify-county-cass=Cass
+identify-county-chippewa=Chippewa
+identify-county-chisago=Chisago
+identify-county-clay=Clay
+identify-county-clearwater=Clearwater
+identify-county-cook=Cook
+identify-county-cottonwood=Cottonwood
+identify-county-crow-wing=Crow Wing
+identify-county-dakota=Dakota
+identify-county-dodge=Dodge
+identify-county-douglas=Douglas
+identify-county-faribault=Faribault
+identify-county-fillmore=Fillmore
+identify-county-freeborn=Freeborn
+identify-county-goodhue=Goodhue
+identify-county-grant=Grant
+identify-county-hennepin=Hennepin
+identify-county-houston=Houston
+identify-county-hubbard=Hubbard
+identify-county-isanti=Isanti
+identify-county-itasca=Itasca
+identify-county-jackson=Jackson
+identify-county-kanabec=Kanabec
+identify-county-kandiyohi=Kandiyohi
+identify-county-kittson=Kittson
+identify-county-koochiching=Koochiching
+identify-county-lac-qui-parle=Lac qui Parle
+identify-county-lake=Lake
+identify-county-lake-of-the-woods=Lake of the Woods
+identify-county-le-sueur=Le Sueur
+identify-county-lincoln=Lincoln
+identify-county-lyon=Lyon
+identify-county-mcleod=McLeod
+identify-county-mahnomen=Mahnomen
+identify-county-marshall=Marshall
+identify-county-meeker=Meeker
+identify-county-martin=Martin
+identify-county-mille-lacs=Mille Lacs County
+identify-county-morrison=Morrison
+identify-county-mower=Mower
+identify-county-murray=Murray
+identify-county-nicollet=Nicollet
+identify-county-nobles=Nobles
+identify-county-norman=Norman
+identify-county-olmsted=Olmsted
+identify-county-otter-tail=Otter Tail
+identify-county-pennington=Pennington
+identify-county-pine=Pine
+identify-county-pipestone=Pipestone
+identify-county-polk=Polk
+identify-county-pope=Pope
+identify-county-ramsey=Ramsey
+identify-county-red-lake=Red Lake County
+identify-county-redwood=Redwood
+identify-county-renville=Renville
+identify-county-rice=Rice
+identify-county-rock=Rock
+identify-county-roseau=Roseau
+identify-county-saint-louis=Saint Louis
+identify-county-scott=Scott
+identify-county-sherburne=Sherburne
+identify-county-sibley=Sibley
+identify-county-stearns=Stearns
+identify-county-steele=Steele
+identify-county-stevens=Stevens
+identify-county-swift=Swift
+identify-county-todd=Todd
+identify-county-traverse=Traverse
+identify-county-wabasha=Wabasha
+identify-county-wadena=Wadena
+identify-county-waseca=Waseca
+identify-county-washington=Washington
+identify-county-watonwan=Watonwan
+identify-county-wilkin=Wilkin
+identify-county-winona=Winona
+identify-county-wright=Wright
+identify-county-yellow-medicine=Yellow Medicine
 
-  uploadDocuments:
-    pageConfiguration: *uploadDocuments
-    nextPages:
-      - pageName: documentSubmitConfirmation
-    datasources:
-      - pageName: choosePrograms
-      - pageName: employmentStatus
-      - pageName: homeExpenses
-      - pageName: workChanges
-      - pageName: addHouseholdMembers
-      - groupName: household
-        pageName: householdMemberInfo
-        optional: "true"
-      - pageName: medicalExpenses
-      
-  uploadDocumentsDeleteWarningPage:
-    pageConfiguration: *uploadDocumentsDeleteWarningPage
-    nextPages:
-      - pageName: uploadDocuments
-  programDocuments:
-    pageConfiguration: *programDocuments
-    nextPages:
-      - pageName: nextSteps
-  documentSubmitConfirmation:
-    pageConfiguration: *documentSubmitConfirmation
-    nextPages:
-      - pageName: programDocuments
-      - pageName: uploadDocuments
-    datasources:
-      - pageName: choosePrograms
-      - pageName: employmentStatus
-      - pageName: homeExpenses
-      - pageName: workChanges
-      - pageName: addHouseholdMembers
-      - groupName: household
-        pageName: householdMemberInfo
-        optional: "true"
-      - pageName: medicalExpenses
-  documentOffboarding:
-    pageConfiguration: *documentOffboarding
-    nextPages:
-      - pageName: programDocuments
-      - pageName: documentRecommendation
-    datasources:
-      - pageName: choosePrograms
-      - pageName: employmentStatus
-      - pageName: homeExpenses
-      - pageName: workChanges
-      - pageName: addHouseholdMembers
-      - groupName: household
-        pageName: householdMemberInfo
-        optional: "true"
-      - pageName: medicalExpenses
-  nextSteps:
-    pageConfiguration: *nextSteps
-    nextPages:
-      - pageName: success
-    datasources:
-      - pageName: contactInfo
-  success:
-    pageConfiguration: *success
-#   We navigate to the recommendations page when the conditions are the same
-#   as when we change the button text on the success page to "View more programs".
-#   From PageController: showRecommendationLink = recommendHealthCare || isCCAP || recommendWIC
-    nextPages:
-      - pageName: recommendations
-        flow: EXPEDITED
-        condition: *expeditedFlow?
-      - pageName: recommendations
-        flow: MINIMUM
-        condition: *minimumFlow?
-      - pageName: recommendations
-        condition:
-          logicalOperator: OR
-          conditions:
-            - *someoneChoseCCAP?
-            - *doesNotHaveHealthcare?
-      - pageName: recommendations
-        condition:
-          logicalOperator: OR
-          conditions:
-            - *someoneChoseCCAP?
-            - *doesNotHaveHealthcare?
-            - logicalOperator: OR
-              conditions:
-                - *isSomeonePregnant?
-                - *householdMemberLessThanAge5?
-      - pageName: feedback
-    datasources:
-      - pageName: pregnant
-      - groupName: household
-        pageName: householdMemberInfo
-        optional: "true"
-      - pageName: healthcareCoverage
-      - pageName: choosePrograms
-      - pageName: doYouNeedHelpImmediately
-  recommendations:
-    pageConfiguration: *recommendations
-    nextPages:
-      - pageName: feedback
-  documentsSent:
-    pageConfiguration: *documentsSent
-  feedback:
-    pageConfiguration: *feedback
-# The public is navigating directly from https://mn.gov/dhs/renewmycoverage/ to here:
-  healthcareRenewalUpload:
-    pageConfiguration: *healthcareRenewalUpload
-    nextPages:
-      - pageName: healthcareRenewalMatchInfo
-        flow: HEALTHCARE_RENEWAL
+match-info.title=Igualar la información
+match-info.match-docs-to-app=Cuéntenos sobre usted
+match-info.fill-in-as-much-as-you-can=Rellene todo lo que pueda.  Esta información ayudará a su condado o nación tribal a asociar sus documentos con su solicitud.
+match-info.whats-your-first-name=¿Cuál es su primer nombre?
+match-info.legally-as-it-appears-on-your-id=Legalmente como aparece en su identificación.
+match-info.whats-your-last-name=¿Cómo se apellida?
+match-info.when-were-you-born=¿Cuándo nació?
+match-info.whats-your-social-security-number=¿Cuál es su número de seguro social?
+match-info.recommended-but-not-required=Se recomienda, pero no se requiere.
+match-info.whats-your-phone-number=¿Cuál es su número de teléfono?
+match-info.phone-number-recommended=Se recomienda, pero no es obligatorio. Sirve para que su condado o nación tribal pueda contactarlo en caso de tener preguntas.
+match-info.county-can-contact-you-if-questions=Se recomienda, pero no es obligatorio. Sirve para que su condado o nación tribal pueda contactarlo en caso de tener preguntas.
+match-info.case-number-if-you-have-it=¿Cuál es el número de su caso, si es que tiene uno?
 
-  healthcareRenewalMatchInfo:
-    pageConfiguration: *healthcareRenewalMatchInfo
-    enrichment: matchInfoDateOfBirthEnrichment
-    nextPages:
-      - pageName: healthcareRenewalHowToAddDocuments
-        flow: HEALTHCARE_RENEWAL
-        
-  healthcareRenewalHowToAddDocuments:
-    pageConfiguration: *healthcareRenewalHowToAddDocuments
-    nextPages:
-      - pageName: healthcareRenewalUploadDocuments
-      
-  healthcareRenewalUploadDocuments:
-    pageConfiguration: *healthcareRenewalUploadDocuments
-    nextPages:
-      - pageName: healthcareRenewalDocumentSubmitConfirmation
-      
-  healthcareRenewalUploadDocumentsDeleteWarningPage:
-    pageConfiguration: *healthcareRenewalUploadDocumentsDeleteWarningPage
-    nextPages:
-      - pageName: healthcareRenewalUploadDocuments
-      
-  healthcareRenewalDocumentSubmitConfirmation:
-    pageConfiguration: *healthcareRenewalDocumentSubmitConfirmation
-    nextPages:
-      - pageName: healthcareRenewalUploadDocuments
- 
-  healthcareRenewalDocumentsSent:
-    pageConfiguration: *healthcareRenewalDocumentsSent     
-    
-pageGroups:
-  jobs:
-    startPages:
-      - householdSelectionForIncome
-      - employersName
-    completePages:
-      - hoursAWeek
-      - incomePerPayPeriod
-      - lastThirtyDaysJobIncome
-    reviewPage: jobBuilder
-    redirectPage: jobRedirectPage
-    deleteWarningPage: jobDeleteWarningPage
-    restartPage: incomeByJob
-  household:
-    startPages:
-      - householdMemberInfo
-    completePages:
-      - householdRaceAndEthnicity
-    reviewPage: householdList
-    redirectPage: householdRedirectPage
-    deleteWarningPage: householdDeleteWarningPage
-    restartPage: addHouseholdMembers
-    startingCount: 1
-  childCareProviders:
-    startPages:
-      - childCareProviderInfo
-    completePages:
-      - childrenAtThisProvider
-    reviewPage: childCareProviderList
-    redirectPage: childCareProviderRedirectPage
-    deleteWarningPage: childCareProviderDeleteWarningPage
-    restartPage: doYouHaveChildCareProvider
-  unearnedIncomeGroup:
-    startPages:
-      - unearnedIncome
-      - socialSecurityIncomeSource
-      - supplementalSecurityIncomeSource
-      - veteransBenefitsIncomeSource
-      - unemploymentIncomeSource
-      - workersCompIncomeSource
-      - retirementIncomeSource
-      - childOrSpoucalSupportIncomeSource
-      - tribalPaymentIncomeSource
-    completePages:
-      - unearnedIncome
-      - socialSecurityIncomeSource
-      - supplementalSecurityIncomeSource
-      - veteransBenefitsIncomeSource
-      - unemploymentIncomeSource
-      - workersCompIncomeSource
-      - retirementIncomeSource
-      - childOrSpoucalSupportIncomeSource
-      - tribalPaymentIncomeSource
-    restartPage: unearnedIncome
-landmarkPages:
-  startTimerPages: # "the first page" of a flow, where we set applicationData.startTime
-    - identifyCountyBeforeApplying
-    - readyToUploadDocuments
-    - healthcareRenewalUpload
-  landingPages: # the home page of the app
-    - landing
-  postSubmitPages: # pages which are accessible after submitting an application
-    - addingDocuments
-    - documentRecommendation
-    - uploadDocuments
-    - uploadDocumentsDeleteWarningPage
-    - programDocuments
-    - howToAddDocuments
-    - documentOffboarding
-    - documentSubmitConfirmation
-    - nextSteps
-    - submissionConfirmation
-    - success
-    - recommendations
-    - feedback
-    - documentsSent
-    #For healthcare renewal
-    - healthcareRenewalAddingDocuments
-    - healthcareRenewalHowToAddDocuments
-    - healthcareRenewalDocumentRecommendation
-    - healthcareRenewalUploadDocuments
-    - healthcareRenewalUploadDocumentsDeleteWarningPage
-    - healthcareRenewalDocumentOffboarding
-    - healthcareRenewalDocumentSubmitConfirmation
-    - healthcareRenewalSubmissionConfirmation
-    - healthcareRenewalMatchInfo
-    - healthcareRenewalDocumentsSent
-#  all pages of the laterdocs flow to restrict them from back navigation
-  laterDocsPostSubmitExcludePages:
-    - matchInfo
-    - tribalNationMember
-    - selectTheTribe
-    - identifyCounty
-    - nationOfResidence
-    - nationsBoundary
-    - readyToUploadDocuments
-    - howToAddDocuments
-    - documentSubmitConfirmation
-    - uploadDocuments
-    - uploadDocumentsDeleteWarningPage
-    - programDocuments
-  nextStepsPage: nextSteps
-  programDocumentsPage: programDocuments
-  terminalPage: success # the final page of the main flow ("Done! Your application has been submitted.")
-  submissionConfirmationPage: submissionConfirmation
-  feedbackPage: feedback
-  recommendationsPage: recommendations
-  laterDocsTerminalPage: documentsSent # the final page of the laterdocs flow  healthcareRenewalUpload
-  healthcareRenewalTerminalPage: healthcareRenewalDocumentsSent # the final page of the healthcare renewal flow
-  healthcareRenewalLandingPage: healthcareRenewalUpload
-  submitPage: submit
-  uploadDocumentsPage: 
-    - uploadDocuments # the page where applicants upload documents
-    - healthcareRenewalUploadDocuments # the page where applicants upload documents
-  submitUploadedDocumentsPage: 
-    - documentSubmitConfirmation # the page where applicants confirm that the documents should be submitted
-    - healthcareRenewalDocumentSubmitConfirmation # the page where applicants confirm that the documents should be submitted for healthcare
+match-info-hc.match-docs-to-case=Antes de empezar, tenemos que cotejar que sus documentos son los que aparecen en su caso de atención médica
+match-info-hc.fill-in-as-much-as-you-can=Proporcione toda la información que pueda. Esto ayudará a su condado o a su nación tribal a cotejar sus documentos con los de su caso y asegurar que se correspondan.
+
+
+landing.title=MNBenefits
+landing.header=Solicitar beneficios fácilmente en línea.
+landing.subheader=Presente su solicitud para recibir beneficios de Minnesota en 20 minutos o menos.
+landing.apply-now=Aplica hoy
+landing.apply-now-espanol=Apply now
+landing.apply-to-these-programs=Solicite estos programas
+landing.food-assistance-SNAP=Asistencia para Comida (SNAP)
+landing.SNAP-helps-low-income-Minnesotans-get-the-food-they-need=SNAP ayuda a la gente de Minnesota a recibir la comida que necesitan. Usted recibirá una tarjeta EBT que puede usar como una tarjeta de debito para comprar alimentos en la mayoría de supermercados y mercados de agricultores.
+landing.cash-programs=Programas de Asistencia en Efectivo
+landing.cash-assistance-helps-people-meet-their-basic-needs-until-they-are-able=La asistencia en efectivo ayuda a las personas a cubrir sus necesidades básicas hasta que puedan mantenerse a sí mismas. Obtendrá una tarjeta EBT que puede usar como tarjeta de débito. Estos son los programas de efectivo más comunes:
+landing.general-assistance=Asistencia General (GA)
+landing.mn-family-investment-program-mfip=Programa de Inversión Familiar de Minnesota (MFIP)
+landing.mn-supplemental-aid-msa=Ayuda Suplementaria de Minnesota (MSA)
+landing.refugee-cash-assistance-rca=Asistencia en Efectivo para Refugiados (RCA)
+landing.tribal-tanf=TANF Tribal
+landing.emergency-assistance=Asistencia de Emergencia
+landing.emergency-assistance-provides-something-to-people-this-is-a-description=Asistencia de Emergencia ayuda con los pagos de vivienda, como los pagos de renta atrasados, para prevenir los desalojos o ejecuciones hipotecarias. También se puede utilizar para servicios públicos cuando existe una amenaza de desconexión.
+landing.child-care-assistance=Asistencia para el Cuidado de Niños
+landing.CCAP-more-link=<a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-3551-SPA" target="_blank" rel="noopener noreferrer">Más recursos sobre el cuidado infantil.</a>
+landing.child-care-assistance-provides-financial-assistance-to-help-families=El Programa de ayuda para el cuidado de niños (Child Care Assistance Program) ayuda a pagar el cuidado de niños para que los cuidadores puedan trabajar, estudiar, buscar empleo, atender sus necesidades de salud mental o participar en actividades incluidas en su plan de empleo.
+landing.housing-support=Programa de Apoyo a la Vivienda (GRH)
+landing.the-housing-support-program=El Programa de ayuda para la vivienda (Housing Support Program) paga a un proveedor aprobado los costos de vivienda y los artículos que las personas necesitan para mantenerse alojadas en ciertos entornos grupales o en la comunidad, para personas de 65 años o más o adultos con discapacidades y bajos ingresos.  Esto ayuda a prevenir la institucionalización o la falta de vivienda. Este programa se llamaba anteriormente Hogar de residencia en grupo (Group Residential Housing, GRH).
+landing.submit-documents-to-county=¿Ya tiene un trámite en el condado? Suba los documentos aquí.
+landing.submit-documents-for-counties=Puede mandar sus documentos sobre MNbenefits si vive en uno de los siguientes condados: Anoka, Carver, Clay, Cook, Dodge, Hennepin, Morrison, Olmsted, Otter Tail, Sherburne, Steele, St. Louis, Wabasha, Waseca, Wadena, y Wright .
+landing.upload-documents=Cargar documentos
+landing.upload-documents-caps=Cargar documentos
+landing.alread-applied=¿Ya presentó una solicitud?
+landing.page-description=MNbenefits es una aplicación de prestaciones en línea por medio de la cual los habitantes de Minnesota pueden solicitar varias prestaciones de la red de seguridad, incluyendo asistencia alimentaria y monetaria, en menos de 20 minutos.
+landing.send-documents-to-your-county-tribal-nation=Enviar documentos a su condado o nación tribal.
+landing.waiting-to-here-back=¿Está esperando la respuesta?
+landing.learn-how-you-can-follow-up-on-your-application=Entérese de cómo puede obtener una actualización sobre su solicitud
+
+landing.application-process=Pasos para presentar la solicitud.
+landing.apply-online=Paso 1: Aplique una vez
+landing.submit-an-application=Puede solicitar varios programas de beneficios para usted y otros miembros de su grupo familiar en una sola solicitud.
+landing.upload-documents-your=Paso 2: Cargue sus documentos
+landing.upload-your-documents=Cargue los documentos que se solicitan, tales como recibos de pago de nómina, recibos de alquiler y estados bancarios como parte de su solicitud. También puede volver a nuestra página principal para agregar documentos después.
+landing.application-review=Paso 3: Permita tiempo para que un trabajador revise su solicitud
+landing.your-application-will-be-reviewed=Su solicitud y sus documentos serán revisados por los empleados de elegibilidad de su condado o nación tribal.
+landing.interview=Paso 4: Complete una entrevista
+landing.most-programs-require-an-interview=La mayoría de los programas de esta solicitud requieren una entrevista para recibir beneficios. Puede tener su entrevista por teléfono o en persona. Su condado o nación tribal se pondrá en contacto con usted por teléfono o correo para concertar una cita. En algunos casos, es posible que sea necesario realizar más seguimientos después de su entrevista.
+landing.learn-about-programs=Informarse sobre los programas
+landing.SNAP-link=<a href="https://dcyf.mn.gov/programs-directory/supplemental-nutrition-assistance-program-snap " target="_blank" rel="noopener noreferrer">Infórmese más sobre el programa SNAP, los requerimientos de elegibilidad y otros recursos de ayuda alimentaria.</a>
+landing.CASH-link=<a href="https://mn.gov/dhs/income/spanish" target="_blank" rel="noopener noreferrer"> Infórmese más sobre los programas de asistencia en efectivo y los requerimientos de elegibilidad.</a>
+landing.Emergency-link=Infórmese más sobre la <a href="https://dcyf.mn.gov/programs-directory/emergency-assistance " target="_blank" rel="noopener noreferrer"> Asistencia de Emergencia (para familias con niños)</a> y la <a href="https://mn.gov/dhs/people-we-serve/adults/economic-assistance/emergency-help/ " target="_blank" rel="noopener noreferrer"> Asistencia General de Emergencia (para adultos sin niños en el hogar)</a>
+landing.housing-link=Obtenga más información sobre el <a href="https://mn.gov/dhs/people-we-serve/adults/economic-assistance/housing/programs-and-services/housing-support.jsp" target="_blank" rel="noopener noreferrer">Programa de ayuda para la vivienda o Housing Supports Program.</a>
+landing.other-housing-link=Encuentre más recursos para recibir ayuda con <a href="https://mn.gov/dhs/housing/spanish/" target="_blank" rel="noopener noreferrer">otras necesidades de vivienda.</a>
+landing.CCAP-link= Este programa está dirigido a niños de hasta 12 años, y a niños de 13 y 14 años con necesidades especiales.<p><a href="https://dcyf.mn.gov/programs-directory/child-care-assistance-program/" target="_blank" rel="noopener noreferrer"> Requisitos para el Programa de ayuda para el cuidado de niños </a></p>
+
+snap-nds.title=SNAP NDS
+snap-nds.header=SNAP Declaración de No Discriminación
+snap-nds.p1=De acuerdo con la ley federal de derechos civiles y las normas y políticas de derechos civiles del Departamento de Agricultura de los Estados Unidos (USDA), esta entidad está prohibida de discriminar por motivos de raza, color, origen nacional, sexo (incluyendo identidad de género y orientación sexual), credo religioso, discapacidad, edad, creencias políticas, o represalia o retorsión por actividades previas de derechos civiles.
+snap-nds.p2=La información sobre el programa puede estar disponible en otros idiomas que no sean el inglés. Personas con discapacidad que requieran medios alternos de comunicación para obtener información sobre el programa (por ejemplo, Braille, letra grande, cinta de audio, Lenguaje de Señas Americano), debe ponerse en contacto con la agencia (estatal o local) donde solicitaron los beneficios. Las personas sordas, con dificultades auditivas o con discapacidades del habla pueden comunicarse con el USDA a través del Servicio Federal de Retransmisión al (800) 877- 8339.
+snap-nds.p3=Para presentar una queja por discriminación en el programa, el reclamante debe llenar un formulario AD-3027, formulario de queja por discriminación en el programa del USDA que puede obtenerse en línea en: https://www.usda.gov/sites/default/files/documents/ad-3027s.pdf, en cualquier oficina del USDA, llamando al (833) 620-1071, o escribiendo una carta dirigida al USDA. La carta debe contener el nombre del demandante, la dirección, el número de teléfono y una descripción escrita de la acción discriminatoria alegada con suficiente detalle para informar al Subsecretario de Derechos Civiles (ASCR) sobre la naturaleza y fecha de una presunta violación de derechos civiles. El formulario AD-3027 completado o la carta debe presentarse por:
+snap-nds.mail=<strong>correo:</strong><br>Food and Nutrition Service, USDA<br>1320 Braddock Place, Room 334<br>Alexandria, VA 22314; o
+snap-nds.fax=<strong>fax:</strong> (833)-256-1665 , o (202)-690-7442; o
+snap-nds.email=<strong>correo electrónico:</strong><a class="long-file-name" href="mailto:FNSCIVILRIGHTSCOMPLAINTS@usda.gov" title="Email FNS Civil Rights Complaints" target="_blank"> FNSCIVILRIGHTSCOMPLAINTS@usda.gov</a>
+snap-nds.eop=Esta institución es un proveedor que brinda igualdad de oportunidades.
+snap-nds.do-not-send-applications-here=No envíe la solicitud aquí.
+
+prepare-to-apply.title=Preparase para su solicitud
+prepare-to-apply.how-this-works=Como funciona
+prepare-to-apply.we-will-ask-you-about=Le preguntaremos acerca de
+prepare-to-apply.personal-information=Su información personal
+prepare-to-apply.people-who-live-with-you=Las personas que viven con usted
+prepare-to-apply.income=Su ingreso
+prepare-to-apply.expenses=Sus gastos
+prepare-to-apply.assets=Sus bienes
+prepare-to-apply.this-application-form-should-take-about=Esta solicitud debe tomar
+prepare-to-apply.minutes=minutos
+prepare-to-apply.to-complete=para completar
+prepare-to-apply.your-information-is-secure-and-will-be-handled-in-accordance-with-our=Su información es segura y sera tratada de acuerdo con nuestra
+prepare-to-apply.Submitting-an-incomplete-app-SNAP=Presentar una solicitud incompleta (sólo SNAP)
+prepare-to-apply.If-you-are-applying-for-food-assistance=Si desea solicitar asistencia alimentaria (SNAP), tendrá la opción de presentar una solicitud incompleta con sólo su nombre, dirección y firma.
+prepare-to-apply.by-choosing-to-submit-an-incomplete-application=Al optar enviar una solicitud incompleta, es posible que experimente un tiempo de procesamiento más prolongado y mayor comunicación con su condado o nación tribal.
+prepare-to-apply.after-you-submit=Después de enviar su solicitud
+prepare-to-apply.your-application-submission-date=La fecha en la que presenta su solicitud es la fecha más temprana en la que pueden comenzar sus prestaciones. 
+prepare-to-apply.most-programs-on-this-application=La mayoría de los programas que figuran en esta solicitud, incluidas las prestaciones alimentarias y económicas, requieren una entrevista después de presentar la solicitud. La entrevista puede realizarse por teléfono o en persona. Espere a recibir una carta por correo o una llamada telefónica de su condado o nación tribal para concertar la cita.
+prepare-to-apply.adding-documents=Agregar Documentos
+prepare-to-apply.at-the-end-of-this-application=Al final de esta solicitud, tendrá la opción de agregar documentos, como talones de pago, recibos de la renta, o facturas médicas. Puede usar su teléfono para tomar fotos de documentos en papel o seleccionar fotos de su teléfono o computadora. También puede volver a nuestra página de inicio después de aplicar para agregar documentos más tarde.
+prepare-to-apply.you-can-use-your-phone=Puede utilizar su teléfono para tomar fotos de documentos en papel o seleccionar fotos de su dispositivo.
+prepare-to-apply.you-can-always-return-to-our-homepage=También siempre puede volver a nuestra página de inicio para añadir documentos más tarde.
+
+program-documents.title=Documentos Adicionales del Programa
+program-documents.header=Documentos adicionales del programa
+program-documents.help-message=Antes de terminar, tómese unos minutos para leer los documentos a continuación.
+program-documents.docs-message=Haga clic en cada enlace para abrirlo en una nueva pestaña del navegador. Una vez abierto, puede guardar o marcar estos documentos en favoritos para consultarlos más tarde.
+program-documents.all-applicants-header=<strong>Recursos para todos los solicitantes</strong>
+program-documents.all-applicants-doc-1=<a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-3477-ENG  " target="_blank" rel="noopener noreferrer">Información sobre violencia doméstica</a>
+program-documents.all-applicants-doc-2=<a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-4133-SPA" target="_blank" rel="noopener noreferrer">¿Tiene alguna discapacidad?</a>
+program-documents.all-applicants-doc-3=<a href=" https://edocs.dhs.state.mn.us/lfserver/Public/DHS-2920-SPA" target="_blank" rel="noopener noreferrer">Información sobre programas de dinero en efectivo, alimentos y cuidado infantil</a>
+program-documents.all-applicants-doc-4=<a href=" https://edocs.dhs.state.mn.us/lfserver/Public/DHS-3315A-SPA" target="_blank" rel="noopener noreferrer">Cómo usar su tarjeta Minnesota EBT</a>
+program-documents.all-applicants-doc-5=<a href=" https://edocs.dhs.state.mn.us/lfserver/Public/DHS-2759-SPA" target="_blank" rel="noopener noreferrer">Sistema de Verificación de Ingresos y Elegibilidad e Informes de Trabajo </a>
+program-documents.all-applicants-doc-6=<a href=" https://edocs.dhs.state.mn.us/lfserver/Public/DHS-3353-SPA" target="_blank" rel="noopener noreferrer">Sus derechos de apelación</a>
+program-documents.snap-applicants-header=<strong>Información sobre el programa SNAP</strong>
+program-documents.snap-applicants-doc-1=<a href=" https://edocs.dhs.state.mn.us/lfserver/Public/DHS-2814-SPA" target="_blank" rel="noopener noreferrer">Hoja informativa del programa SNAP</a>
+program-documents.snap-applicants-doc-2=<a href=" https://edocs.dhs.state.mn.us/lfserver/Public/DHS-2625-SPA" target="_blank" rel="noopener noreferrer">Responsabilidades de los informes de SNAP</a>
+program-documents.snap-applicants-doc-3=<a href=" https://edocs.dhs.state.mn.us/lfserver/Public/DHS-2707-ENG" target="_blank" rel="noopener noreferrer">Información sobre cómo renunciar voluntariamente a su trabajo si recibe SNAP</a>
+
+timeout-notice.title=Aviso de tiempo de espera
+timeout-notice.header=Después de una hora de inactividad, se borrarán sus datos
+timeout-notice.protect=Para proteger su información, su sesión terminará si abandona la solicitud por una hora o más.
+timeout-notice.cant-save=No puede guardar la solicitud y volver después.
+
+language-preferences.title=Preferencias de idioma
+language-preferences.english=English
+language-preferences.spanish=Español
+language-preferences.language-preferences=¿En qué idioma prefiere <i>leer o escribir</i>? 
+language-preferences.what-language-do-you-prefer-to-speak=¿En qué idioma prefiere <i>hablar</i>?
+language-preferences.the-county-will-do-their-best-to-connect-you-with-someone-who-speaks-your=Su condado o nación tribal hará todo lo posible para que pueda comunicarse con alguien que hable su idioma.
+language-preferences.what-language-do-you-prefer-to-read-or-write=¿Qué idioma prefiere leer o escribir?
+language-preferences.the-county-will-do-their-best-to-provide-documents-in-your-preferred-language=Su condado o nación tribal hará todo lo posible para proporcionarle los documentos en su idioma preferido.
+language-preferences.do-you-need-an-interpreter=¿Necesita que su condado le proporcione un intérprete en su idioma? Esto no afecta su solicitud.
+language-preferences.English=English<span class="lang-translate"> — Inglés</span>
+language-preferences.Spanish=Español
+language-preferences.soomaali=Af Soomaali<span class="lang-translate"> — Somalí</span>
+language-preferences.vietnamese=Tiếng Việt<span class="lang-translate"> — Vietnamita</span>
+language-preferences.russian=Pусский<span class="lang-translate"> — Ruso</span>
+language-preferences.hmoob=Lus Hmoob<span class="lang-translate"> — Hmong</span>
+language-preferences.Oromo=Afaan Oromoo<span class="lang-translate"> — Oromo</span>
+language-preferences.Amharic=አማርኛ<span class="lang-translate"> — Amárico</span>
+language-preferences.Lao=ລາວ<span class="lang-translate"> — Lao</span>
+language-preferences.Korean=한국어<span class="lang-translate"> — Coreano</span>
+language-preferences.Karen=ကညီ<span class="lang-translate"> — Karen</span>
+language-preferences.Nepali=नेपाली<span class="lang-translate"> — Nepalí </span>
+language-preferences.French=Français<span class="lang-translate"> — Francés</span>
+language-preferences.Burmese=ဓြန်မာ<span class="lang-translate"> — Birmano</span>
+language-preferences.Arabic=اللغة العربية<span class="lang-translate"> — Árabe </span>
+language-preferences.Ukrainian=українська мова<span class="lang-translate"> — Ucraniano </span>
+language-preferences.different-language=Leo o escribo en otro idioma. 
+language-preferences.American-sign-language=Lenguaje de Señas Americano (ASL, por sus siglas en inglés)
+language-preferences.Cantonese=繁體中文<span class="lang-translate"> — Cantonés</span>
+language-preferences.Khmer=ខ្មែរ<span class="lang-translate"> — Jemer</span>
+
+language-preferences.preferred.language=Ingrese su idioma preferido
+
+speak-language-preferences.different-language=Hablo en otro idioma
+same-language-preferences.to-read-or-write=El mismo idioma que leo o escribo
+written-language.title=Preferencia de idioma – Escrito
+spoken-language.title=Preferencia de idioma – Hablado
+
+
+help-resources.table.of.contents=Tabla de Contenidos
+
+language-and-accessibility.title=Idioma y accesibilidad
+language-and-accessibility.language-and-accessibility=Idioma y accesibilidad
+language-and-accessibility.english=English — Inglés
+language-and-accessibility.content.english=If you have difficulty understanding English or have a disability, free language assistance or other aids and services are available upon request. Please call: 651-539-7700 or TTY: 7-1-1.
+language-and-accessibility.content.english=If you have difficulty understanding English or have a disability, free language assistance or other aids and services are available upon request. Please call: 651-539-7700 or TTY: 7-1-1.
+language-and-accessibility.content.amharic=እንግሊዘኛ ቋንቋን መረዳት የሚቸገሩ ከሆነ ወይም የአካል ጉዳት ካለብዎ፣ ነፃ የቋንቋ እገዛ ወይም ሌሎችእርዳታዎች እና አገልግሎቶች በሚጠይቁበት ወቅት ይገኛሉ። እባክዎን ይደውሉ፦ 651-539-7700 or TTY: 7-1-1.
+language-and-accessibility.content.arabic= إذا كنت تواجه صعوبة في فهم اللغة الإنجليزية أو كنت تعاني من إعاقة ما، تتوفر المساعدات اللغوية أو غيرها من المساعدات والخدمات مجانًا عند الطلب. يرجى الاتصال على الرقم
+language-and-accessibility.content.phone=651-539-7700 or TTY: 7-1-1.
+language-and-accessibility.content.burmese=သင့်အနေဖြင့် အင်္ဂလိပ် စကားကို နားလည်ရန် အခက်အခဲ ရှိပါက သို့မဟုတ် မသန်စွမ်းမှု တစ်ခုခု ရှိပါက ဘာသာစကား အခမဲ့ အကူအညီ သို့မဟုတ် အခြား အကူအညီနှင့် ဝန်ဆောင်မှုများကို တောင်းခံ ရယူနိုင်သည်။ ကျေးဇူးပြု၍ ခေါ်ဆိုပါ -651-539-7700 of TTY: 7-1-1.
+language-and-accessibility.content.cantonese=如果您理解英語有困難或有殘疾，可应要求提供免費語言援助或其他幫助和服務。請致電：651-539-7700 or TTY: 7-1-1.
+language-and-accessibility.content.french=Si vous avez des difficultés à comprendre l’anglais ou si vous souffrez d’un handicap, une assistance linguistique gratuite ou d’autres aides et services sont disponibles sur demande. Veuillez appeler: 651-539-7700 or TTY: 7-1-1.
+language-and-accessibility.content.hmoob=Yog tias koj tsis nkag siab Lus Askiv los sis muaj kev xiam oob qhab, muaj kev pab txhais lus dawb los sis lwm yam kev pab thiab cov kev pab cuam thaum thov txog. Thov hu rau: 651-539-7700 or TTY: 7-1-1.
+language-and-accessibility.content.karen=နမ့ၢ်အိၣ်ဒီးတၢ်ကီတၢ်ခဲလၢတၢ်နၢ်ပၢၢ်အဲကလံးကျိာ် မ့တမ့ၢ် အိၣ်ဒီးတၢ်က့ၢ်ဂီၤတလၢတပှဲၤန့ၣ်, ကျိာ် တၢ်တိစၢၤမၤစၢၤအကလီ မ့တမ့ၢ် တၢ်ဟ့ၣ်မၤစၢၤအဂၤတဖၣ်ဒီးတၢ်မၤစၢၤတၢ်ဖံးတၢ်မၤတဖၣ်အိၣ် လၢနမၤန့ၢ်အီၤသ့ဖဲနမ့ၢ်ဃ့ထီၣ်အီၤအခါန့ၣ်လီၤ. ဝံသးစူၤကိး- 651-539-7700 or TTY: 7-1-1.
+language-and-accessibility.content.khmer=ប្រសិនបើអ្នកមានការលំបាកក្នុងការយល់ភាសាអង់គ្លេស ឬមានពិការភាព ជំនួយផ្នែកភាសាដោយឥតគិតថ្លៃ ឬជំនួយនិងសេវាកម្មផ្សេងទៀតអាចរកបានពេលមានការស្នើសុំ។ សូមទូរសព្ទទៅលេខ៖ 651-539-7700 or TTY: 7-1-1.
+language-and-accessibility.content.korean=영어를 이해하시는 데 어려움이 있거나 장애가 있는 경우, 요청하시면 무료 언어 지원 또는 기타 지원 및 서비스를 이용하실 수 있습니다. 전화해 주십시오: 651-539-7700 or TTY: 7-1-1.
+language-and-accessibility.content.lao=ຖ້າທ່ານມີຄວາມຫຍຸ້ງຍາກໃນການເຂົ້າໃຈພາສາອັງກິດ ຫຼື ມີຄວາມພິການ, ພວກເຮົາມີການຊ່ວຍເຫຼືອດ້ານພາສາ ຫຼື ການຊ່ວຍເຫຼືອ ແລະ ການບໍລິການອື່ນໆ ໃຫ້ໂດຍບໍ່ເສຍຄ່າ. ກະລຸນາໂທໄປທີ່: 651-539-7700 or TTY 7-1-1.
+language-and-accessibility.content.oromo=Afaan Ingiliffaa hubachuuf yoo rakkattan ykn qaama miidhamummaa yoo qabaattan, gargaarsi afaanii bilisaa ykn deeggarsaa fi tajaajilli biroon akkaataa gaaffii keessaniin ni jiru. Maaloo: 651-539-7700 ykn TTY 7-1-1 irratti bilbilaa
+language-and-accessibility.content.russian=Если у вас есть трудности с пониманием английского языка или у вас инвалидность, по запросу предоставляется бесплатная языковая помощь или другие вспомогательные средства и услуги. Пожалуйста позвоните по телефону: 651-539-7700 or TTY: 7-1-1.
+language-and-accessibility.content.soomaali=Hadii aad dhibaato ku qabto fahmida ingiriisiga ama curyaan aad tahay, waxaa la heli karaa taagerida luuqada iyo adeegyada kale ee garkgaarka goorta la codsado. Fadlan wac: 651-539-7700 or TTY: 7-1-1.
+language-and-accessibility.content.spanish=Si tiene dificultades para entender la lengua inglesa o presenta una discapacidad, puede solicitar asistencia lingüística y otros tipos de ayuda y servicios sin coste alguno. Llame al siguiente número de teléfono: 651-539-7700 or TTY 7-1-1.
+language-and-accessibility.content.vietnamese=Nếu quý vị gặp khó khăn trong việc hiểu tiếng Anh hoặc bị khuyết tật, hỗ trợ ngôn ngữ miễn phí hoặc các hỗ trợ và dịch vụ khác được cung cấp theo yêu cầu. Xin gọi: 651-539-7700 or TTY: 7-1-1.
+
+language-and-accessibility.spanish=Español
+language-and-accessibility.soomaali= Af Soomaali
+language-and-accessibility.vietnamese=Tiếng Việt
+language-and-accessibility.russian=Pусский
+language-and-accessibility.hmoob= Lus Hmoob
+language-and-accessibility.oromo=Afaan Oromo
+language-and-accessibility.amharic=አማርኛ
+language-and-accessibility.lao=ລາວ
+language-and-accessibility.korean=한국어
+language-and-accessibility.karen=ကညီ
+language-and-accessibility.nepali=नेपाली
+language-and-accessibility.french=Français
+language-and-accessibility.burmese=ဓြန်မာ
+language-and-accessibility.arabic=اللغة العربية
+language-and-accessibility.ukrainian=Україна
+language-and-accessibility.cantonese= 繁體中文
+language-and-accessibility.khmer= ខ្មែរ
+
+language-and-accessibility-content.spanish=Español
+language-and-accessibility-content.soomaali= Af Soomaali — Somalí
+language-and-accessibility-content.vietnamese= Tiếng Việt — Vietnamita
+language-and-accessibility-content.russian=Pусский — Ruso
+language-and-accessibility-content.hmoob= Lus Hmoob — Hmong
+language-and-accessibility-content.oromo=Afaan Oromo — Oromo
+language-and-accessibility-content.amharic=አማርኛ — Amárico
+language-and-accessibility-content.lao= ລາວ — Lao
+language-and-accessibility-content.korean=한국어 — Coreano
+language-and-accessibility-content.karen=ကညီ — Karen
+language-and-accessibility-content.nepali=नेपाली
+language-and-accessibility-content.french= Français — Francés
+language-and-accessibility-content.burmese= ဓြန်မာ — Birmano
+language-and-accessibility-content.arabic=اللغة العربية — Árabe
+language-and-accessibility-content.ukrainian=Україна
+language-and-accessibility-content.cantonese= 繁體中文 — Cantonés
+language-and-accessibility-content.khmer= ខ្មែរ — Jemer
+
+choose-programs.title=Escoge programas
+choose-programs.what-type-of-assistance-would-you-like-to-apply-for=¿Qué tipo de beneficios desea solicitar?
+choose-programs.food-snap=Comida (SNAP)
+choose-programs.food-snap-help=Dinero para comprar comida para usted y su familia
+choose-programs.cash-programs=Programas de Asistencia en Efectivo
+choose-programs.cash-programs-help=Programas como Asistencia General/GA y el Programa de Inversión Familiar de Minnesota/MFIP ayudan a las familias y adultos solteros a cubrir las necesidades básicas.
+choose-programs.emergency-assistance=Asistencia de Emergencia
+choose-programs.emergency-assistance-help=Ayuda con los pagos de renta y servicios públicos para prevenir el desalojo
+choose-programs.housing-support-group-residential-housing=Vivienda Colectiva
+choose-programs.housing-grh-help=The Housing Support Program (GRH) pays an approved provider for housing costs and things people need to stay housed in certain group setting or in the community for persons aged 65 or older or adults with disabilities with low income.
+choose-programs.child-care-assistance=Asistencia para el Cuidado de Niños
+choose-programs.child-care-assistance-help=Ayuda a pagar el cuidado de niños para que los cuidadores puedan trabajar, estudiar, buscar empleo, atender sus necesidades de salud mental o participar en actividades incluidas en su plan de empleo.
+choose-programs.none-of-the-above=Nada de lo anterior porque sólo lo solicito para otras personas de mi hogar
+choose-programs.you-will-be-asked=Se le pedirá que comparta alguna información sobre usted aunque sólo solicite otros.
+
+penalty-warning.title=Advertencia de penalización
+penalty-warning-header-key=Advertencia sobre sanciones y preguntas de calificación
+penalty-warning-header-help-message-key=Por favor, amplíe el cuadro a continuación y lea la información cuidadosamente.
+penalty-warning.has-court-or-any-other=¿Un tribunal o cualquier otro proceso civil o administrativo en Minnesota o en cualquier otro estado ha determinado que un miembro de su hogar es culpable, o alguien ha sido descalificado de recibir asistencia pública por incumplir con las reglas antes mencionadas?
+penalty-warning.has-anyone-in-the-household=¿Alguna persona del hogar ha sido condenada por hacer declaraciones fraudulentas acerca de su lugar de residencia para obtener beneficios monetarios o de SNAP en más de un estado?
+penalty-warning.is-anyone-in-your-household-hiding=¿Hay alguien en su hogar ocultándose o huyendo de la ley para evitar un proceso judicial, ser detenido, o para evitar ir a la cárcel por un delito mayor?
+penalty-warning.has-anyone-in-your-household-convicted= ¿Ha sido algún miembro de su hogar condenado por un delito relacionado con drogas durante los últimos 10 años? 
+penalty-warning.has-anyone-in-your-household-convicted-if-yes=Si la respuesta es afirmativa, puede seguir recibiendo prestaciones. Es posible que se le pida que se someta a pruebas de detección de drogas al azar.
+penalty-warning.is-anyone-in-your-household-violating=¿Hay algún miembro de su hogar que actualmente esté violando su condición de libertad bajo palabra, libertad condicional o su puesta en libertad bajo supervisión?
+penalty-warning.which-household-member-applies=	¿A qué miembro del hogar se aplica esto?
+penalty-warning.select-all-that-apply=Seleccione todo lo que corresponda
+penalty-warning.validation.select-household-member=Por favor, seleccione al menos un miembro del hogar
+
+expedited-notice.title=Notificación acelerada
+expedited-notice.we-will-check-to-see=<h3 style="font-size: 19px; line-height: 25px; font-weight: bold; border-bottom: 2px solid #5f5854; padding-bottom: 2px; color: #5f5854">Asistencia alimentaria (SNAP)</h3><h2>Vamos a averiguar si puede obtener asistencia alimentaria acelerada (SNAP) en 7 días o menos.
+expedited-notice.what-is-expedited-SNAP=¿Qué es el SNAP acelerado?
+expedited-notice.expedited-SNAP-means=SNAP acelerado significa que usted puede obtener sus beneficios de alimentos más rápidamente. Las personas que califican para el SNAP acelerado pueden recibir su tarjeta EBT en 7 días o menos.
+expedited-notice.who-qualifies-for-snap=¿Quién califica para el SNAP acelerado?
+expedited-notice.you-may-qualify-for-expedited-SNAP=Usted puede tener derecho a un SNAP acelerado si <strong>algunas de estas situaciones</strong> aplican a usted:
+expedited-notice.your-monthly-income-is-less-than-150=Sus ingresos mensuales son de menos de 150 dólares <strong>y</strong> tiene 100 dólares o menos en ahorros.
+expedited-notice.the-amount-you-pay-for-rent=La cantidad que paga por el alojamiento, la hipoteca y los servicios públicos es <strong>más que</strong> sus ingresos y ahorros.
+expedited-notice.you-are-a-migrant=Es un trabajador del campo migrante o de temporada que no está trabajando en este momento <strong>y</strong> tiene 100 dólares o menos en ahorros.
+expedited-notice.at-the-end-of-this-application=Al final de esta solicitud, le diremos si ha sido recomendado para el servicio acelerado.
+
+basic-criteria.title=Criterio básico
+basic-criteria.do-any-of-these-situations-apply=¿Se aplica a usted alguna de estas situaciones?
+basic-criteria.to-apply-for-healthcare-at-least-one-should-be-true=Para solicitar el programa de asistencia sanitaria que ha seleccionado, debe darse al menos una de estas situaciones.
+basic-criteria.i-am-65-or-older=Tengo 65 años o más
+basic-criteria.i-am-blind=Soy invidente/ciego
+basic-criteria.i-receive-ssi-or-rsdi=Actualmente recibo SSI o RSDI por una discapacidad
+basic-criteria.i-have-a-disability-ssa=Tengo una discapacidad que ha sido certificada por la Administración del Seguro Social (SSA)
+basic-criteria.i-have-a-disability-smrt=Tengo una discapacidad que ha sido certificada por el Equipo Estatal de Revisión Médica (SMRT)
+basic-criteria.i-want-to-apply-for-medical-assistance=Deseo solicitar la Asistencia Médica para Empleados con Discapacidad (MA-EDP)
+basic-criteria.i-want-help-with-my-medicare-costs=Tengo Medicare y necesito ayuda con mis gastos
+
+add-other-programs.title=Agregar otros programas
+add-other-programs.would-you-like-to=¿Desea solicitar algún otro programa?
+add-other-programs.yes=Sí, solicitaré otros
+add-other-programs.no=No, abandonar la solicitud
+
+intro-basic-info.title=Introducción: Información Básica
+intro-basic-info.getting-to-know-you=Empezando a conocerlo/a
+intro-basic-info.basic-info=Su información básica
+intro-basic-info.contact-info=Su información de contacto
+intro-basic-info.living-situation=Su situación de vivienda
+
+living-situation.title=Situación de vivienda
+living-situation.what-is-your-current-living-situation=¿Cuál es su situación de vivienda actual?
+living-situation.paying-for-my-own-housing-with-rent-lease-or-mortgage-payments=Vivo en una casa con pagos de renta/alquiler, arrendamiento o hipoteca
+living-situation.living-outside-in-a-vehicle-or-another-place-not-meant-for-housing=Viviendo afuera, en un vehículo u otro lugar no destinado para ser hogar
+living-situation.temporarily-staying-with-friends-or-family-due-to-economic-hardship=Temporalmente me quedo con amigos o con familiares porque perdí mi casa o porque ya no puedo pagar mis propios gastos vivienda
+living-situation.temporarily-staying-with-friends-or-family-for-other-reasons=Temporalmente me quedo con amigos o con familiares por otras razones
+living-situation.staying-in-a-hotel-or-motel=Viviendo en un hotel o motel
+living-situation.staying-in-an-emergency-shelter=Hospedado/a en un refugio de emergencia
+living-situation.living-in-foster-care-or-a-group-home=Hospedado/a en un hogar de crianza, o â€œfoster careâ€ o un hogar grupal, o â€œgroup homeâ€
+living-situation.staying-in-a-hospital-treatment-facility-detox-center-or-nursing-home=Hospedado/a en un hospital, centro de tratamiento, centro de desintoxicación o hogar de ancianos o tercera edad
+living-situation.in-jail-prison-or-juvenile-detention=Viviendo en la cárcel, prisión o centro de detención de menores
+living-situation.none-of-these=Ninguno de estos
+living-situation.i-prefer-not-to-say=Prefiero no decir
+
+housing-provider.title=Proveedor de vivienda
+housing-provider.is-your-household-working-with-a-provider=<h3 style="font-size: 19px; line-height: 25px; font-weight: bold; border-bottom: 2px solid #5f5854; padding-bottom: 2px; color: #5f5854">Programa de ayuda para la vivienda</h3><h2> ¿Su hogar trabaja con un proveedor de vivienda grupal?</h2>
+housing-provider.are-you-working-with-a-provider=<h3 style="font-size: 19px; line-height: 25px; font-weight: bold; border-bottom: 2px solid #5f5854; padding-bottom: 2px; color: #5f5854">Programa de ayuda para la vivienda</h3><h2> ¿Está trabajando con un proveedor de vivienda grupal?</h2>
+housing-provider.we-will-use-this-information=Usaremos esta información para su solicitud al Programa de ayuda para la vivienda. Si no tiene un proveedor, un trabajador de elegibilidad se comunicará con usted.
+
+housing-provider-info.title=Información del proveedor de Vivienda
+housing-provider-info.tell-us-about-your-housing-provider=<h3 style="font-size: 19px; line-height: 25px; font-weight: bold; border-bottom: 2px solid #5f5854; padding-bottom: 2px; color: #5f5854">Programa de ayuda para la vivienda</h3><h2> Cuéntenos sobre su proveedor de vivienda</h2>
+housing-provider-info.include-any-information=Incluya toda la información posible sobre su proveedor.
+housing-provider-info.what-is-the-providers-name=¿Cómo se llama el proveedor?
+housing-provider-info.providers-vendor-number=Número de proveedor
+housing-provider-info.if-you-are-not-sure=Si no está seguro, deje este campo en blanco.
+
+personal-info.title=Su información personal
+personal-info.tell-us-about-yourself=Cuéntenos sobre usted
+personal-info.whats-your-first-name=¿Cuál es su primer nombre?
+personal-info.legally-as-it-appears-on-your-id=Legalmente como aparece en su identificación.
+personal-info.whats-your-last-name=¿Cuál es su apellido?
+personal-info.whats-your-middle-name=¿Cuál es su segundo nombre?
+personal-info.list-any-names-that-you-have-gone-by-in-the-past=Haga una lista de los nombres que haya usado en el pasado.
+personal-info.when-were-you-born=¿Cuál es su fecha de nacimiento?
+personal-info.whats-your-social-security-number=¿Cuál es su número de seguro social?
+personal-info.if-you-have-one-we-strongly-recommend-including-it-here=Si lo tiene, le recomendamos mucho que lo incluya aquí. El SSN, o Número de Seguro Social, no es necesario para los no ciudadanos o los miembros de la familia que no solicitan prestaciones. <a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-3979-SPA" target="_blank" rel="noopener noreferrer">Lea la Ley de Privacidad</a>.
+personal-info.include-maiden-names-or-legal-changes=Incluya apellidos de soltera o cambios legales.
+personal-info.whats-your-marital-status=¿Cuál es su estado civil?
+personal-info.whats-your-sex=¿Cuál es su sexo?
+personal-info.legally-as-it-appears-on-your-id-we-regret-that-this-question-is-limited=Legalmente como aparece en su identificación. Lamentamos que esta pregunta es limitada.
+personal-info.have-you-lived-in-minnesota-your-whole-life=¿Usted se mudó a Minnesota durante el último año?
+personal-info.when-did-you-move-to-minnesota=¿Cuándo se mudó a Minnesota?
+personal-info.what-state-did-you-move-from=¿De qué estado se mudó?
+
+contact-info.title=Su información de contacto
+contact-info.how-can-we-stay-in-touch-with-you=¿Cómo podemos enviarle mensajes y recordatorios sobre su caso en el futuro?
+contact-info.the-department-of-human-services=Puede ser que el departamento de Servicios Humanos le envíe un mensaje de texto y/o un correo electrónico para comunicarse con usted sobre su solicitud. El Departamento sólo le enviará mensajes de texto si así lo elige y si pone una palomita en la casilla de la parte superior. Usted será responsable de cualquier cargo por mensajes o datos de su proveedor de servicios asociados con los mensajes de texto. Usted puede optar por dejar de recibir mensajes de texto en cualquier momento respondiendo con "STOP" a un mensaje de texto, o siguiendo el enlace para cancelar la suscripción en el mensaje de correo electrónico.
+contact-info.whats-your-phone-number=¿Cuál es su número de teléfono?
+contact-info.whats-your-email-address=¿Cuál es su correo electrónico?
+contact-info.text-me=Está bien que me manden mensajes de texto
+contact-info.email-me=Está bien que me manden correos electrónicos
+contact-info.how-can-we-send-you-updates-and-reminders-about-your-case-in-the-future=¿Cómo podemos enviarle actualizaciones y recordatorios sobre su caso en el futuro?
+contact-info.phone-number-helper=Un trabajador del su condado puede usar este número para comunicarse con usted directamente. Si no agrega un número de teléfono, el servicio puede ser más lento.
+
+no-phone.are-you-sure=¿Está seguro de que quiere dejar su número de teléfono en blanco?
+no-phone.title=No hay confirmación de número de teléfono
+no-phone.a-caseworker-will-need-to-contact-you-by-phone=Es posible que un trabajador social tenga que ponerse en contacto con usted para tratar su caso. Si añade un número de teléfono, el trabajador podrá ponerse en contacto con usted con mayor rapidez.
+no-phone.if-you-don't-have-a-phone-number= Si no tiene número de teléfono, puede introducir el de un amigo o familiar.
+no-phone.add-a-phone-number=Agregar un número de teléfono
+no-phone.continue-without-it=Continuar sin el número
+
+no-child.since-you-are-applying-for-child-care=Dado que está solicitando la ayuda para el cuidado de niños, asegúrese de añadir a los niños a su hogar.
+no-child.add-my-children=Agregar a mis hijos
+no-child.continue-without-it=Continuar sin él
+no-child.title=Agregar la confirmación de los niños
+
+submission-confirmation.title=Confirmación de envío
+submission-confirmation.header=¡Su solicitud ha sido enviada! Le recomendamos añadir los documentos ahora.
+submission-confirmation.header-no-recs=¡Su solicitud ha sido enviada! Ahora tiene la opción de añadir documentos.
+submission-confirmation.you-have-30-days=Tiene 30 días para presentar los documentos de verificación. Sin embargo, presentarlos ahora le ayudará a obtener los beneficios más rápidamente.
+
+adding-documents.title=Agregando Documentos
+adding-documents.adding-documents=Agregando Documentos
+adding-documents.we-will-tell-you=Nosotros le informaremos
+adding-documents.how-to-add-docs=Cómo agregar documentos
+adding-documents.which-docs-you-can-add=Qué documentos puede agregar
+adding-documents.how-to-submit-docs-now-or-later=Cómo entregar, ahora o después
+
+how-to-add-documents.title=Cómo agregar documentos
+how-to-add-documents.how-to-add-documents=Cómo agregar documentos a su solicitud
+how-to-add-documents.take-photos=Tomar fotos con su teléfono
+how-to-add-documents.select-files=Seleccionar archivos guardados en su dispositivo
+how-to-add-documents.take-a-screenshot=Tomar una foto de su pantalla en su teléfono
+how-to-add-documents.adding-documents=Agregar documentos a esta solicitud es opcional
+
+document-recommendation.title=Recomendaciones para los documentos
+document-recommendation.submit-any-documents-you-have=Presente los documentos recomendados que tenga disponibles.
+document-recommendation.caseworker-may-ask-you=Su condado o nación tribal podría solicitarle que presente documentos para poder obtener los beneficios.
+document-recommendation.caseworker-give-more-guidance=Un trabajador social le ayudará a determinar qué documentos tendrá que presentar cuando hable con usted sobre su solicitud. También es posible que le envíen un aviso por correo.
+document-recommendation.caseworkers-most-commonly-request=Los condados o naciones tribales generalmente solicitan los siguientes documentos:
+document-recommendation.id=Identificación (ID)
+document-recommendation.pay-stubs=Talones de pago de su trabajo
+document-recommendation.rent-receipts=Prueba de alquiler/renta o refugio
+document-recommendation.sooner-you-submit=Mientras más rápidamente presente los documentos, más pronto obtendrá los beneficios.
+document-recommendation.you-have-30-days=Si no tiene los documentos en este momento, un trabajador social de elegibilidad le ayudará posteriormente. Tiene 30 días para presentarlos.
+document-recommendation.proof-of-income=Comprobante de ingresos
+document-recommendation.proof-of-income-explanation=Los talones de pago de los últimos 30 días con el total de sus ingresos, o sus horas trabajadas y su salario.
+document-recommendation.proof-of-income-example=Ejemplo: Cheques de pago
+document-recommendation.proof-of-housing-costs=Comprobante de los Costos de Vivienda
+document-recommendation.proof-of-housing-costs-explanation=Recibos de arrendamiento, contratos de arrendamiento o facturas de hipotecas que muestren la cantidad total pagada por la vivienda.
+document-recommendation.proof-of-housing-costs-example=Ejemplos: recibos de renta, arrendamiento, o estados de cuenta de hipoteca
+document-recommendation.proof-of-job-loss=Prueba de pérdida del trabajo
+document-recommendation.proof-of-job-loss-explanation=Una carta o correo electrónico de su antiguo empleador. Debe incluir su nombre y su firma, así como la fecha de su último día de trabajo y la cantidad de su último pago.
+document-recommendation.proof-of-job-loss-example=Ejemplo: Carta de despido
+document-recommendation.proof-of-medical-expenses=Comprobante de Gastos Médicos
+document-recommendation.proof-of-medical-expenses-explanation=Recibos, talones de cheques, facturas de seguros o primas que muestren los gastos médicos que usted pagó.
+document-recommendation.proof-of-medical-expenses-example=Ejemplos: Talones de cheques, comprobantes de prestaciones o comprobantes de primas.
+document-recommendation.upload-documents-now=Agregar documentos ahora
+document-recommendation.skip-this-for-now=Lo haré más tarde
+document-recommendation.completed-healthcare-renewal=Una copia de su formulario de renovación de atención médica completado
+document-recommendation.bank-acc-statements=Estados de cuenta del banco (si se le pidió que los presentara anteriormente)
+document-recommendation.any-other-doc-asked-for=Cualquier otro documento que su condado o nación tribal le haya pedido
+
+upload-documents.title=Cargar documentos
+upload-documents.add-your-files=Agregue sus archivos
+upload-documents.view-document-list=Ver la lista de documentos
+upload-documents.recommended-documents=Documentos recomendados
+upload-documents.based-on-your-answers=En base a las respuestas a las preguntas de esta solicitud, debe presentar:
+upload-documents.proof-of-income=Prueba de ingresos
+upload-documents.a-document-with-employer-and-employee-names=Un documento con los nombres del empleador y del empleado y su ingreso total antes de impuestos de los últimos 30 días (o total de horas trabajadas y salario). Ejemplo: Cheques de pago
+upload-documents.proof-of-housing-costs=Comprobante de los Costos de Vivienda
+upload-documents.a-document-showing-total-amount-paid-for-housing=Un documento que muestra la cantidad total pagada por la vivienda. Ejemplos: recibos de renta, arrendamiento o estados de cuenta hipotecarias
+upload-documents.proof-of-job-loss=Prueba de pérdida del trabajo
+upload-documents.a-document-with-your-former-employers-name-and-signature=Un documento con el nombre y la firma de su antiguo empleador, el último día que trabajó y la fecha y el monto de su cheque de pago final. Ejemplo: Carta de despido
+upload-documents.proof-of-medical-expenses=Comprobante de gastos médicos
+upload-documents.documents-showing-medical-expenses-that-you-paid-for=Documentos que muestren los gastos médicos que usted pagó.
+upload-documents.im-finished-uploading=Ya terminé de subir los documentos
+upload-documents.submit-my-documents=Enviar mis documentos
+upload-documents.wait-for-upload-warning=Asegúrese de que sus documentos hayan terminado de cargarse antes de terminar.
+upload-documents.maximum-number-of-files=Ha subido el número máximo de archivos (20). Tendrá la oportunidad de compartir más con un trabajador del condado más adelante.
+upload-documents.maximum-number-of-files-fifty=Ha subido el número máximo de archivos (50). Tendrá la oportunidad de compartir más con un trabajador del condado más adelante.
+upload-documents.this-file-is-too-large=Este archivo es demasiado grande y no se puede cargar (el tamaño máximo es de: {0} MB)
+upload-documents.this-pdf-is-password-protected=Este PDF está protegido por contraseña. Intente eliminar la contraseña o de subir una captura/foto de pantalla en cambio.
+upload-documents.this-pdf-is-in-an-old-format=No podemos cargar este archivo PDF. Intente guardar este archivo en otro formato o tomar capturas de pantalla de las páginas.
+upload-documents.there-was-an-issue-on-our-end=Tuvimos un problema  al procesar este archivo. Le pedimos disculpas. Favor de volver a intentar con otro archivo, o si no, suba en cambio una captura de pantalla.
+upload-documents.there-is-a-problem-with-the-image=Esta imagen no puede ser añadida a su solicitud. Por favor, intente con otro archivo o suba una captura de pantalla en su lugar.
+upload-documents.this-file-appears-to-be-empty=Este archivo parece estar vacío. Por favor, pruebe con otro archivo o suba una captura de pantalla en su lugar.
+upload-documents.heic-files-not-accepted=No se aceptan archivos HEIC, un tipo de archivo del iPhone.
+upload-documents.MS-word-files-not-accepted=No se aceptan documentos en formato de Word MS (.doc o .docx).
+upload-documents.virus-detected=No se pudo cargar su archivo debido a que se detectó un virus. Intente cargar una copia diferente del archivo.
+upload-documents.clammit-server-error=No es posible cargar su archivo en este momento debido a un problema técnico. Vuelva a intentarlo más tarde visitando la página principal de MNbenefits y haciendo clic en Cargar documentos.
+upload-documents.maximum-total-file-size=El total de documentos cargados ha superado el límite máximo de tamaño de archivo (250 MB). Más adelante podrá compartir más documentos con un empleado.
+upload-documents.maximum-total-file-size-error=No puede cargar más archivos.
+
+upload-documents-delete-warning.title=Eliminar un archivo.
+upload-documents-delete-warning.you-are-about-to-delete=Está a punto de eliminar su archivo llamado {0}.
+upload-documents-delete-warning.yes-delete-the-file=Sí, borre el archivo.
+upload-documents-delete-warning.no-lets-keep-the-file=No, conservemos este archivo.
+
+document-submit-confirmation.title=Confirmación de la entrega de documento/s
+document-submit-confirmation.ready-to-submit-your-documents=¿Está listo para presentar sus documentos y terminar su solicitud?
+document-submit-confirmation.yes-submit-and-finish=Sí, presentar y terminar
+document-submit-confirmation.no-add-more-documents=No, agregar más documentos
+
+healthcare-Renewal-Document-Submit-Confirmation.ready-to-submit=¿Listo para presentar sus documentos?
+
+document-offboarding.title=Descarga de documentos
+document-offboarding.finish-your-application-and-add-documents-on-MNbenefits-later=Termine su solicitud y añada los documentos en MNbenefits más tarde.
+document-offboarding.you-can-return-to-our-home-page--to-submit-documents=Puede volver a nuestra página de inicio para presentar los documentos después de terminar esta solicitud.
+document-offboarding.if-you-dont-remember-which-documents=Si no recuerda qué documentos tiene que presentar, puede preguntarle a un trabajador social.
+
+later-docs.confirmation-email-subject=Hemos recibido sus documentos
+later-docs.confirmation-email-we-received=Hemos recibido los documentos para su solicitud de Minnesota Benefits.
+later-docs.confirmation-email-body=Hemos recibido los documentos para su solicitud de beneficios de Minnesota. Esté pendiente de lo que reciba por correo sobre su caso. Es posible que necesite completar pasos adicionales.
+later-docs.confirmation-email-number=Número de confirmación del documento: #{0}
+later-docs.comfirmation-email-look-out-for=Esté atento a correos con más información sobre su caso. Es posible que necesite completar pasos adicionales.
+later-docs.comfirmation-email-update=Si desea una actualización de su caso, por favor llame al condado o nación tribal mencionado anteriormente.
+
+health-care-renewal.confirmation-email-subject=Hemos recibido sus documentos para su renovación de atención médica
+health-care-renewal.confirmation-email-we-received=Hemos recibido sus documentos para su renovación de los programas de atención médica de Minnesota.
+health-care-renewal.confirmation-email-body=Sus documentos fueron enviados a {0} el {1}.
+health-care-renewal.confirmation-email-number=Número de confirmación del documento: <b>#{0}</b>
+health-care-renewal.comfirmation-email-look-out-for=Esté atento a correspondencia que contenga más información sobre su caso. Pudiera ser necesario que complete algunos pasos adicionales.
+health-care-renewal.comfirmation-email-update=Si desea una actualización de su caso, por favor llame al condado o nación tribal mencionado anteriormente.
+
+next-steps.title=Sus siguientes pasos a seguir
+next-steps.your-next-steps-have-been-emailed-to=Le hemos enviado los siguientes pasos por correo electrónico a {0}.
+next-steps.open-each-step=Amplíe cada paso para conocer lo que puede esperar a continuación en el proceso de inscripción de beneficios.
+next-steps.step-1=Paso 1: 
+next-steps.step-1-apply-once=Aplique una vez
+next-steps.step-1-completed=¡Terminado!
+next-steps.step-2=Paso 2:
+next-steps.step-2-upload-your-documents=Cargue sus documentos
+next-steps.allow-time-for-review=Paso 3: <br>Permita tiempo para que un trabajador revise su solicitud
+next-steps.step-4=Paso 4: <br>Complete una entrevista
+next-steps.allow-time-for-review-expedited-snap=Dentro de los próximos 5 días, espere una llamada telefónica de un trabajador de elegibilidad con información sobre sus próximos pasos.
+next-steps.allow-time-for-review-header=Su solicitud y documentos serán revisados por su condado o nación tribal.
+next-steps.allow-time-for-review-expedited-ccap=Dentro de los próximos 5 días, espere una llamada telefónica o una carta por correo de un trabajador de elegibilidad con información sobre sus próximos pasos.
+next-steps.allow-time-for-review-not-expedited=Espere que un trabajador de elegibilidad se comunique con usted por teléfono o correo con información sobre sus próximos pasos. <br/><br/>El tiempo que lleva revisar las solicitudes puede variar.
+next-steps.complete-an-interview-1=El (Los) programa(s) en su solicitud pueden requerir que hable con un trabajador sobre su solicitud.
+next-steps.complete-an-interview-2=Un trabajador de su condado o Nación Tribal se pondrá en contacto con usted para concertar una entrevista. La entrevista puede realizarse por teléfono o en persona.
+next-steps.no-document-upload-message-1=No cargó documentos con su solicitud hoy.
+next-steps.no-document-upload-message-2=Para cargar documentos más tarde, puede volver a nuestra página de inicio y hacer clic en "Cargar documentos" para comenzar.
+next-steps.document-upload-message-1=Recibimos los documentos que cargó con su solicitud.
+next-steps.document-upload-message-2=Si necesita cargar más documentos más tarde, puede volver a nuestra página de inicio y hacer clic en "Cargar documentos" para comenzar.
+
+success.title=Éxito
+success.done-your-application-has-been-submitted=¡Hecho! Su solicitud ha sido enviada.
+success.done-your-application-and-docs-have-been-submitted=¡Ha terminado! Su solicitud y documentos han sido enviados.
+success.helpful-resources=Información de ayuda
+success.hc-renewal-whats-next=¿Ahora que?
+sucesss.hc-renewal-county-process=Su condado o nacion tribal tramitara su renovacion y documentos en el orden en que se recibieron.
+sucesss.hc-renewal-watch-mail=Este atento a la correspondencia que contiene mas informacion sobre su caso. Es posible que deba completar pasos adicionales.
+sucesss.hc-renewal-learn-more=Mas informacion
+sucesss.hc-renewal-faq=Visite la <a href="https://mn.gov/dhs/people-we-serve/adults/health-care/health-care-programs/programs-and-services/renewal-reporting-changes.jsp" target="_blank" rel="noopener noreferrer">pagina de preguntas frecuentes sobre renovaciones de atencion medica</a> para obtener mas informacion sobre el proceso de renovacion.
+sucesss.hc-renewal-update-on-your-case=Si desea obtener informacion actualizada sobre su caso, llame al condado o nacion tribal que se indica arriba.
+success.download-my-application=Descargue una copia de su solicitud para sus registros:
+success.download-your-application=Descargue su solicitud
+success.apply-for-healthcare-coverage=¡Solicite cobertura de salud médica!
+success.additional-documents=Regrese a <a href="/#later-docs-upload" style="text-decoration:none;" target="_blank" rel="noopener noreferrer">MNbenefits.mn.gov </a>para presentar los documentos que le solicite su condado.
+success.of-your-situation-within-30-days=de su situación dentro de los 30 días.
+success.your-county-will-call-you=Un/a trabajador/a de su condado le llamará
+success.a-county-worker-may-ask-you-to-send-them-additional-proof=un trabajador social de elegibilidad podría pedirle que le envíe pruebas adicionales
+success.submit-feedback=Enviar comentarios
+success.give-us-feedback=Denos su opinión
+success.you-may-be-able-to-apply=Es probable que usted sea elegible para beneficios adicionales.
+success.learn-more-about-programs=Puede solicitar programas y recursos adicionales. Podemos ayudarle a empezar.
+success.view-more-programs=Ver más programas
+success.finish=Finalizar
+success.do-you-have-any-feedback-for-us=¿Tiene algún comentario para nosotros?
+success.confirmation-number=Número de Confirmación
+success.application-submitted-generic=Su solicitud fue enviada a {0} el {1}.
+success.hc-renewal-submitted-generic=Sus documentos de renovacion de atencion medica se enviaron al {0} el {1}.
+success.feedback-success=¡Gracias por sus comentarios!
+success.feedback-rating-success=¡Gracias por calificar su experiencia!
+success.feedback-failure=Lo sentimos, no vemos ningún comentario.
+feedback.how-was-your-experience=¿Cómo fue su experiencia al llenar esta solicitud?
+feedback.title=Comentarios
+success.not-good=Mala
+success.ok=Más o menos
+success.great=¡Muy buena!
+success.expedited-snap-timing=Dentro de las siguientes 24 horas <strong>espere una llamada</strong> de su condado o nación tribal sobre su solicitud de asistencia alimenticia.
+success.expedited-snap-timing-header=Usted puede ser elegible para el SNAP acelerado
+success.expedited-ccap-timing=Dentro de los siguientes 5 dí­as, su condado o nación tribal determinará su caso de asistencia para el cuidado de niños y <strong>le enviará una carta por correo</strong>.
+success.expedited-ccap-timing-header=Usted puede ser elegible para el CCAP acelerado, Programa de ayuda para el cuidado de niños
+success.expedited-snap-suggested-action=Si no recibe noticias de parte de su condado o nación tribal dentro de los siguientes 7 días o si desea una actualización sobre su caso, por favor <a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-5207-ENG" target="_blank" rel="noopener noreferrer">llame a su condado o nación tribal.</a>
+success.standard-suggested-action=<a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-5207-ENG" target="_blank" rel="noopener noreferrer">Llame a la agencia de servicios de su condado o tribu</a> si no recibe noticias de ellos en el periodo de tiempo que le hemos indicado.
+success.suggested-action-header=Cuándo comunicarse
+success.contact-promise=En los próximos 7-10 dí­as, <strong>espere recibir una carta por correo</strong> de parte de su condado o nación tribal sobre su {0} solicitud. La carta le explicará los siguientes pasos a seguir.
+success.contact-promise-header=Cuándo le responderán
+success.food-support=apoyo alimentario
+success.childcare=cuidado de niños
+success.housing=vivienda
+success.cash-support=apoyo en efectivo
+success.emergency-assistance=asistencia de emergencia
+success.healthcare=<p>El seguro médico aún no está incluido en nuestra solicitud, pero podemos ayudarle a iniciar el proceso. </p><p>Puede solicitarlo por su cuenta o con la ayuda de un navegador experto. <a href="/faq#how-to-apply-for-healthcare" target="_blank" rel="noopener noreferrer">Aprenda más</a></p>
+success.You-were-recommended-for-expedited-snap=Se le ha recomendado la ayuda alimentaria acelerada (SNAP).
+
+success.childcare-coverage=<p>Consulte y descargue más <a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-3551-SPA" target="_blank" rel="noopener noreferrer">recursos para familias con niños pequeños.</a></p>
+success.childcare-explore-coverage=¡Consiga ayuda para pagar el cuidado infantil!
+
+recommendations.title=Recomendaciones
+recommendations.header=Puede solicitar beneficios adicionales.
+recommendations.header-2=Es probable que usted sea elegible para estos programas y recursos.
+recommendations.help-message=Basado en su solicitud de hoy, le recomendamos los siguientes programas y recursos.
+recommendations.apply-for-food=Solicite el Programa de Women, Infant, and Children (WIC).
+recommendations.wic-1=Debido a que su hogar incluye niños pequeños, o está esperando un bebé, le sugerimos solicitar el Programa de Women, Infant, and Children (WIC).
+recommendations.wic-2=WIC es un programa de nutrición y lactancia materna que ayuda a las familias a alimentarse bien y mantenerse saludables. 
+recommendations.who-can=¿Quién puede solicitar el programa WIC?
+recommendations.pregnant=Mujeres embarazadas
+recommendations.breastfeeding=Mujeres que amamantan
+recommendations.non-breastfeeding=Mujeres que no amamantan y que se encuentran en etapa posparto
+recommendations.individuals-who=Mujeres que hayan estado embarazadas en los últimos 6 meses
+recommendations.mothers-and=Hogares que tengan un bebé, un niño pequeño o cualquier niño de hasta 5 años
+recommendations.you-do-not=No es necesario ser ciudadano estadounidense.
+recommendations.learn-about=<a href="https://www.health.state.mn.us/people/wic/ppthome.html" target="_blank" rel="noopener noreferrer">Obtenga más información sobre el programa WIC</a>
+recommendations.apply-for-wic=Solicite el programa WIC
+recommendations.apply-for-health=Solicite cobertura de atención médica
+recommendations.healthcare-1=Si no tiene seguro médico, le recomendamos que solicite uno de los programas de atención médica del estado de Minnesota.
+recommendations.healthcare-2=Puede presentar la solicitud por su cuenta o con la ayuda de un trabajador social con experiencia. <a href="/faq#how-to-apply-for-healthcare" target="_blank" rel="noopener noreferrer">Obtenga información sobre cómo presentar la solicitud.</a>
+recommendations.get-help-paying=Obtenga ayuda para pagar el cuidado infantil
+recommendations.view-and-download=Vea y descargue más <a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-3551-SPA" target="_blank" rel="noopener noreferrer">recursos para familias con niños pequeños.</a>
+recommendations.give-us-feedback=Déjenos su opinion
+recommendations.how-was-your-experience=¿Cómo fue su experiencia?
+
+documentsSent.title=Documentos Enviados
+documentsSent.great-your-documents-are-being-sent=¡Magnífico! ¡Sus documentos están en camino!
+documentsSent.it-may-take-up-to=El condado o la nación tribal pueden tardar hasta 10 dí­as para revisar sus documentos.
+documentsSent.call-your-county=Llame a su condado o nación tribal si tiene alguna pregunta sobre el estado de su solicitud o de sus documentos.
+documentsSent.find-your-countys-phone=Podrá encontrar el número de teléfono de su condado o nación tribal aquí­.
+
+hc-documentsSent.call-your-county=Llame a su condado o nación tribal si tiene alguna pregunta sobre su renovación de atención médica o sobre los documentos.
+hc-documentsSent.great-weve-received-your-docs=¡Excelente! Hemos recibido sus documentos.
+
+home-address.title=Dirección de casa
+home-address.where-are-you-currently-living=¿Dónde está viviendo actualmente?
+home-address.what-is-the-zip-code=¿Cuál es el código postal?
+home-address.what-is-the-city=¿Cuál es la ciudad?
+home-address.what-is-the-state=¿Cuál es el estado?
+home-address.what-is-the-state-helper=Debe vivir en el estado de Minnesota para ser elegible para beneficios.
+home-address.what-is-the-street-address=¿Cuál es la dirección de la calle?
+home-address.apartment-number=Número de apartamento
+home-address.i-dont-have-a-permanent-address=Yo no tengo una dirección permanente
+
+out-of-state-address-notice.header=Parece que usted está viviendo fuera de Minnesota.
+out-of-state-address-notice.would-you-still-like-to-apply=¿Todavía le gustaría solicitar beneficios en <u>Minnesota</u>?
+out-of-state-address-notice.title=Aviso de dirección fuera del estado
+out-of-state-address-notice.address-you-entered=Dirección que escribió
+out-of-state-address-notice.no-quit-application=No, salga de la aplicación
+out-of-state-address-notice.edit-my-address=Corregir mi dirección
+out-of-state-address-notice.yes-continue=Si, continuar
+
+out-of-state-quit-verify.are-you-sure=Salir ahora terminará su solicitud y borrará sus datos.
+out-of-state-quit-verify.title=Confirmación de salida
+out-of-state-quit-verify.no-take-me-back=Regresar
+out-of-state-quit-verify.yes-quit-application=Salir de la solicitud
+out-of-state-quit-verify.quitting-means-that=Salir ahora terminará su solicitud y borrará sus datos.
+out-of-state-quit-verify.what-next=¿Le parece bien? 
+
+where-to-send-mail.title=Dónde enviar el correo
+where-to-send-mail.the-county-will-need-a-place-to-send-you-mail=El condado o nación tribal necesitará una dirección para el envío de correspondencia durante los próximos 3 meses.
+where-to-send-mail.this-could-be-a-friend-or-family-address=Puede ser la dirección de un amigo o familiar o un apartado postal. Si no tiene uno, seleccionaremos una oficina de correos en su zona donde pueda recoger el correo.
+where-to-send-mail.I-have-a-place-to-get-mail=Tengo un lugar donde puedo recibir correo
+where-to-send-mail.I-will-pick-up-my-mail-at-a-post-office=Recogeré el correo en una oficina de correos con Entrega General cercana.
+
+city-for-general-delivery.title=Ciudad de la oficina de correos de Entrega General
+city-for-general-delivery.help-us-route-your-mail=Ayúdenos a encaminar su correo a una oficina de Entrega General cerca de usted.
+city-for-general-delivery.make-sure-to-provide-a-city=Asegúrese de indicar una ciudad
+city-for-general-delivery.select-your-city=Seleccione su ciudad / pueblo
+
+general-delivery-address.title=Dirección General de entrega
+general-delivery-address.the-county-will-send-all-mail-about-this-application-to=El condado o nación tribal enviará todo la correspondencia sobre esta solicitud a:
+general-delivery-address.call-your-county-to-get-the-exact-street-address=Llame a su condado para obtener la dirección exacta de esta oficina de correos.
+general-delivery-address.tell-the-county-worker-you-submitted-an-application-on-MNbenefits=Infórmele al trabajador social de elegibilidad que presentó una solicitud en MNbenefits y que utilizó la dirección de correspondencia general en su ciudad. Ellos le dirán dónde podrá recoger su correspondencia y qué puede esperar.
+
+mailing-address.title=Dirección para correo postal
+mailing-address.where-can-the-county-send-your-mail=¿A qué dirección puede enviarle el condado o nación tribal su correspondencia?
+mailing-address.what-is-the-zip-code=¿Cuál es el código postal?
+mailing-address.what-is-the-city=¿Cuál es la ciudad?
+mailing-address.what-is-the-state=¿Cuál es el estado?
+mailing-address.what-is-the-street-address=¿Cuál es la dirección de la calle?
+mailing-address.apartment-number=Número de apartamento
+mailing-address.same-as-my-current-living-address=Es la misma que mi dirección actual
+
+sign-this-application.title=Firme esta solicitud
+sign-this-application.type-your-full-legal-name-here-to-sign-this-application=Escriba su nombre legal completo aquí para firmar esta solicitud.
+sign-this-application.by-signing-this-application-you-agree-that-you-want-to=Al firmar esta solicitud está de acuerdo que desea solicitar sus beneficios, que usted a sido honesto en esta solicitud, y que usted a leído y aceptado los términos en la página anterior.
+sign-this-application.make-sure-to-sign-the-application=Asegúrese de firmar la solicitud.
+
+second-signature-notification.title=Notificación de firma
+second-signature-notification.next-we-will-ask=Si hay un adulto adicional en su hogar, es posible que también deba firmar la solicitud. 
+second-signature-notification.header-help-message=Puede firmar ahora o un trabajador solicitará su firma más tarde.<br/><br/>Si usted es el único adulto en su hogar, puede continuar sin agregar una firma adicional.
+second-signature-notification.if-you-are-only-adult=Si usted es el único adulto en su hogar, puede continuar sin agregar una firma adicional.
+second-signature-notification.yes-add-another-signaure=Añadir otra firma
+second-signature-notification.submit-application-now=Continuar sin firma
+second-signature-notification.who-should-sign=¿Quién debería firmar?
+second-signature-notification.reveal-content=Si hay un adulto adicional en su hogar, como su cónyuge o pareja, es posible que deba firmar la solicitud antes de que su hogar pueda recibir beneficios.</br></br><strong>Si no puede firmar ahora, es aceptable. Aún puede enviar la solicitud sin su firma. </strong>Su condado o nación tribal se comunicará con usted posteriormente para obtener su firma. </br></br>La mayoría de las solicitudes requieren una firma adicional. Si hay más adultos en su hogar, su trabajador social puede comunicarse con usted más tarde para obtener firmas adicionales.
+second-signature.title=Firma del adulto adicional
+second-signature.great=<div class="text-with-line">Firma del adulto adicional</div><h2>Escriba su nombre legal completo aquí para firmar esta solicitud.</h2>
+
+submit.title=Enviar solicitud
+submit.submit=Enviar solicitud
+submit.header-text=¡Listo! Su solicitud está firmada y lista para enviarse.
+
+do-you-need-help-immediately.title=¿Necesita ayuda inmediata?
+do-you-need-help-immediately.header=¿Necesita ayuda inmediata?
+do-you-need-help-immediately.we-encourage-you-to-answer-a-few-more-questions-that-will-help-us-figure-out-if-you-qualify-for-faster-service=Le sugerimos a responder a algunas preguntas adicionales que nos ayudarán a determinar si usted califica para un servicio más rápido.
+do-you-need-help-immediately.yes-I-want-to-see-if-I-qualify=Sí, quiero saber si califico.
+do-you-need-help-immediately.finish-application-now=Finalizar la solicitud.
+
+add-household-members.title=¿Desea agregar miembros de su hogar?
+add-household-members.do-you-want-to-add-household-members=¿Vive con alguna de estas personas?
+add-household-members.your-spouse=Su cónyuge
+add-household-members.your-children=Sus hijos
+add-household-members.other-family-members=Otros miembros de la familia
+add-household-members.unmarried-partner=Una pareja de hecho/de unión libre con la que comparte hijos
+add-household-members.roommates=Compañeros con los que compra y prepara la comida
+
+thirty-day-income.title-household=Ingreso de 30 días, Hogar
+thirty-day-income.title-one-person=Ingreso de 30 días, 1 persona
+thirty-day-income.how-much-money-have-you-made-in-the-last-30-days=¿Cuánto dinero has ganado en los últimos 30 días?
+thirty-day-income.how-much-money-has-your-household-made-in-the-last-30-days=¿Cuánto dinero han ganado las personas en su hogar en los últimos 30 días?
+thirty-day-income.if-you-dont-know-the-exact-amount=Si no sabe la cantidad exacta, puede estimar la cantidad o dejarla en blanco.
+thirty-day-income.how-much-money-do-you-have-available=¿Cuánto dinero tiene disponible?
+thirty-day-income.how-much-money-do-you-have-available-in-these=¿Cuánto dinero tiene disponible?
+thirty-day-income.how-much-money-is-available=¿Cuánto dinero tiene disponible su hogar?
+thirty-day-income.how-much-money-is-available-in-these=¿Cuánto dinero tiene disponible su hogar?
+
+thirty-day-job-income.title=Ingreso Laboral de 30 días
+thirty-day-job-income.how-much-money-have-you-made-at-this-job-in-the-last-30-days=¡Esta bien! ¿Cuánto dinero ha ganado en este trabajo en los últimos 30 días?
+thirty-day-job-income.how-much-money-have-they-made-at-this-job-in-the-last-30-days=¡Esta bien! ¿Cuánto dinero han ganado en este trabajo en los últimos 30 días?
+
+liquid-assets-prompt.title-one-person=Dinero disponible
+liquid-assets-prompt.title-household=Dinero disponible
+liquid-assets-prompt.this-includes=A continuación, incluya cualquiera de estos recursos que tenga en su total:
+liquid-assets-prompt.please-include-all=Considere todas las siguientes:
+liquid-assets-prompt.checking-accounts=Cuentas de cheque, o
+liquid-assets-prompt.savings=Cuentas de ahorro
+liquid-assets-prompt.cash=Efectivo
+liquid-assets-prompt.savings-accounts=Cuentas de ahorro
+
+liquid-assets-source.title=Efectivo disponible
+liquid-assets-source.who-does-money-belong-to=¿A quién le pertenece el dinero?
+liquid-assets-source.this-helps-us-determine=Esto nos ayuda a determinar para qué programas son elegibles usted y los otros miembros de su hogar.
+liquid-assets-source.how-much-money-available=¿Cuanto dinero esta disponible?
+
+cash-amount-prompt.please-include=Incluya lo siguiente:
+cash-amount-prompt.cash-you-have-with-you=Efectivo que lleva consigo
+cash-amount-prompt.cash-in-a-safety-deposit-box=Efectivo en una caja de seguridad
+cash-amount-prompt.cash-available-at-home=Efectivo disponible en su casa o el lugar donde vive.
+cash-amount-prompt.type-0-if-you-do-not-have-any=Ingrese "0" si no tiene nada.
+cash-amount-prompt.type-0-if-your-household-does-not-have-any=Ingrese "0" si su hogar no tiene nada.
+cash-amount.how-much-cash-do-you-have-on-hand=¿Cuánto efectivo tiene disponible usted?
+
+
+expedited-expenses.title-one-person=Gastos Acelerados, 1 persona
+expedited-expenses.title-household=Gastos Acelerados, Hogar
+expedited-expenses.header-one-person=¿Paga usted renta/alquiler, hipoteca o alojamiento y comida?
+expedited-expenses.header-household=¿Usted o alguien de su familia paga el alquiler/arrendamiento, la hipoteca o el alojamiento y comida?
+
+expedited-expenses-amount.title-one-person=Cantidad de Gastos Acelerados, 1 persona
+expedited-expenses-amount.title-household=Cantidad de Gastos Acelerados, Hogar
+expedited-expenses-amount.how-much-do-you-pay-for-rent-or-mortgage-every-month=¿Cuánto paga por la renta o la hipoteca cada mes?
+expedited-expenses-amount.how-much-is-paid-for-rent-or-mortgage-every-month=¿Cuánto se paga por la renta o la hipoteca cada mes?
+
+utility-payments.title-one-person=Pagos de Servicios Públicos Acelerados, 1 persona
+utility-payments.title-household=Pagos de Servicios Públicos Acelerados, Hogar
+utility-payments.do-you-pay-for-any-utilities=¿Usted paga algunos de los servicios públicos?
+utility-payments.does-anyone-in-your-household-pay-for-these-utilities=¿Alguien en su hogar paga los servicios públicos?
+utility-payments.select-all-that-you-are-billed-for-even-if-you-havent-paid-it-this-month=Seleccione todo lo que le cobran, incluso si usted no lo ha pagado este mes.
+utility-payments.household-billed=Seleccione todo lo que se cobra a su hogar, incluso si no lo han pagado este mes.
+utility-payments.heating=Calefacción
+utility-payments.cooling=Aire Acondicionado
+utility-payments.electricity=Electricidad
+utility-payments.phone=Teléfono/Teléfono Celular
+utility-payments.water=Agua
+utility-payments.sewer=Drenaje
+utility-payments.garbage-removal=Eliminación de Basura
+utility-payments.cooking-fuel=Combustible de Cocina
+
+expedited-migrant-farm-worker.title-one-person=Trabajador Agricultor Migrante Acelerado, 1 persona
+expedited-migrant-farm-worker.title-household=Trabajador Agricultor Migrante Acelerado, Hogar
+expedited-migrant-farm-worker.header-one-person=¿Usted es un/a trabajador/a agricultor migrante o de temporada?
+expedited-migrant-farm-worker.header-household=¿Alguien en su hogar es un/a trabajador/a agricultor migrante o de temporada?
+
+transition-household-person-details.title=Transición: detalles sobre la personas en el hogar
+transition-household-person-details.thanks=¡Gracias!
+transition-household-person-details.header=A continuación, le vamos a preguntar por algunos datos personales para saber más sobre las necesidades de todos en su hogar.
+transition-household-person-details.up-next=A continuación:
+transition-household-person-details.citizen-disabilities=Ciudadanía, Discapacidades, Preparando Comidas, Capacidad para Trabajar
+
+snap-expedited-determination.qualified-title=Calificado para el servicio acelerado
+snap-expedited-determination.denied-title=Denegado para el servicio acelerado
+snap-expedited-determination.qualified-header=Al parecer califica para un servicio más rápido.
+snap-expedited-determination.denied-header=Gracias por brindarnos esa información.
+snap-expedited-determination.your-county-should-reach-out=Su condado o nación tribal debería ponerse en contacto con usted para hablar de su solicitud en un plazo de 24 horas.
+snap-expedited-determination.if-you-do-not-hear=Si no recibe noticias suyas en un plazo de 3 dí­as, <a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-5207-ENG" target="_blank" rel="noopener noreferrer">por favor comuníquese</a> con su condado o nación tribal para su entrevista.
+snap-expedited-determination.denied-detail=Un trabajador social de elegibilidad se comunicará con usted en un plazo de 5 a 7 días para revisar su solicitud.
+
+legal-stuff-second-signature.title=Asuntos legales – Adulto adicional
+legal-stuff-second-signature.header-text=<div class="text-with-line">Firma del adulto adicional </div><h2 class="spacing-below-35">Las siguientes dos páginas son para que un adulto adicional las revise y las firme.</h2><div style=" color: #5F5854; border-bottom: 2px solid #AAAAAA;  padding-bottom: 0.5rem;  font-style: normal;  font-weight: bold;"></div><h2>Asuntos legales </h2>
+legal-stuff-second-signature.copies-of-the-full-agreements=Se incluirán copias de los acuerdos y términos completos en el correo electrónico de confirmación de su hogar.
+legal-stuff-second-signature.continue-without-another-signature=Continuar sin otra firma
+
+legal-stuff.title=Asuntos Legales
+legal-stuff.the-legal-stuff=Los asuntos legales
+legal-stuff.scroll-down-to-agree-to-the-terms=Amplíe las casillas para revisar los términos. Firmará en la siguiente página.
+legal-stuff.i-agree=Yo acepto los términos
+legal-stuff.copies-of-the-full-agreements=Se incluirán copias de los acuerdos y términos completos en su correo electrónico de confirmación.
+legal-stuff.summary=Resumen
+legal-stuff.you-have-been-honest-on-this-application=Ha sido honesto con esta solicitud.
+legal-stuff.you-agree-to-the-benefit-rules=Acepta las reglas de los beneficios.
+legal-stuff.you-can=Puede
+legal-stuff.register-to-vote-online=registrarse para votar en línea
+legal-stuff.or-ask-your-county-worker=o pedirle al trabajador del condado que le ayude a registrarse.
+legal-stuff.details=Detalles
+legal-stuff.employment-services-registration=Registro de Servicios de Empleo
+legal-stuff.i-understand-that-signing-this-application-registers-me-for-employment-services=Entiendo que al firmar esta solicitud, me inscribo en los servicios de empleo. También entiendo que al hacerlo, registra automáticamente a todos en mi hogar a quienes la agencia aprueba para recibir ayuda conmigo para los servicios de empleo. Entiendo que yo u otras personas en mi hogar podrían tener que participar en los servicios de empleo para recibir asistencia en efectivo o beneficios de SNAP.
+legal-stuff.assignments=Asignaciones
+legal-stuff.i-understand-that-when-I-get-MFIP=Entiendo que cuando obtengo MFIP debo ceder mis derechos a la manutención y manutención de menores al estado de Minnesota.
+legal-stuff.snap-penalty-warnings=Reglas de Advertencia de Penalización
+legal-stuff.if-you-get-cash-or-SNAP-benefits=Si recibe beneficios de SNAP o en efectivo, debe seguir las reglas que se enumeran a continuación.
+legal-stuff.do-not-give-false-information=No brinde información falsa
+legal-stuff.or-hide-information-to-get-or-continue-to-get-benefits=ni oculte información para obtener o continuar recibiendo beneficios. Si recibe beneficios en efectivo o SNAP y proporciona información falsa u oculta información sobre su identidad y residencia para obtener múltiples beneficios durante el mismo período de tiempo, puede ser excluido por 10 años.
+legal-stuff.do-not-trade-or-sell-snap-benefits=No intercambie ni venda beneficios de SNAP
+legal-stuff.or-electronic-benefit-transfer=o tarjetas de acceso de Transferencia Electrónica de Beneficios (EBT). El intercambio o venta de beneficios valorados en más de $500 puede resultar en una inelegibilidad permanente.
+legal-stuff.do-not-use-cash-or-snap-benefits-to-buy-ineligible-items=No use dinero en efectivo o beneficios de SNAP para comprar artículos no elegibles,
+legal-stuff.such-as-alcohol-and-tobacco=como alcohol y tabaco.
+legal-stuff.do-not-use-someone-elses-ebt-access-card=No use la(s) tarjeta(s) de acceso EBT de otra persona
+legal-stuff.to-get-cash-or-snap-benefits=para obtener dinero en efectivo o beneficios de SNAP para su hogar.
+legal-stuff.the-state-may-bar-household-members-who-break=El estado puede excluir a los miembros del hogar que quebranten cualquiera de estas reglas. La exclusión dura un año por el primer fraude, dos años por el segundo fraude y es permanente por el tercer fraude. Los meses en que estará excluido de MFIP por no cumplir las reglas pueden contar hacia su límite de por vida de 60 meses.
+legal-stuff.you-can-also-be-prosecuted-for-fraud=También puede ser enjuiciado por fraude si no cumple con las reglas y se podrían aplicar multas y sanciones adicionales. La pena máxima es una multa de $250,000 o un período de cárcel de 20 años, o ambos.
+legal-stuff.special-snap-penalty-warning=Advertencia de sanción especial de SNAP:
+legal-stuff.if-a-federal-state-or-local-court-finds=si un tribunal federal, estatal o local lo declara a usted o a cualquier miembro de su hogar culpable de dar o recibir beneficios de SNAP a cambio de:
+legal-stuff.controlled-substances=Sustancias controladas,
+legal-stuff.that-household-member-will-be-barred=ese miembro de su hogar no podrá recibir SNAP durante 24 meses por la primera infracción y permanentemente por la segunda infracción.
+legal-stuff.firearms-ammunition-or-explosives=Armas de fuego, municiones o explosivos,
+legal-stuff.that-household-member-will-be-barred-from-getting-snap=ese miembro del hogar no podrá recibir SNAP de forma permanente.
+legal-stuff.perjury-and-general-declarations=Perjurio y declaraciones generales
+legal-stuff.authorization-to-share-information-for-fraud-investigation-and-audits=Autorización para compartir información para investigaciones y auditorías de fraude
+legal-stuff.i-agree-that-third-parties-may-share-information=Acepto que terceros pueden compartir información sobre mí con personas que investiguen el fraude y realicen auditorías federales o estatales.
+legal-stuff.this-may-include-but-is-not-limited-to=Esto puede incluir, pero no se limita a:
+legal-stuff.employers-and-schools=Empleadores y escuelas,
+legal-stuff.landlords-and-utility-companies=Propietarios y empresas de servicios públicos,
+legal-stuff.financial-and-insurance-agencies=Agencias financieras y de seguros, y
+legal-stuff.other-government-offices=Otras oficinas gubernamentales.
+legal-stuff.i-understand-this-consent-is-good-for-six-months-after-my-benefits-stop=Entiendo que este consentimiento es válido por seis meses después de que finalicen mis beneficios.
+legal-stuff.by-signing=Al firmar:
+legal-stuff.i-understand-cash-assistance-is-provided-to-help-eligible-families-meet-their-basic-needs=Entiendo que la asistencia en efectivo se proporciona para ayudar a las familias elegibles a cubrir sus necesidades básicas.
+legal-stuff.i-understand-if-i-give-incorrect-information-or-misuse-an-electronic-benefit=Entiendo que si doy información incorrecta o uso indebidamente una tarjeta de transferencia electrónica de beneficios (EBT), puedo ser investigado y descalificado o procesado por fraude. [Estatuto de Minnesota, secciones 256.98 y 609.821]
+legal-stuff.i-acknowledge-that-since-my-last-application-or-recertification=Reconozco que desde mi última solicitud o recertificación, yo he recibido el efectivo y/o beneficios de SNAP directamente o he usado la tarjeta EBT para recibir el efectivo o mis beneficios de SNAP.
+legal-stuff.i-acknowledge-that-i-have-read-and-understand-the-snaps-penalty-warning=Reconozco que he leído y entiendo la sección "Advertencias de sanciones de SNAP".
+legal-stuff.i-acknowledge-that-i-received-the-attached=Reconozco que he recibido lo siguiente adjunto
+legal-stuff.notices-of-privacy-practices="Avisas de Prácticas de Privacidad" (DHS-3979)
+legal-stuff.client-responsibilties-and-rights="Responsabilidades y Derechos del Cliente" (DHS-4163)
+legal-stuff.client-responsibilties-and-rights-no-quotes=Responsabilidades y Derechos del Cliente (DHS-4163)
+legal-stuff.notices-of-privacy-practices-no-quotes=Avisas de Prácticas de Privacidad (DHS-3979)
+legal-stuff.i-agree-to-assign-my-child-support-as-stated-above=Estoy de acuerdo en asignar la manutención de mis hijos como se indicó anteriormente.
+legal-stuff.i-agree-to-the-sharing-of-information-as-stated-on-the-fraud-release-information=Estoy de acuerdo en compartir información como se indica en la sección de información sobre divulgación de fraude anterior.
+legal-stuff.i-agree-to-the-sharing-of-information-as-stated-in-the-social-security-numbers-section=Estoy de acuerdo en compartir información como se indica en la sección de números de Seguro Social en la segunda página del
+legal-stuff.combined-application-form=Formulario de Solicitud Combinada (CAF).
+legal-stuff.child-care-application=Solicitud de Cuidado Infantil
+legal-stuff.if-i-get-child-care-assistance=Si obtengo asistencia para el cuidado de niños, entiendo que:
+legal-stuff.i-may-be-required-to-pay-a-co-payment-fee=Es posible que deba pagar una tarifa de copago, o pago compartido.
+legal-stuff.if-my-child-care-provider-charges-more-than-the-maximum-rate-paid-in-my-county=Si mi proveedor de cuidado infantil cobra más que la tarifa máxima pagada en mi condado, pagaré los costos adicionales, así como mi tarifa de copago.
+legal-stuff.i-must-report-changes-to-the-information-I-have-given=Debo informar los cambios a la información que he proporcionado dentro de los 10 días de calendario a partir de la fecha en que ocurrió el cambio. Estos incluyen cambios en el estado y horarios de empleo y actividad, estado familiar, cambios significativos de ingresos, dirección o residencia, o cualquier persona que se mude dentro o fuera de mi hogar. Consulte
+legal-stuff.reporting-responsibilties-for-ccap-families=Responsabilidades de Informar para Familias CCAP (DHS-6953)
+legal-stuff.for-specific-requirements=para conocer los requisitos específicos.
+legal-stuff.i-must-give-the-county-agency-and-my-child-care-provider-15-calendar-days=Debo avisar a la agencia del condado ya mi proveedor de cuidado infantil con 15 días de anticipación antes de cambiar de proveedor(es) de cuidado infantil. Este aviso no es necesario en los casos en los que:
+legal-stuff.a-providers-Minnesota-child-care-license-has-been-temporarily-immediately-suspended-or=La licencia de cuidado infantil de Minnesota de un proveedor se ha suspendido temporalmente de inmediato o
+legal-stuff.there-is-an-imminent-risk-of-harm-to-the-health-safety-or-rights-of-a-child=Existe un riesgo inminente de daño a la salud, seguridad o derechos de un niño al cuidado de un proveedor no licenciado por Minnesota.
+legal-stuff.my-eligibility-for-child-care-assistance-will-be-redetermined-every-12-months=Mi elegibilidad para la asistencia de cuidado infantil se volverá a determinar cada 12 meses.
+legal-stuff.i-have-the-right-to-choose-any-legal-child-care-provider=Tengo derecho a elegir cualquier proveedor de cuidado infantil legal, inclusos los centros de cuidado infantil con licencia certificados, los proveedores de cuidado infantil familiar con licencia y los proveedores de cuidado infantil sin licencia legal que cumplan con los requisitos del programa.
+legal-stuff.if-i-choose-a-provider-to-provide-child-care-in-my-home-I-am-considered-the-employer-of-the-provider=Si elijo un proveedor que brinde cuidado infantil en mi hogar, yo soy considerado el empleador del proveedor y tengo responsabilidades legales y fiscales. Este cuidado debe ser aprobado por el DHS antes de que se pueda pagar la asistencia para el cuidado de niños.
+legal-stuff.i-must-cooperate-with-child-support-enforcement-and-assign-my-child-care-support-portion=Debo cooperar con el cumplimiento de la manutención de menores y asignar mi porción de manutención de niños al Departamento de Servicios Humanos de Minnesota. Tengo derecho a reclamar "causa justificada" para no cooperar con la aplicación de la manutención de menores.
+legal-stuff.i-agree-that-authorized-investigators-may-share-information-about-me-during-investigations=Acepto que los investigadores autorizados puedan compartir información sobre mí durante las investigaciones por fraude, prevención de fraude y falsa declaración, y para auditorías federales o estatales.
+legal-stuff.provider-release=Divulgación del proveedor
+legal-stuff.state-and-federal-privacy-laws-protect-my-information=Las leyes de privacidad estatales y federales protegen mi información. Si cumplo con los requisitos para recibir asistencia para el cuidado infantil, el personal de CCAP puede compartir información sobre las horas y la cantidad de asistencia para el cuidado infantil que recibo con mi(s) proveedor(es) de cuidado infantil. Se notificará a mi proveedor cuando mi determinación esta prevista. Entiendo:
+legal-stuff.this-information-must-be-shared-so-that-my-child-care-provider=Esta información debe ser compartida para que mi proveedor de cuidado infantil sepa cuánto pagará CCAP por el cuidado infantil proporcionado.
+legal-stuff.this-information-can-be-shared-only-if-I-give-my-written-permission=Esta información se puede compartir solo si doy mi permiso por escrito o si la ley lo permite.
+legal-stuff.i-can-refuse-to-sign-or-cancel-this-release=Puedo negarme a firmar o cancelar esta autorización, pero si lo hago, es posible que CCAP no pueda pagarle a mi proveedor por el cuidado infantil proporcionado.
+legal-stuff.i-may-cancel-this-authorization-with-written-notice-anytime=Puedo cancelar esta autorización con notificación por escrito en cualquier momento. Este aviso escrito no afectará la información ya divulgada.
+legal-stuff.the-person-or-agency-who-gets-my-information-may-be-able-to-pass-it-on-to-others=La persona o agencia que obtiene mi información puede transmitirla a otras personas.
+legal-stuff.if-my-information-is-passed-on-to-others-by-dhs=Si el DHS transmite mi información a otras personas, es posible que esta autorización ya no la proteja. Esta autorización terminará un año después de la fecha en que la firme. Ley de Privacidad de Datos de Minnesota (Minn. Stat., Cap. 13).
+legal-stuff.penalty-warning=Advertencia de Penalización
+legal-stuff.if-you-get-child-care-assistance-benefits=Si recibe beneficios de asistencia para el cuidado infantil, no dé información falsa ni oculte información:
+legal-stuff.to-get-or-continue-to-get-child-care-assistance-benefits=Para obtener o continuar recibiendo beneficios de asistencia para el cuidado infantil
+legal-stuff.to-help-someone-else-to-get-or-to-continue-to-get-child-care-assistance-payments=Para ayudar a otra persona a obtener o continuar recibiendo pagos de asistencia para el cuidado infantil.
+legal-stuff.the-state-may-bar-a-family-with-a-member-who-breaks-either-of-these-rules=El estado puede prohibir a una familia con un miembro que infrinja cualquiera de estas reglas del Programa de Asistencia para el Cuidado de Niños. La barra dura un año para el primer fraude, dos años para el segundo fraude y es permanente para el tercer fraude. Una persona que proporcione información falsa para que ellos u otra persona reciba Asistencia para el cuidado de niños también puede ser procesada penalmente.
+legal-stuff.i-have-received-a-copy-of-the=He recibido una copia de
+legal-stuff.and=y
+legal-stuff.comma=,
+legal-stuff.the-child-care-assistance-program-and-fraud=El Programa de Asistencia para el Cuidado Infantil y Fraude - Preguntas y Respuestas para Familias (DHS-3943B)
+legal-stuff.i-have-read-and-understand-this-information=He leído y entiendo esta información. Si tengo preguntas sobre esta información, le pediré a un trabajador que me las explique.
+legal-stuff.i-understand-that-if-someone=Reconozco que si alguien en mi hogar ha sido condenado por un delito de drogas en los últimos 10 años, se le podrá pedir que se haga pruebas de drogas al azar. La primera vez que no pase una prueba de drogas, la agencia reducirá los beneficios MFIP o SNAP de su hogar el 30 por ciento. Si falla la prueba por segunda vez, será descalificado permanentemente.
+legal-stuff.i-agree-to-continue-to-assign-my-child-care-support-to-the-state-of-minnesota=Acepto continuar asignando la manutención de mi cuidado infantil al estado de Minnesota. Entiendo que tengo derecho a reclamar una buena causa para no cooperar con la aplicación de la manutención de menores.
+legal-stuff.i-agree-to-the-sharing-of-information-as-stated-in-the-provider-release-and-fraud-investigation-authorization-information-above=Estoy de acuerdo en compartir la información como se indica en la información de autorización de investigación de fraude y divulgación del proveedor anterior.
+legal-stuff.i-have-received-and-reviewed=He recibido y leído lo siguiente:
+legal-stuff.authorization-of-sharing=Autorización para Compartir - <a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-5959A-ENG" target="_blank" rel="noopener noreferrer">DHS 5959A-ENG</a>
+legal-stuff.notice-about-ies=Aviso sobre los informes de trabajo del IES - <a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-2759-ENG" target="_blank" rel="noopener noreferrer">DHS 2759-ENG</a>
+legal-stuff.important-information=Información Importante - <a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-3353-ENG" target="_blank" rel="noopener noreferrer">DHS 3353</a>
+legal-stuff.additional-important-information=Información importante adicional - <a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-5223B-ENG" target="_blank" rel="noopener noreferrer">DHS 5223B</a>
+legal-stuff.penalty-warnings=Advertencias de penalización - <a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-5959B-ENG" target="_blank" rel="noopener noreferrer">DHS 5959B</a>
+legal-stuff.has-anyone-been-convicted-of-drug-felony=¿Alguien en el hogar ha sido condenado por delito grave de drogas en los últimos 10 años?
+legal-stuff.if-yes-you-can-still-get-benefits=Esto es opcional. Si la respuesta es afirmativa, puede seguir recibiendo prestaciones. Es posible que se le pida que se someta a pruebas de detección de drogas al azar.
+legal-stuff.application-terms=Términos de la solicitud
+legal-stuff.child-care-assistance-program-application=Solicitud al Programa de Asistencia para el Cuidado Infantil
+
+legal-stuff.crr=Notificación de derechos y responsabilidades
+legal-stuff.crr-effective=Efectivo Marzo de 2025
+legal-stuff.crr-note=<strong>Nota: Se proporciona dinero con una tarjeta EBT - Electronic Benefits Transfer (transferencia electrónica de servicios) para ayudar a las familias a cubrir sus necesidades básicas, incluyendo: </strong>alimentos, alojamiento, ropa, servicios públicos y transporte. Estos fondos se entregan hasta que las familias puedan sostenerse por sí mismas. Si usted compra o intenta comprar productos de tabaco o alcohol con la tarjeta EBT, incurre en un acto ilegal. Si lo hace, el hecho constituye un fraude y usted será eliminado del programa EBT. Las tarjetas EBT no pueden usarse en un establecimiento de juego por dinero ni comercial que proporciona entretenimiento orientado a adultos donde los artistas se desnudan o actúan sin ropa.
+
+legal-stuff.crr-yourResponsibilites=Sus responsabilidades
+legal-stuff.crr-yourResponsibilites1=<strong>Si usted recibe asistencia para cuidado de menores,</strong> tiene la obligación de reportar a la agencia de su condado o nación tribal los cambios que puedan afectar sus beneficios dentro de los 10 días a partir de ocurrido el cambio. 
+legal-stuff.crr-yourResponsibilites2=<strong>Si usted obtiene beneficios del Supplemental Nutrition Assistance Program (Programa de Asistencia Nutricional Suplementaria) y/o beneficios de asistencia en efectivo, reporte los cambios, a más tardar, el día 10 del siguiente mes.</strong> Cada programa de beneficios puede tener requisitos diferentes para reportar cambios. Consulte al trabajador de su caso sobre lo que usted debe reportar.
+
+legal-stuff.crr-ReportChanges=Puede que le exijan reportar cambios en:
+legal-stuff.crr-employment=<strong>Empleo</strong> - Comenzar o terminar un empleo o negocio; cambio en las horas, las ganancias o los gastos
+legal-stuff.crr-income=<strong>Ingresos</strong> - recibo o cambio de manutención de menores, Social Security, beneficios de veteranos, seguro de desempleo, herencia, beneficios de seguros.
+legal-stuff.crr-property=<strong>Propiedad</strong> - compra, venta o traspaso de una casa, automóvil u otros artículos de valor, o si recibe una herencia o acuerdo legal.
+legal-stuff.crr-household=<strong>Miembros del hogar</strong> - cuando una persona fallece o queda discapacitada, se muda de o al hogar, o se va temporalmente; embarazo; nacimiento de un hijo.
+legal-stuff.crr-citizenship=<strong>Ciudadanía o estado migratorio</strong>
+legal-stuff.crr-address=<strong>Dirección</strong>
+legal-stuff.crr-housing=<strong>Subsidio de los costos y/o el alquiler de la vivienda </strong>
+legal-stuff.crr-utility=<strong>Costo de los servicios públicos</strong>
+legal-stuff.crr-custody=<strong>Custodia de los padres o derechos de visita </strong>
+legal-stuff.crr-marital=<strong>Estado civil </strong>
+legal-stuff.crr-school=<strong>Asistencia a la escuela </strong>
+legal-stuff.crr-insurance=<strong>Cobertura y primas del seguro médico </strong>
+legal-stuff.crr-lottery=<strong>Usted o un miembro de su grupo familiar gana 4,500 dólares o más en la lotería o el juego por dinero. </strong>
+legal-stuff.crr-lawsuit=También es posible que deba informar si usted es parte de una demanda iniciada recientemente o si ha sido condenado por un delito mayor relacionado con las drogas.
+
+legal-stuff.crr-ccaNote=<strong>Nota:</strong> Si está inscrito en el Programa de Asistencia para el Cuidado de menores y cambia de proveedor de cuidado de menores, debe notificarlo a su asistente social y al proveedor al menos 15 días antes de que entre en vigencia el cambio.
+legal-stuff.crr-questions=<strong>Si tiene preguntas o no está seguro</strong> de las reglas para reportar información, comuníquese con el trabajador de su caso. Si el trabajador de su caso no está disponible, déjele un mensaje para que luego se comunique con usted.
+legal-stuff.crr-consent=<strong>Su condado, nación tribal, estado o agencia federal</strong> puede verificar cualquier información que usted proporcione. Es posible que se requiera su consentimiento firmado para obtener algunos tipos de información. Si no lo da, es posible que no reciba asistencia.
+legal-stuff.crr-untrue=Si usted proporciona información que sabe que es falsa, si oculta información o si no la reporta como se exige, o luego se descubre que su información es falsa, puede que lo investiguen por fraude. Como consecuencia, puede que sea descalificado para recibir beneficios, que sea acusado de cometer un delito penal, o ambas cosas.
+legal-stuff.crr-qc=La Agencia de Control de Calidad Estatal o Federal podrá seleccionar su caso al azar para revisarlo. Ellos examinarán las declaraciones que usted entregó y comprobarán si se determinó correctamente su elegibilidad. También revisará para saber si hemos determinado su elegibilidad correctamente. La agencia estatal podrá buscar información de otras fuentes y le informará de cualquier contacto que trate de hacer. <strong>Si usted no colabora, sus beneficios pueden cesar.</strong>
+
+legal-stuff.crr-coopReq=Requisitos de cooperación:
+legal-stuff.crr-coopEmp=Si la agencia de su condado o nación tribal lo aprueba para el Minnesota Family Investment Program (Inversión Familiar de Minnesota) o el Diversionary Work Program (Asistencia para Trabajo Inmediato), usted deberá cooperar con todos los servicios de empleo obligatorios, a menos que esté exento de ello. Debe desarrollar y firmar un plan de empleo con el trabajador de su caso o se denegará su solicitud del Diversionary Work Program.
+legal-stuff.crr-coopChild=Debe cooperar con la manutención de menores a fin de recibir los beneficios del Minnesota Family Investment Program, del Diversionary Work Program y/o el Programa de Asistencia para Cuidado de Menores.
+legal-stuff.crr-nonCust=Si usted recibe manutención de menores directamente del padre sin custodia física, deberá reportarlo al trabajador de su caso.
+
+legal-stuff.crr-SNAP=Para beneficios monetarios y del Supplemental Nutrition Assistance Program - SNAP (Programa de Asistencia Nutricional Suplementaria):
+legal-stuff.crr-EBTsign=<strong>Cada vez que utilice su tarjeta EBT o firme su cheque,</strong> declara que ha informado a su agencia del condado o de la nación tribal sobre cualquier cambio en su situación que pueda afectar a sus beneficios.
+legal-stuff.crr-EBTused=<strong>Cada vez que se utiliza su tarjeta EBT,</strong> se supone que ha recibido sus beneficios en efectivo o SNAP, a menos que haya informado de la pérdida o robo de su tarjeta a su agencia del condado o de la nación tribal.
+
+legal-stuff.crr-CCA=Para asistencia para cuidado de menores:
+legal-stuff.crr-cofee=<strong>Puede que le exijan entregar un pago compartido</strong> a su proveedor de cuidado de menores. Si no paga el cargo, se cancelará su asistencia para el cuidado de menores hasta que se paguen totalmente los cargos o se hayan hecho acuerdos de pago satisfactorios con el condado o la tribu y su proveedor de cuidado de menores.
+legal-stuff.crr-adCost=<strong>Es posible que deba pagar costos adicionales</strong> cuando su proveedor de cuidado menores cobra una tarifa superior a la tarifa máxima vigente en su condado o tribu.
+legal-stuff.crr-doc=<strong>Debe documentar</strong> la condición de inmigración o ciudadanía de los niños de su familia para los que está solicitando asistencia para cuidado de menores.
+legal-stuff.crr-authRepNote=<strong>NOTA:</strong> Si firma esta solicitud como representante autorizado de una persona que está solicitando o recibiendo asistencia, <strong>usted conviene en asumir todas las responsabilidades indicadas arriba en nombre de dicha persona.</strong>
+
+legal-stuff.crr-yourRights=Sus derechos
+legal-stuff.crr-rightsPrivacy=<strong>Usted tiene derecho a la privacidad.</strong> Su información privada, incluida su información de salud, está protegida por las leyes estatales y federales. Su asistente social le ha entregado una hoja informativa de Aviso de prácticas de privacidad (DHS-3979) que explica estos derechos. Usted tiene derecho a volver a solicitar en cualquier momento si sus beneficios cesan.
+legal-stuff.crr-rightsReapply=<strong>Usted tiene derecho a volver a solicitar</strong> en cualquier momento si sus beneficios cesan
+legal-stuff.crr-rightsCopy=<strong>Tiene derecho a recibir una copia</strong> impresa o electrónica de su solicitud del programa SNAP. Informe a su trabajador social si desea recibir una copia.
+legal-stuff.crr-rightsWhy=<strong>Si no hemos procesado su solicitud con prontitud,</strong> usted tiene el derecho de saber por qué:
+legal-stuff.crr-seven=Siete días para SNAP agilizado
+legal-stuff.crr-thirty=Treinta días para asistencia monetaria, SNAP y asistencia para cuidado de menores
+legal-stuff.crr-sixty=Sesenta días para asistencia monetaria asociada con discapacidad.
+
+legal-stuff.crr-SNAPonly=<strong>Solo SNAP:</strong> Los límites de tiempo y otros requisitos que se aplican a la recepción de beneficios en efectivo no se aplican a la recepción de beneficios SNAP. Si los beneficios en efectivo terminan, aún puede calificar para los beneficios SNAP.
+legal-stuff.crr-rules=<strong>Usted tiene el derecho a conocer las reglas</strong> del programa en que se inscribe y que la agencia le diga cómo se calculó el monto de sus beneficios.
+legal-stuff.crr-choose=<strong>Tiene derecho a elegir</strong> dónde y con quién vivir.
+legal-stuff.crr-report=<strong>Tiene derecho a informar gastos</strong> como vivienda, luz, cuidado de menores, manutención de menores o gastos médicos. Estos gastos pueden afectar la cantidad de beneficios SNAP que recibe. No informar o verificar ciertos gastos indicados se considerará que su hogar no desea una deducción por los gastos no informados.
+legal-stuff.crr-legal=<strong>Acceso a servicios legales gratuitos.</strong> Para obtener servicios legales gratuitos, comuníquese con el trabajador de su caso.
+legal-stuff.crr-appeal=<strong>Derechos de apelación.</strong> Usted puede apelar si no está satisfecho con la medida tomada o cree que la agencia no actuó en su solicitud de asistencia. En casos de asistencia monetaria, para cuidado de menores y atención médica, puede presentar una apelación <strong>dentro del plazo de 30 días</strong> a partir de la fecha en que recibe la notificación; para ello, escriba a la agencia de su condado o nación tribal, o escriba directamente a la (Oficina Estatal de Apelaciones, Departamento de Servicios Humanos de Minnesota) State Appeals Office, Minnesota Department of Human Services, P.O. Box 64941, St. Paul, MN 55164-0941. (Si muestra causa suficiente por la que no puede apelar su cuidado de menores <strong>dentro de los 30 días,</strong> la agencia puede aceptar su apelación <strong>hasta 90 días</strong> después de la fecha en que reciba la notificación).
+legal-stuff.crr-stateAppeals=Para SNAP, puede apelar <strong>dentro de los 90 días</strong> escribiendo o llamando a la Oficina de Apelaciones del condado o del estado. Puede representarse a sí mismo en la audiencia o puede hacer que alguien (un abogado, pariente, amigo u otra persona) hable por usted.
+legal-stuff.crr-hearing=<strong>Si desea que su asistencia continúe hasta la audiencia,</strong> debe apelar antes de la fecha de la acción propuesta o dentro de los 10 días posteriores a la fecha en que se envió por correo la notificación de la agencia, lo que sea posterior. Pídale al asistente social de su condado o nación tribal que le explique cómo el momento de su apelación podría afectar su asistencia actual o futura
+
+legal-stuff.client-responsibilities-and-rights=Derechos y Responsabilidades del Cliente
+legal-stuff.changes=Cambios
+legal-stuff.if-you-have-ma-you-must-report=Si recibe asistencia médica, debe informar el cambio dentro de los diez días posteriores al cambio. Llame a su agencia tribal o a su condado para informar el cambio.Si recibe asistencia médica, debe informar el cambio dentro de los diez días posteriores al cambio. Llame a su agencia tribal o a su condado para informar el cambio. Si no lo informa, es posible que deba restituir al gobierno estatal o federal el dinero que haya recibido por beneficios cuando no cumplía los requisitos para recibirlos. Si no está seguro de si debe informar un cambio, llame y explique lo que le ocurre. Algunos ejemplos de los cambios que deben informarse son los siguientes:
+legal-stuff.start-to-get-or-receive-changes=Empezar a recibir o recibir cambios en las cantidades de otros ingresos, como el seguro social, otros ingresos de jubilación y de desempleo.
+legal-stuff.reviews=Revisiones
+legal-stuff.the-state-or-federal-agencys-health-care=Los auditores del programa de cuidado de salud de la agencia estatal o federal pueden evaluar su caso. Revisarán la información que usted nos dio y se asegurarán de que procesamos su caso correctamente. Le informarán si necesitan hacerle preguntas.
+legal-stuff.consent-for-sharing-of-medical-information=Consentimiento para divulgación de información médica
+legal-stuff.in-your-application-for-minnesota-health-care-program=En su solicitud de cobertura del Programa de Cuidado de Salud de Minnesota, usted ha dado su consentimiento escrito y firmado para que las siguientes agencias y personas compartan entre ellas su información médica solamente para los fines limitados que se detallan a continuación:
+legal-stuff.health-providers-including-health-plans=Proveedores de cuidado de salud, que incluyen los planes médicos, las compañías de seguros, los programas de salud de Minnesota, los defensores de los condados, los distritos escolares, los trabajadores de casos del condado o del estado y sus contratistas y subcontratistas para los siguientes fines:
+legal-stuff.to-determine-who-should-pay-for-your-health-care=determinar quién debe pagar por su cuidado de salud;
+legal-stuff.to-provide,-manage-and-coordinate-health-care-services=proporcionar, administrar y coordinar los servicios de cuidado de salud.
+legal-stuff.all-other-agencies-or-people-listed-on-this-notice-of-privacy=Todas las demás agencias o personas que aparecen en esta Notificación de prácticas de privacidad y en la Notificación de derechos y responsabilidades para este propósito:
+legal-stuff.to-administer-minnesota-health-care-programs=administrar los Programas de Cuidado de Salud de Minnesota, pagar por los servicios y llevar a cabo estudios e investigaciones.
+legal-stuff.this-consent-applies-to-medical-information=Este consentimiento se aplica a la información médica de sus hijos menores incluidos en esta solicitud. Puede suspender este consentimiento en cualquier momento si lo solicita por escrito. La notificación por escrito para suspender este consentimiento no afectará la información que la agencia ya ha proporcionado a otros.Este consentimiento es válido mientras usted esté inscrito en los Programas de Cuidado de Salud de Minnesota hasta por un año o durante más tiempo si la ley lo permite.
+legal-stuff.however-it-does-not-end-after-one-year=No obstante, no termina al cabo de un año para los expedientes que se proporcionen a los proveedores consultores o para el pago de sus facturas, las investigaciones de fraude o las evaluaciones y los estudios de la calidad del cuidado de la salud. La agencia o la persona que obtenga su información por medio de este consentimiento puede darle la información a otros. Si da por terminado este consentimiento, no puede inscribirse o seguir inscrito en los Programas de Cuidado de Salud de Minnesota.
+legal-stuff.other-health-care=Otro tipo de cuidado de salud
+legal-stuff.you-and-your-household-members-enrolled-in-ma-must=Usted y los miembros de su hogar inscritos en asistencia médica deben informarnos sobre todo otro seguro médico que tengan o que esté disponible para ustedes, incluso la cobertura patrocinada por empleadores, seguros médicos privados, seguros para cuidado médico a largo plazo y toda cobertura limitada de salud como la cobertura dental o de accidentes. Debe informarnos si su empleador le ofrece un seguro y si usted lo aceptó.
+legal-stuff.you-and-your-household-members-enrolled-in-ma-may=Es posible que usted y los miembros de su familia inscritos en asistencia médica deban aceptar y mantener una póliza de seguro médico cuando se determine que pueden pagar la póliza. Si tiene una buena razón para no hacerlo, puede pedir al estado que la apruebe. Si no nos proporciona información sobre su póliza de salud, podría no obtener cobertura.<br><br> También debe informarnos cuando cumple los requisitos para Medicare. La asistencia médica paga las primas de Medicare de algunas personas de bajos ingresos. Una vez que usted reúna los requisitos para Medicare Parte B y Parte D, la asistencia médica dejará de pagar los servicios que podrían ser cubiertos por un programa de Medicare.
+legal-stuff.ma-medical-support=Manutención médica de la asistencia médica
+legal-stuff.if-you-are-applying-for-yourself-and-your-children=Si está solicitando beneficios para usted y sus hijos y si usted no vive con el otro progenitor, la ley ordena que usted debe dar información al personal de manutención infantil si tanto usted como sus hijos reúnen los requisitos para recibir la asistencia médica. Esto incluye ayudar al estado a probar quién es el padre de sus hijos y hacer que el otro padre ayude a pagar los gastos médicos de sus hijos. Si no colabora con el personal de manutención infantil, sus hijos podrán continuar recibiendo cobertura, pero cesará su cobertura, a menos que esté embarazada.
+legal-stuff.you-have-the-right-to-speak-with-a-legal-aid=Tiene derecho a hablar con un grupo de asistencia jurídica o con un abogado privado si tiene preguntas concretas sobre cómo la recuperación de bienes y los embargos de MA pueden afectar a su circunstancias y a la planificación de su patrimonio. El Departamento de Servicios Humanos de Minnesota no puede proporcionarle asesoramiento jurídico. Para obtener más información, visite la página MA Estate Recovery en nuestro sitio web. 
+legal-stuff.http-mn.gov-dhs-ma-estate-recovery=Página de Recuperación de patrimonio de MA
+legal-stuff.on-our-website=en nuestro sitio web.
+legal-stuff.you-have-the-right-to-ask-for-a-hearing=Usted tiene el derecho de solicitar una audiencia
+legal-stuff.if-you-feel-your-health-care-eligibility-or-benefits=Si considera que su cumplimiento de los requisitos para recibir cuidado de salud o los beneficios son incorrectos o que su solicitud no ha sido procesada de manera correcta, podrá solicitar una audiencia de apelación. Al solicitar una audiencia de apelación, usted solicitará una evaluación imparcial de su caso. Puede representarse así¬ mismo o utilizar los servicios de un abogado, defensor, representante autorizado, pariente, amigo u otra persona. Encontrará instrucciones específicas sobre las apelaciones de todas las notificaciones de cumplimiento de los requisitos que usted reciba. Obtenga más información sobre el proceso de apelación y cómo solicitar una audiencia en
+legal-stuff.www-dhs-state-mn-us-appeals-faqs=PÃ¡gina de Appeals FAQ
+legal-stuff.you-can-complete-and-submit-an-appeal-request=En nuestra página web. Usted puede completar y enviar una solicitud de apelación en línea completando el 
+legal-stuff.https-edocs-dhs-state-mn-us-lfserver-Public-DHS-0033-ENG=el formulario Appeal to State Agency (DHS-0033).
+legal-stuff.you-can-also-print-the-form-that=También puede imprimir el formulario que está disponible en la dirección mencionada y enviar el formulario completado por fax al 651-431-7523 o por correo a esta dirección:
+legal-stuff.minnesota-department-of-human-services=Minnesota Department of Human Services
+legal-stuff.appeals-division=Appeals Division
+legal-stuff.po-box-64941=PO Box 64941
+legal-stuff.st-paul-mn-55164-0941=St. Paul, MN 55164-0941
+legal-stuff.immigration=Inmigración
+legal-stuff.immigration-information-you-give-to-us-is-private=Toda la información de inmigración que usted nos proporciona es confidencial. La usamos para ver si puede recibir la cobertura. Compartimos su información solo cuando la ley lo permite o lo requiere, como cuando se debe verificar la identidad. En la mayoría de los casos, su condición de inmigración no se verá afectada por solicitar cobertura, a menos que solicite el pago de servicios de cuidado médico a largo plazo. Usted no tiene que darnos su información de inmigración si es una mujer embarazada que vive en los Estados Unidos sin el conocimiento ni la aprobación de los Estados Unidos de los Servicios de Ciudadanía e Inmigración (USCIS, por sus siglas en inglés). Tampoco tiene que darnos su información de inmigración si usted:
+legal-stuff.applying-for-emergency-medical-care-only=está solicitando cuidado médico de emergencia solamente;
+legal-stuff.helping-someone-else-apply=está ayudando a otra persona con su solicitud;
+legal-stuff.not-applying-for-yourself=no solicita la cobertura para sí mismo.
+legal-stuff.genetic-information=Información genética
+legal-stuff.dhs-does-not-collect-maintain-or-use-genetic=El Departamento de Servicios Humanos (DHS, por sus siglas en inglés) no recopila, conserva ni usa la información genética para fines del cumplimiento de los requisitos.
+legal-stuff.record-retention=Conservación de registros
+legal-stuff.information-provided-in-an-application-for-coverage=La información proporcionada en una solicitud de cobertura a través de DHS está sujeta a la Ley de Reclamos Falsos y puede conservarse hasta 10 años. DHS sigue los programas de conservación de registros para las agencias del estado y para el Departamento de Servicios Humanos y mantiene los datos de acuerdo con las leyes estatales y federales. Después del período de tiempo pertinente, DHS destruye los datos de una forma que impide la identificación del contenido; esto incluye la destrucción de documentos en papel y la eliminación permanente de los datos electrónicos para impedir totalmente su recuperación.
+legal-stuff.notice-of-privacy-practices=Aviso de Prácticas de Privacidad
+legal-stuff.changes-citizenship-or-lawful-presence-status=cambia su condición de ciudadanía o presencia legal;
+
+legal-stuff.notice-of-privacy-practices=Aviso de Prácticas de Privacidad
+legal-stuff.nopp-date=(Fecha de vigencia: noviembre de 2016)
+legal-stuff.nopp-how-private=<strong>Esta notificación describe cómo la información privada acerca de usted puede usarse y revelarse y cómo usted puede obtener esta información. Por favor examínela atentamente.</strong>
+legal-stuff.nopp-why-ask=¿Por qué pedimos esta información?
+legal-stuff.nopp-to-determine=A fin de determinar si podemos ayudarlo y cómo hacerlo, recogemos información:
+legal-stuff.nopp-similar-name=Para distinguirlo de otras personas con el mismo nombre o un nombre similar
+legal-stuff.nopp-to-decide= Para decidir para qué servicios califica
+legal-stuff.nopp-medical=Para ayudarle a obtener servicios médicos, de salud mental, financieros o sociales, y decidir si usted puede pagar algunos servicios
+legal-stuff.nopp-protective=Para decidir si usted o su familia necesita servicios de protección
+legal-stuff.nopp-homecare=Para decidir si usted o sus hijos necesitan cuidado fuera del hogar o en el hogar
+legal-stuff.nopp-accuracy=Para investigar la exactitud de la información en su solicitud
+legal-stuff.nopp-additional= Después de que comencemos a prestarle servicios o apoyo, es posible que recojamos información adicional:
+legal-stuff.nopp-reports=Para preparar informes, llevar a cabo investigaciones, realizar auditorías y evaluar nuestros programas
+legal-stuff.nopp-lie=Para investigar informes de personas que pueden mentir sobre la ayuda que necesitan
+legal-stuff.nopp-insurance=Para cobrar dinero de otras agencias, como compañías de seguros, si estas deben pagar por su cuidado
+legal-stuff.nopp-state=Para cobrar dinero del gobierno estatal o federal por la ayuda que le brindemos a usted
+legal-stuff.nopp-circumstances=Cuando cambian las circunstancias suyas o de su familia, y usted tiene la obligación de informar el cambio (consulte <a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-4163-SPA" target="\\_blank">los Derechos y Responsabilidades del Cliente – DHS-4163</a>)
+
+legal-stuff.nopp-ask-ssn=¿Por qué le pedimos su número de Social Security (Seguro Social)?
+legal-stuff.nopp-ssn-need=Necesitamos su número de Seguro Social para proporcionarle asistencia médica, algunos tipos de asistencia financiera o servicios de cumplimiento de manutención de menores (42 CFR 435.910 [2006]; Minn. Stat. 256D.03, subd.3(h); Minn. Stat. 256L.04, subd. 1a; 45 CFR 205.52 [2001]; 42 USC 666; 45 CFR 303.30 [2001]). También necesitamos su número de Número de Seguro Social para verificar su identidad y prevenir la duplicación de beneficios estatales y federales. Además, su número de Número de Seguro Social se usa para comparar datos por computadora con agencias colaborativas, no lucrativas y privadas a fin de verificar los ingresos, recursos y otra información que puedan afectar su elegibilidad y/o sus beneficios.
+legal-stuff.nopp-give-ssn=Usted no tiene que darnos el número de Seguro Social:
+legal-stuff.nopp-ssn-coverage=De las personas en su casa que no están solicitando cobertura
+legal-stuff.nopp-ssn-religious=Si tiene objeciones religiosas
+legal-stuff.nopp-ssn-citizen=Si no es ciudadano de los Estados Unidos y sólo está solicitando Emergency Medical Assistance (Asistencia Médica de Emergencia)
+legal-stuff.nopp-ssn-country=Si usted es de otro país, está en los Estados Unidos temporalmente y no tiene permiso de los Servicios de Ciudadanía e Inmigración de los Estados Unidos (U.S. Citizenship and Immigration Services) para residir en los Estados Unidos permanentemente.
+legal-stuff.nopp-ssn-immigration=Si vive en los Estados Unidos sin el conocimiento o la aprobación de los Servicios de Ciudadanía e Inmigración de los Estados Unidos (U.S. Citizenship and Immigration Services).
+
+legal-stuff.nopp-answer=¿Tiene que responder las preguntas que le hacemos?
+legal-stuff.nopp-personalInfo=Usted no tiene que darnos su información personal. Sin la información, es posible que no podamos ayudarle. Si nos da información incorrecta a propósito, podrá ser investigado y acusado de fraude.
+
+legal-stuff.nopp-share-with=¿Con quiénes podemos compartir la información?
+legal-stuff.nopp-share-law=Sólo compartiremos su información según se necesite y se nos permita o se requiera por ley. Podemos compartir su información con las siguientes agencias o personas que necesitan la información para llevar a cabo su trabajo:
+legal-stuff.nopp-share-emp=Empleados o voluntarios de otras agencias estatales, del condado, locales, federales, colaborativas, no lucrativas y privadas
+legal-stuff.nopp-share-audit=Investigadores, auditores, analistas y otros que realizan evaluaciones y estudios sobre la calidad del cuidado de la salud, o inician enjuiciamientos o acciones legales con respecto a la administración de los programas de servicios humanos
+legal-stuff.nopp-share-court=Funcionarios judiciales, fiscal del condado, fiscal general, otros funcionarios del orden público, funcionarios encargados de la manutención de menores, e investigadores de protección de menores y de fraude
+legal-stuff.nopp-share-human=Oficinas de servicios humanos, incluyendo las oficinas para cumplimiento de manutención de menores
+legal-stuff.nopp-share-gov=Agencias gubernamentales en otros estados que administran programas de beneficios públicos
+legal-stuff.nopp-share-providers=Proveedores de cuidado de salud, incluyendo agencias de salud mental e instalaciones de tratamiento para drogas y alcohol
+legal-stuff.nopp-share-insurers=Compañías de seguros de cuidado de salud, agencias de cuidado de salud, organizaciones de cuidado administrado y otros que pagan por su cuidado
+legal-stuff.nopp-share-pa=Guardianes, conservadores o personas con poder de representación
+legal-stuff.nopp-share-coroners=Pesquisidores e investigadores médicos, si usted fallece y ellos investigan su fallecimiento
+legal-stuff.nopp-share-credit=Oficinas de crédito, acreedores o agencias para cobros si usted no paga los honorarios que nos adeuda por los servicios
+legal-stuff.nopp-share-anyone-law=Cualquier otro a quien la ley dice que debemos o podemos proporcionar la información.
+
+legal-stuff.nopp-rights=¿Cuáles son sus derechos respecto a la información que tenemos acerca de usted?
+legal-stuff.nopp-permission=Usted y las personas a quienes ha dado permiso pueden ver y copiar la información médica u otra información privada que tenemos acerca de usted. Es posible que usted tenga que pagar las copias.
+legal-stuff.nopp-question=Usted puede cuestionar si la información que tenemos acerca de usted es correcta. Deberá enviar sus preocupaciones por escrito. Díganos por qué la información es incorrecta o incompleta. Envíe su propia explicación de la información con la que no está de acuerdo. Adjuntaremos su explicación cada vez que su información se comparta con otra agencia.
+legal-stuff.nopp-askWriting=Usted tiene el derecho de pedirnos por escrito que compartamos la información médica con usted de cierta manera o en cierto lugar. Por ejemplo, podría pedirnos que enviemos la información médica a su dirección de trabajo en vez de a su dirección de la casa. Si consideramos que su solicitud es razonable, la otorgaremos.
+legal-stuff.nopp-limit=Usted tiene el derecho de pedirnos que limitemos o restrinjamos la manera en que usamos o divulgamos su información, pero no se nos requiere que estemos de acuerdo con esta solicitud.
+legal-stuff.nopp-explain=Si no entiende la información, pida a su trabajador que se la explique. Puede pedir otra copia de esta notificación al Departamento de Servicios Humanos de Minnesota.
+
+legal-stuff.nopp-ourResponsibilities=¿Cuáles son nuestras responsabilidades?
+legal-stuff.nopp-protect=Debemos proteger la privacidad de su información médica y otra información privada de acuerdo con los términos de esta notificación.
+legal-stuff.nopp-notuse=No podemos usar su información por motivos que no sean los que se indican en este formulario, ni compartir su información con personas y agencias que no sean las que se indican en este formulario, a menos que usted nos diga por escrito que podemos hacerlo.
+legal-stuff.nopp-follow=Debemos cumplir con las condiciones de esta notificación, pero podemos cambiar nuestra política sobre la privacidad debido a cambios en las leyes de privacidad. Colocaremos los cambios a nuestras reglas de privacidad en nuestro sitio web en: <a style="overflow-wrap:anywhere" href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-3979-SPA" target="_blank">https://edocs.dhs.state.mn.us/lfserver/Public/DHS-3979-SPA </a>
+
+legal-stuff.nopp-rightChildren=¿Qué derechos de privacidad tienen los menores?
+legal-stuff.nopp-under18=Si usted es menor de 18 años de edad cuando no se requiere el consentimiento de los padres para tratamiento médico, la información no se mostrará a los padres a menos que el proveedor de cuidado de salud crea que no compartir la información pondría en riesgo su salud. Los padres pueden ver otra información suya y permitir que otros vean esta información, a menos que usted haya pedido que esta información no se comparta con sus padres. Usted debe pedir esto por escrito y decir qué información no desea compartir y por qué. Si la agencia está de acuerdo de que compartir la información no es para su provecho, la información no se compartirá con sus padres. Si la agencia no está de acuerdo, la información puede compartirse con sus padres si ellos la solicitan.
+
+legal-stuff.nopp-violated=¿Qué puede hacer si cree que sus derechos de privacidad han sido violados?
+legal-stuff.nopp-dhs=Si usted cree que el Departamento de Servicios Humanos del Estado de Minnesota ha violado sus derechos de privacidad, puede enviar una queja escrita al Departamento de Salud y Servicios Humanos de los EE.UU. a la siguiente dirección: (Departamento de Servicios Humanos de Minnesota) (Atención: Funcionario de Privacidad) Minnesota Department of Human Services Attn: Privacy Official PO Box 64998 St. Paul, MN 55164-0998
+
+legal-stuff.effective-date=(Fecha de vigencia: noviembre de 2018)
+legal-stuff.this-part-of-the-notice-describes-how-private=Esta parte de la notificación describe cómo puede utilizarse y divulgarse la información privada o confidencial sobre usted. Revísela cuidadosamente.
+legal-stuff.why-do-we-ask-for-this-information=¿Por qué pedimos esta información?
+legal-stuff.to-tell-you-apart-from-other-people=Para diferenciarlo de otras personas que tienen el mismo nombre o un nombre similar.
+legal-stuff.to-decide-what-you-are-eligible-for=Para decidir para qué servicios califica.
+legal-stuff.to-help-you-get-medical-and-mental-health=Para ayudarlo a obtener servicios médicos y de salud mental y decidir si puede pagar algunos de los servicios.
+legal-stuff.to-decide-whether-you-or-your-family-need=Para decidir si usted o su familia necesitan servicios de protección.
+legal-stuff.to-decide-about-out-of-home-care-and-in-home=Para decidir si usted o sus hijos necesitan cuidado fuera del hogar o en el hogar.
+legal-stuff.to-make-reports-do-research-do-audits=Para preparar informes, realizar investigaciones, efectuar auditorías y evaluar nuestros programas.
+legal-stuff.to-investigate-reports-of-people-that-may-lie=Para investigar las denuncias de personas que pueden mentir sobre la ayuda que necesitan o para obtener asistencia a la cual no tienen derecho.
+legal-stuff.to-collect-money-from-other-agencies=Para cobrar dinero de otras agencias, tales como compañías de seguros, si estas deben pagar por su cuidado.
+legal-stuff.to-collect-money-from-the-state-or-federal-government=Para cobrar dinero del gobierno estatal o federal por la ayuda que le proporcionamos.
+legal-stuff.why-do-we-ask-you-for-your-social-security-number=¿Por qué le pedimos su número de seguro social?
+legal-stuff.we-need-your-social-security-number-to-give-you-medical-assistance=Necesitamos su número de seguro social (SSN, por sus siglas en inglés) para proporcionarle asistencia médica, algunos tipos de asistencia financiera o servicios de cumplimiento de manutención infantil (42 USC 666; Minn. Stat. 256 L.04, subd. 1a; 42 CFR 435.910).
+legal-stuff.we-also-need-your-SSN-to-verify-identity=También necesitamos su número de seguro social para verificar su identidad y prevenir la duplicación de beneficios estatales y federales. Además, su número de seguro social se usa para comparar datos por computadora con agencias colaborativas, no lucrativas y privadas a fin de verificar los ingresos, recursos y otra información que puedan afectar el cumplimiento de los requisitos o sus beneficios.
+legal-stuff.you-do-not-have-to-give-us-the-SSN-for-people=No tiene que informarnos el número de seguro social de las personas de su hogar que no están solicitando la cobertura. Tampoco tiene que darnos su número de seguro social:
+legal-stuff.if-you-have-religious-objections=Si tiene objeciones religiosas
+legal-stuff.if-you-are-not-a-U-S-citizen-and-are-applying=Si no es ciudadano de los Estados Unidos y solo está solicitando asistencia médica de emergencia.
+legal-stuff.if-you-are-from-another-country-are-in-the-U-S=Si es de otro país, está en los Estados Unidos temporalmente y no tiene permiso de los Servicios de Ciudadanía e Inmigración de los EE. UU. (U.S. Citizenship and Immigration Services, USCIS) para vivir permanentemente en los EE. UU.
+legal-stuff.if-you-are-living-in-the-U-S-without-the-knowledge-or-approval-of-the-USCIS=Si vive en los EE. UU. sin el conocimiento o la aprobación de USCIS.
+legal-stuff.why-do-we-ask-you-for-your-financial-information=¿Por qué le pedimos información financiera?
+legal-stuff.we-use-this-information-only-for-the-purposes-authorized-by-law=Utilizamos esta información únicamente para los fines autorizados por la ley, tales como verificar si cumple los requisitos o determinar el importe de una prima. No compartiremos esta información con ninguna otra persona o entidad.
+legal-stuff.do-you-have-to-answer-the-questions-we-ask=¿Tiene que responder las preguntas que hacemos?
+legal-stuff.you-do-not-have-to-give-us-your-personal-information=Usted no tiene que darnos información personal. Sin la información, es posible que no podamos ayudarlo. Si nos da información incorrecta a propósito, podrá ser investigado y acusado de fraude.
+legal-stuff.with-whom-may-we-share-information=¿Con quiénes podemos compartir la información?
+legal-stuff.we-will-share-information-about-you-only-as-needed=Solo compartiremos su información según se necesite y se nos permita o se requiera por ley. Podemos compartir su información con las siguientes agencias o personas que necesitan la información para llevar a cabo su trabajo:
+legal-stuff.employees-or-volunteers-with-other-state=Empleados o voluntarios de otras agencias estatales, del condado, locales, federales y las agencias participantes no lucrativas y privadas.
+legal-stuff.researchers-auditors-investigators-and-others=Los investigadores, auditores y otros que realizan evaluaciones y estudios sobre la calidad del cuidado de la salud o que inician procesos o acciones legales relacionadas con la administración de los programas de servicios humanos.
+legal-stuff.court-officials-county-attorneys-attorneys-general=Funcionarios judiciales, fiscales del condado, fiscales generales, otros funcionarios del orden público, funcionarios encargados de la manutención infantil, investigadores de protección de menores y de fraude e investigadores de prevención de fraude.
+legal-stuff.human-services-offices-including-child-support=Oficinas de servicios humanos, incluso las oficinas para cumplimiento de manutención infantil.
+legal-stuff.governmental-agencies-in-other-states-administering=Agencias gubernamentales de otros estados que administran programas de beneficios públicos.
+legal-stuff.health-care-providers-including-mental-health-agencies=Proveedores de cuidado de salud, incluso las agencias de salud mental y centros de tratamiento para drogas y alcohol.
+legal-stuff.health-care-insurers-health-care-agencies-managed-care-organizations=Compañías de seguros médicos, agencias de cuidado de salud, organizaciones de cuidado administrado de la salud y otros que pagan por su cuidado.
+legal-stuff.guardians-conservators-or-people-with-power=Los tutores, vigilantes o personas con poderes notariales que son representantes autorizados.
+legal-stuff.coroners-and-medical-investigators=Forenses e investigadores médicos, si usted fallece y ellos investigan su fallecimiento.
+legal-stuff.credit-bureaus-creditors-or-collection-agencies=Oficinas de crédito, acreedores o agencias para cobranza si usted no paga los honorarios que nos adeuda por los servicios, en situaciones limitadas.
+legal-stuff.certified-application-counselors-in-person-assisters=Asesores de solicitudes certificados, asistentes en persona y navegadores, y cualquier otra persona para quien la ley establece que debemos o podemos proporcionar la información.
+legal-stuff.what-are-our-responsibilities=¿Cuáles son nuestras responsabilidades?
+legal-stuff.we-must-protect-the-privacy-of-your-personal-health-care=Debemos proteger la privacidad de su información personal, de cuidado de salud y otra información privada de acuerdo con las condiciones de esta notificación.
+legal-stuff.we-may-not-use-your-information-for-reasons-other=No podemos usar su información por motivos que no sean los que se indican en este formulario, ni compartir su información con personas y agencias que no sean las que se indican en este formulario, a menos que usted nos diga por escrito que podemos hacerlo.
+legal-stuff.we-will-not-sell-any-data-collected-created=No venderemos ninguna información recopilada, creada o conservada a partir de esta solicitud.
+legal-stuff.we-must-follow-the-terms-of-this-notice-and-give=Debemos adherirnos a las condiciones de esta notificación y entregarle una copia de la misma, pero podríamos cambiar nuestra polí­tica de privacidad. Dichos cambios aplicarían a toda la información que tenemos sobre usted. La nueva notificación estará disponible cuando usted la solicite, y publicaremos los cambios en nuestro sitio web en:
+legal-stuff.DHS-4839E-ENG=Notificación de Prácticas de Privacidad y Notificación de Derechos y Responsabilidades DHS-4839E-ENG.
+legal-stuff.the-law-requires-us-to-keep-your-private=La ley nos exige mantener de manera confidencial y segura su información privada.
+legal-stuff.if-something-happens-that-causes-your-private-information=Si sucede algo que haga que su información privada pierda su carácter de confidencial y segura, se lo haremos saber enseguida
+legal-stuff.this-part-of-the-notice-describes-how-medical-information=En esta parte de la notificación, se describe cómo puede usarse y divulgarse su información médica y cómo puede usted acceder a ella. Léala cuidadosamente.
+legal-stuff.we-can-use-and-share-your-health-care-information-to=Podemos usar y compartir su información médica para:
+legal-stuff.help-manage-the-health-care-treatment-you-receive=Ayudar a administrar el tratamiento médico que recibe
+legal-stuff.we-can-use-your-health-information-and-share=Podemos usar su información médica y compartirla con los profesionales que lo tratan. Ejemplo: un médico nos envía información sobre su diagnóstico y su plan de tratamiento para que podamos organizar servicios adicionales.
+legal-stuff.we-can-also-share-your-information-with-guardians-conservators=También podemos compartir su información con los tutores, vigilantes o personas con poder notarial que son representantes autorizados.
+legal-stuff.run-our-organization=Hacer funcionar nuestra organización
+legal-stuff.we-can-use-and-share-your-information-to-run=Podemos usar y compartir su información para hacer funcionar nuestra organización y comunicarnos con usted cuando sea necesario. Eso incluye compartir su información con empleados o voluntarios de otras agencias estatales, del condado, locales, federales y de nuestras agencias participantes no lucrativas y privadas, incluidas las oficinas de manutención infantil.
+legal-stuff.we-can-share-your-information-with-these-people-and-groups=Podemos compartir su información con estas personas y grupos:
+legal-stuff.auditors-investigators-and-others-that-do=Los auditores, investigadores y otras personas que realizan evaluaciones y estudios sobre la calidad del cuidado de la salud.
+legal-stuff.credit-bureaus-creditors-or-collection-agencies=Oficinas de crédito, acreedores o agencias para cobranza si usted no paga los honorarios que nos adeuda por los servicios, en situaciones limitadas.
+legal-stuff.certified-application-counselors-in-person-assisters=Asesores de solicitudes certificados, asistentes en persona y navegadores, y cualquier otra persona para quien la ley establece que debemos o podemos proporcionar la información.
+legal-stuff.we-are-not-allowed-to-use-genetic-information-to-decide=No estamos autorizados a utilizar la información genética para decidir si le damos cobertura y el costo de esa cobertura. Esto no se aplica a los planes de cuidados a largo plazo. Ejemplo: podemos utilizar su información médica para desarrollar mejores servicios para usted.
+legal-stuff.pay-for-your-health-services=Pagar los servicios médicos
+legal-stuff.we-can-use-and-share-your-health-information-as-we-pay=Podemos usar y compartir su información médica cuando pagamos sus servicios médicos. Ejemplo: podemos compartir su información con su plan dental para coordinar el pago de los servicios dentales que se le prestan.
+legal-stuff.help-with-public-health-and-safety-issues=Ayudar con temas de salud y seguridad públicas
+legal-stuff.we-can-share-health-information-about=Podemos compartir su información médica con los siguientes fines:
+legal-stuff.preventing-disease=Prevenir enfermedades.
+legal-stuff.helping-with-product-recalls=Ayudar con el retiro de productos.
+legal-stuff.reporting-adverse-reactions-to-medications=Notificar las reacciones adversas de los medicamentos
+legal-stuff.reporting-suspected-abuse-neglect-or-domestic-violence=Informar sospechas de abuso, abandono o violencia doméstica.
+legal-stuff.preventing-or-reducing-a-serious-threat-to-anyones-health-or-safety=Prevenir o reducir una amenaza grave a la salud o a la seguridad de las personas.
+legal-stuff.do-research=Hacer investigaciones
+legal-stuff.we-can-use-or-share-your-information-for-health-research=Podemos usar o compartir su información para investigaciones relacionadas con la salud.
+legal-stuff.comply-with-the-law=Cumplir con las leyes
+legal-stuff.we-will-share-information-about-you-if-state-or-federal-laws=Compartiremos su información si lo exigen las leyes estatales o federales. Esto incluye compartir información con el Departamento de Salud y Servicios Humanos si este desea comprobar que estamos cumpliendo la ley federal de privacidad.
+legal-stuff.respond-to-organ-and-tissue-donation-requests=Responder a solicitudes de donación de órganos y tejidos, y trabajar con los examinadores médicos o los directores de funerarias
+legal-stuff.we-can-share-health-information-about-you-with-organ=Podemos compartir su información médica con organizaciones dedicadas a obtener órganos.
+legal-stuff.we-can-share-health-information-with-a-coroner=Cuando fallece una persona, podemos compartir información médica con un médico forense, examinador médico o el director de una funeraria
+legal-stuff.address-workers-compensation-law-enforcement=Responder a casos de indemnización por accidente de trabajo, asuntos del orden público y otras peticiones gubernamentales
+legal-stuff.for-workers-compensation-claims=Para los reclamos de indemnización por accidentes de trabajo
+legal-stuff.for-law-enforcement-purposes-or-with-a-law-enforcement-official=Para propósitos del orden público o con un funcionario del orden público
+legal-stuff.with-health-oversight-agencies=Con agencias que supervisan los servicios de salud para actividades autorizadas por la ley
+legal-stuff.with-governmental-agencies-in-other-states=Con agencias gubernamentales en otros estados que administran programas de beneficios públicos
+legal-stuff.for-special-government-functions-such-as-military=Para funciones especiales del gobierno, tales como los servicios militares, de seguridad nacional y de protección presidencial
+legal-stuff.respond-to-lawsuits-and-legal-actions=Responder a las demandas y acciones legales
+legal-stuff.we-can-share-health-information-about-you-in-response-to-a-court-order=Podemos compartir su información médica en respuesta a una orden judicial. Podemos compartir la información con funcionarios judiciales, fiscales del condado, procuradores generales, otros funcionarios del orden público, funcionarios de manutención infantil, funcionarios de protección de menores e investigadores de prevención de fraude.
+legal-stuff.what-are-your-rights-regarding-the-information-we-have-about-you=¿Cuáles son sus derechos respecto a la información que tenemos sobre usted?
+legal-stuff.get-a-copy-of-health-and-claims-records=Obtener una copia de los registros médicos y de los reclamos
+legal-stuff.you-and-people-you-have-given-permission-to-may-see=Usted y las personas que han dado permiso pueden ver y copiar la información privada que tenemos sobre usted, como los registros médicos y de los expedientes de reclamos. Es posible que tenga que pagar las copias.
+legal-stuff.you-can-choose-someone-to-act-for-you-with-a-medical-power=Puede optar por que otra persona actúe en su nombre mediante un poder notarial o como su tutor legal. Esa persona puede ejercer sus derechos y tomar decisiones acerca de su información.
+legal-stuff.ask-us-to-correct-health-and-claims-records=Pedirnos que corrijamos historias clínicas o registros de reclamos
+legal-stuff.you-may-question-whether-the-information-we-have-about=Puede cuestionar si la información que tenemos sobre usted es correcta. Deberá enviar sus consultas por escrito. Puede decirnos por qué la información es incorrecta o no está completa. Envíe su propia explicación de la información con la que no está de acuerdo. Adjuntaremos su explicación todas las veces que se comparta la información.
+legal-stuff.request-confidential-communications=Solicitar comunicaciones confidenciales
+legal-stuff.you-have-the-right-to-ask-us-in-writing-to-share=Tiene derecho a pedirnos por escrito que compartamos con usted la información médica de determinada manera o en determinado lugar.
+legal-stuff.we-will-consider-all-reasonable-requests=Consideraremos todas las solicitudes razonables. Debemos satisfacer su solicitud si usted nos dice que estaría en peligro en caso de que no lo hagamos. Por ejemplo, puede pedirnos que enviemos la información médica a su trabajo en lugar de a su casa. Si comprobamos que su pedido es razonable, lo concederemos.
+legal-stuff.ask-us-to-limit-what-we-use-or-share=Pedirnos que limitemos la información que usamos o compartimos
+legal-stuff.you-can-ask-us-not-to-use-or-share-certain-health=Puede pedirnos que no usemos o no compartamos cierta información médica con fines de tratamiento, de pago o de nuestras operaciones. No estamos obligados a aceptar su pedido y podemos negarnos a hacerlo si esto afectaría su cuidado.
+legal-stuff.get-a-list-of-those-with-whom-weve-shared-information=Obtener una lista de aquellas personas con quienes hemos compartido información
+legal-stuff.this-list-will-not-include-disclosures-for-treatment=Esta lista no incluirá las divulgaciones para tratamiento, pagos y propósitos de cuidado de salud. Tampoco se incluyen ciertas divulgaciones, tales como las que usted nos haya pedido hacer.
+legal-stuff.we-ll-provide-one-list-a-year-for-free=Le proporcionaremos una lista por año gratuita, pero cobraremos un cargo razonable basado en los costos si solicita otra lista dentro de los 12 meses.
+legal-stuff.get-a-copy-of-this-privacy-notice=Obtener una copia de esta notificación de privacidad
+legal-stuff.you-can-ask-for-a-paper-copy-of-this-notice-at-any-time=Usted puede solicitar una copia impresa de esta notificación en cualquier momento, incluso aunque haya acordado recibir el aviso en formato electrónico. Le entregaremos una copia impresa sin demora.
+legal-stuff.if-you-do-not-understand-the-information-ask-your-worker=Si no entiende la información, pida a su trabajador que se la explique. Puede pedir otra copia de esta notificación al Departamento de Servicios Humanos de Minnesota.
+legal-stuff.what-are-your-choices=¿Cuáles son sus opciones?
+legal-stuff.for-certain-health-information-you-can-tell=Para cierta información médica, puede darnos las opciones de lo que desea que compartamos.
+legal-stuff.you-have-both-the-right-and-choice-to-tell-us-to=Usted tiene tanto el derecho como la opción de decirnos:
+legal-stuff.share-health-information-with-your-family-close-friends=que compartamos información médica con su familia, amigos cercanos u otras personas que se ocupan del pago de su atención médica;
+legal-stuff.share-information-in-a-disaster-relief-situation=que compartamos información en una situación de ayuda para catástrofes.
+legal-stuff.tell-us-what-you-want-us-to-do-and-we-will-follow=Díganos en qué podemos ayudarlo, y seguiremos sus instrucciones. Si no puede decirnos su preferencia (por ejemplo, si está inconsciente), podemos seguir adelante y compartir su información si creemos que es lo mejor para usted. También podemos compartir su información cuando sea necesario para reducir una amenaza grave e inminente a su salud o a su seguridad.
+legal-stuff.what-privacy-rights-do-children-have=¿Qué derechos de privacidad tienen los menores?
+legal-stuff.if-you-are-under-18-when-parental-consent=Si usted es menor de 18 años, cuando no se exige el consentimiento de los padres para el tratamiento médico, la información solo se mostrará a los padres cuando el proveedor de cuidado de salud crea que no compartir la información pondría en riesgo su salud. Los padres pueden ver otra información suya y permitir que otros vean esta información, a menos que usted haya pedido que esta información no se comparta con sus padres. Debe pedir esto por escrito y decir qué información no desea compartir y por qué. Si la agencia está de acuerdo en que compartir la información no es para su beneficio, esta no se compartirá con sus padres. Si la agencia no está de acuerdo, la información puede compartirse con sus padres si ellos la solicitan.
+legal-stuff.what-if-you-believe-your-privacy-rights-have-been-violated=¿Qué puede hacer si cree que se han infringido sus derechos de privacidad?
+legal-stuff.you-may-complain-if-you-believe-your-privacy-rights=Si cree que se han infringido sus derechos de privacidad, puede presentar una queja. No se le puede negar el servicio ni lo pueden tratar mal por haber presentado una queja. Si cree que su privacidad médica ha sido infringida por su médico o la clínica, una compañía de seguros médicos, un plan médico o una farmacia, puede enviar una queja escrita a la agencia del condado, a la organización o a la oficina federal de derechos civiles a:
+legal-stuff.u-s-department-of-health-and-human-services=U.S. Department of Health and Human Services
+legal-stuff.office-for-civil-rights-region-v=Office for Civil Rights, Region V
+legal-stuff.233-n-michigan-avenue-suite-240=233 N. Michigan Avenue, Suite 240
+legal-stuff.chicago-il-60601=Chicago, IL 60601
+legal-stuff.312-886-2359-voice-800-368-1019=312-886-2359 (voice) 800-368-1019 (toll free) 800-537-7697 (TTY) 312-886-1807 (fax)
+legal-stuff.if-you-believe-the-minnesota-department-of-human-services=Si cree que el Departamento de Servicios Humanos de Minnesota ha violado sus derechos de privacidad, también puede ponerse en contacto con:
+legal-stuff.minnesota-department-of-human-services-attn=Minnesota Department of Human Services
+legal-stuff.attn-data-complaint=Attn: Data Complaint
+legal-stuff.po-box-64998=PO Box 64998
+legal-stuff.st-paul-mn-55164-0998=St. Paul, MN 55164-0998
+legal-stuff.whom-do-you-contact-if-you-need=¿A quién debe contactar si necesita más información sobre las prácticas de privacidad?
+legal-stuff.if-you-need-more-information-about-privacy-practices=Si necesita más información acerca de las prácticas de privacidad, llame al departamento de asistencia a miembros de los Programas de Cuidado Médico de Minnesota (Minnesota Health Care Programs, MHCP) al 800-657-3739 o al 651-431-2670
+
+review-info.title=Revisar la información
+review-info.submit-application-now-with-only-the-above-information=Envíe ahora una solicitud incompleta con sólo la información anterior.
+review-info.lets-review-your-info=Revise su información
+review-info.this-looks-correct=Esto parece correcto
+review-info.name=Nombre
+review-info.home-address=Domicilio
+review-info.mailing-address=Dirección Postal
+review-info.county=Condado
+review-info.contact-info=Información de Contacto
+review-info.edit=Editar
+review-info.no-permanent-address=Sin dirección permanente
+review-info.same-as-home-address=La misma de la dirección de casa
+
+intro-personal-details.title=Introducción: Detalles personales
+intro-personal-details.special-situations=Situaciones especiales
+intro-personal-details.citizenship=Ciudadanía
+intro-personal-details.ability-to-work=Capacidad para trabajar
+intro-personal-details.personal-details=Detalles personales
+
+start-household.your-household=Su Hogar
+start-household.title=Empezar Hogar
+start-household.everyone-you-live-with=Todas las personas que viven con usted
+start-household.preparing-meals=Si preparan la comida juntos
+start-household.special-situations=Situaciones especiales
+start-household.citizenship=Ciudadanía
+start-household.ability-to-work=Capacidad para trabajar
+
+household-list.title=Miembros del hogar
+household-list.is-this-everyone-that-lives-with-you=¿Son todos los que viven con usted?
+household-list.include-children-and-everyone-who-lives-with-you=Incluya a su cónyuge o pareja, a sus hijos y a todas las personas que viven con usted, incluso si no están allí todo el tiempo.
+household-list.your-household=Su hogar
+household-list.add-a-person=Agregar a la siguiente persona
+household-list.thats-you=(¡es usted!)
+household-list.yes-thats-everyone=Sí, son todos
+
+children-under-19.title=Niños en su hogar
+children-under-19.header=¿Hay menores de 19 años en su hogar?
+
+parent-not-at-home-19.title=Padre o madre ausente
+parent-not-at-home-19.header=¿Alguno de los menores de 19 años en su hogar tiene un padre o madre que no vive en casa?
+
+temporary-absence.title=Miembros del hogar que no viven en casa
+temporary-absence.header=¿Alguien que vive habitualmente con usted lleva tiempo sin vivir en casa?
+temporary-absence.header.household=¿Alguien de su hogar lleva tiempo sin vivir en casa?
+temporary-absence.body=Esto incluye a personas que están fuera por estudio, trabajo o viajes.
+
+housingSituation.title=Situación de vivienda
+housingSituation.header=¿Te consideras una persona sin hogar?
+
+no-programs-selected.title=No se seleccionó ningún programa
+no-programs-selected.you-did-not-select-any-programs=No ha seleccionado ninguno de los programas para las personas que solicita.
+no-programs-selected.go-back-and-make-sure=Regrésese y asegúrese de que nos haya dicho con qué necesitan ayuda a las personas de su hogar.
+
+children-in-need-of-care.title=¿Quiénes son los niños que necesitan cuidado?
+children-in-need-of-care.who-are-the-children-in-need-of-childcare=¿Quiénes son los niños que necesitan cuidado infantil?
+children-in-need-of-care.you=(you)
+
+parent-not-at-home.title=¿Quién tiene un padre o madre que no vive en casa?
+parent-not-at-home.who-are-the-children-that-have-a-parent-not-living-at-home=¿Alguno de los niños para los que solicita cuidado infantil tiene un padre o madre que no vive en casa?
+parent-not-at-home.none-of-the-children-have-parents-living-outside-the-home=Ninguno de estos niños tiene padres que vivan fuera de casa. 
+parent-not-at-home.help-text=Marque todo lo que corresponda.  A continuación, le pediremos los nombres del padre o madre.
+parent-not-at-home-names.title=Nombre del padre que vive fuera del hogar.
+parent-not-at-home-names.what-are-the-parents-names=Denos el nombre de cualquier padre que viva fuera del hogar.
+parent-not-at-home-names.make-sure-to-provide-a-name=Asegúrese de proporcionarnos el nombre.
+parent-not-at-home-names.what-is-the-parents-name=¿Cómo se llama el padre que vive fuera del hogar?
+
+child-care-child-support.title=Pagos de manutención infantil
+child-care-child-support.who-does-your-household-receive-child-support=¿Para cuál menor de su hogar son destinados los pagos de manutención infantil?
+child-care-child-support.select-all-that-apply=Marque todo lo que corresponda. Le preguntaremos sobre el monto del pago más adelante.
+child-care-child-support.none-receive-child-support=No se reciben pagos de manutención infantil por ninguno de estos niños.
+
+child-care-intro.title=¿Tiene un proveedor de servicios de cuidado infantil?
+child-care-intro.do-you-have-provider=¿Cuenta ya su hogar con un proveedor de servicios de cuidado infantil?
+child-care-intro.this-may-include=Puede tratarse de un proveedor que ya esté atendiendo a su hijo o de un proveedor que usted tenga intención de utilizar.
+
+child-care-info.title=Proveedor de servicios de cuidado infantil
+child-care-info.header=Cuéntenos sobre su proveedor de servicios de cuidado infantil.
+child-care-info.provider-name=¿Cómo se llama el proveedor?
+child-care-info.phone-number=¿Cuál es el número de teléfono del proveedor?
+child-care-info.street-address=¿Cuál es la dirección de la calle?
+child-care-info.suite=N.° de oficina
+child-care-info.city=¿Cuál es la ciudad?
+child-care-info.state=¿Cuál es el estado?
+child-care-info.zip=¿Cuál es el código postal?
+
+child-care-mental-health.title=Necesidades de salud mental y cuidado infantil
+child-care-mental-health.do-any-caregivers-need-help=¿Algún cuidador en su hogar necesita ayuda para pagar el cuidado infantil con el fin de atender sus necesidades de salud mental?
+child-care-mental-health.do-you-need-help=¿Es usted un cuidador que necesita ayuda para pagar el cuidado infantil con el fin de atender sus necesidades de salud mental?
+child-care-mental-health.adults-and-caregivers=Los adultos y cuidadores con un diagnóstico de salud mental pueden recibir ayuda para pagar el cuidado infantil. Un trabajador de elegibilidad conversará con usted sobre este beneficio después de que presente su solicitud. 
+child-care-mental-health.who-qualifies-for-benefits=Quién califica para este beneficio
+child-care-mental-health.caregivers-can-get-help=Los cuidadores pueden recibir ayuda para pagar el cuidado infantil con el fin de atender sus necesidades de salud mental si:
+child-care-mental-health.provide-proof-of-mental-health=Proporcionan prueba de un diagnóstico de salud mental <i>y </i>cuentan con una recomendación de cuidado infantil de un proveedor de salud mental.
+child-care-mental-health.care-for-child-under-7=Están a cargo de un niño menor de 7 años que recibe, o recibirá, asistencia del Programa de Inversión Familiar de Minnesota (MFIP, por sus siglas en inglés).
+
+who-needs-child-care-mental-health.title= Quién necesita cuidado infantil para necesidades de salud mental
+who-needs-child-care-mental-health.who-needs-need-help= ¿Quién necesita ayuda para pagar el cuidado infantil para apoyar sus necesidades de salud mental?
+who-needs-child-care-mental-health.check-all-that-apply=Marque todo lo que corresponda
+
+child-care-mental-health-time.title= Tiempo necesario cada semana
+child-care-mental-health-time.tell-us-how-much-time-is-needed=Indique cuánto tiempo se necesita cada semana.
+child-care-mental-health-time.tell-us-how-much-time-you-need=Indique cuánto tiempo necesita cada semana.
+child-care-mental-health-time.you-can-request=Puede solicitar hasta 20 horas de asistencia de cuidado infantil por semana si tiene un diagnóstico de salud mental.
+child-care-mental-health-time.weekly-amount=monto semanal
+
+child-care-who-uses.title=Niños con este proveedor
+child-care-who-uses.header=¿Quién utiliza este proveedor de servicios de cuidado infantil?
+child-care-who-uses.help-text=Seleccione todo lo que corresponda.
+child-care-who-uses.select-at-least-one-child=Asegúrese de seleccionar al menos un niño.
+
+child-care-info.start-date=¿Cuál es su fecha de inicio?
+
+child-care-start-date.title=Fecha de inicio del cuidado infantil
+child-care-start-date.what-is-start-date=¿Cuál es su fecha de inicio en este proveedor?
+child-care-start-date.this-child-start-date=¿Cuál es la fecha de inicio de este niño?
+
+
+child-care-provider-list.title=Lista de proveedores de servicios de cuidado infantil
+child-care-provider-list.would-you-like-to-add=¿Le gustaría añadir más proveedores de servicios de cuidado infantil?
+child-care-provider-list.include-all-providers=Incluya todos los proveedores que su hogar ya utiliza, o cualquier proveedor que tenga intención de utilizar.
+child-care-provider-list.your-providers=Sus proveedores de servicios de cuidado infantil
+child-care-provider-list.add-a-provider=Agregar un proveedor
+child-care-provider-list.no-thats-it=No, es todo.
+
+child-care-provider-delete.title=Dar de baja un proveedor de servicios de cuidado infantil
+child-care-provider-delete.warning=Está a punto de dar de baja a {0} como proveedor de servicios de cuidado infantil.
+child-care-provider-delete.is-that-ok=¿Le parece bien?
+child-care-provider-delete.yes-remove-provider=Sí, eliminar proveedor
+child-care-provider-delete.keep-them=No, voy a mantener este proveedor
+
+child-care-provider-redirect.helper=Si vuelve atrás, regresará al principio de la sección de proveedores de servicios de cuidado infantil, donde tendrá que empezar de nuevo esta sección.<br/><br/>Se borrará toda la información del proveedor que ha introducido hasta el momento.
+child-care-provider-redirect.header=¿Está seguro de que quiere volver?
+child-care-provider-redirect.no-button=No, volver a lista de proveedores
+child-care-provider-redirect.yes-button=Sí, comenzar de nuevo la sección
+
+preparing-meals-together.title=Si preparan la comida juntos
+preparing-meals-together.header=¿Todos en su hogar compran y preparan alimentos con usted?
+
+buy-or-cook-food.title=Comprar y cocinar alimentos
+buy-or-cook-food.header=¿Alguien en su hogar que tenga 60 años o más, o tenga una discapacidad, necesita ayuda para hacer las compras o cocinar?
+
+housing-subsidy.title=Subsidio de vivienda
+housing-subsidy.header-household=¿Recibe su hogar un subsidio de vivienda o de la Sección 8?
+housing-subsidy.header-applicant-only=¿Recibe usted un subsidio de vivienda o de la Sección 8?
+
+going-to-school.title=Yendo a la escuela
+going-to-school.header=¿Va a la escuela a tiempo completo o parcial?
+going-to-school.header-household=¿Alguien de su hogar va a la escuela en este momento, ya sea a tiempo completo o parcial?
+going-to-school.helper=Incluya todos los niveles escolares, incluidos prekinder, K-12, instituto de educación superior, universidad, y estudios de posgrado.
+
+who-is-going-to-school.title=¿Quién va a la escuela?
+who-is-going-to-school.who-is-going-to-school=¿Quién va a la escuela?
+who-is-going-to-school.check-all-that-apply=Marque todo lo que corresponda. Incluya a cualquier persona que actualmente estudie o que planee comenzar a estudiar en los próximos 12 meses.
+
+school-details.title=Detalles de la escuela
+school-details.header=¿A qué escuela asiste?
+school-details.If-you-dont-have-all-this-information-right-now=Agregue nombre de la escuela para cada niño que figura a continuación.  Si no tiene esta información en este momento, puede dejar el espacio en blanco.
+school-details.school-name=Nombre de la escuela
+
+school-start-date.title=Fecha de inicio de clases 
+school-start-date.header=Díganos cuándo estos niños comenzaron o comenzarán el jardín de infantes. 
+school-start-date.month=Mes
+school-start-date.day=Dia
+school-start-date.year=Año
+
+last-school-grade.title=Último grado escolar completado
+last-school-grade.applicant-header=¿Cuál es el grado escolar más alto que completó?
+last-school-grade.household-header=¿Cuál es el nivel educativo más alto que cada persona en su hogar ha completado?
+last-school-grade.select-grade=Seleccione el grado escolar
+last-school-grade.select-no-school=No completó ningún grado escolar
+last-school-grade.select-preschool=Preescolar
+last-school-grade.select-kindergarten=Jardín de infantes
+last-school-grade.select-1st-grade=1.er grado
+last-school-grade.select-2nd-grade=2.do grado
+last-school-grade.select-3rd-grade=3.er grado
+last-school-grade.select-4th-grade=4.° grado
+last-school-grade.select-5th-grade=5.° grado
+last-school-grade.select-6th-grade=6.° grado
+last-school-grade.select-7th-grade=7.° grado
+last-school-grade.select-8th-grade=8.° grado
+last-school-grade.select-9th-grade=9.° grado
+last-school-grade.select-10th-grade=10.° grado
+last-school-grade.select-11th-grade=11.° grado
+last-school-grade.select-12th-grade=12.° grado
+last-school-grade.select-ged=GED o equivalente
+last-school-grade.select-some-college=Estudios universitarios incompletos
+last-school-grade.select-college-degree=Título universitario
+last-school-grade.select-graduate-degree=Título de posgrado
+last-school-grade.select-other=Otro
+last-school-grade.highest-school-grade=Grado escolar más alto completado
+
+school-grade.title=Nivel académico
+school-grade.header=¿Cuál es su grado académico?
+school-grade.select-their-grade=Seleccione su grado
+school-grade.If-you-dont-have-all-this-information-right-now=Si no tiene esta información en este momento, puede dejar el espacio en blanco.
+school-grade.Head-Start=Inicio Adelantado
+school-grade.Pre-K=Preescolar
+school-grade.Kindergarten=Jardín de infantes
+school-grade.1st-grade=1.er grado
+school-grade.2nd-grade=2.do grado
+school-grade.3rd-grade=3.er grado
+school-grade.4th-grade=4.o grado
+school-grade.5th-grade=5.o grado
+school-grade.6th-grade=6.o grado
+school-grade.7th-grade=7.o grado
+school-grade.8th-grade=8.o grado
+school-grade.9th-grade=9.o grado
+school-grade.10th-grade=10.o grado
+school-grade.11th-grade=11.o grado
+school-grade.12th-grade=12.o grado
+school-grade.Other=Otro
+
+military-service.title=Servicio military
+military-service.has-anyone-served=¿Alguna persona en su hogar ha servido alguna vez en el U.S. Military?
+military-service.have-you-served=¿Alguna vez ha servido en el U.S. Military?
+military-service.message-key=En el presente o en el pasado, sin importar el tipo de baja.
+
+who-has-military-service.title=Quién tiene servicio military
+who-has-military-service.header=¿Quién servido en el U.S. Military?
+
+pregnant.title=Embarazada
+pregnant.are-you-pregnant=¿Está embarazada?
+pregnant.is-anyone-pregnant=¿Alguien en su hogar está embarazada?
+pregnant.who-is-pregnant=¿Quién está embarazada?
+
+who-is-pregnant.title=Hogar: embarazada
+who-is-pregnant.header=¿Quién está embarazada?
+
+direct-deposit.title=Cómo recibir sus beneficios en su cuenta bancaria
+direct-deposit.header=¿Desea saber cómo recibir sus beneficios directamente en su cuenta bancaria?
+direct-deposit.header-help=Es posible que esta opción no esté disponible para todas las personas.  Su trabajador(a) puede brindarle más información.
+
+citizenship.title=Ciudadanía
+citizenship.you-may-still-be-eligible-for-food-and-cash-benefits-if-you-are-not-a-us-citizen=Puede ser elegible para alimentos y beneficios en efectivo si no es un ciudadano estadounidense.
+citizenship.birthright-us-citizen-or-us-national=Ciudadano estadounidense por nacimiento o nacional de los EE. UU.
+citizenship.naturalized-us-citizen=Ciudadano estadounidense naturalizado
+citizenship.derived-us-citizen=Ciudadano estadounidense por derivación
+citizenship.not-a-us-citizen=<i>No</i> es ciudadano estadounidense
+citizenship.please-confirm-your-citizenship-status=Confirme su condición de ciudadanía
+citizenship.please-confirm-the-citizenship-status-of-your-househould=Confirme el estado de ciudadanía de su hogar.
+citizenship.members-of-your-household-may-still-be-eligible=Los miembros de su hogar aún pueden ser elegibles para recibir beneficios de alimentos o dinero en efectivo si no son ciudadanos de los Estados Unidos.
+
+citizenship.reveal-types.title=Tipos de ciudadanía estadounidense
+citizenship.reveal.birthright.title=Ciudadano estadounidense por nacimiento
+citizenship.reveal.birthright.description=Obtuvo la ciudadanía estadounidense porque nació en los Estados Unidos (excluyendo Samoa Americana) o porque sus padres son ciudadanos estadounidenses y usted nació fuera del país.
+citizenship.reveal.us-national.title=Nacional de los EE. UU.
+citizenship.reveal.us-national.description=Aunque usted no es ciudadano estadounidense, ha hecho un compromiso de por vida con los Estados Unidos. Esta condición se aplica principalmente a las personas nacidas en territorios de los EE. UU. como Samoa Americana y la Isla Swains.
+citizenship.reveal.naturalized.title=Ciudadano estadounidense naturalizado
+citizenship.reveal.naturalized.description=Como inmigrante legal elegible, solicitó y se le concedió la ciudadanía.
+citizenship.reveal.derived.title=Ciudadano estadounidense por derivación
+citizenship.reveal.derived.description=Obtuvo automáticamente la ciudadanía estadounidense cuando sus padres se convirtieron en ciudadanos naturalizados.
+
+citizenship.reveal.how-we-use-info.title=Cómo usamos y compartimos su información de ciudadanía
+citizenship.reveal.how-we-use-info.description=Necesitamos verificar los datos de su ciudadanía en una base de datos federal para determinar si cumple los requisitos para ciertos programas.
+citizenship.reveal.how-we-use-info.description.for.example=Por ejemplo, debemos proporcionar información al gobierno federal sobre las personas inscritas en programas como el Programa de Asistencia Nutricional Suplementaria (SNAP, por sus siglas en inglés) que reciben fondos federales.
+citizenship.reveal.how-we-use-info.description.additional=Además, compartimos los datos de su ciudadanía si la ley estatal o federal lo permite o lo exige:
+citizenship.reveal.how-we-use-info.description.additional.verify.our.identity= para verificar su identidad.
+citizenship.reveal.how-we-use-info.description.additional.subpoena.response= en respuesta a una citación o una orden judicial.
+citizenship.reveal.how-we-use-info.description.additional.law.enforcement.reasons=por motivos de orden público.
+citizenship.reveal.how-we-use-info.description.additional.federal.government.access.all.information=El gobierno federal puede tener acceso a toda la información de su solicitud de beneficios. Si le preocupa cómo podría afectar su condición migratoria el hecho de presentar la solicitud, consulte con un abogado de inmigración para recibir asesoramiento sobre su situación específica.
+
+us-citizen.title=Ciudadano estadounidense
+us-citizen.are-you-a-us-citizen=¿Es usted ciudadano estadounidense?
+us-citizen.is-everyone-us-citizen=¿Todos los miembros de su hogar son ciudadanos estadounidenses?
+us-citizen.most-immigrants-are-still-eligible-for-food-and-cash-benefits=La mayoría de inmigrantes aún son elegibles para recibir alimentos y beneficios en efectivo.
+
+who-is-non-citizen.title=No ciudadano
+who-is-non-citizen.header=¿Quién no es ciudadano estadounidense?
+
+alien-id-number.title=Número de identificación de extranjeros
+what-is-their-alien-id-number.header=¿Cuál es su número de identificación de extranjero?
+what-is-your-alien-id-number.header=¿Cuál es su número de identificación de extranjeros?
+what-is-alien-id-number.this-will-help-caseworker=Esto ayudará al trabajador social a procesar su solicitud más rápidamente. Si no tiene la información en este momento, deje el campo vacío.
+
+disability.title=Discapacidad
+disability.do-you-have-a-physical-or-mental-disability-that-limits=¿Tiene una discapacidad física o mental que limita su capacidad para trabajar o realizar actividades diarias?
+disability.does-anyone-in-your-household-have-a-physical-or-mental-disability-that-limits=¿Hay alguien en su hogar que tenga una discapacidad física o mental que limite su capacidad para trabajar o realizar actividades diarias?
+
+unable-to-work.title=No puede trabajar
+unable-to-work.are-you-not-able-to-work-for-any-reason=¿Existen otras razones, aparte de tener una discapacidad o enfermedad, que le impidan trabajar?
+unable-to-work.is-anyone-in-your-household-not-able-to-work-for-any-reason=¿Existen otras razones, además de tener una discapacidad o enfermedad, que impidan que alguien en su hogar pueda trabajar?
+
+who-has-disability.title=Quién tiene alguna discapacidad
+who-has-disability.who-has-a-physical-or-mental-disability-that-limits=¿Quién tiene alguna discapacidad física o mental que limite su capacidad para trabajar o realizar sus actividades cotidianas?
+
+work-situation.title=Situación Laboral
+work-situation.in-the-last-2-months-did-you-do-any-of-these-things=En los últimos 2 meses, ¿hizo alguna de estas cosas?
+work-situation.in-the-last-2-months-did-anyone-in-your-household-do-any-of-these-things=En los últimos 2 meses, ¿alguien de su hogar hizo alguna de estas cosas?
+work-situation.stop-working=Dejar de trabajar, renunciar a un empleo o finalizó el trabajo por cuenta propia
+work-situation.quit-a-job=Renunció en el trabajo
+work-situation.refuse-a-job-offer=Rechazó una oferta de trabajo
+work-situation.ask-to-work-fewer-hours=Tuvo que reducir sus horas de trabajo
+work-situation.go-on-strike=Participo en una huelga
+
+work-changes.title=Cambios en el trabajo
+work-changes.in-the-last-60-days-did-you-do-any-of-these-things=¿Ha realizado alguno de estos cambios en su trabajo en los últimos dos meses (60 días)?
+work-changes.in-the-last-60-days-did-anyone-in-your-household-do-any-of-these-things=¿<i>Alguien</i> en su hogar ha realizado alguno de estos cambios en su trabajo en los últimos dos meses (60 días)?
+work-changes.check-all-that-apply=Marque todo lo que corresponda. Puedes compartir más detalles durante tu entrevista.
+work-changes.stop-working=Dejó de trabajar, renunció a un empleo o finalizó un trabajo por cuenta propia
+work-changes.refuse-a-job-offer=Rechazó una oferta de trabajo
+work-changes.ask-to-work-fewer-hours=Solicitó trabajar menos horas
+work-changes.go-on-strike=Se fue a huelga
+work-changes.make-sure-you-choose=Por favor escoja 'Ninguno de los anteriores' o otra opción.
+
+tribal-nation-member.title=Miembro de una Nación Tribal
+tribal-nation-member.is-anyone-in-your-household-a-member-of-a-tribal-nation=¿Hay algún miembro de su hogar que pertenezca a una Nación Tribal?
+tribal-nation-member.are-you-a-member-of-a-tribal-nation=¿Es usted miembro de una nación tribal?
+
+tribal-tanf-confirmation.title=Confirmación del TANF tribal/en español: Asistencia Temporal Tribal para Familias Necesitadas
+tribal-tanf-confirmation.header=¡Muy bien! Añadiremos el TANF Tribal a su solicitud.
+
+apply-for-mfip-confirmation.title=Confirmación del MFIP/en español: Programa de Inversión Familiar de Minnesota
+apply-for-mfip-confirmation.header=¡Muy bien! Añadiremos el MFIP a su solicitud.
+
+nations-boundary.title=Frontera de las Naciones
+nations-boundary.are-any-of-the-tribal-members=¿Alguno de los miembros de la nación tribal en su hogar vive en la frontera de la nación o cerca de ella?
+nations-boundary.are-you-living-nations-boundary=¿Vives dentro de los límites de una nación tribal?
+
+select-the-tribe.title=Seleccione una nación tribal
+select-the-tribe.which-nation-do-they-belong-to=¿A qué nación tribal pertenece?
+select-the-tribe.select-the-tribe=Seleccione una nación tribal
+select-the-tribe.bois-forte=Bois Forte
+select-the-tribe.fond-du-lac=Fond Du Lac
+select-the-tribe.grand-portage=Grand Portage
+select-the-tribe.leech-lake=Leech Lake
+select-the-tribe.lower-sioux=Lower Sioux
+select-the-tribe.mille-lacs=Mille Lacs Band of Ojibwe
+select-the-tribe.prairie-island=Prairie Island
+select-the-tribe.red-lake=Red Lake Nation
+select-the-tribe.shakopee-mdewakanton=Shakopee Mdewakanton
+select-the-tribe.upper-sioux=Upper Sioux
+select-the-tribe.white-earth=White Earth Nation
+select-the-tribe.other=Otra tribu reconocida a nivel federal
+
+nation-of-residence.title=Nación tribal de residencia
+nation-of-residence.header=Indíquenos a qué nación tribal pertenece.
+later-docs-nation-of-residence.header=De ser así, ¿en qué nación vive?
+
+lineal-descendant-WEN.title=Descendiente lineal de la Nación Tribal
+lineal-descendant-WEN.are-you-a-lineal-descendant=¿Es usted descendiente en línea recta de White Earth Nation?
+lineal-descendant-WEN.is-anyone-a-lineal-descendant=¿Algún miembro de su familia es descendiente en línea recta de White Earth Nation?
+lineal-descendant-WEN.Definition-of-a=¿Quién es un descendiente en línea directa?
+lineal-descendant-WEN.A-lineal-descendant-is=Un descendiente en línea directa es cualquier persona que pueda rastrear su ascendencia directamente hasta un miembro tribal de White Earth Nation.
+
+apply-for-tribal-TANF.title=Solicitar para TANF Tribal
+apply-for-tribal-TANF.it-looks-like-you-might-be-eligible=Parece ser que usted podría ser elegible para el TANF Tribal. ¿Desea solicitarlo?
+apply-for-tribal-TANF.reveal-title=¿Qué es el TANF tribal?
+apply-for-tribal-TANF.reveal-item-1=El TANF tribal, o Asistencia Temporal para Familias Necesitadas, es un programa que sirve a las personas embarazadas y a las familias que tienen uno o más miembros que pertenecen a una nación tribal.
+apply-for-tribal-TANF.reveal-item-2=El TANF tribal es similar a otros programas de dinero en efectivo como el MFIP, pero las reglas de elegibilidad han sido definidas por las naciones tribales.
+apply-for-tribal-TANF.reveal-item-3=Algunas naciones tribales de Minnesota tramitan el TANF tribal directamente en lugar de enviar la solicitud al condado.
+
+apply-for-MFIP.title=solicitar el MFIP
+apply-for-MFIP.it-looks-like-you-might-be-eligible=Parece que podría ser elegible para el MFIP. ¿Desea solicitarlo?
+apply-for-MFIP.reveal-title=¿Qué es el MFIP?
+apply-for-MFIP.real-item-1=El MFIP, o Programa de Inversión Familiar de Minnesota, es un programa de asistencia en efectivo que ayuda a las familias con niños a cubrir sus necesidades básicas, como la alimentación, la ropa y el alojamiento.
+apply-for-MFIP.real-item-2=Las personas que solicitan el MFIP por primera vez serán inscritas primero en el Programa de Trabajo Diversificado. Este es un programa de cuatro meses que ayuda a los padres a conectarse con un trabajo, para que puedan volver a trabajar.
+
+intro-income.title=Introducción: Ingresos
+intro-income.income-and-employment=Ingresos y Empleo
+intro-income.current-jobs=Trabajos Actuales
+intro-income.unearned-income=Ingresos no derivados del trabajo
+intro-income.recent-income-changes=Cambio de Ingresos Reciente
+
+employment-status.title=Situación Laboral
+employment-status.are-you-making-money-from-a-job-self-employment=¿Recibe ingresos de un empleo o trabajo independiente?
+employment-status.is-anyone-in-your-household-making-money-from-a-job=¿Alguien en su hogar gana dinero como empleado o trabajador independiente?
+
+income-by-job.title=Ingresos de trabajo
+income-by-job.lets-add-your-job-information=Agreguemos la información de su trabajo.
+income-by-job.lets-add-all-the-jobs-in-your-household=Agreguemos todos los trabajos de su hogar.
+income-by-job.this-includes-full-time-part-time-contract-self-employment-work=Incluya el trabajo autónomo, trabajo contratado, y trabajo a tiempo completo o parcial.
+income-by-job.add-a-job=Agregue un trabajo
+income-by-job.id-rather-give-an-estimate=Prefiero dar una aproximación de mis ingresos totales en los últimos 30 días.
+
+household-selection-for-income.title=Selección de personas en el hogar para los ingresos
+household-selection-for-income.header=¿Para quién le gustaría agregar un trabajo?
+
+ccap-job-search.title=Búsqueda de Empleo
+ccap-job-search.are-you-currently-looking-for-a-job=¿Está buscando trabajo actualmente?
+ccap-job-search.is-household-currently-looking-for-a-job=¿Alguien en el hogar está buscando trabajo actualmente?
+
+who-is-looking-for-job.title=Quién está buscando trabajo
+who-is-looking-for-job.who-in-your-household-is-looking-for-a-job=¿Quién en su hogar está buscando trabajo?
+
+income-up-next.title=Ingresos a Continuación
+income-up-next.got-it-youre-almost-done-with-the-income-section=¡Gracias! Casi ha terminado con la sección de ingresos.
+
+unearned-income.title=Ingresos No Derivados del Trabajo
+unearned-income.do-you-get-income-from-any-of-these-sources=¿Obtiene ingresos de alguna de estas fuentes?
+unearned-income.household-get-income-from-any-of-these-sources=¿Alguien en su hogar obtiene ingresos de estas fuentes?
+unearned-income.check-all-that-apply-you-do-not-need-to-report-income-you-havent-received-yet=Marque todo lo que corresponda. No es necesario que reporte los ingresos que aún no ha recibido.
+unearned-income.social-security=Seguro Social o Discapacidad (RSDI/SSDI) <span style="font-weight:normal;">(Incluye ingresos de jubilación del Seguro Social, beneficios para sobrevivientes y seguro de incapacidad)</span>
+unearned-income.ssi=SSI <span style="font-weight:normal;">(Seguro de Ingreso Suplementario)</span>
+unearned-income.veterans-benefits=​Beneficios para veteranos 
+unearned-income.unemployment=Beneficios para Desempleo
+unearned-income.workers-compensation=​Compensación laboral 
+unearned-income.retirement=Jubilación <span style="font-weight:normal;">(Como Pensiones IRAs u otras cuentas)</span>
+unearned-income.child-or-spousal-support=​Manutención infantil o conyugal 
+unearned-income.tribal-payments=​Pagos tribales
+
+advanced-child-tax-credit.title=Crédito tributario anticipado por hijos
+advanced-child-tax-credit.single=¿Recibe o espera recibir pagos del crédito tributario por hijos de forma<i> anticipada</i>?
+advanced-child-tax-credit.household= ¿Alguien en su hogar recibe o espera recibir pagos del crédito tributario por hijos de forma<i> anticipada</i>? \n
+advanced-child-tax-credit.body=Estos pagos se envían entre julio y diciembre.
+
+advanced-child-tax-credit.reveal-types.title=Pagos anticipados del crédito tributario por hijos
+advanced-child-tax-credit.reveal-types.p1=Si solicita el crédito tributario por hijos en su declaración de impuestos, puede optar por recibir parte del crédito del próximo año de forma anticipada. Estos pagos se envían entre julio y diciembre.
+advanced-child-tax-credit.reveal-types.p2=Revisamos estos pagos con su solicitud.
+
+emergency-type.title=Tipo de Emergencia
+emergency-type.describes-emergency=<h3 style="font-size: 19px; line-height: 25px; font-weight: bold; border-bottom: 2px solid #5f5854; padding-bottom: 2px; color: #5f5854">Asistencia de Emergencia</h3><h2>¿Qué opción describe mejor su emergencia?</h2>
+emergency-type.check-all-that-apply=Marque todas las que correspondan. Usaremos esta información para su solicitud de Asistencia de emergencia.
+emergency-type.eviction-notice=Alquiler vencido o Aviso de Desalojo
+emergency-type.utility-shut-off=Interrupción de servicios públicos
+emergency-type.first-month-rent-rent-or-damage-deposit=Primer mes de alquiler o depósito por daños
+emergency-type.other-emergency=Otra emergencia
+
+other-emergency-type.title=Otra emergencia
+other-emergency-type.tell-us-your-emergency=<h3 style="font-size: 19px; line-height: 25px; font-weight: bold; border-bottom: 2px solid #5f5854; padding-bottom: 2px; color: #5f5854">Asistencia de Emergencia</h3><h2>Cuéntenos sobre su emergencia</h2>
+other-emergency-type.brief-description=Brindarnos toda la información que pueda nos ayudará a ofrecerle el apoyo adecuado. Solo necesitamos una breve descripción.
+
+# Common for all unearned income source pages
+unearned-income-source.title=Fuentes de Ingresos No Derivados del Trabajo
+unearned-income-source.you-can-select-more=Puede seleccionar a más de una persona.
+unearned-income-source.how-much-income-monthly=¿Cuál es el ingreso mensual?
+# Messages for page that displays each person in household to assign unearned income for each person and source.
+social-security-income-source.title=Fuentes de Ingresos No Derivados del Trabajo
+social-security-income-source.who-receives=¿Quién recibe ingresos del <i>Seguro Social, Beneficios para Sobrevivientes o Seguro por Incapacidad</i>? <i><span style="font-weight: normal;">(RSDI/SSDI)</span></i>
+supplemental-security-income-source.who-receives=¿Quién recibe ingresos del <i>Ingreso suplementario de seguridad</i>? <i><span style="font-weight: normal;">(SSI)</span></i>
+veterans-benefits-income-source.who-receives=¿Quién recibe ingresos de <i>beneficios para veteranos</i>?
+unemployment-income-source.who-receives=¿Quién recibe ingresos por <i>desempleo</i>?
+workers-comp-income-source.who-receives=¿Quién recibe ingresos de una <i>indemnización por accidente laboral</i>?
+retirement-income-source.who-receives=​¿Quién recibe <i>ingresos por jubilación</i>?
+retirement-income-source.additional-help=​<span><p>Esto puede incluir ingresos de pensiones, cuentas IRA u otras cuentas.</p><p> Puede seleccionar a más de una persona.</p></span>
+child-or-spousal-support-income-source.who-receives=¿Quién recibe ingresos de <i>manutención de hijos o cónyuge</i>?
+tribal-payment-income-source.who-receives=¿Quién recibe ingresos de <i>pagos tribales</i>?
+
+unearned-income-other.do-you-get-income-from-any-of-these-sources=¿Recibe ingresos de alguna de estas siguientes fuentes?
+unearned-income-other.household-get-income-from-any-of-these-sources=¿Hay alguien en su hogar que recibe ingresos de otras fuentes?
+unearned-income-other.benefits-programs=Otros programas de beneficios del estado de Minnesota <span style="font-weight:normal">(Beneficios como GA, MFIP, Tribal TANF u otros)</span>
+unearned-income-other.insurance-payments=Pagos de seguros
+unearned-income-other.contract-for-deed=Contrato de escritura
+unearned-income-other.money-from-a-trust=Dinero proveniente de un fideicomiso
+unearned-income-other.rental-income=Ingresos por alquiler
+unearned-income-other.health-care-reimbursement=Reembolsos de gastos médicos
+unearned-income-other.interest-dividends=Intereses o dividendos
+unearned-income-other.other-payments=Otros pagos
+unearned-income-other.annuity-payments=Pagos de anualidades
+unearned-income-other.gifts=Regalos
+unearned-income-other.lottery-gambling=Premios de lotería o juegos de azar
+unearned-income-other.day-trading-proceeds=Ganancias por operaciones bursátiles diarias
+unearned-income-benefits-programs.title=Programas de beneficios
+unearned-income-benefits-programs.header=¿Quién recibe ingresos de <i>programas de beneficios</i>?
+unearned-income-insurance-payments.header=¿Quién recibe ingresos de <i>pagos de seguros</i>?
+unearned-income-contract-for-deed.header=¿Quién recibe ingresos por un <i>contrato de propiedad</i>?
+unearned-income-money-from-a-trust.header=¿Quién recibe ingresos provenientes de un <i>fideicomiso</i>?
+unearned-income-health-care-reimbursement.header=¿Quién recibe ingresos en concepto de <i>reembolsos de gastos médicos</i>?
+unearned-income-interest-dividends.header=¿Quién recibe ingresos en concepto de i<i>ntereses o dividendos</i>?
+unearned-income-rental-income.header=¿Quién recibe <i>ingresos por alquiler</i>?
+unearned-income-annuity-payments.header=¿Quién recibe ingresos de<i> una anualidad</i>?
+unearned-income-gifts-income.header=¿Quién recibe ingresos por<i> regalos</i>?
+unearned-income-gifts.other-additional-help=<span><p>Puede seleccionar a más de una persona.</p></span>
+unearned-income-lottery-gambling.title=Premios de lotería o juegos de azar
+unearned-income-lottery-gambling.header=¿Quién recibe ingresos por premios de<i> lotería o juegos de azar</i>?
+unearned-income-lottery-gambling.other-additional-help=<span><p>Puede seleccionar a más de una persona.</p></span>
+unearned-income-day-trading-proceeds.header=¿Quién recibe ingresos por operaciones<i> bursátiles diarias</i>?
+unearned-income-other.other-payments.header=¿Quién recibe ingresos de <i>otros pagos</i>?
+unearned-income-other.other-additional-help=<span><p>Los otros pagos pueden incluir herencias, ganancias de capital o cualquier ingreso que aún no haya compartido. </p><p>Puede seleccionar a más de una persona.</p></span>
+
+unearned-income-sources.title=Fuentes de Ingresos No Derivados del Trabajo
+unearned-income-sources.tell-us-how-much-money-you-receive=Díganos cuánto dinero recibe.
+unearned-income-sources.tell-us-how-much-money-is-received=Díganos cuánto dinero se recibe.
+unearned-income-sources.if-you-dont-have-all-this-information-on-hand-skip=Si no tiene toda esta información a la mano, puede saltarse esta pregunta por ahora. Un trabajador social de elegibilidad le preguntará sobre esto posteriormente.
+
+student-financial-aid.title=Ayuda financiera para estudiantes
+student-financial-aid.household-header=¿Alguien en su hogar tiene o espera recibir préstamos, becas o subvenciones para asistir a una universidad u otro programa de aprendizaje?
+student-financial-aid.header=¿Tiene o espera obtener préstamos, becas o subvenciones para asistir a una universidad u otro programa de aprendizaje?
+student-financial-aid.header-help-message=Esto incluye programas en los que puede inscribirse después de terminar la escuela secundaria o de obtener un GED.
+
+future-income.title=Ingresos Futuros
+future-income.do-you-think-youll-earn-less-money-this-month-than-last-month=¿Cree que ganará menos dinero este mes que el mes pasado?
+future-income.do-you-think-household-will-earn-less-money-this-month-than-last-month=¿Cree que su hogar ganará menos dinero este mes que el anterior?
+future-income.if-youre-not-sure-you-can-guess=Si no está seguro/a, puede adivinar.
+future-income.is-there-anything-else-youd-like-to-share-about-your-income=¿Hay algo más que le gustaría compartir sobre sus ingresos?
+
+additional-income-info.title=Información adicional sobre los ingresos
+
+employers-name.title=Nombre del empleador
+employers-name.add-a-job-you-have=Agregar un empleo o trabajo.
+employers-name.add-a-job-they-have=Agregar un empleo o trabajo.
+employers-name.what-is-the-employers-name=¿Cuál es el nombre del empleador?
+
+self-employment.title=Trabajo por propia cuenta
+self-employment.is-your-work-here=¿Su trabajo aquí se considera autónomo, por contrato o por cuenta propia?
+self-employment.is-their-work-here=¿Su trabajo aquí se considera autónomo, por contrato o por cuenta propia?
+self-employment.reveal-title=Ejemplos de trabajo por propia cuenta
+self-employment.you-do-gig-work-independent-contracting-or-run-your-own-business=Realiza trabajos por encargo, contrataciones independientes o tiene su propio negocio
+self-employment.you-receive-a-1099-misc-tax-form-from-a-company-or-individual-at-the-end-of-the-year=Usted recibe un formulario de impuestos 1099 MISC de una empresa o de un individuo al final del año
+self-employment.you-do-not-get-employment-benefits-or-tax-contributions-from-the-company-or-individual-you-work-for=Usted no recibe beneficios de su trabajo ni contribuciones de impuestos de la empresa o persona para la que trabaja
+self-employment.job-examples=Ejemplos de trabajos:
+self-employment.rideshare-or-food-delivery-driver-hair-dresser-dog-walker-newspaper-delivery-artist=Conductor de automóvil compartido o de entrega de comidas, peluquero, paseador de perros, repartidor de periódicos, artista.
+
+paid-by-the-hour.title=Pagado por hora
+paid-by-the-hour.do-you-get-paid-by-the-hour=¿Le pagan por hora?
+paid-by-the-hour.do-they-get-paid-by-the-hour=¿Le pagan por hora?
+paid-by-the-hour.i-dont-know-these-details=No sé estos detalles.
+
+hourly-wage.title=Salario por hora
+hourly-wage.what-is-your-hourly-wage=¿Cuál es su salario por hora?
+hourly-wage.what-is-their-hourly-wage=¿Cuál es su salario por hora?
+
+hours-a-week.title=Horas a la semana
+hours-a-week.how-many-hours-a-week-do-you-work=¿Cuántas horas a la semana trabaja?
+hours-a-week.how-many-hours-a-week-do-they-work=¿Cuántas horas a la semana trabajan?
+hours-a-week.we-know-this-can-be-hard-to-answer-so-just-estimate-based-on=Sabemos que puede ser difícil de responder a esta pregunta, así que haga un cálculo basado en su trabajo durante los últimos 30 días.
+hours-a-week.we-know-this-can-be-hard-to-answer-so-just-estimate-based-on-their=Sabemos que puede ser difícil de responder a esta pregunta, así que haga un cálculo basado en su trabajo durante los últimos 30 días.
+
+pay-period.title=Período de pago
+pay-period.how-often-do-you-get-paid=¿Con qué frecuencia le pagan?
+pay-period.how-often-do-they-get-paid=¿Con qué frecuencia le pagan?
+pay-period.every-day=Cada día
+pay-period.every-week=Cada semana
+pay-period.every-two-weeks=Cada dos semanas
+pay-period.twice-a-month=Dos veces al mes
+pay-period.every-month=Cada mes
+pay-period.it-varies=Cambia
+
+principal-wage-earner.title=Perceptor Principal de Ingresos
+principal-wage-earner.header=Designemos a un Perceptor Principal de Ingresos (PWE)
+principal-wage-earner.snap-households-must-designate=<p>Los hogares que reciben beneficios del Programa de Asistencia Nutricional Suplementaria (SNAP, por sus siglas en inglés) deben designar a una persona adulta como PWE.</p><p> Hable con su trabajador sobre cómo esta designación podría afectar sus beneficios.</p>
+principal-wage-earner.im-not-sure=No estoy seguro. Quiero hablar primero con mi trabajador
+principal-wage-earner.i-am-the-principal-wage-earner=Soy el Perceptor Principal de Ingresos
+principal-wage-earner.who-is-the-principal-wage-earner=¿Quién es el Perceptor Principal de Ingresos? 
+principal-wage-earner.select-the-adult=Seleccione a la persona adulta a la que esto aplica
+
+start-expenses.title=Gastos
+start-expenses.expenses-and-deductions=Gastos y Deducciones
+start-expenses.household-payments=Pagos del hogar
+start-expenses.savings=Ahorros
+start-expenses.assets=Sus bienes
+
+home-expenses.title=Gastos del hogar
+home-expenses.do-you-pay-for-any-of-these=¿Usted esta en cargo de alguno de estos pagos?
+home-expenses.household-pay-for-these=¿Alguien en su hogar esta en cargo de alguno de estos pagos?
+home-expenses.rent=Renta
+home-expenses.mortgage=Hipoteca
+home-expenses.homeowners-insurance=Seguro de Propriedad
+home-expenses.real-estate-taxes=Impuestos sobre Bienes Inmuebles
+home-expenses.association-fees=Cuotas de Asociación
+home-expenses.room-and-board=Alojamiento y alimentos
+
+home-expenses-amount.title=Monto de los gastos de la casa
+home-expenses-amount.how-much-do-you-pay-for-rent-and-mortgage-every-month=¿Cuánto paga por la renta y/o la hipoteca cada mes?
+home-expenses-amount.how-much-does-household-pay-for-rent-and-mortgage-every-month=¿Cuánto paga su hogar por la renta y/o la hipoteca cada mes?
+home-expenses-amount.how-much-do-you-pay-for-mortgage-every-month=¿Cuánto paga por la hipoteca cada mes?
+home-expenses-amount.household-pay-mortgage-every-month=¿Cuánto paga su hogar por la hipoteca cada mes?
+home-expenses-amount.how-much-do-you-pay-for-rent-every-month=¿Cuánto paga por la renta cada mes?
+home-expenses-amount.household-pay-rent-every-month=¿Cuánto paga su hogar por la renta cada mes?
+home-expenses-amount.how-much-do-you-pay-for-room-and-board-every-month=¿Cuánto paga por su alojamiento y comida cada mes?
+home-expenses-amount.how-much-do-you-pay-for-rent-and-room-and-board-every-month=¿Cuánto paga por su renta/alquiler, alojamiento y comida cada mes?
+home-expenses-amount.how-much-do-you-pay-for-mortgage-and-room-and-board-every-month=¿Cuánto paga por su hipoteca, alojamiento y comida cada mes?
+home-expenses-amount.how-much-do-you-pay-for-rent-mortgage-and-room-and-board-every-month=¿Cuánto paga por su renta/arrendamiento, alojamiento y comida cada mes?
+home-expenses-amount.household-pay-for-room-and-board-every-month=¿Cuánto paga su familia por alojamiento y comida cada mes?
+home-expenses-amount.household-pay-for-rent-and-room-and-board-every-month=¿Cuánto paga su familia por renta/alquiler alojamiento y comida cada mes?
+home-expenses-amount.household-pay-for-mortgage-and-room-and-board-every-month=¿Cuánto paga su hogar por la hipoteca y el alojamiento y la comida cada mes?
+home-expenses-amount.household-pay-for-rent-mortgage-and-room-and-board-every-month=¿Cuánto paga su familia por renta/alquiler alojamiento y comida cada mes?
+
+energy-assistance.title=Asistencia para Gastos de Energía
+energy-assistance.have-you-received-money-for-energy-assistance=¿Ha recibido dinero para asistencia para gastos de energía (LIHEAP) en los últimos 12 meses?
+energy-assistance.household-received-money=¿Alguien en su hogar ha recibido dinero para asistencia para gastos de energía (LIHEAP) en los últimos 12 meses?
+
+energy-assistance-more-than-20.title=Asistencia para Gastos de Energía Más de 20
+energy-assistance-more-than-20.have-you-received-more-than-20-in-energy-assistance=¿Ha recibido más de $20 en asistencia para gastos de energía este año?
+energy-assistance-more-than-20.household-received=¿Su hogar ha recibido más de $20 en asistencia para gastos de energía este año?
+
+child-care-costs.title=Costos del cuidado infantil
+child-care-costs.header=¿Paga usted por el cuidado de un niño porque trabaja, busca trabajo o estudia?
+child-care-costs-household.header=¿Alguien en su hogar tiene gastos por el cuidado de un niño porque trabaja, busca trabajo o estudia? 
+child-care-costs-household.the-child-care-assistance-program=El Programa de Asistencia para el Cuidado Infantil (Child Care Assistance Program) puede ayudar a pagar los costos del cuidado infantil. Pregúntele a su trabajador(a) cómo solicitar el Programa de Asistencia para el Cuidado Infantil.
+
+child-care-costs-amount.title=Monto del cuidado infantil
+child-care-costs-amount.header=Cuéntenos cuánto paga su hogar en cuidado infantil.
+child-care-costs-amount.if-you-dont-have-all-this=Si no tiene toda esta información a mano, omita esta pregunta por ahora.  Un trabajador de elegibilidad le preguntará sobre esto más adelante.
+
+adult-care-costs-amount.title=Monto del cuidado de adultos
+adult-care-costs-amount.header=Díganos cuánto paga su hogar por el cuidado de un adulto enfermo o discapacitado.
+adult-care-costs-amount.if-you-dont-have-all-this=Si no tiene toda esta información a mano, omita esta pregunta por ahora.  Un trabajador de elegibilidad le preguntará sobre esto más adelante.
+
+costs-amount.amount=Monto
+costs-frequency.how-often=¿Con qué frecuencia?
+
+cost-frequency.select-frequency=Seleccione la frecuencia
+cost-frequency.monthly=Mensualmente
+cost-frequency.twice-a-month=Dos veces al mes
+cost-frequency.every-two-weeks=Cada dos semanas
+cost-frequency.weekly=Semanal
+cost-frequency.other=Otro
+
+adult-care-costs.title=Costos de la atención a adultos 
+adult-care-costs.header=¿Paga por la atención de un adulto enfermo o discapacitado porque trabaja, busca trabajo o estudia?
+adult-care-costs-household.header=¿Alguien en su hogar tiene costos de cuidado para una persona adulta enferma o con una discapacidad debido al trabajo, la búsqueda de empleo o la asistencia a la escuela?
+
+past-employment.title=Experiencia laboral previa
+past-employment.header=<p>Hablemos sobre sus trabajos anteriores.</p><p> ¿Ha tenido un empleo o ha trabajado por cuenta propia en los últimos 36 meses? (3 años)</p>
+past-employment-household.header=<p>Hablemos sobre sus trabajos anteriores.</p><p> ¿Algún miembro de su hogar ha tenido un empleo o ha trabajado por cuenta propia en los últimos 36 meses? (3 años)</p>
+
+medical-expenses.title=Gastos médicos
+medical-expenses.do-you-pay-for-medical-expenses=¿Paga por seguro de médicos u otros gastos médicos?
+medical-expenses.does-anyone-in-your-household-pay-for-medical-expenses=¿Hay alguien en su casa que paga por seguro médico o por otros gastos médicos?
+medical-expenses.let-us-know=Díganos si está pagando de su bolsillo alguno de estos gastos médicos.
+medical-expenses.medical-insurance-premiums=Pagos de seguro médico
+medical-expenses.dental-insurance-premiums=Pagos de seguro dental
+medical-expenses.vision-insurance-premiums=Pagos de seguro de la vista
+medical-expenses.medical-bills-or-copays=Gastos médicos o copagos
+
+medical-expenses-sources.title=Fuentes de gastos médicos
+medical-expenses-sources.tell-us-how-much-money-is-paid=Díganos cuánto dinero se paga.
+medical-expenses-source.if-you-dont-have-this-information-right-now=Si actualmente no tiene esta información, ponga un estimado o déjelo en blanco.
+medical-expenses-sources.medical-insurance-premiums=Prima/Pago de seguro médico
+medical-expenses-sources.dental-insurance-premiums=Prima del seguro dental
+medical-expenses-sources.vision-insurance-premiums=Prima/Pago del Seguro de Vista
+
+special-care-expenses.title=Costos de cuidados especiales
+special-care-expenses-header=¿Tiene alguno de estos gastos?
+special-care-expenses-household-header=¿Tiene usted o alguien en su hogar alguno de estos gastos?
+special-care-expenses-assets.select-all-that-apply=Marque todo lo que corresponda.
+special-care-expenses-representative=Honorarios de representante de beneficiario <span style="font-weight:normal;">(U honorarios que usted paga para que alguien administre sus ingresos del SSI)</span>
+special-care-expenses-guardian=Honorarios de tutor o curador
+special-care-expenses-special-diet=Dieta especial prescrita por un médico
+special-care-expenses-housing=Altos costos de vivienda
+
+support-and-care.title=Gastos de Manutención y Cuidado
+support-and-care.do-you-pay-for-court-ordered-child-support-spousal-support=¿Paga usted alguno de estos gastos?
+support-and-care.household-support=¿Alguien en su hogar paga alguno de los siguientes costos?
+support-and-care.help=<ul class="list--bulleted-blue"><li>Manutención infantil ordenada por el tribunal</li><li>Manutención conyugal</li><li>Manutención infantil</li><li>Asistencia médica</li><li>Contribuye a un dependiente fiscal que no vive en su hogar</li></ul>
+
+support-and-care-costs-amount.title=Montos de apoyo y cuidado
+support-and-care-costs-amount.header=Díganos cuánto paga su hogar por cualquiera de los siguientes gastos:
+support-and-care-costs-amount.payment-list=<p><ul class="list--bulleted-blue"><li>Manutención infantil ordenada por el tribunal</li><li>Manutención conyugal</li><li>Manutención infantil</li><li>Asistencia médica</li><li>Contribuye a un dependiente fiscal que no vive en su hogar </li></ul></p><p>Si no tiene toda esta información a mano, omita esta pregunta por ahora.  Un trabajador de elegibilidad le preguntará sobre esto más adelante.</p>
+
+savings.title=Ahorros
+savings.do-you-have-money-in-a-bank-account-or-debit-card=¿Dispone de dinero en una cuenta bancaria, en una tarjeta de débito o en efectivo?
+savings.household-bank-account=¿Hay alguien en su hogar que tenga dinero en efectivo o en una cuenta bancaria?
+savings.please-include=Incluya lo siguiente:
+savings.cash=Dinero en efectivo
+savings.bank=Dinero en cuentas bancarias
+savings.debit=Dinero en cuentas de débito
+
+savings-amount.title=Cantidad de ahorros
+savings-amount.how-much-money-do-you-have-available=¿Cuánto dinero tiene disponible?
+savings-amount.this-includes=Esto incluye:
+savings-amount.bank-accounts=Cuentas bancarias
+savings-amount.debit-cards=Tarjetas de débito
+
+investments.title=Inversiones
+investments.do-you-have-any-stocks-bonds-or-a-401k=¿Tiene acciones, bonos o un 401k?
+investments.household-stocks=¿Alguien en su hogar tiene acciones, bonos o un 401k?
+
+vehicle.title=Vehículo
+vehicle.do-you-own-a-vehicle=¿Tiene un vehículo?
+vehicle.household-own-vehicle=¿Alguien en el hogar tiene un vehículo?
+
+real-estate.title=Bienes Raíces (Inmuebles)
+real-estate.do-you-own-any-real-estate=¿Posee alguna propiedad inmobiliaria (sin incluir la casa en la que vive actualmente)?
+real-estate.household-own-real-estate=¿Alguien en el hogar posee alguna propiedad inmobiliaria (sin incluir la casa en la que vive actualmente)?
+
+million-dollar.title=$1 millón de activos
+million-dollar.does-your-family-have-more-than-1-million=¿Su familia tiene más de 1 millón de dólares en bienes o activos?
+million-dollar.do-not-include=No incluya el valor de su hogar.
+
+sold-assets.title=Bienes vendidos
+sold-assets.in-the-last-12-months-have-you-given-away-or-sold-any-assets=En los últimos 12 meses, ¿ha regalado o vendido algunos bienes o activos?
+sold-assets.households-given-or-sold=En los últimos 12 meses, ¿alguien en su hogar ha regalado o vendido algunos bienes o activos?
+sold-assets.this-includes=Esto incluye:
+sold-assets.vehicles=Vehículos
+sold-assets.stocks-and-bonds=Acciones o bonos
+sold-assets.household-valuables=Objetos de valor del hogar
+
+submitting-application.title=Envío de Solicitud
+submitting-application.submitting-your-application=Enviar su Solicitud
+submitting-application.before-you-submit=Antes de enviar su solicitud,
+submitting-application.well-ask-about=le preguntaremos acerca de
+submitting-application.registering-to-vote=Registrándose para votar
+submitting-application.getting-help-with-benefits=Recibiendo ayuda con los beneficios
+submitting-application.agreeing-to-terms=Aceptando los términos
+register-to-vote.title=Registrándose para votar
+register-to-vote.yes-send-me-more-info=Sí, envíeme más información
+register-to-vote.ive-already-registered=!Ya me he registrado!
+register-to-vote.no-thanks=No, gracias
+register-to-vote.do-you-want-to-register-to-vote=¿Quiere registrarse para votar?
+healthcareCoverage.do-you-currently-have-healthcare-coverage=¿Tiene actualmente cobertura de salud?
+healthcareCoverage.title=Cobertura de Salud
+past-benefit.title=Beneficios anteriores
+past-benefit.header=¿Alguien en su hogar ha recibido antes asistencia en efectivo, productos básicos o beneficios SNAP?
+past-benefit-details.title=Beneficios anteriores
+past-benefit-details.header=Cuéntenos sobre los beneficios anteriores de su hogar.
+past-benefit-details.when.label=¿Cuándo recibió su hogar los beneficios?
+past-benefit-details.when.now=Los recibimos ahora
+past-benefit-details.when.within-last-year=Dentro del último año
+past-benefit-details.when.more-than-year-ago=Hace más de un año
+past-benefit-details.where.label=¿Dónde recibió los beneficios?
+past-benefit-details.which.label=¿Qué beneficios tenía su hogar?
+past-benefit-details.which.cash-assistance=Asistencia en efectivo
+past-benefit-details.which.snap=SNAP
+past-benefit-details.which.tribal-commodities=Productos básicos a través de una Nación tribal
+past-benefit-details.state.select-placeholder=Seleccione un estado o territorio
+past-benefit-details.state.separator=\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
+past-benefit-details.state.AL=Alabama
+past-benefit-details.state.AK=Alaska
+past-benefit-details.state.AS=Samoa Americana
+past-benefit-details.state.AZ=Arizona
+past-benefit-details.state.AR=Arkansas
+past-benefit-details.state.CA=California
+past-benefit-details.state.CO=Colorado
+past-benefit-details.state.CT=Connecticut
+past-benefit-details.state.DE=Delaware
+past-benefit-details.state.DC=Distrito de Columbia
+past-benefit-details.state.FL=Florida
+past-benefit-details.state.GA=Georgia
+past-benefit-details.state.GU=Guam
+past-benefit-details.state.HI=Hawái
+past-benefit-details.state.ID=Idaho
+past-benefit-details.state.IL=Illinois
+past-benefit-details.state.IN=Indiana
+past-benefit-details.state.IA=Iowa
+past-benefit-details.state.KS=Kansas
+past-benefit-details.state.KY=Kentucky
+past-benefit-details.state.LA=Luisiana
+past-benefit-details.state.ME=Maine
+past-benefit-details.state.MD=Maryland
+past-benefit-details.state.MA=Massachusetts
+past-benefit-details.state.MI=Míchigan
+past-benefit-details.state.MN=Minnesota
+past-benefit-details.state.MS=Misisipi
+past-benefit-details.state.MO=Misuri
+past-benefit-details.state.MT=Montana
+past-benefit-details.state.NE=Nebraska
+past-benefit-details.state.NV=Nevada
+past-benefit-details.state.NH=Nuevo Hampshire
+past-benefit-details.state.NJ=Nueva Jersey
+past-benefit-details.state.NM=Nuevo México
+past-benefit-details.state.NY=Nueva York
+past-benefit-details.state.NC=Carolina del Norte
+past-benefit-details.state.ND=Dakota del Norte
+past-benefit-details.state.MP=Islas Marianas del Norte
+past-benefit-details.state.OH=Ohio
+past-benefit-details.state.OK=Oklahoma
+past-benefit-details.state.OR=Oregón
+past-benefit-details.state.PA=Pensilvania
+past-benefit-details.state.PR=Puerto Rico
+past-benefit-details.state.RI=Rhode Island
+past-benefit-details.state.SC=Carolina del Sur
+past-benefit-details.state.SD=Dakota del Sur
+past-benefit-details.state.TN=Tennessee
+past-benefit-details.state.TX=Texas
+past-benefit-details.state.UT=Utah
+past-benefit-details.state.VT=Vermont
+past-benefit-details.state.VI=Islas Vírgenes de EE. UU.
+past-benefit-details.state.VA=Virginia
+past-benefit-details.state.WA=Washington
+past-benefit-details.state.WV=Virginia Occidental
+past-benefit-details.state.WI=Wisconsin
+past-benefit-details.state.WY=Wyoming
+past-benefit-details.state.OTHER=Otro
+ebt-in-past.title=Tarjeta EBT anterior
+ebt-in-past.header=¿Ha tenido una tarjeta de Transferencia Electrónica de Beneficios (EBT, por sus siglas en inglés) anteriormente?
+social-worker.title=Ayuda de un trabajador social
+social-worker.header=¿Está recibiendo ayuda de un trabajador social o una agencia de servicios sociales?
+referrals.title=Ayuda con los servicios
+referrals.header=¿Le gustaría obtener ayuda para conectarse con otros servicios en su área?
+referrals.body=Su trabajador puede ayudarle a encontrar puestos de alimentos, alojamiento y transporte.
+legalGuardian.title=Tutor legal
+legalGuardian.header=¿Tiene un tutor legal o curador, o hay un poder notarial?
+authorized-rep.do-you-want-to=¿Desea asignar a alguien para que sea su representante autorizado?
+authorized-rep.this-person-can-help=Esta persona puede ayudarle con sus prestaciones o actuar en su nombre.
+authorized-rep.title=Representante Autorizado
+
+additional-info.is-there-anything-else-you-want-to-share=¿Hay algo más que quisiera compartir?
+additional-info.this-is-optional=Esto es opcional.
+additional-info.title=Información Adicional
+additional-info.whats-your-case-number=Si la tiene, ¿cuál es su número de caso?
+additional-info.case-number-is-optional=Este dato es opcional. Este número es útil para procesar las renovaciones.
+additional-info.you-can-find-your-case-number=Puede encontrar el número de su caso en las cartas que le ha enviado su condado o nación tribal:
+
+can-we-ask.title=¿Nos permite preguntar?
+can-we-ask.can-we-ask-about-your-race-and-ethnicity=¿Nos permite preguntarle acerca de su raza y origen étnico?
+race-and-ethnicity.providing-your-race-and-ethnicity-is-optional=Indicar su raza y origen étnico es opcional y no afectará su solicitud individual.
+race-and-ethnicity.we-will-use-this-information-to-evaluate-the-fairness-of-mnbenefits=Utilizaremos esta información para evaluar que se estén proporcionando MNbenefits justamente, y le pedimos que nos la proporcione para asegurarnos de que Ud. ha sido representado con exactitud.
+can-we-ask.yes-continue=Sí, continúe
+can-we-ask.no-skip-this-question=No. Deseo saltar esta pregunta
+
+race-and-ethnicity.title=Raza y origen étnico
+race-and-ethnicity.what-races-or-ethnicities-do-you-identify-with=¿Con qué razas o grupos étnicos se identifica?
+race-and-ethnicity.select-all-that-apply=Seleccione todo lo que corresponda.
+race-and-ethnicity.native-american-or-alaska-native=Nativo americano o nativo de Alaska
+race-and-ethnicity.asian=Asiático
+race-and-ethnicity.black-or-african-american=Negro o afroamericano
+race-and-ethnicity.hispanic-latino-or-spanish=Hispano, latino o español
+race-and-ethnicity.middle-eastern-or-north-african=De Oriente Medio o África del Norte
+race-and-ethnicity.native-hawaiian-or-pacific-islander=Nativo de Hawaii o de las Islas del Pacífico
+race-and-ethnicity.white=Blanco
+race-and-ethnicity.some-other-race=Alguna otra raza o etnia
+race-and-ethnicity.write-your-race-or-ethnicity=Escriba su raza o etnia
+
+authorized-rep-communicate.do-you-want-your-helper-to-communicate-with-the-county-on-your-behalf=¿Prefiere que su representante autorizado se comunique con el condado o nación tribal en su nombre?
+authorized-rep-communicate.title=Representante Autorizado Comunicar
+authorized-rep-communicate.speak-for-you-in-an-interview=Que su representante hable por usted durante una entrevista
+authorized-rep-communicate.help-you-complete-forms=Ayudarlo a llenar un formulario
+authorized-rep-communicate.talk-to-a-service-provider=Hablar con un proveedor de servicios
+authorized-rep-speak-to-county.title=Representante autorizado para correspondencia y notificaciones
+authorized-rep-speak-to-county.do-you-want-your-helper-to-get-mail-and-notices-for-you=¿Desea que su representante autorizado reciba el correo y las notificaciones por usted?
+authorized-rep-speak-to-county.get-mail-about-your-benefits=Reciba correo sobre sus prestaciones
+authorized-rep-speak-to-county.receive-notices-by-mail-or-phone=Que su representante hable por usted durante una entrevista
+authorized-rep-spend-on-your-behalf.title=Que su representante autorizado gaste en su nombre
+authorized-rep-spend-on-your-behalf.do-you-want-your-authorized-rep-to-spend-your-benefits-on-your-behalf=¿Desea que su representante autorizado gaste sus beneficios en su nombre?
+authorized-rep-spend-on-your-behalf.get-their-own-EBT-card-that-is-connected-to-your-benefits=Que obtengan su propia tarjeta EBT que esté conectada a sus beneficios
+authorized-rep-spend-on-your-behalf.buy-things-for-you-with-their-card=Que le hagan compras con la tarjeta de usted
+authorized-rep-contact-info.title=Información de contacto del Representante Autorizado
+authorized-rep-contact-info.lets-get-your-authorized-reps-contact-information=Obtengamos la información de contacto de su representante autorizado
+authorized-rep-contact-info.we-need-to-send-this-information-to-your-county=Debemos enviar esta información a su condado o nación tribal.
+authorized-rep-contact-info.whats-their-name=¿Cómo se llama?
+authorized-rep-contact-info.whats-their-street-address=¿En qué calle vive?
+authorized-rep-contact-info.what-city-do-they-live-in=¿En qué ciudad vive?
+authorized-rep-contact-info.what-is-their-zip-code=¿Cuál es el código postal?
+authorized-rep-contact-info.what-is-their-phone-number=¿Cuál es su número de teléfono?
+
+job-builder.would-you-like-to-add-more-jobs=¿Le gustaría agregar más trabajos?
+job-builder.your-jobs=Sus trabajos
+job-builder.your-household-jobs=Sus trabajos de hogar
+job-builder.no-thats-it=No, es todo.
+job-builder.delete=eliminar
+job-builder.add-a-job=Agregar un trabajo
+job-builder.title=Trabajo/s
+
+warning-page.go-back-title=Advertencia de Regresar
+warning-page.no-data-title=Advertencia de Eliminar Todos Los Trabajos
+warning-page.going-back-will-take-you-to-the-beginning-of-the-jobs-section-where-you-will-start-over=Si hace clic en regresar, lo llevará al principio de la sección de trabajos, donde tendrá que empezar de nuevo.
+warning-page.is-that-ok=¿Está bien?
+warning-page.no-keep-id-rather-keep-going=No, prefiero continuar
+warning-page.nevermind-ill-keep-the-job=No, deje el trabajo.
+warning-page.yes-remove-the-job=Sí, elimine el trabajo
+warning-page.yes-go-back-to-the-start=Sí, regresar al principio
+warning-page.you-are-about-to-delete-your-job=Va a eliminar su trabajo en {0}.
+warning-page.you-are-about-to-delete-member-job=Va a eliminar el trabajo de {1} en {0}.
+warning-page.you-are-about-to-delete-household-member=Va a eliminar {0} como miembro del hogar.
+warning-page.nevermind-lets-keep-them=No, déjenlos.
+warning-page.yes-remove-them=Sí, eliminalos.
+warning-page.delete-household-member-warning=Advertencia de Eliminar Miembro del Hogar
+race-and-ethnicity.prefer-not-to-say=Prefiero no decirlo
+
+income-per-pay-period.title=Ingresos por período de pago
+income-per-pay-period.every-day=¿Cuánto dinero ha pagado este trabajo en los últimos 30 días?
+income-per-pay-period.every-week=¿Cuánto dinero paga este trabajo cada semana?
+income-per-pay-period.every-two-weeks=¿Cuánto dinero paga este trabajo cada dos semanas?
+income-per-pay-period.twice-a-month=¿Cuánto dinero paga este trabajo dos veces al mes?
+income-per-pay-period.every-month=¿Cuánto dinero paga este trabajo mensualmente?
+income-per-pay-period.it-varies=¿Cuánto dinero ha pagado este trabajo en los últimos 30 días?
+income-per-pay-period.provide-income-before-taxes-we-know-this-can-be-hard-to=Proporcionar ingresos antes de impuestos. Sabemos que esto puede ser difÃ­cil de calcular. Si no sabe la cantidad exacta, puede estimarla.
+
+privacy-policy.title=Política de Privacidad
+privacy-policy.privacy-policy=Política de Privacidad
+privacy-policy.minnesota-privacy-policy=<a class="h2 spacing-below-35" href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-3979-SPA">Política de privacidad de Minnesota</a>
+privacy-policy.subheader=Cómo usamos, compartimos, y protegemos su información
+privacy-policy.overviewp2=Solo usaremos su información personal para:
+privacy-policy.overviewp3=1. Ayudarle a obtener y mantener los beneficios en Minnesota que usted solicite en versiones futuras del Sitio ("Beneficios de Minnesota" en este documento se refiere a todos estos programas).
+privacy-policy.overviewp4=2. Sugerir otros servicios o programas de asistencia que puedan ser útiles. Solo usaremos su información personal para presentarle esos servicios o programas como una opción, pero nunca enviaremos su información personal a ningún otro servicio o programa sin su permiso.
+privacy-policy.overviewp5=No divulgaremos ni venderemos a su información personal a ningún tercero a propósito, excepto según lo dispuesto en esta política de privacidad.
+privacy-policy.overviewp6=Tomaremos todas las medidas razonables para proteger su información personal.
+privacy-policy.overview=Resumen General
+privacy-policy.info-we-collect=Información que recopilamos
+privacy-polcy.info-we-collect-0=Recopilamos y guardamos
+privacy-policy.info-we-collect1=Toda la información que proporcione a través del Sitio, incluido su nombre, dirección, información de contacto, número de seguro social, información financiera y la información similar de otras personas que incluya en su solicitud de beneficios de Minnesota
+privacy-policy.info-we-collect2=Copias de cualquier documento que cargue, como fotografías de su licencia de manejar, talones de pago, certificaciones de nacimiento, recibos de renta, etc.
+privacy-policy.info-we-collect3=Cualquier mensaje que nos envíe a través de SMS, correo electrónico, o chat en vivo
+privacy-policy.info-we-collect4=Cualquier respuesta o comentario que usted proporcione en respuesta a una encuesta que le enviamos
+privacy-policy.info-we-collect5=Además de la información que proporciona, automáticamente recopilamos y guardamos información sobre su visita al Sitio:
+privacy-policy.info-we-collect6=Dispositivo desde el cuál se conecta a la Internet
+privacy-policy.info-we-collect7=Dirección IP (una dirección IP o de protocolo de Internet es un número que se le da automáticamente a una computadora conectada a la Web)
+privacy-policy.info-we-collect8=Sistema operativo en su computadora e información sobre el navegador que utilizó cuando visitó el sitio
+privacy-policy.info-we-collect9=Fecha y hora de su visita.
+privacy-policy.info-we-collect10=Páginas que visitó
+privacy-policy.info-we-collect11=Dirección del sitio web que lo conectó con el Sitio (como google.com o bing.com)
+privacy-policy.info-we-collect12=Usamos esta información para comprender cómo se usa el Sitio, para mejorar el Sitio, y para monitorear el uso con fines de seguridad. Estos datos se guardan separadamente de la información personal que usted envía en la solicitud de Beneficios de Minnesota.
+privacy-policy.info-we-collect13=No recopilaremos información personal suya sin su conocimiento y consentimiento, excepto en algunas circunstancias limitadas como se describe en esta política.
+privacy-policy.info-we-collect14=Actualmente, conservamos todos los datos de forma indefinida, a menos que solicite específicamente que los eliminemos. Puede solicitar que sus datos sean eliminados por enviarnos un correo electrónico a <a href="mailto:help@mnbenefits.org">eliminemoshelp@mnbenefits.org.</a>
+privacy-policy.how-we-use-info=Cómo usamos su información
+privacy-policy.how-we-use-info1=Solo usamos su información personal para ayudarle a obtener y mantener los beneficios en Minnesota. Por ejemplo:
+privacy-policy.how-we-use-info2=Enviaremos su solicitud de Beneficios de Minnesota y los documentos al departamento correspondiente de su condado.
+privacy-policy.how-we-use-info3=Podemos recordarle que complete su entrevista telefónica y envíe documentos, según sus preferencias de contacto.
+privacy-policy.how-we-use-info4=Podemos brindarle apoyo continuo para ayudarle a mantener sus beneficios recordándole cuándo debe enviar cambios en los ingresos, completar su Informe Semestral, o completar su Aprobación Anual.
+privacy-policy.how-we-use-info5=Para proporcionar estos servicios, podemos acceder a una cuenta conectada a su caso en el sistema de su condado en línea.
+privacy-policy.how-we-use-info6=Le enviaremos un mensaje de confirmación cuando hayamos enviado correctamente su información a su condado. También podemos enviarle un mensaje si hay algún problema en enviar su información a su condado y se necesita información adicional. Fuera de esos casos:
+privacy-policy.how-we-use-info7=No le enviaremos un correo electrónico a menos que nosotros recibamos su consentimiento para comunicarnos con usted por correo electrónico en la aplicación o nos envíe un correo electrónico primero.
+privacy-policy.how-we-use-info8=No le enviaremos un mensaje de texto a menos que nosotros recibamos su consentimiento para recibir comunicación por mensaje de texto en la aplicación.
+privacy-policy.how-we-share-info=Cómo compartimos su información
+privacy-policy.how-we-share-info1=Una vez que envíe su solicitud de Beneficios de Minnesota en el Sitio, compartiremos esta información con la Agencia de Servicios Humanos (HSA) del condado donde vive. Cada condado de Minnesota tiene su propia HSA, que procesa las solicitudes de beneficios de Minnesota y administra sus beneficios. Una vez que la HSA recibe su información personal, está sujeta a sus respectivas políticas de privacidad.
+privacy-policy.how-we-share-info2=También divulgamos su información personal a los contratistas y organizaciones afiliadas que necesitan conocer la información para poder proporcionar los servicios del Sitio.
+privacy-policy.how-we-share-info3=Aprendemos y compartimos los comentarios que tiene en la aplicación, chat en vivo (Live Chat), SMS, correo electrónico y encuestas para mejor comprender la inscripción en los Beneficios de Minnesota a fin de reducir las barreras en el sistema de protección social. Esto puede incluir compartir su información con su condado para ayudarlo a brindarle un mejor servicio y mejorar los servicios que brindan. También puede incluir compartir citas anónimas en el curso de nuestro trabajo con nuestro socios.
+privacy-policy.how-we-share-info4=No compartimos su información personal con ninguna otra persona u organización, excepto en la medida mínima requerida por la ley.
+privacy-policy.how-we-protect-information=Cómo protegemos su información
+privacy-policy.how-we-protect-info1=La protección de su información personal es muy importante para nosotros y tomamos todas las medidas razonables para hacerlo. A continuación, presentamos algunas prácticas de seguridad específicas que utilizamos:
+privacy-policy.how-we-protect-info2=Cuando ingresa su información en nuestro sitio, encriptamos la transmisión de esa información utilizando la seguridad de la capa de transporte (TLS).
+privacy-policy.how-we-protect-info3=Aunque hacemos todo lo posible para proteger la privacidad de su información personal, no podemos garantizar una seguridad completa. La transmisión de información a través de Internet no es completamente segura. La entrada o el uso no autorizado, las fallas de hardware o software, y otros factores pueden comprometer la seguridad de la información del usuario en cualquier momento.
+privacy-policy.changes=Cambios
+privacy-policy.changes1=Podemos cambiar esta Política De Privacidad de vez en cuando. Consulte esta página frecuentemente para obtener actualizaciones, ya que su uso continuo del Sitio después de cualquier cambio en esta Política De Privacidad constituirá su aceptación de los cambios.
+privacy-policy.effective-date=Fecha Efectiva
+privacy-policy.effective-date1=Esta versión de la política es efectiva a partir del 1 de Agosto, 2020.
+privacy-policy.questions=Preguntas
+privacy-policy.questions1=Si tiene alguna pregunta, comentario, duda o queja sobre el Sitio, por favor contáctenos por correo electrónico: <a href="mailto:help@mnbenefits.org">help@mnbenefits.org</a>
+privacy-policy.questions6=Haremos todo lo posible para resolver este problema.
+
+faq.frequently-asked-questions=Preguntas Frecuentes
+faq.faq=Preguntas y Respuestas Frecuentes (en inglés: FAQ)
+faq.what-is-mnbenefits=¿Qué es MNbenefits.mn.gov y puedo utilizarlo?
+faq.what-is-mnbenefits-1=MNbenefits es una nueva aplicación de beneficios compatible con dispositivos móviles para los habitantes de Minnestota. Está disponible para todos los condados y naciones tribales del estado.
+faq.what-is-mnbenefits-2=En MNbenefits, puede solicitar:<ul class="list--bulleted"><li> Cupones para Alimentos (SNAP),</li><li> Programas de Asistencia en Efectivo como el Programa de Inversión Familiar de Minnesota (por sus siglas en inglés: MFIP), y Asistencia General,</li><li> Asistencia de Emergencia,</li><li> Programa de Asistencia de Cuidado Infantil,</li><li> Apoyo para Vivienda/Vivienda en Grupos (por sus siglas en inglés: GRH)</li></ul>
+faq.i-need-help-now=Necesito ayuda ahora mismo. ¿Qué puedo hacer?
+faq.i-need-help-now-1=Para obtener asistencia alimenticia inmediata, <a href="https://www.hungersolutions.org/find-help/" target="_blank" rel="noopener noreferrer">encuentre su banco de alimentos local</a>. También puede llamar al 2-1-1 o <a href="https://www.211unitedway.org/" target="_blank" rel="noopener noreferrer">visitar el 2-1-1 en lí­nea</a>, una lí­nea de ayuda de recursos para obtener remisiones para el cuidado de niños, viviendas o refugios a precios accesibles, asistencia en efectivo, atención médica y más.
+faq.i-need-help-now-2=Las personas embarazadas y las familias con niños pequeños (de 0 a 8 años) pueden utilizar <a href="https://helpmeconnect.web.health.state.mn.us/HelpMeConnect/" target="_blank" rel="noopener noreferrer">Help Me Connect</a> para encontrar servicios en sus comunidades locales que permitan a las familias estar sanas y seguras.
+faq.how-do-i-contact-my-county=No he tenido noticias con relación a mi solicitud. ¿Cómo puedo contactar a mi condado o nación tribal para obtener una actualización?
+faq.sometimes-there-can-be-delays=A veces, puede haber demoras. Si no ha tenido noticias sobre su solicitud, sepa que todavía el trabajo está en marcha. Contacte a su condado o nación tribal antes de presentar otra solicitud.
+faq.you-can-find-a-full-list-of-county=Aquí puede encontrar <a href="https://mn.gov/dhs/general-public/about-dhs/contact-us/county-and-tribal-nation-offices/" target="_blank" rel="noopener noreferrer"> una lista completa de los números telefónicos del condado y de la nación tribal</a>. Mnbenefits.mn.gov no tiene acceso al estado de su caso.
+faq.i-submitted-my-application=Ya envié mi solicitud en línea. ¿Cuáles son los siguientes pasos que debo seguir?
+faq.i-submitted-my-application-1=Tendrá que<strong> realizar una entrevista </strong>con un trabajador si ha solicitado alguno de estos programas: <ul class="list--bulleted"><li>Cupones de alimentos (SNAP)</li><li>Programas de dinero en efectivo</li><li>Asistencia de Emergencia</li><li>Ayuda para vivienda (GRH)</li></ul>La entrevista puede realizarse por teléfono o en persona.
+faq.i-submitted-my-application-2=Si <strong>sólo</strong> solicitó el Programa de Asistencia para el Cuidado de Niños (CCAP), <strong>no</strong> necesitará tener una entrevista. Es posible que necesite proporcionar documentos adicionales.
+faq.i-submitted-my-application-3=Revise su correspondencia regularmente y conteste todas las llamadas de teléfono que reciba, incluso llamadas de números desconocidos o bloqueados. Su condado o nación tribal se comunicará con usted para indicarle los próximos pasos para finalizar su solicitud.
+faq.i-submitted-my-application-4=También lo invitamos a llamar directamente a su condado o nación tribal para consultar por el estado de su caso. Aquí puede encontrar <a href="https://mn.gov/dhs/general-public/about-dhs/contact-us/county-and-tribal-nation-offices/" target="_blank" rel="noopener noreferrer">una lista completa de los números telefónicos del condado y de la nación tribal</a>.
+faq.i-submitted-my-application-5=Puede enviar los documentos de verificación directamente a su condado o nación tribal. Para hacerlo, haga clic en el botón ‘Dargar documentos’ en nuestra página principal o <a href="pages/readyToUploadDocuments" target="_blank" rel="noopener noreferrer">cargue los documentos aquí.</a> <a href="documents/send-documents-to-your-county.pdf" target="_blank" rel="noopener noreferrer">Encontrar más maneras de enviar documentos a su condado o nación tribal.</a>
+faq.how-quickly-will=¿Qué tan pronto podré obtener los beneficios?
+faq.how-quickly-will-1=<strong>Cupones de alimentos (SNAP)</strong>: Su condado o nación tribal tiene 30 días para aprobar o rechazar su caso. Algunas personas con ingresos muy bajos pueden obtener servicios acelerados, y sus casos deberán ser procesados en 7 días. Debido a la pandemia, los condados están recibiendo un volumen de solicitudes mayor de lo normal. Es posible que la respuesta tarde más de lo habitual. Si ya han pasado más de dos semanas y no ha recibido ninguna correspondencia o llamada telefónica de parte su condado o nación tribal, o desea comunicarse con ellos directamente, <a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-5207-ENG" target="_blank" rel="noopener noreferrer">podrá encontrar su número de teléfono aquí­</a>.
+faq.how-can-i-apply-for-healthcare=¿Cómo puedo solicitar cobertura de seguro médico?
+faq.how-can-i-apply-for-healthcare-1=<strong><i>Solicite con la ayuda de un navegador</i></strong>
+faq.how-can-i-apply-for-healthcare-2=Solicitar cobertura de seguro médico puede ser difícil.
+faq.how-can-i-apply-for-healthcare-3=Los navegadores son expertos que pueden ayudarle a entender sus opciones, completar su solicitud e inscribirse en la cobertura del seguro médico. <a href="https://www.mnsure.org/help/find-assister/find-navigator.jsp" id="assistor-directory" target="_blank" rel="noopener noreferrer">Busque en el Directorio de Asistentes</a> para encontrar un navegador en su área. Los servicios de los navegadores certificados por MNsure son siempre gratuitos.
+faq.how-can-i-apply-for-healthcare-4=<strong><i>Solicite por su cuenta</i></strong>
+faq.how-can-i-apply-for-healthcare-5=Dependiendo de su situación, puede solicitar en línea o llenar una solicitud en papel.
+faq.how-can-i-apply-for-healthcare-6=<strong>Solicite en línea en MNsure.org:</strong> La mayoría de las personas pueden solicitar cobertura de salud directamente en MNsure.org. Tendrá que <a href="https://auth.mnsure.org/RIDP/?account_type=Individual" id="create-account" target="_blank" rel="noopener noreferrer">crear una cuenta </a>o <a href="https://auth.mnsure.org/login/Login.jsp" id="existing-account" target="_blank" rel="noopener noreferrer">iniciar sesión en una cuenta existente</a> para comenzar una solicitud.
+faq.how-can-i-apply-for-healthcare-7=<strong>Solicite la solicitud en papel para determinadas poblaciones:</strong> Algunas personas tendrán que rellenar una solicitud <a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-3876-ENG" id="paper-application" target="_blank" rel="noopener noreferrer">en papel</a> y enviarla por correo a su condado. Utilice la solicitud en papel si todas las personas que solicitan cobertura seguro de salud cumplen al menos uno de estos requisitos:
+faq.how-can-i-apply-for-healthcare-8=<ul class="list--bulleted"><li>Mayor de 65 años de edad</li><li> Únicamente solicita asistencia para los costos de Medicare</li><li>Niños en hogares de crianza temporal</li><li>Persona de 21 años de edad o mayor sin dependientes y con cobertura de Medicare</li>Solicitud para Asistencia Médica para una Persona con Empleo con Incapacidades<li></ul>
+faq.what-benefits-programs=¿Para qué programas de beneficios califico?
+faq.what-benefits-programs-1=Puede utilizar la herramienta de selección <a href="http://bridgetobenefits.org/Home2" target="_blank" rel="noopener noreferrer">Bridge to Benefits</a> para ver a qué programas de prestaciones puede ser elegible. Se le harán 12 preguntas, entre las que se incluyen sus ingresos estimados antes de impuestos. Si vive con otros miembros del hogar, tendrá que incluir también sus ingresos estimados.
+faq.what-benefits-programs-2=Puede calificar para:
+faq.what-benefits-programs-3=<ul class="list--bulleted"><li>Asistencia de electricidad: Ayuda a pagar los gastos de electricidad y recursos adicionales.</li><li>Comidas escolares: Proporciona comidas escolares gratuitas para los niños. Su familia puede calificar automáticamente si recibe SNAP, MFIP u otros programas. </li><li>Programa para Mujeres, Bebés y Niños (WIC): Ayuda a las mujeres embarazadas, a las nuevas madres, a los bebés y a los niños pequeños a comer bien y a mantenerse sanos. Usted puede calificar automáticamente si recibe Asistencia Médica, SNAP, MFIP, Comidas Escolares u otros beneficios.</li><li>Becas de Aprendizaje Temprano: Ayuda a cubrir el costo de los servicios preescolares para niños de 4 años o menos. Usted puede calificar automáticamente si recibe SNAP, MFIP, Head Start, Comidas Escolares, u otros beneficios. </li><li>Créditos fiscales: El crédito fiscal por ingresos ganados y el crédito para familias trabajadoras proporcionan créditos fiscales a las familias con bajos ingresos. Puede reclamarlos para años anteriores si aún no lo ha hecho. Obtenga más información en <a href="https://www.getyourrefund.org/" target="_blank" rel="noopener noreferrer">GetYourRefund.org</a>. Algunas familias con hijos menores de 17 años también pueden recibir nuevos pagos de Crédito Fiscal por Hijos. Puede obtener más información sobre cómo reclamar esta nueva prestación <a href="https://www.getctc.org" target="_blank" rel="noopener noreferrer">aquí</a>.</li><li>Cobertura de seguro de salud: Consulte <a href="#how-to-apply-for-healthcare">la respuesta sobre asistencia de seguro de salud.</a></li></ul>
+faq.do-i-qualify-for-food=¿Califico para Cupones para Alimentos (SNAP)?
+faq.do-i-qualify-for-food-1=La elegibilidad de SNAP se basa en sus ingresos y en los detalles de su hogar. <a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-3529-ENG" target="_blank" rel="noopener noreferrer">Consulte aquí los niveles de ingresos para varios tamaños de hogares</a>.
+faq.i-need-to-submit-a-form=Necesito enviar un formulario, pero no encuentro el correcto. ¿Dónde puedo conseguirlo?
+faq.i-need-to-submit-a-form-1=<a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-2952-ENG" target="_blank" rel="noopener noreferrer">Formulario de verificación de vivienda del DHS</a>: Utilice este formulario para informar de cuánto gasta en gastos de vivienda.
+faq.i-need-to-submit-a-form-2=<a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-2146-ENG" target="_blank" rel="noopener noreferrer">Autorización del DHS para la divulgación de información sobre el empleo</a>: Utilice este formulario para informar sobre sus ingresos. También puede utilizar este formulario para conceder permiso a su condado para ponerse en contacto con su empleador a nombre suyo.
+faq.i-need-to-submit-a-form-3=<a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-3336-ENG " target="_blank" rel="noopener noreferrer">Formulario de declaración de trabajo por cuenta propia del DHS:</a> Utilice este formulario para informar de cualquier ingreso que obtenga de un trabajo por cuenta propia (es decir, un trabajo por encargo como, por ejemplo, conducir para Uber).
+faq.i-need-to-submit-a-form-4=<a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-2402-ENG" target="_blank" rel="noopener noreferrer">Formulario de notificación de cambios del DHS</a>: Utilice este formulario para informar a su condado o nación tribal sobre cambios en su situación.
+faq.i-need-to-send-verification-docs=Tengo que enviar los documentos de verificación (comprobantes) a mi condado o nación tribal. ¿A dónde los enví­o?
+faq.i-need-to-send-verification-docs-1=Puede enviar los documentos de verificación directamente a su condado o nación tribal. Para hacerlo, haga clic en el botón ‘Dargar documentos’ en nuestra página principal o <a href="pages/readyToUploadDocuments" target="_blank" rel="noopener noreferrer">cargue los documentos aquí.</a> <a href="documents/send-documents-to-your-county.pdf" target="_blank" rel="noopener noreferrer">Encontrar más maneras de enviar documentos a su condado o nación tribal.</a>
+faq.can-I-use-mnbenefits-in-my-county=¿Puedo utilizar MNbenefits en mi condado o nación tribal?
+faq.the-application-is-available-for-minnesotans=¡Sí! La solicitud de MNbenefits está disponible para los habitantes de Minnesota que viven en todas las naciones tribales y condados.
+
+support-services.title=Servicios de Apoyo
+support-services.mental-health=Ayuda en caso de crisis de salud mental
+support-services.housing-assistance=Asistencia para vivienda, atención médica u otro tipo de ayuda
+support-services.food-support=Apoyo Alimentario
+support-services.child-care-assistance=Asistencia para el cuidado infantil
+support-services.alcohol-and-substance=Recursos sobre el consumo de alcohol y sustancias
+support-services.get-help=Obtenga ayuda ahora
+support-services.mental-health-1=Ayuda en caso de crisis de salud mental
+support-services.mental-health-2=Llame o envíe un mensaje de texto al 988.
+support-services.looking-for-help-1=¿Necesita ayuda ahora mismo?
+support-services.looking-for-help-2=Llame al 211, envíe un mensaje de texto con su código postal al 898-211, o visite el sitio web del <a href="https://www.es.211.org/">211</a> para obtener referidos sobre el cuidado infantil, vivienda asequible o refugio, asistencia en efectivo, atención médica y más.
+support-services.find-food-1=Encontrar alimentos
+support-services.find-food-2=Para obtener alimentos, comuníquese con Minnesota Food HelpLine al 888-711-1151 o visite <a href="https://www.hungersolutions.org/programs/mn-food-helpline/en-espanol/">Hunger Solutions</a> para obtener más recursos.
+support-services.find-food-3=Para apoyo alimentario inmediato, <a href="https://www.hungersolutions.org/find-help/">busque su banco de alimentos local.</a>
+support-services.find-food-4=Las personas embarazadas y las familias con niños pequeños (de 0 a 8 años) pueden usar <a href="https://helpmeconnect.web.health.state.mn.us/HelpMeConnect/" hreflang="es">Help Me Connect</a> para encontrar servicios en sus comunidades locales que ayuden a las familias a mantenerse saludables y ahorrar.
+support-services.child-care-assistance-1=Asistencia para el cuidado infantil
+support-services.child-care-assistance-2=Para cuidado infantil, llame a Child Care Aware al 888-291-9811, o visite <a href="https://www.parentaware.org/" hreflang="es">Parent Aware</a> para obtener más información.
+support-services.alcohol-and-substance-1=Recursos sobre el consumo de alcohol y sustancias
+support-services.alcohol-and-substance-2=Visite la página <a href="https://mn.gov/dhs/people-we-serve/adults/health-care/alcohol-drugs-addictions/programs-and-services/">Alcohol, drugs and addictions: programs and services</a> del Departamento de Servicios Humanos de Minnesota (Minnesota Department of Human Services, DHS) para conocer los próximos pasos para recibir tratamiento y las opciones de financiamiento para el tratamiento del trastorno por consumo de sustancias.
+support-services.alcohol-and-substance-3=Visite <a href="https://fasttrackermn.org/">FastTrackerMN</a> y <a href="https://licensinglookup.dhs.state.mn.us/">Licensing Lookup</a> para encontrar centros de tratamiento que se ajusten a sus necesidades.
+support-services.immigration-1=¿Busca ayuda legal o de inmigración?
+support-services.immigration-2=Visite el sitio web <a href="https://www.lawhelpmn.org/es">LawHelpMN.org</a> para encontrar más recursos sobre cómo obtener ayuda con sus necesidades legales o de inmigración.
+
+household-member-info.title=Compañero/a de casa: Información Personal
+household-member-info.add-a-person-who-lives-with-you=Agregue la primera persona en su familia
+household-member-info.whats-their-first-name=¿Cuál es su primer nombre?
+household-member-info.legally-as-it-appears-on-their-id=Legalmente como aparece en su identificación.
+household-member-info.whats-their-last-name=¿Cuál es su apellido?
+household-member-info.whats-their-middle-name=¿Cuál es el segundo nombre de esta persona?
+household-member-info.list-any-other-names-they-have-gone-by-in-the-past=Enumere todos los nombres que hayan utilizado en el pasado.
+household-member-info.when-were-they-born=Fecha de nacimiento
+household-member-info.whats-their-martial-status=¿Cuál es su estado civil?
+household-member-info.whats-their-sex=¿Cuál es su sexo?
+household-member-info.legally-as-it-appears-on-their-id-we-regret-that-this-question-is-limited=Legalmente como aparece en su identificación. Lamentamos que esta pregunta es limitada.
+household-member-info.have-they-lived-in-minnesota-their-whole-life=¿Se mudaron a Minnesota dentro del año pasado?
+household-member-info.when-did-they-move-to-minnesota=¿Cuando se mudaron a Minnesota?
+household-member-info.what-state-did-they-move-from=¿De que estado se mudaron?
+household-member-info.whats-their-relationship-to-you=¿Cuál es su relación a usted?
+household-member-info.select-relationship=Seleccione su relación con las siguientes personas
+household-member-info.spouse=Mi cónyuge (por ejemplo, esposa, marido)
+household-member-info.partner=Mi pareja (por ejemplo, novia, novio)
+household-member-info.child=Mi hijo
+household-member-info.step-child=Mi hijastro
+household-member-info.brother-or-sister=Mi hermano o hermana
+household-member-info.step-brother-or-sister=Mi hermanastro o hermanastra
+household-member-info.half-brother-or-sister=Mi medio hermano o media hermana
+household-member-info.parent-or-guardian=Mi padre o guardián
+household-member-info.grandparent=Mi abuelo o abuela
+household-member-info.childs-parent=El padre o madre de mi hijo/a
+household-member-info.aunt-or-uncle=Mi tía o tío
+household-member-info.niece-or-nephew=Mi sobrina o sobrino
+household-member-info.roommate=Mi compañero de cuarto
+household-member-info.friend=Mi amigo/a
+household-member-info.grandchild=Mi nieto/a
+household-member-info.other=Otros
+household-member-info.what-type-of-assistance-would-they-like-to-apply-for=¿Qué tipo de beneficios desea solicitar?
+household-member-info.whats-their-social-security-number=¿Cuál es su número de seguro social?
+household-member-info.if-they-have-one-we-strongly-recommend-including-it-here=Si lo tienen, recomendamos mucho que lo incluyan aquí. El SSN no es necesario para los no ciudadanos o los miembros de la familia que no solicitan prestaciones. <a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-3979-SPA" target="_blank" rel="noopener noreferrer">Lea la Ley de Privacidad</a>.
+
+household-race-and-ethnicity.title=Raza y etnia del hogar
+household-race-and-ethnicity.header=¿Con qué razas o etnias se identifica {0}?
+household-race-and-ethnicity.prefer-not-to-say=Prefiero no decirlo
+
+household-redirect-page.header=Volver eliminará a todos los miembros de tu hogar y te llevará de regreso a la sección de hogar donde empezarás de nuevo.
+household-redirect-page.is-that-ok=¿Está bien?
+address-validation.title=Validación de su dirección
+address-validation.suggested-address=Dirección sugerida
+address-validation.address-you-entered=Dirección que escribió
+address-validation.check-your-mailing-address=Revisa su dirección postal
+address-validation.check-your-address=Compruebe su dirección
+address-validation.make-sure-your-mailing-address-is-correct=Asegúrese que su dirección postal es correcta
+address-validation.make-sure-your-address-is-correct=Asegúrese que su dirección es correcta
+address-validation.we-updated-the-address-you-entered=Actualizamos la dirección que usted escribió. Si es correcta, por favor use la dirección sugerida.
+address-validation.we-couldnt-find-your-address=No nos fue posible encontrar su dirección. Para asegurarse de recibir la correspondencia de su condado o nación tribal podrá editar su dirección o continuar.
+address-validation.edit-my-address=Corregir mi dirección
+address-validation.use-this-address=Use esta dirección
+
+county-validation.title=Validación de su condado
+county-validation.suggested-county=Condado sugerido
+county-validation.county-you-entered=Condado ingresado por usted
+county-validation.check-your-county=Compruebe su condado
+county-validation.make-sure-your-county-is-correct=Asegúrese de que su condado sea el correcto
+county-validation.we-updated-the-county-you-entered=Con base en la información de la dirección que ingresó, actualizamos el condado que seleccionó. Si es correcto, use el condado sugerido.
+county-validation.we-couldnt-find-your-county=No pudimos encontrar su condado usando la dirección que ingresó. Para asegurar que su solicitud se envíe al condado o a la nación tribal correcta, puede editar su condado o seguir adelante.
+county-validation.edit-my-county=Editar mi condado
+county-validation.use-this-county=Usar este condado
+
+email.you-submitted=Usted envió su solicitud de MNbenefits y {0} la recibió.
+email.whats-next=<strong>Que Sigue?</strong>
+email.your-next-steps=Sus próximos pasos en el proceso de solicitud pueden incluir cargar documentos de verificación y estar disponible para llamadas y comunicaciones de su trabajador.
+email.upload-your-documents=<strong>Cargue sus documentos.</strong>
+email.do-you-want-to-send-in-documents=¿Quiere enviar documentos o pruebas directamente a su condado o nación tribal?  Vaya a <a href="https://mnbenefits.mn.gov/?utm_medium=confirmationemail#later-docs-upload" target="_blank" rel="noopener noreferrer">MNbenefits.mn.gov</a> y haga clic en "Cargar documentos".  Los documentos más solicitados son identificación (ID), recibos de pago de su trabajo o prueba de pérdida reciente de trabajo y prueba de alquiler o costos de alojamiento.
+email.allow-time-for-a-worker=<strong>Permita tiempo para que un trabajador revise su solicitud.</strong>
+email.SNAP-expedited=Su solicitud y documentos serán revisados por su {0}. Dentro de los próximos 5 días, espere una llamada telefónica o una carta por correo de un trabajador de elegibilidad.<br><br>El tiempo que lleva revisar las solicitudes puede variar. Si no ha recibido respuesta sobre su solicitud dentro de 7 días, comuníquese con {1} antes de enviar otra solicitud.
+email.CCAP-expedited=Su solicitud y documentos serán revisados por su {0}. Si sólo solicitó el Programa de Asistencia para el Cuidado de Niños (CCAP), no necesitará tener una entrevista.  Dentro de los próximos 5 días, espere una llamada telefónica o una carta por correo de un trabajador de elegibilidad.<br><br>El tiempo que lleva revisar las solicitudes puede variar. Si no ha recibido respuesta sobre su solicitud dentro de 7 días, comuníquese con {1} antes de enviar otra solicitud.
+email.not-expedited=Su solicitud y documentos serán revisados por su {0}. El tiempo que lleva revisar las solicitudes puede variar.<br><br>Espere que un trabajador de elegibilidad se comunique con usted por teléfono o correo con información sobre sus próximos pasos. Si no ha recibido respuesta sobre su solicitud, sepa que el trabajo aún está en progreso.<br><br>Antes de enviar otra solicitud, comuníquese con {1}.
+email.need-help-now=<strong>¿Necesita ayuda ahora?</strong>
+email.mental-health-crisis=Si se encuentra en una crisis de salud mental, llame o envíe un mensaje de texto al 988.<br><br>Para recibir ayuda de alimentos, vivienda, ayuda médica y de otro tipo, puede llamar al 211, o enviar un mensaje de texto con su código postal al 898-211, o visitar <a href="https://www.211.org/" target="_blank" rel="noopener noreferrer">https://www.211.org/</a>.  <br><br>Si necesita ayuda adicional para acceder a los alimentos, comuníquese con la Línea de Ayuda Alimentaria de Minnesota al 888-711-1151 o <a href="https://www.hungersolutions.org/" target="_blank" rel="noopener noreferrer">Hungersolutions.org</a>.
+email.need-help-now=<strong>¿Necesita ayuda ahora?</strong>
+email.have-other-questions=<strong>¿Tienes preguntas?</strong>
+email.visit-faqs=Visite a <a href="https://mnbenefits.mn.gov/faq" target="_blank" rel="noopener noreferrer">MNbenefits en las preguntas frecuentes</a>.
+
+email.subject=Hemos recibido su solicitud de MNbenefits
+email.next-steps-subject=Proximos pasos: Su solicitud de MNbenefits
+email.client-body=Hemos recibido su solicitud de Minnesota Benefits.<br><br>Su solicitud fue enviada a {3} en {4}.<br><br>Número de confirmación: <strong>#{0}</strong><br>Estado de la solicitud: <strong>En revision</strong>{1}<br><br>{2}
+email.if-you-want-an-update-call-your-county=Si desea una actualizaciÃ³n de su caso, por favor llame al condado o naciÃ³n tribal mencionado anteriormente.
+email.confirmation-email-doc-recs=<strong>Documentos de verificación:</strong><br>Si necesita presentar documentos de verificación para su caso, puede <a href="https://mnbenefits.mn.gov/?utm_medium=confirmationemail#later-docs-upload" target="_blank" rel="noopener noreferrer">volver a MNbenefits.mn.gov</a> para subir los documentos en cualquier momento.<br>Es posible que tenga que compartir los siguientes documentos:<br><ul>{0}</ul>
+email.document-recommendation-email=Recuerde subir los documentos en <a href="https://mnbenefits.mn.gov/?utm_medium=confirmationemail#later-docs-upload" target="_blank" rel="noopener noreferrer">MNbenefits.mn.gov</a> para respaldar su solicitud de MN Benefits. Puede usar su teléfono para tomar o subir fotos, o usar su computadora para subir documentos.<br>Si los tiene, debe subir los siguientes documentos:<br><ul>{0}</ul>Si ya ha subido estos documentos, puede ignorar este recordatorio.
+email.document-recommendation-email-subject=[Acción requerida] Cargue documentos a su solicitud de MNbenefits.
+email.resubmit-email=Debido a un problema técnico, este archivo MNbenefits no se envió a la bandeja de entrada de MNIT. En cambio, lo compartimos aquí. Es {0}.
+
+county-to-instructions.generic-client=Esta solicitud ha sido enviada a {0} con la información que usted ha proporcionado. Algunas partes de esta solicitud estarán en blanco. Un trabajador del condado se pondrá en contacto con usted si se necesita información adicional.\n\nPara obtener más ayuda, puede llamar al {1}.
+county-to-instructions.generic-caseworker=This application was submitted by a resident at MNbenefits.mn.gov. MNbenefits sent this application to {0}. This PDF contains a completed Combined Application Form (CAF) or Child Care Assistance Program Application (CCAP), ready for processing. If you have any questions, please contact your supervisor. If you have any feedback on the MNbenefits application, please email the MNbenefits product team at mnbenefits@state.mn.us.
+
+error.title=Error
+error.something-went-wrong=¡Algo no funcionó!
+error.something-went-wrong-on-our-end=Disculpe. Algo no funcionó de nuestra parte. Intente regresar a la página anterior o a la página de inicio.
+error.return-home=Vuelva a la página de inicio
+
+error-session-timeout.title=Tiempo de espera
+error-session-timeout.your-session-ended=Lo sentimos, su sesión ha terminado.
+error-session-timeout.expired=Su sesión ha terminado porque estuvo inactiva durante una hora. Esto se hace para proteger su información.
+error-session-timeout.next=Tendrá que volver a ingresar para presentar su solicitud.
+error-session-timeout.return-home=Vuelva a la página principal (Home)
+
+error-upload-timeout.title=Doc Upload Timeout
+error-upload-timeout.your-session-ended=Tiempo de espera para cargar el documento (Doc Upload Timeout)
+error-upload-timeout.expired=Su sesión para cargar el documento ha terminado. No se preocupe, no tiene que volver a presentar la solicitud. ¡Su solicitud ya ha sido enviada!
+error-upload-timeout.next=Para enviar sus documentos, vuelva a la página principal y haga clic sobre el botón de "cargar documentos" ("upload documents").
+error-upload-timeout.submit-documents=Enviar documentos
+
+hc-error-upload-timeout.expired=Su sesión ha terminado porque estuvo inactiva durante una hora. Esto se hace para proteger su información.
+hc-error-upload-timeout.next=Tendrá que empezar de nuevo para presentar sus documentos de renovación.
+
+assets.title=Sus bienes
+assets.does-any-one-in-your=¿Alguien en su hogar cuenta con alguno de los siguientes?
+assets.do-you-have-any=¿Tiene alguno de estos recursos?
+assets.select-all-that-apply=Seleccione todo lo que corresponda.
+assets.cash=Efectivo
+assets.bank-account=Cuentas bancarias<span style="font-weight: normal;"> (como cuenta de ahorros o de cheques, etc.)</span>
+assets.electronic-payment=Tarjetas de pago electrónico <span style="font-weight: normal;">(tarjetas de débito como Reliacard, tarjetas de Direct Express, etc.)</span>
+assets.a-vehicle=Un vehículo
+assets.stocks-bonds-401k=Acciones, bonos o cuentas de jubilación
+assets.real-estate=Bienes raíces (sin contar su propia casa)
+assets.more-than-1-million-in-family-assets=Más de $1 millón en bienes familiares
+assets.none-of-the-above=Ninguno de los anteriores
+assets.assets-include-cash-bank-accounts=Los bienes incluyen efectivo, cuentas bancarias, vehículos, inversiones y bienes raíces (además de su casa) de su familia.<br><br><b> No incluyen</b> el valor de su vivienda, sus pertenencias personales o bienes relacionados con su trabajo independiente que solo se emplean para fines empresariales.
+
+business-ownership-asset-source.title = Quién tiene participación en una empresa
+business-ownership-asset-source.who-has=Quién tiene participación en una empresa
+business-ownership-asset-source.choose-whoever-is-listed=Seleccione a la persona que aparece en documentos legales. Si se trata de un bien en copropiedad, seleccione a ambas personas.
+
+investments.title=Inversiones
+investments.do-you-have-any-stocks-bonds-or-a-401k=¿Tiene acciones, bonos o un 401k?
+investments.household-stocks=¿Alguien en su hogar tiene acciones, bonos o un 401k?
+investments.tell-us-which-you-have=¿Qué tipo de cuentas de inversión tiene?
+investments.tell-us-which-types-there-are=Díganos de qué tipo de cuentas se trata.
+investments.select-all-that-apply=Seleccione todo lo que corresponda.
+
+investments.stocks=Acciones
+investments.bonds=Bonos
+investments.rsa=Cuentas de jubilación
+
+ebt.scam.alert=<strong>ALERTA DE FRAUDE DE SNAP:</strong> Proteja su tarjeta EBT y beneficios SNAP de los fraudes. MNbenefits no lo contactará en relación con su tarjeta EBT por mensaje de texto.  <a class="link--alert-banner" href="https://dcyf.mn.gov/ebt-card " target="_blank">Obtenga más información aquí.</a>
+
+hc-privacy-notices.privacy-notices=Notificaciones de privacidad
+hc-privacy-notices.please-review-the-privacy-notices-below-before-you-continue=Por favor, revise la notificaciones de privacidad siguientes antes de continuar.
+hc-privacy-notices.collection-of-your-private-data=Recopilación de sus datos privados
+hc-privacy-notices.the-minnesota-department-of-human-services-DHS-collects=El Departamento de Servicios Humanos (DHS) de Minnesota recopila su información privada en esta solicitud para verificar si es elegible para nuestros programas y por las razones que se mencionan en la <a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-4839E-ENG" target="_blank" rel="noopener noreferrer">Notificación de prácticas de privacidad del DHS (DHS Notice of Privacy Practices)</a>.
+hc-privacy-notices.additionally-your-information-may-be-released=Además, su información puede ser divulgada a las autoridades policiales, a personas que la necesitan para cumplir con su trabajo o que están autorizadas por la ley estatal o federal, en cumplimiento de una orden de tribunal o con el consentimiento de usted por escrito. 
+hc-privacy-notices.you-can-refuse-to-provide-this-information=Usted puede negarse a dar esa información, pero, sin ella, el DHS no puede determinar si es elegible para nuestros programas y no podrá recibir los servicios.  Si nos da información errónea intencionalmente, puede ser investigado y acusado de fraude.
+hc-privacy-notices.the-DHS-notice-of-privacy-practices-contains-more=El enlace <a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-4839E-ENG" target="_blank" rel="noopener noreferrer">Notificación de prácticas de privacidad del DHS (DHS Notice of Privacy Practices)</a> da más detalles sobre la manera en la que el DHS usa y divulga su información privada.
+
+hc-privacy-notices.collection-of-your-social-security-number=Recopilación de su número de seguro social
+hc-privacy-notices.DHS-is-required-by-law-to-collect-your-social-security-number=Por ley, el DHS tiene que solicitar su número del seguro social (SSN) para ayudarlo a obtener asistencia médica, ciertos tipos de ayuda financiera o servicios de cumplimiento con la manutención para menores. (42 C.F.R. § 435.910, Minn. Stat. § 256L.04, 42 U.S.C. § 666).
+hc-privacy-notices.DHS-also-needs-your-SSN-to-verify-your-identity=El DHS también necesita su SSN para verificar su identidad, evitar la duplicación de beneficios estatales y federales y cotejar los datos de la computadora con los de otras agencias para verificar su ingreso, recursos y otra información que puede afectar su elegibilidad o beneficios. 
+hc-privacy-notices.more-details-including-a-list-of-circumstances=Puede ver más detalles, inclusive una lista de circunstancias en las que no necesita dar su número de seguro social (SSN), en la <a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-4839E-ENG" target="_blank" rel="noopener noreferrer">Notificación de prácticas de privacidad del DHS (DHS Notice of Privacy Practices)</a>.
+hc-privacy-notices.what-are-your-rights-regarding-the-information=¿Cuáles son sus derechos con respecto a la información que tenemos sobre usted?  Ingrese a <a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-4839E-ENG" target="_blank" rel="noopener noreferrer">Notificación de prácticas de privacidad del DHS (DHS Notice of Privacy Practices)</a>.
+hd-privacy-notices.what-are-our-responsibilities=¿Cuáles son nuestras responsabilidades? Ingrese a <a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-4839E-ENG" target="_blank" rel="noopener noreferrer">Notificación de prácticas de privacidad del DHS (DHS Notice of Privacy Practices)</a>.
+
+document-submit-confirmation.yes-submit-and-wait=Enviando... espere por favor.
