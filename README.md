@@ -1,57 +1,9 @@
-past-benefit-details.state.AL=AL - Alabama
-past-benefit-details.state.AK=AK - Alaska
-past-benefit-details.state.AS=AS - American Samoa
-past-benefit-details.state.AZ=AZ - Arizona
-past-benefit-details.state.AR=AR - Arkansas
-past-benefit-details.state.CA=CA - California
-past-benefit-details.state.CO=CO - Colorado
-past-benefit-details.state.CT=CT - Connecticut
-past-benefit-details.state.DE=DE - Delaware
-past-benefit-details.state.DC=DC - District of Columbia
-past-benefit-details.state.FL=FL - Florida
-past-benefit-details.state.GA=GA - Georgia
-past-benefit-details.state.GU=GU - Guam
-past-benefit-details.state.HI=HI - Hawaii
-past-benefit-details.state.ID=ID - Idaho
-past-benefit-details.state.IL=IL - Illinois
-past-benefit-details.state.IN=IN - Indiana
-past-benefit-details.state.IA=IA - Iowa
-past-benefit-details.state.KS=KS - Kansas
-past-benefit-details.state.KY=KY - Kentucky
-past-benefit-details.state.LA=LA - Louisiana
-past-benefit-details.state.ME=ME - Maine
-past-benefit-details.state.MD=MD - Maryland
-past-benefit-details.state.MA=MA - Massachusetts
-past-benefit-details.state.MI=MI - Michigan
-past-benefit-details.state.MN=MN - Minnesota
-past-benefit-details.state.MS=MS - Mississippi
-past-benefit-details.state.MO=MO - Missouri
-past-benefit-details.state.MT=MT - Montana
-past-benefit-details.state.NE=NE - Nebraska
-past-benefit-details.state.NV=NV - Nevada
-past-benefit-details.state.NH=NH - New Hampshire
-past-benefit-details.state.NJ=NJ - New Jersey
-past-benefit-details.state.NM=NM - New Mexico
-past-benefit-details.state.NY=NY - New York
-past-benefit-details.state.NC=NC - North Carolina
-past-benefit-details.state.ND=ND - North Dakota
-past-benefit-details.state.MP=MP - Northern Mariana Islands
-past-benefit-details.state.OH=OH - Ohio
-past-benefit-details.state.OK=OK - Oklahoma
-past-benefit-details.state.OR=OR - Oregon
-past-benefit-details.state.PA=PA - Pennsylvania
-past-benefit-details.state.PR=PR - Puerto Rico
-past-benefit-details.state.RI=RI - Rhode Island
-past-benefit-details.state.SC=SC - South Carolina
-past-benefit-details.state.SD=SD - South Dakota
-past-benefit-details.state.TN=TN - Tennessee
-past-benefit-details.state.TX=TX - Texas
-past-benefit-details.state.UT=UT - Utah
-past-benefit-details.state.VT=VT - Vermont
-past-benefit-details.state.VI=VI - U.S. Virgin Islands
-past-benefit-details.state.VA=VA - Virginia
-past-benefit-details.state.WA=WA - Washington
-past-benefit-details.state.WV=WV - West Virginia
-past-benefit-details.state.WI=WI - Wisconsin
-past-benefit-details.state.WY=WY - Wyoming
-past-benefit-details.state.OTHER=OTHER - Other
+  pastBenefit:
+    hasHouseholdPastBenefits: HOUSEHOLD_PAST_BENEFITS
+  pastBenefitDetails:
+    whenPastBenefits: PAST_BENEFITS_WHEN
+    wherePastBenefitsState: PAST_BENEFITS_STATE
+    whichPastBenefits:
+      CASH_ASSISTANCE: PAST_BENEFITS_CASH_ASSISTANCE
+      SNAP: PAST_BENEFITS_SNAP
+      TRIBAL_COMMODITIES: PAST_BENEFITS_TRIBAL_COMMODITIES
