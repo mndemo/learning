@@ -1,14 +1,41 @@
-past-benefit.header=Have you ever received cash assistance, commodities or SNAP benefits before?
-past-benefit.header.household=Has anyone in your household ever received cash assistance, commodities or SNAP benefits before?
-past-benefit-details.title=Past benefits
-past-benefit-details.header=Tell us about your past benefits.
-past-benefit-details.header.household=Tell us about your household's past benefits.
-past-benefit-details.when.label=When did you get benefits?
-past-benefit-details.when.label.household=When did your household get benefits?
-past-benefit-details.when.now=We get benefits now
-past-benefit-details.when.within-last-year=Within the last year
-past-benefit-details.when.more-than-year-ago=More than a year ago
-past-benefit-details.where.label=Where did you receive the benefits?
-past-benefit-details.where.label.household=Where did your household receive benefits?
-past-benefit-details.which.label=Which benefits did you have?
-past-benefit-details.which.label.household=Which benefits did your household have?
+package org.codeforamerica.shiba.output.documentfieldpreparers;
+
+import static org.codeforamerica.shiba.output.DocumentFieldType.ENUMERATED_SINGLE_VALUE;
+
+import java.util.ArrayList;
+import java.util.List;
+import org.codeforamerica.shiba.application.Application;
+import org.codeforamerica.shiba.output.Document;
+import org.codeforamerica.shiba.output.DocumentField;
+import org.codeforamerica.shiba.output.Recipient;
+import org.codeforamerica.shiba.pages.data.PagesData;
+import org.springframework.stereotype.Component;
+
+/**
+ * One boolean document field per past-benefit type selected on {@code pastBenefitDetails}.
+ */
+@Component
+public class WhichPastBenefitsPreparer implements DocumentFieldPreparer {
+
+  private static final String PAGE_NAME = "pastBenefitDetails";
+  private static final String INPUT_NAME = "whichPastBenefits";
+  private static final List<String> OPTIONS = List.of(
+      "CASH_ASSISTANCE", "SNAP", "TRIBAL_COMMODITIES");
+
+  @Override
+  public List<DocumentField> prepareDocumentFields(Application application, Document document,
+      Recipient recipient) {
+    PagesData pagesData = application.getApplicationData().getPagesData();
+    if (!pagesData.containsKey(PAGE_NAME)) {
+      return List.of();
+    }
+    List<String> selected = pagesData.safeGetPageInputValue(PAGE_NAME, INPUT_NAME);
+    List<DocumentField> fields = new ArrayList<>();
+    for (String option : OPTIONS) {
+      fields.add(new DocumentField(PAGE_NAME, option,
+          String.valueOf(selected.contains(option)),
+          ENUMERATED_SINGLE_VALUE));
+    }
+    return fields;
+  }
+}
