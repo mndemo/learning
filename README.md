@@ -1,42 +1,78 @@
-package org.codeforamerica.shiba.output.documentfieldpreparers;
+package org.codeforamerica.shiba.pages;
 
-import static org.codeforamerica.shiba.output.DocumentFieldType.SINGLE_VALUE;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
-import java.util.stream.Collectors;
-import org.codeforamerica.shiba.application.Application;
-import org.codeforamerica.shiba.output.Document;
-import org.codeforamerica.shiba.output.DocumentField;
-import org.codeforamerica.shiba.output.Recipient;
-import org.codeforamerica.shiba.pages.data.PageData;
-import org.springframework.stereotype.Component;
+import org.codeforamerica.shiba.testutilities.AbstractShibaMockMvcTest;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-@Component
-public class WhichPastBenefitsPreparer implements DocumentFieldPreparer {
+/**
+ * Navigation and form submission for {@code pastBenefit} and {@code pastBenefitDetails}
+ * (CAF flow between healthcare coverage and direct deposit / EBT / social worker).
+ */
+public class PastBenefitNavigationTest extends AbstractShibaMockMvcTest {
 
-  private static final Map<String, String> LABEL_BY_OPTION = Map.of(
-      "CASH_ASSISTANCE", "CASH",
-      "SNAP", "SNAP",
-      "TRIBAL_COMMODITIES", "Food");
+  @BeforeEach
+  protected void setUp() throws Exception {
+    super.setUp();
+    mockMvc.perform(get("/pages/identifyCountyBeforeApplying").session(session));
+    postExpectingSuccess("identifyCountyBeforeApplying", "county", "Hennepin");
+    postExpectingSuccess("writtenLanguage", Map.of("writtenLanguage", List.of("ENGLISH")));
+    postExpectingSuccess("spokenLanguage", Map.of("spokenLanguage", List.of("ENGLISH")));
+  }
 
-  @Override
-  public List<DocumentField> prepareDocumentFields(Application application, Document document,
-      Recipient recipient) {
-    PageData page = application.getApplicationData().getPagesData().getPage("pastBenefitDetails");
-    if (page == null) {
-      return List.of();
-    }
+  @Test
+  void shouldNavigatePastBenefitYesToDetailsThenEbtInPastWhenSnapOnly() throws Exception {
+    selectPrograms("SNAP");
+    postExpectingRedirect("healthcareCoverage", "healthcareCoverage", "false", "pastBenefit");
+    postExpectingRedirect("pastBenefit", "hasHouseholdPastBenefits", "true", "pastBenefitDetails");
+    postExpectingRedirect(
+        "pastBenefitDetails",
+        validPastBenefitDetailsParams(),
+        "ebtInPast");
+  }
 
-    List<String> chosen =
-        page.containsKey("whichPastBenefits") ? page.get("whichPastBenefits").getValue() : List.of();
+  @Test
+  void shouldNavigatePastBenefitYesToDetailsThenDirectDepositWhenCashOnly() throws Exception {
+    selectPrograms("CASH");
+    postExpectingRedirect("healthcareCoverage", "healthcareCoverage", "false", "pastBenefit");
+    postExpectingRedirect("pastBenefit", "hasHouseholdPastBenefits", "true", "pastBenefitDetails");
+    postExpectingRedirect(
+        "pastBenefitDetails",
+        validPastBenefitDetailsParams(),
+        "directDeposit");
+  }
 
-    String value = chosen.stream()
-        .map(LABEL_BY_OPTION::get)
-        .filter(Objects::nonNull)
-        .collect(Collectors.joining(", "));
+  @Test
+  void shouldNavigatePastBenefitYesToDetailsThenSocialWorkerWhenGrhOnly() throws Exception {
+    selectPrograms("GRH");
+    postExpectingRedirect("healthcareCoverage", "healthcareCoverage", "false", "pastBenefit");
+    postExpectingRedirect("pastBenefit", "hasHouseholdPastBenefits", "true", "pastBenefitDetails");
+    postExpectingRedirect(
+        "pastBenefitDetails",
+        validPastBenefitDetailsParams(),
+        "socialWorker");
+  }
 
-    return List.of(new DocumentField("pastBenefitDetails", "whichPastBenefits", value, SINGLE_VALUE));
+  @Test
+  void shouldRejectPastBenefitDetailsWhenWhichBenefitsMissing() throws Exception {
+    selectPrograms("SNAP");
+    postExpectingRedirect("healthcareCoverage", "healthcareCoverage", "false", "pastBenefit");
+    postExpectingRedirect("pastBenefit", "hasHouseholdPastBenefits", "true", "pastBenefitDetails");
+    postExpectingFailure(
+        "pastBenefitDetails",
+        Map.of(
+            "whenPastBenefits", List.of("NOW"),
+            "wherePastBenefitsState", List.of("MN - Minnesota")));
+    assertPageHasInputError("pastBenefitDetails", "whichPastBenefits");
+  }
+
+  private static Map<String, List<String>> validPastBenefitDetailsParams() {
+    return Map.of(
+        "whenPastBenefits", List.of("NOW"),
+        "wherePastBenefitsState", List.of("MN - Minnesota"),
+        "whichPastBenefits", List.of("SNAP"));
   }
 }
