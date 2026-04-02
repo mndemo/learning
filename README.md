@@ -1,4 +1,11 @@
-# Build label: Gradle replaces @shiba.build.version@ (prefers GITHUB_REF_NAME, e.g. release tag).
-# Override at runtime with SHIBA_BUILD_VERSION to match a GitHub release identifier when needed.
-shiba:
-  build-version: ${SHIBA_BUILD_VERSION:@shiba.build.version@}
+
+// Baked-in label: GitHub Actions sets GITHUB_REF_NAME to the release tag (e.g. v1.2.0) on tag builds.
+def resolvedShibaBuildVersion = System.getenv('GITHUB_REF_NAME') ?: project.version
+
+processResources {
+    filesMatching('**/application.yaml') {
+        filter(org.apache.tools.ant.filters.ReplaceTokens, tokens: [
+                'shiba.build.version': resolvedShibaBuildVersion.toString()
+        ])
+    }
+}
