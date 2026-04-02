@@ -1,19 +1,4 @@
-package org.codeforamerica.shiba.config;
-
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ModelAttribute;
-
-@ControllerAdvice
-public class ShibaGlobalModelAttributes {
-
-  private final ShibaProperties shibaProperties;
-
-  public ShibaGlobalModelAttributes(ShibaProperties shibaProperties) {
-    this.shibaProperties = shibaProperties;
-  }
-
-  @ModelAttribute("shibaBuildVersion")
-  public String shibaBuildVersion() {
-    return shibaProperties.getBuildVersion();
-  }
-}
+# Build label: Gradle replaces @shiba.build.version@ (prefers GITHUB_REF_NAME, e.g. release tag).
+# Override at runtime with SHIBA_BUILD_VERSION to match a GitHub release identifier when needed.
+shiba:
+  build-version: ${SHIBA_BUILD_VERSION:@shiba.build.version@}
