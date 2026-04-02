@@ -1,15 +1,19 @@
 package org.codeforamerica.shiba.config;
 
-import lombok.Data;
-import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
-@Data
-@ConfigurationProperties(prefix = "shiba")
-public class ShibaProperties {
+@ControllerAdvice
+public class ShibaGlobalModelAttributes {
 
-  /**
-   * Application build / release label. Baked in at build time from {@code GITHUB_REF_NAME} when
-   * set (e.g. GitHub release tag); may be overridden at runtime with {@code SHIBA_BUILD_VERSION}.
-   */
-  private String buildVersion = "local";
+  private final ShibaProperties shibaProperties;
+
+  public ShibaGlobalModelAttributes(ShibaProperties shibaProperties) {
+    this.shibaProperties = shibaProperties;
+  }
+
+  @ModelAttribute("shibaBuildVersion")
+  public String shibaBuildVersion() {
+    return shibaProperties.getBuildVersion();
+  }
 }
