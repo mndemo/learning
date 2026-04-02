@@ -1,11 +1,3 @@
-
-// Baked-in label: GitHub Actions sets GITHUB_REF_NAME to the release tag (e.g. v1.2.0) on tag builds.
-def resolvedShibaBuildVersion = System.getenv('GITHUB_REF_NAME') ?: project.version
-
-processResources {
-    filesMatching('**/application.yaml') {
-        filter(org.apache.tools.ant.filters.ReplaceTokens, tokens: [
-                'shiba.build.version': resolvedShibaBuildVersion.toString()
-        ])
-    }
-}
+        <p id="footer-build-version" class="font-white footer-text text--small spacing-above-25"
+           th:if="${shibaBuildVersion != null && !#strings.isEmpty(#strings.trim(shibaBuildVersion))}"
+           th:text="#{generic.footer.build-version(${shibaBuildVersion})}"></p>
