@@ -1,7 +1,1 @@
-processResources {
-    filesMatching('**/application.yaml') {
-        filter(org.apache.tools.ant.filters.ReplaceTokens, tokens: [
-                'shiba.build.version': resolvedShibaBuildVersion.toString()
-        ])
-    }
-}
+def resolvedShibaBuildVersion = System.getenv('GITHUB_REF_NAME') ?: project.version
