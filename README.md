@@ -1,1 +1,7 @@
-generic.footer.build-version=Version {0}
+processResources {
+    filesMatching('**/application.yaml') {
+        filter(org.apache.tools.ant.filters.ReplaceTokens, tokens: [
+                'shiba.build.version': resolvedShibaBuildVersion.toString()
+        ])
+    }
+}
