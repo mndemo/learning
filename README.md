@@ -1,1 +1,7 @@
-def resolvedShibaBuildVersion = System.getenv('GITHUB_REF_NAME') ?: project.version
+  ./gradlew processResources
+
+  notepad build\resources\main\application.yaml
+or
+Select-String -Path build\resources\main\application.yaml -Pattern "shiba" -Context 0,2
+
+  ./gradlew bootRun
