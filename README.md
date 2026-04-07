@@ -1,7 +1,2 @@
-  ./gradlew processResources
-
-  notepad build\resources\main\application.yaml
-or
-Select-String -Path build\resources\main\application.yaml -Pattern "shiba" -Context 0,2
-
-  ./gradlew bootRun
+  # Footer build label: Spring reads SHIBA_BUILD_VERSION at runtime (application.yaml)
+        oc set env deployment/mnbenefits-prod-deployment SHIBA_BUILD_VERSION=${{ steps.fetch-latest-release.outputs.tag_name }} -n mn-benefits-prod
