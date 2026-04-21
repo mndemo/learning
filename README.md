@@ -1,5 +1,4 @@
-// Bakes META-INF/build-info.properties into the jar (build.time, build.version, etc.) — read by Spring's BuildProperties.
-// Git short SHA is written to META-INF/git.properties by the gradle-git-properties plugin above — read by Spring's GitProperties.
-springBoot {
-    buildInfo()
-}
+generic.footer.build-version=Version {0}
+    <p id="footer-build-version" class="font-white footer-text text--small spacing-above-25"
+           th:if="${shibaBuildVersion != null && !#strings.isEmpty(#strings.trim(shibaBuildVersion))}"
+           th:text="#{generic.footer.build-version(${shibaBuildVersion})}"></p>
