@@ -1,44 +1,109 @@
-2. How this works in production — no commands, nothing to set
-Nothing runs in production. The identifier is baked into the deployed artifact when the CI/build system produces it. At runtime the app just reads two files that are already inside the JAR.
-Walk the lifecycle for a production deploy:
-A developer pushes code and cuts a release via workflow_dispatch → Deploy to MNbenefits ATST (or the equivalent promotion step).
-GitHub Actions logs into OpenShift and runs the OpenShift BuildConfig (oc start-build mn-benefits-release).
-The BuildConfig pod:
-git clones your repo at the release tag — so .git is present inside the build pod.
-Runs the Dockerfile:
-./gradlew assemble triggers two automatic Gradle tasks:
-bootBuildInfo → writes META-INF/build-info.properties with build.time=2026-04-20T14:03:11Z, build.version=0.0.1-SNAPSHOT, etc.
-generateGitProperties → writes git.properties with git.commit.id.abbrev=a1b2c3d, git.commit.id=a1b2c3d…, etc.
-Both files land in build/resources/main/ and get sealed into the fat JAR.
-OpenShift tags the image and promotes it: in prod, import-image copies it from non-prod to prod, then patch deployment + rollout restarts pods with the new image.
-When a pod starts, Spring Boot sees both files on the classpath and auto-creates the BuildProperties and GitProperties beans — with the values that were frozen at build time.
-Every HTTP response rendered by that pod runs ShibaGlobalModelAttributes#shibaBuildVersion(), which reads those beans and returns the string. Footer shows Version 2026-04-20 · a1b2c3d.
-Key properties of this setup:
-No env var, no oc set env, no secret, no deployment-time parameter. That’s why the SHIBA_BUILD_VERSION lines were deleted from both workflow files.
-Same JAR = same label in every environment. If the image gets promoted from ATST to prod, both will display the same build id (because the label comes from the JAR, not the pod).
-Two pods of the same image always agree — no risk of one replica showing 0.0.1-SNAPSHOT because someone forgot to set an env var.
-3. What a developer needs to do after pulling this change
-Short answer: nothing special. ./gradlew assemble, ./gradlew bootRun, and IDE runs all work. But two small things to be aware of:
-a) First run after pulling
-That’s it. The tasks.named('processResources') { dependsOn 'bootBuildInfo', 'generateGitProperties' } block I added guarantees the metadata files are generated every time, so bootRun, IDE, and tests all populate the footer correctly without any extra command.
-If a dev was already running the app from a previous clean, they should stop and restart — the running JVM is still using the old classpath.
-b) IntelliJ / IDE run configurations
-If a developer runs the main class directly in IntelliJ (not via Gradle), IntelliJ compiles sources but doesn’t always run processResources automatically. Two ways to handle it:
-Build once with ./gradlew processResources after pulling — the files stay put.
-Or, in IntelliJ: Settings → Build, Execution, Deployment → Build Tools → Gradle → Build and run using: Gradle. That makes IntelliJ delegate to Gradle, which runs processResources and hence bootBuildInfo/generateGitProperties.
-Most teams already use the Gradle-delegated setting. If a dev still sees an empty footer in the IDE after these changes, it’s almost always this setting.
-c) What they'll see locally
-Version 2026-04-20 · a1b2c3d — date is the time they built, SHA is their current commit. So two devs building at different times from different commits will each see their own label, which is fine locally.
-Empty footer line → they ran the app without a build. Fix by ./gradlew processResources once.
-4. A 60-second mental model for the team
-You can paste this into a PR description or team doc:
-> The footer build version is now baked into the JAR, not set at deploy time.
->
-> - At build (./gradlew assemble): Spring Boot’s bootBuildInfo and the gradle-git-properties plugin write two tiny files — META-INF/build-info.properties (build date) and git.properties (short SHA) — into the JAR.
-> - At startup: Spring reads them into the BuildProperties and GitProperties beans.
-> - At request time: ShibaGlobalModelAttributes combines them into "<yyyy-MM-dd> · <shortSha>" and exposes it as ${shibaBuildVersion} for the footer templates.
->
-> Because the value is part of the artifact, every replica in every environment that runs the same image shows the same label — and there’s nothing to set or configure at deploy time. The env-var fallback (SHIBA_BUILD_VERSION) and the OpenShift oc set env commands have been removed.
->
-> Local dev: ./gradlew bootRun (or IntelliJ with Gradle-delegated builds) just works. If the footer is ever empty locally, run ./gradlew processResources and restart the app.
-That’s the whole mental model. Nothing else is needed.
+package org.codeforamerica.shiba.config;
+
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.info.BuildProperties;
+import org.springframework.boot.info.GitProperties;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ModelAttribute;
+
+/**
+ * Provides the {@code shibaBuildVersion} string rendered by the site footer
+ * ({@code templates/fragments/footer.html} and {@code footerHealthcareRenewal.html}).
+ *
+ * <p><b>Why this class exists:</b> we want every deployed environment (dev, ATST, prod) to show the
+ * <i>same</i> build identifier that was produced when the JAR was built — with zero manual steps at
+ * deploy time. So the id is baked into the artifact during {@code ./gradlew assemble} and read back
+ * here at request time.
+ *
+ * <p><b>Where the numbers come from:</b>
+ * <ul>
+ *   <li><b>Build date</b> → {@code META-INF/build-info.properties}, written by Spring Boot's
+ *       {@code bootBuildInfo} Gradle task (configured in {@code build.gradle} via
+ *       {@code springBoot { buildInfo() }}). Spring Boot auto-publishes a {@link BuildProperties}
+ *       bean from this file at startup.</li>
+ *   <li><b>Short git SHA</b> → {@code git.properties}, written by the
+ *       {@code com.gorylenko.gradle-git-properties} plugin during the build. Spring Boot
+ *       auto-publishes a {@link GitProperties} bean from this file at startup.</li>
+ * </ul>
+ *
+ * <p>Rendered footer example: {@code "Version 2026-04-20 · a1b2c3d"}. Falls back gracefully if a
+ * metadata file happens to be missing — e.g. a local {@code bootRun} launched without building
+ * resources first.
+ */
+// @ControllerAdvice: makes the @ModelAttribute below visible to every Thymeleaf view in the app,
+// so any template can use ${shibaBuildVersion} without each controller having to set it manually.
+@ControllerAdvice
+public class ShibaGlobalModelAttributes {
+
+  // Formats the build instant as an ISO date string in UTC. Using UTC keeps the value consistent
+  // regardless of the timezone of the machine that built or runs the app.
+  private static final DateTimeFormatter DATE_FORMAT =
+      DateTimeFormatter.ofPattern("yyyy-MM-dd").withZone(ZoneOffset.UTC);
+
+  // Provided by Spring Boot autoconfiguration when build-info.properties is on the classpath.
+  // Exposes build.time, build.version, etc.
+  private final BuildProperties buildProperties;
+
+  // Provided by Spring Boot autoconfiguration when git.properties is on the classpath.
+  // Exposes git.commit.id, git.commit.id.abbrev (short SHA), git.branch, etc.
+  private final GitProperties gitProperties;
+
+  // Both dependencies are optional (required = false) because either metadata file can be absent —
+  // e.g. running tests before resources are processed, or building outside a git checkout. In that
+  // case Spring just passes null and shibaBuildVersion() falls back to whatever info is available.
+  public ShibaGlobalModelAttributes(
+      @Autowired(required = false) BuildProperties buildProperties,
+      @Autowired(required = false) GitProperties gitProperties) {
+    this.buildProperties = buildProperties;
+    this.gitProperties = gitProperties;
+  }
+
+  // The attribute name ("shibaBuildVersion") is the exact key Thymeleaf uses in the footer:
+  //   th:text="#{generic.footer.build-version(${shibaBuildVersion})}"
+  // The returned string replaces {0} in messages.properties -> "Version {0}".
+  @ModelAttribute("shibaBuildVersion")
+  public String shibaBuildVersion() {
+    String date = buildDate();
+    String sha = shortSha();
+
+    // Preferred form: both pieces available -> "2026-04-20 · a1b2c3d".
+    if (StringUtils.hasText(date) && StringUtils.hasText(sha)) {
+      return date + " · " + sha;
+    }
+    // No SHA (e.g. built without .git) -> just the date.
+    if (StringUtils.hasText(date)) {
+      return date;
+    }
+    // No build-info (e.g. ran app without bootBuildInfo) -> just the SHA.
+    if (StringUtils.hasText(sha)) {
+      return sha;
+    }
+    // Neither file reached the classpath. Returning empty hides the footer line via th:if,
+    // which is preferable to displaying something misleading like "null".
+    return "";
+  }
+
+  private String buildDate() {
+    // buildProperties is null when META-INF/build-info.properties isn't on the classpath.
+    // buildProperties.getTime() can be null if the file exists but has no build.time entry.
+    if (buildProperties == null || buildProperties.getTime() == null) {
+      return "";
+    }
+    // getTime() returns an Instant; DATE_FORMAT is UTC-zoned so output is deterministic.
+    return DATE_FORMAT.format(buildProperties.getTime());
+  }
+
+  private String shortSha() {
+    // gitProperties is null when git.properties isn't on the classpath (no git during build,
+    // or gorylenko plugin task didn't run before app launch).
+    if (gitProperties == null) {
+      return "";
+    }
+    // Short SHA (7 chars by default), written by the gorylenko plugin from git.commit.id.abbrev.
+    String sha = gitProperties.getShortCommitId();
+    return sha != null ? sha.trim() : "";
+  }
+}
