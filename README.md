@@ -1,39 +1,18 @@
-/* Footer build-version label. Two copies in the markup, toggled via media query.
-   Desktop (>=601px): full-width line at the very bottom of the footer (below the floated
-   mn.gov logo), right-aligned so it sits underneath the logo column.
-   Mobile (<=600px): inline with the mn.gov logo on the same row, pushed to the far right. */
-.footer-build-version {
+  <p id="footer-build-version" class="footer-build-version"
+           th:if="${shibaBuildVersion != null && !#strings.isEmpty(#strings.trim(shibaBuildVersion))}"
+           th:text="#{generic.footer.build-version(${shibaBuildVersion})}"></p>
+
+
+
+
+           .footer-build-version {
+  clear: both;
   color: #cdcdcd;
   font-size: 0.875rem;
-  margin: 0;
+  margin: 1.5rem 0 0;
 }
 @media screen and (min-width: 601px) {
-  .footer-build-version--mobile {
-    display: none;
-  }
-  .footer-build-version--desktop {
-    clear: both;            /* drop below the floated .main-footer__mn-logo */
-    margin-top: 1.5rem;
-    text-align: right;      /* sit visually under the logo on the right */
-  }
-}
-@media screen and (max-width: 600px) {
-  .footer-build-version--desktop {
-    display: none;
-  }
-  /* Lay out the mn.gov logo and the mobile build-version on a single row,
-     logo on the left and build-version pushed to the far right. The version
-     sits at the bottom of the logo's baseline (align-items: flex-end) so it
-     visually lines up with the lower edge of the logo image. */
-  .main-footer__mn-logo {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: 1rem;
-  }
-  .footer-build-version--mobile {
-    margin-left: auto;
+  .footer-build-version {
     text-align: right;
-    white-space: nowrap;
   }
 }
