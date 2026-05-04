@@ -21,23 +21,19 @@
   .footer-build-version--desktop {
     display: none;
   }
-  /* Place mn.gov logo and the mobile build-version on a single row, vertically
-     centered, with the build-version pinned to the far right. */
+  /* Lay out the mn.gov logo and the mobile build-version on a single row,
+     logo on the left and build-version pushed to the far right. The version
+     sits at the bottom of the logo's baseline (align-items: flex-end) so it
+     visually lines up with the lower edge of the logo image. */
   .main-footer__mn-logo {
-    display: flex !important;     /* override any inline/block from .grid__item */
-    flex-wrap: nowrap;
-    align-items: center;          /* horizontally aligned (same baseline as logo) */
+    display: flex;
+    align-items: flex-end;
     justify-content: space-between;
-    width: 100%;
     gap: 1rem;
   }
-  .main-footer__mn-logo > .illustration--mn-logo {
-    flex: 0 0 auto;               /* keep logo at its intrinsic 70×43 size */
-  }
-  .main-footer__mn-logo > .footer-build-version--mobile {
-    margin: 0 0 0 auto;           /* push to far right */
+  .footer-build-version--mobile {
+    margin-left: auto;
     text-align: right;
     white-space: nowrap;
-    line-height: 1;               /* tighter so it visually sits at logo center */
   }
 }
