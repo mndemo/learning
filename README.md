@@ -1,39 +1,37 @@
-  <p class="footer-build-version footer-build-version--desktop"
-                   th:if="${shibaBuildVersion != null && !#strings.isEmpty(#strings.trim(shibaBuildVersion))}"
-                   th:text="#{generic.footer.build-version(${shibaBuildVersion})}"></p>
-
-
-                           <p id="footer-build-version" class="footer-build-version footer-build-version--mobile"
-           th:if="${shibaBuildVersion != null && !#strings.isEmpty(#strings.trim(shibaBuildVersion))}"
-           th:text="#{generic.footer.build-version(${shibaBuildVersion})}"></p>
-
-
-
-
-
-
-
-
-           .footer-build-version {
+/* Footer build-version label. Two copies in the markup, toggled via media query.
+   Desktop (>=601px): full-width line at the very bottom of the footer (below the floated
+   mn.gov logo), right-aligned so it sits underneath the logo column.
+   Mobile (<=600px): inline with the mn.gov logo on the same row, pushed to the far right. */
+.footer-build-version {
   color: #cdcdcd;
   font-size: 0.875rem;
   margin: 0;
 }
-/* Desktop layout (matches the same breakpoint the footer columns/logo use). */
 @media screen and (min-width: 601px) {
-  .footer-build-version--desktop {
-    margin-top: 0.75rem;
-  }
   .footer-build-version--mobile {
     display: none;
   }
+  .footer-build-version--desktop {
+    clear: both;            /* drop below the floated .main-footer__mn-logo */
+    margin-top: 1.5rem;
+    text-align: right;      /* sit visually under the logo on the right */
+  }
 }
-/* Mobile layout: stack at the bottom; hide the in-About-column copy. */
 @media screen and (max-width: 600px) {
   .footer-build-version--desktop {
     display: none;
   }
+  /* Lay out the mn.gov logo and the mobile build-version on a single row,
+     logo on the left and build-version pushed to the far right. */
+  .main-footer__mn-logo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
   .footer-build-version--mobile {
-    margin-top: 1.5rem;
+    margin-left: auto;      /* belt-and-braces against any flex shrinkage */
+    text-align: right;
+    white-space: nowrap;
   }
 }
