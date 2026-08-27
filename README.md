@@ -1,27 +1,20 @@
-/* Shared site banners: demo, SNAP scam alert, and child tax credit notice.
-   Fully defined here so appearance does not depend on Honeycrisp. */
-.demo-banner,
-.alert-banner,
-.delayed-processing-time-notice-box {
-	position: relative;
-	z-index: 2;
+/* Demo banner — original Honeycrisp look, owned here so it does not depend on Honeycrisp */
+.demo-banner {
 	margin-left: -1.5rem;
 	margin-right: -1.5rem;
-	padding: 1.5rem;
-	background-color: #FFBA26;
+	padding-left: 1.5rem;
+	padding-right: 1.5rem;
+	position: relative;
+	z-index: 2;
+	background-color: #D13F00;
+	padding: .5em;
 	text-align: center;
 	font-size: 1.6rem;
-	line-height: 1.5;
-	color: #121111;
-	border: none;
-	box-sizing: border-box;
-	width: auto;
+	color: #fff;
 }
 
 @media screen and (min-width: 601px) {
-	.demo-banner,
-	.alert-banner,
-	.delayed-processing-time-notice-box {
+	.demo-banner {
 		margin-left: -3.5rem;
 		margin-right: -3.5rem;
 		padding-left: 3.5rem;
@@ -29,35 +22,46 @@
 	}
 }
 
-/* Keep nested Honeycrisp utility classes from changing banner typography */
-.demo-banner .text-25,
-.demo-banner .text-bold,
-.alert-banner .text-25,
-.alert-banner .text-bold,
-.delayed-processing-time-notice-box .text-25,
-.delayed-processing-time-notice-box .text-bold {
-	font-size: inherit;
-	line-height: inherit;
-	margin-bottom: 0;
+.link--subtle {
 	color: inherit;
 }
 
-.demo-banner .text-bold,
-.alert-banner .text-bold,
-.delayed-processing-time-notice-box .text-bold {
-	font-weight: 700;
+/* SNAP scam alert banner — original shiba style */
+.alert-banner {
+	position: relative;
+	margin-left: -1.5rem;
+	margin-right: -1.5rem;
+	padding: 1.5rem;
+	background-color: #FFBA26;
+	text-align: center;
+	font-size: 1.6rem;
+	color: #121111;
 }
 
-.link--alert-banner,
-.demo-banner a,
-.alert-banner a,
-.delayed-processing-time-notice-box a {
+@media screen and (min-width: 601px) {
+	.alert-banner {
+		margin-left: -3.5rem;
+		margin-right: -3.5rem;
+		padding-left: 3.5rem;
+		padding-right: 3.5rem;
+	}
+}
+
+.link--alert-banner {
 	color: #003865;
 }
 
-.link--alert-banner:visited,
-.demo-banner a:visited,
-.alert-banner a:visited,
-.delayed-processing-time-notice-box a:visited {
+.link--alert-banner:visited {
 	color: #5B0E5D;
+}
+
+/* Child tax credit / delayed-processing notice — original look (unstyled box + text utilities) */
+.delayed-processing-time-notice-box .text-25 {
+	font-size: 1.9rem;
+	line-height: 2.5rem;
+	margin-bottom: 2.5rem;
+}
+
+.delayed-processing-time-notice-box .text-bold {
+	font-weight: 700;
 }
